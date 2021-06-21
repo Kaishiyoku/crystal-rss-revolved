@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    {{ html()->modelForm($category, 'post', route('categories.store'))->open() }}
+    {{ html()->modelForm($category, 'post', route('categories.store'))->class('px-4 sm:px-0')->open() }}
         @include('category._form_fields')
 
         <x-button>{{ __('Save') }}</x-button>

@@ -15,7 +15,7 @@
         </div>
     </x-slot>
 
-    {{ html()->modelForm($category, 'put', route('categories.update', $category))->open() }}
+    {{ html()->modelForm($category, 'put', route('categories.update', $category))->class('px-4 sm:px-0')->open() }}
         @include('category._form_fields')
 
         <x-button>{{ __('Save') }}</x-button>
