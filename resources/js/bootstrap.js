@@ -1,3 +1,5 @@
+import onDomReady from './onDomReady';
+
 window._ = require('lodash');
 
 /**
@@ -26,3 +28,17 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+onDomReady(() => {
+    document.querySelectorAll('[data-confirm]').forEach((element) => {
+        element.addEventListener('click', (event) => {
+            const confirmationText = element.getAttribute('data-confirm');
+
+            if (!confirm(confirmationText)) {
+                event.preventDefault();
+
+                return false;
+            }
+        });
+    });
+});

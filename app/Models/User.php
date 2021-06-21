@@ -33,6 +33,8 @@ use Illuminate\Notifications\Notifiable;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|Category[] $categories
+ * @property-read int|null $categories_count
  */
 class User extends Authenticatable
 {
@@ -67,4 +69,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function categories()
+    {
+        return $this->hasMany(Category::class);
+    }
+
+    public function createDefaultCategory()
+    {
+        $category = new Category();
+        $category->name = Category::DEFAULT_NAME;
+
+        $this->categories()->save($category);
+    }
 }

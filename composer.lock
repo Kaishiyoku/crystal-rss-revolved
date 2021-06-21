@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "327b35be4bc5ae0f2517d035bc9f5914",
+    "content-hash": "921e1d312b85414094bf6dbc646f951b",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -340,6 +340,46 @@
                 }
             ],
             "time": "2021-01-20T22:51:39+00:00"
+        },
+        {
+            "name": "cjstroud/classnames-php",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/CJStroud/classnames-php.git",
+                "reference": "0ed8df43de4d5116468d7b81819fd137ad60d813"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/CJStroud/classnames-php/zipball/0ed8df43de4d5116468d7b81819fd137ad60d813",
+                "reference": "0ed8df43de4d5116468d7b81819fd137ad60d813",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.1"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/ClassNames.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chris Stroud",
+                    "email": "chris.stroud00@gmail.com"
+                }
+            ],
+            "description": "A simple PHP utility for conditionally joining classNames together",
+            "support": {
+                "issues": "https://github.com/CJStroud/classnames-php/issues",
+                "source": "https://github.com/CJStroud/classnames-php/tree/master"
+            },
+            "time": "2017-04-29T22:14:00+00:00"
         },
         {
             "name": "composer/ca-bundle",
@@ -3887,6 +3927,85 @@
                 "source": "https://github.com/Seldaek/phar-utils/tree/master"
             },
             "time": "2020-07-07T18:42:57+00:00"
+        },
+        {
+            "name": "spatie/laravel-html",
+            "version": "2.29.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-html.git",
+                "reference": "0c278efcb1a95b6476f9894e76cbb7f7a83709da"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-html/zipball/0c278efcb1a95b6476f9894e76cbb7f7a83709da",
+                "reference": "0c278efcb1a95b6476f9894e76cbb7f7a83709da",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/http": "^6.0|^7.0|^8.0",
+                "illuminate/support": "^6.0|^7.0|^8.0",
+                "php": "^8.0|^7.2"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.3",
+                "orchestra/testbench": "^4.0|^5.0|^6.0",
+                "phpunit/phpunit": "^8.0|^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spatie\\Html\\HtmlServiceProvider"
+                    ],
+                    "aliases": {
+                        "Html": "Spatie\\Html\\Facades\\Html"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Html\\": "src"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian De Deyne",
+                    "email": "sebastian@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A fluent html builder",
+            "homepage": "https://github.com/spatie/laravel-html",
+            "keywords": [
+                "html",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-html/issues",
+                "source": "https://github.com/spatie/laravel-html/tree/2.29.0"
+            },
+            "funding": [
+                {
+                    "url": "https://spatie.be/open-source/support-us",
+                    "type": "custom"
+                }
+            ],
+            "time": "2021-02-09T08:46:34+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
