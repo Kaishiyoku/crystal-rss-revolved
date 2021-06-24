@@ -47,6 +47,11 @@ class Category extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function feeds()
+    {
+        return $this->hasMany(Feed::class);
+    }
+
     /**
      * @return bool
      */
@@ -58,5 +63,13 @@ class Category extends Model
     public function getName()
     {
         return $this->isDefault() ? __($this->name) : $this->name;
+    }
+
+    /**
+     * @return \Illuminate\Support\Collection
+     */
+    public static function getAvailableOptions()
+    {
+        return self::orderBy('name')->pluck('name', 'id');
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FeedController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +25,7 @@ Route::middleware(['auth'])->group(function () {
     })->name('dashboard');
 
     Route::resource('categories', CategoryController::class)->except(['show']);
+    Route::resource('feeds', FeedController::class)->except(['show']);
 });
 
 require __DIR__.'/auth.php';

@@ -78,6 +78,11 @@ class User extends Authenticatable
         return $this->hasMany(Category::class);
     }
 
+    public function feeds()
+    {
+        return $this->hasMany(Feed::class);
+    }
+
     public function createDefaultCategory()
     {
         $category = new Category();
