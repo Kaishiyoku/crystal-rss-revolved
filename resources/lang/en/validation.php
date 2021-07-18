@@ -152,6 +152,9 @@ return [
 
     'attributes' => [
         'name' => 'Name',
+        'category_id' => 'Category',
+        'feed_url' => 'Feed URL',
+        'site_url' => 'Site URL',
     ],
 
 ];

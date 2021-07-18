@@ -23,6 +23,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Category whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Category whereUserId($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Feed[] $feeds
+ * @property-read int|null $feeds_count
  */
 class Category extends Model
 {
@@ -51,6 +53,14 @@ class Category extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasManywwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
+     */
+    public function feeds()
+    {
+        return $this->hasMany(Feed::class);
+    }
+
+    /**
      * @return bool
      */
     public function isDefault()
@@ -64,5 +74,13 @@ class Category extends Model
     public function getName()
     {
         return $this->isDefault() ? __($this->name) : $this->name;
+    }
+
+    /**
+     * @return \Illuminate\Support\Collection
+     */
+    public static function getAvailableOptions()
+    {
+        return self::orderBy('name')->pluck('name', 'id');
     }
 }

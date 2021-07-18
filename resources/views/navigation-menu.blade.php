@@ -104,6 +104,10 @@
                                 {{ __('Categories') }}
                             </x-jet-dropdown-link>
 
+                            <x-jet-dropdown-link href="{{ route('feeds.index') }}" :active="request()->routeIs('feeds.*')">
+                                {{ __('Feeds') }}
+                            </x-jet-dropdown-link>
+
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                                 <x-jet-dropdown-link href="{{ route('api-tokens.index') }}">
                                     {{ __('API Tokens') }}
@@ -170,6 +174,10 @@
 
                 <x-jet-responsive-nav-link href="{{ route('categories.index') }}" :active="request()->routeIs('categories.*')">
                     {{ __('Categories') }}
+                </x-jet-responsive-nav-link>
+
+                <x-jet-responsive-nav-link href="{{ route('feeds.index') }}" :active="request()->routeIs('feeds.*')">
+                    {{ __('Feeds') }}
                 </x-jet-responsive-nav-link>
 
                 @if (Laravel\Jetstream\Jetstream::hasApiFeatures())

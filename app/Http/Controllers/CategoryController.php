@@ -99,6 +99,8 @@ class CategoryController extends Controller
     {
         $this->authorize('delete', $category);
 
+        $category->feeds()->delete();
+
         $category->delete();
 
         return redirect()->route('categories.index');
