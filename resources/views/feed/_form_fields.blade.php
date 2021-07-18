@@ -11,7 +11,7 @@
 <div class="mb-4">
     <x-label for="feed_url" :value="__('validation.attributes.feed_url')" required/>
 
-    <livewire:feed-discoverer :feed="$feed"/>
+    <livewire:feed-discoverer :feed="$feed" site-url-input-element-selector="#site_url" name-input-element-selector="#name"/>
 
     @error('feed_url')
         <x-validation-error>{{ $message }}</x-validation-error>

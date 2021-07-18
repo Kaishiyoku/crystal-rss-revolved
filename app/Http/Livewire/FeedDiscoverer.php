@@ -15,6 +15,16 @@ class FeedDiscoverer extends Component
     public $feed;
 
     /**
+     * @var string
+     */
+    public $siteUrlInputElementSelector;
+
+    /**
+     * @var string
+     */
+    public $nameInputElementSelector;
+
+    /**
      * @var \Illuminate\Support\Collection
      */
     public $discoveredFeedUrls;
@@ -23,6 +33,18 @@ class FeedDiscoverer extends Component
      * @var \Illuminate\Support\MessageBag
      */
     public $validationErrors;
+
+    /**
+     * @var \Kaishiyoku\HeraRssCrawler\HeraRssCrawler
+     */
+    private $heraRssCrawler;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->heraRssCrawler = new HeraRssCrawler();
+    }
 
     public function mount()
     {
@@ -48,12 +70,21 @@ class FeedDiscoverer extends Component
         }
 
         try {
-            $heraRssCrawler = new HeraRssCrawler();
-            $this->discoveredFeedUrls = $heraRssCrawler->discoverFeedUrls($url);
+            $this->discoveredFeedUrls = $this->heraRssCrawler->discoverFeedUrls($url);
 
             $this->emit('discoverySuccess');
         } catch (ConnectException $e) {
             $this->emit('discoveryFailed', __('The given URL is invalid.'));
         }
+    }
+
+    public function retrieveFeedMetadata($feedUrl)
+    {
+        $feed = $this->heraRssCrawler->parseFeed($feedUrl);
+
+        $this->emit('feedMetadata', [
+            'siteUrl' => $feed->getUrl(),
+            'name' => $feed->getTitle(),
+        ]);
     }
 }

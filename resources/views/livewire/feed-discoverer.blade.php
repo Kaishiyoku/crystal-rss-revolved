@@ -32,6 +32,10 @@
                         this.errorMessage = null;
                         this.isFeedUrlSelected = false;
                     });
+                    this.$wire.on('feedMetadata', (feedMetadata) => {
+                        document.querySelector('{{ $siteUrlInputElementSelector }}').value = feedMetadata.siteUrl;
+                        document.querySelector('{{ $nameInputElementSelector }}').value = feedMetadata.name;
+                    });
                 },
                 handleInputChange(event) {
                     const value = event.target.value;
@@ -45,6 +49,8 @@
                 selectFeedUrl(feedUrl) {
                     this.$refs.feedUrlInput.value = feedUrl;
                     this.isFeedUrlSelected = true;
+
+                    this.$wire.retrieveFeedMetadata(feedUrl);
                 },
             };
         }
