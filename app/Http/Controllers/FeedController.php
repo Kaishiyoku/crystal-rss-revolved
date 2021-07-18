@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Feed;
+use App\Rules\ValidFeedUrl;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -50,7 +51,7 @@ class FeedController extends Controller
     {
         $data = $request->validate([
             'category_id' => ['required', Rule::in(Category::getAvailableOptions()->keys())],
-            'feed_url' => ['required', 'url'],
+            'feed_url' => ['required', 'url', new ValidFeedUrl()],
             'site_url' => ['required', 'url'],
             'name' => ['required', Rule::unique('feeds', 'name')->where('user_id', auth()->user()->id)],
         ]);
@@ -89,7 +90,7 @@ class FeedController extends Controller
         $this->authorize('update', $feed);
 
         $data = $request->validate([
-            'feed_url' => ['required', 'url'],
+            'feed_url' => ['required', 'url', new ValidFeedUrl()],
             'site_url' => ['required', 'url'],
             'name' => ['required', Rule::unique('feeds', 'name')->where('user_id', auth()->user()->id)->ignore($feed)],
         ]);

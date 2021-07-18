@@ -157,4 +157,6 @@ return [
         'site_url' => 'Site URL',
     ],
 
+    'valid_feed_url' => 'The :attribute must be a valid feed.',
+
 ];
