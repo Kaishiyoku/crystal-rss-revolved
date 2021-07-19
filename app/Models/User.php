@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -51,6 +52,9 @@ use Laravel\Sanctum\HasApiTokens;
  * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Feed[] $feeds
  * @property-read int|null $feeds_count
+ * @method static \Illuminate\Database\Eloquent\Builder|User verified()
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\FeedItem[] $feedItems
+ * @property-read int|null $feed_items_count
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -117,11 +121,28 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Feed::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
+    public function feedItems()
+    {
+        return $this->hasManyThrough(FeedItem::class, Feed::class);
+    }
+
     public function createDefaultCategory()
     {
         $category = new Category();
         $category->name = Category::DEFAULT_NAME;
 
         $this->categories()->save($category);
+    }
+
+    /**
+     * @param Illuminate\Database\Eloquent\Builder $query
+     * @return Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeVerified(Builder $query)
+    {
+        return $query->whereNotNull('email_verified_at');
     }
 }

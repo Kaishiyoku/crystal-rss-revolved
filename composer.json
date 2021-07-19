@@ -16,6 +16,7 @@
         "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.5",
+        "neitanod/forceutf8": "^2.0",
         "spatie/laravel-html": "^2.30"
     },
     "require-dev": {
