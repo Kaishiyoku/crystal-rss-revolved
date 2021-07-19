@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -36,6 +37,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|FeedItem whereUrl($value)
  * @method static \Illuminate\Database\Eloquent\Builder|FeedItem whereUserId($value)
  * @mixin \Eloquent
+ * @method static Builder|FeedItem unread()
  */
 class FeedItem extends Model
 {
@@ -56,10 +58,28 @@ class FeedItem extends Model
     ];
 
     /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'posted_at' => 'datetime',
+    ];
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function feed()
     {
         return $this->belongsTo(Feed::class);
+    }
+
+    /**
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeUnread(Builder $query)
+    {
+        return $query->whereNull('read_at');
     }
 }

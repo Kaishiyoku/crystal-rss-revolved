@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FeedController;
+use App\Http\Controllers\FeedItemController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,4 +24,5 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::resource('categories', CategoryController::class)->except(['show']);
     Route::resource('feeds', FeedController::class)->except(['show']);
+    Route::put('/feed_items/{feedItem}/read', [FeedItemController::class, 'toggleMarkAsRead'])->name('feed_items.toggle_mark_as_read');
 });

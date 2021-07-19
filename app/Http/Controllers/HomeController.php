@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 class HomeController extends Controller
 {
     /**
@@ -19,7 +17,11 @@ class HomeController extends Controller
      */
     public function dashboard()
     {
-        return view('dashboard');
+        $unreadFeedItems = auth()->user()->feedItems()->unread()->with('feed')->take(20)->get();
+
+        return view('dashboard', [
+            'unreadFeedItems' => $unreadFeedItems,
+        ]);
     }
 
 }
