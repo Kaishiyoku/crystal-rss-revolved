@@ -22,7 +22,7 @@
                     </x-secondary-button>
                 </div>
                 <div class="w-16">
-                    @if ($unreadFeedItem->image_url)
+                    @if ($unreadFeedItem->image_url && isImageUrl($unreadFeedItem->image_url))
                         <img src="{{ $unreadFeedItem->image_url }}" alt="{{ $unreadFeedItem->title }}" class="h-9 rounded"/>
                     @else
                         <div class="flex items-center justify-center bg-gray-300 rounded">
