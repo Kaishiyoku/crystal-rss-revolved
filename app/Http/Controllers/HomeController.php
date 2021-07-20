@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Feed;
+use Illuminate\Pagination\CursorPaginator;
+
 class HomeController extends Controller
 {
     /**
@@ -17,11 +20,7 @@ class HomeController extends Controller
      */
     public function dashboard()
     {
-        $unreadFeedItems = auth()->user()->feedItems()->unread()->with('feed')->take(20)->get();
-
-        return view('dashboard', [
-            'unreadFeedItems' => $unreadFeedItems,
-        ]);
+        return view('dashboard');
     }
 
 }
