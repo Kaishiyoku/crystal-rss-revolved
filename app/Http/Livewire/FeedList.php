@@ -2,33 +2,52 @@
 
 namespace App\Http\Livewire;
 
-use Illuminate\Pagination\Cursor;
-use Illuminate\Pagination\CursorPaginator;
+use App\Models\FeedItem;
 use Livewire\Component;
 
 class FeedList extends Component
 {
     /**
-     * @var Cursor|null
+     * @var int
      */
-    private $cursor = null;
+    private const LIMIT_INCREASE = 15;
 
-    private $nextCursor;
+    /**
+     * @var bool
+     */
+    public $limit = 15;
 
     public function render()
     {
-        /*** @var CursorPaginator $unreadFeedItems */
-        $unreadFeedItems = auth()->user()->feedItems()->unread()->with('feed')->orderBy('posted_at', 'desc')->orderBy('feed_items.id', 'desc')->cursorPaginate(2, '*', 'cursor', $this->cursor);
+        $unreadFeedItems = auth()->user()->feedItems()
+            ->unread()
+            ->with('feed')
+            ->orderBy('posted_at', 'desc')
+            ->orderBy('feed_items.id', 'desc')
+            ->limit($this->limit + 1)
+            ->get();
 
-        $this->nextCursor = $unreadFeedItems->nextCursor()->encode();
+        $hasMoreFeedItems = $unreadFeedItems->count() > $this->limit;
 
         return view('livewire.feed-list', [
             'unreadFeedItems' => $unreadFeedItems,
+            'hasMoreFeedItems' => $hasMoreFeedItems,
         ]);
+    }
+
+    public function markAsRead(FeedItem $feedItem)
+    {
+        if ($feedItem->read_at) {
+            return;
+        }
+
+        $feedItem->read_at = now();
+
+        $feedItem->save();
     }
 
     public function loadMore()
     {
-        $this->cursor = $this->nextCursor;
+        $this->limit = $this->limit + static::LIMIT_INCREASE;
     }
 }

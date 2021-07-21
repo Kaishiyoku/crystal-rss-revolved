@@ -1,3 +1,4 @@
 {
-    "[default]": "Default"
+    "[default]": "Default",
+    "unread_articles": "{0}No unread articles|{1}One unread article|[2,*]:count unread articles"
 }

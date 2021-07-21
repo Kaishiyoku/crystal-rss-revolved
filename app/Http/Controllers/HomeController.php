@@ -20,7 +20,11 @@ class HomeController extends Controller
      */
     public function dashboard()
     {
-        return view('dashboard');
+        $totalUnreadFeedItems = auth()->user()->feedItems()->unread()->count();
+
+        return view('dashboard', [
+            'totalUnreadFeedItems' => $totalUnreadFeedItems,
+        ]);
     }
 
 }
