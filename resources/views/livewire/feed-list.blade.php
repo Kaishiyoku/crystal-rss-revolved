@@ -1,11 +1,11 @@
-<div>
+<div class="pl-2">
     @foreach ($unreadFeedItems as $i => $unreadFeedItem)
-        <div class="flex space-x-4">
+        <div wire:ignore x-data="{isLoading: false, isRead: {{ json_encode(!!$unreadFeedItem->read_at) }}}" class="flex items-start space-x-4">
             <button
-                x-data="{isLoading: false}"
                 type="button"
-                class="my-2 inline-flex items-center px-4 py-2 text-gray-800 rounded-md font-semibold text-xs uppercase tracking-widest hover:text-white hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-out duration-300"
-                @click="isLoading = true; $wire.markAsRead({{ $unreadFeedItem->id }}).then(() => isLoading = false);"
+                class="my-2 disabled:cursor-not-allowed disabled:opacity-100 inline-flex items-center p-3 text-gray-800 rounded-full font-semibold text-xs uppercase tracking-widest hover:text-white hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-out duration-300"
+                :disabled="isLoading"
+                @click.prevent="isLoading = true; axios.put('{{ route('feed_items.toggle_mark_as_read', $unreadFeedItem) }}').then(({data}) => {isLoading = false; isRead = !!data.read_at;})"
             >
                 <svg x-show="isLoading" x-cloak class="animate-spin text-indigo-500 w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -15,12 +15,13 @@
                 <x-heroicon-s-eye x-show="!isLoading" class="w-5 h-5"/>
             </button>
 
-            <x-card.card class="{{ classNames('group flex-grow sm:rounded-none', ['sm:rounded-t-lg' => $i === 0, 'sm:rounded-b-lg' => $i === $unreadFeedItems->count() - 1]) }}">
+            <x-card.card class="{{ classNames('flex-grow sm:rounded-none', ['sm:rounded-t-lg' => $i === 0, 'sm:rounded-b-lg' => $i === $unreadFeedItems->count() - 1]) }}">
                 <a
-                    class="flex items-center space-x-4 px-4 py-3 transition ease-out duration-300 hover:bg-indigo-500 focus:outline-none focus:bg-gray-50 transition"
+                    class="group flex items-center space-x-4 px-4 py-3 transition ease-out duration-300 hover:bg-indigo-500 focus:outline-none focus:text-white focus:bg-indigo-600 transition"
+                    :class="{'opacity-50': isRead}"
                     href="{{ $unreadFeedItem->url }}"
                 >
-                    <div class="w-16">
+                    <div class="flex-shrink-0 w-16">
                         @if ($unreadFeedItem->image_url && isImageUrl($unreadFeedItem->image_url))
                             <img src="{{ $unreadFeedItem->image_url }}" alt="{{ $unreadFeedItem->title }}" class="h-9 rounded"/>
                         @else
@@ -33,7 +34,7 @@
                     </div>
                     <div>
                         <div class="group-hover:text-white">{{ $unreadFeedItem->title }}</div>
-                        <div class="group-hover:text-gray-300 md:flex md:space-x-2 text-gray-500 text-xs">
+                        <div class="group-hover:text-gray-300 group-focus:text-gray-200 md:flex md:space-x-2 text-gray-500 text-xs">
                             <div>{{ $unreadFeedItem->posted_at->format(__('date.datetime')) }}</div>
                             <div>{{ $unreadFeedItem->feed->name }}</div>
                         </div>
@@ -45,7 +46,7 @@
 
     @if ($hasMoreFeedItems)
         <x-secondary-button type="button" class="mt-8" wire:click="loadMore()">
-            {{ __('Load all') }}
+            {{ __('Load more') }}
         </x-secondary-button>
     @endif
 </div>

@@ -716,5 +716,5 @@
     "Add feed": "Feed hinzufügen",
     "Edit feed": "Feed ändern",
     "unread_articles": "{0}Keine ungelesen Artikel|{1}Ein ungelesener Artikel|[2,*]:count ungelesene Artikel",
-    "Load all": "Alles laden"
+    "Load more": "Mehr laden"
 }
