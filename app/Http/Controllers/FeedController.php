@@ -90,6 +90,7 @@ class FeedController extends Controller
         $this->authorize('update', $feed);
 
         $data = $request->validate([
+            'category_id' => ['required', Rule::in(Category::getAvailableOptions()->keys())],
             'feed_url' => ['required', 'url', new ValidFeedUrl()],
             'site_url' => ['required', 'url'],
             'name' => ['required', Rule::unique('feeds', 'name')->where('user_id', auth()->user()->id)->ignore($feed)],
