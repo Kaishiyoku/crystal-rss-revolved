@@ -110,6 +110,7 @@ class FeedController extends Controller
     {
         $this->authorize('delete', $feed);
 
+        $feed->feedItems()->delete();
         $feed->delete();
 
         return redirect()->route('feeds.index');
