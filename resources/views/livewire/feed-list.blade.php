@@ -15,7 +15,7 @@
                 <x-heroicon-s-eye x-show="!isLoading" class="w-5 h-5"/>
             </button>
 
-            <x-card.card class="{{ classNames('flex-grow sm:rounded-none mb-12 md:mb-0', ['sm:rounded-t-lg' => $i === 0, 'sm:rounded-b-lg' => $i === $unreadFeedItems->count() - 1]) }}">
+            <x-card.card class="{{ classNames('flex-grow md:rounded-none mb-12 md:mb-0', ['md:rounded-t-lg' => $i === 0, 'md:rounded-b-lg' => $i === $unreadFeedItems->count() - 1]) }}">
                 <a
                     class="group block md:flex md:items-center md:space-x-4 md:px-4 md:py-3 transition ease-out duration-300 hover:bg-indigo-500 focus:outline-none focus:text-white focus:bg-indigo-600 transition"
                     :class="{'opacity-[35%]': isRead}"
@@ -35,11 +35,11 @@
                             </svg>
                         @endif
                     </div>
-                    <div class="px-4 py-3 md:px-0 md:py-0">
+                    <div class="w-full px-4 py-3 md:px-0 md:py-0">
                         <div class="group-hover:text-white text-2xl md:text-base">{{ $unreadFeedItem->title }}</div>
-                        <div class="group-hover:text-gray-300 group-focus:text-gray-200 md:flex md:space-x-2 text-muted md:text-xs pt-2 md:pt-0">
-                            <div>{{ $unreadFeedItem->posted_at->format(__('date.datetime')) }}</div>
+                        <div class="group-hover:text-gray-300 w-full group-focus:text-gray-200 md:flex md:justify-between md:space-x-2 text-muted md:text-xs pt-2 md:pt-0">
                             <div>{{ $unreadFeedItem->feed->name }}</div>
+                            <div>{{ $unreadFeedItem->posted_at->format(__('date.datetime')) }}</div>
                         </div>
 
                         <div class="md:hidden flex justify-end">
