@@ -1,4 +1,4 @@
-<div>
+<div class="pl-2">
     @foreach ($unreadFeedItems as $i => $unreadFeedItem)
         @include('feed.feed-item')
     @endforeach

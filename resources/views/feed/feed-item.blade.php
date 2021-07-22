@@ -1,7 +1,7 @@
-<div wire:ignore x-data="feedItem()" class="md:flex md:items-start md:space-x-4">
+<div wire:ignore x-data="feedItem()" class="flex items-start space-x-4">
     <button
         type="button"
-        class="hidden md:inline-flex my-2 disabled:cursor-not-allowed disabled:opacity-100 items-center p-3 text-gray-800 rounded-full font-semibold text-xs uppercase tracking-widest hover:text-white hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-out duration-300"
+        class="my-2 disabled:cursor-not-allowed disabled:opacity-100 inline-flex items-center p-3 text-gray-800 rounded-full font-semibold text-xs uppercase tracking-widest hover:text-white hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-out duration-300"
         :disabled="isLoading"
         @click.prevent="toggleMarkAsRead()"
     >
@@ -48,49 +48,16 @@
             isLoading: false,
             isRead: false,
             init() {
-                const element = this.$refs.link;
-                const gesture = TinyGesture(element);
+                const gesture = TinyGesture(this.$refs.link);
 
-                let isRequestCalled = false;
-
-                gesture.on('panmove', () => {
-                    if (gesture.animationFrame) {
-                        return;
-                    }
-
-                    gesture.animationFrame = window.requestAnimationFrame(() => {
-                        if (gesture.touchMoveX < 0) {
-                            console.log(gesture.swipingDirection);
-
-                            if (!gesture.swipingDirection.startsWith('pre-')) {
-                                element.classList.add('opacity-50');
-
-                                element.style.transform = `translate3d(-${element.clientWidth}px, 0, 0)`;
-
-                                if (!isRequestCalled) {
-                                    isRequestCalled = true;
-
-                                    this.toggleMarkAsRead().finally(() => {
-                                        element.style.transform = 'none';
-
-                                        isRequestCalled = false;
-                                    });
-                                }
-                            } else {
-                                element.classList.remove('opacity-50');
-
-                                element.style.transform = `translate3d(${gesture.touchMoveX}px, 0, 0)`;
-                            }
-
-                            gesture.animationFrame = null;
-                        }
-                    });
+                gesture.on('swipeleft', (event) => {
+                    this.toggleMarkAsRead()
                 });
             },
             toggleMarkAsRead() {
                 this.isLoading = true;
 
-                return axios.put('{{ route('feed_items.toggle_mark_as_read', $unreadFeedItem) }}')
+                axios.put('{{ route('feed_items.toggle_mark_as_read', $unreadFeedItem) }}')
                     .then(({data}) => {
                         this.isLoading = false;
                         this.isRead = !!data.read_at;
