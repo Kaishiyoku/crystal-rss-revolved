@@ -13,8 +13,9 @@
 
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg divide-y divide-gray-100">
         @foreach ($feeds as $feed)
-            <a class="flex items-center space-x-4 px-4 py-3 transition first:rounded-t-md last:rounded-b-md hover:bg-gray-50" href="{{ route('feeds.edit', $feed) }}">
-                {{ $feed->name }}
+            <a class="flex justify-between space-x-4 px-4 py-3 transition first:rounded-t-md last:rounded-b-md hover:bg-gray-50" href="{{ route('feeds.edit', $feed) }}">
+                <div>{{ $feed->name }}</div>
+                <div class="text-muted">{{ __('category_name', ['name' => $feed->category->name]) }}</div>
             </a>
         @endforeach
     </div>

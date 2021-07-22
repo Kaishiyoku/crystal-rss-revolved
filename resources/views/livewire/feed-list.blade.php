@@ -37,7 +37,7 @@
                     </div>
                     <div class="px-4 py-3 md:px-0 md:py-0">
                         <div class="group-hover:text-white text-2xl md:text-base">{{ $unreadFeedItem->title }}</div>
-                        <div class="group-hover:text-gray-300 group-focus:text-gray-200 md:flex md:space-x-2 text-gray-500 md:text-xs pt-2 md:pt-0">
+                        <div class="group-hover:text-gray-300 group-focus:text-gray-200 md:flex md:space-x-2 text-muted md:text-xs pt-2 md:pt-0">
                             <div>{{ $unreadFeedItem->posted_at->format(__('date.datetime')) }}</div>
                             <div>{{ $unreadFeedItem->feed->name }}</div>
                         </div>

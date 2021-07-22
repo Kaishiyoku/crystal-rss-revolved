@@ -2,6 +2,12 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+/* Colors
+---------------------------------------------------------------------------- */
+.text-muted {
+    @apply text-gray-500;
+}
+
 /* Alpine.js
 ---------------------------------------------------------------------------- */
 [x-cloak] {

@@ -717,5 +717,6 @@
     "Edit feed": "Feed ändern",
     "unread_articles": "{0}Keine ungelesen Artikel|{1}Ein ungelesener Artikel|[2,*]:count ungelesene Artikel",
     "Load more": "Mehr laden",
-    "Mark as read": "Als gelesen markieren"
+    "Mark as read": "Als gelesen markieren",
+    "category_name": "Kategorie: :name"
 }
