@@ -15,7 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = auth()->user()->categories;
+        $categories = auth()->user()->categories()->withCount('feeds')->orderBy('name')->get();
 
         return view('category.index', [
             'categories' => $categories,

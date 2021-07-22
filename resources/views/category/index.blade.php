@@ -13,8 +13,9 @@
 
     <x-card.card class="divide-y divide-gray-100">
         @foreach ($categories as $category)
-            <a class="flex items-center space-x-4 px-4 py-3 transition first:rounded-t-md last:rounded-b-md hover:bg-gray-50 focus:outline-none focus:bg-gray-50" href="{{ route('categories.edit', $category) }}">
-                {{ $category->getName() }}
+            <a class="flex justify-between space-x-4 px-4 py-3 transition first:rounded-t-md last:rounded-b-md hover:bg-gray-50" href="{{ route('categories.edit', $category) }}">
+                <div>{{ $category->getName() }}</div>
+                <div class="text-mute">{{ trans_choice('number_of_feeds', $category->feeds_count) }}</div>
             </a>
         @endforeach
     </x-card.card>
