@@ -1,4 +1,5 @@
 import onDomReady from './utils/onDomReady';
+import TinyGesture from 'tinygesture';
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -26,6 +27,17 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+window.TinyGesture = (element) => new TinyGesture(element, {
+    threshold: (type, self) => Math.max(25, Math.floor(0.15 * (type === 'x' ? window.innerWidth || document.body.clientWidth : window.innerHeight || document.body.clientHeight))),
+    velocityThreshold: 10,
+    disregardVelocityThreshold: (type, self) => Math.floor(0.5 * (type === 'x' ? self.element.clientWidth : self.element.clientHeight)),
+    pressThreshold: 8,
+    diagonalSwipes: false,
+    diagonalLimit: Math.tan(45 * 1.5 / 180 * Math.PI),
+    mouseSupport: false,
+});
+
 
 onDomReady(() => {
     document.querySelectorAll('[data-confirm]').forEach((element) => {
