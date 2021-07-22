@@ -1,6 +1,6 @@
 <div>
     @foreach ($unreadFeedItems as $i => $unreadFeedItem)
-        <div wire:ignore x-data="{isLoading: false, isRead: {{ json_encode(!!$unreadFeedItem->read_at) }}}" class="md:flex md:items-center md:space-x-4">
+        <div wire:ignore x-data="{isLoading: false, isRead: @json(!!$unreadFeedItem->read_at)}" class="md:flex md:items-center md:space-x-4">
             <button
                 type="button"
                 class="hidden md:inline-flex my-2 disabled:cursor-not-allowed disabled:opacity-100 items-center p-3 text-gray-800 rounded-full font-semibold text-xs uppercase tracking-widest hover:text-white hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-out duration-300"
