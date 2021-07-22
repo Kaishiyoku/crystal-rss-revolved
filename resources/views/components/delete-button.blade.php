@@ -5,7 +5,7 @@
 
     <input type="hidden" name="_method" value="delete"/>
 
-    <button type="submit" data-confirm="{{ __('Are you sure?') }}" {{ $attributes->merge(['class' => classNames('inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs uppercase tracking-widest focus:outline-none disabled:opacity-25 transition ease-in-out duration-150', ['bg-red-600 text-white bg-red-600 text-white hover:bg-red-700 active:bg-red-900 focus:border-red-900 focus:ring ring-red-300' => $theme === 'default', 'text-red-600 hover:bg-red-200 hover:border-red-200 focus:text-red-700 focus:bg-red-300 focus:border-red-300' => $theme === 'plain'])]) }}>
+    <button type="submit" data-confirm="{{ __('Are you sure?') }}" {{ $attributes->merge(['class' => 'inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:ring focus:ring-red-200 active:bg-red-600 disabled:opacity-25 transition']) }}>
         @if ($slot->isEmpty())
             {{ __('Delete') }}
         @else
