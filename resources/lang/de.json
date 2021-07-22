@@ -719,5 +719,8 @@
     "Load more": "Mehr laden",
     "Mark as read": "Als gelesen markieren",
     "category_name": "Kategorie: :name",
-    "number_of_feeds": "{0}Keine Feeds|{1}Ein Feed|[2,*]:count Feeds"
+    "number_of_feeds": "{0}Keine Feeds|{1}Ein Feed|[2,*]:count Feeds",
+    "Filter by feed": "Nach Feed filtern",
+    "All feeds": "Alle Feeds",
+    "feed_filter": "Filter: :name"
 }

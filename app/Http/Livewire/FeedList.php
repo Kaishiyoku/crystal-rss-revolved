@@ -25,28 +25,46 @@ class FeedList extends Component
      */
     public $unreadFeedItems;
 
+    /**
+     * @var int|null
+     */
+    public $filterFeedId = null;
+
     public function mount()
     {
         $this->feedItemsPerPage = config('app.feed_items_per_page');
-        $this->unreadFeedItems = new Collection();
 
-        $this->loadMore();
+        $this->loadMore([], true);
     }
 
     public function render()
     {
+        $feeds = auth()->user()->feeds()
+            ->whereHas('unreadFeedItems')
+            ->orderBy('name')
+            ->get();
+
         return view('livewire.feed-list', [
+            'feeds' => $feeds,
             'unreadFeedItems' => $this->unreadFeedItems,
             'hasMoreFeedItems' => $this->hasMoreFeedItems,
+            'filterFeedId' => $this->filterFeedId,
         ]);
     }
 
-    public function loadMore($readFeedIds = [])
+    public function loadMore($readFeedIds = [], $overwriteCollection = false)
     {
+        if ($overwriteCollection) {
+            $this->offset = 0;
+        }
+
         $newUnreadFeedItems = auth()->user()->feedItems()
             ->unread()
             ->when(count($readFeedIds) > 0, function (Builder $query) use ($readFeedIds) {
                 return $query->orWhereIn('feed_items.id', $readFeedIds);
+            })
+            ->when($this->filterFeedId, function (Builder $query) {
+                return $query->where('feed_id', $this->filterFeedId);
             })
             ->with('feed')
             ->orderBy('posted_at', 'desc')
@@ -60,6 +78,14 @@ class FeedList extends Component
 
         $newSlicedUnreadFeedItems = $newUnreadFeedItems->slice(0, -1);
 
-        $this->unreadFeedItems = $this->unreadFeedItems->merge($newSlicedUnreadFeedItems);
+        $this->unreadFeedItems = $overwriteCollection ? $newSlicedUnreadFeedItems : $this->unreadFeedItems->merge($newSlicedUnreadFeedItems);
+    }
+
+    public function filterByFeed($feedId)
+    {
+        $this->filterFeedId = $feedId;
+
+        $this->offset = 0;
+        $this->loadMore([], true);
     }
 }

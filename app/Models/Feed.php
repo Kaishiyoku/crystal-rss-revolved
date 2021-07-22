@@ -84,4 +84,12 @@ class Feed extends Model
     {
         return $this->hasMany(FeedItem::class);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function unreadFeedItems()
+    {
+        return $this->hasMany(FeedItem::class)->unread();
+    }
 }
