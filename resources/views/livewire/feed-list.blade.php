@@ -5,7 +5,7 @@
                 type="button"
                 class="my-2 disabled:cursor-not-allowed disabled:opacity-100 inline-flex items-center p-3 text-gray-800 rounded-full font-semibold text-xs uppercase tracking-widest hover:text-white hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-out duration-300"
                 :disabled="isLoading"
-                @click.prevent="isLoading = true; axios.put('{{ route('feed_items.toggle_mark_as_read', $unreadFeedItem) }}').then(({data}) => {isLoading = false; isRead = !!data.read_at;})"
+                @click.prevent="isLoading = true; axios.put('{{ route('feed_items.toggle_mark_as_read', $unreadFeedItem) }}').then(({data}) => {isLoading = false; isRead = !!data.read_at; if (isRead) {readFeedIds.push(data.id)} else {readFeedIds = readFeedIds.filter((feedId) => feedId !== data.id)}})"
             >
                 <svg x-show="isLoading" x-cloak class="animate-spin text-indigo-500 w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -45,8 +45,12 @@
     @endforeach
 
     @if ($hasMoreFeedItems)
-        <x-secondary-button type="button" class="mt-8" wire:click="loadMore()">
+        <x-secondary-button type="button" class="mt-8" wire:click="loadMore(readFeedIds)">
             {{ __('Load more') }}
         </x-secondary-button>
     @endif
 </div>
+
+<script type="text/javascript">
+    let readFeedIds = [];
+</script>

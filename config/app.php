@@ -134,6 +134,8 @@ return [
 
     'rss_crawler_retry_count' => env('RSS_CRAWLER_RETRY_COUNT', 2),
 
+    'feed_items_per_page' => env('FEED_ITEMS_PER_PAGE', 15),
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers

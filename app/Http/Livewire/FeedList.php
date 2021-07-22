@@ -2,52 +2,64 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\FeedItem;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
 
 class FeedList extends Component
 {
     /**
-     * @var int
+     * @var int|null
      */
-    private const LIMIT_INCREASE = 15;
+    public $feedItemsPerPage = null;
+
+    public $offset = 0;
 
     /**
      * @var bool
      */
-    public $limit = 15;
+    public $hasMoreFeedItems;
+
+    /**
+     * @var \Illuminate\Database\Eloquent\Collection
+     */
+    public $unreadFeedItems;
+
+    public function mount()
+    {
+        $this->feedItemsPerPage = config('app.feed_items_per_page');
+        $this->unreadFeedItems = new Collection();
+
+        $this->loadMore();
+    }
 
     public function render()
     {
-        $unreadFeedItems = auth()->user()->feedItems()
-            ->unread()
-            ->with('feed')
-            ->orderBy('posted_at', 'desc')
-            ->orderBy('feed_items.id', 'desc')
-            ->limit($this->limit + 1)
-            ->get();
-
-        $hasMoreFeedItems = $unreadFeedItems->count() > $this->limit;
-
         return view('livewire.feed-list', [
-            'unreadFeedItems' => $unreadFeedItems,
-            'hasMoreFeedItems' => $hasMoreFeedItems,
+            'unreadFeedItems' => $this->unreadFeedItems,
+            'hasMoreFeedItems' => $this->hasMoreFeedItems,
         ]);
     }
 
-    public function markAsRead(FeedItem $feedItem)
+    public function loadMore($readFeedIds = [])
     {
-        if ($feedItem->read_at) {
-            return;
-        }
+        $newUnreadFeedItems = auth()->user()->feedItems()
+            ->unread()
+            ->when(count($readFeedIds) > 0, function (Builder $query) use ($readFeedIds) {
+                return $query->orWhereIn('feed_items.id', $readFeedIds);
+            })
+            ->with('feed')
+            ->orderBy('posted_at', 'desc')
+            ->orderBy('feed_items.id', 'desc')
+            ->offset($this->offset)
+            ->limit($this->feedItemsPerPage + 1)
+            ->get();
 
-        $feedItem->read_at = now();
+        $this->offset = $this->offset + $this->feedItemsPerPage;
+        $this->hasMoreFeedItems = $newUnreadFeedItems->count() > $this->feedItemsPerPage;
 
-        $feedItem->save();
-    }
+        $newSlicedUnreadFeedItems = $newUnreadFeedItems->slice(0, -1);
 
-    public function loadMore()
-    {
-        $this->limit = $this->limit + static::LIMIT_INCREASE;
+        $this->unreadFeedItems = $this->unreadFeedItems->merge($newSlicedUnreadFeedItems);
     }
 }
