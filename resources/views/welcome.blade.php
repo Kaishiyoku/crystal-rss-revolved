@@ -49,7 +49,7 @@
             <div class="flex flex-col justify-center items-center pt-8 sm:pt-0">
                 <x-application-authentication-logo class="w-32 h-40" />
 
-                <span class="text-6xl md:text-8xl text-center pt-4">
+                <span class="text-6xl md:text-8xl text-center pt-4 dark:text-white">
                     {{ config('app.name', 'Laravel') }}
                 </span>
             </div>
