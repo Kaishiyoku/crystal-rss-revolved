@@ -82,4 +82,12 @@ class FeedItem extends Model
     {
         return $query->whereNull('read_at');
     }
+
+    /**
+     * @return bool
+     */
+    public function hasImage()
+    {
+        return $this->image_url && isImageUrl($this->image_url);
+    }
 }
