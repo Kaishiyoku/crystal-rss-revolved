@@ -11,6 +11,8 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+
+        @include('shared._favicon')
     </head>
     <body class="antialiased bg-gray-100 dark:bg-gray-900">
         <div class="absolute w-full bg-gradient-to-r lg:bg-none from-[#6927ff] to-[#914cd9]">
@@ -20,9 +22,9 @@
                 </div>
 
                 @if (Route::has('login'))
-                    <div class="fixed top-0 right-0 px-6 py-4">
+                    <div class="md:fixed md:top-0 md:right-0 px-4 md:px-6 py-4">
                         @auth
-                            <a href="{{ url('/dashboard') }}" class="text-purple-300 hover:text-white uppercase pr-4 transition-all duration-200 tracking-wider">{{ __('Dashboard') }}</a>
+                            <a href="{{ url('/dashboard') }}" class="text-purple-300 hover:text-white uppercase pl-4 transition-all duration-200 tracking-wider">{{ __('Dashboard') }}</a>
                         @else
                             <a href="{{ route('login') }}" class="text-purple-300 hover:text-white uppercase pl-4 transition-all duration-200 tracking-wider">{{ __('Log in') }}</a>
 
@@ -35,7 +37,7 @@
             </div>
         </div>
 
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" class="absolute mt-12 lg:mt-0" style="z-index: -1;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" class="absolute mt-24 md:mt-12 lg:mt-0" style="z-index: -1;">
             <defs>
                 <linearGradient id="pathGradient" x1="0" y1="0.5" x2="1" y2="0.5">
                     <stop offset="0" stop-color="#6927ff"/>
