@@ -5,7 +5,7 @@
                 <x-jet-dropdown align="left" width="60">
                     <x-slot name="trigger">
                         <span class="inline-flex rounded-md">
-                            <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition">
+                            <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-left text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition">
                                 <span x-text="dropdownButtonTitle">{{ __('Filter by feed') }}</span>
 
                                 <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -63,7 +63,7 @@
                 <x-heroicon-s-eye x-show="!isLoading" class="w-5 h-5"/>
             </button>
 
-            <x-card.card wire:ignore class="{{ classNames('flex-grow md:rounded-none mb-12 md:mb-0', ['md:rounded-t-lg' => $i === 0, 'md:rounded-b-lg' => $i === $unreadFeedItems->count() - 1]) }}">
+            <x-card.card wire:ignore class="{{ classNames('flex-grow md:rounded-none mb-16 md:mb-0', ['md:rounded-t-lg' => $i === 0, 'md:rounded-b-lg' => $i === $unreadFeedItems->count() - 1]) }}">
                 <div :class="{'opacity-40': isRead}">
                     <a
                         class="group block md:flex md:items-center md:space-x-4 md:px-4 md:py-3 transition ease-out duration-300 hover:bg-indigo-500 focus:outline-none focus:text-white focus:bg-indigo-600 transition"
