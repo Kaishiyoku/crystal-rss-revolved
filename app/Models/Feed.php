@@ -34,6 +34,8 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\FeedItem[] $feedItems
  * @property-read int|null $feed_items_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\FeedItem[] $unreadFeedItems
+ * @property-read int|null $unread_feed_items_count
  */
 class Feed extends Model
 {
