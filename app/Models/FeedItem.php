@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Prunable;
 
 /**
  * App\Models\FeedItem
@@ -41,7 +42,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class FeedItem extends Model
 {
-    use HasFactory;
+    use HasFactory, Prunable;
 
     /**
      * The attributes that are mass assignable.
@@ -65,6 +66,16 @@ class FeedItem extends Model
     protected $casts = [
         'posted_at' => 'datetime',
     ];
+
+    /**
+     * Get the prunable model query.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function prunable()
+    {
+        return static::where('posted_at', '<=', now()->subMonths(config('app.months_after_pruning_feed_items')));
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

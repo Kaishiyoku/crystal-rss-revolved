@@ -136,6 +136,8 @@ return [
 
     'feed_items_per_page' => env('FEED_ITEMS_PER_PAGE', 15),
 
+    'months_after_pruning_feed_items' => env('MONTHS_AFTER_PRUNING_FEED_ITEMS', 2),
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
