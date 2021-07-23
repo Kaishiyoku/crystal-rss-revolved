@@ -58,50 +58,51 @@
             </button>
 
             <x-card.card class="{{ classNames('flex-grow md:rounded-none mb-12 md:mb-0', ['md:rounded-t-lg' => $i === 0, 'md:rounded-b-lg' => $i === $unreadFeedItems->count() - 1]) }}">
-                <a
-                    class="group block md:flex md:items-center md:space-x-4 md:px-4 md:py-3 transition ease-out duration-300 hover:bg-indigo-500 focus:outline-none focus:text-white focus:bg-indigo-600 transition"
-                    :class="{'opacity-[35%]': isRead}"
-                    href="{{ $unreadFeedItem->url }}"
-                >
-                    <div class="md:flex-shrink-0 md:block md:w-12">
-
-                        @if ($unreadFeedItem->hasImage())
-                            <img
-                                src="{{ $unreadFeedItem->image_url }}"
-                                alt="{{ $unreadFeedItem->title }}"
-                                class="object-cover w-full md:w-auto h-72 md:h-auto md:rounded"
-                            />
-                        @else
-                            <svg class="fill-current text-white bg-gray-300 w-full md:w-auto h-72 md:h-auto md:rounded" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
-                            </svg>
-                        @endif
-                    </div>
-                    <div class="w-full px-4 py-3 md:px-0 md:py-0">
-                        <div class="group-hover:text-white text-2xl md:text-base">{{ $unreadFeedItem->title }}</div>
-                        <div class="group-hover:text-gray-300 w-full group-focus:text-gray-200 md:flex md:justify-between md:space-x-2 text-muted md:text-xs pt-2 md:pt-0">
-                            <div>{{ $unreadFeedItem->feed->name }}</div>
-                            <div>{{ $unreadFeedItem->posted_at->format(__('date.datetime')) }}</div>
-                        </div>
-                    </div>
-                </a>
-
-                <div class="md:hidden px-4 pb-4 flex justify-end">
-                    <button
-                        type="button"
-                        class="mt-4 disabled:cursor-not-allowed disabled:opacity-100 inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200 active:text-gray-800 active:bg-gray-50 transition"
-                        :disabled="isLoading"
-                        @click.prevent="isLoading = true; axios.put('{{ route('feed_items.toggle_mark_as_read', $unreadFeedItem) }}').then(({data}) => {isLoading = false; isRead = !!data.read_at; if (isRead) {readFeedIds.push(data.id)} else {readFeedIds = readFeedIds.filter((feedId) => feedId !== data.id)}})"
+                <div :class="{'opacity-[35%]': isRead}">
+                    <a
+                        class="group block md:flex md:items-center md:space-x-4 md:px-4 md:py-3 transition ease-out duration-300 hover:bg-indigo-500 focus:outline-none focus:text-white focus:bg-indigo-600 transition"
+                        href="{{ $unreadFeedItem->url }}"
                     >
-                        <svg x-show="isLoading" x-cloak class="animate-spin text-indigo-500 w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
+                        <div class="md:flex-shrink-0 md:block md:w-12">
 
-                        <x-heroicon-s-eye x-show="!isLoading" class="w-5 h-5 mr-2"/>
+                            @if ($unreadFeedItem->hasImage())
+                                <img
+                                    src="{{ $unreadFeedItem->image_url }}"
+                                    alt="{{ $unreadFeedItem->title }}"
+                                    class="object-cover w-full md:w-auto h-72 md:h-auto md:rounded"
+                                />
+                            @else
+                                <svg class="fill-current text-white bg-gray-300 w-full md:w-auto h-72 md:h-auto md:rounded" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
+                                </svg>
+                            @endif
+                        </div>
+                        <div class="w-full px-4 py-3 md:px-0 md:py-0">
+                            <div class="group-hover:text-white text-2xl md:text-base">{{ $unreadFeedItem->title }}</div>
+                            <div class="group-hover:text-gray-300 w-full group-focus:text-gray-200 md:flex md:justify-between md:space-x-2 text-muted md:text-xs pt-2 md:pt-0">
+                                <div>{{ $unreadFeedItem->feed->name }}</div>
+                                <div>{{ $unreadFeedItem->posted_at->format(__('date.datetime')) }}</div>
+                            </div>
+                        </div>
+                    </a>
 
-                        <span>{{ __('Mark as read') }}</span>
-                    </button>
+                    <div class="md:hidden px-4 pb-4 flex justify-end">
+                        <button
+                            type="button"
+                            class="mt-4 disabled:cursor-not-allowed disabled:opacity-100 inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200 active:text-gray-800 active:bg-gray-50 transition"
+                            :disabled="isLoading"
+                            @click.prevent="isLoading = true; axios.put('{{ route('feed_items.toggle_mark_as_read', $unreadFeedItem) }}').then(({data}) => {isLoading = false; isRead = !!data.read_at; if (isRead) {readFeedIds.push(data.id)} else {readFeedIds = readFeedIds.filter((feedId) => feedId !== data.id)}})"
+                        >
+                            <svg x-show="isLoading" x-cloak class="animate-spin text-indigo-500 w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+
+                            <x-heroicon-s-eye x-show="!isLoading" class="w-5 h-5 mr-2"/>
+
+                            <span>{{ __('Mark as read') }}</span>
+                        </button>
+                    </div>
                 </div>
             </x-card.card>
         </div>
