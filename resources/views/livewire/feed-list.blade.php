@@ -5,7 +5,7 @@
                 <x-jet-dropdown align="left" width="60">
                     <x-slot name="trigger">
                         <span class="inline-flex rounded-md">
-                            <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-left text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition">
+                            <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-left text-sm leading-4 font-medium rounded-md text-gray-500 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-700 dark:hover:text-gray-400 focus:outline-none focus:bg-gray-50 dark:focus:text-gray-400 dark:focus:bg-gray-600 dark:active:text-gray-300 active:bg-gray-50 dark:active:bg-gray-500 transition">
                                 <span x-text="dropdownButtonTitle">{{ __('Filter by feed') }}</span>
 
                                 <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -20,18 +20,18 @@
                             <button
                                 type="button"
                                 @click="$wire.filterByFeed(null).then(() => dropdownButtonTitle = '{{ __('Filter by feed') }}')"
-                                class="{{ classNames('block w-full text-left px-4 py-2 text-sm leading-5 text-gray-700 focus:outline-none transition', ['hover:bg-gray-100 focus:bg-gray-100' => $filterFeedId !== null, 'text-white bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700' => $filterFeedId === null]) }}"
+                                class="{{ classNames('block w-full text-left px-4 py-2 text-sm leading-5 focus:outline-none dark:focus:text-gray-300 transition', ['text-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-100 dark:focus:bg-gray-600' => $filterFeedId !== null, 'text-white bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700' => $filterFeedId === null]) }}"
                             >
                                 {{ __('All feeds') }}
                             </button>
 
-                            <div class="border-t border-gray-100"></div>
+                            <div class="border-t border-gray-100 dark:border-gray-700"></div>
 
                             @foreach ($feeds as $feed)
                                 <button
                                     type="button"
                                     @click="$wire.filterByFeed({{ $feed->id }}).then(() => dropdownButtonTitle = '{{ __('feed_filter', ['name' => $feed->name]) }}')"
-                                    class="{{ classNames('block w-full text-left px-4 py-2 text-sm leading-5 text-gray-700 focus:outline-none transition', ['hover:bg-gray-100 focus:bg-gray-100' => $feed->id !== $filterFeedId, 'text-white bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700' => $feed->id === $filterFeedId]) }}"
+                                    class="{{ classNames('block w-full text-left px-4 py-2 text-sm leading-5 focus:outline-none dark:focus:text-gray-300 transition', ['text-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-100 dark:focus:bg-gray-600' => $feed->id !== $filterFeedId, 'text-white bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700' => $feed->id === $filterFeedId]) }}"
                                 >
                                     {{ $feed->name }}
                                 </button>
