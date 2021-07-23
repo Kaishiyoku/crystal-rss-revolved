@@ -3,7 +3,6 @@
 namespace App\Http\Livewire;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
 
 class FeedList extends Component
@@ -70,15 +69,14 @@ class FeedList extends Component
             ->orderBy('posted_at', 'desc')
             ->orderBy('feed_items.id', 'desc')
             ->offset($this->offset)
-            ->limit($this->feedItemsPerPage + 1)
+            ->limit($this->feedItemsPerPage)
             ->get();
 
         $this->offset = $this->offset + $this->feedItemsPerPage;
-        $this->hasMoreFeedItems = $newUnreadFeedItems->count() > $this->feedItemsPerPage;
 
-        $newSlicedUnreadFeedItems = $newUnreadFeedItems->slice(0, -1);
+        $this->unreadFeedItems = $overwriteCollection ? $newUnreadFeedItems : $this->unreadFeedItems->merge($newUnreadFeedItems);
 
-        $this->unreadFeedItems = $overwriteCollection ? $newSlicedUnreadFeedItems : $this->unreadFeedItems->merge($newSlicedUnreadFeedItems);
+        $this->hasMoreFeedItems = auth()->user()->feedItems()->unread()->count() > optional($this->unreadFeedItems)->count();
     }
 
     public function filterByFeed($feedId)
