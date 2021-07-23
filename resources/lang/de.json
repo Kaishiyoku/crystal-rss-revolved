@@ -722,5 +722,7 @@
     "number_of_feeds": "{0}Keine Feeds|{1}Ein Feed|[2,*]:count Feeds",
     "Filter by feed": "Nach Feed filtern",
     "All feeds": "Alle Feeds",
-    "feed_filter": "Filter: :name"
+    "feed_filter": "Filter: :name",
+    "Mark all as read": "Alle als gelesen markieren",
+    "Are you sure?": "Sind Sie sicher?"
 }

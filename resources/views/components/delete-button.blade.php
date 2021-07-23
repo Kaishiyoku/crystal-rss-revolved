@@ -1,4 +1,4 @@
-@props(['theme' => 'default', 'url' => null])
+@props(['url' => null])
 
 <form class="inline-block" method="post" action="{{ $url }}">
     @csrf

@@ -4,7 +4,7 @@
             {{ __('Dashboard') }}
         </h2>
 
-        {{ trans_choice('unread_articles', $totalUnreadFeedItems) }}
+        <div>{{ trans_choice('unread_articles', $totalUnreadFeedItems) }}</div>
     </x-slot>
 
     <livewire:feed-list/>

@@ -116,4 +116,21 @@ class FeedController extends Controller
 
         return redirect()->route('feeds.index');
     }
+
+    /**
+     * Mark all unread feed items as read.
+     *
+     * @param  \App\Models\Feed  $feed
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function markAllAsRead()
+    {
+        $now = now();
+
+        auth()->user()->feeds()->with('unreadFeedItems')->get()->each(function (Feed $feed) use ($now) {
+            $feed->feedItems()->update(['read_at' => $now]);
+        });
+
+        return redirect()->route('dashboard');
+    }
 }
