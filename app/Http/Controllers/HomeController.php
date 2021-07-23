@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Feed;
-use Illuminate\Pagination\CursorPaginator;
-
 class HomeController extends Controller
 {
     /**

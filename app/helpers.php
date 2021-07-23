@@ -6,7 +6,7 @@ if (!function_exists('isImageUrl')) {
         try {
             $headers = get_headers($url, true);
 
-            return Str::startsWith('image/', Arr::get($headers, 'Content-Type'));
+            return Str::startsWith(Arr::get($headers, 'Content-Type'), 'image/');
         } catch (Exception $e) {
             return false;
         }

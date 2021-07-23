@@ -9,9 +9,11 @@ use Exception;
 use ForceUTF8\Encoding;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Console\Command;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 use Kaishiyoku\HeraRssCrawler\HeraRssCrawler;
 use Kaishiyoku\HeraRssCrawler\Models\Rss\FeedItem as RssFeedItem;
+use Str;
 
 class FetchFeedItems extends Command
 {
@@ -124,8 +126,8 @@ class FetchFeedItems extends Command
         $feedItem = FeedItem::make([
             'url' => $rssFeedItem->getPermalink(),
             'title' => Encoding::toUTF8($rssFeedItem->getTitle()),
-            'image_url' => $rssFeedItem->getEnclosureUrl(),
-            'description' => Encoding::toUTF8(strip_tags($rssFeedItem->getDescription())),
+            'image_url' => Arr::first($rssFeedItem->getImageUrls()) ?? $rssFeedItem->getEnclosureUrl(),
+            'description' => Str::limit(Encoding::toUTF8(strip_tags($rssFeedItem->getDescription())), 1024),
             'posted_at' => $rssFeedItem->getCreatedAt(),
             'checksum' => $rssFeedItem->getChecksum(),
         ]);
