@@ -81,6 +81,8 @@ class Category extends Model
      */
     public static function getAvailableOptions()
     {
-        return self::orderBy('name')->pluck('name', 'id');
+        return self::orderBy('name')->get(['id', 'name'])->mapWithKeys(function (self $category) {
+            return [$category->id => $category->getName()];
+        });
     }
 }
