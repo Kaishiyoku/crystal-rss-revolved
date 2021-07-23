@@ -66,7 +66,7 @@
             <x-card.card wire:ignore class="{{ classNames('flex-grow md:rounded-none mb-16 md:mb-0', ['md:rounded-t-lg' => $i === 0, 'md:rounded-b-lg' => $i === $unreadFeedItems->count() - 1]) }}">
                 <div :class="{'opacity-40': isRead}">
                     <a
-                        class="group block md:flex md:items-center md:space-x-4 md:px-4 md:py-3 transition ease-out duration-300 dark:text-gray-400 hover:bg-indigo-500 focus:outline-none focus:text-white focus:bg-indigo-600 transition"
+                        class="group block md:flex md:items-center md:space-x-4 md:px-4 md:py-3 transition ease-out duration-300 hover:bg-indigo-500 focus:outline-none focus:text-white focus:bg-indigo-600 transition"
                         href="{{ $unreadFeedItem->url }}"
                     >
                         <div class="md:flex-shrink-0 md:block md:w-12">

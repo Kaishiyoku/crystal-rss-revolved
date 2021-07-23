@@ -11,11 +11,11 @@
         </div>
     </x-slot>
 
-    <x-card.card class="divide-y divide-gray-100">
+    <x-card.card class="divide-y divide-gray-100 dark:divide-gray-700">
         @foreach ($categories as $category)
-            <a class="flex justify-between space-x-4 px-4 py-3 transition first:rounded-t-md last:rounded-b-md hover:bg-gray-50" href="{{ route('categories.edit', $category) }}">
+            <a class="group flex justify-between space-x-4 px-4 py-3 transition first:rounded-t-md last:rounded-b-md hover:bg-gray-50 dark:hover:bg-gray-700 dark:hover:text-gray-300" href="{{ route('categories.edit', $category) }}">
                 <div>{{ $category->getName() }}</div>
-                <div class="text-mute">{{ trans_choice('number_of_feeds', $category->feeds_count) }}</div>
+                <div class="dark:group-hover:text-gray-400 text-muted">{{ trans_choice('number_of_feeds', $category->feeds_count) }}</div>
             </a>
         @endforeach
     </x-card.card>
