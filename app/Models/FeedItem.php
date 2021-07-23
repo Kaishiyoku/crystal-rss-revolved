@@ -4,8 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\MassPrunable;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Prunable;
 
 /**
  * App\Models\FeedItem
@@ -42,7 +42,7 @@ use Illuminate\Database\Eloquent\Prunable;
  */
 class FeedItem extends Model
 {
-    use HasFactory, Prunable;
+    use HasFactory, MassPrunable;
 
     /**
      * The attributes that are mass assignable.
