@@ -1,5 +1,5 @@
 <div x-data="feedDiscoverer()">
-    <x-input id="feed_url" class="block mt-1 w-full" type="text" name="feed_url" :value="old('feed_url', $feed->feed_url)" required x-ref="feedUrlInput" @keyup.debounce="handleInputChange"/>
+    <x-jet-input id="feed_url" class="block mt-1 w-full" type="text" name="feed_url" :value="old('feed_url', $feed->feed_url)" required x-ref="feedUrlInput" @keyup.debounce="handleInputChange"/>
 
     @if ($discoveredFeedUrls->isNotEmpty())
         <div class="absolute rounded-md ring-1 ring-black ring-opacity-5 py-1 bg-white overflow-y-auto max-w-[300px] max-h-[250px]" x-show="!isFeedUrlSelected && !errorMessage">
