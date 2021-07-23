@@ -51,7 +51,7 @@
         <div x-data="{isLoading: false, isRead: @json(!!$unreadFeedItem->read_at)}" class="md:flex md:items-center md:space-x-4">
             <button
                 type="button"
-                class="hidden md:inline-flex my-2 disabled:cursor-not-allowed disabled:opacity-100 items-center p-3 text-gray-800 rounded-full font-semibold text-xs uppercase tracking-widest hover:text-white hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-out duration-300"
+                class="hidden md:inline-flex my-2 disabled:cursor-not-allowed disabled:opacity-100 items-center p-3 text-gray-800 dark:text-gray-500 rounded-full font-semibold text-xs uppercase tracking-widest hover:text-white hover:bg-gray-700 active:bg-gray-900 dark:active:bg-gray-600 focus:outline-none focus:border-gray-900 dark:focus:border-gray-400 focus:ring ring-gray-300 dark:ring-gray-500 disabled:opacity-25 transition ease-out duration-300"
                 :disabled="isLoading"
                 @click.prevent="isLoading = true; axios.put('{{ route('feed_items.toggle_mark_as_read', $unreadFeedItem) }}').then(({data}) => {isLoading = false; isRead = !!data.read_at; if (isRead) {readFeedIds.push(data.id)} else {readFeedIds = readFeedIds.filter((feedId) => feedId !== data.id)}})"
             >
@@ -66,7 +66,7 @@
             <x-card.card wire:ignore class="{{ classNames('flex-grow md:rounded-none mb-16 md:mb-0', ['md:rounded-t-lg' => $i === 0, 'md:rounded-b-lg' => $i === $unreadFeedItems->count() - 1]) }}">
                 <div :class="{'opacity-40': isRead}">
                     <a
-                        class="group block md:flex md:items-center md:space-x-4 md:px-4 md:py-3 transition ease-out duration-300 hover:bg-indigo-500 focus:outline-none focus:text-white focus:bg-indigo-600 transition"
+                        class="group block md:flex md:items-center md:space-x-4 md:px-4 md:py-3 transition ease-out duration-300 dark:text-gray-400 hover:bg-indigo-500 focus:outline-none focus:text-white focus:bg-indigo-600 transition"
                         href="{{ $unreadFeedItem->url }}"
                     >
                         <div class="md:flex-shrink-0 md:block md:w-12">
