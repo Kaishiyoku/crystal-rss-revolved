@@ -83,6 +83,11 @@
                                 <div>{{ $unreadFeedItem->feed->name }}</div>
                                 <div>{{ $unreadFeedItem->posted_at->format(__('date.datetime')) }}</div>
                             </div>
+                            @if ($unreadFeedItem->description)
+                                <div class="group-hover:text-gray-300 group-focus:text-gray-200 pt-1 text-muted md:text-xs">
+                                    {{ $unreadFeedItem->description }}
+                                </div>
+                            @endif
                         </div>
                     </a>
 

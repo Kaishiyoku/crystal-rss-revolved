@@ -53,6 +53,7 @@ class FeedItem extends Model
         'url',
         'title',
         'image_url',
+        'description',
         'posted_at',
         'checksum',
         'read_at',

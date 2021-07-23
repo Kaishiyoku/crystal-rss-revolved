@@ -125,6 +125,7 @@ class FetchFeedItems extends Command
             'url' => $rssFeedItem->getPermalink(),
             'title' => Encoding::toUTF8($rssFeedItem->getTitle()),
             'image_url' => $rssFeedItem->getEnclosureUrl(),
+            'description' => Encoding::toUTF8(strip_tags($rssFeedItem->getDescription())),
             'posted_at' => $rssFeedItem->getCreatedAt(),
             'checksum' => $rssFeedItem->getChecksum(),
         ]);
