@@ -17,6 +17,6 @@
         "laravel-mix": "^6.0.25",
         "postcss": "^8.3.6",
         "postcss-import": "^14.0.1",
-        "tailwindcss": "^2.2.6"
+        "tailwindcss": "^2.2.7"
     }
 }
