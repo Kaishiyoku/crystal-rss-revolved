@@ -25,5 +25,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::resource('categories', CategoryController::class)->except(['show']);
     Route::put('/feeds/mark_all_as_read', [FeedController::class, 'markAllAsRead'])->name('feeds.mark_all_as_read');
     Route::resource('feeds', FeedController::class)->except(['show']);
+    Route::post('/feed_items', [FeedItemController::class, 'load'])->name('feed_items.load');
     Route::put('/feed_items/{feedItem}/read', [FeedItemController::class, 'toggleMarkAsRead'])->name('feed_items.toggle_mark_as_read');
 });

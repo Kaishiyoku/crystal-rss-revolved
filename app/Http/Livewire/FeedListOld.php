@@ -5,7 +5,7 @@ namespace App\Http\Livewire;
 use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
 
-class FeedList extends Component
+class FeedListOld extends Component
 {
     /**
      * @var int|null

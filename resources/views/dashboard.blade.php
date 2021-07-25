@@ -7,5 +7,5 @@
         <div>{{ trans_choice('unread_articles', $totalUnreadFeedItems) }}</div>
     </x-slot>
 
-    <livewire:feed-list/>
+    <x-feed-list/>
 </x-app-layout>

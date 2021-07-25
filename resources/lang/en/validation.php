@@ -158,5 +158,6 @@ return [
     ],
 
     'valid_feed_url' => 'The :attribute must be a valid feed.',
+    'array_of_integers' => 'The :attribute must be a list of integers.',
 
 ];

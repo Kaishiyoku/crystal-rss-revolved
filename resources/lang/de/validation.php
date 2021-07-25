@@ -163,4 +163,7 @@ return [
         'feed_url'              => 'Feed-URL',
         'site_url'              => 'Site-URL',
     ],
+
+    'valid_feed_url' => ':attribute muss eine gültiger Feed sein feed.',
+    'array_of_integers' => ':attribute muss eine Liste ganzer Zahlen sein.',
 ];
