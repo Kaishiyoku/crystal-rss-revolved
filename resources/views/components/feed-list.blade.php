@@ -33,9 +33,9 @@
                                     :key="feed.id"
                                     type="button"
                                     @click="filterByFeed(feed.id)"
-                                    class="block w-full text-left px-4 py-2 text-sm leading-5 focus:outline-none dark:focus:text-gray-300 transition"
+                                    class="flex justify-between items-center w-full text-left px-4 py-2 text-sm leading-5 focus:outline-none dark:focus:text-gray-300 transition"
                                     :class="{'text-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-100 dark:focus:bg-gray-600': feed.id !== filteredFeedId, 'text-white bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700': feed.id === filteredFeedId}"
-                                    x-text="feed.name"
+                                    x-html="getFeedFilterHtmlForFeed(feed)"
                                 >
                                 </button>
                             </template>
@@ -162,6 +162,9 @@
                 }
 
                 return '{{ __('Filter by feed') }}';
+            },
+            getFeedFilterHtmlForFeed(feed) {
+                return `<div>${feed.name}</div><div class="${this.filteredFeedId === feed.id ? '' : 'text-muted'} text-xs">(${feed.feed_items_count})</div>`;
             },
             isRead(feedItemId) {
                 return this.readFeedItemIds.includes(feedItemId);

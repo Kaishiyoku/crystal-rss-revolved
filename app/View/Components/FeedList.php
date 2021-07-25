@@ -27,6 +27,7 @@ class FeedList extends Component
 
         $this->feeds = auth()->user()->feeds()
             ->whereHas('unreadFeedItems')
+            ->withCount('feedItems')
             ->orderBy('name')
             ->get();
     }
