@@ -69,6 +69,15 @@ class FeedItem extends Model
     ];
 
     /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'formatted_posted_at',
+    ];
+
+    /**
      * Get the prunable model query.
      *
      * @return \Illuminate\Database\Eloquent\Builder
@@ -101,5 +110,10 @@ class FeedItem extends Model
     public function hasImage()
     {
         return $this->image_url && isImageUrl($this->image_url);
+    }
+
+    public function getFormattedPostedAtAttribute()
+    {
+        return $this->posted_at->format(__('date.datetime'));
     }
 }
