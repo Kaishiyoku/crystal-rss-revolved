@@ -11,10 +11,7 @@
                     :disabled="isLoading(unreadFeedItem.id)"
                     @click.prevent="toggleMarkAsRead(unreadFeedItem.id)"
                 >
-                    <svg x-show="isLoading(unreadFeedItem.id)" x-cloak class="animate-spin text-indigo-500 w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
+                    <x-icon.loading x-show="isLoading(unreadFeedItem.id)"/>
 
                     <x-heroicon-s-eye x-show="!isLoading(unreadFeedItem.id)" class="w-5 h-5"/>
                 </button>
@@ -55,10 +52,7 @@
                             :disabled="isLoading(unreadFeedItem.id)"
                             @click.prevent="toggleMarkAsRead(unreadFeedItem.id)"
                         >
-                            <svg x-show="isLoading(unreadFeedItem.id)" x-cloak class="animate-spin text-indigo-500 w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                            </svg>
+                            <x-icon.loading x-show="isLoading(unreadFeedItem.id)"/>
 
                             <x-heroicon-s-eye x-show="!isLoading(unreadFeedItem.id)" class="w-5 h-5 mr-2"/>
 
@@ -70,7 +64,9 @@
         </div>
     </template>
 
-    <x-secondary-button type="button" class="mt-8" @click="loadMore()">
+    <x-secondary-button type="button" class="mt-8" ::disabled="isMoreLoading" @click="loadMore()" x-cloak>
+        <x-icon.loading class="mr-2" x-show="isMoreLoading"/>
+
         {{ __('Load more') }}
     </x-secondary-button>
 </div>
@@ -78,6 +74,9 @@
 <script type="text/javascript">
     function feedList() {
         return {
+            init() {
+                this.loadMore();
+            },
             unreadFeedItems: [],
             filteredFeedId: null,
             readFeedItemIds: [],
@@ -85,6 +84,7 @@
             offset: 0,
             loadingList: [],
             hasMoreUnreadFeedItems: true,
+            isMoreLoading: false,
             isRead(feedItemId) {
                 return this.readFeedItemIds.includes(feedItemId);
             },
@@ -121,6 +121,8 @@
                 });
             },
             loadMore() {
+                this.isMoreLoading = true;
+
                 axios.post('{{ route('feed_items.load') }}', {
                     numberOfDisplayedFeedItems: this.unreadFeedItems.length,
                     filteredFeedId: this.filteredFeedId,
@@ -137,6 +139,8 @@
                     this.offset = newOffset;
                     this.hasMoreUnreadFeedItems = hasMoreUnreadFeedItems;
                     this.unreadFeedItems = this.unreadFeedItems.concat(newUnreadFeedItemsWithFilteredOutDuplicates);
+                }).finally(() => {
+                    this.isMoreLoading = false;
                 });
             },
         };
