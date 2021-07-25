@@ -1,4 +1,56 @@
 <div x-data="feedList()">
+    <template x-if="unreadFeedItems.length > 0">
+        <div class="mb-8 lg:flex lg:justify-between lg:space-x-2 space-y-2 lg:space-y-0 px-2 md:px-0">
+            <div class="flex">
+                <x-jet-dropdown align="left" width="60">
+                    <x-slot name="trigger">
+                        <span class="inline-flex rounded-md">
+                            <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-left text-sm leading-4 font-medium rounded-md text-gray-500 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-700 dark:hover:text-gray-400 focus:outline-none focus:bg-gray-50 dark:focus:text-gray-400 dark:focus:bg-gray-600 dark:active:text-gray-300 active:bg-gray-50 dark:active:bg-gray-500 transition">
+                                <span x-text="feedFilterDropdownButtonTitle"></span>
+
+                                <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                        </span>
+                    </x-slot>
+
+                    <x-slot name="content">
+                        <div class="w-60 max-h-72 overflow-hidden overflow-y-auto">
+                            <!-- @click="$wire.filterByFeed(null).then(() => dropdownButtonTitle = '{{ __('Filter by feed') }}')" -->
+                            <button
+                                type="button"
+                                class="block w-full text-left px-4 py-2 text-sm leading-5 focus:outline-none dark:focus:text-gray-300 transition"
+                                @click="filterByFeed(null)"
+                                :class="{'text-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-100 dark:focus:bg-gray-600': filteredFeedId !== null, 'text-white bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700': filteredFeedId === null}"
+                            >
+                                {{ __('All feeds') }}
+                            </button>
+
+                            <div class="border-t border-gray-100 dark:border-gray-700"></div>
+
+                            <template x-for="feed in feeds">
+                                <button
+                                    :key="feed.id"
+                                    type="button"
+                                    @click="filterByFeed(feed.id)"
+                                    class="block w-full text-left px-4 py-2 text-sm leading-5 focus:outline-none dark:focus:text-gray-300 transition"
+                                    :class="{'text-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-100 dark:focus:bg-gray-600': feed.id !== filteredFeedId, 'text-white bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700': feed.id === filteredFeedId}"
+                                    x-text="feed.name"
+                                >
+                                </button>
+                            </template>
+                        </div>
+                    </x-slot>
+                </x-jet-dropdown>
+            </div>
+
+            <x-secondary-update-button :url="route('feeds.mark_all_as_read')" @click="confirm($event)">
+                {{ __('Mark all as read') }}
+            </x-secondary-update-button>
+        </div>
+    </template>
+
     <template x-for="(unreadFeedItem, index) in unreadFeedItems">
         <div :key="unreadFeedItem.id" class="md:flex md:items-center md:space-x-4">
             <button
@@ -11,9 +63,12 @@
                     :disabled="isLoading(unreadFeedItem.id)"
                     @click.prevent="toggleMarkAsRead(unreadFeedItem.id)"
                 >
-                    <x-icon.loading x-show="isLoading(unreadFeedItem.id)"/>
-
-                    <x-heroicon-s-eye x-show="!isLoading(unreadFeedItem.id)" class="w-5 h-5"/>
+                    <template x-if="isLoading(unreadFeedItem.id)">
+                        <x-icon.loading/>
+                    </template>
+                    <template x-if="!isLoading(unreadFeedItem.id)">
+                        <x-heroicon-s-eye class="w-5 h-5"/>
+                    </template>
                 </button>
             </button>
 
@@ -24,16 +79,18 @@
                         :href="unreadFeedItem.url"
                     >
                         <div class="md:flex-shrink-0 md:block md:w-12">
-                            <img
-                                :src="unreadFeedItem.image_url"
-                                :alt="unreadFeedItem.title"
-                                class="object-cover w-full md:w-auto h-72 md:h-auto md:rounded"
-                                x-show="unreadFeedItem.image_url"
-                            />
-
-                            <svg class="fill-current text-white bg-gray-300 w-full md:w-auto h-72 md:h-auto md:rounded" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" x-show="!unreadFeedItem.image_url">
-                                <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
-                            </svg>
+                            <template x-if="unreadFeedItem.image_url">
+                                <img
+                                    :src="unreadFeedItem.image_url"
+                                    :alt="unreadFeedItem.title"
+                                    class="object-cover w-full md:w-auto h-72 md:h-auto md:rounded"
+                                />
+                            </template>
+                            <template x-if="!unreadFeedItem.image_url">
+                                <svg class="fill-current text-white bg-gray-300 w-full md:w-auto h-72 md:h-auto md:rounded" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
+                                </svg>
+                            </template>
                         </div>
                         <div class="w-full px-4 py-3 md:px-0 md:py-0">
                             <div class="group-hover:text-white text-2xl md:text-base" x-text="unreadFeedItem.title"></div>
@@ -41,7 +98,9 @@
                                 <div x-text="unreadFeedItem.feed.name"></div>
                                 <div x-text="unreadFeedItem.posted_at"></div>
                             </div>
-                            <div class="group-hover:text-gray-300 group-focus:text-gray-200 pt-1 text-muted md:text-xs" x-show="unreadFeedItem.description" x-text="unreadFeedItem.description">w</div>
+                            <template x-if="unreadFeedItem.description">
+                                <div class="group-hover:text-gray-300 group-focus:text-gray-200 pt-1 text-muted md:text-xs" x-text="unreadFeedItem.description">w</div>
+                            </template>
                         </div>
                     </a>
 
@@ -52,9 +111,12 @@
                             :disabled="isLoading(unreadFeedItem.id)"
                             @click.prevent="toggleMarkAsRead(unreadFeedItem.id)"
                         >
-                            <x-icon.loading x-show="isLoading(unreadFeedItem.id)"/>
-
-                            <x-heroicon-s-eye x-show="!isLoading(unreadFeedItem.id)" class="w-5 h-5 mr-2"/>
+                            <template x-if="isLoading(unreadFeedItem.id)">
+                                <x-icon.loading/>
+                            </template>
+                            <template x-if="!isLoading(unreadFeedItem.id)">
+                                <x-heroicon-s-eye class="w-5 h-5 mr-2"/>
+                            </template>
 
                             <span>{{ __('Mark as read') }}</span>
                         </button>
@@ -64,11 +126,15 @@
         </div>
     </template>
 
-    <x-secondary-button type="button" class="mt-8" ::disabled="isMoreLoading" @click="loadMore()" x-cloak>
-        <x-icon.loading class="mr-2" x-show="isMoreLoading"/>
+    <template x-if="hasMoreUnreadFeedItems">
+        <x-secondary-button type="button" class="mt-8" ::disabled="isMoreLoading" @click="loadMore()" x-cloak>
+            <template x-if="isMoreLoading">
+                <x-icon.loading class="mr-2"/>
+            </template>
 
-        {{ __('Load more') }}
-    </x-secondary-button>
+            {{ __('Load more') }}
+        </x-secondary-button>
+    </template>
 </div>
 
 <script type="text/javascript">
@@ -77,14 +143,21 @@
             init() {
                 this.loadMore();
             },
+            feeds: @json($feeds),
             unreadFeedItems: [],
             filteredFeedId: null,
             readFeedItemIds: [],
             feedItemsPerPage: {{ $feedItemsPerPage }},
             offset: 0,
             loadingList: [],
-            hasMoreUnreadFeedItems: true,
+            hasMoreUnreadFeedItems: false,
             isMoreLoading: false,
+            feedFilterDropdownButtonTitle: '{{ __('Filter by feed') }}',
+            confirm(event) {
+                if (!confirm('{{ __('Are you sure?') }}')) {
+                    event.preventDefault()
+                }
+            },
             isRead(feedItemId) {
                 return this.readFeedItemIds.includes(feedItemId);
             },
@@ -118,6 +191,24 @@
                     } else {
                         this.removeIsRead(feedItemId);
                     }
+                });
+            },
+            filterByFeed(feedId) {
+                // TODO
+
+                axios.post('{{ route('feed_items.load') }}', {
+                    numberOfDisplayedFeedItems: this.unreadFeedItems.length,
+                    filteredFeedId: feedId,
+                    offset: 0,
+                    feedItemsPerPage: this.feedItemsPerPage,
+                    readFeedItemIds: [],
+                }).then(({data: {newOffset, hasMoreUnreadFeedItems, newUnreadFeedItems}}) => {
+                    this.offset = newOffset;
+                    this.hasMoreUnreadFeedItems = hasMoreUnreadFeedItems;
+                    this.unreadFeedItems = newUnreadFeedItems;
+                    this.filteredFeedId = feedId;
+                }).finally(() => {
+                    // TODO
                 });
             },
             loadMore() {

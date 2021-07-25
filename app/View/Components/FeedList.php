@@ -12,6 +12,11 @@ class FeedList extends Component
     public $feedItemsPerPage = null;
 
     /**
+     * @var \Illuminate\Support\Collection|null
+     */
+    public $feeds = null;
+
+    /**
      * Create a new component instance.
      *
      * @return void
@@ -19,6 +24,11 @@ class FeedList extends Component
     public function __construct()
     {
         $this->feedItemsPerPage = config('app.feed_items_per_page');
+
+        $this->feeds = auth()->user()->feeds()
+            ->whereHas('unreadFeedItems')
+            ->orderBy('name')
+            ->get();
     }
 
     /**
