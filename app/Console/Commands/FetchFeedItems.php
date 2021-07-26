@@ -63,11 +63,17 @@ class FetchFeedItems extends Command
      */
     public function handle()
     {
+        $startTime = microtime(true);
+
         User::verified()->with('feeds')->each(function (User $user) {
             $this->info("Fetching feeds for user {$user->name}");
 
             $this->fetchFeedsForUser($user);
         });
+
+        $executionTimeInSeconds = round(microtime(true) - $startTime);
+
+        $this->info("Duration: {$executionTimeInSeconds}s");
 
         return 0;
     }
