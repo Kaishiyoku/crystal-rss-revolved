@@ -70,7 +70,7 @@ class FeedController extends Controller
      */
     public function edit(Feed $feed)
     {
-        $this->authorize('view', $feed);
+        $this->authorize('update', $feed);
 
         return view('feed.edit', [
             'feed' => $feed,

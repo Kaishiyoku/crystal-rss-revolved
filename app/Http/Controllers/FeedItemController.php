@@ -54,6 +54,8 @@ class FeedItemController extends Controller
 
     public function toggleMarkAsRead(FeedItem $feedItem)
     {
+        $this->authorize('update', $feedItem);
+
         $feedItem->read_at = $feedItem->read_at ? null : now();
 
         $feedItem->save();
