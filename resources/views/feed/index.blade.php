@@ -11,9 +11,9 @@
         </div>
     </x-slot>
 
-    <x-card.card class="divide-y divide-gray-100 dark:divide-gray-700">
+    <x-card.card class="divide-y divide-gray-200 dark:divide-gray-700">
         @foreach ($feeds as $feed)
-            <a class="group flex justify-between space-x-4 px-4 py-3 transition first:rounded-t-md last:rounded-b-md hover:bg-gray-50 dark:hover:bg-gray-700 dark:hover:text-gray-300" href="{{ route('feeds.edit', $feed) }}">
+            <a class="group block md:flex md:justify-between md:space-x-4 px-4 py-3 transition first:rounded-t-md last:rounded-b-md hover:bg-gray-50 dark:hover:bg-gray-700 dark:hover:text-gray-300" href="{{ route('feeds.edit', $feed) }}">
                 <div>{{ $feed->name }}</div>
                 <div class="dark:group-hover:text-gray-400 text-muted">{{ __('category_name', ['name' => $feed->category->getName()]) }}</div>
             </a>

@@ -1,6 +1,6 @@
 <div x-data="feedList()">
     <template x-if="unreadFeedItems.length > 0">
-        <div class="mb-8 lg:flex lg:justify-between lg:space-x-2 space-y-2 lg:space-y-0 px-2 md:px-0">
+        <div class="mb-8 lg:flex lg:justify-between lg:space-x-2 space-y-2 lg:space-y-0 px-4 sm:px-0">
             <div class="flex">
                 <x-jet-dropdown align="left" width="60">
                     <x-slot name="trigger">
@@ -126,7 +126,7 @@
     </template>
 
     <template x-if="hasMoreUnreadFeedItems">
-        <x-secondary-button type="button" class="mt-8" ::disabled="isMoreLoading" @click="loadMore()" x-cloak>
+        <x-secondary-button type="button" class="mx-4 sm:mx-0 mt-8" ::disabled="isMoreLoading" @click="loadMore()" x-cloak>
             <template x-if="isMoreLoading">
                 <x-icon.loading class="mr-2"/>
             </template>
