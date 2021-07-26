@@ -119,7 +119,7 @@ class FetchFeedItems extends Command
     private function storeRssFeedItem(Feed $feed, RssFeedItem $rssFeedItem)
     {
         // don't save duplicate items
-        if (FeedItem::whereChecksum($rssFeedItem->getChecksum())->count() > 0) {
+        if (FeedItem::whereChecksum($rssFeedItem->getChecksum())->count() > 0 || !$rssFeedItem->getCreatedAt()) {
             return;
         }
 
