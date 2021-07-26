@@ -1,14 +1,14 @@
 <?php
 
-if (!function_exists('isImageUrl')) {
-    function isImageUrl(string $url): bool
+if (!function_exists('getContentTypeForUrl')) {
+    function getContentTypeForUrl(string $url): ?string
     {
         try {
             $headers = get_headers($url, true);
 
-            return Str::startsWith(Arr::get($headers, 'Content-Type'), 'image/');
+            return Arr::get($headers, 'Content-Type');
         } catch (Exception $e) {
-            return false;
+            return null;
         }
     }
 }

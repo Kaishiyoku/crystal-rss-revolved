@@ -123,10 +123,14 @@ class FetchFeedItems extends Command
             return;
         }
 
+        $imageUrl = Arr::first($rssFeedItem->getImageUrls()) ?? $rssFeedItem->getEnclosureUrl();
+        $imageMimetype = $imageUrl ? getContentTypeForUrl($imageUrl) : null;
+
         $feedItem = FeedItem::make([
             'url' => $rssFeedItem->getPermalink(),
             'title' => Encoding::toUTF8($rssFeedItem->getTitle()),
-            'image_url' => Arr::first($rssFeedItem->getImageUrls()) ?? $rssFeedItem->getEnclosureUrl(),
+            'image_url' => $imageUrl,
+            'image_mimetype' => $imageMimetype,
             'description' => Str::limit(Encoding::toUTF8(strip_tags($rssFeedItem->getDescription())), 1024),
             'posted_at' => $rssFeedItem->getCreatedAt(),
             'checksum' => $rssFeedItem->getChecksum(),

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\MassPrunable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 /**
  * App\Models\FeedItem
@@ -53,6 +54,7 @@ class FeedItem extends Model
         'url',
         'title',
         'image_url',
+        'image_mimetype',
         'description',
         'posted_at',
         'checksum',
@@ -75,6 +77,7 @@ class FeedItem extends Model
      */
     protected $appends = [
         'formatted_posted_at',
+        'has_image',
     ];
 
     /**
@@ -109,11 +112,16 @@ class FeedItem extends Model
      */
     public function hasImage()
     {
-        return $this->image_url && isImageUrl($this->image_url);
+        return $this->image_url && Str::startsWith($this->image_mimetype, 'image/');
     }
 
     public function getFormattedPostedAtAttribute()
     {
         return $this->posted_at->format(__('date.datetime'));
+    }
+
+    public function getHasImageAttribute()
+    {
+        return $this->hasImage();
     }
 }

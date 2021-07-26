@@ -78,14 +78,14 @@
                         :href="unreadFeedItem.url"
                     >
                         <div class="md:flex-shrink-0 md:block md:w-12">
-                            <template x-if="unreadFeedItem.image_url">
+                            <template x-if="unreadFeedItem.has_image">
                                 <img
                                     :src="unreadFeedItem.image_url"
                                     :alt="unreadFeedItem.title"
                                     class="object-cover w-full md:w-auto h-72 md:h-auto md:rounded"
                                 />
                             </template>
-                            <template x-if="!unreadFeedItem.image_url">
+                            <template x-if="!unreadFeedItem.has_image">
                                 <svg class="fill-current text-white bg-gray-300 w-full md:w-auto h-72 md:h-auto md:rounded" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
                                 </svg>
