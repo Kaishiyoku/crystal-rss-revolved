@@ -164,7 +164,7 @@
                 return '{{ __('Filter by feed') }}';
             },
             getFeedFilterHtmlForFeed(feed) {
-                return `<div>${feed.name}</div><div class="${this.filteredFeedId === feed.id ? '' : 'text-muted'} text-xs">(${feed.feed_items_count})</div>`;
+                return `<div>${feed.name}</div><div class="${this.filteredFeedId === feed.id ? '' : 'text-muted'} text-xs">(${feed.unread_feed_items_count})</div>`;
             },
             isRead(feedItemId) {
                 return this.readFeedItemIds.includes(feedItemId);
