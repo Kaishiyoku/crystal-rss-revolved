@@ -55,20 +55,15 @@
             <button
                 type="button"
                 class="hidden md:inline-flex my-2 disabled:cursor-not-allowed disabled:opacity-100 items-center p-3 text-gray-800 dark:text-gray-500 rounded-full font-semibold text-xs uppercase tracking-widest hover:text-white hover:bg-gray-700 active:bg-gray-900 dark:active:bg-gray-600 focus:outline-none focus:border-gray-900 dark:focus:border-gray-400 focus:ring ring-gray-300 dark:ring-gray-500 disabled:opacity-25 transition ease-out duration-300"
+                :disabled="isLoading(unreadFeedItem.id)"
+                @click.prevent="toggleMarkAsRead(unreadFeedItem.id)"
             >
-                <button
-                    type="button"
-                    class="hidden md:inline-flex my-2 disabled:cursor-not-allowed disabled:opacity-100 items-center p-3 text-gray-800 dark:text-gray-500 rounded-full font-semibold text-xs uppercase tracking-widest hover:text-white hover:bg-gray-700 active:bg-gray-900 dark:active:bg-gray-600 focus:outline-none focus:border-gray-900 dark:focus:border-gray-400 focus:ring ring-gray-300 dark:ring-gray-500 disabled:opacity-25 transition ease-out duration-300"
-                    :disabled="isLoading(unreadFeedItem.id)"
-                    @click.prevent="toggleMarkAsRead(unreadFeedItem.id)"
-                >
-                    <template x-if="isLoading(unreadFeedItem.id)">
-                        <x-icon.loading/>
-                    </template>
-                    <template x-if="!isLoading(unreadFeedItem.id)">
-                        <x-heroicon-s-eye class="w-5 h-5"/>
-                    </template>
-                </button>
+                <template x-if="isLoading(unreadFeedItem.id)">
+                    <x-icon.loading/>
+                </template>
+                <template x-if="!isLoading(unreadFeedItem.id)">
+                    <x-heroicon-s-eye class="w-5 h-5"/>
+                </template>
             </button>
 
             <x-card.card class="flex-grow md:rounded-none mb-16 md:mb-0" ::class="{'md:rounded-t-lg': index === 0, 'md:rounded-b-lg': index === unreadFeedItems.length - 1}">
