@@ -6,7 +6,13 @@ if (!function_exists('getContentTypeForUrl')) {
         try {
             $headers = get_headers($url, true);
 
-            return Arr::get($headers, 'Content-Type');
+            $contentType = Arr::get($headers, 'Content-Type');
+
+            if (is_array($contentType)) {
+                return null;
+            }
+
+            return $contentType;
         } catch (Exception $e) {
             return null;
         }

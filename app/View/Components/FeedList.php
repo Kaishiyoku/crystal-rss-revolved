@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\View\Component;
 
 class FeedList extends Component
@@ -27,7 +28,9 @@ class FeedList extends Component
 
         $this->feeds = auth()->user()->feeds()
             ->whereHas('unreadFeedItems')
-            ->withCount('feedItems')
+            ->withCount(['unreadFeedItems' => function (Builder $query) {
+                $query->unread();
+            }])
             ->orderBy('name')
             ->get();
     }
