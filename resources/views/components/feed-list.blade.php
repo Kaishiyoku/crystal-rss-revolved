@@ -81,15 +81,21 @@
                                 />
                             </template>
                             <template x-if="!unreadFeedItem.has_image">
-                                <svg class="fill-current text-white bg-gray-300 w-full md:w-auto h-72 md:h-auto md:rounded" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
-                                </svg>
+                                <x-heroicon-s-photograph class="fill-current text-white bg-gray-300 w-full md:w-auto h-72 md:h-auto md:rounded"/>
                             </template>
                         </div>
                         <div class="w-full px-4 py-3 md:px-0 md:py-0">
                             <div class="group-hover:text-white text-2xl md:text-base" x-text="unreadFeedItem.title"></div>
                             <div class="group-hover:text-gray-300 w-full group-focus:text-gray-200 md:flex md:justify-between md:space-x-2 text-muted md:text-xs pt-2 md:pt-0">
-                                <div x-text="unreadFeedItem.feed.name"></div>
+                                <div class="flex items-center">
+                                    <template x-if="unreadFeedItem.feed.favicon_url">
+                                        <img :src="unreadFeedItem.feed.favicon_url" class="w-4 h-4" alt="Favicon"/>
+                                    </template>
+                                    <template x-if="!unreadFeedItem.feed.favicon_url">
+                                        <x-heroicon-o-photograph class="h-4 w-4"/>
+                                    </template>
+                                    <div class="ml-1" x-text="unreadFeedItem.feed.name"></div>
+                                </div>
                                 <div x-text="unreadFeedItem.formatted_posted_at"></div>
                             </div>
                             <template x-if="unreadFeedItem.description">

@@ -21,7 +21,9 @@ class MigrateFaviconUrlAtFeedsTable extends Migration
             try {
                 $faviconUrl = $heraRssCrawler->discoverFavicon($feed->site_url);
 
-                DB::table('feeds')->where('id', $feed->id)->update(['favicon_url' => $faviconUrl]);
+                if ($faviconUrl && Str::startsWith(getContentTypeForUrl($faviconUrl), 'image/')) {
+                    DB::table('feeds')->where('id', $feed->id)->update(['favicon_url' => $faviconUrl]);
+                }
             } catch (Exception $e) {
                 Log::warning("Couldn't discover favicon: {$e->getMessage()}");
             }
