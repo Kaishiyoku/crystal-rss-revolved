@@ -6,11 +6,26 @@ use App\Models\Category;
 use App\Models\Feed;
 use App\Rules\ValidFeedUrl;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use Kaishiyoku\HeraRssCrawler\HeraRssCrawler;
 
 class FeedController extends Controller
 {
+    /**
+     * @var HeraRssCrawler
+     */
+    private $heraRssCrawler;
+
+    /**
+     * FeedController constructor.
+     */
+    public function __construct()
+    {
+        $this->heraRssCrawler = new HeraRssCrawler();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -57,7 +72,9 @@ class FeedController extends Controller
             'name' => ['required', Rule::unique('feeds', 'name')->where('user_id', Auth::user()->id)],
         ]);
 
-        $feed = Feed::make($data);
+        $faviconUrl = $this->heraRssCrawler->discoverFavicon(Arr::get($data, 'site_url'));
+
+        $feed = Feed::make(Arr::add($data, 'favicon_url', $faviconUrl));
         Auth::user()->feeds()->save($feed);
 
         return redirect()->route('feeds.index');
@@ -97,7 +114,9 @@ class FeedController extends Controller
             'name' => ['required', Rule::unique('feeds', 'name')->where('user_id', Auth::user()->id)->ignore($feed)],
         ]);
 
-        $feed->update($data);
+        $faviconUrl = $this->heraRssCrawler->discoverFavicon(Arr::get($data, 'site_url'));
+
+        $feed->update(Arr::add($data, 'favicon_url', $faviconUrl));
 
         return redirect()->route('feeds.index');
     }
