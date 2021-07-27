@@ -34,7 +34,6 @@ class FeedItemController extends Controller
 
         $hasMoreUnreadFeedItems = Auth::user()->feedItems()
                 ->filteredByFeed($filteredFeedId, $readFeedItemIds)
-                ->paged($feedItemsPerPage, $offset)
                 ->count() > Arr::get($data, 'numberOfDisplayedFeedItems');
         $newOffset = $offset + $feedItemsPerPage;
 
