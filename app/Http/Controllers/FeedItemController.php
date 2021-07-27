@@ -7,6 +7,7 @@ use App\Models\FeedItem;
 use App\Rules\ArrayOfIntegers;
 use Arr;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
 class FeedItemController extends Controller
@@ -26,12 +27,12 @@ class FeedItemController extends Controller
         $offset = Arr::get($data, 'offset');
         $feedItemsPerPage = Arr::get($data, 'feedItemsPerPage');
 
-        $newUnreadFeedItems = auth()->user()->feedItems()
+        $newUnreadFeedItems = Auth::user()->feedItems()
             ->filteredByFeed($filteredFeedId, $readFeedItemIds)
             ->paged($feedItemsPerPage, $offset)
             ->get();
 
-        $hasMoreUnreadFeedItems = auth()->user()->feedItems()
+        $hasMoreUnreadFeedItems = Auth::user()->feedItems()
                 ->filteredByFeed($filteredFeedId, $readFeedItemIds)
                 ->paged($feedItemsPerPage, $offset)
                 ->count() > Arr::get($data, 'numberOfDisplayedFeedItems');

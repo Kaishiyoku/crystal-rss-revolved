@@ -3,6 +3,7 @@
 namespace App\View\Components;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\Component;
 
 class FeedList extends Component
@@ -26,7 +27,7 @@ class FeedList extends Component
     {
         $this->feedItemsPerPage = config('app.feed_items_per_page');
 
-        $this->feeds = auth()->user()->feeds()
+        $this->feeds = Auth::user()->feeds()
             ->whereHas('unreadFeedItems')
             ->withCount(['unreadFeedItems' => function (Builder $query) {
                 $query->unread();

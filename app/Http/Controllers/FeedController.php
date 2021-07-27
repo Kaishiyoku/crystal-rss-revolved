@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Feed;
 use App\Rules\ValidFeedUrl;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
 class FeedController extends Controller
@@ -17,7 +18,7 @@ class FeedController extends Controller
      */
     public function index()
     {
-        $feeds = auth()->user()->feeds()->with('category')->orderBy('name')->get();
+        $feeds = Auth::user()->feeds()->with('category')->orderBy('name')->get();
 
         return view('feed.index', [
             'feeds' => $feeds,
@@ -53,11 +54,11 @@ class FeedController extends Controller
             'category_id' => ['required', Rule::in(Category::getAvailableOptions()->keys())],
             'feed_url' => ['required', 'url', new ValidFeedUrl()],
             'site_url' => ['required', 'url'],
-            'name' => ['required', Rule::unique('feeds', 'name')->where('user_id', auth()->user()->id)],
+            'name' => ['required', Rule::unique('feeds', 'name')->where('user_id', Auth::user()->id)],
         ]);
 
         $feed = Feed::make($data);
-        auth()->user()->feeds()->save($feed);
+        Auth::user()->feeds()->save($feed);
 
         return redirect()->route('feeds.index');
     }
@@ -93,7 +94,7 @@ class FeedController extends Controller
             'category_id' => ['required', Rule::in(Category::getAvailableOptions()->keys())],
             'feed_url' => ['required', 'url', new ValidFeedUrl()],
             'site_url' => ['required', 'url'],
-            'name' => ['required', Rule::unique('feeds', 'name')->where('user_id', auth()->user()->id)->ignore($feed)],
+            'name' => ['required', Rule::unique('feeds', 'name')->where('user_id', Auth::user()->id)->ignore($feed)],
         ]);
 
         $feed->update($data);
@@ -127,7 +128,7 @@ class FeedController extends Controller
     {
         $now = now();
 
-        auth()->user()->feeds()->with('unreadFeedItems')->get()->each(function (Feed $feed) use ($now) {
+        Auth::feeds()->with('unreadFeedItems')->get()->each(function (Feed $feed) use ($now) {
             $feed->feedItems()->update(['read_at' => $now]);
         });
 

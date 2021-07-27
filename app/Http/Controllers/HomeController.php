@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -19,7 +20,7 @@ class HomeController extends Controller
      */
     public function dashboard()
     {
-        $totalUnreadFeedItems = auth()->user()->feedItems()->unread()->count();
+        $totalUnreadFeedItems = Auth::user()->feedItems()->unread()->count();
 
         return view('dashboard', [
             'totalUnreadFeedItems' => $totalUnreadFeedItems,
