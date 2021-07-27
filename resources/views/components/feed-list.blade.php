@@ -19,11 +19,11 @@
                         <div class="w-60 max-h-72 overflow-hidden overflow-y-auto">
                             <button
                                 type="button"
-                                class="block w-full text-left px-4 py-2 text-sm leading-5 focus:outline-none dark:focus:text-gray-300 transition"
                                 @click="filterByFeed(null)"
+                                class="flex justify-between items-center w-full text-left px-4 py-2 text-sm leading-5 focus:outline-none dark:focus:text-gray-300 transition"
                                 :class="{'text-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-100 dark:focus:bg-gray-600': filteredFeedId !== null, 'text-white bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700': filteredFeedId === null}"
+                                x-html="getAllFeedsButtonHtml()"
                             >
-                                {{ __('All feeds') }}
                             </button>
 
                             <div class="border-t border-gray-100 dark:border-gray-700"></div>
@@ -81,15 +81,21 @@
                                 />
                             </template>
                             <template x-if="!unreadFeedItem.has_image">
-                                <svg class="fill-current text-white bg-gray-300 w-full md:w-auto h-72 md:h-auto md:rounded" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
-                                </svg>
+                                <x-heroicon-s-photograph class="fill-current text-white bg-gray-300 w-full md:w-auto h-72 md:h-auto md:rounded"/>
                             </template>
                         </div>
                         <div class="w-full px-4 py-3 md:px-0 md:py-0">
                             <div class="group-hover:text-white text-2xl md:text-base" x-text="unreadFeedItem.title"></div>
                             <div class="group-hover:text-gray-300 w-full group-focus:text-gray-200 md:flex md:justify-between md:space-x-2 text-muted md:text-xs pt-2 md:pt-0">
-                                <div x-text="unreadFeedItem.feed.name"></div>
+                                <div class="flex items-center">
+                                    <template x-if="unreadFeedItem.feed.favicon_url">
+                                        <img :src="unreadFeedItem.feed.favicon_url" class="w-4 h-4" alt="Favicon"/>
+                                    </template>
+                                    <template x-if="!unreadFeedItem.feed.favicon_url">
+                                        <x-heroicon-o-photograph class="h-4 w-4"/>
+                                    </template>
+                                    <div class="ml-1" x-text="unreadFeedItem.feed.name"></div>
+                                </div>
                                 <div x-text="unreadFeedItem.formatted_posted_at"></div>
                             </div>
                             <template x-if="unreadFeedItem.description">
@@ -157,6 +163,11 @@
                 }
 
                 return '{{ __('Filter by feed') }}';
+            },
+            getAllFeedsButtonHtml() {
+                const totalNumberOfFeedItems = this.feeds.reduce((carry, feed) => carry + feed.unread_feed_items_count, 0);
+
+                return `<div>{{ __('All feeds') }}</div><div class="${!this.filteredFeedId ? '' : 'text-muted'} text-xs">(${totalNumberOfFeedItems})</div>`
             },
             getFeedFilterHtmlForFeed(feed) {
                 return `<div>${feed.name}</div><div class="${this.filteredFeedId === feed.id ? '' : 'text-muted'} text-xs">(${feed.unread_feed_items_count})</div>`;

@@ -138,8 +138,8 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * @param Illuminate\Database\Eloquent\Builder $query
-     * @return Illuminate\Database\Eloquent\Builder
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeVerified(Builder $query)
     {

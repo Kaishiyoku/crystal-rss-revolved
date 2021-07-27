@@ -36,6 +36,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read int|null $feed_items_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\FeedItem[] $unreadFeedItems
  * @property-read int|null $unread_feed_items_count
+ * @property string|null $favicon_url
+ * @method static \Illuminate\Database\Eloquent\Builder|Feed whereFaviconUrl($value)
  */
 class Feed extends Model
 {
@@ -50,6 +52,7 @@ class Feed extends Model
         'category_id',
         'feed_url',
         'site_url',
+        'favicon_url',
         'name',
         'last_checked_at',
     ];

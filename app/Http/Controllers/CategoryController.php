@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
 class CategoryController extends Controller
@@ -15,7 +16,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = auth()->user()->categories()->withCount('feeds')->orderBy('name')->get();
+        $categories = Auth::user()->categories()->withCount('feeds')->orderBy('name')->get();
 
         return view('category.index', [
             'categories' => $categories,
@@ -45,11 +46,11 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => ['required', Rule::unique('categories', 'name')->where('user_id', auth()->user()->id)],
+            'name' => ['required', Rule::unique('categories', 'name')->where('user_id', Auth::user()->id)],
         ]);
 
         $category = Category::make($data);
-        auth()->user()->categories()->save($category);
+        Auth::user()->categories()->save($category);
 
         return redirect()->route('categories.index');
     }
@@ -81,7 +82,7 @@ class CategoryController extends Controller
         $this->authorize('update', $category);
 
         $data = $request->validate([
-            'name' => ['required', Rule::unique('categories', 'name')->where('user_id', auth()->user()->id)->ignore($category)],
+            'name' => ['required', Rule::unique('categories', 'name')->where('user_id', Auth::user()->id)->ignore($category)],
         ]);
 
         $category->update($data);
