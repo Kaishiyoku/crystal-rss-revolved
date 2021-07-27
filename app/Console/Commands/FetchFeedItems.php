@@ -66,14 +66,14 @@ class FetchFeedItems extends Command
         $startTime = microtime(true);
 
         User::verified()->with('feeds')->each(function (User $user) {
-            $this->info("Fetching feeds for user {$user->name}");
+            $this->logger->info("Fetching feeds for user {$user->name}");
 
             $this->fetchFeedsForUser($user);
         });
 
         $executionTimeInSeconds = round(microtime(true) - $startTime);
 
-        $this->info("Duration: {$executionTimeInSeconds}s");
+        $this->logger->info("Duration: {$executionTimeInSeconds}s");
 
         return 0;
     }
@@ -93,7 +93,7 @@ class FetchFeedItems extends Command
      */
     private function fetchFeed(Feed $feed)
     {
-        $this->info("Fetching feed {$feed->name}");
+        $this->logger->info("Fetching feed {$feed->name}");
 
         try {
             $rssFeed = $this->heraRssCrawler->parseFeed($feed->feed_url);
@@ -106,10 +106,8 @@ class FetchFeedItems extends Command
                 $this->storeRssFeedItem($feed, $rssFeedItem);
             });
         } catch (ClientException $e) {
-            $this->info("Couldn't get feed {$feed->feed_url}");
             $this->logger->error($e, [$feed->feed_url]);
         } catch (Exception $e) {
-            $this->info("Couldn't parse feed {$feed->feed_url}");
             $this->logger->error($e, [$feed->feed_url]);
         }
 
