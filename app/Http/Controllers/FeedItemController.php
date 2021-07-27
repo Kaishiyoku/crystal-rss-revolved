@@ -6,7 +6,6 @@ use App\Models\Feed;
 use App\Models\FeedItem;
 use App\Rules\ArrayOfIntegers;
 use Arr;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -22,27 +21,20 @@ class FeedItemController extends Controller
             'readFeedItemIds' => [new ArrayOfIntegers()],
         ]);
 
-        $readFeedItemIds = Arr::get($data, 'readFeedItemIds');
+        $readFeedItemIds = collect(Arr::get($data, 'readFeedItemIds'));
         $filteredFeedId = Arr::get($data, 'filteredFeedId');
         $offset = Arr::get($data, 'offset');
         $feedItemsPerPage = Arr::get($data, 'feedItemsPerPage');
 
         $newUnreadFeedItems = auth()->user()->feedItems()
-            ->unread()
-            ->when(count($readFeedItemIds) > 0, function (Builder $query) use ($readFeedItemIds) {
-                return $query->orWhereIn('feed_items.id', $readFeedItemIds);
-            })
-            ->when($filteredFeedId, function (Builder $query) use ($filteredFeedId) {
-                return $query->where('feed_id', $filteredFeedId);
-            })
-            ->with('feed')
-            ->orderBy('posted_at', 'desc')
-            ->orderBy('feed_items.id', 'desc')
-            ->offset($offset)
-            ->limit($feedItemsPerPage)
+            ->filteredByFeed($filteredFeedId, $readFeedItemIds)
+            ->paged($feedItemsPerPage, $offset)
             ->get();
 
-        $hasMoreUnreadFeedItems = auth()->user()->feedItems()->unread()->count() > Arr::get($data, 'numberOfDisplayedFeedItems');
+        $hasMoreUnreadFeedItems = auth()->user()->feedItems()
+                ->filteredByFeed($filteredFeedId, $readFeedItemIds)
+                ->paged($feedItemsPerPage, $offset)
+                ->count() > Arr::get($data, 'numberOfDisplayedFeedItems');
         $newOffset = $offset + $feedItemsPerPage;
 
         return response()->json([

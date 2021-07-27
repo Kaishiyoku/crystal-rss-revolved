@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\MassPrunable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 /**
@@ -40,6 +41,14 @@ use Illuminate\Support\Str;
  * @method static \Illuminate\Database\Eloquent\Builder|FeedItem whereUserId($value)
  * @mixin \Eloquent
  * @method static Builder|FeedItem unread()
+ * @property string|null $image_mimetype
+ * @property string|null $description
+ * @property-read mixed $formatted_posted_at
+ * @property-read mixed $has_image
+ * @method static Builder|FeedItem filteredByFeed($filteredFeedId, \Illuminate\Support\Collection $readFeedItemIds)
+ * @method static Builder|FeedItem paged($limit, $offset)
+ * @method static Builder|FeedItem whereDescription($value)
+ * @method static Builder|FeedItem whereImageMimetype($value)
  */
 class FeedItem extends Model
 {
@@ -105,6 +114,28 @@ class FeedItem extends Model
     public function scopeUnread(Builder $query)
     {
         return $query->whereNull('read_at');
+    }
+
+    public function scopeFilteredByFeed(Builder $query, $filteredFeedId, Collection $readFeedItemIds)
+    {
+        return $query
+            ->unread()
+            ->when($readFeedItemIds->isNotEmpty(), function (Builder $query) use ($readFeedItemIds) {
+                return $query->orWhereIn('feed_items.id', $readFeedItemIds);
+            })
+            ->when($filteredFeedId, function (Builder $query) use ($filteredFeedId) {
+                return $query->where('feed_id', $filteredFeedId);
+            })
+            ->with('feed')
+            ->orderBy('posted_at', 'desc')
+            ->orderBy('feed_items.id', 'desc');
+    }
+
+    public function scopePaged(Builder $query, $limit, $offset)
+    {
+        return $query
+            ->offset($offset)
+            ->limit($limit);
     }
 
     /**

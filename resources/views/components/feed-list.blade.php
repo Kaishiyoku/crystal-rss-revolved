@@ -19,11 +19,11 @@
                         <div class="w-60 max-h-72 overflow-hidden overflow-y-auto">
                             <button
                                 type="button"
-                                class="block w-full text-left px-4 py-2 text-sm leading-5 focus:outline-none dark:focus:text-gray-300 transition"
                                 @click="filterByFeed(null)"
+                                class="flex justify-between items-center w-full text-left px-4 py-2 text-sm leading-5 focus:outline-none dark:focus:text-gray-300 transition"
                                 :class="{'text-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-100 dark:focus:bg-gray-600': filteredFeedId !== null, 'text-white bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700': filteredFeedId === null}"
+                                x-html="getAllFeedsButtonHtml()"
                             >
-                                {{ __('All feeds') }}
                             </button>
 
                             <div class="border-t border-gray-100 dark:border-gray-700"></div>
@@ -157,6 +157,11 @@
                 }
 
                 return '{{ __('Filter by feed') }}';
+            },
+            getAllFeedsButtonHtml() {
+                const totalNumberOfFeedItems = this.feeds.reduce((carry, feed) => carry + feed.unread_feed_items_count, 0);
+
+                return `<div>{{ __('All feeds') }}</div><div class="${!this.filteredFeedId ? '' : 'text-muted'} text-xs">(${totalNumberOfFeedItems})</div>`
             },
             getFeedFilterHtmlForFeed(feed) {
                 return `<div>${feed.name}</div><div class="${this.filteredFeedId === feed.id ? '' : 'text-muted'} text-xs">(${feed.unread_feed_items_count})</div>`;
