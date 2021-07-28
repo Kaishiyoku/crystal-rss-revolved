@@ -147,7 +147,7 @@ class FeedController extends Controller
     {
         $now = now();
 
-        Auth::feeds()->with('unreadFeedItems')->get()->each(function (Feed $feed) use ($now) {
+        Auth::user()->feeds()->with('unreadFeedItems')->get()->each(function (Feed $feed) use ($now) {
             $feed->feedItems()->update(['read_at' => $now]);
         });
 
