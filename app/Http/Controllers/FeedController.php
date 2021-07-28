@@ -127,7 +127,6 @@ class FeedController extends Controller
     /**
      * Mark all unread feed items as read.
      *
-     * @param  \App\Models\Feed  $feed
      * @return \Illuminate\Http\RedirectResponse
      */
     public function markAllAsRead()

@@ -30,11 +30,6 @@ class FeedDiscoverer extends Component
     public $discoveredFeedUrls;
 
     /**
-     * @var \Illuminate\Support\MessageBag
-     */
-    public $validationErrors;
-
-    /**
      * @var \Kaishiyoku\HeraRssCrawler\HeraRssCrawler
      */
     private $heraRssCrawler;
@@ -49,7 +44,6 @@ class FeedDiscoverer extends Component
     public function mount()
     {
         $this->discoveredFeedUrls = collect();
-        $this->validationErrors = collect();
     }
 
     public function render()

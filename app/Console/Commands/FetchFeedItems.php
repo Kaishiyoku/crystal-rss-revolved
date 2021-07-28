@@ -83,7 +83,7 @@ class FetchFeedItems extends Command
      */
     private function fetchFeedsForUser(User $user)
     {
-        $user->feeds->each(function (Feed $feed) use ($user) {
+        $user->feeds->each(function (Feed $feed) {
             $this->fetchFeed($feed);
         });
     }

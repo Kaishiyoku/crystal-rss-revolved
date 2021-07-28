@@ -14,7 +14,7 @@ class FeedItemPolicy
      * Determine whether the user can view any models.
      *
      * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @return \Illuminate\Auth\Access\Response|bool|void
      */
     public function viewAny(User $user)
     {
@@ -26,7 +26,7 @@ class FeedItemPolicy
      *
      * @param  \App\Models\User  $user
      * @param  \App\Models\FeedItem  $feedItem
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @return \Illuminate\Auth\Access\Response|bool|void
      */
     public function view(User $user, FeedItem $feedItem)
     {
@@ -37,7 +37,7 @@ class FeedItemPolicy
      * Determine whether the user can create models.
      *
      * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @return \Illuminate\Auth\Access\Response|bool|void
      */
     public function create(User $user)
     {
@@ -61,7 +61,7 @@ class FeedItemPolicy
      *
      * @param  \App\Models\User  $user
      * @param  \App\Models\FeedItem  $feedItem
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @return \Illuminate\Auth\Access\Response|bool|void
      */
     public function delete(User $user, FeedItem $feedItem)
     {
@@ -73,7 +73,7 @@ class FeedItemPolicy
      *
      * @param  \App\Models\User  $user
      * @param  \App\Models\FeedItem  $feedItem
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @return \Illuminate\Auth\Access\Response|bool|void
      */
     public function restore(User $user, FeedItem $feedItem)
     {
@@ -85,7 +85,7 @@ class FeedItemPolicy
      *
      * @param  \App\Models\User  $user
      * @param  \App\Models\FeedItem  $feedItem
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @return \Illuminate\Auth\Access\Response|bool|void
      */
     public function forceDelete(User $user, FeedItem $feedItem)
     {

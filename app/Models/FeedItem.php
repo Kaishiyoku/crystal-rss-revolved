@@ -18,7 +18,7 @@ use Illuminate\Support\Str;
  * @property string $url
  * @property string $title
  * @property string|null $image_url
- * @property string $posted_at
+ * @property \Illuminate\Support\Carbon|null $posted_at
  * @property string $checksum
  * @property string|null $read_at
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -107,23 +107,19 @@ class FeedItem extends Model
         return $this->belongsTo(Feed::class);
     }
 
-    /**
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeUnread(Builder $query)
+    public function scopeUnread($query)
     {
         return $query->whereNull('read_at');
     }
 
-    public function scopeFilteredByFeed(Builder $query, $filteredFeedId, Collection $readFeedItemIds)
+    public function scopeFilteredByFeed($query, $filteredFeedId, Collection $readFeedItemIds)
     {
         return $query
             ->unread()
-            ->when($readFeedItemIds->isNotEmpty(), function (Builder $query) use ($readFeedItemIds) {
+            ->when($readFeedItemIds->isNotEmpty(), function ($query) use ($readFeedItemIds) {
                 return $query->orWhereIn('feed_items.id', $readFeedItemIds);
             })
-            ->when($filteredFeedId, function (Builder $query) use ($filteredFeedId) {
+            ->when($filteredFeedId, function ($query) use ($filteredFeedId) {
                 return $query->where('feed_id', $filteredFeedId);
             })
             ->with('feed')
@@ -131,7 +127,7 @@ class FeedItem extends Model
             ->orderBy('feed_items.id', 'desc');
     }
 
-    public function scopePaged(Builder $query, $limit, $offset)
+    public function scopePaged($query, $limit, $offset)
     {
         return $query
             ->offset($offset)

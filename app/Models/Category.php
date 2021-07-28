@@ -53,7 +53,7 @@ class Category extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasManywwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function feeds()
     {
