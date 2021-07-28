@@ -122,8 +122,8 @@ class FetchFeedItems extends Command
      */
     private function storeRssFeedItem(Feed $feed, RssFeedItem $rssFeedItem)
     {
-        // don't save duplicate items
-        if (FeedItem::whereChecksum($rssFeedItem->getChecksum())->count() > 0 || !$rssFeedItem->getCreatedAt()) {
+        // don't save duplicate items, items without a creation date or items which are older than the prune time
+        if (FeedItem::whereChecksum($rssFeedItem->getChecksum())->count() > 0 || !$rssFeedItem->getCreatedAt() || $rssFeedItem->getCreatedAt()->isBefore(now()->subMonths(config('app.months_after_pruning_feed_items')))) {
             return;
         }
 
