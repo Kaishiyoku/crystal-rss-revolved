@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCategoryRequest;
+use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rule;
 
 class CategoryController extends Controller
 {
@@ -40,16 +40,12 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreCategoryRequest  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(StoreCategoryRequest $request)
     {
-        $data = $request->validate([
-            'name' => ['required', Rule::unique('categories', 'name')->where('user_id', Auth::user()->id)],
-        ]);
-
-        $category = Category::make($data);
+        $category = Category::make($request->validated());
         Auth::user()->categories()->save($category);
 
         return redirect()->route('categories.index');
@@ -73,19 +69,13 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\UpdateCategoryRequest  $request
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, Category $category)
+    public function update(UpdateCategoryRequest $request, Category $category)
     {
-        $this->authorize('update', $category);
-
-        $data = $request->validate([
-            'name' => ['required', Rule::unique('categories', 'name')->where('user_id', Auth::user()->id)->ignore($category)],
-        ]);
-
-        $category->update($data);
+        $category->update($request->validated());
 
         return redirect()->route('categories.index');
     }

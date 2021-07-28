@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreFeedRequest;
+use App\Http\Requests\UpdateFeedRequest;
 use App\Models\Category;
 use App\Models\Feed;
-use App\Rules\ValidFeedUrl;
-use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rule;
 use Kaishiyoku\HeraRssCrawler\HeraRssCrawler;
 
 class FeedController extends Controller
@@ -60,21 +59,16 @@ class FeedController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreFeedRequest  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(StoreFeedRequest $request)
     {
-        $data = $request->validate([
-            'category_id' => ['required', Rule::in(Category::getAvailableOptions()->keys())],
-            'feed_url' => ['required', 'url', new ValidFeedUrl()],
-            'site_url' => ['required', 'url'],
-            'name' => ['required', Rule::unique('feeds', 'name')->where('user_id', Auth::user()->id)],
-        ]);
+        $validated = $request->validated();
 
-        $faviconUrl = $this->heraRssCrawler->discoverFavicon(Arr::get($data, 'site_url'));
+        $faviconUrl = $this->heraRssCrawler->discoverFavicon(Arr::get($validated, 'site_url'));
 
-        $feed = Feed::make(Arr::add($data, 'favicon_url', $faviconUrl));
+        $feed = Feed::make(Arr::add($validated, 'favicon_url', $faviconUrl));
         Auth::user()->feeds()->save($feed);
 
         return redirect()->route('feeds.index');
@@ -99,24 +93,17 @@ class FeedController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\UpdateFeedRequest  $request
      * @param  \App\Models\Feed  $feed
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, Feed $feed)
+    public function update(UpdateFeedRequest $request, Feed $feed)
     {
-        $this->authorize('update', $feed);
+        $validated = $request->validated();
 
-        $data = $request->validate([
-            'category_id' => ['required', Rule::in(Category::getAvailableOptions()->keys())],
-            'feed_url' => ['required', 'url', new ValidFeedUrl()],
-            'site_url' => ['required', 'url'],
-            'name' => ['required', Rule::unique('feeds', 'name')->where('user_id', Auth::user()->id)->ignore($feed)],
-        ]);
+        $faviconUrl = $this->heraRssCrawler->discoverFavicon(Arr::get($validated, 'site_url'));
 
-        $faviconUrl = $this->heraRssCrawler->discoverFavicon(Arr::get($data, 'site_url'));
-
-        $feed->update(Arr::add($data, 'favicon_url', $faviconUrl));
+        $feed->update(Arr::add($validated, 'favicon_url', $faviconUrl));
 
         return redirect()->route('feeds.index');
     }
