@@ -4,7 +4,7 @@
     "category_name": "Category: :name",
     "number_of_feeds": "{0}No feeds|{1}One feed|[2,*]:count feeds",
     "feed_filter": "Filter: :name",
-    "new_feed_items_message": "{1}One new article available.|[2,*]:count new articles available."
+    "new_feed_items_message": "{1}One new article available.|[2,*]:count new articles available.",
     "welcome_page_headline": ":name is a minimalist newsfeed reader.",
     "welcome_page_text_1": "The features are limited by intention to be able to concentrate on what matters: reading the news.",
     "welcome_page_text_2": "Any RSS feed can be added and article summaries are then being fetched and displayed on the dashboard automatically.",
