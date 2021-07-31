@@ -13,8 +13,9 @@
         <script type="text/javascript">
             onDomReady(() => {
                 Echo.private(`feed-list.${userId}`)
-                    .listen('NewFeedItemsFetched', (data) => {
-                        Alpine.store('toasts').add(data.message, 5000);
+                    .listen('NewFeedItemsFetched', ({title, message}) => {
+                        Alpine.store('toasts').add(message, 10000);
+                        sendPushNotification(title, message, 10000, () => window.location.reload());
                     });
             });
         </script>

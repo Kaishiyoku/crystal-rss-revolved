@@ -19,6 +19,11 @@ class NewFeedItemsFetched implements ShouldBroadcast
     /**
      * @var string
      */
+    public $title;
+
+    /**
+     * @var string
+     */
     public $message;
 
     /**
@@ -38,7 +43,8 @@ class NewFeedItemsFetched implements ShouldBroadcast
         App::setLocale(Cache::get('locale'));
 
         $this->userId = $userId;
-        $this->message = trans_choice('new_feed_items', $numberOfNewFeedItems);
+        $this->title = __('New articles available');
+        $this->message = trans_choice('new_feed_items_message', $numberOfNewFeedItems);
     }
 
     /**
