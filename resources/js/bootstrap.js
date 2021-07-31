@@ -1,5 +1,4 @@
 import onDomReady from './utils/onDomReady';
-import {toast, snackbar} from 'tailwind-toast';
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
