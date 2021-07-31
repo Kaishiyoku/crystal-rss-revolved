@@ -1,4 +1,5 @@
 import onDomReady from './utils/onDomReady';
+import Push from 'push.js';
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -29,6 +30,20 @@ window.Echo = new Echo({
     wsPort: 6001,
     wssPort: 6001,
 });
+
+window.sendPushNotification = (title, body, timeout = 4000, callback = () => {}) => {
+    Push.create(title, {
+        body,
+        icon: '/img/favicon/apple-touch-icon.png',
+        timeout,
+        onClick: function () {
+            window.focus();
+            this.close();
+
+            callback();
+        }
+    });
+};
 
 onDomReady(() => {
     document.querySelectorAll('[data-confirm]').forEach((element) => {
