@@ -26,7 +26,24 @@ Alpine.store('toasts', {
             this.removeOldest();
         }, totalDuration);
     },
+    remove(id) {
+        const index = this.list.findIndex((toast) => toast.id === id);
+
+        if (index < 0) {
+            return;
+        }
+
+        this.list[index].visible = false;
+
+        setTimeout(() => {
+            this.list = this.list.filter((toast, i) => i !== index);
+        }, this.animationDuration);
+    },
     removeOldest() {
+        if (!this.list[0]) {
+            return;
+        }
+
         this.list[0].visible = false;
 
         setTimeout(() => {
