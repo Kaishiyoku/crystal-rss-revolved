@@ -27,7 +27,7 @@ window.Echo = new Echo({
     forceTLS: process.env.MIX_WEBSOCKETS_USE_TLS === 'true',
     wsHost: window.location.hostname,
     wsPort: 6001,
-    enabledTransports: ['ws', 'wss'],
+    wssPort: 6001,
 });
 
 onDomReady(() => {
