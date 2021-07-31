@@ -1,4 +1,8 @@
 <x-app-layout>
+    <x-slot name="pageTitle">
+        {{ __('Edit category') }}
+    </x-slot>
+
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <div>
