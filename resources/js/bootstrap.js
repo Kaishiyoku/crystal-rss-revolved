@@ -26,8 +26,8 @@ window.Echo = new Echo({
     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
     forceTLS: process.env.MIX_WEBSOCKETS_USE_TLS === 'true',
     wsHost: window.location.hostname,
-    wsPort: 6001,
-    wssPort: 6001,
+    wsPort: parseInt(process.env.MIX_LARAVEL_WEBSOCKETS_PORT, 10),
+    wssPort: parseInt(process.env.MIX_LARAVEL_WEBSOCKETS_PORT, 10),
 });
 
 onDomReady(() => {
