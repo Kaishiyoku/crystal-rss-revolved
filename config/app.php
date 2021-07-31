@@ -138,6 +138,10 @@ return [
 
     'months_after_pruning_feed_items' => env('MONTHS_AFTER_PRUNING_FEED_ITEMS', 2),
 
+    'contact_email' => env('CONTACT_EMAIL'),
+
+    'github_url' => env('GITHUB_URL'),
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
