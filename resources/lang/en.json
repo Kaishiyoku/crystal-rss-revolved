@@ -3,5 +3,6 @@
     "unread_articles": "{0}No unread articles|{1}One unread article|[2,*]:count unread articles",
     "category_name": "Category: :name",
     "number_of_feeds": "{0}No feeds|{1}One feed|[2,*]:count feeds",
-    "feed_filter": "Filter: :name"
+    "feed_filter": "Filter: :name",
+    "new_feed_items": "{1}One new article available.|[2,*]:count new articles available."
 }

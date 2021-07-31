@@ -7,7 +7,7 @@ const onDomReady = (callback) => {
         return;
     }
 
-    document.addEventListener("DOMContentLoaded", callback);
+    document.addEventListener('DOMContentLoaded', callback);
 };
 
 export default onDomReady;

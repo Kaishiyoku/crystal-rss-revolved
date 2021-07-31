@@ -8,4 +8,15 @@
     </x-slot>
 
     <x-feed-list/>
+
+    @push('scripts')
+        <script type="text/javascript">
+            onDomReady(() => {
+                Echo.private(`feed-list.${userId}`)
+                    .listen('NewFeedItemsFetched', (data) => {
+                        Alpine.store('toasts').add(data.message, 5000);
+                    });
+            });
+        </script>
+    @endpush
 </x-app-layout>

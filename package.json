@@ -14,9 +14,11 @@
         "@tailwindcss/typography": "^0.4.0",
         "alpinejs": "^3.0.6",
         "axios": "^0.21",
+        "laravel-echo": "^1.11.0",
         "laravel-mix": "^6.0.27",
         "postcss": "^8.3.6",
         "postcss-import": "^14.0.1",
+        "pusher-js": "^7.0.3",
         "tailwindcss": "^2.2.7"
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Events\NewFeedItemsFetched;
 use App\Models\Feed;
 use App\Models\FeedItem;
 use App\Models\User;
@@ -42,6 +43,11 @@ class FetchFeedItems extends Command
     private $heraRssCrawler;
 
     /**
+     * @var \Illuminate\Support\Collection<\Illuminate\Support\Collection<int>>
+     */
+    private $newFeedItemIdsPerUser;
+
+    /**
      * Create a new command instance.
      *
      * @return void
@@ -54,6 +60,7 @@ class FetchFeedItems extends Command
         $this->heraRssCrawler = new HeraRssCrawler();
         $this->heraRssCrawler->setLogger($this->logger);
         $this->heraRssCrawler->setRetryCount(config('app.rss_crawler_retry_count'));
+        $this->newFeedItemIdsPerUser = collect();
     }
 
     /**
@@ -74,6 +81,14 @@ class FetchFeedItems extends Command
         $executionTimeInSeconds = round(microtime(true) - $startTime);
 
         $this->logger->info("Duration: {$executionTimeInSeconds}s");
+
+        $this->newFeedItemIdsPerUser
+            ->filter(function ($feedItemIds) {
+                return $feedItemIds->isNotEmpty();
+            })
+            ->each(function ($feedItemIds, $userId) {
+                broadcast(new NewFeedItemsFetched($userId, $feedItemIds->count()));
+            });
 
         return 0;
     }
@@ -141,5 +156,9 @@ class FetchFeedItems extends Command
         ]);
 
         $feed->feedItems()->save($feedItem);
+
+        $this->newFeedItemIdsPerUser->put($feed->user_id, with($this->newFeedItemIdsPerUser->get($feed->user_id), function ($collection) use ($feedItem) {
+            return $collection ? $collection->push($feedItem->id) : collect($feedItem->id);
+        }));
     }
 }

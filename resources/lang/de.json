@@ -724,5 +724,6 @@
     "All feeds": "Alle Feeds",
     "feed_filter": "Filter: :name",
     "Mark all as read": "Alle als gelesen markieren",
-    "Are you sure?": "Sind Sie sicher?"
+    "Are you sure?": "Sind Sie sicher?",
+    "new_feed_items": "{1}Ein neuer Artikel verfügbar.|[2,*]:count neue Artikel verfügbar."
 }

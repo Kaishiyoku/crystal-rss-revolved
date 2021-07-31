@@ -137,113 +137,116 @@
     </template>
 </div>
 
-<script type="text/javascript">
-    function feedList() {
-        return {
-            init() {
-                this.loadMore();
-            },
-            feeds: @json($feeds),
-            unreadFeedItems: [],
-            filteredFeedId: null,
-            readFeedItemIds: [],
-            feedItemsPerPage: {{ $feedItemsPerPage }},
-            offset: 0,
-            loadingList: [],
-            hasMoreUnreadFeedItems: false,
-            isMoreLoading: false,
-            confirm(event) {
-                if (!confirm('{{ __('Are you sure?') }}')) {
-                    event.preventDefault()
-                }
-            },
-            getFeedFilterDropdownButtonTitle() {
-                if (this.filteredFeedId) {
-                    return '{{ __('feed_filter') }}'.replace(':name', this.feeds.find((feed) => feed.id === this.filteredFeedId).name);
-                }
-
-                return '{{ __('Filter by feed') }}';
-            },
-            getAllFeedsButtonHtml() {
-                const totalNumberOfFeedItems = this.feeds.reduce((carry, feed) => carry + feed.unread_feed_items_count, 0);
-
-                return `<div>{{ __('All feeds') }}</div><div class="${!this.filteredFeedId ? '' : 'text-muted'} text-xs">(${totalNumberOfFeedItems})</div>`
-            },
-            getFeedFilterHtmlForFeed(feed) {
-                return `<div>${feed.name}</div><div class="${this.filteredFeedId === feed.id ? '' : 'text-muted'} text-xs">(${feed.unread_feed_items_count})</div>`;
-            },
-            isRead(feedItemId) {
-                return this.readFeedItemIds.includes(feedItemId);
-            },
-            addIsRead(feedItemId) {
-                this.readFeedItemIds.push(feedItemId);
-            },
-            removeIsRead(feedItemId) {
-                this.readFeedItemIds = this.readFeedItemIds.filter((id) => id !== feedItemId);
-            },
-            isLoading(feedItemId) {
-                return this.loadingList.includes(feedItemId);
-            },
-            addIsLoading(feedItemId) {
-                this.loadingList.push(feedItemId);
-            },
-            removeIsLoading(feedItemId) {
-                this.loadingList = this.loadingList.filter((id) => id !== feedItemId);
-            },
-            toggleMarkAsRead(feedItemId) {
-                this.addIsLoading(feedItemId);
-
-                const baseUrl = '{{ route('feed_items.toggle_mark_as_read', ':feedItemId') }}';
-
-                axios.put(baseUrl.replace(':feedItemId', feedItemId)).then(({data}) => {
-                    const isRead = !!data.read_at;
-
-                    this.removeIsLoading(feedItemId);
-
-                    if (isRead) {
-                        this.addIsRead(feedItemId);
-                    } else {
-                        this.removeIsRead(feedItemId);
+@push('scripts')
+    <script type="text/javascript">
+        function feedList() {
+            return {
+                init() {
+                    this.loadMore();
+                },
+                feeds: @json($feeds),
+                unreadFeedItems: [],
+                filteredFeedId: null,
+                readFeedItemIds: [],
+                feedItemsPerPage: {{ $feedItemsPerPage }},
+                offset: 0,
+                loadingList: [],
+                hasMoreUnreadFeedItems: false,
+                isMoreLoading: false,
+                confirm(event) {
+                    if (!confirm('{{ __('Are you sure?') }}')) {
+                        event.preventDefault()
                     }
-                });
-            },
-            filterByFeed(feedId) {
-                axios.post('{{ route('feed_items.load') }}', {
-                    numberOfDisplayedFeedItems: this.unreadFeedItems.length,
-                    filteredFeedId: feedId,
-                    offset: 0,
-                    feedItemsPerPage: this.feedItemsPerPage,
-                    readFeedItemIds: [],
-                }).then(({data: {newOffset, hasMoreUnreadFeedItems, newUnreadFeedItems}}) => {
-                    this.offset = newOffset;
-                    this.hasMoreUnreadFeedItems = hasMoreUnreadFeedItems;
-                    this.unreadFeedItems = newUnreadFeedItems;
-                    this.filteredFeedId = feedId;
-                });
-            },
-            loadMore() {
-                this.isMoreLoading = true;
+                },
+                getFeedFilterDropdownButtonTitle() {
+                    if (this.filteredFeedId) {
+                        return '{{ __('feed_filter') }}'.replace(':name', this.feeds.find((feed) => feed.id === this.filteredFeedId).name);
+                    }
 
-                axios.post('{{ route('feed_items.load') }}', {
-                    numberOfDisplayedFeedItems: this.unreadFeedItems.length,
-                    filteredFeedId: this.filteredFeedId,
-                    offset: this.offset,
-                    feedItemsPerPage: this.feedItemsPerPage,
-                    readFeedItemIds: this.readFeedItemIds,
-                }).then(({data: {newOffset, hasMoreUnreadFeedItems, newUnreadFeedItems}}) => {
-                    const newUnreadFeedItemsWithFilteredOutDuplicates = newUnreadFeedItems
-                        .filter((newUnreadFeedItem) => !this.unreadFeedItems
-                            .map((unreadFeedItem) => unreadFeedItem.id)
-                            .includes(newUnreadFeedItem.id)
-                        );
+                    return '{{ __('Filter by feed') }}';
+                },
+                getAllFeedsButtonHtml() {
+                    const totalNumberOfFeedItems = this.feeds.reduce((carry, feed) => carry + feed.unread_feed_items_count, 0);
 
-                    this.offset = newOffset;
-                    this.hasMoreUnreadFeedItems = hasMoreUnreadFeedItems;
-                    this.unreadFeedItems = this.unreadFeedItems.concat(newUnreadFeedItemsWithFilteredOutDuplicates);
-                }).finally(() => {
-                    this.isMoreLoading = false;
-                });
-            },
-        };
-    }
-</script>
+                    return `<div>{{ __('All feeds') }}</div><div class="${!this.filteredFeedId ? '' : 'text-muted'} text-xs">(${totalNumberOfFeedItems})</div>`
+                },
+                getFeedFilterHtmlForFeed(feed) {
+                    return `<div>${feed.name}</div><div class="${this.filteredFeedId === feed.id ? '' : 'text-muted'} text-xs">(${feed.unread_feed_items_count})</div>`;
+                },
+                isRead(feedItemId) {
+                    return this.readFeedItemIds.includes(feedItemId);
+                },
+                addIsRead(feedItemId) {
+                    this.readFeedItemIds.push(feedItemId);
+                },
+                removeIsRead(feedItemId) {
+                    this.readFeedItemIds = this.readFeedItemIds.filter((id) => id !== feedItemId);
+                },
+                isLoading(feedItemId) {
+                    return this.loadingList.includes(feedItemId);
+                },
+                addIsLoading(feedItemId) {
+                    this.loadingList.push(feedItemId);
+                },
+                removeIsLoading(feedItemId) {
+                    this.loadingList = this.loadingList.filter((id) => id !== feedItemId);
+                },
+                toggleMarkAsRead(feedItemId) {
+                    this.addIsLoading(feedItemId);
+
+                    const baseUrl = '{{ route('feed_items.toggle_mark_as_read', ':feedItemId') }}';
+
+                    axios.put(baseUrl.replace(':feedItemId', feedItemId)).then(({data}) => {
+                        console.log(data);
+                        const isRead = !!data.read_at;
+
+                        this.removeIsLoading(feedItemId);
+
+                        if (isRead) {
+                            this.addIsRead(feedItemId);
+                        } else {
+                            this.removeIsRead(feedItemId);
+                        }
+                    });
+                },
+                filterByFeed(feedId) {
+                    axios.post('{{ route('feed_items.load') }}', {
+                        numberOfDisplayedFeedItems: this.unreadFeedItems.length,
+                        filteredFeedId: feedId,
+                        offset: 0,
+                        feedItemsPerPage: this.feedItemsPerPage,
+                        readFeedItemIds: [],
+                    }).then(({data: {newOffset, hasMoreUnreadFeedItems, newUnreadFeedItems}}) => {
+                        this.offset = newOffset;
+                        this.hasMoreUnreadFeedItems = hasMoreUnreadFeedItems;
+                        this.unreadFeedItems = newUnreadFeedItems;
+                        this.filteredFeedId = feedId;
+                    });
+                },
+                loadMore() {
+                    this.isMoreLoading = true;
+
+                    axios.post('{{ route('feed_items.load') }}', {
+                        numberOfDisplayedFeedItems: this.unreadFeedItems.length,
+                        filteredFeedId: this.filteredFeedId,
+                        offset: this.offset,
+                        feedItemsPerPage: this.feedItemsPerPage,
+                        readFeedItemIds: this.readFeedItemIds,
+                    }).then(({data: {newOffset, hasMoreUnreadFeedItems, newUnreadFeedItems}}) => {
+                        const newUnreadFeedItemsWithFilteredOutDuplicates = newUnreadFeedItems
+                            .filter((newUnreadFeedItem) => !this.unreadFeedItems
+                                .map((unreadFeedItem) => unreadFeedItem.id)
+                                .includes(newUnreadFeedItem.id)
+                            );
+
+                        this.offset = newOffset;
+                        this.hasMoreUnreadFeedItems = hasMoreUnreadFeedItems;
+                        this.unreadFeedItems = this.unreadFeedItems.concat(newUnreadFeedItemsWithFilteredOutDuplicates);
+                    }).finally(() => {
+                        this.isMoreLoading = false;
+                    });
+                },
+            };
+        }
+    </script>
+@endpush

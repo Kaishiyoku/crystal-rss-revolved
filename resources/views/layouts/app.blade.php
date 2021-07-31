@@ -17,6 +17,7 @@
 
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
+        <script src="{{ mix('js/misc.js') }}"></script>
 
         @include('shared._favicon')
     </head>
@@ -45,9 +46,15 @@
             </main>
         </div>
 
+        <x-toasts-renderer position="bottom right"/>
+
         @stack('modals')
 
         @livewireScripts
+
+        <script type="text/javascript">
+            const userId = {{ auth()->user()->id }};
+        </script>
 
         @stack('scripts')
     </body>
