@@ -44,6 +44,10 @@
                     @livewire('profile.delete-user-form')
                 </div>
             @endif
+
+            <x-jet-section-border />
+
+            <x-profile-push-notifications/>
         </div>
     </div>
 </x-app-layout>

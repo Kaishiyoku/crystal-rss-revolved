@@ -731,5 +731,11 @@
     "welcome_page_text_1": "Die Funktionen beschränken sich absichtlich nur auf das Wesentliche, damit man sich auf das konzentrieren kann, auf was es ankommt: die Nachrichten zu lesen.",
     "welcome_page_text_2": "Es kann jeder beliebige RSS Feed hinzugefügt werden und Artikelzusammenfassungen werden dann automatisch geladen und auf dem Dashboard angezeigt.",
     "welcome_page_text_3": "Die Nutzung ist kostenlos, du brauchst dich nur zu registrieren.",
-    "Contact": "Kontakt"
+    "Contact": "Kontakt",
+    "Push Notifications": "Push-Benachrichtigungen",
+    "Enable push notifications.": "Aktivieren Sie Push-Benachrichtigungen",
+    "You can enable push notificiations. Every time new articles have been found you will receive a notification.": "Sie können Push-Benachrichtigungen aktivieren wenn Sie möchten. Jedes Mal wenn neue Artikel gefunden wurden werden Sie eine Benachrichtigung bekommen.",
+    "Enable push notifications": "Push-Benachrichtigungen aktivieren",
+    "Permission for notifications has been denied. Please adjust the permission in the browser settings if you want to re-enable it.": "Das Recht, Benachrichtigungen zu erhalten, wurde abgelehnt. Bitte passen Sie diese Einstellung in den Browser-Einstellungen an, wenn Sie Benachrichtigungen wieder aktivieren wollen.",
+    "Push notifications enabled.": "Push-Benachrichtigungen aktiviert."
 }
