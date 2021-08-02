@@ -12,6 +12,9 @@
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
+        <!-- Scripts -->
+        <script src="{{ mix('js/welcome.js') }}" defer></script>
+
         @include('shared._favicon')
     </head>
     <body class="antialiased bg-gray-100 dark:bg-gray-900 pb-4 dark:text-gray-100">
@@ -91,20 +94,12 @@
             </div>
         @endif
 
-        <script>
-            function adjustNavigationOnScroll(scrollPosition) {
-                if (scrollPosition > 50) {
-                    document.getElementById('navigation').classList.add('bg-[#914cd9]', 'dark:bg-[#6927ff]');
-                } else {
-                    document.getElementById('navigation').classList.remove('bg-[#914cd9]', 'dark:bg-[#6927ff]');
-                }
-            }
+        <button type="button" class="block mx-auto mt-12 text-[#914cd9] dark:text-[#6927ff] opacity-50 hover:opacity-75 focus:opacity-90 transition" data-scroll="#screenshots">
+            <x-heroicon-s-arrow-circle-down class="w-16 h-16"/>
+        </button>
 
-            adjustNavigationOnScroll(window.scrollY);
-
-            document.addEventListener('scroll', () => {
-                adjustNavigationOnScroll(window.scrollY)
-            });
-        </script>
+        <div id="screenshots" class="mt-64 pt-4">
+            @include('shared._screenshots')
+        </div>
     </body>
 </html>

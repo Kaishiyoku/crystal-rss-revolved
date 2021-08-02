@@ -20,6 +20,8 @@
         "postcss-import": "^14.0.1",
         "push.js": "^1.0.12",
         "pusher-js": "^7.0.3",
-        "tailwindcss": "^2.2.7"
+        "scroll-js": "^3.4.2",
+        "tailwindcss": "^2.2.7",
+        "zooming": "^2.1.1"
     }
 }

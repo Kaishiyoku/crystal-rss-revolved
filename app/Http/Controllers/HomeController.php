@@ -25,5 +25,4 @@ class HomeController extends Controller
             'totalUnreadFeedItems' => $totalUnreadFeedItems,
         ]);
     }
-
 }

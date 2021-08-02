@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Auth;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -81,7 +82,7 @@ class Category extends Model
      */
     public static function getAvailableOptions()
     {
-        return self::orderBy('name')->get(['id', 'name'])->mapWithKeys(function (self $category) {
+        return Auth::user()->categories()->orderBy('name')->get(['id', 'name'])->mapWithKeys(function (self $category) {
             return [$category->id => $category->getName()];
         });
     }
