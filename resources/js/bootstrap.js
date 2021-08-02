@@ -45,6 +45,10 @@ window.sendPushNotification = (title, body, timeout = 4000, callback = () => {})
     });
 };
 
+window.hasPushNotificationsEnabled = () => Push.Permission.has();
+window.requestPushNotificationPermission = (onGranted = () => {}, onDenied = () => {}) => Push.Permission.request(onGranted, onDenied);
+window.getNativePushNotificationPermissionLevel = () => Push.Permission.get();
+
 onDomReady(() => {
     document.querySelectorAll('[data-confirm]').forEach((element) => {
         element.addEventListener('click', (event) => {

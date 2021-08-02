@@ -82,6 +82,10 @@ class FetchFeedItems extends Command
 
         $this->logger->info("Duration: {$executionTimeInSeconds}s");
 
+        if (!config('app.enable_push_notifications')) {
+            return 0;
+        }
+
         $this->newFeedItemIdsPerUser
             ->filter(function ($feedItemIds) {
                 return $feedItemIds->isNotEmpty();

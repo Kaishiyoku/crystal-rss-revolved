@@ -197,7 +197,6 @@
                     const baseUrl = '{{ route('feed_items.toggle_mark_as_read', ':feedItemId') }}';
 
                     axios.put(baseUrl.replace(':feedItemId', feedItemId)).then(({data}) => {
-                        console.log(data);
                         const isRead = !!data.read_at;
 
                         this.removeIsLoading(feedItemId);
