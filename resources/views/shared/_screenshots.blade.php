@@ -5,31 +5,31 @@
         <x-card.card class="p-4 mb-8">
             <div class="text-2xl pb-4">{{ __('Add feed') }}</div>
 
-            <img src="{{ mix('img/screenshots/desktop/add_feed.png') }}" alt="{{ __('Add feed') }}" class="hidden md:block" data-theme="light" data-provide="zoomable"/>
-            <img src="{{ mix('img/screenshots/mobile/add_feed.png') }}" alt="{{ __('Add feed') }}" class="md:hidden" data-theme="light" data-provide="zoomable"/>
+            <img src="{{ asset('img/screenshots/desktop/add_feed.png') }}" alt="{{ __('Add feed') }}" class="hidden md:block" data-theme="light" data-provide="zoomable"/>
+            <img src="{{ asset('img/screenshots/mobile/add_feed.png') }}" alt="{{ __('Add feed') }}" class="md:hidden" data-theme="light" data-provide="zoomable"/>
 
-            <img src="{{ mix('img/screenshots/desktop/add_feed_dark.png') }}" alt="{{ __('Add feed') }}" class="hidden md:block" data-theme="dark" data-provide="zoomable"/>
-            <img src="{{ mix('img/screenshots/mobile/add_feed_dark.png') }}" alt="{{ __('Add feed') }}" class="md:hidden" data-theme="dark" data-provide="zoomable"/>
+            <img src="{{ asset('img/screenshots/desktop/add_feed_dark.png') }}" alt="{{ __('Add feed') }}" class="hidden md:block" data-theme="dark" data-provide="zoomable"/>
+            <img src="{{ asset('img/screenshots/mobile/add_feed_dark.png') }}" alt="{{ __('Add feed') }}" class="md:hidden" data-theme="dark" data-provide="zoomable"/>
         </x-card.card>
 
         <x-card.card class="p-4 mb-8">
             <div class="text-2xl pb-4">{{ __('Feeds') }}</div>
 
-            <img src="{{ mix('img/screenshots/desktop/feeds.png') }}" alt="{{ __('Feeds') }}" class="hidden md:block" data-theme="light" data-provide="zoomable"/>
-            <img src="{{ mix('img/screenshots/mobile/feeds.png') }}" alt="{{ __('Feeds') }}" class="md:hidden" data-theme="light" data-provide="zoomable"/>
+            <img src="{{ asset('img/screenshots/desktop/feeds.png') }}" alt="{{ __('Feeds') }}" class="hidden md:block" data-theme="light" data-provide="zoomable"/>
+            <img src="{{ asset('img/screenshots/mobile/feeds.png') }}" alt="{{ __('Feeds') }}" class="md:hidden" data-theme="light" data-provide="zoomable"/>
 
-            <img src="{{ mix('img/screenshots/desktop/feeds_dark.png') }}" alt="{{ __('Feeds') }}" class="hidden md:block" data-theme="dark" data-provide="zoomable"/>
-            <img src="{{ mix('img/screenshots/mobile/feeds_dark.png') }}" alt="{{ __('Feeds') }}" class="md:hidden" data-theme="dark" data-provide="zoomable"/>
+            <img src="{{ asset('img/screenshots/desktop/feeds_dark.png') }}" alt="{{ __('Feeds') }}" class="hidden md:block" data-theme="dark" data-provide="zoomable"/>
+            <img src="{{ asset('img/screenshots/mobile/feeds_dark.png') }}" alt="{{ __('Feeds') }}" class="md:hidden" data-theme="dark" data-provide="zoomable"/>
         </x-card.card>
 
         <x-card.card class="p-4 mb-8">
             <div class="text-2xl pb-4">{{ __('Dashboard') }}</div>
 
-            <img src="{{ mix('img/screenshots/desktop/dashboard.png') }}" alt="{{ __('Dashboard') }}" class="hidden md:block" data-theme="light" data-provide="zoomable"/>
-            <img src="{{ mix('img/screenshots/mobile/dashboard.png') }}" alt="{{ __('Dashboard') }}" class="md:hidden" data-theme="light" data-provide="zoomable"/>
+            <img src="{{ asset('img/screenshots/desktop/dashboard.png') }}" alt="{{ __('Dashboard') }}" class="hidden md:block" data-theme="light" data-provide="zoomable"/>
+            <img src="{{ asset('img/screenshots/mobile/dashboard.png') }}" alt="{{ __('Dashboard') }}" class="md:hidden" data-theme="light" data-provide="zoomable"/>
 
-            <img src="{{ mix('img/screenshots/desktop/dashboard_dark.png') }}" alt="{{ __('Dashboard') }}" class="hidden md:block" data-theme="dark" data-provide="zoomable"/>
-            <img src="{{ mix('img/screenshots/mobile/dashboard_dark.png') }}" alt="{{ __('Dashboard') }}" class="md:hidden" data-theme="dark" data-provide="zoomable"/>
+            <img src="{{ asset('img/screenshots/desktop/dashboard_dark.png') }}" alt="{{ __('Dashboard') }}" class="hidden md:block" data-theme="dark" data-provide="zoomable"/>
+            <img src="{{ asset('img/screenshots/mobile/dashboard_dark.png') }}" alt="{{ __('Dashboard') }}" class="md:hidden" data-theme="dark" data-provide="zoomable"/>
         </x-card.card>
     </div>
 </div>
