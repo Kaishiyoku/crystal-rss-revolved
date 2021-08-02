@@ -6,8 +6,8 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
-        "ext-json": "*",
         "ext-curl": "*",
+        "ext-json": "*",
         "beyondcode/laravel-websockets": "^1.12",
         "blade-ui-kit/blade-heroicons": "^1.2",
         "cjstroud/classnames-php": "^1.0",
@@ -22,6 +22,7 @@
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.5",
         "neitanod/forceutf8": "^2.0",
+        "predis/predis": "^1.1",
         "pusher/pusher-php-server": "~5.0",
         "spatie/laravel-html": "^2.30"
     },
