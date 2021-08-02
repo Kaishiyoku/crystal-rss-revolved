@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use Cache;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -19,17 +18,10 @@ class SetLocale
      */
     public function handle(Request $request, Closure $next)
     {
-        $locale = Str::substr($request->server('HTTP_ACCEPT_LANGUAGE'), 0, 2);
+        $httpLocale = Str::substr($request->server('HTTP_ACCEPT_LANGUAGE'), 0, 2);
+        $locale = collect(config('app.available_locales'))->contains($httpLocale) ? $httpLocale : config('app.fallback_locale');
 
-        $cachedLocale = Cache::get('locale');
-
-        if ($cachedLocale !== $locale) {
-            Cache::set('locale', $locale);
-
-            App::setLocale($locale);
-        } else {
-            App::setLocale($locale);
-        }
+        App::setLocale($locale);
 
         return $next($request);
     }
