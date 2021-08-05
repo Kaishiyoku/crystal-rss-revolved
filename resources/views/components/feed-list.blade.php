@@ -78,6 +78,7 @@
                                     :src="unreadFeedItem.image_url"
                                     :alt="unreadFeedItem.title"
                                     class="object-cover w-full md:w-auto h-72 md:h-auto md:rounded"
+                                    loading="lazy"
                                 />
                             </template>
                             <template x-if="!unreadFeedItem.has_image">
