@@ -47,7 +47,9 @@
 
             <x-jet-section-border />
 
-            <x-profile-push-notifications/>
+            <div class="mt-10 sm:mt-0">
+                <x-profile-push-notifications/>
+            </div>
         </div>
     </div>
 </x-app-layout>
