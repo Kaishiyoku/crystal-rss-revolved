@@ -739,5 +739,6 @@
     "Permission for notifications has been denied. Please adjust the permission in the browser settings if you want to re-enable it.": "Das Recht, Benachrichtigungen zu erhalten, wurde abgelehnt. Bitte passen Sie diese Einstellung in den Browser-Einstellungen an, wenn Sie Benachrichtigungen wieder aktivieren wollen.",
     "Push notifications enabled.": "Push-Benachrichtigungen aktiviert.",
     "The given URL is invalid.": "Die URL ist ungültig.",
-    "The given URL could not be resolved.": "Die URL konnte nicht aufgelöst werden."
+    "The given URL could not be resolved.": "Die URL konnte nicht aufgelöst werden.",
+    "Couldn't find any feeds for this URL.": "Für diese URL konnten keine Feeds gefunden werden."
 }

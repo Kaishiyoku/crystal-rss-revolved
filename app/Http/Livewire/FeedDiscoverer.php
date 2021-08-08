@@ -67,6 +67,12 @@ class FeedDiscoverer extends Component
         try {
             $this->discoveredFeedUrls = $this->heraRssCrawler->discoverFeedUrls($url);
 
+            if ($this->discoveredFeedUrls->isEmpty()) {
+                $this->emit('discoveryFailed', __("Couldn't find any feeds for this URL."));
+
+                return;
+            }
+
             $this->emit('discoverySuccess');
         } catch (ConnectException $e) {
             $this->emit('discoveryFailed', __('The given URL is invalid.'));
