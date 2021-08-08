@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ConnectException;
 use Illuminate\Support\Facades\Validator;
 use Kaishiyoku\HeraRssCrawler\HeraRssCrawler;
@@ -69,6 +70,8 @@ class FeedDiscoverer extends Component
             $this->emit('discoverySuccess');
         } catch (ConnectException $e) {
             $this->emit('discoveryFailed', __('The given URL is invalid.'));
+        } catch (ClientException $e) {
+            $this->emit('discoveryFailed', __('The given URL could not be resolved.'));
         }
     }
 
