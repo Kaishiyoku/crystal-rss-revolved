@@ -9,6 +9,44 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
+/**
+ * App\Models\FeedItem
+ *
+ * @property int $id
+ * @property int $feed_id
+ * @property string $url
+ * @property string $title
+ * @property string|null $image_url
+ * @property string|null $image_mimetype
+ * @property string|null $description
+ * @property \Illuminate\Support\Carbon $posted_at
+ * @property string $checksum
+ * @property string|null $read_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Feed $feed
+ * @property-read mixed $formatted_posted_at
+ * @property-read mixed $has_image
+ * @method static Builder|FeedItem filteredByFeed($filteredFeedId, \Illuminate\Support\Collection $readFeedItemIds)
+ * @method static Builder|FeedItem newModelQuery()
+ * @method static Builder|FeedItem newQuery()
+ * @method static Builder|FeedItem paged($limit, $offset)
+ * @method static Builder|FeedItem query()
+ * @method static Builder|FeedItem unread()
+ * @method static Builder|FeedItem whereChecksum($value)
+ * @method static Builder|FeedItem whereCreatedAt($value)
+ * @method static Builder|FeedItem whereDescription($value)
+ * @method static Builder|FeedItem whereFeedId($value)
+ * @method static Builder|FeedItem whereId($value)
+ * @method static Builder|FeedItem whereImageMimetype($value)
+ * @method static Builder|FeedItem whereImageUrl($value)
+ * @method static Builder|FeedItem wherePostedAt($value)
+ * @method static Builder|FeedItem whereReadAt($value)
+ * @method static Builder|FeedItem whereTitle($value)
+ * @method static Builder|FeedItem whereUpdatedAt($value)
+ * @method static Builder|FeedItem whereUrl($value)
+ * @mixin \Eloquent
+ */
 class FeedItem extends Model
 {
     use HasFactory, MassPrunable;
