@@ -19,7 +19,7 @@
                         <div class="w-60 max-h-72 overflow-hidden overflow-y-auto">
                             <button
                                 type="button"
-                                @click="filterByFeed(null)"
+                                @click="filterByFeed()"
                                 class="flex justify-between items-center w-full text-left px-4 py-2 text-sm leading-5 focus:outline-none dark:focus:text-gray-300 transition"
                                 :class="{'text-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-100 dark:focus:bg-gray-600': filteredFeedId !== null, 'text-white bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700': filteredFeedId === null}"
                                 x-html="getAllFeedsButtonHtml()"
@@ -209,9 +209,9 @@
                         }
                     });
                 },
-                filterByFeed(feedId) {
+                filterByFeed(feedId = null) {
                     axios.post('{{ route('feed_items.load') }}', {
-                        numberOfDisplayedFeedItems: this.unreadFeedItems.length,
+                        numberOfDisplayedFeedItems: 0,
                         filteredFeedId: feedId,
                         offset: 0,
                         feedItemsPerPage: this.feedItemsPerPage,
@@ -221,6 +221,10 @@
                         this.hasMoreUnreadFeedItems = hasMoreUnreadFeedItems;
                         this.unreadFeedItems = newUnreadFeedItems;
                         this.filteredFeedId = feedId;
+
+                        if (this.unreadFeedItems.length === 0) {
+                            this.filterByFeed();
+                        }
                     });
                 },
                 loadMore() {
