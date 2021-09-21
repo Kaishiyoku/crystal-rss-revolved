@@ -72,7 +72,7 @@
                         class="group block md:flex md:items-center md:space-x-4 md:px-4 md:py-3 transition ease-out duration-300 hover:bg-indigo-500 focus:outline-none focus:text-white focus:bg-indigo-600 transition"
                         :href="unreadFeedItem.url"
                     >
-                        <div class="md:flex-shrink-0 md:block md:w-12">
+                        <div class="md:flex-shrink-0 md:block md:w-16">
                             <template x-if="unreadFeedItem.has_image">
                                 <img
                                     :src="unreadFeedItem.image_url"
@@ -86,8 +86,8 @@
                             </template>
                         </div>
                         <div class="w-full px-4 py-3 md:px-0 md:py-0">
-                            <div class="group-hover:text-white text-2xl md:text-base" x-text="unreadFeedItem.title"></div>
-                            <div class="group-hover:text-gray-300 w-full group-focus:text-gray-200 md:flex md:justify-between md:space-x-2 text-muted md:text-xs pt-2 md:pt-0">
+                            <div class="group-hover:text-white text-2xl md:text-lg" x-text="unreadFeedItem.title"></div>
+                            <div class="group-hover:text-gray-300 w-full group-focus:text-gray-200 md:flex md:justify-between md:space-x-2 text-muted md:text-sm pt-2 md:pt-0">
                                 <div class="flex items-center">
                                     <template x-if="unreadFeedItem.feed.favicon_url">
                                         <img :src="unreadFeedItem.feed.favicon_url" class="w-4 h-4" alt="Favicon"/>
@@ -100,7 +100,7 @@
                                 <div x-text="unreadFeedItem.formatted_posted_at"></div>
                             </div>
                             <template x-if="unreadFeedItem.description">
-                                <div class="group-hover:text-gray-300 group-focus:text-gray-200 pt-1 text-muted md:text-xs" x-text="unreadFeedItem.description">w</div>
+                                <div class="group-hover:text-gray-300 group-focus:text-gray-200 pt-1 text-muted md:text-sm" x-text="unreadFeedItem.description">w</div>
                             </template>
                         </div>
                     </a>
