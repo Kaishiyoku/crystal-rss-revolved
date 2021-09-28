@@ -1,7 +1,7 @@
 <div x-data="feedList()">
     <template x-if="unreadFeedItems.length > 0">
         <div class="mb-8 lg:flex lg:justify-between lg:space-x-2 space-y-2 lg:space-y-0 px-4 sm:px-0">
-            <div class="flex mb-4">
+            <div class="flex mb-4 md:mb-0">
                 <x-jet-dropdown align="left" width="60">
                     <x-slot name="trigger">
                         <span class="inline-flex rounded-md">
