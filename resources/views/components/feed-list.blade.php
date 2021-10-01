@@ -62,10 +62,10 @@
                         </div>
                     </a>
 
-                    <div class="md:hidden mt-4 px-4 pb-4 flex justify-end">
+                    <div class="md:hidden mt-4 px-4 pb-4">
                         <button
                             type="button"
-                            class="inline-flex items-center px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md font-semibold text-xs text-gray-700 dark:text-gray-400 uppercase tracking-widest shadow-sm hover:text-gray-500 dark:hover:text-gray-300 focus:outline-none focus:border-indigo-300 dark:focus:border-indigo-500 focus:ring focus:ring-indigo-200 dark:focus:ring-indigo-600 active:text-gray-800 dark:active:text-gray-200 active:bg-gray-50 dark:active:bg-gray-600 disabled:opacity-25 transition"
+                            class="w-full inline-flex items-center px-4 py-4 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md font-semibold text-xs text-gray-700 dark:text-gray-400 uppercase tracking-widest shadow-sm hover:text-gray-500 dark:hover:text-gray-300 focus:outline-none focus:border-indigo-300 dark:focus:border-indigo-500 focus:ring focus:ring-indigo-200 dark:focus:ring-indigo-600 active:text-gray-800 dark:active:text-gray-200 active:bg-gray-50 dark:active:bg-gray-600 disabled:opacity-25 transition"
                             :disabled="isLoading(unreadFeedItem.id)"
                             @click.prevent="toggleMarkAsRead(unreadFeedItem.id)"
                         >
@@ -85,13 +85,15 @@
     </template>
 
     <template x-if="hasMoreUnreadFeedItems">
-        <x-secondary-button type="button" class="mx-4 sm:mx-0 mt-8" ::disabled="isMoreLoading" @click="loadMore()" x-cloak>
-            <template x-if="isMoreLoading">
-                <x-icon.loading class="mr-2"/>
-            </template>
+        <div class="mx-4">
+            <x-secondary-button type="button" class="sm:mx-0 mt-8 py-4 md:py-2 w-full md:w-auto" ::disabled="isMoreLoading" @click="loadMore()" x-cloak>
+                <template x-if="isMoreLoading">
+                    <x-icon.loading class="mr-2"/>
+                </template>
 
-            {{ __('Load more') }}
-        </x-secondary-button>
+                {{ __('Load more') }}
+            </x-secondary-button>
+        </div>
     </template>
 </div>
 
