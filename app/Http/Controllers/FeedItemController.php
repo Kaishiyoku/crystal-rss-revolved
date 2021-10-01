@@ -16,24 +16,22 @@ class FeedItemController extends Controller
     {
         $data = $request->validate([
             'numberOfDisplayedFeedItems' => ['required', 'integer', 'min:0'],
-            'filteredFeedId' => ['nullable', 'integer', Rule::in(Feed::pluck('id'))],
             'offset' => ['integer', 'min:0'],
             'feedItemsPerPage' => ['integer', 'min:0'],
             'readFeedItemIds' => [new ArrayOfIntegers()],
         ]);
 
         $readFeedItemIds = collect(Arr::get($data, 'readFeedItemIds'));
-        $filteredFeedId = Arr::get($data, 'filteredFeedId');
         $offset = Arr::get($data, 'offset');
         $feedItemsPerPage = Arr::get($data, 'feedItemsPerPage');
 
         $newUnreadFeedItems = Auth::user()->feedItems()
-            ->filteredByFeed($filteredFeedId, $readFeedItemIds)
+            ->filteredByFeedItemIds($readFeedItemIds)
             ->paged($feedItemsPerPage, $offset)
             ->get();
 
         $hasMoreUnreadFeedItems = Auth::user()->feedItems()
-                ->filteredByFeed($filteredFeedId, $readFeedItemIds)
+                ->filteredByFeedItemIds($readFeedItemIds)
                 ->count() > Arr::get($data, 'numberOfDisplayedFeedItems') + $newUnreadFeedItems->count();
         $newOffset = $offset + $feedItemsPerPage;
 

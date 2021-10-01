@@ -25,14 +25,6 @@ class FeedList extends Component
     public function __construct()
     {
         $this->feedItemsPerPage = config('app.feed_items_per_page');
-
-        $this->feeds = Auth::user()->feeds()
-            ->whereHas('unreadFeedItems')
-            ->withCount(['unreadFeedItems' => function ($query) {
-                $query->unread();
-            }])
-            ->orderBy('name')
-            ->get();
     }
 
     /**

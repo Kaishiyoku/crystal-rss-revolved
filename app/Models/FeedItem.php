@@ -27,7 +27,7 @@ use Illuminate\Support\Str;
  * @property-read \App\Models\Feed $feed
  * @property-read mixed $formatted_posted_at
  * @property-read mixed $has_image
- * @method static Builder|FeedItem filteredByFeed($filteredFeedId, \Illuminate\Support\Collection $readFeedItemIds)
+ * @method static Builder|FeedItem filteredByFeedItemIds(\Illuminate\Support\Collection $readFeedItemIds)
  * @method static Builder|FeedItem newModelQuery()
  * @method static Builder|FeedItem newQuery()
  * @method static Builder|FeedItem paged($limit, $offset)
@@ -109,15 +109,12 @@ class FeedItem extends Model
         return $query->whereNull('read_at');
     }
 
-    public function scopeFilteredByFeed($query, $filteredFeedId, Collection $readFeedItemIds)
+    public function scopeFilteredByFeedItemIds($query, Collection $readFeedItemIds)
     {
         return $query
             ->unread()
             ->when($readFeedItemIds->isNotEmpty(), function ($query) use ($readFeedItemIds) {
                 return $query->orWhereIn('feed_items.id', $readFeedItemIds);
-            })
-            ->when($filteredFeedId, function ($query) use ($filteredFeedId) {
-                return $query->where('feed_id', $filteredFeedId);
             })
             ->with('feed')
             ->orderBy('posted_at', 'desc')

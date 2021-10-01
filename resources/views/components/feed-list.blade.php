@@ -1,49 +1,6 @@
 <div x-data="feedList()">
     <template x-if="unreadFeedItems.length > 0">
         <div class="mb-8 lg:flex lg:justify-between lg:space-x-2 space-y-2 lg:space-y-0 px-4 sm:px-0">
-            <div class="flex">
-                <x-jet-dropdown align="left" width="60">
-                    <x-slot name="trigger">
-                        <span class="inline-flex rounded-md">
-                            <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-left text-sm leading-4 font-medium rounded-md text-gray-500 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-700 dark:hover:text-gray-400 focus:outline-none focus:bg-gray-50 dark:focus:text-gray-400 dark:focus:bg-gray-600 dark:active:text-gray-300 active:bg-gray-50 dark:active:bg-gray-500 transition">
-                                <span x-text="getFeedFilterDropdownButtonTitle()"></span>
-
-                                <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                </svg>
-                            </button>
-                        </span>
-                    </x-slot>
-
-                    <x-slot name="content">
-                        <div class="w-60 max-h-72 overflow-hidden overflow-y-auto">
-                            <button
-                                type="button"
-                                @click="filterByFeed()"
-                                class="flex justify-between items-center w-full text-left px-4 py-2 text-sm leading-5 focus:outline-none dark:focus:text-gray-300 transition"
-                                :class="{'text-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-100 dark:focus:bg-gray-600': filteredFeedId !== null, 'text-white bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700': filteredFeedId === null}"
-                                x-html="getAllFeedsButtonHtml()"
-                            >
-                            </button>
-
-                            <div class="border-t border-gray-100 dark:border-gray-700"></div>
-
-                            <template x-for="feed in feeds">
-                                <button
-                                    :key="feed.id"
-                                    type="button"
-                                    @click="filterByFeed(feed.id)"
-                                    class="flex justify-between items-center w-full text-left px-4 py-2 text-sm leading-5 focus:outline-none dark:focus:text-gray-300 transition"
-                                    :class="{'text-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-100 dark:focus:bg-gray-600': feed.id !== filteredFeedId, 'text-white bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700': feed.id === filteredFeedId}"
-                                    x-html="getFeedFilterHtmlForFeed(feed)"
-                                >
-                                </button>
-                            </template>
-                        </div>
-                    </x-slot>
-                </x-jet-dropdown>
-            </div>
-
             <x-secondary-update-button :url="route('feeds.mark_all_as_read')" @click="confirm($event)">
                 {{ __('Mark all as read') }}
             </x-secondary-update-button>
@@ -145,9 +102,7 @@
                 init() {
                     this.loadMore();
                 },
-                feeds: @json($feeds),
                 unreadFeedItems: [],
-                filteredFeedId: null,
                 readFeedItemIds: [],
                 feedItemsPerPage: {{ $feedItemsPerPage }},
                 offset: 0,
@@ -158,21 +113,6 @@
                     if (!confirm('{{ __('Are you sure?') }}')) {
                         event.preventDefault()
                     }
-                },
-                getFeedFilterDropdownButtonTitle() {
-                    if (this.filteredFeedId) {
-                        return '{{ __('feed_filter') }}'.replace(':name', this.feeds.find((feed) => feed.id === this.filteredFeedId).name);
-                    }
-
-                    return '{{ __('Filter by feed') }}';
-                },
-                getAllFeedsButtonHtml() {
-                    const totalNumberOfFeedItems = this.feeds.reduce((carry, feed) => carry + feed.unread_feed_items_count, 0);
-
-                    return `<div>{{ __('All feeds') }}</div><div class="${!this.filteredFeedId ? '' : 'text-muted'} text-xs">(${totalNumberOfFeedItems})</div>`
-                },
-                getFeedFilterHtmlForFeed(feed) {
-                    return `<div>${feed.name}</div><div class="${this.filteredFeedId === feed.id ? '' : 'text-muted'} text-xs">(${feed.unread_feed_items_count})</div>`;
                 },
                 isRead(feedItemId) {
                     return this.readFeedItemIds.includes(feedItemId);
@@ -209,30 +149,11 @@
                         }
                     });
                 },
-                filterByFeed(feedId = null) {
-                    axios.post('{{ route('feed_items.load') }}', {
-                        numberOfDisplayedFeedItems: 0,
-                        filteredFeedId: feedId,
-                        offset: 0,
-                        feedItemsPerPage: this.feedItemsPerPage,
-                        readFeedItemIds: [],
-                    }).then(({data: {newOffset, hasMoreUnreadFeedItems, newUnreadFeedItems}}) => {
-                        this.offset = newOffset;
-                        this.hasMoreUnreadFeedItems = hasMoreUnreadFeedItems;
-                        this.unreadFeedItems = newUnreadFeedItems;
-                        this.filteredFeedId = feedId;
-
-                        if (this.unreadFeedItems.length === 0) {
-                            this.filterByFeed();
-                        }
-                    });
-                },
                 loadMore() {
                     this.isMoreLoading = true;
 
                     axios.post('{{ route('feed_items.load') }}', {
                         numberOfDisplayedFeedItems: this.unreadFeedItems.length,
-                        filteredFeedId: this.filteredFeedId,
                         offset: this.offset,
                         feedItemsPerPage: this.feedItemsPerPage,
                         readFeedItemIds: this.readFeedItemIds,
