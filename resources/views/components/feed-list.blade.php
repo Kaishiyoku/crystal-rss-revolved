@@ -97,8 +97,8 @@
     </template>
 
     <div
-        class="transition duration-500 mt-12 md:mt-0"
-        :class="{'opacity-100': offset > {{ $feedItemsPerPage }}, 'opacity-0': offset <= {{ $feedItemsPerPage }}}"
+        class="transition duration-500"
+        :class="{'opacity-100 hidden md:block': offset > {{ $feedItemsPerPage }}, 'opacity-0': offset <= {{ $feedItemsPerPage }}}"
         x-cloak
     >
         <button
