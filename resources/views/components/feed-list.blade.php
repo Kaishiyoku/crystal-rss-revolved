@@ -95,6 +95,20 @@
             </x-secondary-button>
         </div>
     </template>
+
+    <div
+        class="transition duration-500 mt-12 md:mt-0"
+        :class="{'opacity-100': offset > {{ $feedItemsPerPage }}, 'opacity-0': offset <= {{ $feedItemsPerPage }}}"
+        x-cloak
+    >
+        <button
+            type="button"
+            class="fixed left-3 md:left-auto md:right-3 bottom-3 block text-[#914cd9] dark:text-[#6927ff] opacity-50 hover:opacity-75 focus:opacity-90 transition"
+            data-scroll-to-top
+        >
+            <x-heroicon-s-arrow-circle-up class="w-16 h-16"/>
+        </button>
+    </div>
 </div>
 
 @push('scripts')
