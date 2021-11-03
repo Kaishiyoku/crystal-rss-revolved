@@ -7,5 +7,6 @@
     "welcome_page_headline": ":name is a minimalist newsfeed reader.",
     "welcome_page_text_1": "The features are limited by intention to be able to concentrate on what matters: reading the news.",
     "welcome_page_text_2": "Any RSS feed can be added and article summaries are then being fetched and displayed on the dashboard automatically.",
-    "welcome_page_text_3": "The newsfeed reader is totally free, you only have to register."
+    "welcome_page_text_3": "The newsfeed reader is totally free, you only have to register.",
+    "number_of_recently_fetched_feed_items": "{0}No recently fetched article|{1}One recently fetched article|[2,*]:count recently fetched items"
 }

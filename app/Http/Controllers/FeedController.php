@@ -32,7 +32,11 @@ class FeedController extends Controller
      */
     public function index()
     {
-        $feeds = Auth::user()->feeds()->with('category')->orderBy('name')->get();
+        $feeds = Auth::user()->feeds()
+            ->withCount('feedItems')
+            ->with('category')
+            ->orderBy('name')
+            ->get();
 
         return view('feed.index', [
             'feeds' => $feeds,
