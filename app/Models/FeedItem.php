@@ -93,7 +93,8 @@ class FeedItem extends Model
      */
     public function prunable()
     {
-        return static::where('read_at', true)->where('posted_at', '<=', now()->subMonths(config('app.months_after_pruning_feed_items')));
+        return static::where('read_at', true)
+            ->where('posted_at', '<=', now()->subMonths(config('app.months_after_pruning_feed_items')));
     }
 
     /**
@@ -113,9 +114,7 @@ class FeedItem extends Model
     {
         return $query
             ->unread()
-            ->when($readFeedItemIds->isNotEmpty(), function ($query) use ($readFeedItemIds) {
-                return $query->orWhereIn('feed_items.id', $readFeedItemIds);
-            })
+            ->when($readFeedItemIds->isNotEmpty(), fn($query) => $query->orWhereIn('feed_items.id', $readFeedItemIds))
             ->with('feed')
             ->orderBy('posted_at', 'desc')
             ->orderBy('feed_items.id', 'desc');

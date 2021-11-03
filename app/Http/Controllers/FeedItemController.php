@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Feed;
 use App\Models\FeedItem;
 use App\Rules\ArrayOfIntegers;
 use Arr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rule;
 
 class FeedItemController extends Controller
 {

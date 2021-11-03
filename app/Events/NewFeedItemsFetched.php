@@ -16,29 +16,16 @@ class NewFeedItemsFetched implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    /**
-     * @var string
-     */
-    public $title;
+    public string $title;
 
-    /**
-     * @var string
-     */
-    public $message;
+    public string $message;
 
-    /**
-     * @var int
-     */
-    private $userId;
+    private int $userId;
 
     /**
      * Create a new event instance.
-     *
-     * @param int $userId
-     * @param int $numberOfNewFeedItems
-     * @return void
      */
-    public function __construct($userId, $numberOfNewFeedItems)
+    public function __construct(int $userId, int $numberOfNewFeedItems)
     {
         App::setLocale(Cache::get('locale'));
 

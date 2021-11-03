@@ -85,8 +85,6 @@ class Category extends Model
         return Auth::user()->categories()
             ->orderBy('name')
             ->get(['id', 'name'])
-            ->mapWithKeys(function (self $category) { // @phpstan-ignore-line
-                return [$category->id => $category->getName()];
-            });
+            ->mapWithKeys(fn(self $category) => [$category->id => $category->getName()]); // @phpstan-ignore-line
     }
 }

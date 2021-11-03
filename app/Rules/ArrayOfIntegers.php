@@ -15,9 +15,7 @@ class ArrayOfIntegers implements Rule
      */
     public function passes($attribute, $value)
     {
-        return collect($value)->every(function ($value) {
-            return is_int($value);
-        });
+        return collect($value)->every(fn($value) => is_int($value));
     }
 
     /**

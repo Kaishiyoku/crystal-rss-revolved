@@ -11,9 +11,11 @@ use ForceUTF8\Encoding;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Kaishiyoku\HeraRssCrawler\HeraRssCrawler;
 use Kaishiyoku\HeraRssCrawler\Models\Rss\FeedItem as RssFeedItem;
+use Psr\Log\LoggerInterface;
 use Str;
 
 class FetchFeedItems extends Command
@@ -32,20 +34,14 @@ class FetchFeedItems extends Command
      */
     protected $description = 'Fetch feed items';
 
-    /**
-     * @var \Psr\Log\LoggerInterface
-     */
-    private $logger;
+    private LoggerInterface $logger;
+
+    private HeraRssCrawler $heraRssCrawler;
 
     /**
-     * @var HeraRssCrawler
+     * @var Collection<Collection<int>>
      */
-    private $heraRssCrawler;
-
-    /**
-     * @var \Illuminate\Support\Collection<\Illuminate\Support\Collection<int>>
-     */
-    private $newFeedItemIdsPerUser;
+    private Collection $newFeedItemIdsPerUser;
 
     /**
      * Create a new command instance.
@@ -87,9 +83,7 @@ class FetchFeedItems extends Command
         }
 
         $this->newFeedItemIdsPerUser
-            ->filter(function ($feedItemIds) {
-                return $feedItemIds->isNotEmpty();
-            })
+            ->filter(fn($feedItemIds) => $feedItemIds->isNotEmpty())
             ->each(function ($feedItemIds, $userId) {
                 broadcast(new NewFeedItemsFetched($userId, $feedItemIds->count()));
             });
@@ -97,20 +91,14 @@ class FetchFeedItems extends Command
         return 0;
     }
 
-    /**
-     * @param User $user
-     */
-    private function fetchFeedsForUser(User $user)
+    private function fetchFeedsForUser(User $user): void
     {
         $user->feeds->each(function (Feed $feed) {
             $this->fetchFeed($feed);
         });
     }
 
-    /**
-     * @param Feed $feed
-     */
-    private function fetchFeed(Feed $feed)
+    private function fetchFeed(Feed $feed): void
     {
         $this->logger->info("Fetching feed {$feed->name}");
 
@@ -124,9 +112,7 @@ class FetchFeedItems extends Command
             $rssFeed->getFeedItems()->each(function (RssFeedItem $rssFeedItem) use ($feed) {
                 $this->storeRssFeedItem($feed, $rssFeedItem);
             });
-        } catch (ClientException $e) {
-            $this->logger->error($e, [$feed->feed_url]);
-        } catch (Exception $e) {
+        } catch (ClientException | Exception $e) {
             $this->logger->error($e, [$feed->feed_url]);
         }
 
@@ -135,14 +121,12 @@ class FetchFeedItems extends Command
         $feed->save();
     }
 
-    /**
-     * @param Feed $feed
-     * @param RssFeedItem $rssFeedItem
-     */
-    private function storeRssFeedItem(Feed $feed, RssFeedItem $rssFeedItem)
+    private function storeRssFeedItem(Feed $feed, RssFeedItem $rssFeedItem): void
     {
         // don't save duplicate items, items without a creation date or items which are older than the prune time
-        if (FeedItem::whereChecksum($rssFeedItem->getChecksum())->count() > 0 || !$rssFeedItem->getCreatedAt() || $rssFeedItem->getCreatedAt()->isBefore(now()->subMonths(config('app.months_after_pruning_feed_items')))) {
+        if (FeedItem::whereChecksum($rssFeedItem->getChecksum())->count() > 0
+            || !$rssFeedItem->getCreatedAt()
+            || $rssFeedItem->getCreatedAt()->isBefore(now()->subMonths(config('app.months_after_pruning_feed_items')))) {
             return;
         }
 
@@ -161,8 +145,8 @@ class FetchFeedItems extends Command
 
         $feed->feedItems()->save($feedItem);
 
-        $this->newFeedItemIdsPerUser->put($feed->user_id, with($this->newFeedItemIdsPerUser->get($feed->user_id), function ($collection) use ($feedItem) {
-            return $collection ? $collection->push($feedItem->id) : collect($feedItem->id);
-        }));
+        $this->newFeedItemIdsPerUser->put($feed->user_id, with(
+            $this->newFeedItemIdsPerUser->get($feed->user_id), fn($collection) => $collection ? $collection->push($feedItem->id) : collect($feedItem->id)
+        ));
     }
 }
