@@ -30,10 +30,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $category = Category::make();
-
         return view('category.create', [
-            'category' => $category,
+            'category' => new Category(),
         ]);
     }
 
@@ -45,8 +43,7 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        $category = Category::make($request->validated());
-        Auth::user()->categories()->save($category);
+        Auth::user()->categories()->save(new Category($request->validated()));
 
         return redirect()->route('categories.index');
     }

@@ -48,10 +48,8 @@ class FeedController extends Controller
     {
         $availableCategoryOptions = Category::getAvailableOptions();
 
-        $feed = Feed::make();
-
         return view('feed.create', [
-            'feed' => $feed,
+            'feed' => new Feed(),
             'availableCategoryOptions' => $availableCategoryOptions,
         ]);
     }
@@ -68,8 +66,7 @@ class FeedController extends Controller
 
         $faviconUrl = $this->heraRssCrawler->discoverFavicon(Arr::get($validated, 'site_url'));
 
-        $feed = Feed::make(Arr::add($validated, 'favicon_url', $faviconUrl));
-        Auth::user()->feeds()->save($feed);
+        Auth::user()->feeds()->save(new Feed(Arr::add($validated, 'favicon_url', $faviconUrl)));
 
         return redirect()->route('feeds.index');
     }

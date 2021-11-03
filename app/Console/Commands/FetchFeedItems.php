@@ -149,7 +149,7 @@ class FetchFeedItems extends Command
         $imageUrl = Arr::first($rssFeedItem->getImageUrls()) ?? $rssFeedItem->getEnclosureUrl();
         $imageMimetype = $imageUrl ? getContentTypeForUrl($imageUrl) : null;
 
-        $feedItem = FeedItem::make([
+        $feedItem = new FeedItem([
             'url' => $rssFeedItem->getPermalink(),
             'title' => Encoding::toUTF8($rssFeedItem->getTitle()),
             'image_url' => $imageUrl,
