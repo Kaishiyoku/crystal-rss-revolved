@@ -12,10 +12,10 @@
     "devDependencies": {
         "@tailwindcss/forms": "^0.3.4",
         "@tailwindcss/typography": "^0.4.0",
-        "alpinejs": "^3.5.0",
+        "alpinejs": "^3.5.1",
         "axios": "^0.24.0",
         "laravel-echo": "^1.11.3",
-        "laravel-mix": "^6.0.37",
+        "laravel-mix": "^6.0.39",
         "postcss": "^8.3.11",
         "postcss-import": "^14.0.1",
         "push.js": "^1.0.12",
