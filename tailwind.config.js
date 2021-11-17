@@ -17,12 +17,44 @@ module.exports = {
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },
+            typography: (theme) => ({
+                dark: {
+                    css: {
+                        color: theme('colors.gray.400'),
+                        h1: {
+                            color: theme('colors.gray.400'),
+                        },
+                        h2: {
+                            color: theme('colors.gray.400'),
+                        },
+                        h3: {
+                            color: theme('colors.gray.400'),
+                        },
+                        h4: {
+                            color: theme('colors.gray.400'),
+                        },
+                        h5: {
+                            color: theme('colors.gray.400'),
+                        },
+                        h6: {
+                            color: theme('colors.gray.400'),
+                        },
+                        a: {
+                            color: theme('colors.gray.400'),
+                            '&:hover': {
+                                color: theme('colors.gray.400'),
+                            },
+                        },
+                    },
+                },
+            }),
         },
     },
 
     variants: {
         extend: {
             opacity: ['disabled'],
+            typography: ['responsive', 'dark'],
         },
     },
 
