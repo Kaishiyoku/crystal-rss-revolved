@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 8.70.2.
+ * Generated for Laravel 8.73.2.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -2260,6 +2260,16 @@
         {
                         return \Illuminate\Auth\SessionGuard::hasMacro($name);
         }
+                    /**
+         * Flush the existing macros.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function flushMacros()
+        {
+                        \Illuminate\Auth\SessionGuard::flushMacros();
+        }
          
     }
             /**
@@ -3583,7 +3593,7 @@
          * Get an item from the cache, or execute the given Closure and store the result.
          *
          * @param string $key
-         * @param \DateTimeInterface|\DateInterval|int|null $ttl
+         * @param \Closure|\DateTimeInterface|\DateInterval|int|null $ttl
          * @param \Closure $callback
          * @return mixed 
          * @static 
@@ -3841,6 +3851,16 @@
                         return \Illuminate\Cache\Repository::hasMacro($name);
         }
                     /**
+         * Flush the existing macros.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function flushMacros()
+        {
+                        \Illuminate\Cache\Repository::flushMacros();
+        }
+                    /**
          * Dynamically handle calls to the class.
          *
          * @param string $method
@@ -3855,6 +3875,50 @@
                         return $instance->macroCall($method, $parameters);
         }
                     /**
+         * Remove all items from the cache.
+         *
+         * @return bool 
+         * @static 
+         */ 
+        public static function flush()
+        {
+                        /** @var \Illuminate\Cache\FileStore $instance */
+                        return $instance->flush();
+        }
+                    /**
+         * Get the Filesystem instance.
+         *
+         * @return \Illuminate\Filesystem\Filesystem 
+         * @static 
+         */ 
+        public static function getFilesystem()
+        {
+                        /** @var \Illuminate\Cache\FileStore $instance */
+                        return $instance->getFilesystem();
+        }
+                    /**
+         * Get the working directory of the cache.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getDirectory()
+        {
+                        /** @var \Illuminate\Cache\FileStore $instance */
+                        return $instance->getDirectory();
+        }
+                    /**
+         * Get the cache key prefix.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getPrefix()
+        {
+                        /** @var \Illuminate\Cache\FileStore $instance */
+                        return $instance->getPrefix();
+        }
+                    /**
          * Get a lock instance.
          *
          * @param string $name
@@ -3865,7 +3929,7 @@
          */ 
         public static function lock($name, $seconds = 0, $owner = null)
         {
-                        /** @var \Illuminate\Cache\RedisStore $instance */
+                        /** @var \Illuminate\Cache\FileStore $instance */
                         return $instance->lock($name, $seconds, $owner);
         }
                     /**
@@ -3878,99 +3942,8 @@
          */ 
         public static function restoreLock($name, $owner)
         {
-                        /** @var \Illuminate\Cache\RedisStore $instance */
+                        /** @var \Illuminate\Cache\FileStore $instance */
                         return $instance->restoreLock($name, $owner);
-        }
-                    /**
-         * Remove all items from the cache.
-         *
-         * @return bool 
-         * @static 
-         */ 
-        public static function flush()
-        {
-                        /** @var \Illuminate\Cache\RedisStore $instance */
-                        return $instance->flush();
-        }
-                    /**
-         * Get the Redis connection instance.
-         *
-         * @return \Illuminate\Redis\Connections\Connection 
-         * @static 
-         */ 
-        public static function connection()
-        {
-                        /** @var \Illuminate\Cache\RedisStore $instance */
-                        return $instance->connection();
-        }
-                    /**
-         * Get the Redis connection instance that should be used to manage locks.
-         *
-         * @return \Illuminate\Redis\Connections\Connection 
-         * @static 
-         */ 
-        public static function lockConnection()
-        {
-                        /** @var \Illuminate\Cache\RedisStore $instance */
-                        return $instance->lockConnection();
-        }
-                    /**
-         * Specify the name of the connection that should be used to store data.
-         *
-         * @param string $connection
-         * @return void 
-         * @static 
-         */ 
-        public static function setConnection($connection)
-        {
-                        /** @var \Illuminate\Cache\RedisStore $instance */
-                        $instance->setConnection($connection);
-        }
-                    /**
-         * Specify the name of the connection that should be used to manage locks.
-         *
-         * @param string $connection
-         * @return \Illuminate\Cache\RedisStore 
-         * @static 
-         */ 
-        public static function setLockConnection($connection)
-        {
-                        /** @var \Illuminate\Cache\RedisStore $instance */
-                        return $instance->setLockConnection($connection);
-        }
-                    /**
-         * Get the Redis database instance.
-         *
-         * @return \Illuminate\Contracts\Redis\Factory 
-         * @static 
-         */ 
-        public static function getRedis()
-        {
-                        /** @var \Illuminate\Cache\RedisStore $instance */
-                        return $instance->getRedis();
-        }
-                    /**
-         * Get the cache key prefix.
-         *
-         * @return string 
-         * @static 
-         */ 
-        public static function getPrefix()
-        {
-                        /** @var \Illuminate\Cache\RedisStore $instance */
-                        return $instance->getPrefix();
-        }
-                    /**
-         * Set the cache key prefix.
-         *
-         * @param string $prefix
-         * @return void 
-         * @static 
-         */ 
-        public static function setPrefix($prefix)
-        {
-                        /** @var \Illuminate\Cache\RedisStore $instance */
-                        $instance->setPrefix($prefix);
         }
          
     }
@@ -4315,6 +4288,16 @@
         public static function hasMacro($name)
         {
                         return \Illuminate\Cookie\CookieJar::hasMacro($name);
+        }
+                    /**
+         * Flush the existing macros.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function flushMacros()
+        {
+                        \Illuminate\Cookie\CookieJar::flushMacros();
         }
          
     }
@@ -5817,6 +5800,16 @@
                         return \Illuminate\Events\Dispatcher::hasMacro($name);
         }
                     /**
+         * Flush the existing macros.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function flushMacros()
+        {
+                        \Illuminate\Events\Dispatcher::flushMacros();
+        }
+                    /**
          * Assert if an event has a listener attached to it.
          *
          * @param string $expectedEvent
@@ -6499,6 +6492,16 @@
         public static function hasMacro($name)
         {
                         return \Illuminate\Filesystem\Filesystem::hasMacro($name);
+        }
+                    /**
+         * Flush the existing macros.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function flushMacros()
+        {
+                        \Illuminate\Filesystem\Filesystem::flushMacros();
         }
          
     }
@@ -7198,6 +7201,16 @@
                         return \Illuminate\Http\Client\Factory::hasMacro($name);
         }
                     /**
+         * Flush the existing macros.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function flushMacros()
+        {
+                        \Illuminate\Http\Client\Factory::flushMacros();
+        }
+                    /**
          * Dynamically handle calls to the class.
          *
          * @param string $method
@@ -7504,6 +7517,16 @@
         public static function hasMacro($name)
         {
                         return \Illuminate\Translation\Translator::hasMacro($name);
+        }
+                    /**
+         * Flush the existing macros.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function flushMacros()
+        {
+                        \Illuminate\Translation\Translator::flushMacros();
         }
          
     }
@@ -8445,6 +8468,16 @@
         {
                         return \Illuminate\Support\Testing\Fakes\NotificationFake::hasMacro($name);
         }
+                    /**
+         * Flush the existing macros.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function flushMacros()
+        {
+                        \Illuminate\Support\Testing\Fakes\NotificationFake::flushMacros();
+        }
          
     }
             /**
@@ -8932,92 +8965,6 @@
                         return $instance->setConnectionName($name);
         }
                     /**
-         * Migrate the delayed jobs that are ready to the regular queue.
-         *
-         * @param string $from
-         * @param string $to
-         * @return array 
-         * @static 
-         */ 
-        public static function migrateExpiredJobs($from, $to)
-        {
-                        /** @var \Illuminate\Queue\RedisQueue $instance */
-                        return $instance->migrateExpiredJobs($from, $to);
-        }
-                    /**
-         * Delete a reserved job from the queue.
-         *
-         * @param string $queue
-         * @param \Illuminate\Queue\Jobs\RedisJob $job
-         * @return void 
-         * @static 
-         */ 
-        public static function deleteReserved($queue, $job)
-        {
-                        /** @var \Illuminate\Queue\RedisQueue $instance */
-                        $instance->deleteReserved($queue, $job);
-        }
-                    /**
-         * Delete a reserved job from the reserved queue and release it.
-         *
-         * @param string $queue
-         * @param \Illuminate\Queue\Jobs\RedisJob $job
-         * @param int $delay
-         * @return void 
-         * @static 
-         */ 
-        public static function deleteAndRelease($queue, $job, $delay)
-        {
-                        /** @var \Illuminate\Queue\RedisQueue $instance */
-                        $instance->deleteAndRelease($queue, $job, $delay);
-        }
-                    /**
-         * Delete all of the jobs from the queue.
-         *
-         * @param string $queue
-         * @return int 
-         * @static 
-         */ 
-        public static function clear($queue)
-        {
-                        /** @var \Illuminate\Queue\RedisQueue $instance */
-                        return $instance->clear($queue);
-        }
-                    /**
-         * Get the queue or return the default.
-         *
-         * @param string|null $queue
-         * @return string 
-         * @static 
-         */ 
-        public static function getQueue($queue)
-        {
-                        /** @var \Illuminate\Queue\RedisQueue $instance */
-                        return $instance->getQueue($queue);
-        }
-                    /**
-         * Get the connection for the queue.
-         *
-         * @return \Illuminate\Redis\Connections\Connection 
-         * @static 
-         */ 
-        public static function getConnection()
-        {
-                        /** @var \Illuminate\Queue\RedisQueue $instance */
-                        return $instance->getConnection();
-        }
-                    /**
-         * Get the underlying Redis instance.
-         *
-         * @return \Illuminate\Contracts\Redis\Factory 
-         * @static 
-         */ 
-        public static function getRedis()
-        {
-                        /** @var \Illuminate\Queue\RedisQueue $instance */
-                        return $instance->getRedis();
-        }
-                    /**
          * Get the backoff for an object-based queue handler.
          *
          * @param mixed $job
@@ -9026,7 +8973,7 @@
          */ 
         public static function getJobBackoff($job)
         {            //Method inherited from \Illuminate\Queue\Queue         
-                        /** @var \Illuminate\Queue\RedisQueue $instance */
+                        /** @var \Illuminate\Queue\SyncQueue $instance */
                         return $instance->getJobBackoff($job);
         }
                     /**
@@ -9038,7 +8985,7 @@
          */ 
         public static function getJobExpiration($job)
         {            //Method inherited from \Illuminate\Queue\Queue         
-                        /** @var \Illuminate\Queue\RedisQueue $instance */
+                        /** @var \Illuminate\Queue\SyncQueue $instance */
                         return $instance->getJobExpiration($job);
         }
                     /**
@@ -9050,7 +8997,7 @@
          */ 
         public static function createPayloadUsing($callback)
         {            //Method inherited from \Illuminate\Queue\Queue         
-                        \Illuminate\Queue\RedisQueue::createPayloadUsing($callback);
+                        \Illuminate\Queue\SyncQueue::createPayloadUsing($callback);
         }
                     /**
          * Get the container instance being used by the connection.
@@ -9060,7 +9007,7 @@
          */ 
         public static function getContainer()
         {            //Method inherited from \Illuminate\Queue\Queue         
-                        /** @var \Illuminate\Queue\RedisQueue $instance */
+                        /** @var \Illuminate\Queue\SyncQueue $instance */
                         return $instance->getContainer();
         }
                     /**
@@ -9072,7 +9019,7 @@
          */ 
         public static function setContainer($container)
         {            //Method inherited from \Illuminate\Queue\Queue         
-                        /** @var \Illuminate\Queue\RedisQueue $instance */
+                        /** @var \Illuminate\Queue\SyncQueue $instance */
                         $instance->setContainer($container);
         }
          
@@ -9327,6 +9274,16 @@
         public static function hasMacro($name)
         {
                         return \Illuminate\Routing\Redirector::hasMacro($name);
+        }
+                    /**
+         * Flush the existing macros.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function flushMacros()
+        {
+                        \Illuminate\Routing\Redirector::flushMacros();
         }
          
     }
@@ -9959,7 +9916,7 @@
                     /**
          * Gets the list of trusted proxies.
          *
-         * @return array An array of trusted proxies
+         * @return array 
          * @static 
          */ 
         public static function getTrustedProxies()
@@ -9991,7 +9948,7 @@
                     /**
          * Gets the list of trusted host patterns.
          *
-         * @return array An array of trusted host patterns
+         * @return array 
          * @static 
          */ 
         public static function getTrustedHosts()
@@ -10004,7 +9961,7 @@
          * It builds a normalized query string, where keys/value pairs are alphabetized,
          * have consistent escaping and unneeded delimiters are removed.
          *
-         * @return string A normalized query string for the Request
+         * @return string 
          * @static 
          */ 
         public static function normalizeQueryString($qs)
@@ -10031,7 +9988,7 @@
                     /**
          * Checks whether support for the _method request parameter is enabled.
          *
-         * @return bool True when the _method request parameter is enabled, false otherwise
+         * @return bool 
          * @static 
          */ 
         public static function getHttpMethodParameterOverride()
@@ -10057,7 +10014,8 @@
          * like whether the session is started or not. It is just a way to check if this Request
          * is associated with a Session instance.
          *
-         * @return bool true when the Request contains a Session object, false otherwise
+         * @param bool $skipIfUninitialized When true, ignores factories injected by `setSessionFactory`
+         * @return bool 
          * @static 
          */ 
         public static function hasSession()
@@ -10079,6 +10037,7 @@
          * 
          *
          * @internal 
+         * @param \Symfony\Component\HttpFoundation\callable():  SessionInterface $factory
          * @static 
          */ 
         public static function setSessionFactory($factory)
@@ -10095,7 +10054,7 @@
          * 
          * Use this method carefully; you should use getClientIp() instead.
          *
-         * @return array The client IP addresses
+         * @return array 
          * @see getClientIp()
          * @static 
          */ 
@@ -10117,7 +10076,7 @@
          * ("Client-Ip" for instance), configure it via the $trustedHeaderSet
          * argument of the Request::setTrustedProxies() method instead.
          *
-         * @return string|null The client IP address
+         * @return string|null 
          * @see getClientIps()
          * @see https://wikipedia.org/wiki/X-Forwarded-For
          * @static 
@@ -10211,7 +10170,7 @@
          * 
          * The "X-Forwarded-Port" header must contain the client port.
          *
-         * @return int|string can be a string if fetched from the server bag
+         * @return int|string|null Can be a string if fetched from the server bag
          * @static 
          */ 
         public static function getPort()
@@ -10244,7 +10203,7 @@
                     /**
          * Gets the user info.
          *
-         * @return string A user name and, optionally, scheme-specific information about how to gain authorization to access the server
+         * @return string|null A user name if any and, optionally, scheme-specific information about how to gain authorization to access the server
          * @static 
          */ 
         public static function getUserInfo()
@@ -10282,7 +10241,7 @@
          * If the URL was called with basic authentication, the user
          * and the password are not added to the generated string.
          *
-         * @return string The scheme and HTTP host
+         * @return string 
          * @static 
          */ 
         public static function getSchemeAndHttpHost()
@@ -10293,7 +10252,7 @@
                     /**
          * Generates a normalized URI (URL) for the Request.
          *
-         * @return string A normalized URI (URL) for the Request
+         * @return string 
          * @see getQueryString()
          * @static 
          */ 
@@ -10306,7 +10265,7 @@
          * Generates a normalized URI for the given path.
          *
          * @param string $path A path to use instead of the current one
-         * @return string The normalized URI for the path
+         * @return string 
          * @static 
          */ 
         public static function getUriForPath($path)
@@ -10329,7 +10288,7 @@
          * - "/a/b/c/other" -> "other"
          * - "/a/x/y"       -> "../../x/y"
          *
-         * @return string The relative target path
+         * @return string 
          * @static 
          */ 
         public static function getRelativeUriForPath($path)
@@ -10343,7 +10302,7 @@
          * It builds a normalized query string, where keys/value pairs are alphabetized
          * and have consistent escaping.
          *
-         * @return string|null A normalized query string for the Request
+         * @return string|null 
          * @static 
          */ 
         public static function getQueryString()
@@ -10405,7 +10364,7 @@
          * 
          * The method is always an uppercased string.
          *
-         * @return string The request method
+         * @return string 
          * @see getRealMethod()
          * @static 
          */ 
@@ -10417,7 +10376,7 @@
                     /**
          * Gets the "real" request method.
          *
-         * @return string The request method
+         * @return string 
          * @see getMethod()
          * @static 
          */ 
@@ -10429,7 +10388,7 @@
                     /**
          * Gets the mime type associated with the format.
          *
-         * @return string|null The associated mime type (null if not found)
+         * @return string|null 
          * @static 
          */ 
         public static function getMimeType($format)
@@ -10440,7 +10399,7 @@
                     /**
          * Gets the mime types associated with the format.
          *
-         * @return array The associated mime types
+         * @return array 
          * @static 
          */ 
         public static function getMimeTypes($format)
@@ -10450,7 +10409,7 @@
                     /**
          * Gets the format associated with the mime type.
          *
-         * @return string|null The format (null if not found)
+         * @return string|null 
          * @static 
          */ 
         public static function getFormat($mimeType)
@@ -10479,7 +10438,7 @@
          *  * $default
          *
          * @see getPreferredFormat
-         * @return string|null The request format
+         * @return string|null 
          * @static 
          */ 
         public static function getRequestFormat($default = 'html')
@@ -10500,7 +10459,7 @@
                     /**
          * Gets the format associated with the request.
          *
-         * @return string|null The format (null if no content type is present)
+         * @return string|null 
          * @static 
          */ 
         public static function getContentType()
@@ -10589,7 +10548,7 @@
          * Checks whether the method is cacheable or not.
          *
          * @see https://tools.ietf.org/html/rfc7231#section-4.2.3
-         * @return bool True for GET and HEAD, false otherwise
+         * @return bool 
          * @static 
          */ 
         public static function isMethodCacheable()
@@ -10618,7 +10577,7 @@
          * Returns the request body content.
          *
          * @param bool $asResource If true, a resource will be returned
-         * @return string|resource The request body content or a resource to read the body stream
+         * @return string|resource 
          * @static 
          */ 
         public static function getContent($asResource = false)
@@ -10629,7 +10588,7 @@
                     /**
          * Gets the Etags.
          *
-         * @return array The entity tags
+         * @return array 
          * @static 
          */ 
         public static function getETags()
@@ -10667,7 +10626,7 @@
          * Returns the preferred language.
          *
          * @param string[] $locales An array of ordered available locales
-         * @return string|null The preferred locale
+         * @return string|null 
          * @static 
          */ 
         public static function getPreferredLanguage($locales = null)
@@ -10676,9 +10635,9 @@
                         return $instance->getPreferredLanguage($locales);
         }
                     /**
-         * Gets a list of languages acceptable by the client browser.
+         * Gets a list of languages acceptable by the client browser ordered in the user browser preferences.
          *
-         * @return array Languages ordered in the user browser preferences
+         * @return array 
          * @static 
          */ 
         public static function getLanguages()
@@ -10687,9 +10646,9 @@
                         return $instance->getLanguages();
         }
                     /**
-         * Gets a list of charsets acceptable by the client browser.
+         * Gets a list of charsets acceptable by the client browser in preferable order.
          *
-         * @return array List of charsets in preferable order
+         * @return array 
          * @static 
          */ 
         public static function getCharsets()
@@ -10698,9 +10657,9 @@
                         return $instance->getCharsets();
         }
                     /**
-         * Gets a list of encodings acceptable by the client browser.
+         * Gets a list of encodings acceptable by the client browser in preferable order.
          *
-         * @return array List of encodings in preferable order
+         * @return array 
          * @static 
          */ 
         public static function getEncodings()
@@ -10709,9 +10668,9 @@
                         return $instance->getEncodings();
         }
                     /**
-         * Gets a list of content types acceptable by the client browser.
+         * Gets a list of content types acceptable by the client browser in preferable order.
          *
-         * @return array List of content types in preferable order
+         * @return array 
          * @static 
          */ 
         public static function getAcceptableContentTypes()
@@ -10726,7 +10685,7 @@
          * It is known to work with common JavaScript frameworks:
          *
          * @see https://wikipedia.org/wiki/List_of_Ajax_frameworks#JavaScript
-         * @return bool true if the request is an XMLHttpRequest, false otherwise
+         * @return bool 
          * @static 
          */ 
         public static function isXmlHttpRequest()
@@ -10751,7 +10710,7 @@
          * This can be useful to determine whether or not to trust the
          * contents of a proxy-specific header.
          *
-         * @return bool true if the request came from a trusted proxy, false otherwise
+         * @return bool 
          * @static 
          */ 
         public static function isFromTrustedProxy()
@@ -11328,6 +11287,16 @@
                         return \Illuminate\Http\Request::hasMacro($name);
         }
                     /**
+         * Flush the existing macros.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function flushMacros()
+        {
+                        \Illuminate\Http\Request::flushMacros();
+        }
+                    /**
          * 
          *
          * @see \Illuminate\Foundation\Providers\FoundationServiceProvider::registerRequestValidation()
@@ -11621,6 +11590,16 @@
         public static function hasMacro($name)
         {
                         return \Illuminate\Routing\ResponseFactory::hasMacro($name);
+        }
+                    /**
+         * Flush the existing macros.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function flushMacros()
+        {
+                        \Illuminate\Routing\ResponseFactory::flushMacros();
         }
          
     }
@@ -12482,6 +12461,16 @@
         public static function hasMacro($name)
         {
                         return \Illuminate\Routing\Router::hasMacro($name);
+        }
+                    /**
+         * Flush the existing macros.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function flushMacros()
+        {
+                        \Illuminate\Routing\Router::flushMacros();
         }
                     /**
          * Dynamically handle calls to the class.
@@ -14143,6 +14132,16 @@
                         return \Illuminate\Filesystem\FilesystemAdapter::hasMacro($name);
         }
                     /**
+         * Flush the existing macros.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function flushMacros()
+        {
+                        \Illuminate\Filesystem\FilesystemAdapter::flushMacros();
+        }
+                    /**
          * Dynamically handle calls to the class.
          *
          * @param string $method
@@ -14641,6 +14640,16 @@
         public static function hasMacro($name)
         {
                         return \Illuminate\Routing\UrlGenerator::hasMacro($name);
+        }
+                    /**
+         * Flush the existing macros.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function flushMacros()
+        {
+                        \Illuminate\Routing\UrlGenerator::flushMacros();
         }
          
     }
@@ -15240,6 +15249,16 @@
         public static function hasMacro($name)
         {
                         return \Illuminate\View\Factory::hasMacro($name);
+        }
+                    /**
+         * Flush the existing macros.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function flushMacros()
+        {
+                        \Illuminate\View\Factory::flushMacros();
         }
                     /**
          * Start a component rendering process.
@@ -17962,6 +17981,16 @@
         {
                         return \Spatie\Html\Html::hasMacro($name);
         }
+                    /**
+         * Flush the existing macros.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function flushMacros()
+        {
+                        \Spatie\Html\Html::flushMacros();
+        }
          
     }
      
@@ -19322,7 +19351,7 @@ namespace  {
              * @param string $relationship
              * @param string $boolean
              * @return \Illuminate\Database\Eloquent\Builder|static 
-             * @throws \Exception
+             * @throws \RuntimeException
              * @static 
              */ 
             public static function whereBelongsTo($related, $relationshipName = null, $boolean = 'and')
@@ -19337,7 +19366,7 @@ namespace  {
              * @param \Illuminate\Database\Eloquent\Model $related
              * @param string $relationship
              * @return \Illuminate\Database\Eloquent\Builder|static 
-             * @throws \Exception
+             * @throws \RuntimeException
              * @static 
              */ 
             public static function orWhereBelongsTo($related, $relationshipName = null)
@@ -19571,6 +19600,22 @@ namespace  {
             {
                                 /** @var \Illuminate\Database\Eloquent\Builder $instance */
                                 return $instance->lazyById($chunkSize, $column, $alias);
+            }
+             
+                /**
+             * Query lazily, by chunking the results of a query by comparing IDs in descending order.
+             *
+             * @param int $count
+             * @param string|null $column
+             * @param string|null $alias
+             * @return \Illuminate\Support\LazyCollection 
+             * @throws \InvalidArgumentException
+             * @static 
+             */ 
+            public static function lazyByIdDesc($chunkSize = 1000, $column = null, $alias = null)
+            {
+                                /** @var \Illuminate\Database\Eloquent\Builder $instance */
+                                return $instance->lazyByIdDesc($chunkSize, $column, $alias);
             }
              
                 /**
@@ -21583,6 +21628,17 @@ namespace  {
             public static function mixin($mixin, $replace = true)
             {
                                 \Illuminate\Database\Query\Builder::mixin($mixin, $replace);
+            }
+             
+                /**
+             * Flush the existing macros.
+             *
+             * @return void 
+             * @static 
+             */ 
+            public static function flushMacros()
+            {
+                                \Illuminate\Database\Query\Builder::flushMacros();
             }
              
                 /**
