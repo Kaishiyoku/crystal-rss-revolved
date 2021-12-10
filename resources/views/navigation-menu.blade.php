@@ -4,7 +4,7 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
-                <div class="flex-shrink-0 flex items-center">
+                <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
                         <x-application-logo class="w-10 h-9" />
                     </a>
@@ -149,11 +149,11 @@
         x-cloak
         class="sm:hidden"
         x-transition:enter="transition ease-out duration-200"
-        x-transition:enter-start="transform opacity-0 -translate-y-12"
-        x-transition:enter-end="transform opacity-100 translate-y-0"
+        x-transition:enter-start="opacity-0 -translate-y-12"
+        x-transition:enter-end="opacity-100 translate-y-0"
         x-transition:leave="transition ease-in duration-100"
-        x-transition:leave-start="transform opacity-100 translate-y-0"
-        x-transition:leave-end="transform opacity-0 -translate-y-12"
+        x-transition:leave-start="opacity-100 translate-y-0"
+        x-transition:leave-end="opacity-0 -translate-y-12"
     >
         <div class="pt-2 pb-3 space-y-1">
             <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
@@ -165,7 +165,7 @@
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
             <div class="flex items-center px-4">
                 @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
-                    <div class="flex-shrink-0 mr-3">
+                    <div class="shrink-0 mr-3">
                         <img class="h-10 w-10 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
                     </div>
                 @endif

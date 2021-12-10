@@ -23,13 +23,13 @@
                 </template>
             </button>
 
-            <x-card.card class="flex-grow md:rounded-none mb-16 md:mb-0 overflow-hidden" ::class="{'md:rounded-t-lg': index === 0, 'md:rounded-b-lg': index === unreadFeedItems.length - 1}">
+            <x-card.card class="grow md:rounded-none mb-16 md:mb-0 overflow-hidden" ::class="{'md:rounded-t-lg': index === 0, 'md:rounded-b-lg': index === unreadFeedItems.length - 1}">
                 <div class="transition duration-200" :class="{'opacity-40': isRead(unreadFeedItem.id)}">
                     <a
                         class="group block md:flex md:items-center md:space-x-4 md:px-4 md:py-3 transition ease-out duration-300 hover:bg-indigo-500 focus:outline-none focus:text-white focus:bg-indigo-600 transition"
                         :href="unreadFeedItem.url"
                     >
-                        <div class="md:flex-shrink-0 md:block md:w-16">
+                        <div class="md:shrink-0 md:block md:w-16">
                             <template x-if="unreadFeedItem.has_image">
                                 <img
                                     :src="unreadFeedItem.image_url"
