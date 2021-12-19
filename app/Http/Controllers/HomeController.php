@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\TestNotificationSent;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -24,5 +25,10 @@ class HomeController extends Controller
         return view('dashboard', [
             'totalUnreadFeedItems' => $totalUnreadFeedItems,
         ]);
+    }
+
+    public function sendTestNotification()
+    {
+        broadcast(new TestNotificationSent(Auth::id()));
     }
 }

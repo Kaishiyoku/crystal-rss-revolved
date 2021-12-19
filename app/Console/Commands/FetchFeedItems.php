@@ -79,7 +79,7 @@ class FetchFeedItems extends Command
         $this->logger->info("Duration: {$executionTimeInSeconds}s");
 
         if (!config('app.enable_push_notifications')) {
-            return 0;
+            return Command::SUCCESS;
         }
 
         $this->newFeedItemIdsPerUser
@@ -88,7 +88,7 @@ class FetchFeedItems extends Command
                 broadcast(new NewFeedItemsFetched($userId, $feedItemIds->count()));
             });
 
-        return 0;
+        return Command::SUCCESS;
     }
 
     private function fetchFeedsForUser(User $user): void

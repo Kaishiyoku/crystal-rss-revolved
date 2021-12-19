@@ -15,8 +15,14 @@
         <div x-data>
             <div class="mt-5">
                 <template x-if="hasPushNotificationsEnabled()">
-                    <div class="max-w-xl text-sm text-green-500 font-semibold">
-                        {{ __('Push notifications enabled.') }}
+                    <div>
+                        <div class="max-w-xl text-sm text-green-500 font-semibold">
+                            {{ __('Push notifications enabled.') }}
+                        </div>
+
+                        <x-jet-secondary-button class="mt-5" @click="axios.post('{{ route('home.send_test_notification') }}')">
+                            {{ __('Send test notification') }}
+                        </x-jet-secondary-button>
                     </div>
                 </template>
 
@@ -33,5 +39,17 @@
                 </template>
             </div>
         </div>
+
+        @push('scripts')
+            <script type="text/javascript">
+                onDomReady(() => {
+                    Echo.private(`feed-list.${userId}`)
+                        .listen('NewFeedItemsFetched', ({title, message}) => {
+                            Alpine.store('toasts').add(message, 10000);
+                            sendPushNotification(title, message, 10000, () => window.location.reload());
+                        });
+                });
+            </script>
+        @endpush
     </x-slot>
 </x-jet-action-section>

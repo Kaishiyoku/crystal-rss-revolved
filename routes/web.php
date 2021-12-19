@@ -29,4 +29,5 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::resource('feeds', FeedController::class)->except(['show']);
     Route::post('/feed_items', [FeedItemController::class, 'load'])->name('feed_items.load');
     Route::put('/feed_items/{feedItem}/read', [FeedItemController::class, 'toggleMarkAsRead'])->name('feed_items.toggle_mark_as_read');
+    Route::post('/user/profile/send_test_notification', [HomeController::class, 'sendTestNotification'])->name('home.send_test_notification');
 });

@@ -45,11 +45,13 @@
                 </div>
             @endif
 
-            <x-jet-section-border />
+            @if (config('app.enable_push_notifications'))
+                <x-jet-section-border />
 
-            <div class="mt-10 sm:mt-0">
-                <x-profile-push-notifications/>
-            </div>
+                <div class="mt-10 sm:mt-0">
+                    <x-profile-push-notifications/>
+                </div>
+            @endif
         </div>
     </div>
 </x-app-layout>
