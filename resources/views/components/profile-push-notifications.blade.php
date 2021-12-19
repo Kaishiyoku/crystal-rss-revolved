@@ -43,8 +43,8 @@
         @push('scripts')
             <script type="text/javascript">
                 onDomReady(() => {
-                    Echo.private(`feed-list.${userId}`)
-                        .listen('NewFeedItemsFetched', ({title, message}) => {
+                    Echo.private(`test-notification.${userId}`)
+                        .listen('TestNotificationSent', ({title, message}) => {
                             Alpine.store('toasts').add(message, 10000);
                             sendPushNotification(title, message, 10000, () => window.location.reload());
                         });
