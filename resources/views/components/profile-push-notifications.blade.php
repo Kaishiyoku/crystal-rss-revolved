@@ -46,7 +46,7 @@
                     Echo.private(`test-notification.${userId}`)
                         .listen('TestNotificationSent', ({title, message}) => {
                             Alpine.store('toasts').add(message, 10000);
-                            sendPushNotification(title, message, 10000, () => window.location.reload());
+                            sendPushNotification(title, message, 10000);
                         });
                 });
             </script>
