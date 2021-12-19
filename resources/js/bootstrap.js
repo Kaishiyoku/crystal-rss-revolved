@@ -31,6 +31,7 @@ if (process.env.MIX_ENABLE_PUSH_NOTIFICATIONS === 'true') {
         wsHost: window.location.hostname,
         wsPort: 6001,
         wssPort: 6001,
+        enabledTransports: ['ws', 'wss'],
     });
 }
 
