@@ -1896,16 +1896,16 @@
         },
         {
             "name": "laminas/laminas-stdlib",
-            "version": "3.6.4",
+            "version": "3.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-stdlib.git",
-                "reference": "830a36d93aeaf06e540e90ec031babb3c6eafadb"
+                "reference": "cba75fad2053bb5dc8d3e7f5e62b61d75eecfaf1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-stdlib/zipball/830a36d93aeaf06e540e90ec031babb3c6eafadb",
-                "reference": "830a36d93aeaf06e540e90ec031babb3c6eafadb",
+                "url": "https://api.github.com/repos/laminas/laminas-stdlib/zipball/cba75fad2053bb5dc8d3e7f5e62b61d75eecfaf1",
+                "reference": "cba75fad2053bb5dc8d3e7f5e62b61d75eecfaf1",
                 "shasum": ""
             },
             "require": {
@@ -1916,8 +1916,8 @@
             },
             "require-dev": {
                 "laminas/laminas-coding-standard": "~2.3.0",
-                "phpbench/phpbench": "^0.17.1",
-                "phpunit/phpunit": "~9.3.7",
+                "phpbench/phpbench": "^1.0",
+                "phpunit/phpunit": "^9.3.7",
                 "psalm/plugin-phpunit": "^0.16.0",
                 "vimeo/psalm": "^4.7"
             },
@@ -1951,7 +1951,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2021-12-29T14:33:01+00:00"
+            "time": "2022-01-10T11:18:55+00:00"
         },
         {
             "name": "laminas/laminas-xml",
@@ -8226,21 +8226,21 @@
         },
         {
             "name": "barryvdh/laravel-ide-helper",
-            "version": "v2.10.0",
+            "version": "v2.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/barryvdh/laravel-ide-helper.git",
-                "reference": "73b1012b927633a1b4cd623c2e6b1678e6faef08"
+                "reference": "f2a7f9d84f628cb50e1b0dc302f10d2ba945b0ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-ide-helper/zipball/73b1012b927633a1b4cd623c2e6b1678e6faef08",
-                "reference": "73b1012b927633a1b4cd623c2e6b1678e6faef08",
+                "url": "https://api.github.com/repos/barryvdh/laravel-ide-helper/zipball/f2a7f9d84f628cb50e1b0dc302f10d2ba945b0ea",
+                "reference": "f2a7f9d84f628cb50e1b0dc302f10d2ba945b0ea",
                 "shasum": ""
             },
             "require": {
                 "barryvdh/reflection-docblock": "^2.0.6",
-                "composer/composer": "^1.6 || ^2",
+                "composer/composer": "^1.10.23 || ^2.1.9",
                 "doctrine/dbal": "^2.6 || ^3",
                 "ext-json": "*",
                 "illuminate/console": "^8",
@@ -8304,15 +8304,19 @@
             ],
             "support": {
                 "issues": "https://github.com/barryvdh/laravel-ide-helper/issues",
-                "source": "https://github.com/barryvdh/laravel-ide-helper/tree/v2.10.0"
+                "source": "https://github.com/barryvdh/laravel-ide-helper/tree/v2.11.0"
             },
             "funding": [
+                {
+                    "url": "https://fruitcake.nl",
+                    "type": "custom"
+                },
                 {
                     "url": "https://github.com/barryvdh",
                     "type": "github"
                 }
             ],
-            "time": "2021-04-09T06:17:55+00:00"
+            "time": "2022-01-03T20:47:54+00:00"
         },
         {
             "name": "barryvdh/reflection-docblock",
@@ -8444,16 +8448,16 @@
         },
         {
             "name": "composer/composer",
-            "version": "2.2.3",
+            "version": "2.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "3c92ba5cdc7d48b7db2dcd197e6fa0e8fa6d9f4a"
+                "reference": "8a5ad75194f901e3b39ece4bbd22cbdabc79ae8f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/3c92ba5cdc7d48b7db2dcd197e6fa0e8fa6d9f4a",
-                "reference": "3c92ba5cdc7d48b7db2dcd197e6fa0e8fa6d9f4a",
+                "url": "https://api.github.com/repos/composer/composer/zipball/8a5ad75194f901e3b39ece4bbd22cbdabc79ae8f",
+                "reference": "8a5ad75194f901e3b39ece4bbd22cbdabc79ae8f",
                 "shasum": ""
             },
             "require": {
@@ -8523,7 +8527,7 @@
             "support": {
                 "irc": "ircs://irc.libera.chat:6697/composer",
                 "issues": "https://github.com/composer/composer/issues",
-                "source": "https://github.com/composer/composer/tree/2.2.3"
+                "source": "https://github.com/composer/composer/tree/2.2.4"
             },
             "funding": [
                 {
@@ -8539,7 +8543,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-12-31T11:18:53+00:00"
+            "time": "2022-01-08T11:30:42+00:00"
         },
         {
             "name": "composer/metadata-minifier",
@@ -10051,16 +10055,16 @@
         },
         {
             "name": "nunomaduro/collision",
-            "version": "v5.10.0",
+            "version": "v5.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nunomaduro/collision.git",
-                "reference": "3004cfa49c022183395eabc6d0e5207dfe498d00"
+                "reference": "8b610eef8582ccdc05d8f2ab23305e2d37049461"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nunomaduro/collision/zipball/3004cfa49c022183395eabc6d0e5207dfe498d00",
-                "reference": "3004cfa49c022183395eabc6d0e5207dfe498d00",
+                "url": "https://api.github.com/repos/nunomaduro/collision/zipball/8b610eef8582ccdc05d8f2ab23305e2d37049461",
+                "reference": "8b610eef8582ccdc05d8f2ab23305e2d37049461",
                 "shasum": ""
             },
             "require": {
@@ -10122,7 +10126,7 @@
             },
             "funding": [
                 {
-                    "url": "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=66BYDWAT92N6L",
+                    "url": "https://www.paypal.com/paypalme/enunomaduro",
                     "type": "custom"
                 },
                 {
@@ -10134,7 +10138,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2021-09-20T15:06:32+00:00"
+            "time": "2022-01-10T16:22:52+00:00"
         },
         {
             "name": "nunomaduro/larastan",
