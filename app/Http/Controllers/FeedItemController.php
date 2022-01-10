@@ -3,40 +3,54 @@
 namespace App\Http\Controllers;
 
 use App\Models\FeedItem;
-use App\Rules\ArrayOfIntegers;
 use Arr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class FeedItemController extends Controller
 {
-    public function load(Request $request)
+    /**
+     * @param string|null $previousFirstFeedItemChecksum
+     * @param string|null $previousLastFeedItemChecksum
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function dashboard($previousFirstFeedItemChecksum = null, $previousLastFeedItemChecksum = null)
     {
-        $data = $request->validate([
-            'numberOfDisplayedFeedItems' => ['required', 'integer', 'min:0'],
-            'offset' => ['integer', 'min:0'],
-            'feedItemsPerPage' => ['integer', 'min:0'],
-            'readFeedItemIds' => [new ArrayOfIntegers()],
-        ]);
+        // both checksums must be null or filled
+        if ($previousFirstFeedItemChecksum && !$previousLastFeedItemChecksum || !$previousFirstFeedItemChecksum && $previousLastFeedItemChecksum) {
+            abort(404);
+        }
 
-        $readFeedItemIds = collect(Arr::get($data, 'readFeedItemIds'));
-        $offset = Arr::get($data, 'offset');
-        $feedItemsPerPage = Arr::get($data, 'feedItemsPerPage');
+        $totalUnreadFeedItems = Auth::user()->feedItems()->unread()->count();
 
-        $newUnreadFeedItems = Auth::user()->feedItems()
-            ->filteredByFeedItemIds($readFeedItemIds)
-            ->paged($feedItemsPerPage, $offset)
+        $previousFirstFeedItem = $previousFirstFeedItemChecksum ? Auth::user()->feedItems()->whereChecksum($previousFirstFeedItemChecksum)->firstOrFail() : null;
+        $previousLastFeedItem = $previousLastFeedItemChecksum ? Auth::user()->feedItems()->whereChecksum($previousLastFeedItemChecksum)->firstOrFail() : null;
+
+        $previousItemsCount = $previousFirstFeedItemChecksum && $previousLastFeedItemChecksum
+            ? Auth::user()
+                ->feedItems()
+                ->unread()
+                ->where('posted_at', '<=', $previousFirstFeedItem->posted_at)
+                ->where('posted_at', '>=', $previousLastFeedItem->posted_at)
+                ->count()
+            : 0;
+
+        $newlyFetchedFeedItemCount = $previousFirstFeedItem ? Auth::user()->feedItems()->unread()->where('posted_at', '>', $previousFirstFeedItem->posted_at)->count() : 0;
+
+        $unreadFeedItems = Auth::user()
+            ->feedItems()
+            ->unread()
+            ->with('feed')
+            ->when($previousFirstFeedItem && $previousLastFeedItem, fn($query) => $query->where('posted_at', '<=', $previousFirstFeedItem->posted_at))
+            ->orderByDesc('posted_at')
+            ->orderByDesc('feed_items.id')
+            ->take($previousItemsCount + config('app.feed_items_per_page'))
             ->get();
 
-        $hasMoreUnreadFeedItems = Auth::user()->feedItems()
-                ->filteredByFeedItemIds($readFeedItemIds)
-                ->count() > Arr::get($data, 'numberOfDisplayedFeedItems') + $newUnreadFeedItems->count();
-        $newOffset = $offset + $feedItemsPerPage;
-
-        return response()->json([
-            'newOffset' => $newOffset,
-            'newUnreadFeedItems' => $newUnreadFeedItems,
-            'hasMoreUnreadFeedItems' => $hasMoreUnreadFeedItems,
+        return view('dashboard', [
+            'totalUnreadFeedItems' => $totalUnreadFeedItems,
+            'newlyFetchedFeedItemCount' => $newlyFetchedFeedItemCount,
+            'unreadFeedItems' => $unreadFeedItems,
         ]);
     }
 

@@ -27,10 +27,8 @@ use Illuminate\Support\Str;
  * @property-read \App\Models\Feed $feed
  * @property-read mixed $formatted_posted_at
  * @property-read mixed $has_image
- * @method static Builder|FeedItem filteredByFeedItemIds(\Illuminate\Support\Collection $readFeedItemIds)
  * @method static Builder|FeedItem newModelQuery()
  * @method static Builder|FeedItem newQuery()
- * @method static Builder|FeedItem paged($limit, $offset)
  * @method static Builder|FeedItem query()
  * @method static Builder|FeedItem unread()
  * @method static Builder|FeedItem whereChecksum($value)
@@ -108,23 +106,6 @@ class FeedItem extends Model
     public function scopeUnread($query)
     {
         return $query->whereNull('read_at');
-    }
-
-    public function scopeFilteredByFeedItemIds($query, Collection $readFeedItemIds)
-    {
-        return $query
-            ->unread()
-            ->when($readFeedItemIds->isNotEmpty(), fn($query) => $query->orWhereIn('feed_items.id', $readFeedItemIds))
-            ->with('feed')
-            ->orderBy('posted_at', 'desc')
-            ->orderBy('feed_items.id', 'desc');
-    }
-
-    public function scopePaged($query, $limit, $offset)
-    {
-        return $query
-            ->offset($offset)
-            ->limit($limit);
     }
 
     /**

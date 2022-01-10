@@ -68,7 +68,7 @@ class FetchFeedItems extends Command
     {
         $startTime = microtime(true);
 
-        User::verified()->with('feeds')->each(function (User $user) {
+        User::verified()->with('feeds')->get()->each(function (User $user) {
             $this->logger->info("Fetching feeds for user {$user->name}");
 
             $this->fetchFeedsForUser($user);

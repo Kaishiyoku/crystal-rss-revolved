@@ -738,5 +738,7 @@
     "The given URL is invalid.": "Die URL ist ungültig.",
     "The given URL could not be resolved.": "Die URL konnte nicht aufgelöst werden.",
     "Couldn't find any feeds for this URL.": "Für diese URL konnten keine Feeds gefunden werden.",
-    "number_of_recently_fetched_feed_items": "{0}Keine kürzlichen Artikel|{1}Ein kürzlicher Artikel|[2,*]:count kürzliche Artikel"
+    "number_of_recently_fetched_feed_items": "{0}Keine kürzlichen Artikel|{1}Ein kürzlicher Artikel|[2,*]:count kürzliche Artikel",
+    "new_items_found": "{0}Keine neuen Artikel gefunden.|{1}Einen neuen Artikel gefunden.|:count neue Artikel gefunden.",
+    "Refresh now": "Jetzt aktualisieren"
 }

@@ -22,7 +22,7 @@ Route::get('/', [HomeController::class, 'welcome'])->name('welcome');
 Route::get('/docs/api/v1', [DocumentationV1Controller::class, 'home'])->name('api.v1.home');
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
-    Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
+    Route::get('/dashboard/{previousFirstFeedItemChecksum?}/{previousLastFeedItemChecksum?}', [FeedItemController::class, 'dashboard'])->name('dashboard');
 
     Route::resource('categories', CategoryController::class)->except(['show']);
     Route::put('/feeds/mark_all_as_read', [FeedController::class, 'markAllAsRead'])->name('feeds.mark_all_as_read');

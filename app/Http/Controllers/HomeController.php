@@ -15,18 +15,6 @@ class HomeController extends Controller
         return view('welcome');
     }
 
-    /**
-     * @return \Illuminate\Contracts\View\View
-     */
-    public function dashboard()
-    {
-        $totalUnreadFeedItems = Auth::user()->feedItems()->unread()->count();
-
-        return view('dashboard', [
-            'totalUnreadFeedItems' => $totalUnreadFeedItems,
-        ]);
-    }
-
     public function sendTestNotification()
     {
         broadcast(new TestNotificationSent(Auth::id()));
