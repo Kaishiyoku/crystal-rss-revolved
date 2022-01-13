@@ -1,0 +1,87 @@
+name: Home
+description: |-
+
+  APIs for basic information
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: api/user
+    metadata:
+      title: 'Retrieve own user'
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    queryParameters: []
+    bodyParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+           "id": 1,
+           "name": "John Doe",
+           "email": "john_doe@test.com",
+           "email_verified_at": "2021-07-19T16:52:07.000000Z",
+           "current_team_id": null,
+           "profile_photo_path": "profile-photos/tQoWDCXYOOOK15OykHUBLnyrTvB76laGnIAwtaj8.jpg",
+           "created_at": "2021-07-19T16:46:51.000000Z",
+           "updated_at": "2021-08-22T12:26:11.000000Z",
+           "profile_photo_url": "/storage/profile-photos/tQoWDCXYOOOK15OykHUBLnyrTvB76laGnIAwtaj8.jpg"
+          }
+        headers: []
+        description: '200, success'
+      -
+        status: 401
+        content: '{"message": "Unauthenticated."}'
+        headers: []
+        description: '401, unauthenticated'
+    responseFields: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/health_check
+    metadata:
+      title: Healthcheck
+      description: |-
+        Check that the service is up. If everything is okay, you'll get a 200 OK response.
+
+        Otherwise, the request will fail with a 400 error, and a response listing the failed services.
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    queryParameters: []
+    bodyParameters: []
+    responses:
+      -
+        status: 400
+        content: '{"status": false, "services": {"database": false}}'
+        headers: []
+        description: '400, Service is unhealthy'
+      -
+        status: 200
+        content: '{"status":true,"services":{"database":true}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '59'
+          access-control-allow-origin: '*'
+        description: null
+    responseFields:
+      status:
+        name: status
+        description: 'The status of this API (`true` or `false`).'
+        type: boolean
+      services:
+        name: services
+        description: 'Map of each downstream service and their status (`true` or `false`).'
+        type: object
