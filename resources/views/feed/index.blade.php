@@ -5,9 +5,13 @@
 
     <x-slot name="header">
         <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-300 leading-tight">
-                {{ __('Feeds') }}
-            </h2>
+            <div>
+                <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-300 leading-tight">
+                    {{ __('Feeds') }}
+                </h2>
+
+                <div>{{ trans_choice('total_number_of_feeds', $feeds->count()) }}</div>
+            </div>
 
             <x-secondary-button-link :url="route('feeds.create')">
                 {{ __('Add') }}
