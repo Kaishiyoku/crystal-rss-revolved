@@ -16,11 +16,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('v1')->middleware('api')->group(function () {
-    Route::get('/', [HomeController::class, 'index']);
+    Route::get('/health_check', [HomeController::class, 'healthCheck']);
 });
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('/user', [HomeController::class, 'user']);
 });
 
 Route::fallback(function () {
