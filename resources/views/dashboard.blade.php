@@ -100,8 +100,11 @@
                                 <template x-if="isLoading(@json($unreadFeedItem->id))">
                                     <x-icon.loading class="mr-2"/>
                                 </template>
-                                <template x-if="!isLoading(@json($unreadFeedItem->id))">
+                                <template x-if="!isLoading(@json($unreadFeedItem->id)) && !isRead(@json($unreadFeedItem->id))">
                                     <x-heroicon-s-eye class="w-5 h-5 mr-2"/>
+                                </template>
+                                <template x-if="!isLoading(@json($unreadFeedItem->id)) && isRead(@json($unreadFeedItem->id))">
+                                    <x-heroicon-s-eye-off class="w-5 h-5 mr-2"/>
                                 </template>
 
                                 <span>{{ __('Mark as read') }}</span>
