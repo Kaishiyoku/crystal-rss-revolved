@@ -5,9 +5,13 @@
 
     <x-slot name="header">
         <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-300 leading-tight">
-                {{ __('Categories') }}
-            </h2>
+            <div>
+                <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-300 leading-tight">
+                    {{ __('Categories') }}
+                </h2>
+
+                <div>{{ trans_choice('total_number_of_categories', $categories->count()) }}</div>
+            </div>
 
             <x-secondary-button-link :url="route('categories.create')">
                 {{ __('Add') }}

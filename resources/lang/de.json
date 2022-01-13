@@ -741,5 +741,6 @@
     "number_of_recently_fetched_feed_items": "{0}Keine kürzlichen Artikel|{1}Ein kürzlicher Artikel|[2,*]:count kürzliche Artikel",
     "new_items_found": "{0}Keine neuen Artikel gefunden.|{1}Einen neuen Artikel gefunden.|:count neue Artikel gefunden.",
     "Refresh now": "Jetzt aktualisieren",
-    "total_number_of_feeds": "{0}Keine Feeds|{1}Ein Feed|[2,*]:count Feeds"
+    "total_number_of_feeds": "{0}Keine Feeds|{1}Ein Feed|[2,*]:count Feeds",
+    "total_number_of_categories": "{0}Keine Kategorien|{1}Eine Kategorie|[2,*]:count Kategorien"
 }

@@ -10,5 +10,6 @@
     "welcome_page_text_3": "The newsfeed reader is totally free, you only have to register.",
     "number_of_recently_fetched_feed_items": "{0}No recently fetched article|{1}One recently fetched article|[2,*]:count recently fetched items",
     "new_items_found": "{0}No new articles found.{1}One new article found.|:count new articles found.",
-    "total_number_of_feeds": "{0}No feeds|{1}One feed|[2,*]:count feeds"
+    "total_number_of_feeds": "{0}No feeds|{1}One feed|[2,*]:count feeds",
+    "total_number_of_categories": "{0}No categories|{1}One category|[2,*]:count categories"
 }
