@@ -28,7 +28,17 @@ class UpdateCategoryRequest extends FormRequest
         return [
             'name' => [
                 'required',
-                Rule::unique('categories', 'name')->where('user_id', Auth::user()->id)->ignore($this->category),
+                'string',
+                Rule::unique('categories', 'name')->where('user_id', optional($this->user())->id)->ignore($this->category),
+            ],
+        ];
+    }
+
+    public function bodyParameters()
+    {
+        return [
+            'name' => [
+                'description' => 'The name of the category.',
             ],
         ];
     }

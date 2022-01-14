@@ -7,6 +7,285 @@ servers:
   -
     url: 'http://localhost:8000'
 paths:
+  /api/categories:
+    get:
+      summary: 'Display a listing of the resource.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                example:
+                  -
+                    id: 1
+                    user_id: 1
+                    name: Technology
+                    created_at: '2021-07-19T16:46:51.000000Z'
+                    updated_at: '2021-08-22T12:26:11.000000Z'
+                    feeds_count: 8
+                  -
+                    id: 2
+                    user_id: 1
+                    name: Poetry
+                    created_at: '2021-07-19T16:46:51.000000Z'
+                    updated_at: '2021-08-22T12:26:11.000000Z'
+                    feeds_count: 3
+      tags:
+        - Categories
+    post:
+      summary: 'Store a newly created resource in storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 3
+                  user_id: 1
+                  name: Blogs
+                  created_at: '2021-07-19T16:46:51.000000Z'
+                  updated_at: '2021-08-22T12:26:11.000000Z'
+                  feeds_count: 0
+                properties:
+                  id:
+                    type: integer
+                    example: 3
+                  user_id:
+                    type: integer
+                    example: 1
+                  name:
+                    type: string
+                    example: Blogs
+                  created_at:
+                    type: string
+                    example: '2021-07-19T16:46:51.000000Z'
+                  updated_at:
+                    type: string
+                    example: '2021-08-22T12:26:11.000000Z'
+                  feeds_count:
+                    type: integer
+                    example: 0
+      tags:
+        - Categories
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'The name of the category.'
+                  example: alias
+              required:
+                - name
+  '/api/categories/{id}':
+    get:
+      summary: 'Display the specified resource.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 1
+                  user_id: 1
+                  name: Technology
+                  created_at: '2021-07-19T16:46:51.000000Z'
+                  updated_at: '2021-08-22T12:26:11.000000Z'
+                  feeds_count: 8
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  user_id:
+                    type: integer
+                    example: 1
+                  name:
+                    type: string
+                    example: Technology
+                  created_at:
+                    type: string
+                    example: '2021-07-19T16:46:51.000000Z'
+                  updated_at:
+                    type: string
+                    example: '2021-08-22T12:26:11.000000Z'
+                  feeds_count:
+                    type: integer
+                    example: 8
+      tags:
+        - Categories
+    delete:
+      summary: 'Remove the specified resource from storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                example: {  }
+                properties: {  }
+      tags:
+        - Categories
+    put:
+      summary: 'Update the specified resource in storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "[{\n \"id\": 1,\n \"user_id\": 1,\n \"name\": \"Tech & IT\",\n \"created_at\": \"2021-07-19T16:46:51.000000Z\",\n \"updated_at\": \"2021-08-23T12:26:11.000000Z\",\n \"feeds_count\": 8\n}"
+      tags:
+        - Categories
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'The name of the category.'
+                  example: qui
+              required:
+                - name
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the category.'
+        example: 8
+        required: true
+        schema:
+          type: integer
   /api/user:
     get:
       summary: 'Retrieve own user'
@@ -78,18 +357,6 @@ paths:
                   profile_photo_url:
                     type: string
                     example: /storage/profile-photos/tQoWDCXYOOOK15OykHUBLnyrTvB76laGnIAwtaj8.jpg
-        401:
-          description: unauthenticated
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  message: Unauthenticated.
-                properties:
-                  message:
-                    type: string
-                    example: Unauthenticated.
       tags:
         - Home
   /api/v1/health_check:
@@ -157,8 +424,11 @@ paths:
       security: []
 tags:
   -
+    name: Categories
+    description: "\nAPI methods for managing categories"
+  -
     name: Home
-    description: "\nAPIs for basic information"
+    description: "\nAPI methods for basic information"
 components:
   securitySchemes:
     default:

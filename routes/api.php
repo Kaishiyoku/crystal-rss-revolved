@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\HomeController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +21,7 @@ Route::prefix('v1')->middleware('api')->group(function () {
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/user', [HomeController::class, 'user']);
+    Route::resource('/categories', CategoryController::class)->except(['create', 'edit']);
 });
 
 Route::fallback(function () {

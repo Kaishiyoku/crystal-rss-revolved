@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 /**
  * @group Home
  *
- * APIs for basic information
+ * API methods for basic information
  */
 class HomeController extends Controller
 {
@@ -21,6 +21,7 @@ class HomeController extends Controller
      *
      * Otherwise, the request will fail with a 400 error, and a response listing the failed services.
      *
+     * @unauthenticated
      * @response 400 scenario="Service is unhealthy" {"status": false, "services": {"database": false}}
      * @responseField status The status of this API (`true` or `false`).
      * @responseField services Map of each downstream service and their status (`true` or `false`).
@@ -52,7 +53,6 @@ class HomeController extends Controller
     /**
      * Retrieve own user
      *
-     * @authenticated
      * @response scenario=success {
      *  "id": 1,
      *  "name": "John Doe",
@@ -64,7 +64,6 @@ class HomeController extends Controller
      *  "updated_at": "2021-08-22T12:26:11.000000Z",
      *  "profile_photo_url": "/storage/profile-photos/tQoWDCXYOOOK15OykHUBLnyrTvB76laGnIAwtaj8.jpg"
      * }
-     * @response status=401 scenario=unauthenticated {"message": "Unauthenticated."}
      *
      * @return \Illuminate\Http\JsonResponse
      */
