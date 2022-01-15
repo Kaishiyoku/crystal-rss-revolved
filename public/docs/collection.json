@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Crystal RSS",
-        "_postman_id": "96655aa4-9c57-41d2-87b1-3cf738669116",
+        "_postman_id": "c391faee-e856-4099-8897-38403a8c1e0c",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -24,9 +24,9 @@
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
-                            "path": "api\/categories",
+                            "path": "api\/v1\/categories",
                             "query": [],
-                            "raw": "{{baseUrl}}\/api\/categories"
+                            "raw": "{{baseUrl}}\/api\/v1\/categories"
                         },
                         "method": "GET",
                         "header": [
@@ -52,18 +52,53 @@
                     ]
                 },
                 {
+                    "name": "Store a newly created resource in storage.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/categories",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/categories"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"voluptas\"}"
+                        },
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n \"id\": 3,\n \"user_id\": 1,\n \"name\": \"Blogs\",\n \"created_at\": \"2021-07-19T16:46:51.000000Z\",\n \"updated_at\": \"2021-08-22T12:26:11.000000Z\",\n \"feeds_count\": 0\n}",
+                            "name": "success"
+                        }
+                    ]
+                },
+                {
                     "name": "Display the specified resource.",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
-                            "path": "api\/categories\/:id",
+                            "path": "api\/v1\/categories\/:id",
                             "query": [],
-                            "raw": "{{baseUrl}}\/api\/categories\/:id",
+                            "raw": "{{baseUrl}}\/api\/v1\/categories\/:id",
                             "variable": [
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "8",
+                                    "value": "6",
                                     "description": "The ID of the category."
                                 }
                             ]
@@ -92,18 +127,61 @@
                     ]
                 },
                 {
-                    "name": "Remove the specified resource from storage.",
+                    "name": "Update the specified resource in storage.",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
-                            "path": "api\/categories\/:id",
+                            "path": "api\/v1\/categories\/:id",
                             "query": [],
-                            "raw": "{{baseUrl}}\/api\/categories\/:id",
+                            "raw": "{{baseUrl}}\/api\/v1\/categories\/:id",
                             "variable": [
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "18",
+                                    "value": "17",
+                                    "description": "The ID of the category."
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"omnis\"}"
+                        },
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "[{\n \"id\": 1,\n \"user_id\": 1,\n \"name\": \"Tech & IT\",\n \"created_at\": \"2021-07-19T16:46:51.000000Z\",\n \"updated_at\": \"2021-08-23T12:26:11.000000Z\",\n \"feeds_count\": 8\n}",
+                            "name": "success"
+                        }
+                    ]
+                },
+                {
+                    "name": "Remove the specified resource from storage.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/categories\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/categories\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "11",
                                     "description": "The ID of the category."
                                 }
                             ]
@@ -130,58 +208,21 @@
                             "name": "success"
                         }
                     ]
-                },
+                }
+            ]
+        },
+        {
+            "name": "Feeds",
+            "description": "\nAPI methods for managing feeds",
+            "item": [
                 {
-                    "name": "Store a newly created resource in storage.",
+                    "name": "Mark all unread feed items as read.",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
-                            "path": "api\/categories",
+                            "path": "api\/v1\/feeds\/mark_all_as_read",
                             "query": [],
-                            "raw": "{{baseUrl}}\/api\/categories"
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\"name\":\"alias\"}"
-                        },
-                        "description": ""
-                    },
-                    "response": [
-                        {
-                            "header": [],
-                            "code": 200,
-                            "body": "{\n \"id\": 3,\n \"user_id\": 1,\n \"name\": \"Blogs\",\n \"created_at\": \"2021-07-19T16:46:51.000000Z\",\n \"updated_at\": \"2021-08-22T12:26:11.000000Z\",\n \"feeds_count\": 0\n}",
-                            "name": "success"
-                        }
-                    ]
-                },
-                {
-                    "name": "Update the specified resource in storage.",
-                    "request": {
-                        "url": {
-                            "host": "{{baseUrl}}",
-                            "path": "api\/categories\/:id",
-                            "query": [],
-                            "raw": "{{baseUrl}}\/api\/categories\/:id",
-                            "variable": [
-                                {
-                                    "id": "id",
-                                    "key": "id",
-                                    "value": "19",
-                                    "description": "The ID of the category."
-                                }
-                            ]
+                            "raw": "{{baseUrl}}\/api\/v1\/feeds\/mark_all_as_read"
                         },
                         "method": "PUT",
                         "header": [
@@ -194,35 +235,26 @@
                                 "value": "application\/json"
                             }
                         ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\"name\":\"qui\"}"
-                        },
+                        "body": null,
                         "description": ""
                     },
                     "response": [
                         {
                             "header": [],
                             "code": 200,
-                            "body": "[{\n \"id\": 1,\n \"user_id\": 1,\n \"name\": \"Tech & IT\",\n \"created_at\": \"2021-07-19T16:46:51.000000Z\",\n \"updated_at\": \"2021-08-23T12:26:11.000000Z\",\n \"feeds_count\": 8\n}",
+                            "body": "{}",
                             "name": "success"
                         }
                     ]
-                }
-            ]
-        },
-        {
-            "name": "Home",
-            "description": "\nAPI methods for basic information",
-            "item": [
+                },
                 {
-                    "name": "Retrieve own user",
+                    "name": "Display a listing of the resource.",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
-                            "path": "api\/user",
+                            "path": "api\/v1\/feeds",
                             "query": [],
-                            "raw": "{{baseUrl}}\/api\/user"
+                            "raw": "{{baseUrl}}\/api\/v1\/feeds"
                         },
                         "method": "GET",
                         "header": [
@@ -242,11 +274,175 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\n \"id\": 1,\n \"name\": \"John Doe\",\n \"email\": \"john_doe@test.com\",\n \"email_verified_at\": \"2021-07-19T16:52:07.000000Z\",\n \"current_team_id\": null,\n \"profile_photo_path\": \"profile-photos\/tQoWDCXYOOOK15OykHUBLnyrTvB76laGnIAwtaj8.jpg\",\n \"created_at\": \"2021-07-19T16:46:51.000000Z\",\n \"updated_at\": \"2021-08-22T12:26:11.000000Z\",\n \"profile_photo_url\": \"\/storage\/profile-photos\/tQoWDCXYOOOK15OykHUBLnyrTvB76laGnIAwtaj8.jpg\"\n}",
+                            "body": "[{\n \"id\": 1,\n \"user_id\": 1,\n \"category_id\": 1,\n \"feed_url\": \"http:\/\/www.example.com\/feed\",\n \"site_url\": \"http:\/\/www.example.com\",\n \"favicon_url\": \"http:\/\/www.example.com\/favicon.ico\",\n \"name\": \"Example feed\",\n \"last_checked_at\": \"2022-01-12T21:18:15.000000Z\",\n \"created_at\": \"2021-07-19T16:46:51.000000Z\",\n \"updated_at\": \"2021-08-22T12:26:11.000000Z\",\n \"feed_items_count\": 7,\n \"category\": {\n  \"id\": 1,\n  \"user_id\": 1,\n  \"name\": \"Example category\",\n  \"created_at\": \"2021-09-23T19:11:01.000000Z\",\n  \"updated_at\": \"2021-09-23T19:11:01.000000Z\"\n }\n},\n{\n \"id\": 1,\n \"user_id\": 1,\n \"category_id\": 2,\n \"feed_url\": \"http:\/\/www.example.com\/feed\",\n \"site_url\": \"http:\/\/www.example.com\",\n \"favicon_url\": \"http:\/\/www.example.com\/favicon.ico\",\n \"name\": \"Example feed\",\n \"last_checked_at\": \"2022-01-12T21:18:15.000000Z\",\n \"created_at\": \"2021-07-19T16:46:51.000000Z\",\n \"updated_at\": \"2021-08-22T12:26:11.000000Z\",\n \"feed_items_count\": 7,\n \"category\": {\n  \"id\": 1,\n  \"user_id\": 1,\n  \"name\": \"Example category\",\n  \"created_at\": \"2021-09-23T19:11:01.000000Z\",\n  \"updated_at\": \"2021-09-23T19:11:01.000000Z\"\n }\n}]",
                             "name": "success"
                         }
                     ]
                 },
+                {
+                    "name": "Store a newly created resource in storage.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/feeds",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/feeds"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"category_id\":1,\"feed_url\":\"voluptas\",\"site_url\":\"magni\",\"name\":\"harum\"}"
+                        },
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n \"id\": 1,\n \"user_id\": 1,\n \"category_id\": 1,\n \"feed_url\": \"http:\/\/www.example.com\/feed\",\n \"site_url\": \"http:\/\/www.example.com\",\n \"favicon_url\": \"http:\/\/www.example.com\/favicon.ico\",\n \"name\": \"Example feed\",\n \"last_checked_at\": \"2022-01-12T21:18:15.000000Z\",\n \"created_at\": \"2021-07-19T16:46:51.000000Z\",\n \"updated_at\": \"2021-08-22T12:26:11.000000Z\",\n \"feed_items_count\": 7,\n \"category\": {\n  \"id\": 1,\n  \"user_id\": 1,\n  \"name\": \"Example category\",\n  \"created_at\": \"2021-09-23T19:11:01.000000Z\",\n  \"updated_at\": \"2021-09-23T19:11:01.000000Z\"\n }\n}",
+                            "name": "success"
+                        }
+                    ]
+                },
+                {
+                    "name": "Display the specified resource.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/feeds\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/feeds\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "19",
+                                    "description": "The ID of the feed."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n \"id\": 1,\n \"user_id\": 1,\n \"category_id\": 1,\n \"feed_url\": \"http:\/\/www.example.com\/feed\",\n \"site_url\": \"http:\/\/www.example.com\",\n \"favicon_url\": \"http:\/\/www.example.com\/favicon.ico\",\n \"name\": \"Example feed\",\n \"last_checked_at\": \"2022-01-12T21:18:15.000000Z\",\n \"created_at\": \"2021-07-19T16:46:51.000000Z\",\n \"updated_at\": \"2021-08-22T12:26:11.000000Z\",\n \"feed_items_count\": 7,\n \"category\": {\n  \"id\": 1,\n  \"user_id\": 1,\n  \"name\": \"Example category\",\n  \"created_at\": \"2021-09-23T19:11:01.000000Z\",\n  \"updated_at\": \"2021-09-23T19:11:01.000000Z\"\n }\n}",
+                            "name": "success"
+                        }
+                    ]
+                },
+                {
+                    "name": "Update the specified resource in storage.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/feeds\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/feeds\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "6",
+                                    "description": "The ID of the feed."
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"category_id\":17,\"feed_url\":\"rerum\",\"site_url\":\"a\",\"name\":\"quo\"}"
+                        },
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "[{\n \"id\": 1,\n \"user_id\": 1,\n \"category_id\": 1,\n \"feed_url\": \"http:\/\/www.example.com\/feed\",\n \"site_url\": \"http:\/\/www.example.com\",\n \"favicon_url\": \"http:\/\/www.example.com\/favicon.ico\",\n \"name\": \"Example feed\",\n \"last_checked_at\": \"2022-01-12T21:18:15.000000Z\",\n \"created_at\": \"2021-07-19T16:46:51.000000Z\",\n \"updated_at\": \"2021-08-22T12:26:11.000000Z\",\n \"feed_items_count\": 7,\n \"category\": {\n  \"id\": 1,\n  \"user_id\": 1,\n  \"name\": \"Example category\",\n  \"created_at\": \"2021-09-23T19:11:01.000000Z\",\n  \"updated_at\": \"2021-09-23T19:11:01.000000Z\"\n }\n}",
+                            "name": "success"
+                        }
+                    ]
+                },
+                {
+                    "name": "Remove the specified resource from storage.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/feeds\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/feeds\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "4",
+                                    "description": "The ID of the feed."
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{}",
+                            "name": "success"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Home",
+            "description": "\nAPI methods for basic information",
+            "item": [
                 {
                     "name": "Healthcheck",
                     "request": {
@@ -296,7 +492,7 @@
                                 },
                                 {
                                     "key": "x-ratelimit-remaining",
-                                    "value": "58"
+                                    "value": "59"
                                 },
                                 {
                                     "key": "access-control-allow-origin",
@@ -306,6 +502,38 @@
                             "code": 200,
                             "body": "{\"status\":true,\"services\":{\"database\":true}}",
                             "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Retrieve own user",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/user",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/user"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n \"id\": 1,\n \"name\": \"John Doe\",\n \"email\": \"john_doe@test.com\",\n \"email_verified_at\": \"2021-07-19T16:52:07.000000Z\",\n \"current_team_id\": null,\n \"profile_photo_path\": \"profile-photos\/tQoWDCXYOOOK15OykHUBLnyrTvB76laGnIAwtaj8.jpg\",\n \"created_at\": \"2021-07-19T16:46:51.000000Z\",\n \"updated_at\": \"2021-08-22T12:26:11.000000Z\",\n \"profile_photo_url\": \"\/storage\/profile-photos\/tQoWDCXYOOOK15OykHUBLnyrTvB76laGnIAwtaj8.jpg\"\n}",
+                            "name": "success"
                         }
                     ]
                 }

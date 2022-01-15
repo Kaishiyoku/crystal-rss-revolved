@@ -17,9 +17,6 @@ class FeedController extends Controller
      */
     private $heraRssCrawler;
 
-    /**
-     * FeedController constructor.
-     */
     public function __construct()
     {
         $this->heraRssCrawler = new HeraRssCrawler();

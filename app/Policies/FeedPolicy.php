@@ -30,7 +30,7 @@ class FeedPolicy
      */
     public function view(User $user, Feed $feed)
     {
-        //
+        return $user->id === $feed->user_id;
     }
 
     /**

@@ -7,7 +7,7 @@ servers:
   -
     url: 'http://localhost:8000'
 paths:
-  /api/categories:
+  /api/v1/categories:
     get:
       summary: 'Display a listing of the resource.'
       description: ''
@@ -129,10 +129,10 @@ paths:
                 name:
                   type: string
                   description: 'The name of the category.'
-                  example: alias
+                  example: voluptas
               required:
                 - name
-  '/api/categories/{id}':
+  '/api/v1/categories/{id}':
     get:
       summary: 'Display the specified resource.'
       description: ''
@@ -193,42 +193,6 @@ paths:
                     example: 8
       tags:
         - Categories
-    delete:
-      summary: 'Remove the specified resource from storage.'
-      description: ''
-      parameters:
-        -
-          in: header
-          name: Authorization
-          description: ''
-          example: 'Bearer {YOUR_AUTH_KEY}'
-          schema:
-            type: string
-        -
-          in: header
-          name: Content-Type
-          description: ''
-          example: application/json
-          schema:
-            type: string
-        -
-          in: header
-          name: Accept
-          description: ''
-          example: application/json
-          schema:
-            type: string
-      responses:
-        200:
-          description: success
-          content:
-            application/json:
-              schema:
-                type: object
-                example: {  }
-                properties: {  }
-      tags:
-        - Categories
     put:
       summary: 'Update the specified resource in storage.'
       description: ''
@@ -274,19 +238,554 @@ paths:
                 name:
                   type: string
                   description: 'The name of the category.'
-                  example: qui
+                  example: omnis
               required:
                 - name
+    delete:
+      summary: 'Remove the specified resource from storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                example: {  }
+                properties: {  }
+      tags:
+        - Categories
     parameters:
       -
         in: path
         name: id
         description: 'The ID of the category.'
-        example: 8
+        example: 6
         required: true
         schema:
           type: integer
-  /api/user:
+  /api/v1/feeds/mark_all_as_read:
+    put:
+      summary: 'Mark all unread feed items as read.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                example: {  }
+                properties: {  }
+      tags:
+        - Feeds
+  /api/v1/feeds:
+    get:
+      summary: 'Display a listing of the resource.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                example:
+                  -
+                    id: 1
+                    user_id: 1
+                    category_id: 1
+                    feed_url: 'http://www.example.com/feed'
+                    site_url: 'http://www.example.com'
+                    favicon_url: 'http://www.example.com/favicon.ico'
+                    name: 'Example feed'
+                    last_checked_at: '2022-01-12T21:18:15.000000Z'
+                    created_at: '2021-07-19T16:46:51.000000Z'
+                    updated_at: '2021-08-22T12:26:11.000000Z'
+                    feed_items_count: 7
+                    category:
+                      id: 1
+                      user_id: 1
+                      name: 'Example category'
+                      created_at: '2021-09-23T19:11:01.000000Z'
+                      updated_at: '2021-09-23T19:11:01.000000Z'
+                  -
+                    id: 1
+                    user_id: 1
+                    category_id: 2
+                    feed_url: 'http://www.example.com/feed'
+                    site_url: 'http://www.example.com'
+                    favicon_url: 'http://www.example.com/favicon.ico'
+                    name: 'Example feed'
+                    last_checked_at: '2022-01-12T21:18:15.000000Z'
+                    created_at: '2021-07-19T16:46:51.000000Z'
+                    updated_at: '2021-08-22T12:26:11.000000Z'
+                    feed_items_count: 7
+                    category:
+                      id: 1
+                      user_id: 1
+                      name: 'Example category'
+                      created_at: '2021-09-23T19:11:01.000000Z'
+                      updated_at: '2021-09-23T19:11:01.000000Z'
+      tags:
+        - Feeds
+    post:
+      summary: 'Store a newly created resource in storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 1
+                  user_id: 1
+                  category_id: 1
+                  feed_url: 'http://www.example.com/feed'
+                  site_url: 'http://www.example.com'
+                  favicon_url: 'http://www.example.com/favicon.ico'
+                  name: 'Example feed'
+                  last_checked_at: '2022-01-12T21:18:15.000000Z'
+                  created_at: '2021-07-19T16:46:51.000000Z'
+                  updated_at: '2021-08-22T12:26:11.000000Z'
+                  feed_items_count: 7
+                  category:
+                    id: 1
+                    user_id: 1
+                    name: 'Example category'
+                    created_at: '2021-09-23T19:11:01.000000Z'
+                    updated_at: '2021-09-23T19:11:01.000000Z'
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  user_id:
+                    type: integer
+                    example: 1
+                  category_id:
+                    type: integer
+                    example: 1
+                  feed_url:
+                    type: string
+                    example: 'http://www.example.com/feed'
+                  site_url:
+                    type: string
+                    example: 'http://www.example.com'
+                  favicon_url:
+                    type: string
+                    example: 'http://www.example.com/favicon.ico'
+                  name:
+                    type: string
+                    example: 'Example feed'
+                  last_checked_at:
+                    type: string
+                    example: '2022-01-12T21:18:15.000000Z'
+                  created_at:
+                    type: string
+                    example: '2021-07-19T16:46:51.000000Z'
+                  updated_at:
+                    type: string
+                    example: '2021-08-22T12:26:11.000000Z'
+                  feed_items_count:
+                    type: integer
+                    example: 7
+                  category:
+                    type: object
+                    example:
+                      id: 1
+                      user_id: 1
+                      name: 'Example category'
+                      created_at: '2021-09-23T19:11:01.000000Z'
+                      updated_at: '2021-09-23T19:11:01.000000Z'
+      tags:
+        - Feeds
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                category_id:
+                  type: integer
+                  description: 'The ID of the category.'
+                  example: 1
+                feed_url:
+                  type: string
+                  description: 'The URL of the feed.'
+                  example: voluptas
+                site_url:
+                  type: string
+                  description: 'The URL of the website.'
+                  example: magni
+                name:
+                  type: string
+                  description: 'THe name of the feed.'
+                  example: harum
+              required:
+                - category_id
+                - feed_url
+                - site_url
+                - name
+  '/api/v1/feeds/{id}':
+    get:
+      summary: 'Display the specified resource.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 1
+                  user_id: 1
+                  category_id: 1
+                  feed_url: 'http://www.example.com/feed'
+                  site_url: 'http://www.example.com'
+                  favicon_url: 'http://www.example.com/favicon.ico'
+                  name: 'Example feed'
+                  last_checked_at: '2022-01-12T21:18:15.000000Z'
+                  created_at: '2021-07-19T16:46:51.000000Z'
+                  updated_at: '2021-08-22T12:26:11.000000Z'
+                  feed_items_count: 7
+                  category:
+                    id: 1
+                    user_id: 1
+                    name: 'Example category'
+                    created_at: '2021-09-23T19:11:01.000000Z'
+                    updated_at: '2021-09-23T19:11:01.000000Z'
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  user_id:
+                    type: integer
+                    example: 1
+                  category_id:
+                    type: integer
+                    example: 1
+                  feed_url:
+                    type: string
+                    example: 'http://www.example.com/feed'
+                  site_url:
+                    type: string
+                    example: 'http://www.example.com'
+                  favicon_url:
+                    type: string
+                    example: 'http://www.example.com/favicon.ico'
+                  name:
+                    type: string
+                    example: 'Example feed'
+                  last_checked_at:
+                    type: string
+                    example: '2022-01-12T21:18:15.000000Z'
+                  created_at:
+                    type: string
+                    example: '2021-07-19T16:46:51.000000Z'
+                  updated_at:
+                    type: string
+                    example: '2021-08-22T12:26:11.000000Z'
+                  feed_items_count:
+                    type: integer
+                    example: 7
+                  category:
+                    type: object
+                    example:
+                      id: 1
+                      user_id: 1
+                      name: 'Example category'
+                      created_at: '2021-09-23T19:11:01.000000Z'
+                      updated_at: '2021-09-23T19:11:01.000000Z'
+      tags:
+        - Feeds
+    put:
+      summary: 'Update the specified resource in storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "[{\n \"id\": 1,\n \"user_id\": 1,\n \"category_id\": 1,\n \"feed_url\": \"http://www.example.com/feed\",\n \"site_url\": \"http://www.example.com\",\n \"favicon_url\": \"http://www.example.com/favicon.ico\",\n \"name\": \"Example feed\",\n \"last_checked_at\": \"2022-01-12T21:18:15.000000Z\",\n \"created_at\": \"2021-07-19T16:46:51.000000Z\",\n \"updated_at\": \"2021-08-22T12:26:11.000000Z\",\n \"feed_items_count\": 7,\n \"category\": {\n  \"id\": 1,\n  \"user_id\": 1,\n  \"name\": \"Example category\",\n  \"created_at\": \"2021-09-23T19:11:01.000000Z\",\n  \"updated_at\": \"2021-09-23T19:11:01.000000Z\"\n }\n}"
+      tags:
+        - Feeds
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                category_id:
+                  type: integer
+                  description: 'The ID of the category.'
+                  example: 17
+                feed_url:
+                  type: string
+                  description: 'The URL of the feed.'
+                  example: rerum
+                site_url:
+                  type: string
+                  description: 'The URL of the website.'
+                  example: a
+                name:
+                  type: string
+                  description: 'THe name of the feed.'
+                  example: quo
+              required:
+                - category_id
+                - feed_url
+                - site_url
+                - name
+    delete:
+      summary: 'Remove the specified resource from storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                example: {  }
+                properties: {  }
+      tags:
+        - Feeds
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the feed.'
+        example: 19
+        required: true
+        schema:
+          type: integer
+  /api/v1/health_check:
+    get:
+      summary: Healthcheck
+      description: "Check that the service is up. If everything is okay, you'll get a 200 OK response.\n\nOtherwise, the request will fail with a 400 error, and a response listing the failed services."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        400:
+          description: 'Service is unhealthy'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  services:
+                    database: false
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                    description: 'The status of this API (`true` or `false`).'
+                  services:
+                    type: object
+                    example:
+                      database: false
+                    description: 'Map of each downstream service and their status (`true` or `false`).'
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: true
+                  services:
+                    database: true
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                    description: 'The status of this API (`true` or `false`).'
+                  services:
+                    type: object
+                    example:
+                      database: true
+                    description: 'Map of each downstream service and their status (`true` or `false`).'
+      tags:
+        - Home
+      security: []
+  /api/v1/user:
     get:
       summary: 'Retrieve own user'
       description: ''
@@ -359,73 +858,13 @@ paths:
                     example: /storage/profile-photos/tQoWDCXYOOOK15OykHUBLnyrTvB76laGnIAwtaj8.jpg
       tags:
         - Home
-  /api/v1/health_check:
-    get:
-      summary: Healthcheck
-      description: "Check that the service is up. If everything is okay, you'll get a 200 OK response.\n\nOtherwise, the request will fail with a 400 error, and a response listing the failed services."
-      parameters:
-        -
-          in: header
-          name: Content-Type
-          description: ''
-          example: application/json
-          schema:
-            type: string
-        -
-          in: header
-          name: Accept
-          description: ''
-          example: application/json
-          schema:
-            type: string
-      responses:
-        400:
-          description: 'Service is unhealthy'
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  status: false
-                  services:
-                    database: false
-                properties:
-                  status:
-                    type: boolean
-                    example: false
-                    description: 'The status of this API (`true` or `false`).'
-                  services:
-                    type: object
-                    example:
-                      database: false
-                    description: 'Map of each downstream service and their status (`true` or `false`).'
-        200:
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  status: true
-                  services:
-                    database: true
-                properties:
-                  status:
-                    type: boolean
-                    example: true
-                    description: 'The status of this API (`true` or `false`).'
-                  services:
-                    type: object
-                    example:
-                      database: true
-                    description: 'Map of each downstream service and their status (`true` or `false`).'
-      tags:
-        - Home
-      security: []
 tags:
   -
     name: Categories
     description: "\nAPI methods for managing categories"
+  -
+    name: Feeds
+    description: "\nAPI methods for managing feeds"
   -
     name: Home
     description: "\nAPI methods for basic information"

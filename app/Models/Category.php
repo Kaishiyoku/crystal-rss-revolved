@@ -82,9 +82,12 @@ class Category extends Model
      */
     public static function getAvailableOptions()
     {
-        return Auth::user()->categories()
-            ->orderBy('name')
-            ->get(['id', 'name'])
-            ->mapWithKeys(fn(self $category) => [$category->id => $category->getName()]); // @phpstan-ignore-line
+        return optional(Auth::user(), function (User $user) {
+            return $user
+                ->categories()
+                ->orderBy('name')
+                ->get(['id', 'name'])
+                ->mapWithKeys(fn(self $category) => [$category->id => $category->getName()]); // @phpstan-ignore-line
+        });
     }
 }
