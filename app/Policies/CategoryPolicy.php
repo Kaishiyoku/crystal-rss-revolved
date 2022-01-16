@@ -18,7 +18,7 @@ class CategoryPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return $user->tokenCan('category:read');
     }
 
     /**

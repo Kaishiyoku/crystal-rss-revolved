@@ -39,6 +39,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny', Category::class);
+
         return response()->json(Auth::user()->categories()->withCount('feeds')->orderBy('name')->get());
     }
 

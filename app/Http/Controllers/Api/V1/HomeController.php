@@ -8,7 +8,7 @@ use Exception;
 use Illuminate\Http\Request;
 
 /**
- * @group Home
+ * @group Miscellaneous
  *
  * API methods for basic information
  */
@@ -69,6 +69,10 @@ class HomeController extends Controller
      */
     public function user(Request $request)
     {
+        if (!$request->user()->tokenCan('user:read')) {
+            abort(403, 'This action is unauthorized.');
+        }
+
         return $request->user();
     }
 }

@@ -111,28 +111,28 @@ endpoints:
         name: category_id
         description: 'The ID of the category.'
         required: true
-        example: 1
+        example: 12
         type: integer
         custom: []
       feed_url:
         name: feed_url
         description: 'The URL of the feed.'
         required: true
-        example: voluptas
+        example: explicabo
         type: string
         custom: []
       site_url:
         name: site_url
         description: 'The URL of the website.'
         required: true
-        example: magni
+        example: et
         type: string
         custom: []
       name:
         name: name
         description: 'THe name of the feed.'
         required: true
-        example: harum
+        example: pariatur
         type: string
         custom: []
     responses:
@@ -180,7 +180,7 @@ endpoints:
         name: id
         description: 'The ID of the feed.'
         required: true
-        example: 19
+        example: 2
         type: integer
         custom: []
     queryParameters: []
@@ -231,7 +231,7 @@ endpoints:
         name: id
         description: 'The ID of the feed.'
         required: true
-        example: 6
+        example: 3
         type: integer
         custom: []
     queryParameters: []
@@ -240,28 +240,28 @@ endpoints:
         name: category_id
         description: 'The ID of the category.'
         required: true
-        example: 17
+        example: 12
         type: integer
         custom: []
       feed_url:
         name: feed_url
         description: 'The URL of the feed.'
         required: true
-        example: rerum
+        example: quia
         type: string
         custom: []
       site_url:
         name: site_url
         description: 'The URL of the website.'
         required: true
-        example: a
+        example: ex
         type: string
         custom: []
       name:
         name: name
         description: 'THe name of the feed.'
         required: true
-        example: quo
+        example: quos
         type: string
         custom: []
     responses:
@@ -309,7 +309,7 @@ endpoints:
         name: id
         description: 'The ID of the feed.'
         required: true
-        example: 4
+        example: 18
         type: integer
         custom: []
     queryParameters: []

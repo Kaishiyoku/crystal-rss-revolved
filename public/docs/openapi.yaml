@@ -7,6 +7,142 @@ servers:
   -
     url: 'http://localhost:8000'
 paths:
+  /api/v1/health_check:
+    get:
+      summary: Healthcheck
+      description: "Check that the service is up. If everything is okay, you'll get a 200 OK response.\n\nOtherwise, the request will fail with a 400 error, and a response listing the failed services."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        400:
+          description: 'Service is unhealthy'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: false
+                  services:
+                    database: false
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                    description: 'The status of this API (`true` or `false`).'
+                  services:
+                    type: object
+                    example:
+                      database: false
+                    description: 'Map of each downstream service and their status (`true` or `false`).'
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: true
+                  services:
+                    database: true
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                    description: 'The status of this API (`true` or `false`).'
+                  services:
+                    type: object
+                    example:
+                      database: true
+                    description: 'Map of each downstream service and their status (`true` or `false`).'
+      tags:
+        - Miscellaneous
+      security: []
+  /api/v1/user:
+    get:
+      summary: 'Retrieve own user'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 1
+                  name: 'John Doe'
+                  email: john_doe@test.com
+                  email_verified_at: '2021-07-19T16:52:07.000000Z'
+                  current_team_id: null
+                  profile_photo_path: profile-photos/tQoWDCXYOOOK15OykHUBLnyrTvB76laGnIAwtaj8.jpg
+                  created_at: '2021-07-19T16:46:51.000000Z'
+                  updated_at: '2021-08-22T12:26:11.000000Z'
+                  profile_photo_url: /storage/profile-photos/tQoWDCXYOOOK15OykHUBLnyrTvB76laGnIAwtaj8.jpg
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  name:
+                    type: string
+                    example: 'John Doe'
+                  email:
+                    type: string
+                    example: john_doe@test.com
+                  email_verified_at:
+                    type: string
+                    example: '2021-07-19T16:52:07.000000Z'
+                  current_team_id:
+                    type: string
+                    example: null
+                  profile_photo_path:
+                    type: string
+                    example: profile-photos/tQoWDCXYOOOK15OykHUBLnyrTvB76laGnIAwtaj8.jpg
+                  created_at:
+                    type: string
+                    example: '2021-07-19T16:46:51.000000Z'
+                  updated_at:
+                    type: string
+                    example: '2021-08-22T12:26:11.000000Z'
+                  profile_photo_url:
+                    type: string
+                    example: /storage/profile-photos/tQoWDCXYOOOK15OykHUBLnyrTvB76laGnIAwtaj8.jpg
+      tags:
+        - Miscellaneous
   /api/v1/categories:
     get:
       summary: 'Display a listing of the resource.'
@@ -129,7 +265,7 @@ paths:
                 name:
                   type: string
                   description: 'The name of the category.'
-                  example: voluptas
+                  example: debitis
               required:
                 - name
   '/api/v1/categories/{id}':
@@ -238,7 +374,7 @@ paths:
                 name:
                   type: string
                   description: 'The name of the category.'
-                  example: omnis
+                  example: id
               required:
                 - name
     delete:
@@ -282,7 +418,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the category.'
-        example: 6
+        example: 15
         required: true
         schema:
           type: integer
@@ -501,19 +637,19 @@ paths:
                 category_id:
                   type: integer
                   description: 'The ID of the category.'
-                  example: 1
+                  example: 12
                 feed_url:
                   type: string
                   description: 'The URL of the feed.'
-                  example: voluptas
+                  example: explicabo
                 site_url:
                   type: string
                   description: 'The URL of the website.'
-                  example: magni
+                  example: et
                 name:
                   type: string
                   description: 'THe name of the feed.'
-                  example: harum
+                  example: pariatur
               required:
                 - category_id
                 - feed_url
@@ -659,19 +795,19 @@ paths:
                 category_id:
                   type: integer
                   description: 'The ID of the category.'
-                  example: 17
+                  example: 12
                 feed_url:
                   type: string
                   description: 'The URL of the feed.'
-                  example: rerum
+                  example: quia
                 site_url:
                   type: string
                   description: 'The URL of the website.'
-                  example: a
+                  example: ex
                 name:
                   type: string
                   description: 'THe name of the feed.'
-                  example: quo
+                  example: quos
               required:
                 - category_id
                 - feed_url
@@ -718,156 +854,20 @@ paths:
         in: path
         name: id
         description: 'The ID of the feed.'
-        example: 19
+        example: 2
         required: true
         schema:
           type: integer
-  /api/v1/health_check:
-    get:
-      summary: Healthcheck
-      description: "Check that the service is up. If everything is okay, you'll get a 200 OK response.\n\nOtherwise, the request will fail with a 400 error, and a response listing the failed services."
-      parameters:
-        -
-          in: header
-          name: Content-Type
-          description: ''
-          example: application/json
-          schema:
-            type: string
-        -
-          in: header
-          name: Accept
-          description: ''
-          example: application/json
-          schema:
-            type: string
-      responses:
-        400:
-          description: 'Service is unhealthy'
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  status: false
-                  services:
-                    database: false
-                properties:
-                  status:
-                    type: boolean
-                    example: false
-                    description: 'The status of this API (`true` or `false`).'
-                  services:
-                    type: object
-                    example:
-                      database: false
-                    description: 'Map of each downstream service and their status (`true` or `false`).'
-        200:
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  status: true
-                  services:
-                    database: true
-                properties:
-                  status:
-                    type: boolean
-                    example: true
-                    description: 'The status of this API (`true` or `false`).'
-                  services:
-                    type: object
-                    example:
-                      database: true
-                    description: 'Map of each downstream service and their status (`true` or `false`).'
-      tags:
-        - Home
-      security: []
-  /api/v1/user:
-    get:
-      summary: 'Retrieve own user'
-      description: ''
-      parameters:
-        -
-          in: header
-          name: Authorization
-          description: ''
-          example: 'Bearer {YOUR_AUTH_KEY}'
-          schema:
-            type: string
-        -
-          in: header
-          name: Content-Type
-          description: ''
-          example: application/json
-          schema:
-            type: string
-        -
-          in: header
-          name: Accept
-          description: ''
-          example: application/json
-          schema:
-            type: string
-      responses:
-        200:
-          description: success
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  id: 1
-                  name: 'John Doe'
-                  email: john_doe@test.com
-                  email_verified_at: '2021-07-19T16:52:07.000000Z'
-                  current_team_id: null
-                  profile_photo_path: profile-photos/tQoWDCXYOOOK15OykHUBLnyrTvB76laGnIAwtaj8.jpg
-                  created_at: '2021-07-19T16:46:51.000000Z'
-                  updated_at: '2021-08-22T12:26:11.000000Z'
-                  profile_photo_url: /storage/profile-photos/tQoWDCXYOOOK15OykHUBLnyrTvB76laGnIAwtaj8.jpg
-                properties:
-                  id:
-                    type: integer
-                    example: 1
-                  name:
-                    type: string
-                    example: 'John Doe'
-                  email:
-                    type: string
-                    example: john_doe@test.com
-                  email_verified_at:
-                    type: string
-                    example: '2021-07-19T16:52:07.000000Z'
-                  current_team_id:
-                    type: string
-                    example: null
-                  profile_photo_path:
-                    type: string
-                    example: profile-photos/tQoWDCXYOOOK15OykHUBLnyrTvB76laGnIAwtaj8.jpg
-                  created_at:
-                    type: string
-                    example: '2021-07-19T16:46:51.000000Z'
-                  updated_at:
-                    type: string
-                    example: '2021-08-22T12:26:11.000000Z'
-                  profile_photo_url:
-                    type: string
-                    example: /storage/profile-photos/tQoWDCXYOOOK15OykHUBLnyrTvB76laGnIAwtaj8.jpg
-      tags:
-        - Home
 tags:
+  -
+    name: Miscellaneous
+    description: "\nAPI methods for basic information"
   -
     name: Categories
     description: "\nAPI methods for managing categories"
   -
     name: Feeds
     description: "\nAPI methods for managing feeds"
-  -
-    name: Home
-    description: "\nAPI methods for basic information"
 components:
   securitySchemes:
     default:
