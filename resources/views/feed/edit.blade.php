@@ -22,6 +22,6 @@
     {{ html()->modelForm($feed, 'put', route('feeds.update', $feed))->class('px-4 sm:px-0')->open() }}
         @include('feed._form_fields')
 
-        <x-button>{{ __('Save') }}</x-button>
+        <x-jet-button>{{ __('Save') }}</x-jet-button>
     {{ html()->closeModelForm() }}
 </x-app-layout>

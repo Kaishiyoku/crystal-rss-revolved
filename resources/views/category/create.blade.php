@@ -12,6 +12,6 @@
     {{ html()->modelForm($category, 'post', route('categories.store'))->class('px-4 sm:px-0')->open() }}
         @include('category._form_fields')
 
-        <x-button>{{ __('Save') }}</x-button>
+        <x-jet-button>{{ __('Save') }}</x-jet-button>
     {{ html()->closeModelForm() }}
 </x-app-layout>
