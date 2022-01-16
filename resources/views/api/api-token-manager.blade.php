@@ -7,6 +7,10 @@
 
         <x-slot name="description">
             {{ __('API tokens allow third-party services to authenticate with our application on your behalf.') }}
+
+            <x-link href="{{ url('/docs') }}" class="inline-block mt-5">
+                {{ __('API documentation') }}
+            </x-link>
         </x-slot>
 
         <x-slot name="form">

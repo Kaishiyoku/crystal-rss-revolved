@@ -742,5 +742,6 @@
     "new_items_found": "{0}Keine neuen Artikel gefunden.|{1}Einen neuen Artikel gefunden.|:count neue Artikel gefunden.",
     "Refresh now": "Jetzt aktualisieren",
     "total_number_of_feeds": "{0}Keine Feeds|{1}Ein Feed|[2,*]:count Feeds",
-    "total_number_of_categories": "{0}Keine Kategorien|{1}Eine Kategorie|[2,*]:count Kategorien"
+    "total_number_of_categories": "{0}Keine Kategorien|{1}Eine Kategorie|[2,*]:count Kategorien",
+    "API documentation": "API-Dokumentation"
 }

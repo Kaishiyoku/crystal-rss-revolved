@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\DocumentationV1Controller;
 use App\Http\Controllers\FeedController;
 use App\Http\Controllers\FeedItemController;
 use App\Http\Controllers\HomeController;
