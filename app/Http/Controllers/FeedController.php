@@ -63,6 +63,8 @@ class FeedController extends Controller
      */
     public function store(StoreFeedRequest $request)
     {
+        $this->authorize('create', Feed::class);
+
         $validated = $request->validated();
 
         $faviconUrl = $this->heraRssCrawler->discoverFavicon(Arr::get($validated, 'site_url'));

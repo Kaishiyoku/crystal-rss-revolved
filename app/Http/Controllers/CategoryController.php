@@ -43,6 +43,8 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
+        $this->authorize('create', Category::class);
+
         Auth::user()->categories()->save(new Category($request->validated()));
 
         return redirect()->route('categories.index');

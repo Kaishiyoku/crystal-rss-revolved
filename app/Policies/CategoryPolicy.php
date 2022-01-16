@@ -30,7 +30,7 @@ class CategoryPolicy
      */
     public function view(User $user, Category $category)
     {
-        return $user->id === $category->user_id;
+        return $user->id === $category->user_id && $user->tokenCan('category:read');
     }
 
     /**
@@ -41,7 +41,7 @@ class CategoryPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->tokenCan('category:create');
     }
 
     /**
@@ -53,7 +53,7 @@ class CategoryPolicy
      */
     public function update(User $user, Category $category)
     {
-        return $user->id === $category->user_id;
+        return $user->id === $category->user_id && $user->tokenCan('category:update');
     }
 
     /**
@@ -65,7 +65,7 @@ class CategoryPolicy
      */
     public function delete(User $user, Category $category)
     {
-        return $user->id === $category->user_id;
+        return $user->id === $category->user_id && $user->tokenCan('category:delete');
     }
 
     /**

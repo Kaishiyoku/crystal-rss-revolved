@@ -23,7 +23,7 @@ class StoreFeedRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->user()->tokenCan('feed:create');
     }
 
     /**

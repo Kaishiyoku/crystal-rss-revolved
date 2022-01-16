@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Sanctum\HasApiTokens;
 
 /**
  * App\Models\Feed
@@ -38,9 +39,12 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read int|null $unread_feed_items_count
  * @property string|null $favicon_url
  * @method static \Illuminate\Database\Eloquent\Builder|Feed whereFaviconUrl($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Sanctum\PersonalAccessToken[] $tokens
+ * @property-read int|null $tokens_count
  */
 class Feed extends Model
 {
+    use HasApiTokens;
     use HasFactory;
 
     /**

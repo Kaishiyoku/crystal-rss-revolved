@@ -22,7 +22,7 @@ class UpdateFeedRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can('update', $this->feed);
+        return $this->user()->can('update', $this->feed) && $this->user()->tokenCan('feed:update');
     }
 
     /**

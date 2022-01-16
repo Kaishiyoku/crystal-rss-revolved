@@ -30,7 +30,7 @@ class FeedPolicy
      */
     public function view(User $user, Feed $feed)
     {
-        return $user->id === $feed->user_id;
+        return $user->id === $feed->user_id && $user->tokenCan('feed:read');
     }
 
     /**
@@ -41,7 +41,7 @@ class FeedPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->tokenCan('feed:create');
     }
 
     /**
@@ -53,7 +53,7 @@ class FeedPolicy
      */
     public function update(User $user, Feed $feed)
     {
-        return $user->id === $feed->user_id;
+        return $user->id === $feed->user_id && $user->tokenCan('feed:update');
     }
 
     /**
@@ -65,7 +65,7 @@ class FeedPolicy
      */
     public function delete(User $user, Feed $feed)
     {
-        return $user->id === $feed->user_id;
+        return $user->id === $feed->user_id && $user->tokenCan('feed:delete');
     }
 
     /**
