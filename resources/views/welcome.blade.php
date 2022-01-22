@@ -25,7 +25,7 @@
                 </div>
 
                 @if (Route::has('login'))
-                    <div id="navigation" class="md:fixed md:top-0 md:right-0 px-4 md:px-6 py-4 rounded-bl-full transition ease-out duration-500">
+                    <div id="navigation" class="md:fixed md:top-0 md:right-0 px-4 md:px-6 py-4 rounded-bl-2xl transition ease-out duration-500">
                         @auth
                             <a href="{{ url('/dashboard') }}" class="text-purple-300 hover:text-white uppercase pl-4 transition-all duration-200 tracking-wider">{{ __('Dashboard') }}</a>
                         @else
@@ -47,7 +47,7 @@
             <div class="flex flex-col justify-center items-center pt-8 sm:pt-0">
                 <x-application-authentication-logo class="w-32 h-40" />
 
-                <span class="text-6xl md:text-8xl text-center pt-4">
+                <span class="text-6xl md:text-8xl text-center pt-4 text-transparent bg-clip-text bg-gradient-to-r from-[#6927ff] to-[#914cd9]">
                     {{ config('app.name', 'Laravel') }}
                 </span>
             </div>
@@ -79,10 +79,14 @@
                     @endif
 
                     @if (config('app.github_url'))
-                        <a href="{{ config('app.github_url') }}" class="text-[#914cd9] dark:text-[#6927ff] hover:underline">
+                        <x-link href="{{ config('app.github_url') }}" class="text-[#914cd9] dark:text-[#6927ff]">
                             {{ __('GitHub') }}
-                        </a>
+                        </x-link>
                     @endif
+
+                    <x-link href="{{ url('/docs') }}" class="text-[#914cd9] dark:text-[#6927ff]">
+                        {{ __('API documentation') }}
+                    </x-link>
                 </div>
             </div>
         @endif
