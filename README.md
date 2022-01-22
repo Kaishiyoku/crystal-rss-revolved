@@ -86,4 +86,4 @@ Same goes for the favorite and voting features. I planned to build some kind of 
 
 # Author
 
-![Andreas Wiedel](https://andreas-wiedel.de)
+[Andreas Wiedel](https://andreas-wiedel.de)
