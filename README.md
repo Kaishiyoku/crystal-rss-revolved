@@ -48,6 +48,9 @@ The feed reader is optimized for usage on smartphones.
 
 # Screenshots
 
+<details>
+<summary>Click to toggle screenshots</summary>
+
 ![Add feed](https://698857750-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-MiLDJ9RD-asJHmj5ZWy%2Fuploads%2Fgit-blob-7cdcdd61d73aea880395927b75a399a44db1ea3b%2Fadd_feed.png?alt=media)
 
 ![Add feed](https://698857750-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-MiLDJ9RD-asJHmj5ZWy%2Fuploads%2Fgit-blob-4608d2410c0b41cd93b4b09871015b12ff19872b%2Fadd_feed_dark.png?alt=media)
@@ -71,6 +74,8 @@ The feed reader is optimized for usage on smartphones.
 ![Dashboard (mobile)](https://698857750-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-MiLDJ9RD-asJHmj5ZWy%2Fuploads%2Fgit-blob-467c1c17476dcf318e5e5bb9f05fab71fe230aec%2Fdashboard_mobile.png?alt=media)
 
 ![Dashboard (mobile)](https://698857750-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-MiLDJ9RD-asJHmj5ZWy%2Fuploads%2Fgit-blob-17ac945b77e23c4ea021315c6c98cc8a8d987c8e%2Fdashboard_dark_mobile.png?alt=media)
+    
+</details>
 
 
 # FAQ
