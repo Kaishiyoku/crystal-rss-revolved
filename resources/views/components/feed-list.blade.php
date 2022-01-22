@@ -86,13 +86,13 @@
 
     <template x-if="hasMoreUnreadFeedItems">
         <div class="mx-4">
-            <x-secondary-button type="button" class="sm:mx-0 mt-8 py-4 md:py-2 w-full md:w-auto" ::disabled="isMoreLoading" @click="loadMore()" x-cloak>
+            <x-jet-secondary-button type="button" class="sm:mx-0 mt-8 py-4 md:py-2 w-full md:w-auto" ::disabled="isMoreLoading" @click="loadMore()" x-cloak>
                 <template x-if="isMoreLoading">
                     <x-icon.loading class="mr-2"/>
                 </template>
 
                 {{ __('Load more') }}
-            </x-secondary-button>
+            </x-jet-secondary-button>
         </div>
     </template>
 
