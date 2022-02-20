@@ -11,17 +11,17 @@
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.4.0",
-        "@tailwindcss/typography": "^0.5.0",
-        "alpinejs": "^3.8.1",
-        "axios": "^0.25.0",
+        "@tailwindcss/typography": "^0.5.2",
+        "alpinejs": "^3.9.0",
+        "axios": "^0.26.0",
         "laravel-echo": "^1.11.3",
-        "laravel-mix": "^6.0.41",
-        "postcss": "^8.4.5",
+        "laravel-mix": "^6.0.43",
+        "postcss": "^8.4.6",
         "postcss-import": "^14.0.1",
         "push.js": "^1.0.12",
-        "pusher-js": "^7.0.3",
+        "pusher-js": "^7.0.6",
         "scroll-js": "^3.5.0",
-        "tailwindcss": "^3.0.15",
+        "tailwindcss": "^3.0.23",
         "zooming": "^2.1.1"
     }
 }
