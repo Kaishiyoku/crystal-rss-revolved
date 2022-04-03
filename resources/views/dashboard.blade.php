@@ -124,7 +124,7 @@
 
             <button
                 type="button"
-                class="text-[#914cd9] dark:text-[#6927ff] opacity-50 hover:opacity-75 focus:opacity-90 transition mt-8 md:mt-0"
+                class="text-indigo-500 dark:text-purple-500 opacity-50 hover:opacity-75 focus:opacity-90 transition mt-8 md:mt-0"
                 data-scroll-to-top
             >
                 <x-heroicon-s-arrow-circle-up class="w-16 h-16"/>

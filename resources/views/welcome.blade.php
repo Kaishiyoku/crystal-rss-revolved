@@ -18,7 +18,7 @@
         @include('shared._favicon')
     </head>
     <body class="antialiased bg-gray-100 dark:bg-gray-900 pb-4 dark:text-gray-100">
-        <div class="absolute w-full bg-gradient-to-r lg:bg-none from-[#6927ff] to-[#914cd9]">
+        <div class="absolute w-full bg-gradient-to-r lg:bg-none from-indigo-500 to-purple-500">
             <div class="md:flex md:justify-between">
                 <div class="text-white uppercase text-2xl pl-8 pt-4 tracking-wider">
                     <a href="{{ route('welcome') }}">{{ config('app.name', 'Laravel') }}</a>
@@ -27,12 +27,12 @@
                 @if (Route::has('login'))
                     <div id="navigation" class="md:fixed md:top-0 md:right-0 px-4 md:px-6 py-4 rounded-bl-2xl transition ease-out duration-500">
                         @auth
-                            <a href="{{ url('/dashboard') }}" class="text-purple-300 hover:text-white uppercase pl-4 transition-all duration-200 tracking-wider">{{ __('Dashboard') }}</a>
+                            <a href="{{ url('/dashboard') }}" class="text-indigo-200 hover:text-white uppercase pl-4 transition-all duration-200 tracking-wider">{{ __('Dashboard') }}</a>
                         @else
-                            <a href="{{ route('login') }}" class="text-purple-300 hover:text-white uppercase pl-4 transition-all duration-200 tracking-wider">{{ __('Log in') }}</a>
+                            <a href="{{ route('login') }}" class="text-indigo-200 hover:text-white uppercase pl-4 transition-all duration-200 tracking-wider">{{ __('Log in') }}</a>
 
                             @if (Route::has('register'))
-                                <a href="{{ route('register') }}" class="text-purple-300 hover:text-white uppercase pl-4 transition-all duration-200 tracking-wider">{{ __('Register') }}</a>
+                                <a href="{{ route('register') }}" class="text-indigo-200 hover:text-white uppercase pl-4 transition-all duration-200 tracking-wider">{{ __('Register') }}</a>
                             @endif
                         @endauth
                     </div>
@@ -47,7 +47,7 @@
             <div class="flex flex-col justify-center items-center pt-8 sm:pt-0">
                 <x-application-authentication-logo class="w-32 h-40" />
 
-                <span class="text-6xl md:text-8xl text-center pt-4 text-transparent bg-clip-text bg-gradient-to-r from-[#6927ff] to-[#914cd9]">
+                <span class="text-6xl md:text-8xl text-center pt-4 text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-500">
                     {{ config('app.name', 'Laravel') }}
                 </span>
             </div>
@@ -73,25 +73,25 @@
 
                 <div class="mt-16 space-x-4 text-xl">
                     @if (config('app.contact_email'))
-                        <a href="mailto:{{ config('app.contact_email') }}" class="text-[#914cd9] dark:text-[#6927ff] hover:underline">
+                        <a href="mailto:{{ config('app.contact_email') }}" class="text-indigo-500 dark:text-purple-500 hover:underline">
                             {{ __('Contact') }}
                         </a>
                     @endif
 
                     @if (config('app.github_url'))
-                        <x-link href="{{ config('app.github_url') }}" class="text-[#914cd9] dark:text-[#6927ff]">
+                        <x-link href="{{ config('app.github_url') }}" class="text-indigo-500 dark:text-purple-500">
                             {{ __('GitHub') }}
                         </x-link>
                     @endif
 
-                    <x-link href="{{ url('/docs') }}" class="text-[#914cd9] dark:text-[#6927ff]">
+                    <x-link href="{{ url('/docs') }}" class="text-indigo-500 dark:text-purple-500">
                         {{ __('API documentation') }}
                     </x-link>
                 </div>
             </div>
         @endif
 
-        <button type="button" class="block mx-auto mt-12 text-[#914cd9] dark:text-[#6927ff] opacity-50 hover:opacity-75 focus:opacity-90 transition" data-scroll="#screenshots">
+        <button type="button" class="block mx-auto mt-12 text-indigo-500 dark:text-purple-500 opacity-50 hover:opacity-75 focus:opacity-90 transition" data-scroll="#screenshots">
             <x-heroicon-s-arrow-circle-down class="w-16 h-16"/>
         </button>
 

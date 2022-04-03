@@ -103,7 +103,7 @@
     >
         <button
             type="button"
-            class="fixed left-3 md:left-auto md:right-3 bottom-3 block text-[#914cd9] dark:text-[#6927ff] opacity-50 hover:opacity-75 focus:opacity-90 transition"
+            class="fixed left-3 md:left-auto md:right-3 bottom-3 block text-indigo-500 dark:text-purple-500 opacity-50 hover:opacity-75 focus:opacity-90 transition"
             data-scroll-to-top
         >
             <x-heroicon-s-arrow-circle-up class="w-16 h-16"/>

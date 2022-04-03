@@ -24,7 +24,7 @@
 				'from-indigo-500 to-indigo-600': toast.type === 'info',
 				'from-green-500 to-green-600': toast.type === 'success',
 				'from-yellow-400 to-yellow-500': toast.type === 'warning',
-				'from-red-500 to-pink-500': toast.type === 'error'
+				'from-red-500 to-purple-500': toast.type === 'error'
 				}"
         >
             <div x-text="toast.message"></div>
