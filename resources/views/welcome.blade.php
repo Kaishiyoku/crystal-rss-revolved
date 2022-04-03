@@ -73,9 +73,9 @@
 
                 <div class="mt-16 space-x-4 text-xl">
                     @if (config('app.contact_email'))
-                        <a href="mailto:{{ config('app.contact_email') }}" class="text-indigo-500 dark:text-purple-500 hover:underline">
+                        <x-link href="mailto:{{ config('app.contact_email') }}" class="text-indigo-500 dark:text-purple-500">
                             {{ __('Contact') }}
-                        </a>
+                        </x-link>
                     @endif
 
                     @if (config('app.github_url'))
