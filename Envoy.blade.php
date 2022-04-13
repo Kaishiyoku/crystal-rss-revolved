@@ -82,7 +82,7 @@
     sudo chown -R forge:forge {{ $path }}/storage/*
     echo "Changed storage owner to deployment user"
 
-    sudo chown -R forge:forge {{ $path }}/bootstrap/cache/*
+    sudo chown -R forge:forge {{ $release }}/bootstrap/cache
     echo "Changed bootstrap/cache owner to deployment user"
 @endtask
 
@@ -135,7 +135,7 @@
     sudo chown -R www-data:www-data {{ $path }}/storage/*
     echo "Changed storage owner to www-data"
 
-    sudo chown -R www-data:www-data {{ $path }}/bootstrap/cache/*
+    sudo chown -R www-data:www-data {{ $release }}/bootstrap/cache
     echo "Changed bootstrap/cache owner to www-data"
 @endtask
 
