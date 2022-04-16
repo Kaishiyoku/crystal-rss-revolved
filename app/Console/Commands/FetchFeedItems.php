@@ -41,7 +41,7 @@ class FetchFeedItems extends Command
     /**
      * @var Collection<Collection<int>>
      */
-    private Collection $newFeedItemIdsPerUser;
+    private Collection $newFeedItemIdsPerUserId;
 
     /**
      * Create a new command instance.
@@ -56,7 +56,7 @@ class FetchFeedItems extends Command
         $this->heraRssCrawler = new HeraRssCrawler();
         $this->heraRssCrawler->setLogger($this->logger);
         $this->heraRssCrawler->setRetryCount(config('app.rss_crawler_retry_count'));
-        $this->newFeedItemIdsPerUser = collect();
+        $this->newFeedItemIdsPerUserId = collect();
     }
 
     /**
@@ -74,21 +74,21 @@ class FetchFeedItems extends Command
             $this->fetchFeedsForUser($user);
         });
 
+        $this->newFeedItemIdsPerUserId
+            ->filter(fn($feedItemIds) => $feedItemIds->isNotEmpty())
+            ->each(function ($feedItemIds, $userId) {
+                if (config('app.enable_push_notifications')) {
+                    broadcast(new NewFeedItemsFetched($userId, $feedItemIds->count()));
+                }
+
+                $this->logger->info("Number of new feed items for user #{$userId}: {$feedItemIds->count()}");
+            });
+
         $executionTimeInSeconds = round(microtime(true) - $startTime);
 
         $this->logger->info("Duration: {$executionTimeInSeconds}s");
 
-        if (!config('app.enable_push_notifications')) {
-            return Command::SUCCESS;
-        }
-
-        $this->newFeedItemIdsPerUser
-            ->filter(fn($feedItemIds) => $feedItemIds->isNotEmpty())
-            ->each(function ($feedItemIds, $userId) {
-                broadcast(new NewFeedItemsFetched($userId, $feedItemIds->count()));
-            });
-
-        return Command::SUCCESS;
+        return 0;
     }
 
     private function fetchFeedsForUser(User $user): void
@@ -145,8 +145,8 @@ class FetchFeedItems extends Command
 
         $feed->feedItems()->save($feedItem);
 
-        $this->newFeedItemIdsPerUser->put($feed->user_id, with(
-            $this->newFeedItemIdsPerUser->get($feed->user_id), fn($collection) => $collection ? $collection->push($feedItem->id) : collect($feedItem->id)
+        $this->newFeedItemIdsPerUserId->put($feed->user_id, with(
+            $this->newFeedItemIdsPerUserId->get($feed->user_id), fn($collection) => $collection ? $collection->push($feedItem->id) : collect($feedItem->id)
         ));
     }
 }
