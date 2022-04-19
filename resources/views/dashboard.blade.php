@@ -54,7 +54,7 @@
                 <x-card.card class="{{ classNames('grow md:rounded-none mb-16 md:mb-0 overflow-hidden', ['md:rounded-t-lg' => $loop->index === 0, 'md:rounded-b-lg' => $loop->index === $unreadFeedItems->count() - 1]) }}">
                     <div class="transition duration-200" :class="{'opacity-40': isRead(@json($unreadFeedItem->id))}">
                         <a
-                            class="group block md:flex md:items-center md:space-x-4 md:px-4 md:py-3 transition ease-out duration-300 hover:bg-indigo-500 focus:outline-none focus:text-white focus:bg-indigo-600 transition"
+                            class="group block md:flex md:items-center md:space-x-4 md:px-4 md:py-3 transition ease-out duration-300 hover:bg-primary-500 focus:outline-none focus:text-white focus:bg-primary-600 transition"
                             href="{{ $unreadFeedItem->url }}"
                         >
                             <div class="md:shrink-0 md:block md:w-16">
@@ -93,7 +93,7 @@
                         <div class="md:hidden mt-4 px-4 pb-4">
                             <button
                                 type="button"
-                                class="w-full inline-flex items-center px-4 py-4 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md font-semibold text-xs text-gray-700 dark:text-gray-400 uppercase tracking-widest shadow-sm hover:text-gray-500 dark:hover:text-gray-300 focus:outline-none focus:border-indigo-300 dark:focus:border-indigo-500 focus:ring focus:ring-indigo-200 dark:focus:ring-indigo-600 active:text-gray-800 dark:active:text-gray-200 active:bg-gray-50 dark:active:bg-gray-600 disabled:opacity-25 transition"
+                                class="w-full inline-flex items-center px-4 py-4 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md font-semibold text-xs text-gray-700 dark:text-gray-400 uppercase tracking-widest shadow-sm hover:text-gray-500 dark:hover:text-gray-300 focus:outline-none focus:border-primary-300 dark:focus:border-primary-500 focus:ring focus:ring-primary-200 dark:focus:ring-primary-600 active:text-gray-800 dark:active:text-gray-200 active:bg-gray-50 dark:active:bg-gray-600 disabled:opacity-25 transition"
                                 :disabled="isLoading(@json($unreadFeedItem->id))"
                                 @click.prevent="toggleMarkAsRead(@json($unreadFeedItem->id))"
                             >
@@ -124,7 +124,7 @@
 
             <button
                 type="button"
-                class="text-indigo-500 dark:text-purple-500 opacity-50 hover:opacity-75 focus:opacity-90 transition mt-8 md:mt-0"
+                class="text-primary-500 dark:text-secondary-500 opacity-50 hover:opacity-75 focus:opacity-90 transition mt-8 md:mt-0"
                 data-scroll-to-top
             >
                 <x-heroicon-s-arrow-circle-up class="w-16 h-16"/>

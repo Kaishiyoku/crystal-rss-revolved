@@ -18,9 +18,7 @@
 
         @include('shared._favicon')
     </head>
-    <body>
-        <div class="font-sans text-gray-900 antialiased">
-            {{ $slot }}
-        </div>
+    <body class="font-sans text-gray-900 antialiased base-theme">
+        {{ $slot }}
     </body>
 </html>

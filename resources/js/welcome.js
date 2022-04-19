@@ -4,9 +4,9 @@ import Zooming from 'zooming';
 
 function adjustNavigationOnScroll(scrollPosition) {
     if (scrollPosition > 50) {
-        document.getElementById('navigation').classList.add('md:bg-purple-500');
+        document.getElementById('navigation').classList.add('md:bg-secondary-500');
     } else {
-        document.getElementById('navigation').classList.remove('md:bg-purple-500');
+        document.getElementById('navigation').classList.remove('md:bg-secondary-500');
     }
 }
 

@@ -21,10 +21,10 @@
             x-transition:leave-end="translate-x-full opacity-0"
             class="bg-gray-900 bg-gradient-to-r text-white p-3 rounded mb-3 shadow-lg flex items-center cursor-pointer"
             :class="{
-				'from-indigo-500 to-indigo-600': toast.type === 'info',
+				'from-primary-500 to-primary-600': toast.type === 'info',
 				'from-green-500 to-green-600': toast.type === 'success',
 				'from-yellow-400 to-yellow-500': toast.type === 'warning',
-				'from-red-500 to-purple-500': toast.type === 'error'
+				'from-red-500 to-secondary-500': toast.type === 'error'
 				}"
         >
             <div x-text="toast.message"></div>

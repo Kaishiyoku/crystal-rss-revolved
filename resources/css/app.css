@@ -2,6 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
+.base-theme {
+    --color-primary-50: 248, 250, 251;
+    --color-primary-100: 233, 240, 252;
+    --color-primary-200: 209, 216, 249;
+    --color-primary-300: 172, 179, 240;
+    --color-primary-400: 141, 138, 229;
+    --color-primary-500: 116, 101, 220;
+    --color-primary-600: 95, 73, 203;
+    --color-primary-700: 72, 55, 169;
+    --color-primary-800: 49, 37, 122;
+    --color-primary-900: 27, 23, 75;
+
+    --color-secondary-50: 249, 250, 250;
+    --color-secondary-100: 240, 241, 248;
+    --color-secondary-200: 222, 219, 241;
+    --color-secondary-300: 188, 182, 222;
+    --color-secondary-400: 155, 140, 197;
+    --color-secondary-500: 126, 103, 172;
+    --color-secondary-600: 101, 75, 142;
+    --color-secondary-700: 76, 56, 108;
+    --color-secondary-800: 51, 38, 73;
+    --color-secondary-900: 29, 23, 43;
+
+    --color-gray-50: 249, 250, 251;
+    --color-gray-100: 243, 244, 246;
+    --color-gray-200: 229, 231, 235;
+    --color-gray-300: 209, 213, 219;
+    --color-gray-400: 156, 163, 175;
+    --color-gray-500: 107, 114, 128;
+    --color-gray-600: 75, 85, 99;
+    --color-gray-700: 55, 65, 81;
+    --color-gray-800: 31, 41, 55;
+    --color-gray-900: 17, 24, 39;
+}
+
 @layer base {
     /**
      * Colors
@@ -31,10 +66,10 @@
     }
 
     .alert--info {
-        @apply bg-purple-100 dark:bg-purple-800 text-purple-800 dark:text-purple-400 border-purple-400 dark:border-purple-500;
+        @apply bg-secondary-100 dark:bg-secondary-800 text-secondary-800 dark:text-secondary-400 border-secondary-400 dark:border-secondary-500;
     }
     .alert--info .alert--cta {
-        @apply bg-purple-500 dark:bg-purple-500 text-purple-100 dark:text-purple-200 border-purple-600 dark:border-purple-400 dark:hover:text-purple-900 hover:bg-purple-700 dark:hover:bg-purple-100 hover:border-purple-800;
+        @apply bg-secondary-500 dark:bg-secondary-500 text-secondary-100 dark:text-secondary-200 border-secondary-600 dark:border-secondary-400 dark:hover:text-secondary-900 hover:bg-secondary-700 dark:hover:bg-secondary-100 hover:border-secondary-800;
     }
     .alert--success {
         @apply bg-green-100 dark:bg-green-800 text-green-800 dark:text-green-400 border-green-400 dark:border-green-500;
