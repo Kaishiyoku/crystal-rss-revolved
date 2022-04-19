@@ -3,9 +3,10 @@ const colors = require('tailwindcss/colors');
 
 const withOpacityValue = (variable) => {
     return ({opacityValue}) => {
-        return opacityValue === undefined ? `rgb(var(${variable}))` : `rgba(var(${variable}, opacityValue))`;
+        return opacityValue === undefined ? `rgb(var(${variable}))` : `rgba(var(${variable}), ${opacityValue})`;
     }
 };
+
 
 module.exports = {
     content: [
