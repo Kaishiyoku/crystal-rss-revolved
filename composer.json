@@ -15,7 +15,7 @@
         "fruitcake/laravel-cors": "^2.0.5",
         "guzzlehttp/guzzle": "^7.3.0",
         "guzzlehttp/psr7": "^1.5",
-        "kaishiyoku/hera-rss-crawler": "^2.2.0",
+        "kaishiyoku/hera-rss-crawler": "^3.0.0",
         "knuckleswtf/scribe": "^3.21",
         "laravel/framework": "^9.0",
         "laravel/jetstream": "^2.3",

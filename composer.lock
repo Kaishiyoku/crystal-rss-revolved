@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "54ba1a6cf5c13e3a506394ec94954a0f",
+    "content-hash": "9a74d81853a5830a549330086a4eaec3",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2287,16 +2287,16 @@
         },
         {
             "name": "kaishiyoku/hera-rss-crawler",
-            "version": "2.2.0",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Kaishiyoku/hera-rss-crawler.git",
-                "reference": "a751574a65d91b2bc46d427a84ebfb1f850109b2"
+                "reference": "1862e64761d3335de5fad672f67ba1428c14a3a6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Kaishiyoku/hera-rss-crawler/zipball/a751574a65d91b2bc46d427a84ebfb1f850109b2",
-                "reference": "a751574a65d91b2bc46d427a84ebfb1f850109b2",
+                "url": "https://api.github.com/repos/Kaishiyoku/hera-rss-crawler/zipball/1862e64761d3335de5fad672f67ba1428c14a3a6",
+                "reference": "1862e64761d3335de5fad672f67ba1428c14a3a6",
                 "shasum": ""
             },
             "require": {
@@ -2352,7 +2352,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Kaishiyoku/hera-rss-crawler/issues",
-                "source": "https://github.com/Kaishiyoku/hera-rss-crawler/tree/2.2.0"
+                "source": "https://github.com/Kaishiyoku/hera-rss-crawler/tree/3.0.0"
             },
             "funding": [
                 {
@@ -2360,7 +2360,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-02-20T13:13:37+00:00"
+            "time": "2022-04-19T18:30:25+00:00"
         },
         {
             "name": "knuckleswtf/scribe",
