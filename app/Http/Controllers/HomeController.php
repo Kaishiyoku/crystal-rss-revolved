@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\TestNotificationSent;
-use Illuminate\Support\Facades\Auth;
-
 class HomeController extends Controller
 {
     /**
@@ -13,10 +10,5 @@ class HomeController extends Controller
     public function welcome()
     {
         return view('welcome');
-    }
-
-    public function sendTestNotification()
-    {
-        broadcast(new TestNotificationSent(Auth::id()));
     }
 }

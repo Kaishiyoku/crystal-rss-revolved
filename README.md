@@ -28,12 +28,6 @@ The feed reader is optimized for usage on smartphones.
 * `CONTACT_EMAIL` is being displayed on the welcome page; leave empty if you don't want to display the contact us link
 * `GITHUB_URL` is being displayed on the welcome page; leave empty if you don't want to display the GitHub link
 
-## Using the websockets feature
-
-1. fill in the .env values `LARAVEL_WEBSOCKETS_*`
-2. enable the feature by setting the `ENABLE_PUSH_NOTIFICATIONS=true` .env variable to `true`
-
-
 # Features
 
 * manage feeds and categorize them

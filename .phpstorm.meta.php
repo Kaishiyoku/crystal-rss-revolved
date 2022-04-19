@@ -13,8 +13,6 @@ namespace PHPSTORM_META {
         '' => '@',
             'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
             'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
-            'BeyondCode\LaravelWebSockets\Apps\AppProvider' => \BeyondCode\LaravelWebSockets\Apps\ConfigAppProvider::class,
-            'BeyondCode\LaravelWebSockets\WebSockets\Channels\ChannelManager' => \BeyondCode\LaravelWebSockets\WebSockets\Channels\ChannelManagers\ArrayChannelManager::class,
             'BladeUI\Icons\Factory' => \BladeUI\Icons\Factory::class,
             'BladeUI\Icons\IconsManifest' => \BladeUI\Icons\IconsManifest::class,
             'Illuminate\Auth\Console\ClearResetsCommand' => \Illuminate\Auth\Console\ClearResetsCommand::class,
@@ -225,14 +223,11 @@ namespace PHPSTORM_META {
             'view' => \Illuminate\View\Factory::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
             'view.finder' => \Illuminate\View\FileViewFinder::class,
-            'websockets.router' => \BeyondCode\LaravelWebSockets\Server\Router::class,
         ]));
     override(\Illuminate\Container\Container::makeWith(0), map([
         '' => '@',
             'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
             'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
-            'BeyondCode\LaravelWebSockets\Apps\AppProvider' => \BeyondCode\LaravelWebSockets\Apps\ConfigAppProvider::class,
-            'BeyondCode\LaravelWebSockets\WebSockets\Channels\ChannelManager' => \BeyondCode\LaravelWebSockets\WebSockets\Channels\ChannelManagers\ArrayChannelManager::class,
             'BladeUI\Icons\Factory' => \BladeUI\Icons\Factory::class,
             'BladeUI\Icons\IconsManifest' => \BladeUI\Icons\IconsManifest::class,
             'Illuminate\Auth\Console\ClearResetsCommand' => \Illuminate\Auth\Console\ClearResetsCommand::class,
@@ -443,14 +438,11 @@ namespace PHPSTORM_META {
             'view' => \Illuminate\View\Factory::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
             'view.finder' => \Illuminate\View\FileViewFinder::class,
-            'websockets.router' => \BeyondCode\LaravelWebSockets\Server\Router::class,
         ]));
     override(\Illuminate\Contracts\Container\Container::get(0), map([
         '' => '@',
             'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
             'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
-            'BeyondCode\LaravelWebSockets\Apps\AppProvider' => \BeyondCode\LaravelWebSockets\Apps\ConfigAppProvider::class,
-            'BeyondCode\LaravelWebSockets\WebSockets\Channels\ChannelManager' => \BeyondCode\LaravelWebSockets\WebSockets\Channels\ChannelManagers\ArrayChannelManager::class,
             'BladeUI\Icons\Factory' => \BladeUI\Icons\Factory::class,
             'BladeUI\Icons\IconsManifest' => \BladeUI\Icons\IconsManifest::class,
             'Illuminate\Auth\Console\ClearResetsCommand' => \Illuminate\Auth\Console\ClearResetsCommand::class,
@@ -661,14 +653,11 @@ namespace PHPSTORM_META {
             'view' => \Illuminate\View\Factory::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
             'view.finder' => \Illuminate\View\FileViewFinder::class,
-            'websockets.router' => \BeyondCode\LaravelWebSockets\Server\Router::class,
         ]));
     override(\Illuminate\Contracts\Container\Container::make(0), map([
         '' => '@',
             'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
             'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
-            'BeyondCode\LaravelWebSockets\Apps\AppProvider' => \BeyondCode\LaravelWebSockets\Apps\ConfigAppProvider::class,
-            'BeyondCode\LaravelWebSockets\WebSockets\Channels\ChannelManager' => \BeyondCode\LaravelWebSockets\WebSockets\Channels\ChannelManagers\ArrayChannelManager::class,
             'BladeUI\Icons\Factory' => \BladeUI\Icons\Factory::class,
             'BladeUI\Icons\IconsManifest' => \BladeUI\Icons\IconsManifest::class,
             'Illuminate\Auth\Console\ClearResetsCommand' => \Illuminate\Auth\Console\ClearResetsCommand::class,
@@ -879,14 +868,11 @@ namespace PHPSTORM_META {
             'view' => \Illuminate\View\Factory::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
             'view.finder' => \Illuminate\View\FileViewFinder::class,
-            'websockets.router' => \BeyondCode\LaravelWebSockets\Server\Router::class,
         ]));
     override(\Illuminate\Contracts\Container\Container::makeWith(0), map([
         '' => '@',
             'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
             'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
-            'BeyondCode\LaravelWebSockets\Apps\AppProvider' => \BeyondCode\LaravelWebSockets\Apps\ConfigAppProvider::class,
-            'BeyondCode\LaravelWebSockets\WebSockets\Channels\ChannelManager' => \BeyondCode\LaravelWebSockets\WebSockets\Channels\ChannelManagers\ArrayChannelManager::class,
             'BladeUI\Icons\Factory' => \BladeUI\Icons\Factory::class,
             'BladeUI\Icons\IconsManifest' => \BladeUI\Icons\IconsManifest::class,
             'Illuminate\Auth\Console\ClearResetsCommand' => \Illuminate\Auth\Console\ClearResetsCommand::class,
@@ -1097,14 +1083,11 @@ namespace PHPSTORM_META {
             'view' => \Illuminate\View\Factory::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
             'view.finder' => \Illuminate\View\FileViewFinder::class,
-            'websockets.router' => \BeyondCode\LaravelWebSockets\Server\Router::class,
         ]));
     override(\App::get(0), map([
         '' => '@',
             'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
             'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
-            'BeyondCode\LaravelWebSockets\Apps\AppProvider' => \BeyondCode\LaravelWebSockets\Apps\ConfigAppProvider::class,
-            'BeyondCode\LaravelWebSockets\WebSockets\Channels\ChannelManager' => \BeyondCode\LaravelWebSockets\WebSockets\Channels\ChannelManagers\ArrayChannelManager::class,
             'BladeUI\Icons\Factory' => \BladeUI\Icons\Factory::class,
             'BladeUI\Icons\IconsManifest' => \BladeUI\Icons\IconsManifest::class,
             'Illuminate\Auth\Console\ClearResetsCommand' => \Illuminate\Auth\Console\ClearResetsCommand::class,
@@ -1315,14 +1298,11 @@ namespace PHPSTORM_META {
             'view' => \Illuminate\View\Factory::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
             'view.finder' => \Illuminate\View\FileViewFinder::class,
-            'websockets.router' => \BeyondCode\LaravelWebSockets\Server\Router::class,
         ]));
     override(\App::make(0), map([
         '' => '@',
             'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
             'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
-            'BeyondCode\LaravelWebSockets\Apps\AppProvider' => \BeyondCode\LaravelWebSockets\Apps\ConfigAppProvider::class,
-            'BeyondCode\LaravelWebSockets\WebSockets\Channels\ChannelManager' => \BeyondCode\LaravelWebSockets\WebSockets\Channels\ChannelManagers\ArrayChannelManager::class,
             'BladeUI\Icons\Factory' => \BladeUI\Icons\Factory::class,
             'BladeUI\Icons\IconsManifest' => \BladeUI\Icons\IconsManifest::class,
             'Illuminate\Auth\Console\ClearResetsCommand' => \Illuminate\Auth\Console\ClearResetsCommand::class,
@@ -1533,14 +1513,11 @@ namespace PHPSTORM_META {
             'view' => \Illuminate\View\Factory::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
             'view.finder' => \Illuminate\View\FileViewFinder::class,
-            'websockets.router' => \BeyondCode\LaravelWebSockets\Server\Router::class,
         ]));
     override(\App::makeWith(0), map([
         '' => '@',
             'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
             'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
-            'BeyondCode\LaravelWebSockets\Apps\AppProvider' => \BeyondCode\LaravelWebSockets\Apps\ConfigAppProvider::class,
-            'BeyondCode\LaravelWebSockets\WebSockets\Channels\ChannelManager' => \BeyondCode\LaravelWebSockets\WebSockets\Channels\ChannelManagers\ArrayChannelManager::class,
             'BladeUI\Icons\Factory' => \BladeUI\Icons\Factory::class,
             'BladeUI\Icons\IconsManifest' => \BladeUI\Icons\IconsManifest::class,
             'Illuminate\Auth\Console\ClearResetsCommand' => \Illuminate\Auth\Console\ClearResetsCommand::class,
@@ -1751,14 +1728,11 @@ namespace PHPSTORM_META {
             'view' => \Illuminate\View\Factory::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
             'view.finder' => \Illuminate\View\FileViewFinder::class,
-            'websockets.router' => \BeyondCode\LaravelWebSockets\Server\Router::class,
         ]));
     override(\app(0), map([
         '' => '@',
             'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
             'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
-            'BeyondCode\LaravelWebSockets\Apps\AppProvider' => \BeyondCode\LaravelWebSockets\Apps\ConfigAppProvider::class,
-            'BeyondCode\LaravelWebSockets\WebSockets\Channels\ChannelManager' => \BeyondCode\LaravelWebSockets\WebSockets\Channels\ChannelManagers\ArrayChannelManager::class,
             'BladeUI\Icons\Factory' => \BladeUI\Icons\Factory::class,
             'BladeUI\Icons\IconsManifest' => \BladeUI\Icons\IconsManifest::class,
             'Illuminate\Auth\Console\ClearResetsCommand' => \Illuminate\Auth\Console\ClearResetsCommand::class,
@@ -1969,14 +1943,11 @@ namespace PHPSTORM_META {
             'view' => \Illuminate\View\Factory::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
             'view.finder' => \Illuminate\View\FileViewFinder::class,
-            'websockets.router' => \BeyondCode\LaravelWebSockets\Server\Router::class,
         ]));
     override(\resolve(0), map([
         '' => '@',
             'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
             'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
-            'BeyondCode\LaravelWebSockets\Apps\AppProvider' => \BeyondCode\LaravelWebSockets\Apps\ConfigAppProvider::class,
-            'BeyondCode\LaravelWebSockets\WebSockets\Channels\ChannelManager' => \BeyondCode\LaravelWebSockets\WebSockets\Channels\ChannelManagers\ArrayChannelManager::class,
             'BladeUI\Icons\Factory' => \BladeUI\Icons\Factory::class,
             'BladeUI\Icons\IconsManifest' => \BladeUI\Icons\IconsManifest::class,
             'Illuminate\Auth\Console\ClearResetsCommand' => \Illuminate\Auth\Console\ClearResetsCommand::class,
@@ -2187,14 +2158,11 @@ namespace PHPSTORM_META {
             'view' => \Illuminate\View\Factory::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
             'view.finder' => \Illuminate\View\FileViewFinder::class,
-            'websockets.router' => \BeyondCode\LaravelWebSockets\Server\Router::class,
         ]));
     override(\Psr\Container\ContainerInterface::get(0), map([
         '' => '@',
             'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
             'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
-            'BeyondCode\LaravelWebSockets\Apps\AppProvider' => \BeyondCode\LaravelWebSockets\Apps\ConfigAppProvider::class,
-            'BeyondCode\LaravelWebSockets\WebSockets\Channels\ChannelManager' => \BeyondCode\LaravelWebSockets\WebSockets\Channels\ChannelManagers\ArrayChannelManager::class,
             'BladeUI\Icons\Factory' => \BladeUI\Icons\Factory::class,
             'BladeUI\Icons\IconsManifest' => \BladeUI\Icons\IconsManifest::class,
             'Illuminate\Auth\Console\ClearResetsCommand' => \Illuminate\Auth\Console\ClearResetsCommand::class,
@@ -2405,7 +2373,6 @@ namespace PHPSTORM_META {
             'view' => \Illuminate\View\Factory::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
             'view.finder' => \Illuminate\View\FileViewFinder::class,
-            'websockets.router' => \BeyondCode\LaravelWebSockets\Server\Router::class,
         ]));
 
 

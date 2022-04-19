@@ -77,10 +77,6 @@ class FetchFeedItems extends Command
         $this->newFeedItemIdsPerUserId
             ->filter(fn($feedItemIds) => $feedItemIds->isNotEmpty())
             ->each(function ($feedItemIds, $userId) {
-                if (config('app.enable_push_notifications')) {
-                    broadcast(new NewFeedItemsFetched($userId, $feedItemIds->count()));
-                }
-
                 $this->logger->info("Number of new feed items for user #{$userId}: {$feedItemIds->count()}");
             });
 

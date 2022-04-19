@@ -134,16 +134,6 @@
 
     @push('scripts')
         <script type="text/javascript">
-            @if (config('app.enable_push_notifications'))
-            onDomReady(() => {
-                Echo.private(`feed-list.${userId}`)
-                    .listen('NewFeedItemsFetched', ({title, message}) => {
-                        Alpine.store('toasts').add(message, 10000);
-                        sendPushNotification(title, message, 10000, () => window.location.reload());
-                    });
-            });
-            @endif
-
             function feedList() {
                 return {
                     readFeedItemIds: [],

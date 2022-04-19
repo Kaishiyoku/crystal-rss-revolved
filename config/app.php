@@ -146,8 +146,6 @@ return [
 
     'github_url' => env('GITHUB_URL'),
 
-    'enable_push_notifications' => env('ENABLE_PUSH_NOTIFICATIONS', false),
-
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
