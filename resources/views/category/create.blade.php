@@ -4,9 +4,9 @@
     </x-slot>
 
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-300 leading-tight">
+        <x-site.heading>
             {{ __('Add category') }}
-        </h2>
+        </x-site.heading>
     </x-slot>
 
     {{ html()->modelForm($category, 'post', route('categories.store'))->class('px-4 sm:px-0')->open() }}

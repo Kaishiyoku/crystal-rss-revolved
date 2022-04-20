@@ -9,6 +9,7 @@ const withOpacityValue = (variable) => {
 
 
 module.exports = {
+    darkMode: 'class',
     content: [
         './resources/js/**/*.js',
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',

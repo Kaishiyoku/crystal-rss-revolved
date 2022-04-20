@@ -30,7 +30,7 @@
                         @foreach (Laravel\Jetstream\Jetstream::$permissions as $permission)
                             <label class="flex items-center">
                                 <x-jet-checkbox wire:model.defer="createApiTokenForm.permissions" :value="$permission"/>
-                                <span class="ml-2 text-sm text-gray-600">{{ $permission }}</span>
+                                <span class="ml-2 text-sm text-gray-700/75">{{ $permission }}</span>
                             </label>
                         @endforeach
                     </div>
@@ -74,13 +74,13 @@
 
                                 <div class="flex items-center">
                                     @if ($token->last_used_at)
-                                        <div class="text-sm text-gray-400">
+                                        <div class="text-sm text-gray-700/75">
                                             {{ __('Last used') }} {{ $token->last_used_at->diffForHumans() }}
                                         </div>
                                     @endif
 
                                     @if (Laravel\Jetstream\Jetstream::hasPermissions())
-                                        <button class="cursor-pointer ml-6 text-sm text-gray-400 underline" wire:click="manageApiTokenPermissions({{ $token->id }})">
+                                        <button class="cursor-pointer ml-6 text-sm text-gray-700/75 underline" wire:click="manageApiTokenPermissions({{ $token->id }})">
                                             {{ __('Permissions') }}
                                         </button>
                                     @endif
@@ -133,7 +133,7 @@
                 @foreach (Laravel\Jetstream\Jetstream::$permissions as $permission)
                     <label class="flex items-center">
                         <x-jet-checkbox wire:model.defer="updateApiTokenForm.permissions" :value="$permission"/>
-                        <span class="ml-2 text-sm text-gray-600">{{ $permission }}</span>
+                        <span class="ml-2 text-sm text-gray-700/75">{{ $permission }}</span>
                     </label>
                 @endforeach
             </div>
