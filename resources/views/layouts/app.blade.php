@@ -29,7 +29,7 @@
 
         <style>
             .custom-theme {
-                @foreach (availableThemeColorFields() as $colorField)
+                @foreach (availableThemeColorFields()->flatten() as $colorField)
                     --{{ Str::replace('_', '-', $colorField) }}: {{ session()->get('theme.' . Str::replace('_', '-', $colorField)) }};
                 @endforeach
             }

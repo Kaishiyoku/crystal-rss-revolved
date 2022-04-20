@@ -22,7 +22,7 @@ class ProfileColorThemeController extends Controller
      */
     public function update(Request $request)
     {
-        $data = $request->validate(availableThemeColorFields()->mapWithKeys(fn(string $colorField) => [$colorField => ['required', 'color_hex']])->toArray());
+        $data = $request->validate(availableThemeColorFields()->flatten()->mapWithKeys(fn(string $colorField) => [$colorField => ['required', 'color_hex']])->toArray());
 
         collect($data)->each(function ($color, $colorField) use ($request) {
             $request->session()->put('theme.' . Str::replace('_', '-', $colorField), rgbToString(Hex::fromString($color)->toRgb()));
@@ -39,7 +39,7 @@ class ProfileColorThemeController extends Controller
      */
     public function reset(Request $request)
     {
-        $request->session()->forget(availableThemeColorFields()->map(fn(string $colorField) => 'theme.' . Str::replace('_', '-', $colorField))->toArray());
+        $request->session()->forget(availableThemeColorFields()->flatten()->map(fn(string $colorField) => 'theme.' . Str::replace('_', '-', $colorField))->toArray());
         $request->session()->forget('theme.custom');
 
         return redirect()->back();

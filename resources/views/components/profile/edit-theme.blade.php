@@ -1,13 +1,13 @@
 <div class="md:grid md:grid-cols-3 md:gap-6" {{ $attributes }}>
     <x-jet-section-title>
-        <x-slot name="title">{{ __('Edit theme') }}</x-slot>
-        <x-slot name="description">{{ __('Edit the color theme of the site') }}</x-slot>
+        <x-slot name="title">{{ __('Edit color theme') }}</x-slot>
+        <x-slot name="description">{{ __('You can change the color theme of the site. the lower the number the lighter the color should be (50 = lightest, 900 = darkest).') }}</x-slot>
     </x-jet-section-title>
 
     <div class="mt-5 md:mt-0 md:col-span-2">
         <div class="mb-5">
             <x-secondary-update-button :url="route('user-theme.reset')">
-                {{ __('Reset theme') }}
+                {{ __('Reset color theme') }}
             </x-secondary-update-button>
         </div>
 
@@ -18,14 +18,22 @@
 
             <div class="px-4 py-5 sm:p-6 bg-white dark:bg-gray-900/50 dark:bg-opacity-50 shadow sm:rounded-t-lg">
                 <div class="max-w-xl text-sm text-gray-700/50 dark:text-gray-500">
-                    @foreach (availableThemeColorFields() as $colorField)
-                        <div>
-                            <x-jet-label :for="$colorField" value="{{ __('validation.attributes.' . $colorField) }}" />
-                            <x-jet-input :id="$colorField" class="block mt-1 w-full" type="color" :name="$colorField" required/>
+                    @foreach (availableThemeColorFields() as $colorGroup => $colorFields)
+                        <div class="text-lg text-gray-900 dark:text-gray-100 pb-2">
+                            {{ __(\Illuminate\Support\Str::ucfirst($colorGroup)) }}
+                        </div>
 
-                            @error($colorField)
-                                <x-validation-error>{{ $message }}</x-validation-error>
-                            @enderror
+                        <div class="grid grid-cols-5">
+                            @foreach ($colorFields as $colorField)
+                                <div class="mb-4">
+                                    <x-jet-label :for="$colorField" :value="Arr::last(explode('_', $colorField))" class="pl-1"/>
+                                    <x-jet-input :id="$colorField" class="block mt-1 w-full" type="color" :name="$colorField" required/>
+
+                                    @error($colorField)
+                                        <x-validation-error>{{ $message }}</x-validation-error>
+                                    @enderror
+                                </div>
+                            @endforeach
                         </div>
                     @endforeach
                 </div>

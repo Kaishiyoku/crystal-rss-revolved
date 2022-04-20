@@ -737,5 +737,11 @@
     "Refresh now": "Jetzt aktualisieren",
     "total_number_of_feeds": "{0}Keine Feeds|{1}Ein Feed|[2,*]:count Feeds",
     "total_number_of_categories": "{0}Keine Kategorien|{1}Eine Kategorie|[2,*]:count Kategorien",
-    "API documentation": "API-Dokumentation"
+    "API documentation": "API-Dokumentation",
+    "Edit color theme": "Farbschema ändern",
+    "You can change the color theme of the site. the lower the number the lighter the color should be (50 = lightest, 900 = darkest).": "Du kannst das Farbschema der Seite ändern. Je kleiner der Wert, desto heller die Farbe (50 = hellste, 900 = dunkelste).",
+    "Reset color theme": "Farbschema zurücksetzen",
+    "Primary": "Primär",
+    "Secondary": "Sekundär",
+    "Gray": "Grau"
 }
