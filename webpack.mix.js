@@ -18,6 +18,7 @@ mix.js('resources/js/app.js', 'public/js')
         require('postcss-import'),
         require('tailwindcss'),
     ])
+    .postCss('resources/css/themes/base-theme.css', 'public/css')
     .copyDirectory('resources/img', 'public/img');
 
 if (mix.inProduction()) {

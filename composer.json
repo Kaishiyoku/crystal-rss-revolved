@@ -8,6 +8,7 @@
         "php": "^8.0.2",
         "ext-curl": "*",
         "ext-json": "*",
+        "bensampo/laravel-enum": "^5.3",
         "blade-ui-kit/blade-heroicons": "^1.2",
         "cjstroud/classnames-php": "^1.0",
         "doctrine/dbal": "^3.3",

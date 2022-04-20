@@ -55,6 +55,8 @@ use Laravel\Sanctum\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|User verified()
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\FeedItem[] $feedItems
  * @property-read int|null $feed_items_count
+ * @property string $theme
+ * @method static Builder|User whereTheme($value)
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
