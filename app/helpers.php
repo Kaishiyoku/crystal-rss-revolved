@@ -50,11 +50,11 @@ if (!function_exists('availableThemeColorFields')) {
             'gray',
         ]);
 
-        return $colorGroups->mapWithKeys(
-            fn(string $colorGroup) => [$colorGroup => $colorVariations->map(
+        return $colorGroups->map(
+            fn(string $colorGroup) => $colorVariations->map(
                 fn(int $variation) => "color_{$colorGroup}_{$variation}"
-            )]
-        );
+            )
+        )->flatten();
     }
 }
 
