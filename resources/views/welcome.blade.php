@@ -11,6 +11,7 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+        <link rel="stylesheet" href="{{ mix('css/base-theme.css') }}">
 
         <!-- Scripts -->
         <script src="{{ mix('js/welcome.js') }}" defer></script>
