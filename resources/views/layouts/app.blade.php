@@ -39,12 +39,12 @@
     <body class="font-sans antialiased {{ session()->has('theme.custom') ? 'custom-theme' : 'base-theme' }}">
         <x-jet-banner />
 
-        <div class="min-h-screen bg-gray-100 dark:text-gray-500/75 dark:bg-gray-900">
+        <div class="min-h-screen bg-gray-100 dark:text-gray-400 dark:bg-gray-900">
             @livewire('navigation-menu')
 
             <!-- Page Heading -->
             @if (isset($header))
-                <header class="bg-white dark:bg-gray-700/25 shadow">
+                <header class="bg-white dark:bg-gray-800 shadow">
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>

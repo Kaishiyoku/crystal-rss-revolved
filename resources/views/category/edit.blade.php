@@ -6,9 +6,9 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <div>
-                <x-site.heading>
+                <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-300 leading-tight">
                     {{ __('Edit category') }}
-                </x-site.heading>
+                </h2>
 
                 <div>
                     {{ $category->getName() }}
