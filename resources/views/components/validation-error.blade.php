@@ -1,3 +1,3 @@
-<div class="text-sm text-red-800 pt-1">
+<div class="text-sm text-warning-800 pt-1">
     {{ $slot }}
 </div>

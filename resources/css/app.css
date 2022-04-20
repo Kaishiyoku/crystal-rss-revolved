@@ -35,6 +35,17 @@
     --color-gray-700: 55, 65, 81;
     --color-gray-800: 31, 41, 55;
     --color-gray-900: 17, 24, 39;
+
+    --color-warning-50: 253, 242, 248;
+    --color-warning-100: 252, 231, 243;
+    --color-warning-200: 251, 207, 232;
+    --color-warning-300: 249, 168, 212;
+    --color-warning-400: 244, 114, 182;
+    --color-warning-500: 236, 72, 153;
+    --color-warning-600: 219, 39, 119;
+    --color-warning-700: 190, 24, 93;
+    --color-warning-800: 157, 23, 77;
+    --color-warning-900: 131, 24, 67;
 }
 
 @layer base {

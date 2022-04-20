@@ -41,6 +41,17 @@ module.exports = {
             'secondary-800': withOpacityValue('--color-secondary-800'),
             'secondary-900': withOpacityValue('--color-secondary-900'),
 
+            'warning-50': withOpacityValue('--color-warning-50'),
+            'warning-100': withOpacityValue('--color-warning-100'),
+            'warning-200': withOpacityValue('--color-warning-200'),
+            'warning-300': withOpacityValue('--color-warning-300'),
+            'warning-400': withOpacityValue('--color-warning-400'),
+            'warning-500': withOpacityValue('--color-warning-500'),
+            'warning-600': withOpacityValue('--color-warning-600'),
+            'warning-700': withOpacityValue('--color-warning-700'),
+            'warning-800': withOpacityValue('--color-warning-800'),
+            'warning-900': withOpacityValue('--color-warning-900'),
+
             'gray-50': withOpacityValue('--color-gray-50'),
             'gray-100': withOpacityValue('--color-gray-100'),
             'gray-200': withOpacityValue('--color-gray-200'),
