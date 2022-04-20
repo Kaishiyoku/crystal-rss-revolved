@@ -62,3 +62,10 @@ if (!function_exists('availableThemeColorFields')) {
         )->flatten();
     }
 }
+
+if (!function_exists('plainRgbToHex')) {
+    function plainRgbToHex(string $rgb): string
+    {
+        return Rgb::fromString("rgb({$rgb})")->toHex();
+    }
+}
