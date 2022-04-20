@@ -35,7 +35,6 @@
             }
         </style>
     </head>
-
     <body class="font-sans antialiased {{ session()->has('theme.custom') ? 'custom-theme' : 'base-theme' }}">
         <x-jet-banner />
 
