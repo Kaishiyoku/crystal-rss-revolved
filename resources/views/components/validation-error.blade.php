@@ -1,3 +1,3 @@
-<div class="text-sm text-pink-800 dark:text-pink-600 pt-1">
+<div class="text-sm text-red-800 pt-1">
     {{ $slot }}
 </div>

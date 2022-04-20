@@ -15,7 +15,6 @@
         "guzzlehttp/guzzle": "^7.3.0",
         "guzzlehttp/psr7": "^1.5",
         "kaishiyoku/hera-rss-crawler": "^3.0.0",
-        "kaishiyoku/laravel-color-validation": "^2.0",
         "knuckleswtf/scribe": "^3.21",
         "laravel/framework": "^9.0",
         "laravel/jetstream": "^2.3",
@@ -25,7 +24,6 @@
         "neitanod/forceutf8": "^2.0",
         "predis/predis": "^1.1",
         "pusher/pusher-php-server": "~5.0",
-        "spatie/color": "^1.5",
         "spatie/laravel-html": "^3.1.0"
     },
     "require-dev": {

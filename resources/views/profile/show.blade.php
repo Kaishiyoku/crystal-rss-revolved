@@ -44,12 +44,6 @@
                     @livewire('profile.delete-user-form')
                 </div>
             @endif
-
-            <x-jet-section-border />
-
-            <div class="mt-10 sm:mt-0">
-                <x-profile.edit-theme/>
-            </div>
         </div>
     </div>
 </x-app-layout>
