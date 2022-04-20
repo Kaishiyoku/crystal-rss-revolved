@@ -737,5 +737,8 @@
     "Refresh now": "Jetzt aktualisieren",
     "total_number_of_feeds": "{0}Keine Feeds|{1}Ein Feed|[2,*]:count Feeds",
     "total_number_of_categories": "{0}Keine Kategorien|{1}Eine Kategorie|[2,*]:count Kategorien",
-    "API documentation": "API-Dokumentation"
+    "API documentation": "API-Dokumentation",
+    "Base": "Standard",
+    "Edit color theme": "Farbschema ändern",
+    "Select your preferred color theme.": "Wählen Sie Ihr bevorzugtes Farbschema."
 }

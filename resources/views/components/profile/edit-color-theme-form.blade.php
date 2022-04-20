@@ -8,7 +8,11 @@
     </x-slot>
 
     <x-slot name="content">
-        <div class="flex space-x-4">
+        <div class="max-w-xl text-sm text-gray-600 dark:text-gray-500">
+            {{ __('theme.currently_selected', ['theme' => __(\App\Enums\ColorTheme::fromValue(Auth::user()->theme)->key)]) }}
+        </div>
+
+        <div class="flex space-x-4 mt-5">
             <x-secondary-update-button :url="route('user-edit-color-theme', \App\Enums\ColorTheme::Base)" class="dark:bg-[#31257a] dark:border-[#4837a9] dark:hover:bg-[#4837a9]">
                 {{ __(\App\Enums\ColorTheme::Base()->key) }}
             </x-secondary-update-button>
