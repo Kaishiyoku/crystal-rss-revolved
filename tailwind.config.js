@@ -52,6 +52,7 @@ module.exports = {
             'gray-800': withOpacityValue('--color-gray-800'),
             'gray-900': withOpacityValue('--color-gray-900'),
 
+            pink: colors.pink,
             transparent: 'transparent',
             current: 'currentColor',
             white: '#ffffff',

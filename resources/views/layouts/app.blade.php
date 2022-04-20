@@ -26,8 +26,16 @@
         <script src="{{ mix('js/misc.js') }}"></script>
 
         @include('shared._favicon')
+
+        <style>
+            .custom-theme {
+                @foreach (availableThemeColorFields() as $colorField)
+                    --{{ Str::replace('_', '-', $colorField) }}: {{ session()->get('theme.' . Str::replace('_', '-', $colorField)) }};
+                @endforeach
+            }
+        </style>
     </head>
-    <body class="font-sans antialiased base-theme">
+    <body class="font-sans antialiased {{ session()->has('theme.custom') ? 'custom-theme' : 'base-theme' }}">
         <x-jet-banner />
 
         <div class="min-h-screen bg-gray-100 dark:text-gray-400 dark:bg-gray-900">
