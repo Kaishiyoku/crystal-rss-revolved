@@ -13,11 +13,11 @@
         </div>
 
         <div class="flex space-x-4 mt-5">
-            <x-secondary-update-button :url="route('user-edit-color-theme', \App\Enums\ColorTheme::Base)" class="dark:bg-[#31257a] dark:border-[#4837a9] dark:hover:bg-[#4837a9]">
+            <x-secondary-update-button :url="route('user-edit-color-theme', \App\Enums\ColorTheme::Base)" class="bg-[#d1d8f9] dark:bg-[#31257a]">
                 {{ __(\App\Enums\ColorTheme::Base()->key) }}
             </x-secondary-update-button>
 
-            <x-secondary-update-button :url="route('user-edit-color-theme', \App\Enums\ColorTheme::Lavender)" class="dark:bg-[#2F2A41] dark:border-[#484063] dark:hover:bg-[#484063]">
+            <x-secondary-update-button :url="route('user-edit-color-theme', \App\Enums\ColorTheme::Lavender)" class="bg-[#b7abe3] dark:bg-[#31257a]">
                 {{ __(\App\Enums\ColorTheme::Lavender()->key) }}
             </x-secondary-update-button>
         </div>

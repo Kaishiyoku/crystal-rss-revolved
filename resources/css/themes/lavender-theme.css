@@ -1,15 +1,15 @@
 .base-theme {
-    --color-primary-default: 123, 112, 163;
-    --color-primary-50: 226, 224, 235;
-    --color-primary-100: 215, 212, 227;
-    --color-primary-200: 192, 187, 211;
-    --color-primary-300: 169, 162, 195;
-    --color-primary-400: 146, 137, 179;
-    --color-primary-500: 123, 112, 163;
-    --color-primary-600: 96, 86, 133;
-    --color-primary-700: 72, 64, 99;
-    --color-primary-800: 47, 42, 65;
-    --color-primary-900: 22, 20, 31;
+    --color-primary-default: 104, 79, 196;
+    --color-primary-50: 222, 216, 242;
+    --color-primary-100: 209, 201, 237;
+    --color-primary-200: 183, 171, 227;
+    --color-primary-300: 156, 140, 217;
+    --color-primary-400: 130, 109, 206;
+    --color-primary-500: 104, 79, 196;
+    --color-primary-600: 78, 55, 164;
+    --color-primary-700: 58, 41, 122;
+    --color-primary-800: 38, 27, 80;
+    --color-primary-900: 18, 13, 38;
 
     --color-secondary-default: 112, 115, 163;
     --color-secondary-50: 224, 224, 235;
@@ -23,17 +23,17 @@
     --color-secondary-800: 42, 43, 65;
     --color-secondary-900: 20, 20, 31;
 
-    --color-gray-default: 133, 129, 146;
-    --color-gray-50: 228, 228, 231;
-    --color-gray-100: 218, 217, 222;
-    --color-gray-200: 197, 195, 203;
-    --color-gray-300: 175, 173, 184;
-    --color-gray-400: 154, 151, 165;
-    --color-gray-500: 133, 129, 146;
-    --color-gray-600: 105, 102, 117;
-    --color-gray-700: 78, 76, 87;
-    --color-gray-800: 51, 50, 57;
-    --color-gray-900: 24, 24, 27;
+    --color-gray-default: 140, 128, 179;
+    --color-gray-50: 243, 242, 247;
+    --color-gray-100: 232, 230, 240;
+    --color-gray-200: 209, 204, 224;
+    --color-gray-300: 186, 179, 209;
+    --color-gray-400: 163, 153, 194;
+    --color-gray-500: 140, 128, 179;
+    --color-gray-600: 111, 96, 159;
+    --color-gray-700: 89, 77, 128;
+    --color-gray-800: 66, 57, 96;
+    --color-gray-900: 44, 38, 64;
 
     --color-warning-default: 163, 112, 163;
     --color-warning-50: 235, 224, 235;
