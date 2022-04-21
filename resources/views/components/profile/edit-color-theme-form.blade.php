@@ -20,6 +20,10 @@
             <x-secondary-update-button :url="route('user-edit-color-theme', \App\Enums\ColorTheme::Lavender)" class="bg-[#b7abe3] dark:bg-[#31257a]">
                 {{ __(\App\Enums\ColorTheme::Lavender()->key) }}
             </x-secondary-update-button>
+
+            <x-secondary-update-button :url="route('user-edit-color-theme', \App\Enums\ColorTheme::Solarized)" class="bg-[#6B5824] dark:bg-[#413516]">
+                {{ __(\App\Enums\ColorTheme::Solarized()->key) }}
+            </x-secondary-update-button>
         </div>
     </x-slot>
 </x-jet-action-section>

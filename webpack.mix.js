@@ -20,6 +20,7 @@ mix.js('resources/js/app.js', 'public/js')
     ])
     .postCss('resources/css/themes/base-theme.css', 'public/css')
     .postCss('resources/css/themes/lavender-theme.css', 'public/css')
+    .postCss('resources/css/themes/solarized-theme.css', 'public/css')
     .copyDirectory('resources/img', 'public/img');
 
 if (mix.inProduction()) {

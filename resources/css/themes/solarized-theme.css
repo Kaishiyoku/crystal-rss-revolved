@@ -1,0 +1,49 @@
+.solarized-theme {
+    --color-primary-50: 211, 238, 253;
+    --color-primary-100: 192, 231, 252;
+    --color-primary-200: 153, 216, 250;
+    --color-primary-300: 114, 201, 248;
+    --color-primary-400: 75, 186, 246;
+    --color-primary-500: 36, 171, 244;
+    --color-primary-600: 10, 136, 204;
+    --color-primary-700: 7, 94, 141;
+    --color-primary-800: 4, 52, 78;
+    --color-primary-900: 1, 10, 15;
+    --color-primary-default: 36, 171, 244;
+
+    --color-secondary-50: 235, 225, 252;
+    --color-secondary-100: 221, 204, 250;
+    --color-secondary-200: 194, 162, 246;
+    --color-secondary-300: 166, 120, 243;
+    --color-secondary-400: 139, 78, 239;
+    --color-secondary-500: 111, 35, 235;
+    --color-secondary-600: 86, 18, 196;
+    --color-secondary-700: 63, 13, 145;
+    --color-secondary-800: 41, 9, 93;
+    --color-secondary-900: 18, 4, 42;
+    --color-secondary-default: 111, 35, 235;
+
+    --color-gray-50: 237, 227, 201;
+    --color-gray-100: 232, 219, 186;
+    --color-gray-200: 222, 204, 156;
+    --color-gray-300: 212, 188, 125;
+    --color-gray-400: 201, 172, 94;
+    --color-gray-500: 191, 156, 64;
+    --color-gray-600: 149, 122, 50;
+    --color-gray-700: 107, 88, 36;
+    --color-gray-800: 65, 53, 22;
+    --color-gray-900: 23, 19, 8;
+    --color-gray-default: 191, 156, 64;
+
+    --color-warning-50: 253, 238, 246;
+    --color-warning-100: 251, 220, 235;
+    --color-warning-200: 248, 183, 215;
+    --color-warning-300: 244, 146, 194;
+    --color-warning-400: 240, 109, 174;
+    --color-warning-500: 236, 72, 153;
+    --color-warning-600: 228, 24, 125;
+    --color-warning-700: 177, 18, 97;
+    --color-warning-800: 127, 13, 69;
+    --color-warning-900: 76, 8, 41;
+    --color-warning-default: 236, 72, 153;
+}
