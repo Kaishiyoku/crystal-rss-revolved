@@ -1,49 +1,49 @@
 .lavender-theme {
-    --color-primary-default: 104, 79, 196;
-    --color-primary-50: 222, 216, 242;
-    --color-primary-100: 209, 201, 237;
-    --color-primary-200: 183, 171, 227;
-    --color-primary-300: 156, 140, 217;
-    --color-primary-400: 130, 109, 206;
-    --color-primary-500: 104, 79, 196;
-    --color-primary-600: 78, 55, 164;
-    --color-primary-700: 58, 41, 122;
-    --color-primary-800: 38, 27, 80;
-    --color-primary-900: 18, 13, 38;
+    --color-primary-default: 104, 79, 196; /* #684fc4 */
+    --color-primary-50: 222, 216, 242; /* #ded8f2 */
+    --color-primary-100: 209, 201, 237; /* #d1c9ed */
+    --color-primary-200: 183, 171, 227; /* #b7abe3 */
+    --color-primary-300: 156, 140, 217; /* #9c8cd9 */
+    --color-primary-400: 130, 109, 206; /* #826dce */
+    --color-primary-500: 104, 79, 196; /* #684fc4 */
+    --color-primary-600: 78, 55, 164; /* #4e37a4 */
+    --color-primary-700: 58, 41, 122; /* #3a297a */
+    --color-primary-800: 38, 27, 80; /* #261b50 */
+    --color-primary-900: 18, 13, 38; /* #120d26 */
 
-    --color-secondary-default: 112, 115, 163;
-    --color-secondary-50: 224, 224, 235;
-    --color-secondary-100: 211, 212, 227;
-    --color-secondary-200: 186, 188, 211;
-    --color-secondary-300: 162, 164, 195;
-    --color-secondary-400: 137, 139, 179;
-    --color-secondary-500: 112, 115, 163;
-    --color-secondary-600: 86, 88, 133;
-    --color-secondary-700: 64, 66, 99;
-    --color-secondary-800: 42, 43, 65;
-    --color-secondary-900: 20, 20, 31;
+    --color-secondary-default: 112, 115, 163; /* #7073a3 */
+    --color-secondary-50: 224, 224, 235; /* #e0e0eb */
+    --color-secondary-100: 211, 212, 227; /* #d3d4e3 */
+    --color-secondary-200: 186, 188, 211; /* #babcd3 */
+    --color-secondary-300: 162, 164, 195; /* #a2a4c3 */
+    --color-secondary-400: 137, 139, 179; /* #898bb3 */
+    --color-secondary-500: 112, 115, 163; /* #7073a3 */
+    --color-secondary-600: 86, 88, 133; /* #565885 */
+    --color-secondary-700: 64, 66, 99; /* #404263 */
+    --color-secondary-800: 42, 43, 65; /* #2a2b41 */
+    --color-secondary-900: 20, 20, 31; /* #14141f */
 
-    --color-gray-default: 140, 128, 179;
-    --color-gray-50: 243, 242, 247;
-    --color-gray-100: 232, 230, 240;
-    --color-gray-200: 209, 204, 224;
-    --color-gray-300: 186, 179, 209;
-    --color-gray-400: 163, 153, 194;
-    --color-gray-500: 140, 128, 179;
-    --color-gray-600: 111, 96, 159;
-    --color-gray-700: 89, 77, 128;
-    --color-gray-800: 66, 57, 96;
-    --color-gray-900: 44, 38, 64;
+    --color-gray-default: 140, 128, 179; /* #8c80b3 */
+    --color-gray-50: 243, 242, 247; /* #f3f2f7 */
+    --color-gray-100: 232, 230, 240; /* #e8e6f0 */
+    --color-gray-200: 209, 204, 224; /* #d1cce0 */
+    --color-gray-300: 186, 179, 209; /* #bab3d1 */
+    --color-gray-400: 163, 153, 194; /* #a399c2 */
+    --color-gray-500: 140, 128, 179; /* #8c80b3 */
+    --color-gray-600: 111, 96, 159; /* #6f609f */
+    --color-gray-700: 89, 77, 128; /* #594d80 */
+    --color-gray-800: 66, 57, 96; /* #423960 */
+    --color-gray-900: 44, 38, 64; /* #2c2640 */
 
-    --color-warning-default: 163, 112, 163;
-    --color-warning-50: 235, 224, 235;
-    --color-warning-100: 227, 211, 227;
-    --color-warning-200: 211, 186, 211;
-    --color-warning-300: 195, 162, 195;
-    --color-warning-400: 179, 137, 179;
-    --color-warning-500: 163, 112, 163;
-    --color-warning-600: 133, 86, 133;
-    --color-warning-700: 99, 64, 99;
-    --color-warning-800: 65, 42, 65;
-    --color-warning-900: 31, 20, 31;
+    --color-warning-default: 163, 112, 163; /* #a370a3 */
+    --color-warning-50: 235, 224, 235; /* #ebe0eb */
+    --color-warning-100: 227, 211, 227; /* #e3d3e3 */
+    --color-warning-200: 211, 186, 211; /* #d3bad3 */
+    --color-warning-300: 195, 162, 195; /* #c3a2c3 */
+    --color-warning-400: 179, 137, 179; /* #b389b3 */
+    --color-warning-500: 163, 112, 163; /* #a370a3 */
+    --color-warning-600: 133, 86, 133; /* #855685 */
+    --color-warning-700: 99, 64, 99; /* #634063 */
+    --color-warning-800: 65, 42, 65; /* #412a41 */
+    --color-warning-900: 31, 20, 31; /* #1f141f */
 }
