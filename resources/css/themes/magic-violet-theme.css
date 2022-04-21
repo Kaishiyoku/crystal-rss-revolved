@@ -1,0 +1,49 @@
+.magic-violet-theme {
+    --color-primary-50: 245, 235, 255; /* #F5EBFF */
+    --color-primary-100: 236, 214, 255; /* #ECD6FF */
+    --color-primary-200: 216, 173, 255; /* #D8ADFF */
+    --color-primary-300: 197, 133, 255; /* #C585FF */
+    --color-primary-400: 178, 92, 255; /* #B25CFF */
+    --color-primary-500: 158, 51, 255; /* #9E33FF */
+    --color-primary-600: 132, 0, 250; /* #8400FA */
+    --color-primary-700: 102, 0, 194; /* #6600C2 */
+    --color-primary-800: 72, 0, 138; /* #48008A */
+    --color-primary-900: 43, 0, 82; /* #2B0052 */
+    --color-primary-default: 158, 51, 255; /* #9E33FF */
+
+    --color-secondary-50: 246, 252, 255; /* #F6FCFF */
+    --color-secondary-100: 225, 245, 255; /* #E1F5FF */
+    --color-secondary-200: 185, 230, 255; /* #B9E6FF */
+    --color-secondary-300: 144, 216, 254; /* #90D8FE */
+    --color-secondary-400: 104, 201, 254; /* #68C9FE */
+    --color-secondary-500: 63, 187, 254; /* #3FBBFE */
+    --color-secondary-600: 7, 167, 254; /* #07A7FE */
+    --color-secondary-700: 1, 133, 204; /* #0185CC */
+    --color-secondary-800: 1, 96, 148; /* #016094 */
+    --color-secondary-900: 0, 60, 92; /* #003C5C */
+    --color-secondary-default: 63, 187, 254; /* #3FBBFE */
+
+    --color-gray-50: 245, 243, 247; /* #F5F3F7 */
+    --color-gray-100: 235, 231, 239; /* #EBE7EF */
+    --color-gray-200: 215, 206, 222; /* #D7CEDE */
+    --color-gray-300: 194, 182, 206; /* #C2B6CE */
+    --color-gray-400: 174, 157, 190; /* #AE9DBE */
+    --color-gray-500: 154, 133, 173; /* #9A85AD */
+    --color-gray-600: 126, 100, 150; /* #7E6496 */
+    --color-gray-700: 98, 78, 116; /* #624E74 */
+    --color-gray-800: 70, 55, 83; /* #463753 */
+    --color-gray-900: 41, 33, 49; /* #292131 */
+    --color-gray-default: 154, 133, 173; /* #9A85AD */
+
+    --color-warning-50: 255, 219, 246; /* #FFDBF6 */
+    --color-warning-100: 255, 198, 241; /* #FFC6F1 */
+    --color-warning-200: 255, 157, 231; /* #FF9DE7 */
+    --color-warning-300: 255, 117, 220; /* #FF75DC */
+    --color-warning-400: 255, 76, 210; /* #FF4CD2 */
+    --color-warning-500: 255, 35, 200; /* #FF23C8 */
+    --color-warning-600: 234, 0, 175; /* #EA00AF */
+    --color-warning-700: 178, 0, 133; /* #B20085 */
+    --color-warning-800: 122, 0, 91; /* #7A005B */
+    --color-warning-900: 66, 0, 49; /* #420031 */
+    --color-warning-default: 255, 35, 200; /* #FF23C8 */
+}
