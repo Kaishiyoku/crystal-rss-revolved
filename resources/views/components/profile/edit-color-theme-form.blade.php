@@ -21,10 +21,6 @@
                 {{ __(getTranslationForColorTheme(\App\Enums\ColorTheme::Lavender())) }}
             </x-secondary-update-button>
 
-            <x-secondary-update-button :url="route('user-edit-color-theme', \App\Enums\ColorTheme::Solarized)" class="bg-[#6B5824] dark:bg-[#413516]">
-                {{ __(getTranslationForColorTheme(\App\Enums\ColorTheme::Solarized())) }}
-            </x-secondary-update-button>
-
             <x-secondary-update-button :url="route('user-edit-color-theme', \App\Enums\ColorTheme::MagicViolet)" class="bg-[#8400FA] dark:bg-[#48008A]">
                 {{ __(getTranslationForColorTheme(\App\Enums\ColorTheme::MagicViolet())) }}
             </x-secondary-update-button>
