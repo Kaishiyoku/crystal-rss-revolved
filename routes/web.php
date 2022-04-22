@@ -23,6 +23,7 @@ Route::get('/', [HomeController::class, 'welcome'])->name('welcome');
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/dashboard/{previousFirstFeedItemChecksum?}/{previousLastFeedItemChecksum?}', [FeedItemController::class, 'dashboard'])->name('dashboard');
+    Route::get('/dashboard/filter/feed/{feed}/{previousFirstFeedItemChecksum?}/{previousLastFeedItemChecksum?}', [FeedItemController::class, 'dashboardFiltered'])->name('dashboard.filter');
 
     Route::resource('categories', CategoryController::class)->except(['show']);
     Route::put('/feeds/mark_all_as_read', [FeedController::class, 'markAllAsRead'])->name('feeds.mark_all_as_read');

@@ -12,7 +12,11 @@
     </x-slot>
 
     @if ($unreadFeedItems->isNotEmpty())
-        <div class="mb-8 lg:flex lg:justify-between lg:space-x-2 space-y-2 lg:space-y-0 px-4 sm:px-0">
+        <div class="md:flex md:justify-between md:items-center md:space-x-4 space-y-4 md:space-y-0 mb-8 px-4 sm:px-0">
+            <div class="w-[400px]">
+                <x-select-autocomplete id="filter_by_feed" :placeholder="__('Filter by feed...')" name="filter_by_feed" :value="optional($selectedFeed)->name" :autocompleteValues="$feedOptions"/>
+            </div>
+
             <x-update-button :url="route('feeds.mark_all_as_read')">
                 {{ __('Mark all as read') }}
             </x-update-button>
@@ -118,9 +122,15 @@
 
     @if ($unreadFeedItems->count() >= config('app.feed_items_per_page'))
         <div class="md:flex md:justify-between md:items-center px-4 md:px-0 mt-8">
-            <x-button-link class="sm:mx-0 py-4 md:py-2 w-full md:w-auto" :url="route('dashboard', [$unreadFeedItems->first()->checksum, $unreadFeedItems->last()->checksum])">
-                {{ __('Load more') }}
-            </x-button-link>
+            @if ($selectedFeed)
+                <x-button-link class="sm:mx-0 py-4 md:py-2 w-full md:w-auto" :url="route('dashboard.filter', [$selectedFeed->id, $unreadFeedItems->first()->checksum, $unreadFeedItems->last()->checksum])">
+                    {{ __('Load more') }}
+                </x-button-link>
+            @else
+                <x-button-link class="sm:mx-0 py-4 md:py-2 w-full md:w-auto" :url="route('dashboard', [$unreadFeedItems->first()->checksum, $unreadFeedItems->last()->checksum])">
+                    {{ __('Load more') }}
+                </x-button-link>
+            @endif
 
             <button
                 type="button"

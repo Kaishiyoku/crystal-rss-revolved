@@ -742,5 +742,8 @@
     "Edit color theme": "Farbschema ändern",
     "Select your preferred color theme.": "Wählen Sie Ihr bevorzugtes Farbschema.",
     "Preferences": "Einstellungen",
-    "Edit your preferences.": "Ändern Sie Ihre Einstellungen."
+    "Edit your preferences.": "Ändern Sie Ihre Einstellungen.",
+    "All feeds": "Alle Feeds",
+    "Display all feeds": "Alle Feeds anzeigen",
+    "Filter by feed...": "Nach Feed filtern..."
 }
