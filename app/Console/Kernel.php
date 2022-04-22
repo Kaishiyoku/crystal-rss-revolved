@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\CheckFeedFavicons;
 use App\Console\Commands\FetchFeedItems;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -26,6 +27,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command(FetchFeedItems::class)->hourly();
+        $schedule->command(CheckFeedFavicons::class)->weeklyOn(0, '02:00');
         $schedule->command('model:prune')->daily();
     }
 
