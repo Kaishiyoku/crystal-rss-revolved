@@ -50,6 +50,12 @@
             <div class="mt-10 sm:mt-0">
                 <x-profile.edit-color-theme-form/>
             </div>
+
+            <x-jet-section-border />
+
+            <div class="mt-10 sm:mt-0">
+                <x-profile.edit-settings-form/>
+            </div>
         </div>
     </div>
 </x-app-layout>

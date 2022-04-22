@@ -740,5 +740,7 @@
     "API documentation": "API-Dokumentation",
     "Base": "Standard",
     "Edit color theme": "Farbschema ändern",
-    "Select your preferred color theme.": "Wählen Sie Ihr bevorzugtes Farbschema."
+    "Select your preferred color theme.": "Wählen Sie Ihr bevorzugtes Farbschema.",
+    "Preferences": "Einstellungen",
+    "Edit your preferences.": "Ändern Sie Ihre Einstellungen."
 }

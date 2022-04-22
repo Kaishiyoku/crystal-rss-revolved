@@ -84,7 +84,7 @@
                                     <div>{{ $unreadFeedItem->formatted_posted_at }}</div>
                                 </div>
 
-                                @if ($unreadFeedItem->description)
+                                @if (Auth::user()->is_feed_item_description_visible && $unreadFeedItem->description)
                                     <div class="group-hover:text-gray-300 group-focus:text-gray-200 pt-1 text-muted md:text-sm">{{ $unreadFeedItem->description }}</div>
                                 @endif
                             </div>

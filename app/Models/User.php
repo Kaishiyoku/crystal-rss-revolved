@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\ColorTheme;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -57,6 +58,8 @@ use Laravel\Sanctum\HasApiTokens;
  * @property-read int|null $feed_items_count
  * @property string $theme
  * @method static Builder|User whereTheme($value)
+ * @property int $is_feed_item_description_visible
+ * @method static Builder|User whereIsFeedItemDescriptionVisible($value)
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -76,6 +79,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'password',
         'theme',
+        'is_feed_item_description_visible',
     ];
 
     /**
@@ -97,6 +101,8 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'theme' => ColorTheme::class,
+        'is_feed_item_description_visible' => 'bool',
     ];
 
     /**

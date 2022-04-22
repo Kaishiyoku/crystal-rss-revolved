@@ -9,7 +9,7 @@
 
     <x-slot name="content">
         <div class="max-w-xl text-sm text-gray-600 dark:text-gray-500">
-            {{ __('theme.currently_selected', ['theme' => __(\App\Enums\ColorTheme::fromValue(Auth::user()->theme)->key)]) }}
+            {{ __('theme.currently_selected', ['theme' => __(Auth::user()->theme->key)]) }}
         </div>
 
         <div class="flex space-x-4 mt-5">
