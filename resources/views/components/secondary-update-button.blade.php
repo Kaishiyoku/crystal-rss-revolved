@@ -1,4 +1,4 @@
-@props(['url' => null, 'customBackgrounds' => false])
+@props(['url' => null])
 
 <form class="inline-block" method="post" action="{{ $url }}">
     @csrf
