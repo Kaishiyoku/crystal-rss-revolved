@@ -35,7 +35,6 @@
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^6.1",
-        "nunomaduro/larastan": "^0.7.12",
         "phpunit/phpunit": "^9.5.10",
         "spatie/laravel-ignition": "^1.0"
     },
@@ -69,8 +68,7 @@
             "php artisan ide-helper:generate",
             "php artisan ide-helper:meta",
             "php artisan ide-helper:models --dir=\"app/Models\" --write"
-        ],
-        "analyse": "./vendor/bin/phpstan analyse --memory-limit=512M"
+        ]
     },
     "extra": {
         "laravel": {
