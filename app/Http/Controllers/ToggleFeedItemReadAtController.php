@@ -18,8 +18,9 @@ class ToggleFeedItemReadAtController extends Controller
     {
         $this->authorize('update', $feedItem);
 
-        $feedItem->read_at = $feedItem->read_at ? null : now();
-        $feedItem->save();
+        $feedItem->update([
+            'read_at' => $feedItem->read_at ? null : now(),
+        ]);
 
         return response()->json($feedItem->only(['id', 'read_at']));
     }
