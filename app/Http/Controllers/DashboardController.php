@@ -3,19 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\Feed;
-use App\Models\FeedItem;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class FeedItemController extends Controller
+class DashboardController extends Controller
 {
     /**
+     * Handle the incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param int|string|null $feedId
      * @param string|null $previousFirstFeedItemChecksum
      * @param string|null $previousLastFeedItemChecksum
-     * @param int|null $feedId
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse
      */
-    public function dashboard($previousFirstFeedItemChecksum = null, $previousLastFeedItemChecksum = null, $feedId = null)
+    public function __invoke(Request $request, $feedId = null, $previousFirstFeedItemChecksum = null, $previousLastFeedItemChecksum = null)
     {
+        if ($feedId === 'all') {
+            $feedId = null;
+        }
+
         // both checksums must be null or filled
         if ($previousFirstFeedItemChecksum && !$previousLastFeedItemChecksum || !$previousFirstFeedItemChecksum && $previousLastFeedItemChecksum) {
             abort(404);
@@ -31,7 +38,7 @@ class FeedItemController extends Controller
             ->map(fn(Feed $feed) => [
                 'label' => $feed->name,
                 'description' => "{$feed->category->getName()} ({$feed->unread_feed_items_count})",
-                'url' => route('dashboard.filter', [$feed]),
+                'url' => route('dashboard', [$feed]),
             ])
             ->when($selectedFeed, fn($feedOptions) => $feedOptions->prepend([
                 'label' => __('All feeds'),
@@ -92,26 +99,5 @@ class FeedItemController extends Controller
             'unreadFeedItems' => $unreadFeedItems,
             'totalUnreadFeedItemCount' => $totalUnreadFeedItemCount,
         ]);
-    }
-
-    /**
-     * @param int $feedId
-     * @param string|null $previousFirstFeedItemChecksum
-     * @param string|null $previousLastFeedItemChecksum
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse
-     */
-    public function dashboardFiltered($feedId, $previousFirstFeedItemChecksum = null, $previousLastFeedItemChecksum = null)
-    {
-        return $this->dashboard($previousFirstFeedItemChecksum, $previousLastFeedItemChecksum, $feedId);
-    }
-
-    public function toggleMarkAsRead(FeedItem $feedItem)
-    {
-        $this->authorize('update', $feedItem);
-
-        $feedItem->read_at = $feedItem->read_at ? null : now();
-        $feedItem->save();
-
-        return response()->json($feedItem->only(['id', 'read_at']));
     }
 }

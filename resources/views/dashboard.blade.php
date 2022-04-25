@@ -122,15 +122,9 @@
 
     @if ($unreadFeedItems->count() < $totalUnreadFeedItemCount)
         <div class="md:flex md:justify-between md:items-center px-4 md:px-0 mt-8">
-            @if ($selectedFeed)
-                <x-button-link class="sm:mx-0 py-4 md:py-2 w-full md:w-auto" :url="route('dashboard.filter', [$selectedFeed->id, $unreadFeedItems->first()->checksum, $unreadFeedItems->last()->checksum])">
-                    {{ __('Load more') }}
-                </x-button-link>
-            @else
-                <x-button-link class="sm:mx-0 py-4 md:py-2 w-full md:w-auto" :url="route('dashboard', [$unreadFeedItems->first()->checksum, $unreadFeedItems->last()->checksum])">
-                    {{ __('Load more') }}
-                </x-button-link>
-            @endif
+            <x-button-link class="sm:mx-0 py-4 md:py-2 w-full md:w-auto" :url="route('dashboard', [$selectedFeed ? $selectedFeed->id : \App\Enums\FeedFilter::All, $unreadFeedItems->first()->checksum, $unreadFeedItems->last()->checksum])">
+                {{ __('Load more') }}
+            </x-button-link>
 
             <button
                 type="button"
