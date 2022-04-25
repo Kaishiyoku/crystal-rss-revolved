@@ -17,9 +17,12 @@ class FeedController extends Controller
      */
     private $heraRssCrawler;
 
-    public function __construct()
+    /**
+     * @param HeraRssCrawler $heraRssCrawler
+     */
+    public function __construct(HeraRssCrawler $heraRssCrawler)
     {
-        $this->heraRssCrawler = new HeraRssCrawler();
+        $this->heraRssCrawler = $heraRssCrawler;
     }
 
     /**
@@ -67,9 +70,7 @@ class FeedController extends Controller
 
         $validated = $request->validated();
 
-        $faviconUrl = $this->heraRssCrawler->discoverFavicon(Arr::get($validated, 'site_url'));
-
-        Auth::user()->feeds()->save(new Feed(Arr::add($validated, 'favicon_url', $faviconUrl)));
+        Auth::user()->feeds()->save(new Feed(Arr::add($validated, 'favicon_url', $this->discoverFaviconUrl(Arr::get($validated, 'site_url')))));
 
         return redirect()->route('feeds.index');
     }
@@ -101,9 +102,7 @@ class FeedController extends Controller
     {
         $validated = $request->validated();
 
-        $faviconUrl = $this->heraRssCrawler->discoverFavicon(Arr::get($validated, 'site_url'));
-
-        $feed->update(Arr::add($validated, 'favicon_url', $faviconUrl));
+        $feed->update(Arr::add($validated, 'favicon_url', $this->discoverFaviconUrl(Arr::get($validated, 'site_url'))));
 
         return redirect()->route('feeds.index');
     }
@@ -133,10 +132,23 @@ class FeedController extends Controller
     {
         $now = now();
 
-        Auth::user()->feeds()->with('unreadFeedItems')->get()->each(function (Feed $feed) use ($now) {
-            $feed->feedItems()->update(['read_at' => $now]);
-        });
+        Auth::user()->feeds()
+            ->with('unreadFeedItems')
+            ->get()
+            ->each(function (Feed $feed) use ($now) {
+                $feed->feedItems()->update(['read_at' => $now]);
+            });
 
         return redirect()->route('dashboard');
+    }
+
+    /**
+     * @param string $siteUrl
+     * @return string|null
+     * @throws \Exception
+     */
+    private function discoverFaviconUrl($siteUrl)
+    {
+        return $this->heraRssCrawler->discoverFavicon($siteUrl);
     }
 }
