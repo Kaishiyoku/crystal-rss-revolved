@@ -14,7 +14,7 @@
     @if ($unreadFeedItems->isNotEmpty())
         <div class="md:flex md:justify-between md:items-center md:space-x-4 space-y-4 md:space-y-0 mb-8 px-4 sm:px-0">
             <div class="w-full md:w-[400px]">
-                <x-select-autocomplete id="filter_by_feed" :placeholder="__('Filter by feed...')" name="filter_by_feed" :value="optional($selectedFeed)->name" :autocompleteValues="$feedOptions"/>
+                <x-select-autocomplete id="filter_by_feed" :placeholder="__('Filter by feed...')" name="filter_by_feed" :value="optional($selectedFeed)->name" :autocompleteValues="$feedOptions" readonly/>
             </div>
 
             <x-update-button :url="route('feeds.mark_all_as_read')">
