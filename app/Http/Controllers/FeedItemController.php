@@ -12,7 +12,7 @@ class FeedItemController extends Controller
      * @param string|null $previousFirstFeedItemChecksum
      * @param string|null $previousLastFeedItemChecksum
      * @param int|null $feedId
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse
      */
     public function dashboard($previousFirstFeedItemChecksum = null, $previousLastFeedItemChecksum = null, $feedId = null)
     {
@@ -79,6 +79,11 @@ class FeedItemController extends Controller
             ->unread()
             ->count();
 
+        // no more items for the filtered feed, redirect to all feeds dashboard view
+        if ($selectedFeed && $totalUnreadFeedItemCount === 0) {
+            return redirect()->route('dashboard');
+        }
+
         return view('dashboard', [
             'selectedFeed' => $selectedFeed,
             'feedOptions' => $feedOptions,
@@ -93,7 +98,7 @@ class FeedItemController extends Controller
      * @param int $feedId
      * @param string|null $previousFirstFeedItemChecksum
      * @param string|null $previousLastFeedItemChecksum
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse
      */
     public function dashboardFiltered($feedId, $previousFirstFeedItemChecksum = null, $previousLastFeedItemChecksum = null)
     {
