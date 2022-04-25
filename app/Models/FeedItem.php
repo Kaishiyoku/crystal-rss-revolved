@@ -44,6 +44,7 @@ use Illuminate\Support\Str;
  * @method static Builder|FeedItem whereUpdatedAt($value)
  * @method static Builder|FeedItem whereUrl($value)
  * @mixin \Eloquent
+ * @method static Builder|FeedItem ofFeed($feedId)
  */
 class FeedItem extends Model
 {
@@ -106,6 +107,11 @@ class FeedItem extends Model
     public function scopeUnread($query)
     {
         return $query->whereNull('read_at');
+    }
+
+    public function scopeOfFeed($query, $feedId)
+    {
+        return $query->when($feedId, fn($query) => $query->where('feed_id', $feedId));
     }
 
     /**

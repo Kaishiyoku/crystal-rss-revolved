@@ -41,12 +41,13 @@ class FeedItemController extends Controller
 
         $totalUnreadFeedItems = Auth::user()->feedItems()->unread()->count();
 
-        $previousFirstFeedItem = $previousFirstFeedItemChecksum ? Auth::user()->feedItems()->whereChecksum($previousFirstFeedItemChecksum)->firstOrFail() : null;
-        $previousLastFeedItem = $previousLastFeedItemChecksum ? Auth::user()->feedItems()->whereChecksum($previousLastFeedItemChecksum)->firstOrFail() : null;
+        $previousFirstFeedItem = $previousFirstFeedItemChecksum ? Auth::user()->feedItems()->ofFeed(optional($selectedFeed)->id)->whereChecksum($previousFirstFeedItemChecksum)->firstOrFail() : null;
+        $previousLastFeedItem = $previousLastFeedItemChecksum ? Auth::user()->feedItems()->ofFeed(optional($selectedFeed)->id)->whereChecksum($previousLastFeedItemChecksum)->firstOrFail() : null;
 
         $previousItemsCount = $previousFirstFeedItemChecksum && $previousLastFeedItemChecksum
             ? Auth::user()
                 ->feedItems()
+                ->ofFeed(optional($selectedFeed)->id)
                 ->unread()
                 ->where('posted_at', '<=', $previousFirstFeedItem->posted_at)
                 ->where('posted_at', '>=', $previousLastFeedItem->posted_at)
@@ -55,7 +56,7 @@ class FeedItemController extends Controller
 
         $newlyFetchedFeedItemCount = $previousFirstFeedItem
             ? Auth::user()->feedItems()
-                ->when($selectedFeed, fn($query) => $query->where('feed_id', $selectedFeed->id))
+                ->ofFeed(optional($selectedFeed)->id)
                 ->unread()
                 ->where('posted_at', '>', $previousFirstFeedItem->posted_at)
                 ->count()
@@ -63,9 +64,7 @@ class FeedItemController extends Controller
 
         $unreadFeedItems = Auth::user()
             ->feedItems()
-            ->when($feedId, function ($query) use ($feedId) {
-                $query->where('feed_id', $feedId);
-            })
+            ->ofFeed(optional($selectedFeed)->id)
             ->unread()
             ->with('feed')
             ->when($previousFirstFeedItem && $previousLastFeedItem, fn($query) => $query->where('posted_at', '<=', $previousFirstFeedItem->posted_at))
@@ -74,12 +73,19 @@ class FeedItemController extends Controller
             ->take($previousItemsCount + config('app.feed_items_per_page'))
             ->get();
 
+        $totalUnreadFeedItemCount = Auth::user()
+            ->feedItems()
+            ->ofFeed(optional($selectedFeed)->id)
+            ->unread()
+            ->count();
+
         return view('dashboard', [
             'selectedFeed' => $selectedFeed,
             'feedOptions' => $feedOptions,
             'totalUnreadFeedItems' => $totalUnreadFeedItems,
             'newlyFetchedFeedItemCount' => $newlyFetchedFeedItemCount,
             'unreadFeedItems' => $unreadFeedItems,
+            'totalUnreadFeedItemCount' => $totalUnreadFeedItemCount,
         ]);
     }
 
