@@ -1,4 +1,4 @@
-@props(['name' => null, 'value' => null, 'readonly' => false, 'autocompleteValues' => []])
+@props(['name' => null, 'value' => null, 'readonly' => false, 'autocompleteValues' => [], 'autocompleteClass' => ''])
 
 <div x-data="selectAutocomplete()" {{ $attributes->merge(['class' => 'relative mt-1']) }}>
     @if ($readonly)
@@ -49,7 +49,7 @@
         x-transition:leave-end="opacity-0 scale-95"
         class="absolute w-full z-50 mr-4 mt-2 rounded-md shadow-lg origin-top-right"
     >
-        <div class="rounded-md ring-1 ring-black ring-opacity-5 py-1 bg-white overflow-y-auto max-h-[200px] min-w-[300px] sm:min-w-[350px] dark:bg-gray-800 dark:border-gray-600 dark:focus:border-primary-500 dark:focus:ring-primary-500">
+        <div class="{{ classNames('rounded-md ring-1 ring-black ring-opacity-5 py-1 bg-white overflow-y-auto min-w-[300px] sm:min-w-[350px] dark:bg-gray-800 dark:border-gray-600 dark:focus:border-primary-500 dark:focus:ring-primary-500 max-h-[200px]', $autocompleteClass) }}">
             <div x-show="filteredAutocompleteValues().length === 0" class="w-full px-4 py-2 text-sm leading-5 text-gray-700">
                 {{ __('No entries found.') }}
             </div>

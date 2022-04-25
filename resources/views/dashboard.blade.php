@@ -4,22 +4,32 @@
     </x-slot>
 
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-300 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
+        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center space-y-2 sm:space-y-0">
+            <div>
+                <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-300 leading-tight">
+                    {{ __('Dashboard') }}
+                </h2>
 
-        <div>{{ trans_choice('unread_articles', $totalUnreadFeedItems) }}</div>
+                <div>{{ trans_choice('unread_articles', $totalUnreadFeedItems) }}</div>
+            </div>
+
+            <x-secondary-update-button :url="route('feeds.mark_all_as_read')">
+                {{ __('Mark all as read') }}
+            </x-secondary-update-button>
+        </div>
     </x-slot>
 
     @if ($unreadFeedItems->isNotEmpty())
-        <div class="md:flex md:justify-between md:items-center md:space-x-4 space-y-4 md:space-y-0 mb-8 px-4 sm:px-0">
-            <div class="w-full md:w-[400px]">
-                <x-select-autocomplete id="filter_by_feed" :placeholder="__('Filter by feed...')" name="filter_by_feed" :value="optional($selectedFeed)->name" :autocompleteValues="$feedOptions" readonly/>
-            </div>
-
-            <x-update-button :url="route('feeds.mark_all_as_read')">
-                {{ __('Mark all as read') }}
-            </x-update-button>
+        <div class="w-full md:w-[400px] mb-8 px-4 sm:px-0">
+            <x-select-autocomplete
+                id="filter_by_feed"
+                :placeholder="__('Filter by feed...')"
+                name="filter_by_feed"
+                :value="optional($selectedFeed)->name"
+                :autocompleteValues="$feedOptions"
+                autocompleteClass="max-h-[250px] sm:max-h-[350px] lg:max-h-[450px]"
+                readonly
+            />
         </div>
     @endif
 
