@@ -4,7 +4,7 @@
     @if ($readonly)
         <button
             type="button"
-            class="{{ classNames('px-4 py-2 text-left dark:text-gray-400 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 focus:border-primary-300 dark:focus:border-primary-500 focus:ring focus:ring-primary-200 dark:focus:ring-primary-500 focus:ring-opacity-50 rounded-md shadow-sm transition w-full', ['opacity-50' => $attributes->has('disabled')]) }}"
+            class="{{ classNames('text-ellipsis overflow-hidden whitespace-nowrap pl-4 pr-12 py-2 text-left dark:text-gray-400 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 border border-gray-300 dark:border-gray-600 focus:border-primary-300 dark:focus:border-primary-500 focus:ring focus:ring-primary-200 dark:focus:ring-primary-500 focus:ring-opacity-50 rounded-md shadow-sm transition w-full', ['opacity-50' => $attributes->has('disabled')]) }}"
             @click.stop="isFocused = !isFocused"
             @click.away="isFocused = false"
             x-text="inputValue || '{{ $attributes->get('placeholder') ?? '' }}'"
@@ -15,7 +15,7 @@
     @else
         <x-jet-input
             type="text"
-            class="w-full placeholder-gray-400 dark:placeholder-gray-500"
+            class="w-full placeholder-gray-400 dark:placeholder-gray-500 text-ellipsis overflow-hidden whitespace-nowrap pl-4 pr-12"
             autoComplete="off"
             :name="$name"
             :value="$value"
@@ -30,7 +30,7 @@
 
     <button
         type="button"
-        class="flex justify-center items-center absolute top-[1px] right-0 w-10 h-10 text-gray-500 border-l border-gray-200 dark:border-gray-600"
+        class="flex justify-center items-center absolute top-[1px] right-0 w-10 h-10 text-gray-500 border-l border-r border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-r-md"
         @click.stop="$refs.inputElement ? isFocused ? isFocused = false : $refs.inputElement.focus() : isFocused = !isFocused"
     >
         <x-heroicon-o-chevron-up class="w-5 h-5" x-show="isFocused" x-cloak/>
