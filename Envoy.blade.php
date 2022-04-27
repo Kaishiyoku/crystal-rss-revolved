@@ -71,6 +71,10 @@
     list_releases
 @endstory
 
+@story('cleanup')
+    deployment_cleanup
+@endstory
+
 @task('deployment_start')
     cd {{ $path }}
     echo "Deployment ({{ $date }}) started"
@@ -141,6 +145,8 @@
 
 @task('deployment_cleanup')
     cd {{ $path }}/releases
+    find . -maxdepth 1 -name "20*" | sort | head -n -4 | xargs -I '{}' chown -R forge:forge '{}'
+    echo "Changed releases owner to deployment user"
     find . -maxdepth 1 -name "20*" | sort | head -n -4 | xargs rm -Rf
     echo "Cleaned up old deployments"
 @endtask
@@ -149,6 +155,8 @@
     cd {{ $path }}/releases
 
     @if (isset($cleanup) && $cleanup)
+        find . -maxdepth 1 -name "20*" | sort | head -n -4 | xargs -I '{}' chown -R forge:forge '{}'
+        echo "Changed releases owner to deployment user"
         find . -maxdepth 1 -name "20*" | sort | head -n -4 | xargs rm -Rf
         echo "Cleaned up old deployments"
     @endif
