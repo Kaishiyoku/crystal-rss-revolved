@@ -114,7 +114,7 @@
                                 </x-jet-dropdown-link>
                             @endif
 
-                            <x-dropdown-divider/>
+                            <x-dropdown.dropdown-divider/>
 
                             <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}">

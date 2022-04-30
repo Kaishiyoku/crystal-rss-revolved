@@ -1,7 +1,7 @@
 <div class="mb-4">
     <x-jet-label for="category_id" :value="__('validation.attributes.category_id')" required/>
 
-    <x-select id="category_id" class="block mt-1 w-full" type="url" name="category_id" :value="old('category_id', $feed->category_id)" :options="$availableCategoryOptions" required/>
+    <x-input.select id="category_id" class="block mt-1 w-full" type="url" name="category_id" :value="old('category_id', $feed->category_id)" :options="$availableCategoryOptions" required/>
 
     @error('category_id')
         <x-validation-error>{{ $message }}</x-validation-error>

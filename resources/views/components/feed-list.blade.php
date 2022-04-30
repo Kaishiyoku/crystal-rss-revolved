@@ -1,9 +1,9 @@
 <div x-data="feedList()">
     <template x-if="unreadFeedItems.length > 0">
         <div class="mb-8 lg:flex lg:justify-between lg:space-x-2 space-y-2 lg:space-y-0 px-4 sm:px-0">
-            <x-secondary-update-button :url="route('feeds.mark_all_as_read')" @click="confirm($event)">
+            <x-button.secondary-update-button :url="route('feeds.mark_all_as_read')" @click="confirm($event)">
                 {{ __('Mark all as read') }}
-            </x-secondary-update-button>
+            </x-button.secondary-update-button>
         </div>
     </template>
 

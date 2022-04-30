@@ -13,15 +13,15 @@
                 <div>{{ trans_choice('unread_articles', $totalUnreadFeedItems) }}</div>
             </div>
 
-            <x-secondary-update-button :url="route('feeds.mark_all_as_read')">
+            <x-button.secondary-update-button :url="route('feeds.mark_all_as_read')">
                 {{ __('Mark all as read') }}
-            </x-secondary-update-button>
+            </x-button.secondary-update-button>
         </div>
     </x-slot>
 
     @if ($unreadFeedItems->isNotEmpty())
         <div class="w-full md:w-[400px] mb-8 px-4 sm:px-0">
-            <x-select-dropdown
+            <x-dropdown.select-dropdown
                 :placeholder="__('Filter by feed...')"
                 :value="optional($selectedFeed)->name"
                 :autocomplete-values="$feedOptions"
@@ -131,9 +131,9 @@
 
     @if ($unreadFeedItems->count() < $totalUnreadFeedItemCount)
         <div class="md:flex md:justify-between md:items-center px-4 md:px-0 mt-8">
-            <x-button-link class="sm:mx-0 py-4 md:py-2 w-full md:w-auto" :url="route('dashboard', [$selectedFeed ? $selectedFeed->id : \App\Enums\FeedFilter::All, $unreadFeedItems->first()->checksum, $unreadFeedItems->last()->checksum])">
+            <x-button.primary-button-link class="sm:mx-0 py-4 md:py-2 w-full md:w-auto" :url="route('dashboard', [$selectedFeed ? $selectedFeed->id : \App\Enums\FeedFilter::All, $unreadFeedItems->first()->checksum, $unreadFeedItems->last()->checksum])">
                 {{ __('Load more') }}
-            </x-button-link>
+            </x-button.primary-button-link>
 
             <button
                 type="button"

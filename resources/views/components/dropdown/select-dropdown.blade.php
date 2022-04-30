@@ -39,7 +39,7 @@ switch ($width) {
                     </div>
                 </x-jet-dropdown-link>
             @else
-                <x-dropdown-divider/>
+                <x-dropdown.dropdown-divider/>
             @endif
         @endforeach
     </x-slot>

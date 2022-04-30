@@ -15,7 +15,7 @@
                 </div>
             </div>
 
-            <x-delete-button :url="route('categories.destroy', $category)"/>
+            <x-button.delete-button :url="route('categories.destroy', $category)"/>
         </div>
     </x-slot>
 

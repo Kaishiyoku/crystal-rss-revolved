@@ -13,9 +13,9 @@
                 <div>{{ trans_choice('total_number_of_categories', $categories->count()) }}</div>
             </div>
 
-            <x-secondary-button-link :url="route('categories.create')">
+            <x-button.secondary-button-link :url="route('categories.create')">
                 {{ __('Add') }}
-            </x-secondary-button-link>
+            </x-button.secondary-button-link>
         </div>
     </x-slot>
 
