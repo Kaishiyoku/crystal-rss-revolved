@@ -15,7 +15,7 @@
                 </div>
             </div>
 
-            <x-delete-button :url="route('feeds.destroy', $feed)"/>
+            <x-button.delete-button :url="route('feeds.destroy', $feed)"/>
         </div>
     </x-slot>
 
