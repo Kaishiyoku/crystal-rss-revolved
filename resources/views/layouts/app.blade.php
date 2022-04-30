@@ -18,7 +18,6 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-        <link rel="stylesheet" href="{{ mix('css/' . Auth::user()->theme->value . '-theme.css') }}">
 
         @livewireStyles
 
@@ -28,7 +27,7 @@
 
         @include('shared._favicon')
     </head>
-    <body class="font-sans antialiased {{ Auth::user()->theme->value }}-theme">
+    <body class="font-sans antialiased">
         <x-jet-banner />
 
         <div class="min-h-screen bg-gray-100 dark:text-gray-400 dark:bg-gray-900">

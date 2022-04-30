@@ -3,7 +3,6 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FeedController;
-use App\Http\Controllers\ProfileEditColorThemeController;
 use App\Http\Controllers\ToggleFeedItemReadAtController;
 use App\Http\Controllers\UserSettingsController;
 use App\Http\Controllers\WelcomeController;
@@ -29,6 +28,5 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::put('/feeds/mark_all_as_read', [FeedController::class, 'markAllAsRead'])->name('feeds.mark_all_as_read');
     Route::resource('feeds', FeedController::class)->except(['show']);
     Route::put('/feed_items/{feedItem}/read', ToggleFeedItemReadAtController::class)->name('feed_items.toggle_mark_as_read');
-    Route::put('/user/theme/{theme}', ProfileEditColorThemeController::class)->name('user-edit-color-theme');
     Route::put('/user/settings', UserSettingsController::class)->name('user-edit-settings');
 });

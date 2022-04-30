@@ -11,14 +11,13 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-        <link rel="stylesheet" href="{{ mix('css/base-theme.css') }}">
 
         <!-- Scripts -->
         <script src="{{ mix('js/welcome.js') }}" defer></script>
 
         @include('shared._favicon')
     </head>
-    <body class="antialiased bg-gray-100 dark:bg-gray-900 pb-4 dark:text-gray-100 base-theme">
+    <body class="antialiased bg-gray-100 dark:bg-gray-900 pb-4 dark:text-gray-100">
         <div class="absolute w-full bg-gradient-to-r lg:bg-none from-primary-500 to-secondary-500">
             <div class="md:flex md:justify-between">
                 <div class="text-white uppercase text-2xl pl-8 pt-4 tracking-wider">

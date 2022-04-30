@@ -1,13 +1,6 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 const colors = require('tailwindcss/colors');
 
-const withOpacityValue = (variable) => {
-    return ({opacityValue}) => {
-        return opacityValue === undefined ? `rgb(var(${variable}))` : `rgba(var(${variable}), ${opacityValue})`;
-    }
-};
-
-
 module.exports = {
     content: [
         './resources/js/**/*.js',
@@ -19,49 +12,49 @@ module.exports = {
 
     theme: {
         colors: {
-            'primary-50': withOpacityValue('--color-primary-50'),
-            'primary-100': withOpacityValue('--color-primary-100'),
-            'primary-200': withOpacityValue('--color-primary-200'),
-            'primary-300': withOpacityValue('--color-primary-300'),
-            'primary-400': withOpacityValue('--color-primary-400'),
-            'primary-500': withOpacityValue('--color-primary-500'),
-            'primary-600': withOpacityValue('--color-primary-600'),
-            'primary-700': withOpacityValue('--color-primary-700'),
-            'primary-800': withOpacityValue('--color-primary-800'),
-            'primary-900': withOpacityValue('--color-primary-900'),
+            'primary-50': '#f8fafb',
+            'primary-100': '#e9f0fc',
+            'primary-200': '#d1d8f9',
+            'primary-300': '#acb3f0',
+            'primary-400': '#8d8ae5',
+            'primary-500': '#7465dc',
+            'primary-600': '#5f49cb',
+            'primary-700': '#4837a9',
+            'primary-800': '#31257a',
+            'primary-900': '#1b174b',
 
-            'secondary-50': withOpacityValue('--color-secondary-50'),
-            'secondary-100': withOpacityValue('--color-secondary-100'),
-            'secondary-200': withOpacityValue('--color-secondary-200'),
-            'secondary-300': withOpacityValue('--color-secondary-300'),
-            'secondary-400': withOpacityValue('--color-secondary-400'),
-            'secondary-500': withOpacityValue('--color-secondary-500'),
-            'secondary-600': withOpacityValue('--color-secondary-600'),
-            'secondary-700': withOpacityValue('--color-secondary-700'),
-            'secondary-800': withOpacityValue('--color-secondary-800'),
-            'secondary-900': withOpacityValue('--color-secondary-900'),
+            'secondary-50': '#f9fafa',
+            'secondary-100': '#f0f1f8',
+            'secondary-200': '#dedbf1',
+            'secondary-300': '#bcb6de',
+            'secondary-400': '#9b8cc5',
+            'secondary-500': '#7e67ac',
+            'secondary-600': '#654b8e',
+            'secondary-700': '#4c386c',
+            'secondary-800': '#332649',
+            'secondary-900': '#1d172b',
 
-            'warning-50': withOpacityValue('--color-warning-50'),
-            'warning-100': withOpacityValue('--color-warning-100'),
-            'warning-200': withOpacityValue('--color-warning-200'),
-            'warning-300': withOpacityValue('--color-warning-300'),
-            'warning-400': withOpacityValue('--color-warning-400'),
-            'warning-500': withOpacityValue('--color-warning-500'),
-            'warning-600': withOpacityValue('--color-warning-600'),
-            'warning-700': withOpacityValue('--color-warning-700'),
-            'warning-800': withOpacityValue('--color-warning-800'),
-            'warning-900': withOpacityValue('--color-warning-900'),
+            'warning-50': '#fdf2f8',
+            'warning-100': '#fce7f3',
+            'warning-200': '#fbcfe8',
+            'warning-300': '#f9a8d4',
+            'warning-400': '#f472b6',
+            'warning-500': '#ec4899',
+            'warning-600': '#db2777',
+            'warning-700': '#be185d',
+            'warning-800': '#9d174d',
+            'warning-900': '#831843',
 
-            'gray-50': withOpacityValue('--color-gray-50'),
-            'gray-100': withOpacityValue('--color-gray-100'),
-            'gray-200': withOpacityValue('--color-gray-200'),
-            'gray-300': withOpacityValue('--color-gray-300'),
-            'gray-400': withOpacityValue('--color-gray-400'),
-            'gray-500': withOpacityValue('--color-gray-500'),
-            'gray-600': withOpacityValue('--color-gray-600'),
-            'gray-700': withOpacityValue('--color-gray-700'),
-            'gray-800': withOpacityValue('--color-gray-800'),
-            'gray-900': withOpacityValue('--color-gray-900'),
+            'gray-50': '#f9fafb',
+            'gray-100': '#f3f4f6',
+            'gray-200': '#e5e7eb',
+            'gray-300': '#d1d5db',
+            'gray-400': '#9ca3af',
+            'gray-500': '#6b7280',
+            'gray-600': '#4b5563',
+            'gray-700': '#374151',
+            'gray-800': '#1f2937',
+            'gray-900': '#111827',
 
             transparent: 'transparent',
             current: 'currentColor',

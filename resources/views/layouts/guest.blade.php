@@ -12,14 +12,13 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-        <link rel="stylesheet" href="{{ mix('css/base-theme.css') }}">
 
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
 
         @include('shared._favicon')
     </head>
-    <body class="font-sans text-gray-900 antialiased base-theme">
+    <body class="font-sans text-gray-900 antialiased">
         {{ $slot }}
     </body>
 </html>

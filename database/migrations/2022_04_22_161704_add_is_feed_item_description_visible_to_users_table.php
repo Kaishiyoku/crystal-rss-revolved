@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->boolean('is_feed_item_description_visible')->default(true)->after('theme');
+            $table->boolean('is_feed_item_description_visible')->default(true)->after('profile_photo_path');
         });
     }
 
