@@ -95,7 +95,7 @@ class DashboardController extends Controller
                 'description' => "{$feed->category->getName()} ({$feed->unread_feed_items_count})",
                 'url' => route('dashboard', [$feed]),
             ])
-            ->when($selectedFeed, fn($feedOptions) => $feedOptions->prepend([
+            ->when($selectedFeed, fn($feedOptions) => $feedOptions->prepend(null)->prepend([
                 'label' => __('All feeds'),
                 'description' => __('Display all feeds') . ' (' . $totalUnreadFeedItems . ')',
                 'url' => route('dashboard'),

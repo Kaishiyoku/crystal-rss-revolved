@@ -1,32 +1,19 @@
-@props(['name' => null, 'value' => null, 'readonly' => false, 'autocompleteValues' => [], 'autocompleteClass' => ''])
+@props(['name' => null, 'value' => null, 'autocompleteValues' => [], 'autocompleteClass' => ''])
 
 <div x-data="selectAutocomplete()" {{ $attributes->merge(['class' => 'relative mt-1']) }}>
-    @if ($readonly)
-        <button
-            type="button"
-            class="{{ classNames('text-ellipsis overflow-hidden whitespace-nowrap pl-4 pr-12 py-2 text-left dark:text-gray-400 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 border border-gray-300 dark:border-gray-600 focus:border-primary-300 dark:focus:border-primary-500 focus:ring focus:ring-primary-200 dark:focus:ring-primary-500 focus:ring-opacity-50 rounded-md shadow-sm transition w-full', ['opacity-50' => $attributes->has('disabled')]) }}"
-            @click.stop="isFocused = !isFocused"
-            @click.away="isFocused = false"
-            x-text="inputValue || '{{ $attributes->get('placeholder') ?? '' }}'"
-            {{ $attributes }}
-        >
-            &nbsp;
-        </button>
-    @else
-        <x-jet-input
-            type="text"
-            class="w-full placeholder-gray-400 dark:placeholder-gray-500 text-ellipsis overflow-hidden whitespace-nowrap pl-4 pr-12"
-            autoComplete="off"
-            :name="$name"
-            :value="$value"
-            x-model="inputValue"
-            x-ref="inputElement"
-            @focusin="isFocused = true"
-            @click.away="isFocused = false"
-            @keyup="isValueSelected = false"
-            {{ $attributes }}
-        />
-    @endif
+    <x-jet-input
+        type="text"
+        class="w-full placeholder-gray-400 dark:placeholder-gray-500 text-ellipsis overflow-hidden whitespace-nowrap pl-4 pr-12"
+        autoComplete="off"
+        :name="$name"
+        :value="$value"
+        x-model="inputValue"
+        x-ref="inputElement"
+        @focusin="isFocused = true"
+        @click.away="isFocused = false"
+        @keyup="isValueSelected = false"
+        {{ $attributes }}
+    />
 
     <button
         type="button"
@@ -59,7 +46,7 @@
                     class="w-full text-left px-4 py-2 text-sm leading-5 text-gray-700 dark:text-gray-400 cursor-pointer focus:outline-none transition duration-150 ease-in-out"
                     :class="{ 'text-white dark:text-white bg-primary-500 hover:bg-primary-600 focus:bg-primary-700': inputValue === autocompleteValue.label, 'hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-100': inputValue !== autocompleteValue.label }"
                     tabindex="0"
-                    @click.stop="autocompleteValue.url ? window.location.href = autocompleteValue.url : selectValue(autocompleteValue)"
+                    @click.stop="selectValue(autocompleteValue)"
                     @keydown.enter.prevent="selectValue(autocompleteValue)"
                 >
                     <div x-text="autocompleteValue.label"></div>

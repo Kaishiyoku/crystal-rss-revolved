@@ -21,14 +21,13 @@
 
     @if ($unreadFeedItems->isNotEmpty())
         <div class="w-full md:w-[400px] mb-8 px-4 sm:px-0">
-            <x-select-autocomplete
-                id="filter_by_feed"
+            <x-select-dropdown
                 :placeholder="__('Filter by feed...')"
-                name="filter_by_feed"
                 :value="optional($selectedFeed)->name"
-                :autocompleteValues="$feedOptions"
-                autocompleteClass="max-h-[250px] sm:max-h-[350px] lg:max-h-[450px]"
-                readonly
+                :autocomplete-values="$feedOptions"
+                width="96"
+                trigger-class="py-3"
+                mobile-full-width
             />
         </div>
     @endif

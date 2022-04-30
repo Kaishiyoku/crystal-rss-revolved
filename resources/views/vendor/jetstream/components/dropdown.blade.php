@@ -1,4 +1,4 @@
-@props(['align' => 'right', 'width' => '48', 'contentClasses' => 'py-1 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800', 'dropdownClasses' => ''])
+@props(['align' => 'right', 'width' => '48', 'contentClasses' => 'py-1 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800', 'dropdownClasses' => '', 'mobileFullWidth' => false])
 
 @php
 switch ($align) {
@@ -20,13 +20,19 @@ switch ($align) {
 
 switch ($width) {
     case '48':
-        $width = 'w-48';
+        $width = $mobileFullWidth ? 'sn:w-48' : 'w-48';
+        break;
+    case '72':
+        $width = $mobileFullWidth ? 'sm:w-72' : 'w-72';
+        break;
+    case '96':
+        $width = $mobileFullWidth ? 'sm:w-96' : 'w-96';
         break;
 }
 @endphp
 
 <div class="relative" x-data="{ open: false }" @click.away="open = false" @close.stop="open = false">
-    <div @click="open = ! open">
+    <div @click="open = ! open" class="{{ classNames(['inline-block' => !$mobileFullWidth]) }}">
         {{ $trigger }}
     </div>
 
@@ -37,10 +43,10 @@ switch ($width) {
             x-transition:leave="transition ease-in duration-75"
             x-transition:leave-start="opacity-100 scale-100"
             x-transition:leave-end="opacity-0 scale-95"
-            class="absolute z-50 mt-2 {{ $width }} rounded-md shadow-lg {{ $alignmentClasses }} {{ $dropdownClasses }}"
+            class="{{ classNames('absolute z-50 mt-2 rounded-md shadow-lg', $alignmentClasses, $dropdownClasses, $width, ['w-full' => $mobileFullWidth]) }}"
             style="display: none;"
             @click="open = false">
-        <div class="rounded-md ring-1 ring-black ring-opacity-5 {{ $contentClasses }}">
+        <div class="rounded-md ring-1 ring-black ring-opacity-5 max-h-96 overflow-auto {{ $contentClasses }}">
             {{ $content }}
         </div>
     </div>
