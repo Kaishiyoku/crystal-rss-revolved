@@ -4,7 +4,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 9.12.2.
+ * Generated for Laravel 9.14.1.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -7239,7 +7239,7 @@
      * @method static \Illuminate\Http\Client\PendingRequest contentType(string $contentType)
      * @method static \Illuminate\Http\Client\PendingRequest dd()
      * @method static \Illuminate\Http\Client\PendingRequest dump()
-     * @method static \Illuminate\Http\Client\PendingRequest retry(int $times, int $sleep = 0, ?callable $when = null, bool $throw = true)
+     * @method static \Illuminate\Http\Client\PendingRequest retry(int $times, int $sleepMilliseconds = 0, ?callable $when = null, bool $throw = true)
      * @method static \Illuminate\Http\Client\PendingRequest sink(string|resource $to)
      * @method static \Illuminate\Http\Client\PendingRequest stub(callable $callback)
      * @method static \Illuminate\Http\Client\PendingRequest timeout(int $seconds)
@@ -8763,6 +8763,18 @@
                         $instance->assertSentTimes($notification, $expectedCount);
         }
                     /**
+         * Assert the total count of notification that were sent.
+         *
+         * @param int $expectedCount
+         * @return void 
+         * @static 
+         */ 
+        public static function assertCount($expectedCount)
+        {
+                        /** @var \Illuminate\Support\Testing\Fakes\NotificationFake $instance */
+                        $instance->assertCount($expectedCount);
+        }
+                    /**
          * Assert the total amount of times a notification was sent.
          *
          * @param int $expectedCount
@@ -9630,7 +9642,7 @@
                     /**
          * Create a new redirect response to the previously intended location.
          *
-         * @param string $default
+         * @param mixed $default
          * @param int $status
          * @param array $headers
          * @param bool|null $secure
@@ -15507,7 +15519,7 @@
                     /**
          * Get the container instance used by the validation factory.
          *
-         * @return \Illuminate\Contracts\Container\Container 
+         * @return \Illuminate\Contracts\Container\Container|null 
          * @static 
          */ 
         public static function getContainer()
@@ -19563,7 +19575,7 @@ namespace  {
                 /**
              * Paginate the given query.
              *
-             * @param int|null $perPage
+             * @param int|null|\Closure $perPage
              * @param array $columns
              * @param string $pageName
              * @param int|null $page
@@ -20907,13 +20919,13 @@ namespace  {
              *
              * @param array $wheres
              * @param array $bindings
-             * @return void 
+             * @return \Illuminate\Database\Query\Builder 
              * @static 
              */ 
             public static function mergeWheres($wheres, $bindings)
             {
                                 /** @var \Illuminate\Database\Query\Builder $instance */
-                                $instance->mergeWheres($wheres, $bindings);
+                                return $instance->mergeWheres($wheres, $bindings);
             }
              
                 /**
