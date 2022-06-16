@@ -13,9 +13,11 @@
                 <div>{{ trans_choice('unread_articles', $totalUnreadFeedItems) }}</div>
             </div>
 
-            <x-button.secondary-update-button :url="route('feeds.mark_all_as_read')">
-                {{ __('Mark all as read') }}
-            </x-button.secondary-update-button>
+            @if ($unreadFeedItems->isNotEmpty())
+                <x-button.secondary-update-button :url="route('feeds.mark_all_as_read')">
+                    {{ __('Mark all as read') }}
+                </x-button.secondary-update-button>
+            @endif
         </div>
     </x-slot>
 

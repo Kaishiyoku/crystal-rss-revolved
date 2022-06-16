@@ -4,7 +4,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 9.14.1.
+ * Generated for Laravel 9.17.0.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -2770,11 +2770,12 @@
      *
      * @method static \Illuminate\Broadcasting\Broadcasters\Broadcaster channel(string $channel, callable|string  $callback, array $options = [])
      * @method static mixed auth(\Illuminate\Http\Request $request)
+     * @method static void resolveAuthenticatedUserUsing(Closure $callback)
      * @see \Illuminate\Contracts\Broadcasting\Factory
      */ 
         class Broadcast {
                     /**
-         * Register the routes for handling broadcast authentication and sockets.
+         * Register the routes for handling broadcast channel authentication and sockets.
          *
          * @param array|null $attributes
          * @return void 
@@ -2784,6 +2785,32 @@
         {
                         /** @var \Illuminate\Broadcasting\BroadcastManager $instance */
                         $instance->routes($attributes);
+        }
+                    /**
+         * Register the routes for handling broadcast user authentication.
+         *
+         * @param array|null $attributes
+         * @return void 
+         * @static 
+         */ 
+        public static function userAuthenticationRoutes($attributes = null)
+        {
+                        /** @var \Illuminate\Broadcasting\BroadcastManager $instance */
+                        $instance->userAuthenticationRoutes($attributes);
+        }
+                    /**
+         * Register the routes for handling broadcast authentication and sockets.
+         * 
+         * Alias of "routes" method.
+         *
+         * @param array|null $attributes
+         * @return void 
+         * @static 
+         */ 
+        public static function channelAuthorizationRoutes($attributes = null)
+        {
+                        /** @var \Illuminate\Broadcasting\BroadcastManager $instance */
+                        $instance->channelAuthorizationRoutes($attributes);
         }
                     /**
          * Get the socket ID for the given request.
@@ -6500,6 +6527,19 @@
                         return $instance->isDirectory($directory);
         }
                     /**
+         * Determine if the given path is a directory that does not contain any other files or directories.
+         *
+         * @param string $directory
+         * @param bool $ignoreDotFiles
+         * @return bool 
+         * @static 
+         */ 
+        public static function isEmptyDirectory($directory, $ignoreDotFiles = false)
+        {
+                        /** @var \Illuminate\Filesystem\Filesystem $instance */
+                        return $instance->isEmptyDirectory($directory, $ignoreDotFiles);
+        }
+                    /**
          * Determine if the given path is readable.
          *
          * @param string $path
@@ -7256,6 +7296,7 @@
      * @method static \Illuminate\Http\Client\PendingRequest withoutVerifying()
      * @method static \Illuminate\Http\Client\PendingRequest throw(callable $callback = null)
      * @method static \Illuminate\Http\Client\PendingRequest throwIf($condition)
+     * @method \Illuminate\Http\Client\PendingRequest throwUnless($condition)
      * @method static array pool(callable $callback)
      * @method static \Illuminate\Http\Client\Response delete(string $url, array $data = [])
      * @method static \Illuminate\Http\Client\Response get(string $url, array|string|null $query = null)
@@ -7270,7 +7311,7 @@
                     /**
          * Create a new response instance for use during stubbing.
          *
-         * @param array|string $body
+         * @param array|string|null $body
          * @param int $status
          * @param array $headers
          * @return \GuzzleHttp\Promise\PromiseInterface 
@@ -9590,6 +9631,7 @@
          *
          * @param int $status
          * @return \Illuminate\Http\RedirectResponse 
+         * @deprecated Will be removed in a future Laravel version.
          * @static 
          */ 
         public static function home($status = 302)
@@ -10219,6 +10261,7 @@
                     /**
          * Gets the Session.
          *
+         * @throws SessionNotFoundException When session is not set properly
          * @static 
          */ 
         public static function getSession()
@@ -19312,7 +19355,7 @@ namespace  {
              * Find a model by its primary key.
              *
              * @param mixed $id
-             * @param array $columns
+             * @param array|string $columns
              * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Collection|static[]|static|null 
              * @static 
              */ 
@@ -19326,7 +19369,7 @@ namespace  {
              * Find multiple models by their primary keys.
              *
              * @param \Illuminate\Contracts\Support\Arrayable|array $ids
-             * @param array $columns
+             * @param array|string $columns
              * @return \Illuminate\Database\Eloquent\Collection 
              * @static 
              */ 
@@ -19340,7 +19383,7 @@ namespace  {
              * Find a model by its primary key or throw an exception.
              *
              * @param mixed $id
-             * @param array $columns
+             * @param array|string $columns
              * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Collection|static|static[] 
              * @throws \Illuminate\Database\Eloquent\ModelNotFoundException<\Illuminate\Database\Eloquent\Model>
              * @static 
@@ -19355,7 +19398,7 @@ namespace  {
              * Find a model by its primary key or return fresh model instance.
              *
              * @param mixed $id
-             * @param array $columns
+             * @param array|string $columns
              * @return \Illuminate\Database\Eloquent\Model|static 
              * @static 
              */ 
@@ -19369,7 +19412,7 @@ namespace  {
              * Find a model by its primary key or call a callback.
              *
              * @param mixed $id
-             * @param \Closure|array $columns
+             * @param \Closure|array|string $columns
              * @param \Closure|null $callback
              * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Collection|static[]|static|mixed 
              * @static 
@@ -19425,7 +19468,7 @@ namespace  {
                 /**
              * Execute the query and get the first result or throw an exception.
              *
-             * @param array $columns
+             * @param array|string $columns
              * @return \Illuminate\Database\Eloquent\Model|static 
              * @throws \Illuminate\Database\Eloquent\ModelNotFoundException<\Illuminate\Database\Eloquent\Model>
              * @static 
@@ -19439,7 +19482,7 @@ namespace  {
                 /**
              * Execute the query and get the first result or call a callback.
              *
-             * @param \Closure|array $columns
+             * @param \Closure|array|string $columns
              * @param \Closure|null $callback
              * @return \Illuminate\Database\Eloquent\Model|static|mixed 
              * @static 
@@ -19576,7 +19619,7 @@ namespace  {
              * Paginate the given query.
              *
              * @param int|null|\Closure $perPage
-             * @param array $columns
+             * @param array|string $columns
              * @param string $pageName
              * @param int|null $page
              * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator 
@@ -19593,7 +19636,7 @@ namespace  {
              * Paginate the given query into a simple paginator.
              *
              * @param int|null $perPage
-             * @param array $columns
+             * @param array|string $columns
              * @param string $pageName
              * @param int|null $page
              * @return \Illuminate\Contracts\Pagination\Paginator 
@@ -19609,7 +19652,7 @@ namespace  {
              * Paginate the given query into a cursor paginator.
              *
              * @param int|null $perPage
-             * @param array $columns
+             * @param array|string $columns
              * @param string $cursorName
              * @param \Illuminate\Pagination\Cursor|string|null $cursor
              * @return \Illuminate\Contracts\Pagination\CursorPaginator 
@@ -19812,6 +19855,19 @@ namespace  {
             {
                                 /** @var \Illuminate\Database\Eloquent\Builder $instance */
                                 return $instance->setEagerLoads($eagerLoad);
+            }
+             
+                /**
+             * Indicate that the given relationships should not be eagerly loaded.
+             *
+             * @param array $relations
+             * @return \Illuminate\Database\Eloquent\Builder|static 
+             * @static 
+             */ 
+            public static function withoutEagerLoad($relations)
+            {
+                                /** @var \Illuminate\Database\Eloquent\Builder $instance */
+                                return $instance->withoutEagerLoad($relations);
             }
              
                 /**
@@ -20184,6 +20240,24 @@ namespace  {
             {
                                 /** @var \Illuminate\Database\Eloquent\Builder $instance */
                                 return $instance->whereHas($relation, $callback, $operator, $count);
+            }
+             
+                /**
+             * Add a relationship count / exists condition to the query with where clauses.
+             * 
+             * Also load the relationship with same condition.
+             *
+             * @param string $relation
+             * @param \Closure|null $callback
+             * @param string $operator
+             * @param int $count
+             * @return \Illuminate\Database\Eloquent\Builder|static 
+             * @static 
+             */ 
+            public static function withWhereHas($relation, $callback = null, $operator = '>=', $count = 1)
+            {
+                                /** @var \Illuminate\Database\Eloquent\Builder $instance */
+                                return $instance->withWhereHas($relation, $callback, $operator, $count);
             }
              
                 /**
@@ -21812,8 +21886,8 @@ namespace  {
              * Add a "having" clause to the query.
              *
              * @param \Closure|string $column
-             * @param string|null $operator
-             * @param string|null $value
+             * @param string|int|float|null $operator
+             * @param string|int|float|null $value
              * @param string $boolean
              * @return \Illuminate\Database\Query\Builder 
              * @static 
@@ -21828,8 +21902,8 @@ namespace  {
              * Add an "or having" clause to the query.
              *
              * @param \Closure|string $column
-             * @param string|null $operator
-             * @param string|null $value
+             * @param string|int|float|null $operator
+             * @param string|int|float|null $value
              * @return \Illuminate\Database\Query\Builder 
              * @static 
              */ 
