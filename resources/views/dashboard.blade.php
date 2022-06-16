@@ -60,11 +60,11 @@
                                     <img
                                         src="{{ $unreadFeedItem->image_url }}"
                                         alt="{{ $unreadFeedItem->title }}"
-                                        class="object-cover w-full h-72 md:h-56"
+                                        class="group-hover:brightness-125 object-cover w-full h-72 md:h-56 transition"
                                         loading="lazy"
                                     />
                                 @else
-                                    <x-heroicon-s-photograph class="fill-current text-white dark:text-gray-400 bg-gray-300 dark:bg-gray-700 w-full h-72 md:h-56"/>
+                                    <x-heroicon-s-photograph class="group-hover:brightness-125 fill-current text-white dark:text-gray-400 bg-gray-300 dark:bg-gray-700 w-full h-72 md:h-56 transition"/>
                                 @endif
                             </div>
                             <div class="w-full px-4 py-3">
