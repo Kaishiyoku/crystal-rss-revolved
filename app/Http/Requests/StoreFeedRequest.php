@@ -38,6 +38,7 @@ class StoreFeedRequest extends FormRequest
             'feed_url' => ['required', 'url', new ValidFeedUrl()],
             'site_url' => ['required', 'url'],
             'name' => ['required', Rule::unique('feeds', 'name')->where('user_id', optional($this->user())->id)],
+            'language' => ['nullable', 'string'],
         ];
     }
 
@@ -48,6 +49,7 @@ class StoreFeedRequest extends FormRequest
             'feed_url',
             'site_url',
             'name',
+            'language',
         ];
     }
 }

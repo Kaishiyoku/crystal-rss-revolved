@@ -51,6 +51,7 @@ class UpdateFeedRequest extends FormRequest
                 'string',
                 Rule::unique('feeds', 'name')->where('user_id', optional($this->user())->id)->ignore($this->feed),
             ],
+            'language' => ['nullable', 'string'],
         ];
     }
 
@@ -61,6 +62,7 @@ class UpdateFeedRequest extends FormRequest
             'feed_url',
             'site_url',
             'name',
+            'language',
         ];
     }
 }

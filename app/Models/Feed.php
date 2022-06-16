@@ -58,6 +58,7 @@ class Feed extends Model
         'site_url',
         'favicon_url',
         'name',
+        'language',
         'last_checked_at',
     ];
 

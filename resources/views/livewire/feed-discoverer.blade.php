@@ -43,6 +43,7 @@
                     this.$wire.on('feedMetadata', (feedMetadata) => {
                         document.querySelector('{{ $siteUrlInputElementSelector }}').value = feedMetadata.siteUrl;
                         document.querySelector('{{ $nameInputElementSelector }}').value = feedMetadata.name;
+                        document.querySelector('{{ $languageInputElementSelector }}').value = feedMetadata.language;
                         this.isLoading = false;
                     });
                 },

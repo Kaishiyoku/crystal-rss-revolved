@@ -11,7 +11,7 @@
 <div class="mb-4">
     <x-jet-label for="feed_url" :value="__('validation.attributes.feed_url')" required/>
 
-    <livewire:feed-discoverer :feed="$feed" site-url-input-element-selector="#site_url" name-input-element-selector="#name"/>
+    <livewire:feed-discoverer :feed="$feed" site-url-input-element-selector="#site_url" name-input-element-selector="#name" language-input-element-selector="#language"/>
 
     @error('feed_url')
         <x-validation-error>{{ $message }}</x-validation-error>
@@ -34,6 +34,20 @@
     <x-jet-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name', $feed->name)" required/>
 
     @error('name')
+        <x-validation-error>{{ $message }}</x-validation-error>
+    @enderror
+</div>
+
+<div class="mb-4">
+    <x-jet-label for="language" :value="__('validation.attributes.language')"/>
+
+    <x-jet-input id="language" class="block mt-1 w-full" type="text" name="language" :value="old('language', $feed->language)"/>
+
+    <div class="text-sm pt-1 text-muted">
+        {{ __('Example: de') }}
+    </div>
+
+    @error('language')
         <x-validation-error>{{ $message }}</x-validation-error>
     @enderror
 </div>

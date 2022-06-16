@@ -9,6 +9,12 @@
     .text-muted {
         @apply text-gray-500;
     }
+    /**
+     * Typography
+     */
+    .hyphens-auto {
+        hyphens: auto;
+    }
 
     /**
      * Alpine.js

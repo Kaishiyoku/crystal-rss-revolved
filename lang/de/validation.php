@@ -163,6 +163,7 @@ return [
         'feed_url'                          => 'Feed-URL',
         'site_url'                          => 'Site-URL',
         'is_feed_item_description_visible'  => 'Beschreibung der Feed-Einträge anzeigen',
+        'language'                          => 'Sprache',
     ],
 
     'valid_feed_url' => ':attribute muss eine gültiger Feed sein feed.',

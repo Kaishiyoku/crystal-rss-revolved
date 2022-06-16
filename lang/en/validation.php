@@ -156,6 +156,7 @@ return [
         'feed_url' => 'Feed URL',
         'site_url' => 'Site URL',
         'is_feed_item_description_visible' => 'Show description of feed items',
+        'language' => 'Language',
     ],
 
     'valid_feed_url' => 'The :attribute must be a valid feed.',

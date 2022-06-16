@@ -26,6 +26,11 @@ class FeedDiscoverer extends Component
     public $nameInputElementSelector;
 
     /**
+     * @var string
+     */
+    public $languageInputElementSelector;
+
+    /**
      * @var \Illuminate\Support\Collection
      */
     public $discoveredFeedUrls;
@@ -88,6 +93,7 @@ class FeedDiscoverer extends Component
         $this->emit('feedMetadata', [
             'siteUrl' => $feed->getUrl(),
             'name' => $feed->getTitle(),
+            'language' => $feed->getLanguage(),
         ]);
     }
 }
