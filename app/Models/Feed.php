@@ -41,6 +41,8 @@ use Laravel\Sanctum\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|Feed whereFaviconUrl($value)
  * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Sanctum\PersonalAccessToken[] $tokens
  * @property-read int|null $tokens_count
+ * @property string|null $language
+ * @method static \Illuminate\Database\Eloquent\Builder|Feed whereLanguage($value)
  */
 class Feed extends Model
 {
