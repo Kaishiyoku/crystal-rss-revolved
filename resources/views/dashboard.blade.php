@@ -68,7 +68,7 @@
                                 @endif
                             </div>
                             <div class="w-full px-4 py-3">
-                                <div class="group-hover:text-white text-2xl overflow-x-hidden hyphens-auto break-words" lang="{{ $unreadFeedItem->feed->language }}">{{ $unreadFeedItem->title }}</div>
+                                <div class="group-hover:text-white text-2xl overflow-hidden hyphens-auto break-words" lang="{{ $unreadFeedItem->feed->language }}">{{ $unreadFeedItem->title }}</div>
                                 <div class="group-hover:text-gray-300 w-full group-focus:text-gray-200 text-muted pt-2">
                                     <div class="flex items-center">
                                         @if ($unreadFeedItem->feed->favicon_url)
