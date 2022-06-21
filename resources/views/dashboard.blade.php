@@ -83,7 +83,7 @@
                                 </div>
 
                                 @if (Auth::user()->is_feed_item_description_visible && $unreadFeedItem->description)
-                                    <div class="group-hover:text-gray-300 group-focus:text-gray-200 pt-1 text-muted overflow-hidden line-clamp-6 xl:line-clamp-3">{{ $unreadFeedItem->description }}</div>
+                                    <div class="group-hover:text-gray-300 group-focus:text-gray-200 pt-1 text-muted overflow-hidden line-clamp-6 xl:line-clamp-3 break-all">{{ $unreadFeedItem->description }}</div>
                                 @endif
                             </div>
                         </a>
