@@ -26,6 +26,7 @@
             <x-dropdown.select-dropdown
                 :placeholder="__('Filter by feed...')"
                 :value="optional($selectedFeed)->name"
+                :sub-value="$selectedFeedUnreadFeedItemCount"
                 :autocomplete-values="$feedOptions"
                 width="96"
                 trigger-class="py-3"

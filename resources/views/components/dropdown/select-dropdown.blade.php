@@ -1,4 +1,4 @@
-@props(['align' => 'left', 'placeholder' => null, 'autocompleteValues' => [], 'value' => null, 'width' => '48', 'mobileFullWidth' => false, 'triggerClass' => ''])
+@props(['align' => 'left', 'placeholder' => null, 'autocompleteValues' => [], 'value' => null, 'subValue', 'width' => '48', 'mobileFullWidth' => false, 'triggerClass' => ''])
 
 @php
 switch ($width) {
@@ -17,8 +17,13 @@ switch ($width) {
 <x-jet-dropdown :align="$align" :width="$width" :mobile-full-width="$mobileFullWidth">
     <x-slot name="trigger">
         <button type="button" class="{{ classNames('inline-flex items-center justify-between px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-400 focus:outline-none shadow transition', $width, $triggerClass, ['w-full' => $mobileFullWidth]) }}">
-            <div class="text-ellipsis overflow-hidden whitespace-nowrap">
-                {{ $value ?? $placeholder }}
+            <div class="flex text-ellipsis overflow-hidden whitespace-nowrap">
+                <div>{{ $value ?? $placeholder }}</div>
+
+                @if ($subValue)
+                    <div class="mx-1 select-none text-gray-300 dark:text-gray-600">|</div>
+                    <div class="text-gray-300 dark:text-gray-600">{{ $subValue }}</div>
+                @endif
             </div>
 
             <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">

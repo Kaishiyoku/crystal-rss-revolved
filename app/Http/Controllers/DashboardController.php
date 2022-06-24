@@ -29,6 +29,7 @@ class DashboardController extends Controller
 
         // some basic data for the view
         $selectedFeed = $this->getSelectedFeed($feedId);
+        $selectedFeedUnreadFeedItemCount = optional($selectedFeed, fn($value) => $value->unreadFeedItems()->count());
         $totalUnreadFeedItems = Auth::user()->feedItems()->unread()->count();
         $feedOptions = $this->getFeedOptions($selectedFeed, $totalUnreadFeedItems);
         $totalUnreadFeedItemCount = $this->getTotalUnreadFeedItemCount($selectedFeed);
@@ -49,6 +50,7 @@ class DashboardController extends Controller
 
         return view('dashboard', [
             'selectedFeed' => $selectedFeed,
+            'selectedFeedUnreadFeedItemCount' => $selectedFeedUnreadFeedItemCount,
             'feedOptions' => $feedOptions,
             'totalUnreadFeedItems' => $totalUnreadFeedItems,
             'newlyFetchedFeedItemCount' => $newlyFetchedFeedItemCount,
