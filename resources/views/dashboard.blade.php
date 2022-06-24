@@ -50,48 +50,47 @@
         @foreach ($unreadFeedItems as $unreadFeedItem)
             <div class="flex flex-col">
                 <x-card.card class="{{ classNames('grow overflow-hidden', ['' => $loop->index === 0, '' => $loop->index === $unreadFeedItems->count() - 1]) }}">
-                    <div class="flex flex-col justify-between h-full transition duration-200" :class="{'opacity-40': isRead(@json($unreadFeedItem->id))}">
-                        <a
-                            class="grow group block transition ease-out duration-300 hover:bg-primary-500 focus:outline-none focus:text-white focus:bg-primary-600"
-                            href="{{ $unreadFeedItem->url }}"
-                        >
-                            <div>
-                                @if ($unreadFeedItem->has_image)
-                                    <img
-                                        src="{{ $unreadFeedItem->image_url }}"
-                                        alt="{{ $unreadFeedItem->title }}"
-                                        class="group-hover:brightness-125 object-cover w-full h-72 md:h-56 transition"
-                                        loading="lazy"
-                                    />
-                                @else
-                                    <x-heroicon-s-photograph class="group-hover:brightness-125 fill-current text-white dark:text-gray-400 bg-gray-300 dark:bg-gray-700 w-full h-72 md:h-56 transition"/>
-                                @endif
-                            </div>
-                            <div class="w-full px-4 py-3">
-                                <div class="group-hover:text-white text-2xl overflow-hidden hyphens-auto break-words" lang="{{ $unreadFeedItem->feed->language }}">{{ $unreadFeedItem->title }}</div>
-                                <div class="group-hover:text-gray-300 w-full group-focus:text-gray-200 text-muted pt-2">
-                                    <div class="flex items-center">
-                                        @if ($unreadFeedItem->feed->favicon_url)
-                                            <img src="{{ $unreadFeedItem->feed->favicon_url }}" class="w-4 h-4" alt="Favicon"/>
-                                        @else
-                                            <x-heroicon-o-photograph class="h-4 w-4"/>
-                                        @endif
+                    <a
+                        class="flex flex-col justify-between h-full group hover:bg-primary-500 block transition ease-out duration-300 focus:outline-none focus:text-white focus:bg-primary-600"
+                        href="{{ $unreadFeedItem->url }}"
+                        :class="{'opacity-40': isRead(@json($unreadFeedItem->id))}"
+                    >
+                        <div>
+                            @if ($unreadFeedItem->has_image)
+                                <img
+                                    src="{{ $unreadFeedItem->image_url }}"
+                                    alt="{{ $unreadFeedItem->title }}"
+                                    class="group-hover:brightness-125 object-cover w-full h-72 md:h-56 transition"
+                                    loading="lazy"
+                                />
+                            @else
+                                <x-heroicon-s-photograph class="group-hover:brightness-125 fill-current text-white dark:text-gray-400 bg-gray-300 dark:bg-gray-700 w-full h-72 md:h-56 transition"/>
+                            @endif
+                        </div>
+                        <div class="w-full px-4 py-3">
+                            <div class="group-hover:text-white text-2xl overflow-hidden hyphens-auto break-words" lang="{{ $unreadFeedItem->feed->language }}">{{ $unreadFeedItem->title }}</div>
+                            <div class="group-hover:text-primary-200 w-full group-focus:text-primary-100 text-muted pt-2">
+                                <div class="flex items-center">
+                                    @if ($unreadFeedItem->feed->favicon_url)
+                                        <img src="{{ $unreadFeedItem->feed->favicon_url }}" class="w-4 h-4" alt="Favicon"/>
+                                    @else
+                                        <x-heroicon-o-photograph class="h-4 w-4"/>
+                                    @endif
 
-                                        <div class="ml-1">{{ $unreadFeedItem->feed->name }}</div>
-                                    </div>
-                                    <div>{{ $unreadFeedItem->formatted_posted_at }}</div>
+                                    <div class="ml-1">{{ $unreadFeedItem->feed->name }}</div>
                                 </div>
-
-                                @if (Auth::user()->is_feed_item_description_visible && $unreadFeedItem->description)
-                                    <div class="group-hover:text-gray-300 group-focus:text-gray-200 pt-1 text-muted overflow-hidden line-clamp-6 xl:line-clamp-3 break-all">{{ $unreadFeedItem->description }}</div>
-                                @endif
+                                <div>{{ $unreadFeedItem->formatted_posted_at }}</div>
                             </div>
-                        </a>
+
+                            @if (Auth::user()->is_feed_item_description_visible && $unreadFeedItem->description)
+                                <div class="group-hover:text-primary-200 group-focus:text-primary-100 pt-1 text-muted overflow-hidden line-clamp-6 xl:line-clamp-3 break-all">{{ $unreadFeedItem->description }}</div>
+                            @endif
+                        </div>
 
                         <div class="mt-4 px-4 pb-4">
                             <button
                                 type="button"
-                                class="w-full inline-flex items-center px-4 py-4 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md font-semibold text-xs text-gray-700 dark:text-gray-400 uppercase tracking-widest shadow-sm hover:text-gray-500 dark:hover:text-gray-300 focus:outline-none focus:border-primary-300 dark:focus:border-primary-500 focus:ring focus:ring-primary-200 dark:focus:ring-primary-600 active:text-gray-800 dark:active:text-gray-200 active:bg-gray-50 dark:active:bg-gray-600 disabled:opacity-25 transition"
+                                class="group-hover:text-white group-hover:border-primary-300 w-full inline-flex items-center px-4 py-4 border border-gray-200 rounded-md hover:bg-primary-700 focus:bg-primary-800 focus:text-white hover:shadow-md focus:shadow-lg outline-none focus:ring focus:ring-primary-400 transition"
                                 :disabled="isLoading(@json($unreadFeedItem->id))"
                                 @click.prevent="toggleMarkAsRead(@json($unreadFeedItem->id))"
                             >
@@ -108,7 +107,7 @@
                                 <span>{{ __('Mark as read') }}</span>
                             </button>
                         </div>
-                    </div>
+                    </a>
                 </x-card.card>
             </div>
         @endforeach
