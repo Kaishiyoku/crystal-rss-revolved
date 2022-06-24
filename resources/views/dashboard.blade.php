@@ -90,7 +90,7 @@
                         <div class="mt-4 px-4 pb-4">
                             <button
                                 type="button"
-                                class="group-hover:text-white group-hover:border-primary-300 w-full inline-flex items-center px-4 py-4 border border-gray-200 rounded-md hover:bg-primary-700 focus:bg-primary-800 focus:text-white hover:shadow-md focus:shadow-lg outline-none focus:ring focus:ring-primary-400 transition"
+                                class="group-hover:text-white group-hover:border-primary-300 w-full inline-flex items-center px-4 py-4 border border-gray-200 dark:border-gray-700 rounded-md hover:bg-primary-700 focus:bg-primary-800 focus:text-white hover:shadow-md focus:shadow-lg outline-none focus:ring focus:ring-primary-400 transition"
                                 :disabled="isLoading(@json($unreadFeedItem->id))"
                                 @click.prevent="toggleMarkAsRead(@json($unreadFeedItem->id))"
                             >
