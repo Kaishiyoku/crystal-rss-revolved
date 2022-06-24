@@ -118,32 +118,35 @@
         },
         {
             "name": "bensampo/laravel-enum",
-            "version": "v5.3.0",
+            "version": "v5.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/BenSampo/laravel-enum.git",
-                "reference": "0440f7a7fd70d77716a6e6c7fed2a3e932d09b49"
+                "reference": "297dc7e9cadf96de1e39540770ea07f27ce58cb0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BenSampo/laravel-enum/zipball/0440f7a7fd70d77716a6e6c7fed2a3e932d09b49",
-                "reference": "0440f7a7fd70d77716a6e6c7fed2a3e932d09b49",
+                "url": "https://api.github.com/repos/BenSampo/laravel-enum/zipball/297dc7e9cadf96de1e39540770ea07f27ce58cb0",
+                "reference": "297dc7e9cadf96de1e39540770ea07f27ce58cb0",
                 "shasum": ""
             },
             "require": {
                 "composer/composer": "^2.2",
-                "illuminate/contracts": "^9.0",
-                "illuminate/support": "^9.0",
-                "laminas/laminas-code": "^3.4 || ^4.0",
+                "illuminate/contracts": "^9",
+                "illuminate/support": "^9",
+                "laminas/laminas-code": "^3.4 || ^4",
                 "nikic/php-parser": "^4.13",
-                "php": "^8.0"
+                "php": "^8"
             },
             "require-dev": {
                 "doctrine/dbal": "^3.3",
                 "ergebnis/composer-normalize": "^2.24",
                 "mockery/mockery": "^1.4.4",
-                "orchestra/testbench": "^7.0",
+                "nunomaduro/larastan": "^2",
+                "orchestra/testbench": "^7",
                 "phpstan/phpstan": "^1.4",
+                "phpstan/phpstan-mockery": "^1",
+                "phpstan/phpstan-phpunit": "^1",
                 "phpunit/phpunit": "^9.5.10",
                 "squizlabs/php_codesniffer": "^3.6"
             },
@@ -190,7 +193,7 @@
             ],
             "support": {
                 "issues": "https://github.com/BenSampo/laravel-enum/issues",
-                "source": "https://github.com/BenSampo/laravel-enum/tree/v5.3.0"
+                "source": "https://github.com/BenSampo/laravel-enum/tree/v5.3.1"
             },
             "funding": [
                 {
@@ -198,7 +201,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-04-08T07:46:13+00:00"
+            "time": "2022-06-22T08:35:50+00:00"
         },
         {
             "name": "blade-ui-kit/blade-heroicons",
@@ -2817,16 +2820,16 @@
         },
         {
             "name": "knuckleswtf/scribe",
-            "version": "3.31.0",
+            "version": "3.32.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/knuckleswtf/scribe.git",
-                "reference": "b2052640cd815ce68471aefc3ac181145703a858"
+                "reference": "9e3d35d83d9558375c28dec6011a04c87fd13e56"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/knuckleswtf/scribe/zipball/b2052640cd815ce68471aefc3ac181145703a858",
-                "reference": "b2052640cd815ce68471aefc3ac181145703a858",
+                "url": "https://api.github.com/repos/knuckleswtf/scribe/zipball/9e3d35d83d9558375c28dec6011a04c87fd13e56",
+                "reference": "9e3d35d83d9558375c28dec6011a04c87fd13e56",
                 "shasum": ""
             },
             "require": {
@@ -2901,7 +2904,7 @@
             ],
             "support": {
                 "issues": "https://github.com/knuckleswtf/scribe/issues",
-                "source": "https://github.com/knuckleswtf/scribe/tree/3.31.0"
+                "source": "https://github.com/knuckleswtf/scribe/tree/3.32.0"
             },
             "funding": [
                 {
@@ -2909,7 +2912,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2022-06-16T10:55:14+00:00"
+            "time": "2022-06-23T19:11:08+00:00"
         },
         {
             "name": "laminas/laminas-code",
