@@ -91,6 +91,7 @@ class DashboardController extends Controller
             ->whereHas('unreadFeedItems')
             ->with('category')
             ->withCount('unreadFeedItems')
+            ->orderBy('name')
             ->get()
             ->map(fn(Feed $feed) => [
                 'label' => $feed->name,
