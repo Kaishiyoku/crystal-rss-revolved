@@ -114,6 +114,12 @@
                                 </x-jet-dropdown-link>
                             @endif
 
+                            @if (Auth::user()->is_admin)
+                                <x-jet-dropdown-link href="{{ route('telescope') }}">
+                                    {{ __('Telescope') }}
+                                </x-jet-dropdown-link>
+                            @endif
+
                             <x-dropdown.dropdown-divider/>
 
                             <!-- Authentication -->
@@ -193,6 +199,12 @@
                 @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                     <x-jet-responsive-nav-link href="{{ route('api-tokens.index') }}" :active="request()->routeIs('api-tokens.index')">
                         {{ __('API Tokens') }}
+                    </x-jet-responsive-nav-link>
+                @endif
+
+                @if (Auth::user()->is_admin)
+                    <x-jet-responsive-nav-link href="{{ route('telescope') }}">
+                        {{ __('Telescope') }}
                     </x-jet-responsive-nav-link>
                 @endif
 

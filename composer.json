@@ -20,6 +20,7 @@
         "laravel/framework": "^9.0",
         "laravel/jetstream": "^2.3",
         "laravel/sanctum": "^2.14.1",
+        "laravel/telescope": "^4.9",
         "laravel/tinker": "^2.7",
         "livewire/livewire": "^2.5",
         "neitanod/forceutf8": "^2.0",
@@ -63,6 +64,9 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
+        ],
+        "post-update-cmd": [
+            "@php artisan telescope:publish --ansi"
         ],
         "ide-helper": [
             "php artisan ide-helper:generate",
