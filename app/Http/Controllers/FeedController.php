@@ -136,7 +136,7 @@ class FeedController extends Controller
             ->with('unreadFeedItems')
             ->get()
             ->each(function (Feed $feed) use ($now) {
-                $feed->feedItems()->update(['read_at' => $now]);
+                $feed->unreadFeedItems()->update(['read_at' => $now]);
             });
 
         return redirect()->route('dashboard');
