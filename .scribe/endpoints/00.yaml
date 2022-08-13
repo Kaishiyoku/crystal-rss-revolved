@@ -1,0 +1,196 @@
+name: Categories
+description: |-
+
+  API methods for managing categories
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/categories
+    metadata:
+      title: 'Display a listing of the resource.'
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    queryParameters: []
+    bodyParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          [{
+           "id": 1,
+           "user_id": 1,
+           "name": "Technology",
+           "created_at": "2021-07-19T16:46:51.000000Z",
+           "updated_at": "2021-08-22T12:26:11.000000Z",
+           "feeds_count": 8
+          },
+          {
+           "id": 2,
+           "user_id": 1,
+           "name": "Poetry",
+           "created_at": "2021-07-19T16:46:51.000000Z",
+           "updated_at": "2021-08-22T12:26:11.000000Z",
+           "feeds_count": 3
+          }]
+        headers: []
+        description: '200, success'
+    responseFields: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/categories
+    metadata:
+      title: 'Store a newly created resource in storage.'
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    queryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'The name of the category.'
+        required: true
+        example: velit
+        type: string
+        custom: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+           "id": 3,
+           "user_id": 1,
+           "name": "Blogs",
+           "created_at": "2021-07-19T16:46:51.000000Z",
+           "updated_at": "2021-08-22T12:26:11.000000Z",
+           "feeds_count": 0
+          }
+        headers: []
+        description: '200, success'
+    responseFields: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/v1/categories/{id}'
+    metadata:
+      title: 'Display the specified resource.'
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the category.'
+        required: true
+        example: 1
+        type: integer
+        custom: []
+    queryParameters: []
+    bodyParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+           "id": 1,
+           "user_id": 1,
+           "name": "Technology",
+           "created_at": "2021-07-19T16:46:51.000000Z",
+           "updated_at": "2021-08-22T12:26:11.000000Z",
+           "feeds_count": 8
+          }
+        headers: []
+        description: '200, success'
+    responseFields: []
+  -
+    httpMethods:
+      - PUT
+      - PATCH
+    uri: 'api/v1/categories/{id}'
+    metadata:
+      title: 'Update the specified resource in storage.'
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the category.'
+        required: true
+        example: 1
+        type: integer
+        custom: []
+    queryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'The name of the category.'
+        required: true
+        example: cupiditate
+        type: string
+        custom: []
+    responses:
+      -
+        status: 200
+        content: |-
+          [{
+           "id": 1,
+           "user_id": 1,
+           "name": "Tech & IT",
+           "created_at": "2021-07-19T16:46:51.000000Z",
+           "updated_at": "2021-08-23T12:26:11.000000Z",
+           "feeds_count": 8
+          }
+        headers: []
+        description: '200, success'
+    responseFields: []
+  -
+    httpMethods:
+      - DELETE
+    uri: 'api/v1/categories/{id}'
+    metadata:
+      title: 'Remove the specified resource from storage.'
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the category.'
+        required: true
+        example: 1
+        type: integer
+        custom: []
+    queryParameters: []
+    bodyParameters: []
+    responses:
+      -
+        status: 200
+        content: '{}'
+        headers: []
+        description: '200, success'
+    responseFields: []

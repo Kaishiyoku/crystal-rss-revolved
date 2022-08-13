@@ -30,9 +30,9 @@
         var useCsrf = Boolean();
         var csrfUrl = "/sanctum/csrf-cookie";
     </script>
-    <script src="../docs/js/tryitout-3.21.0.js"></script>
+    <script src="../docs/js/tryitout-3.35.0.js"></script>
 
-    <script src="../docs/js/theme-default-3.21.0.js"></script>
+    <script src="../docs/js/theme-default-3.35.0.js"></script>
 
 </head>
 
@@ -70,19 +70,6 @@
                                                 </ul>
                     
                     <ul id="tocify-header-2" class="tocify-header">
-                <li class="tocify-item level-1" data-unique="miscellaneous">
-                    <a href="#miscellaneous">Miscellaneous</a>
-                </li>
-                                    <ul id="tocify-subheader-miscellaneous" class="tocify-subheader">
-                                                    <li class="tocify-item level-2" data-unique="miscellaneous-GETapi-v1-health_check">
-                        <a href="#miscellaneous-GETapi-v1-health_check">Healthcheck</a>
-                    </li>
-                                    <li class="tocify-item level-2" data-unique="miscellaneous-GETapi-v1-user">
-                        <a href="#miscellaneous-GETapi-v1-user">Retrieve own user</a>
-                    </li>
-                                                    </ul>
-                            </ul>
-                    <ul id="tocify-header-3" class="tocify-header">
                 <li class="tocify-item level-1" data-unique="categories">
                     <a href="#categories">Categories</a>
                 </li>
@@ -104,7 +91,7 @@
                     </li>
                                                     </ul>
                             </ul>
-                    <ul id="tocify-header-4" class="tocify-header">
+                    <ul id="tocify-header-3" class="tocify-header">
                 <li class="tocify-item level-1" data-unique="feeds">
                     <a href="#feeds">Feeds</a>
                 </li>
@@ -129,6 +116,19 @@
                     </li>
                                                     </ul>
                             </ul>
+                    <ul id="tocify-header-4" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="miscellaneous">
+                    <a href="#miscellaneous">Miscellaneous</a>
+                </li>
+                                    <ul id="tocify-subheader-miscellaneous" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="miscellaneous-GETapi-v1-health_check">
+                        <a href="#miscellaneous-GETapi-v1-health_check">Healthcheck</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="miscellaneous-GETapi-v1-user">
+                        <a href="#miscellaneous-GETapi-v1-user">Retrieve own user</a>
+                    </li>
+                                                    </ul>
+                            </ul>
         
                         
             </div>
@@ -139,7 +139,7 @@
                             <li><a href="http://github.com/knuckleswtf/scribe">Documentation powered by Scribe ✍</a></li>
                     </ul>
         <ul class="toc-footer" id="last-updated">
-        <li>Last updated: January 16 2022</li>
+        <li>Last updated: August 13 2022</li>
     </ul>
 </div>
 
@@ -159,257 +159,6 @@ You can switch the language used with the tabs at the top right (or from the nav
 <p>Authenticate requests to this API's endpoints by sending an <strong><code>Authorization</code></strong> header with the value <strong><code>"Bearer {YOUR_AUTH_KEY}"</code></strong>.</p>
 <p>All authenticated endpoints are marked with a <code>requires authentication</code> badge in the documentation below.</p>
 <p>You can retrieve your token by visiting your dashboard and clicking <b>Generate API token</b>.</p>
-
-        <h1 id="miscellaneous">Miscellaneous</h1>
-
-    <p>API methods for basic information</p>
-
-            <h2 id="miscellaneous-GETapi-v1-health_check">Healthcheck</h2>
-
-<p>
-</p>
-
-<p>Check that the service is up. If everything is okay, you'll get a 200 OK response.</p>
-<p>Otherwise, the request will fail with a 400 error, and a response listing the failed services.</p>
-
-<span id="example-requests-GETapi-v1-health_check">
-<blockquote>Example request:</blockquote>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/health_check"
-);
-
-const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers,
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="php-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$response = $client-&gt;get(
-    'http://localhost:8000/api/v1/health_check',
-    [
-        'headers' =&gt; [
-            'Content-Type' =&gt; 'application/json',
-            'Accept' =&gt; 'application/json',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-</span>
-
-<span id="example-responses-GETapi-v1-health_check">
-            <blockquote>
-            <p>Example response (400, Service is unhealthy):</p>
-        </blockquote>
-                <pre>
-
-<code class="language-json">{
-    &quot;status&quot;: false,
-    &quot;services&quot;: {
-        &quot;database&quot;: false
-    }
-}</code>
- </pre>
-            <blockquote>
-            <p>Example response (200):</p>
-        </blockquote>
-                <details class="annotation">
-            <summary>
-                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
-            </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
-content-type: application/json
-x-ratelimit-limit: 60
-x-ratelimit-remaining: 59
-access-control-allow-origin: *
- </code></pre>
-        </details>         <pre>
-
-<code class="language-json">{
-    &quot;status&quot;: true,
-    &quot;services&quot;: {
-        &quot;database&quot;: true
-    }
-}</code>
- </pre>
-    </span>
-<span id="execution-results-GETapi-v1-health_check" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-GETapi-v1-health_check"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-v1-health_check"></code></pre>
-</span>
-<span id="execution-error-GETapi-v1-health_check" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-v1-health_check"></code></pre>
-</span>
-<form id="form-GETapi-v1-health_check" data-method="GET"
-      data-path="api/v1/health_check"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-health_check', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-GETapi-v1-health_check"
-                    onclick="tryItOut('GETapi-v1-health_check');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-GETapi-v1-health_check"
-                    onclick="cancelTryOut('GETapi-v1-health_check');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-GETapi-v1-health_check" hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-green">GET</small>
-            <b><code>api/v1/health_check</code></b>
-        </p>
-                    </form>
-
-    <h3>Response</h3>
-    <h4 class="fancy-heading-panel"><b>Response Fields</b></h4>
-            <p>
-            <b><code>status</code></b>&nbsp;&nbsp;<small>boolean</small>  &nbsp;
-<br>
-<p>The status of this API (<code>true</code> or <code>false</code>).</p>
-        </p>
-            <p>
-            <b><code>services</code></b>&nbsp;&nbsp;<small>object</small>  &nbsp;
-<br>
-<p>Map of each downstream service and their status (<code>true</code> or <code>false</code>).</p>
-        </p>
-                <h2 id="miscellaneous-GETapi-v1-user">Retrieve own user</h2>
-
-<p>
-<small class="badge badge-darkred">requires authentication</small>
-</p>
-
-
-
-<span id="example-requests-GETapi-v1-user">
-<blockquote>Example request:</blockquote>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/user"
-);
-
-const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers,
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="php-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$response = $client-&gt;get(
-    'http://localhost:8000/api/v1/user',
-    [
-        'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
-            'Content-Type' =&gt; 'application/json',
-            'Accept' =&gt; 'application/json',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-</span>
-
-<span id="example-responses-GETapi-v1-user">
-            <blockquote>
-            <p>Example response (200, success):</p>
-        </blockquote>
-                <pre>
-
-<code class="language-json">{
-    &quot;id&quot;: 1,
-    &quot;name&quot;: &quot;John Doe&quot;,
-    &quot;email&quot;: &quot;john_doe@test.com&quot;,
-    &quot;email_verified_at&quot;: &quot;2021-07-19T16:52:07.000000Z&quot;,
-    &quot;current_team_id&quot;: null,
-    &quot;profile_photo_path&quot;: &quot;profile-photos/tQoWDCXYOOOK15OykHUBLnyrTvB76laGnIAwtaj8.jpg&quot;,
-    &quot;created_at&quot;: &quot;2021-07-19T16:46:51.000000Z&quot;,
-    &quot;updated_at&quot;: &quot;2021-08-22T12:26:11.000000Z&quot;,
-    &quot;profile_photo_url&quot;: &quot;/storage/profile-photos/tQoWDCXYOOOK15OykHUBLnyrTvB76laGnIAwtaj8.jpg&quot;
-}</code>
- </pre>
-    </span>
-<span id="execution-results-GETapi-v1-user" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-GETapi-v1-user"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-v1-user"></code></pre>
-</span>
-<span id="execution-error-GETapi-v1-user" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-v1-user"></code></pre>
-</span>
-<form id="form-GETapi-v1-user" data-method="GET"
-      data-path="api/v1/user"
-      data-authed="1"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}'
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-user', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-GETapi-v1-user"
-                    onclick="tryItOut('GETapi-v1-user');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-GETapi-v1-user"
-                    onclick="cancelTryOut('GETapi-v1-user');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-GETapi-v1-user" hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-green">GET</small>
-            <b><code>api/v1/user</code></b>
-        </p>
-                <p>
-            <label id="auth-GETapi-v1-user" hidden>Authorization header:
-                <b><code>Bearer </code></b><input type="text"
-                                                                name="Authorization"
-                                                                data-prefix="Bearer "
-                                                                data-endpoint="GETapi-v1-user"
-                                                                data-component="header"></label>
-        </p>
-                </form>
 
         <h1 id="categories">Categories</h1>
 
@@ -560,7 +309,7 @@ const headers = {
 };
 
 let body = {
-    "name": "debitis"
+    "name": "velit"
 };
 
 fetch(url, {
@@ -581,7 +330,7 @@ $response = $client-&gt;post(
             'Accept' =&gt; 'application/json',
         ],
         'json' =&gt; [
-            'name' =&gt; 'debitis',
+            'name' =&gt; 'velit',
         ],
     ]
 );
@@ -659,7 +408,7 @@ print_r(json_decode((string) $body));</code></pre></div>
                 <input type="text"
                name="name"
                data-endpoint="POSTapi-v1-categories"
-               value="debitis"
+               value="velit"
                data-component="body" hidden>
     <br>
 <p>The name of the category.</p>
@@ -680,7 +429,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/categories/15"
+    "http://localhost:8000/api/v1/categories/1"
 );
 
 const headers = {
@@ -698,7 +447,7 @@ fetch(url, {
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $response = $client-&gt;get(
-    'http://localhost:8000/api/v1/categories/15',
+    'http://localhost:8000/api/v1/categories/1',
     [
         'headers' =&gt; [
             'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
@@ -781,7 +530,7 @@ print_r(json_decode((string) $body));</code></pre></div>
                 <input type="number"
                name="id"
                data-endpoint="GETapi-v1-categories--id-"
-               value="15"
+               value="1"
                data-component="url" hidden>
     <br>
 <p>The ID of the category.</p>
@@ -802,7 +551,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/categories/18"
+    "http://localhost:8000/api/v1/categories/1"
 );
 
 const headers = {
@@ -812,7 +561,7 @@ const headers = {
 };
 
 let body = {
-    "name": "id"
+    "name": "cupiditate"
 };
 
 fetch(url, {
@@ -825,7 +574,7 @@ fetch(url, {
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $response = $client-&gt;put(
-    'http://localhost:8000/api/v1/categories/18',
+    'http://localhost:8000/api/v1/categories/1',
     [
         'headers' =&gt; [
             'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
@@ -833,7 +582,7 @@ $response = $client-&gt;put(
             'Accept' =&gt; 'application/json',
         ],
         'json' =&gt; [
-            'name' =&gt; 'id',
+            'name' =&gt; 'cupiditate',
         ],
     ]
 );
@@ -915,7 +664,7 @@ print_r(json_decode((string) $body));</code></pre></div>
                 <input type="number"
                name="id"
                data-endpoint="PUTapi-v1-categories--id-"
-               value="18"
+               value="1"
                data-component="url" hidden>
     <br>
 <p>The ID of the category.</p>
@@ -926,7 +675,7 @@ print_r(json_decode((string) $body));</code></pre></div>
                 <input type="text"
                name="name"
                data-endpoint="PUTapi-v1-categories--id-"
-               value="id"
+               value="cupiditate"
                data-component="body" hidden>
     <br>
 <p>The name of the category.</p>
@@ -947,7 +696,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/categories/6"
+    "http://localhost:8000/api/v1/categories/1"
 );
 
 const headers = {
@@ -965,7 +714,7 @@ fetch(url, {
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $response = $client-&gt;delete(
-    'http://localhost:8000/api/v1/categories/6',
+    'http://localhost:8000/api/v1/categories/1',
     [
         'headers' =&gt; [
             'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
@@ -1041,7 +790,7 @@ print_r(json_decode((string) $body));</code></pre></div>
                 <input type="number"
                name="id"
                data-endpoint="DELETEapi-v1-categories--id-"
-               value="6"
+               value="1"
                data-component="url" hidden>
     <br>
 <p>The ID of the category.</p>
@@ -1325,10 +1074,11 @@ const headers = {
 };
 
 let body = {
-    "category_id": 12,
-    "feed_url": "explicabo",
-    "site_url": "et",
-    "name": "pariatur"
+    "category_id": 8,
+    "feed_url": "maiores",
+    "site_url": "ad",
+    "name": "officia",
+    "language": "debitis"
 };
 
 fetch(url, {
@@ -1349,10 +1099,11 @@ $response = $client-&gt;post(
             'Accept' =&gt; 'application/json',
         ],
         'json' =&gt; [
-            'category_id' =&gt; 12,
-            'feed_url' =&gt; 'explicabo',
-            'site_url' =&gt; 'et',
-            'name' =&gt; 'pariatur',
+            'category_id' =&gt; 8,
+            'feed_url' =&gt; 'maiores',
+            'site_url' =&gt; 'ad',
+            'name' =&gt; 'officia',
+            'language' =&gt; 'debitis',
         ],
     ]
 );
@@ -1442,7 +1193,7 @@ print_r(json_decode((string) $body));</code></pre></div>
                 <input type="number"
                name="category_id"
                data-endpoint="POSTapi-v1-feeds"
-               value="12"
+               value="8"
                data-component="body" hidden>
     <br>
 <p>The ID of the category.</p>
@@ -1452,7 +1203,7 @@ print_r(json_decode((string) $body));</code></pre></div>
                 <input type="text"
                name="feed_url"
                data-endpoint="POSTapi-v1-feeds"
-               value="explicabo"
+               value="maiores"
                data-component="body" hidden>
     <br>
 <p>The URL of the feed.</p>
@@ -1462,7 +1213,7 @@ print_r(json_decode((string) $body));</code></pre></div>
                 <input type="text"
                name="site_url"
                data-endpoint="POSTapi-v1-feeds"
-               value="et"
+               value="ad"
                data-component="body" hidden>
     <br>
 <p>The URL of the website.</p>
@@ -1472,10 +1223,20 @@ print_r(json_decode((string) $body));</code></pre></div>
                 <input type="text"
                name="name"
                data-endpoint="POSTapi-v1-feeds"
-               value="pariatur"
+               value="officia"
                data-component="body" hidden>
     <br>
 <p>THe name of the feed.</p>
+        </p>
+                <p>
+            <b><code>language</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+                <input type="text"
+               name="language"
+               data-endpoint="POSTapi-v1-feeds"
+               value="debitis"
+               data-component="body" hidden>
+    <br>
+
         </p>
         </form>
 
@@ -1493,7 +1254,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/feeds/2"
+    "http://localhost:8000/api/v1/feeds/1"
 );
 
 const headers = {
@@ -1511,7 +1272,7 @@ fetch(url, {
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $response = $client-&gt;get(
-    'http://localhost:8000/api/v1/feeds/2',
+    'http://localhost:8000/api/v1/feeds/1',
     [
         'headers' =&gt; [
             'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
@@ -1606,7 +1367,7 @@ print_r(json_decode((string) $body));</code></pre></div>
                 <input type="number"
                name="id"
                data-endpoint="GETapi-v1-feeds--id-"
-               value="2"
+               value="1"
                data-component="url" hidden>
     <br>
 <p>The ID of the feed.</p>
@@ -1627,7 +1388,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/feeds/3"
+    "http://localhost:8000/api/v1/feeds/1"
 );
 
 const headers = {
@@ -1637,10 +1398,11 @@ const headers = {
 };
 
 let body = {
-    "category_id": 12,
-    "feed_url": "quia",
-    "site_url": "ex",
-    "name": "quos"
+    "category_id": 8,
+    "feed_url": "consequatur",
+    "site_url": "iste",
+    "name": "asperiores",
+    "language": "hic"
 };
 
 fetch(url, {
@@ -1653,7 +1415,7 @@ fetch(url, {
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $response = $client-&gt;put(
-    'http://localhost:8000/api/v1/feeds/3',
+    'http://localhost:8000/api/v1/feeds/1',
     [
         'headers' =&gt; [
             'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
@@ -1661,10 +1423,11 @@ $response = $client-&gt;put(
             'Accept' =&gt; 'application/json',
         ],
         'json' =&gt; [
-            'category_id' =&gt; 12,
-            'feed_url' =&gt; 'quia',
-            'site_url' =&gt; 'ex',
-            'name' =&gt; 'quos',
+            'category_id' =&gt; 8,
+            'feed_url' =&gt; 'consequatur',
+            'site_url' =&gt; 'iste',
+            'name' =&gt; 'asperiores',
+            'language' =&gt; 'hic',
         ],
     ]
 );
@@ -1758,7 +1521,7 @@ print_r(json_decode((string) $body));</code></pre></div>
                 <input type="number"
                name="id"
                data-endpoint="PUTapi-v1-feeds--id-"
-               value="3"
+               value="1"
                data-component="url" hidden>
     <br>
 <p>The ID of the feed.</p>
@@ -1769,7 +1532,7 @@ print_r(json_decode((string) $body));</code></pre></div>
                 <input type="number"
                name="category_id"
                data-endpoint="PUTapi-v1-feeds--id-"
-               value="12"
+               value="8"
                data-component="body" hidden>
     <br>
 <p>The ID of the category.</p>
@@ -1779,7 +1542,7 @@ print_r(json_decode((string) $body));</code></pre></div>
                 <input type="text"
                name="feed_url"
                data-endpoint="PUTapi-v1-feeds--id-"
-               value="quia"
+               value="consequatur"
                data-component="body" hidden>
     <br>
 <p>The URL of the feed.</p>
@@ -1789,7 +1552,7 @@ print_r(json_decode((string) $body));</code></pre></div>
                 <input type="text"
                name="site_url"
                data-endpoint="PUTapi-v1-feeds--id-"
-               value="ex"
+               value="iste"
                data-component="body" hidden>
     <br>
 <p>The URL of the website.</p>
@@ -1799,10 +1562,20 @@ print_r(json_decode((string) $body));</code></pre></div>
                 <input type="text"
                name="name"
                data-endpoint="PUTapi-v1-feeds--id-"
-               value="quos"
+               value="asperiores"
                data-component="body" hidden>
     <br>
 <p>THe name of the feed.</p>
+        </p>
+                <p>
+            <b><code>language</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+                <input type="text"
+               name="language"
+               data-endpoint="PUTapi-v1-feeds--id-"
+               value="hic"
+               data-component="body" hidden>
+    <br>
+
         </p>
         </form>
 
@@ -1820,7 +1593,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/feeds/18"
+    "http://localhost:8000/api/v1/feeds/1"
 );
 
 const headers = {
@@ -1838,7 +1611,7 @@ fetch(url, {
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $response = $client-&gt;delete(
-    'http://localhost:8000/api/v1/feeds/18',
+    'http://localhost:8000/api/v1/feeds/1',
     [
         'headers' =&gt; [
             'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
@@ -1914,12 +1687,263 @@ print_r(json_decode((string) $body));</code></pre></div>
                 <input type="number"
                name="id"
                data-endpoint="DELETEapi-v1-feeds--id-"
-               value="18"
+               value="1"
                data-component="url" hidden>
     <br>
 <p>The ID of the feed.</p>
             </p>
                     </form>
+
+        <h1 id="miscellaneous">Miscellaneous</h1>
+
+    <p>API methods for basic information</p>
+
+            <h2 id="miscellaneous-GETapi-v1-health_check">Healthcheck</h2>
+
+<p>
+</p>
+
+<p>Check that the service is up. If everything is okay, you'll get a 200 OK response.</p>
+<p>Otherwise, the request will fail with a 400 error, and a response listing the failed services.</p>
+
+<span id="example-requests-GETapi-v1-health_check">
+<blockquote>Example request:</blockquote>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/api/v1/health_check"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$response = $client-&gt;get(
+    'http://localhost:8000/api/v1/health_check',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-health_check">
+            <blockquote>
+            <p>Example response (400, Service is unhealthy):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;status&quot;: false,
+    &quot;services&quot;: {
+        &quot;database&quot;: false
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary>
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+x-ratelimit-limit: 60
+x-ratelimit-remaining: 59
+access-control-allow-origin: *
+ </code></pre>
+        </details>         <pre>
+
+<code class="language-json">{
+    &quot;status&quot;: true,
+    &quot;services&quot;: {
+        &quot;database&quot;: true
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-health_check" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-health_check"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-health_check"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-health_check" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-health_check"></code></pre>
+</span>
+<form id="form-GETapi-v1-health_check" data-method="GET"
+      data-path="api/v1/health_check"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-health_check', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-health_check"
+                    onclick="tryItOut('GETapi-v1-health_check');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-health_check"
+                    onclick="cancelTryOut('GETapi-v1-health_check');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-health_check" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/health_check</code></b>
+        </p>
+                    </form>
+
+    <h3>Response</h3>
+    <h4 class="fancy-heading-panel"><b>Response Fields</b></h4>
+            <p>
+            <b><code>status</code></b>&nbsp;&nbsp;<small>boolean</small>  &nbsp;
+<br>
+<p>The status of this API (<code>true</code> or <code>false</code>).</p>
+        </p>
+            <p>
+            <b><code>services</code></b>&nbsp;&nbsp;<small>object</small>  &nbsp;
+<br>
+<p>Map of each downstream service and their status (<code>true</code> or <code>false</code>).</p>
+        </p>
+                <h2 id="miscellaneous-GETapi-v1-user">Retrieve own user</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-user">
+<blockquote>Example request:</blockquote>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/api/v1/user"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$response = $client-&gt;get(
+    'http://localhost:8000/api/v1/user',
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-user">
+            <blockquote>
+            <p>Example response (200, success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;id&quot;: 1,
+    &quot;name&quot;: &quot;John Doe&quot;,
+    &quot;email&quot;: &quot;john_doe@test.com&quot;,
+    &quot;email_verified_at&quot;: &quot;2021-07-19T16:52:07.000000Z&quot;,
+    &quot;current_team_id&quot;: null,
+    &quot;profile_photo_path&quot;: &quot;profile-photos/tQoWDCXYOOOK15OykHUBLnyrTvB76laGnIAwtaj8.jpg&quot;,
+    &quot;created_at&quot;: &quot;2021-07-19T16:46:51.000000Z&quot;,
+    &quot;updated_at&quot;: &quot;2021-08-22T12:26:11.000000Z&quot;,
+    &quot;profile_photo_url&quot;: &quot;/storage/profile-photos/tQoWDCXYOOOK15OykHUBLnyrTvB76laGnIAwtaj8.jpg&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-user" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-user"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-user"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-user" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-user"></code></pre>
+</span>
+<form id="form-GETapi-v1-user" data-method="GET"
+      data-path="api/v1/user"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-user', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-user"
+                    onclick="tryItOut('GETapi-v1-user');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-user"
+                    onclick="cancelTryOut('GETapi-v1-user');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-user" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/user</code></b>
+        </p>
+                <p>
+            <label id="auth-GETapi-v1-user" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="GETapi-v1-user"
+                                                                data-component="header"></label>
+        </p>
+                </form>
 
     
 

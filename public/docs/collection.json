@@ -10,111 +10,11 @@
     ],
     "info": {
         "name": "Crystal RSS",
-        "_postman_id": "1bd435f9-bf3a-4375-97f9-bee5dcd4a242",
+        "_postman_id": "af2712fe-3b03-4432-a554-bc406e096729",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
     "item": [
-        {
-            "name": "Miscellaneous",
-            "description": "\nAPI methods for basic information",
-            "item": [
-                {
-                    "name": "Healthcheck",
-                    "request": {
-                        "url": {
-                            "host": "{{baseUrl}}",
-                            "path": "api\/v1\/health_check",
-                            "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/health_check"
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": null,
-                        "description": "Check that the service is up. If everything is okay, you'll get a 200 OK response.\n\nOtherwise, the request will fail with a 400 error, and a response listing the failed services.",
-                        "auth": {
-                            "type": "noauth"
-                        }
-                    },
-                    "response": [
-                        {
-                            "header": [],
-                            "code": 400,
-                            "body": "{\"status\": false, \"services\": {\"database\": false}}",
-                            "name": "Service is unhealthy"
-                        },
-                        {
-                            "header": [
-                                {
-                                    "key": "cache-control",
-                                    "value": "no-cache, private"
-                                },
-                                {
-                                    "key": "content-type",
-                                    "value": "application\/json"
-                                },
-                                {
-                                    "key": "x-ratelimit-limit",
-                                    "value": "60"
-                                },
-                                {
-                                    "key": "x-ratelimit-remaining",
-                                    "value": "59"
-                                },
-                                {
-                                    "key": "access-control-allow-origin",
-                                    "value": "*"
-                                }
-                            ],
-                            "code": 200,
-                            "body": "{\"status\":true,\"services\":{\"database\":true}}",
-                            "name": ""
-                        }
-                    ]
-                },
-                {
-                    "name": "Retrieve own user",
-                    "request": {
-                        "url": {
-                            "host": "{{baseUrl}}",
-                            "path": "api\/v1\/user",
-                            "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/user"
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": null,
-                        "description": ""
-                    },
-                    "response": [
-                        {
-                            "header": [],
-                            "code": 200,
-                            "body": "{\n \"id\": 1,\n \"name\": \"John Doe\",\n \"email\": \"john_doe@test.com\",\n \"email_verified_at\": \"2021-07-19T16:52:07.000000Z\",\n \"current_team_id\": null,\n \"profile_photo_path\": \"profile-photos\/tQoWDCXYOOOK15OykHUBLnyrTvB76laGnIAwtaj8.jpg\",\n \"created_at\": \"2021-07-19T16:46:51.000000Z\",\n \"updated_at\": \"2021-08-22T12:26:11.000000Z\",\n \"profile_photo_url\": \"\/storage\/profile-photos\/tQoWDCXYOOOK15OykHUBLnyrTvB76laGnIAwtaj8.jpg\"\n}",
-                            "name": "success"
-                        }
-                    ]
-                }
-            ]
-        },
         {
             "name": "Categories",
             "description": "\nAPI methods for managing categories",
@@ -173,7 +73,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"name\":\"debitis\"}"
+                            "raw": "{\"name\":\"velit\"}"
                         },
                         "description": ""
                     },
@@ -198,7 +98,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "15",
+                                    "value": "1",
                                     "description": "The ID of the category."
                                 }
                             ]
@@ -238,7 +138,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "18",
+                                    "value": "1",
                                     "description": "The ID of the category."
                                 }
                             ]
@@ -256,7 +156,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"name\":\"id\"}"
+                            "raw": "{\"name\":\"cupiditate\"}"
                         },
                         "description": ""
                     },
@@ -281,7 +181,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "6",
+                                    "value": "1",
                                     "description": "The ID of the category."
                                 }
                             ]
@@ -401,7 +301,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"category_id\":12,\"feed_url\":\"explicabo\",\"site_url\":\"et\",\"name\":\"pariatur\"}"
+                            "raw": "{\"category_id\":8,\"feed_url\":\"maiores\",\"site_url\":\"ad\",\"name\":\"officia\",\"language\":\"debitis\"}"
                         },
                         "description": ""
                     },
@@ -426,7 +326,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "2",
+                                    "value": "1",
                                     "description": "The ID of the feed."
                                 }
                             ]
@@ -466,7 +366,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "3",
+                                    "value": "1",
                                     "description": "The ID of the feed."
                                 }
                             ]
@@ -484,7 +384,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"category_id\":12,\"feed_url\":\"quia\",\"site_url\":\"ex\",\"name\":\"quos\"}"
+                            "raw": "{\"category_id\":8,\"feed_url\":\"consequatur\",\"site_url\":\"iste\",\"name\":\"asperiores\",\"language\":\"hic\"}"
                         },
                         "description": ""
                     },
@@ -509,7 +409,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "18",
+                                    "value": "1",
                                     "description": "The ID of the feed."
                                 }
                             ]
@@ -533,6 +433,106 @@
                             "header": [],
                             "code": 200,
                             "body": "{}",
+                            "name": "success"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Miscellaneous",
+            "description": "\nAPI methods for basic information",
+            "item": [
+                {
+                    "name": "Healthcheck",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/health_check",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/health_check"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Check that the service is up. If everything is okay, you'll get a 200 OK response.\n\nOtherwise, the request will fail with a 400 error, and a response listing the failed services.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 400,
+                            "body": "{\"status\": false, \"services\": {\"database\": false}}",
+                            "name": "Service is unhealthy"
+                        },
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "x-ratelimit-limit",
+                                    "value": "60"
+                                },
+                                {
+                                    "key": "x-ratelimit-remaining",
+                                    "value": "59"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 200,
+                            "body": "{\"status\":true,\"services\":{\"database\":true}}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Retrieve own user",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/user",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/user"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n \"id\": 1,\n \"name\": \"John Doe\",\n \"email\": \"john_doe@test.com\",\n \"email_verified_at\": \"2021-07-19T16:52:07.000000Z\",\n \"current_team_id\": null,\n \"profile_photo_path\": \"profile-photos\/tQoWDCXYOOOK15OykHUBLnyrTvB76laGnIAwtaj8.jpg\",\n \"created_at\": \"2021-07-19T16:46:51.000000Z\",\n \"updated_at\": \"2021-08-22T12:26:11.000000Z\",\n \"profile_photo_url\": \"\/storage\/profile-photos\/tQoWDCXYOOOK15OykHUBLnyrTvB76laGnIAwtaj8.jpg\"\n}",
                             "name": "success"
                         }
                     ]
