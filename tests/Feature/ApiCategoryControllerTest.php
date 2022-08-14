@@ -26,7 +26,7 @@ class ApiCategoryControllerTest extends TestCase
         static::assertEmpty($response->json());
 
         // add a category and check that it is returned in the response
-        $category = $user->categories()->save(Category::factory()->create());
+        $category = $user->categories()->save(Category::factory()->make());
 
         $response = $this->getJson(route('api.v1.categories.index'));
 
@@ -71,7 +71,7 @@ class ApiCategoryControllerTest extends TestCase
         $categoryName = 'Updated Test Category';
 
         $user = User::factory()->create();
-        $category = $user->categories()->save(Category::factory()->create());
+        $category = $user->categories()->save(Category::factory()->make());
 
         $this->actingAs($user);
 
@@ -92,7 +92,7 @@ class ApiCategoryControllerTest extends TestCase
     public function test_deletes_resource()
     {
         $user = User::factory()->create();
-        $category = $user->categories()->save(Category::factory()->create());
+        $category = $user->categories()->save(Category::factory()->make());
 
         $this->actingAs($user);
 
