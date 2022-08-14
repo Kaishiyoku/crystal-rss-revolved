@@ -11,16 +11,22 @@ jobs:
 
     runs-on: ubuntu-latest
     
+    env:
+      DB_DATABASE: laravel
+      DB_USERNAME: laravel
+      DB_PASSWORD: laravel
+      DB_PORT: 32574
+      MYSQL_ROOT_PASSWORD: laravel
+      MYSQL_DATABASE: laravel
+    
     services:
       mariadb:
         image: mariadb:10.6
-        ports:
-          - 3306
         env:
-          MYSQL_DATABASE: laravel
-          MYSQL_USER: laravel
-          MYSQL_PASSWORD: laravel
           MYSQL_ROOT_PASSWORD: laravel
+          MYSQL_DATABASE: laravel
+        ports:
+          - 32574:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
@@ -38,6 +44,3 @@ jobs:
       run: chmod -R 777 storage bootstrap/cache
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       run: vendor/bin/phpunit
-      env:
-        DB_DATABASE: ${MYSQL_PASSWORD}
-        DB_USERNAME: ${MYSQL_USER}
