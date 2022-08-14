@@ -18,9 +18,8 @@ jobs:
           - 3306
         env:
           MYSQL_USER: root
-          MYSQL_PASSWORD: root
           MYSQL_DATABASE: test
-          MYSQL_ROOT_PASSWORD: root
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
@@ -42,6 +41,4 @@ jobs:
         chmod -R 777 database
         touch database/database.sqlite
     - name: Execute tests (Unit and Feature tests) via PHPUnit
-      env:
-        DB_PASSWORD=root
       run: vendor/bin/phpunit
