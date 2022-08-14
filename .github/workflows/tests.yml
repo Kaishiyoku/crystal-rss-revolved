@@ -29,7 +29,7 @@ jobs:
       run: |
         mysql --version
         sudo apt-get install -y mysql-client
-        mysql --host 172.0.0.1 --port ${{ job.services.mysql.ports['3306'] }} -u laravel -e "SHOW DATABASES" --protocol tcp
+        mysql --host 172.0.0.1 --port 3306 -u laravel -e "SHOW DATABASES" --protocol tcp
 
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.github', '.env');"
