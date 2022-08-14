@@ -13,14 +13,14 @@ jobs:
     
     services:
       mariadb:
-        image: mariadb:latest
+        image: mariadb:10.6
         ports:
           - 3306
         env:
           MYSQL_DATABASE: laravel
-          MYSQL_USER: root
-          MYSQL_PASSWORD: root
-          MYSQL_ROOT_PASSWORD: root
+          MYSQL_USER: laravel
+          MYSQL_PASSWORD: laravel
+          MYSQL_ROOT_PASSWORD: laravel
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
@@ -40,3 +40,4 @@ jobs:
       run: vendor/bin/phpunit
       env:
         DB_DATABASE: ${MYSQL_PASSWORD}
+        DB_USERNAME: ${MYSQL_USER}
