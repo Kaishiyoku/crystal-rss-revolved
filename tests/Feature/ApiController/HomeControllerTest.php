@@ -1,14 +1,11 @@
 <?php
 
-namespace Tests\Feature;
+namespace ApiController;
 
-use App\Models\Category;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class ApiHomeControllerTest extends TestCase
+class HomeControllerTest extends TestCase
 {
     /**
      * A basic feature test example.

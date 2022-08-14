@@ -1,13 +1,12 @@
 <?php
 
-namespace Tests\Feature;
+namespace ApiController;
 
 use App\Models\Category;
 use App\Models\User;
-use Illuminate\Support\Arr;
 use Tests\TestCase;
 
-class ApiCategoryControllerTest extends TestCase
+class CategoryControllerTest extends TestCase
 {
     /**
      * A basic feature test example.
@@ -33,8 +32,8 @@ class ApiCategoryControllerTest extends TestCase
         static::assertNotEmpty($response->json());
         static::assertIsArray($response->json());
         static::assertCount(1, $response->json());
-        static::assertEquals($category->user_id, Arr::get($response->json(), '0.user_id'));
-        static::assertEquals($category->name, Arr::get($response->json(), '0.name'));
+        static::assertEquals($category->user_id, $response->json('0.user_id'));
+        static::assertEquals($category->name, $response->json('0.name'));
 
         $response->assertOk();
     }
