@@ -39,4 +39,4 @@ jobs:
         MYSQL_DATABASE: test
         DB_USERNAME: root
         DB_PORT: ${{ job.services.mysql.ports[3306] }}
-      run: vendor/bin/phpunit
+      run: php artisan test
