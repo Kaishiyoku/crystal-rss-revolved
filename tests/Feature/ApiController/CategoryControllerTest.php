@@ -4,6 +4,10 @@ namespace ApiController;
 
 use App\Models\Category;
 use App\Models\User;
+use Illuminate\Support\Str;
+use Laravel\Jetstream\Features;
+use Laravel\Jetstream\Http\Livewire\ApiTokenManager;
+use Livewire\Livewire;
 use Tests\TestCase;
 
 class CategoryControllerTest extends TestCase
@@ -99,5 +103,34 @@ class CategoryControllerTest extends TestCase
 
         $response = $this->deleteJson(route('api.v1.categories.destroy', 1));
         $response->assertUnauthorized();
+    }
+
+    public function test_api_token_permissions_tests()
+    {
+        if (! Features::hasApiFeatures()) {
+            return $this->markTestSkipped('API support is not enabled.');
+        }
+
+        if (Features::hasTeamFeatures()) {
+            $user = User::factory()->withPersonalTeam()->create();
+        } else {
+            $user = User::factory()->create();
+        }
+
+        $token = $user->tokens()->create([
+            'name' => 'Test Token',
+            'token' => Str::random(40),
+            'abilities' => [
+                'category:create',
+                'category:read',
+                'category:update',
+                'category:delete',
+            ],
+        ]);
+        $response = $this->actingAs($user, 'api')->withToken($token->token)->getJson(route('api.v1.categories.index'))->dump();
+
+//        $response = $this->withToken($token->token)->getJson(route('api.v1.categories.index'));
+
+        $response->assertOk();
     }
 }
