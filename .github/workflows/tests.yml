@@ -39,6 +39,9 @@ jobs:
       
     - name: Compile assets
       run: npm run build
+      
+    - name: Run migrations
+      run: php artisan migrate
 
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       env:
