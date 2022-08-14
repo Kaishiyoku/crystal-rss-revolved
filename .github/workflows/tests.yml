@@ -11,25 +11,19 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    services:
-      mysql:
-        image: mariadb:10.6
-        env:
-          MYSQL_DATABASE: test
-          MYSQL_USER: laravel
-          MYSQL_ALLOW_EMPTY_PASSWORD: yes
-        ports:
-          - 3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-
     steps:
+    - uses: ankane/setup-mariadb@v1
+      with:
+        mariadb-version: 10.6
+        database: test
+    
     - uses: actions/checkout@v2
     
     - name: Verify MySQL connection
       run: |
         mysql --version
         sudo apt-get install -y mysql-client
-        mysql --host 172.0.0.1 --port 3306 -u laravel -e "SHOW DATABASES" --protocol tcp
+        mysql --host 172.0.0.1 --port 3306 -u root -e "SHOW DATABASES" --protocol tcp
 
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.github', '.env');"
