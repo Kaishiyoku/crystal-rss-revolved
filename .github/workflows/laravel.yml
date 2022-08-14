@@ -27,6 +27,7 @@ jobs:
     - name: Create Database
       run: |
         mkdir -p database
+        chmod -R 777 database
         touch database/database.sqlite
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       env:
