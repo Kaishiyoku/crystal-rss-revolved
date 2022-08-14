@@ -20,7 +20,7 @@ jobs:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
         ports:
           - 3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3 --protocol tcp
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
     - uses: actions/checkout@v2
@@ -29,7 +29,7 @@ jobs:
       run: |
         mysql --version
         sudo apt-get install -y mysql-client
-        mysql --host 172.18.0.1 --port ${{ job.services.mysql.ports['3306'] }} -u laravel -e "SHOW DATABASES"
+        mysql --host 172.0.0.1 --port ${{ job.services.mysql.ports['3306'] }} -u laravel -e "SHOW DATABASES" --protocol tcp
 
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.github', '.env');"
