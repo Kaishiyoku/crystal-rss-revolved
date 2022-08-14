@@ -7,11 +7,6 @@ use Tests\TestCase;
 
 class HomeControllerTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
     public function test_health_check()
     {
         $response = $this->getJson(route('api.v1.health_check'));
@@ -22,11 +17,6 @@ class HomeControllerTest extends TestCase
         $response->assertOk();
     }
 
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
     public function test_retrieve_own_user()
     {
         $user = User::factory()->create();
@@ -43,4 +33,11 @@ class HomeControllerTest extends TestCase
 
         $response->assertOk();
     }
+
+    public function test_requires_authorization()
+    {
+        $response = $this->getJson(route('api.v1.user'));
+        $response->assertUnauthorized();
+    }
+
 }

@@ -8,11 +8,6 @@ use Tests\TestCase;
 
 class CategoryControllerTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
     public function test_retrieves_resources()
     {
         $user = User::factory()->create();
@@ -38,11 +33,6 @@ class CategoryControllerTest extends TestCase
         $response->assertOk();
     }
 
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
     public function test_creates_resource()
     {
         $categoryName = 'Test Category';
@@ -60,11 +50,6 @@ class CategoryControllerTest extends TestCase
         $response->assertOk();
     }
 
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
     public function test_updates_resource()
     {
         $categoryName = 'Updated Test Category';
@@ -83,11 +68,6 @@ class CategoryControllerTest extends TestCase
         $response->assertOk();
     }
 
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
     public function test_deletes_resource()
     {
         $user = User::factory()->create();
@@ -101,5 +81,23 @@ class CategoryControllerTest extends TestCase
         static::assertEmpty($user->categories);
 
         $response->assertOk();
+    }
+
+    public function test_requires_authorization()
+    {
+        $response = $this->getJson(route('api.v1.categories.index'));
+        $response->assertUnauthorized();
+
+        $response = $this->postJson(route('api.v1.categories.store'));
+        $response->assertUnauthorized();
+
+        $response = $this->putJson(route('api.v1.categories.update', 1));
+        $response->assertUnauthorized();
+
+        $response = $this->getJson(route('api.v1.categories.show', 1));
+        $response->assertUnauthorized();
+
+        $response = $this->deleteJson(route('api.v1.categories.destroy', 1));
+        $response->assertUnauthorized();
     }
 }

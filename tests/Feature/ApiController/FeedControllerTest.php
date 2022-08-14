@@ -11,11 +11,6 @@ use Tests\TestCase;
 
 class FeedControllerTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
     public function test_retrieves_resources()
     {
         $user = User::factory()->create();
@@ -48,11 +43,6 @@ class FeedControllerTest extends TestCase
         $response->assertOk();
     }
 
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
     public function test_creates_resource()
     {
         $user = User::factory()->create();
@@ -83,11 +73,6 @@ class FeedControllerTest extends TestCase
         $response->assertOk();
     }
 
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
     public function test_updates_resource()
     {
         $user = User::factory()->create();
@@ -120,11 +105,6 @@ class FeedControllerTest extends TestCase
         $response->assertOk();
     }
 
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
     public function test_deletes_resource()
     {
         $user = User::factory()->create();
@@ -141,11 +121,6 @@ class FeedControllerTest extends TestCase
         $response->assertOk();
     }
 
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
     public function test_shows_resource()
     {
         $user = User::factory()->create();
@@ -169,11 +144,6 @@ class FeedControllerTest extends TestCase
         $response->assertOk();
     }
 
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
     public function test_marks_all_as_read()
     {
         $user = User::factory()->create();
@@ -191,5 +161,26 @@ class FeedControllerTest extends TestCase
         });
 
         $response->assertOk();
+    }
+
+    public function test_requires_authorization()
+    {
+        $response = $this->getJson(route('api.v1.feeds.index'));
+        $response->assertUnauthorized();
+
+        $response = $this->postJson(route('api.v1.feeds.store'));
+        $response->assertUnauthorized();
+
+        $response = $this->putJson(route('api.v1.feeds.update', 1));
+        $response->assertUnauthorized();
+
+        $response = $this->getJson(route('api.v1.feeds.show', 1));
+        $response->assertUnauthorized();
+
+        $response = $this->deleteJson(route('api.v1.feeds.destroy', 1));
+        $response->assertUnauthorized();
+
+        $response = $this->putJson(route('api.v1.feeds.mark_all_as_read', 1));
+        $response->assertUnauthorized();
     }
 }
