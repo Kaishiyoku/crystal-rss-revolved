@@ -1,4 +1,4 @@
-@props(['align' => 'right', 'width' => '48', 'contentClasses' => 'py-1 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800/75', 'dropdownClasses' => '', 'mobileFullWidth' => false])
+@props(['align' => 'right', 'width' => '48', 'containerClasses' => '', 'contentClasses' => 'py-1 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800/75', 'dropdownClasses' => '', 'mobileFullWidth' => false])
 
 @php
 switch ($align) {
@@ -31,7 +31,7 @@ switch ($width) {
 }
 @endphp
 
-<div class="relative" x-data="{ open: false }" @click.away="open = false" @close.stop="open = false">
+<div class="{{ classNames('relative', $containerClasses) }}" x-data="{ open: false }" @click.away="open = false" @close.stop="open = false">
     <div @click="open = ! open" class="{{ classNames(['inline-block' => !$mobileFullWidth]) }}">
         {{ $trigger }}
     </div>
