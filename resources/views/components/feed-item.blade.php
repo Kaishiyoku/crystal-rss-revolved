@@ -1,21 +1,21 @@
 @props(['feedItem'])
 
-<x-card.card class="grow overflow-hidden">
+<x-card.card class="grow">
     <a
-        class="flex flex-col justify-between h-full group sm:hover:bg-primary-500 block transition ease-out duration-300 sm:focus:outline-none sm:focus:text-white sm:focus:bg-primary-600"
+        class="flex flex-col justify-between h-full group sm:hover:bg-primary-500 block transition ease-out duration-300 sm:focus:outline-none sm:focus:text-white sm:focus:bg-primary-600 rounded-md"
         href="{{ $feedItem->url }}"
         :class="{'opacity-40': isRead(@json($feedItem->id))}"
     >
-        <div>
+        <div class="rounded-t-md">
             @if ($feedItem->has_image)
                 <img
                     src="{{ $feedItem->image_url }}"
                     alt="{{ $feedItem->title }}"
-                    class="group-hover:brightness-125 object-cover w-full h-72 md:h-56 transition"
+                    class="group-hover:brightness-125 object-cover w-full h-72 md:h-56 rounded-t-md transition"
                     loading="lazy"
                 />
             @else
-                <x-heroicon-s-photograph class="group-hover:brightness-125 fill-current text-white dark:text-gray-400 bg-gray-300 dark:bg-gray-700 w-full h-72 md:h-56 transition"/>
+                <x-heroicon-s-photograph class="group-hover:brightness-125 fill-current text-white dark:text-gray-400 bg-gray-300 dark:bg-gray-700 w-full h-72 md:h-56 rounded-t-md transition"/>
             @endif
         </div>
         <div class="w-full px-4 py-3">
@@ -38,10 +38,10 @@
             @endif
         </div>
 
-        <div class="mt-4 px-4 pb-4">
+        <div class="mt-4">
             <button
                 type="button"
-                class="hover:text-white sm:group-hover:text-white group-hover:border-primary-500 sm:group-hover:border-primary-300 w-full inline-flex items-center px-4 py-4 border border-gray-200 dark:border-gray-700 rounded-md hover:bg-primary-700 focus:bg-primary-800 focus:text-white hover:shadow-md focus:shadow-lg outline-none focus:ring focus:ring-primary-400 transition"
+                class="shadow-inner hover:text-white sm:group-hover:text-white group-hover:border-primary-500 sm:group-hover:border-primary-400 w-full inline-flex items-center px-4 py-4 border border-gray-200 dark:border-gray-700/50 hover:bg-primary-700 focus:bg-primary-800 focus:text-white hover:shadow-md focus:shadow-lg outline-none rounded-b-md focus:ring focus:ring-inset focus:ring-primary-400 transition"
                 :disabled="isLoading(@json($feedItem->id))"
                 @click.prevent="toggleMarkAsRead(@json($feedItem->id))"
             >
