@@ -29,6 +29,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property-read int|null $feeds_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Sanctum\PersonalAccessToken[] $tokens
  * @property-read int|null $tokens_count
+ * @method static \Database\Factories\CategoryFactory factory(...$parameters)
  */
 class Category extends Model
 {

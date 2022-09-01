@@ -45,6 +45,7 @@ use Illuminate\Support\Str;
  * @method static Builder|FeedItem whereUrl($value)
  * @mixin \Eloquent
  * @method static Builder|FeedItem ofFeed($feedId)
+ * @method static \Database\Factories\FeedItemFactory factory(...$parameters)
  */
 class FeedItem extends Model
 {

@@ -43,6 +43,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property-read int|null $tokens_count
  * @property string|null $language
  * @method static \Illuminate\Database\Eloquent\Builder|Feed whereLanguage($value)
+ * @method static \Database\Factories\FeedFactory factory(...$parameters)
  */
 class Feed extends Model
 {

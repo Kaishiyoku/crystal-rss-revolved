@@ -8,11 +8,10 @@
     >
         <div class="rounded-t-md">
             @if ($feedItem->has_image)
-                <img
-                    src="{{ $feedItem->image_url }}"
-                    alt="{{ $feedItem->title }}"
+                <x-lazy-image
+                    :src="$feedItem->image_url"
+                    :alt="$feedItem->title"
                     class="group-hover:brightness-125 object-cover w-full h-72 md:h-56 rounded-t-md transition"
-                    loading="lazy"
                 />
             @else
                 <x-heroicon-s-photograph class="group-hover:brightness-125 fill-current text-white dark:text-gray-400 bg-gray-300 dark:bg-gray-700 w-full h-72 md:h-56 rounded-t-md transition"/>
@@ -23,7 +22,7 @@
             <div class="group-hover:text-primary-600 dark:group-hover:text-primary-400 sm:group-hover:text-primary-200 w-full group-focus:text-primary-100 text-muted pt-2">
                 <div class="flex items-center">
                     @if ($feedItem->feed->favicon_url)
-                        <img src="{{ $feedItem->feed->favicon_url }}" class="w-4 h-4" alt="Favicon"/>
+                        <x-lazy-image :src="$feedItem->feed->favicon_url" class="w-4 h-4" alt="Favicon"/>
                     @else
                         <x-heroicon-o-photograph class="h-4 w-4"/>
                     @endif

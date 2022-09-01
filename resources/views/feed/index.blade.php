@@ -24,7 +24,7 @@
             <a class="group block md:flex md:items-center md:justify-between md:space-x-4 px-4 py-3 transition first:rounded-t-md last:rounded-b-md hover:bg-gray-50 dark:hover:bg-gray-700 dark:hover:text-gray-300" href="{{ route('feeds.edit', $feed) }}">
                 <div class="flex">
                     @if ($feed->favicon_url)
-                        <img src="{{ $feed->favicon_url }}" alt="Favicon" class="w-5 h-5"/>
+                        <x-lazy-image :src="$feed->favicon_url" alt="Favicon" class="w-5 h-5"/>
                     @else
                         <x-heroicon-o-photograph class="h-6 w-6"/>
                     @endif
