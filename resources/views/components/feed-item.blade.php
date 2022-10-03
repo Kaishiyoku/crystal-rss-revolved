@@ -2,18 +2,18 @@
 
 <x-card.card class="grow">
     <div
-        class="flex flex-col justify-between h-full block transition ease-out duration-300 rounded-md"
+        class="flex flex-col justify-between h-full block transition ease-out duration-300 sm:rounded-md"
         :class="{ 'opacity-40': isRead(@json($feedItem->id)) }"
     >
-        <div class="rounded-t-md">
+        <div class="sm:rounded-t-md">
             @if ($feedItem->has_image)
                 <x-lazy-image
                     :src="$feedItem->image_url"
                     :alt="$feedItem->title"
-                    class="object-cover w-full h-72 md:h-56 rounded-t-md transition"
+                    class="object-cover w-full h-72 md:h-56 sm:rounded-t-md transition"
                 />
             @else
-                <x-heroicon-s-photograph class="fill-current text-white dark:text-gray-400 bg-gray-300 dark:bg-gray-700 w-full h-72 md:h-56 rounded-t-md transition"/>
+                <x-heroicon-s-photograph class="fill-current text-white dark:text-gray-400 bg-gray-300 dark:bg-gray-700 w-full h-72 md:h-56 sm:rounded-t-md transition"/>
             @endif
         </div>
 
@@ -21,7 +21,7 @@
             <a
                 href="{{ $feedItem->url }}"
                 lang="{{ $feedItem->feed->language }}"
-                class="text-primary-600 sm:hover:text-primary-700 hover:underline text-2xl overflow-hidden hyphens-auto break-words"
+                class="text-primary-600 dark:text-primary-400 hover:text-primary-700 hover:text-primary-300 hover:underline text-2xl overflow-hidden hyphens-auto break-words transition"
             >
                 {{ $feedItem->title }}
             </a>
@@ -44,7 +44,7 @@
 
             <button
                 type="button"
-                class="mt-4 w-full inline-flex items-center p-4 bg-white dark:bg-primary-600 border border-gray-300 rounded-md font-semibold text-xs text-gray-600 uppercase tracking-widest shadow dark:shadow-black/25 hover:text-white hover:bg-primary-700 dark:hover:bg-primary-500 active:bg-gray-900 dark:active:bg-primary-800 focus:outline-none focus:border-gray-900 focus:ring-2 focus:ring-primary-300/75 dark:focus:ring-primary-400/75 ring-offset-2 focus:ring-primary-200 dark:focus:ring-primary-600 dark:focus:ring-offset-gray-800 disabled:opacity-25 transition"
+                class="mt-4 w-full inline-flex items-center p-4 bg-white dark:bg-transparent border border-gray-300 dark:border-gray-700 rounded-md font-semibold text-xs text-gray-600 uppercase tracking-widest shadow dark:shadow-black/25 hover:text-white hover:bg-primary-700 dark:hover:bg-primary-500 active:bg-gray-900 dark:active:bg-primary-800 focus:outline-none focus:border-gray-900 focus:ring-2 focus:ring-primary-300/75 dark:focus:ring-primary-400/75 ring-offset-2 focus:ring-primary-200 dark:focus:ring-primary-600 dark:focus:ring-offset-gray-800 disabled:opacity-25 transition"
                 :disabled="isLoading(@json($feedItem->id))"
                 @click.prevent="toggleMarkAsRead(@json($feedItem->id))"
             >
