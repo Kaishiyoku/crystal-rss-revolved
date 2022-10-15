@@ -21,7 +21,7 @@
             <a
                 href="{{ $feedItem->url }}"
                 lang="{{ $feedItem->feed->language }}"
-                class="text-primary-600 dark:text-primary-400 hover:text-primary-700 hover:text-primary-300 hover:underline text-2xl overflow-hidden hyphens-auto break-words transition"
+                class="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 hover:underline text-2xl overflow-hidden hyphens-auto break-words transition"
             >
                 {{ $feedItem->title }}
             </a>
