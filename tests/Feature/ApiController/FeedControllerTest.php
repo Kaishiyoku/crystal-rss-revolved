@@ -2,12 +2,10 @@
 
 namespace ApiController;
 
-use App\Http\Middleware\PreventRequestsDuringMaintenance;
 use App\Models\Category;
 use App\Models\Feed;
 use App\Models\FeedItem;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Laravel\Jetstream\Features;
@@ -15,15 +13,17 @@ use Tests\TestCase;
 
 class FeedControllerTest extends TestCase
 {
-    use RefreshDatabase;
-
     public function test_retrieves_resources()
     {
         $user = User::factory()->create();
 
-        $this->actingAs($user);
+        $this->actingAs($user, 'api');
 
-        $response = $this->getJson(route('api.v1.feeds.index'));
+        $token = $user->createToken(Str::random(40), [
+            'feed:read',
+        ]);
+
+        $response = $this->withToken($token->plainTextToken)->getJson(route('api.v1.feeds.index'));
 
         // since we haven't added any feeds the response should be empty
         static::assertEmpty($response->json());
@@ -32,7 +32,7 @@ class FeedControllerTest extends TestCase
         $category = $user->categories()->save(Category::factory()->make());
         $feed = $user->feeds()->save(Feed::factory()->make()->fill(['category_id' => $category->id]));
 
-        $response = $this->getJson(route('api.v1.feeds.index'));
+        $response = $this->withToken($token->plainTextToken)->getJson(route('api.v1.feeds.index'));
 
         static::assertNotEmpty($response->json());
         static::assertIsArray($response->json());
@@ -63,9 +63,13 @@ class FeedControllerTest extends TestCase
             'language' => 'de-DE',
         ];
 
-        $this->actingAs($user);
+        $this->actingAs($user, 'api');
 
-        $response = $this->postJson(route('api.v1.feeds.store'), $feedData);
+        $token = $user->createToken(Str::random(40), [
+            'feed:create',
+        ]);
+
+        $response = $this->withToken($token->plainTextToken)->postJson(route('api.v1.feeds.store'), $feedData);
 
         // one feed should be created
         static::assertCount(1, $user->categories);
@@ -86,7 +90,11 @@ class FeedControllerTest extends TestCase
         $secondCategory = $user->categories()->save(Category::factory()->make());
         $feed = $user->feeds()->save(Feed::factory()->make()->fill(['category_id' => $firstCategory->id]));
 
-        $this->actingAs($user);
+        $this->actingAs($user, 'api');
+
+        $token = $user->createToken(Str::random(40), [
+            'feed:update',
+        ]);
 
         $updatedFeedData = [
             'category_id' => $secondCategory->id,
@@ -97,7 +105,7 @@ class FeedControllerTest extends TestCase
             'language' => 'de-DE',
         ];
 
-        $response = $this->putJson(route('api.v1.feeds.update', $feed), $updatedFeedData);
+        $response = $this->withToken($token->plainTextToken)->putJson(route('api.v1.feeds.update', $feed), $updatedFeedData);
 
         // the feed should be updated
         static::assertCount(1, $user->feeds);
@@ -117,9 +125,13 @@ class FeedControllerTest extends TestCase
         $category = $user->categories()->save(Category::factory()->make());
         $feed = $user->feeds()->save(Feed::factory()->make()->fill(['category_id' => $category->id]));
 
-        $this->actingAs($user);
+        $this->actingAs($user, 'api');
 
-        $response = $this->deleteJson(route('api.v1.feeds.destroy', $feed));
+        $token = $user->createToken(Str::random(40), [
+            'feed:delete',
+        ]);
+
+        $response = $this->withToken($token->plainTextToken)->deleteJson(route('api.v1.feeds.destroy', $feed));
 
         // there should be no feeds
         static::assertEmpty($user->feeds);
@@ -133,9 +145,13 @@ class FeedControllerTest extends TestCase
         $category = $user->categories()->save(Category::factory()->make());
         $feed = $user->feeds()->save(Feed::factory()->make()->fill(['category_id' => $category->id]));
 
-        $this->actingAs($user);
+        $this->actingAs($user, 'api');
 
-        $response = $this->getJson(route('api.v1.feeds.show', $feed));
+        $token = $user->createToken(Str::random(40), [
+            'feed:read',
+        ]);
+
+        $response = $this->withToken($token->plainTextToken)->getJson(route('api.v1.feeds.show', $feed));
 
         static::assertEquals($feed->id, $response->json('id'));
         static::assertEquals($feed->user_id, $response->json('user_id'));
@@ -158,7 +174,7 @@ class FeedControllerTest extends TestCase
         $feed->feedItems()->saveMany(FeedItem::factory()->times(10)->make());
 
         $token = $user->createToken(Str::random(40), [
-            'feed:mark_all_as_read',
+            'feed:read',
         ]);
 
         $responseAuthorized = $this->actingAs($user, 'api')->withToken($token->plainTextToken)->putJson(route('api.v1.feeds.mark_all_as_read'));
@@ -223,15 +239,7 @@ class FeedControllerTest extends TestCase
 
     public function test_api_token_permissions_tests()
     {
-        if (!Features::hasApiFeatures()) {
-            return $this->markTestSkipped('API support is not enabled.');
-        }
-
-        if (Features::hasTeamFeatures()) {
-            $user = User::factory()->withPersonalTeam()->create();
-        } else {
-            $user = User::factory()->create();
-        }
+        $user = User::factory()->create();
 
         $responseUnauthorized = $this->actingAs($user, 'api')->getJson(route('api.v1.feeds.index'));
 

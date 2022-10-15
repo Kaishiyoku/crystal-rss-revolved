@@ -3,6 +3,7 @@
 namespace ApiController;
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class HomeControllerTest extends TestCase
@@ -21,9 +22,13 @@ class HomeControllerTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $this->actingAs($user);
+        $this->actingAs($user, 'api');
 
-        $response = $this->getJson(route('api.v1.user'));
+        $token = $user->createToken(Str::random(40), [
+            'user:read',
+        ]);
+
+        $response = $this->withToken($token->plainTextToken)->getJson(route('api.v1.user'));
 
         static::assertEquals($user->name, $response->json('name'));
         static::assertEquals($user->email, $response->json('email'));
