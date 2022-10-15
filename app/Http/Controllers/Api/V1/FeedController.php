@@ -223,6 +223,8 @@ class FeedController extends Controller
      */
     public function markAllAsRead()
     {
+        $this->authorize('mark-all-as-read');
+
         $now = now();
 
         Auth::user()->feeds()->with('unreadFeedItems')->get()->each(function (Feed $feed) use ($now) {

@@ -7,6 +7,8 @@ use App\Models\Feed;
 use App\Models\FeedItem;
 use App\Models\User;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
+use Laravel\Jetstream\Features;
 use Tests\TestCase;
 
 class FeedControllerTest extends TestCase
@@ -182,5 +184,34 @@ class FeedControllerTest extends TestCase
 
         $response = $this->putJson(route('api.v1.feeds.mark_all_as_read', 1));
         $response->assertUnauthorized();
+    }
+
+    public function test_api_token_permissions_tests()
+    {
+        if (!Features::hasApiFeatures()) {
+            return $this->markTestSkipped('API support is not enabled.');
+        }
+
+        if (Features::hasTeamFeatures()) {
+            $user = User::factory()->withPersonalTeam()->create();
+        } else {
+            $user = User::factory()->create();
+        }
+
+        $responseUnauthorized = $this->actingAs($user, 'api')->getJson(route('api.v1.feeds.index'));
+
+        $responseUnauthorized->assertUnauthorized();
+
+        $token = $user->createToken(Str::random(40), [
+            'feed:create',
+            'feed:read',
+            'feed:update',
+            'feed:delete',
+            'feed:mark-all-as-read',
+        ]);
+
+        $responseAuthorized = $this->actingAs($user, 'api')->withToken($token->plainTextToken)->getJson(route('api.v1.feeds.index'));
+
+        $responseAuthorized->assertOk();
     }
 }

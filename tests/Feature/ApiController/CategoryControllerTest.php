@@ -107,7 +107,7 @@ class CategoryControllerTest extends TestCase
 
     public function test_api_token_permissions_tests()
     {
-        if (! Features::hasApiFeatures()) {
+        if (!Features::hasApiFeatures()) {
             return $this->markTestSkipped('API support is not enabled.');
         }
 
@@ -117,6 +117,10 @@ class CategoryControllerTest extends TestCase
             $user = User::factory()->create();
         }
 
+        $responseUnauthorized = $this->actingAs($user, 'api')->getJson(route('api.v1.categories.index'));
+
+        $responseUnauthorized->assertUnauthorized();
+
         $token = $user->createToken(Str::random(40), [
             'category:create',
             'category:read',
@@ -124,8 +128,8 @@ class CategoryControllerTest extends TestCase
             'category:delete',
         ]);
 
-        $response = $this->actingAs($user, 'api')->withToken($token->plainTextToken)->getJson(route('api.v1.categories.index'));
+        $responseAuthorized = $this->actingAs($user, 'api')->withToken($token->plainTextToken)->getJson(route('api.v1.categories.index'));
 
-        $response->assertOk();
+        $responseAuthorized->assertOk();
     }
 }
