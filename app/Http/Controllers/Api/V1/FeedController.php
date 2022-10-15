@@ -78,6 +78,8 @@ class FeedController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny', Feed::class);
+
         $feeds = Auth::user()->feeds()
             ->withCount('feedItems')
             ->with('category')
@@ -223,7 +225,7 @@ class FeedController extends Controller
      */
     public function markAllAsRead()
     {
-        $this->authorize('mark-all-as-read');
+        $this->authorize('viewAny', Feed::class);
 
         $now = now();
 

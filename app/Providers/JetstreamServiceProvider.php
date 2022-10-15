@@ -49,7 +49,6 @@ class JetstreamServiceProvider extends ServiceProvider
             'feed:read',
             'feed:update',
             'feed:delete',
-            'feed:mark-all-as-read',
         ]);
     }
 }

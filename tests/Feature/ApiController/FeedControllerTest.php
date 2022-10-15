@@ -2,10 +2,12 @@
 
 namespace ApiController;
 
+use App\Http\Middleware\PreventRequestsDuringMaintenance;
 use App\Models\Category;
 use App\Models\Feed;
 use App\Models\FeedItem;
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Laravel\Jetstream\Features;
@@ -13,6 +15,8 @@ use Tests\TestCase;
 
 class FeedControllerTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function test_retrieves_resources()
     {
         $user = User::factory()->create();
@@ -153,16 +157,18 @@ class FeedControllerTest extends TestCase
         $feed = $user->feeds()->save(Feed::factory()->make()->fill(['category_id' => $category->id]));
         $feed->feedItems()->saveMany(FeedItem::factory()->times(10)->make());
 
-        $this->actingAs($user);
+        $token = $user->createToken(Str::random(40), [
+            'feed:mark_all_as_read',
+        ]);
 
-        $response = $this->putJson(route('api.v1.feeds.mark_all_as_read', $feed));
+        $responseAuthorized = $this->actingAs($user, 'api')->withToken($token->plainTextToken)->putJson(route('api.v1.feeds.mark_all_as_read'));
+
+        $responseAuthorized->assertOk();
 
         // every feed item should be marked as read
         $user->feedItems->each(function (FeedItem $feedItem) {
             static::assertNotNull($feedItem->read_at);
         });
-
-        $response->assertOk();
     }
 
     public function test_requires_authorization()
@@ -184,6 +190,35 @@ class FeedControllerTest extends TestCase
 
         $response = $this->putJson(route('api.v1.feeds.mark_all_as_read', 1));
         $response->assertUnauthorized();
+    }
+
+    public function test_requires_token_permissions()
+    {
+        $user = User::factory()->create();
+        $category = $user->categories()->save(Category::factory()->make());
+        $feed = $user->feeds()->save(Feed::factory()->make()->fill(['category_id' => $category->id]));
+
+        $token = $user->createToken(Str::random(40), []);
+
+        $this->actingAs($user, 'api');
+
+        $response = $this->withToken($token->plainTextToken)->getJson(route('api.v1.feeds.index'));
+        $response->assertForbidden();
+
+        $response = $this->withToken($token->plainTextToken)->postJson(route('api.v1.feeds.store'));
+        $response->assertForbidden();
+
+        $response = $this->withToken($token->plainTextToken)->putJson(route('api.v1.feeds.update', $feed));
+        $response->assertForbidden();
+
+        $response = $this->withToken($token->plainTextToken)->getJson(route('api.v1.feeds.show', $feed));
+        $response->assertForbidden();
+
+        $response = $this->withToken($token->plainTextToken)->deleteJson(route('api.v1.feeds.destroy', $feed));
+        $response->assertForbidden();
+
+        $response = $this->withToken($token->plainTextToken)->putJson(route('api.v1.feeds.mark_all_as_read', $feed));
+        $response->assertForbidden();
     }
 
     public function test_api_token_permissions_tests()
