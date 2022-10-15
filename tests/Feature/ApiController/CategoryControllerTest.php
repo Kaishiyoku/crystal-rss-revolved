@@ -117,19 +117,14 @@ class CategoryControllerTest extends TestCase
             $user = User::factory()->create();
         }
 
-        $token = $user->tokens()->create([
-            'name' => 'Test Token',
-            'token' => Str::random(40),
-            'abilities' => [
-                'category:create',
-                'category:read',
-                'category:update',
-                'category:delete',
-            ],
+        $token = $user->createToken(Str::random(40), [
+            'category:create',
+            'category:read',
+            'category:update',
+            'category:delete',
         ]);
-        $response = $this->actingAs($user, 'api')->withToken($token->token)->getJson(route('api.v1.categories.index'))->dump();
 
-//        $response = $this->withToken($token->token)->getJson(route('api.v1.categories.index'));
+        $response = $this->actingAs($user, 'api')->withToken($token->plainTextToken)->getJson(route('api.v1.categories.index'));
 
         $response->assertOk();
     }
