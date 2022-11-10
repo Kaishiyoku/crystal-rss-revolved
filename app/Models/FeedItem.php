@@ -93,8 +93,7 @@ class FeedItem extends Model
      */
     public function prunable()
     {
-        return static::where('read_at', true)
-            ->where('posted_at', '<=', now()->subMonths(config('app.months_after_pruning_feed_items')));
+        return static::where('read_at', '<=', now()->subMonths(config('app.months_after_pruning_feed_items')));
     }
 
     /**
