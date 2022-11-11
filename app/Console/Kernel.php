@@ -28,9 +28,9 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command(FetchFeedItems::class)->hourly();
         $schedule->command(CheckFeedFavicons::class)->dailyAt('02:00');
-        $schedule->command('model:prune', ['chunk' => 500])->hourly();
+        $schedule->command('model:prune', ['--chunk' => 500])->hourly();
 
-        $schedule->command('telescope:prune --hours=72')->daily();
+        $schedule->command('telescope:prune', ['--hours' => 72])->daily();
     }
 
     /**
