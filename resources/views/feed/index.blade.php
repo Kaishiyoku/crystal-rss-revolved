@@ -13,9 +13,9 @@
                 <div>{{ trans_choice('total_number_of_feeds', $feeds->count()) }}</div>
             </div>
 
-            <x-button.secondary-button-link :url="route('feeds.create')">
+            <x-button.button secondary :href="route('feeds.create')">
                 {{ __('Add') }}
-            </x-button.secondary-button-link>
+            </x-button.button>
         </div>
     </x-slot>
 

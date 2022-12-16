@@ -19,9 +19,9 @@
             </div>
 
             <div class="flex justify-end mt-4">
-                <x-jet-button class="ml-4">
+                <x-button.button primary type="submit" class="ml-4">
                     {{ __('Confirm') }}
-                </x-jet-button>
+                </x-button.button>
             </div>
         </form>
     </x-jet-authentication-card>

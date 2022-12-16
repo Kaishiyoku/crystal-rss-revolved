@@ -14,9 +14,9 @@
             </div>
 
             @if ($unreadFeedItems->isNotEmpty())
-                <x-button.secondary-update-button :url="route('feeds.mark_all_as_read')">
+                <x-button.button secondary confirm :action="route('feeds.mark_all_as_read')" method="put">
                     {{ __('Mark all as read') }}
-                </x-button.secondary-update-button>
+                </x-button.button>
             @endif
         </div>
     </x-slot>
@@ -57,17 +57,9 @@
 
     @if ($unreadFeedItems->count() < $totalUnreadFeedItemCount)
         <div class="md:flex md:justify-between md:items-center px-4 md:px-0 mt-8">
-            <x-button.primary-button-link class="sm:mx-0 py-4 md:py-2 w-full md:w-auto" :url="route('dashboard', [$selectedFeed ? $selectedFeed->id : \App\Enums\FeedFilter::All, $unreadFeedItems->first()?->checksum, $unreadFeedItems->last()?->checksum])">
+            <x-button.button primary :href="route('dashboard', [$selectedFeed ? $selectedFeed->id : \App\Enums\FeedFilter::All, $unreadFeedItems->first()?->checksum, $unreadFeedItems->last()?->checksum])" class="sm:mx-0 py-4 md:py-2 w-full md:w-auto">
                 {{ __('Load more') }}
-            </x-button.primary-button-link>
-
-            <button
-                type="button"
-                class="text-primary-500 dark:text-secondary-500 opacity-50 hover:opacity-75 focus:opacity-90 transition mt-8 md:mt-0"
-                data-scroll-to-top
-            >
-                <x-heroicon-s-arrow-circle-up class="w-16 h-16"/>
-            </button>
+            </x-button.button>
         </div>
     @endif
 

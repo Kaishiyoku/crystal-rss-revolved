@@ -1,6 +1,5 @@
 import axios from 'axios';
 import onDomReady from './utils/onDomReady';
-import {scrollTo} from 'scroll-js';
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -28,12 +27,6 @@ onDomReady(() => {
 
                 return false;
             }
-        });
-    });
-
-    document.querySelectorAll('[data-scroll-to-top]').forEach((element) => {
-        element.addEventListener('click', () => {
-            scrollTo(document.body, {top: 0, duration: 750, easing: 'ease-in-out'});
         });
     });
 });

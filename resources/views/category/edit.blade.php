@@ -15,7 +15,9 @@
                 </div>
             </div>
 
-            <x-button.delete-button :url="route('categories.destroy', $category)"/>
+            <x-button.button danger confirm :action="route('categories.destroy', $category)" method="delete">
+                {{ __('Delete') }}
+            </x-button.button>
         </div>
     </x-slot>
 

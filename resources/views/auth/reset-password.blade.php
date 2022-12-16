@@ -27,9 +27,9 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <x-jet-button>
+                <x-button.button primary type="submit">
                     {{ __('Reset Password') }}
-                </x-jet-button>
+                </x-button.button>
             </div>
         </form>
     </x-jet-authentication-card>
