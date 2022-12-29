@@ -73,7 +73,7 @@ module.exports = {
 
         extend: {
             fontFamily: {
-                sans: ['Nunito', ...defaultTheme.fontFamily.sans],
+                sans: ['Nunito Sans', ...defaultTheme.fontFamily.sans],
             }
             ,
             typography: (theme) => ({
