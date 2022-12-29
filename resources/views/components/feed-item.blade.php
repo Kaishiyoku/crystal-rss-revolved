@@ -39,27 +39,29 @@
             </div>
 
             @if (Auth::user()->is_feed_item_description_visible && $feedItem->description)
-                <div class="grow pt-2 text-muted overflow-hidden line-clamp-6 xl:line-clamp-3 break-all">{{ $feedItem->description }}</div>
+                <div class="text-muted overflow-hidden line-clamp-6 xl:line-clamp-3 break-all">{{ $feedItem->description }}</div>
             @endif
 
-            <button
-                type="button"
-                class="inline-flex items-center transition ease-in disabled:opacity-50 disabled:cursor-not-allowed font-semibold text-xs uppercase tracking-widest border focus:outline-none focus:ring-1 shadow focus:shadow-md dark:shadow-black rounded-md px-4 py-3 sm:py-2 text-gray-900 border-gray-300 bg-white hover:border-gray-300 hover:bg-gray-100 focus:ring-gray-300 dark:text-white dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600 dark:focus:ring-gray-600"
-                :disabled="isLoading(@json($feedItem->id))"
-                @click.prevent="toggleMarkAsRead(@json($feedItem->id))"
-            >
-                <template x-if="isLoading(@json($feedItem->id))">
-                    <x-icon.loading class="mr-2"/>
-                </template>
-                <template x-if="!isLoading(@json($feedItem->id)) && !isRead(@json($feedItem->id))">
-                    <x-heroicon-s-eye class="w-5 h-5 mr-2"/>
-                </template>
-                <template x-if="!isLoading(@json($feedItem->id)) && isRead(@json($feedItem->id))">
-                    <x-heroicon-s-eye-off class="w-5 h-5 mr-2"/>
-                </template>
+            <div class="grow flex items-end">
+                <button
+                    type="button"
+                    class="mt-4 inline-flex items-center w-full transition ease-in disabled:opacity-50 disabled:cursor-not-allowed font-semibold text-xs uppercase tracking-widest border focus:outline-none focus:ring-1 shadow focus:shadow-md dark:shadow-black rounded-md px-4 py-3 sm:py-2 text-gray-900 border-gray-300 bg-white hover:border-gray-300 hover:bg-gray-100 focus:ring-gray-300 dark:text-white dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                    :disabled="isLoading(@json($feedItem->id))"
+                    @click.prevent="toggleMarkAsRead(@json($feedItem->id))"
+                >
+                    <template x-if="isLoading(@json($feedItem->id))">
+                        <x-icon.loading class="mr-2"/>
+                    </template>
+                    <template x-if="!isLoading(@json($feedItem->id)) && !isRead(@json($feedItem->id))">
+                        <x-heroicon-s-eye class="w-5 h-5 mr-2"/>
+                    </template>
+                    <template x-if="!isLoading(@json($feedItem->id)) && isRead(@json($feedItem->id))">
+                        <x-heroicon-s-eye-off class="w-5 h-5 mr-2"/>
+                    </template>
 
-                <span>{{ __('Mark as read') }}</span>
-            </button>
+                    <span>{{ __('Mark as read') }}</span>
+                </button>
+            </div>
         </x-card.body>
     </div>
 </x-card.card>
