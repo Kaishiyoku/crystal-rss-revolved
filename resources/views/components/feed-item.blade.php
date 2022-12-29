@@ -44,7 +44,7 @@
 
             <button
                 type="button"
-                class="mt-4 w-full inline-flex items-center p-4 bg-white dark:bg-transparent border border-gray-300 dark:border-gray-700 rounded-md font-semibold text-xs text-gray-600 uppercase tracking-widest shadow dark:shadow-black/25 hover:text-white hover:bg-primary-700 dark:hover:bg-primary-500 active:bg-gray-900 dark:active:bg-primary-800 focus:outline-none focus:border-gray-900 focus:ring-2 focus:ring-primary-300/75 dark:focus:ring-primary-400/75 ring-offset-2 focus:ring-primary-200 dark:focus:ring-primary-600 dark:focus:ring-offset-gray-800 disabled:opacity-25 transition"
+                class="inline-flex items-center transition ease-in disabled:opacity-50 disabled:cursor-not-allowed font-semibold text-xs uppercase tracking-widest border focus:outline-none focus:ring-1 shadow focus:shadow-md dark:shadow-black rounded-md px-4 py-3 sm:py-2 text-gray-900 border-gray-300 bg-white hover:border-gray-300 hover:bg-gray-100 focus:ring-gray-300 dark:text-white dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600 dark:focus:ring-gray-600"
                 :disabled="isLoading(@json($feedItem->id))"
                 @click.prevent="toggleMarkAsRead(@json($feedItem->id))"
             >
