@@ -32,7 +32,6 @@ use Laravel\Sanctum\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|Feed whereSiteUrl($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Feed whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Feed whereUserId($value)
- * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\FeedItem[] $feedItems
  * @property-read int|null $feed_items_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\FeedItem[] $unreadFeedItems
@@ -44,6 +43,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string|null $language
  * @method static \Illuminate\Database\Eloquent\Builder|Feed whereLanguage($value)
  * @method static \Database\Factories\FeedFactory factory(...$parameters)
+ * @mixin \Eloquent
  */
 class Feed extends Model
 {

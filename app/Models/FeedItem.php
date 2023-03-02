@@ -42,9 +42,9 @@ use Illuminate\Support\Str;
  * @method static Builder|FeedItem whereTitle($value)
  * @method static Builder|FeedItem whereUpdatedAt($value)
  * @method static Builder|FeedItem whereUrl($value)
- * @mixin \Eloquent
  * @method static Builder|FeedItem ofFeed($feedId)
  * @method static \Database\Factories\FeedItemFactory factory(...$parameters)
+ * @mixin \Eloquent
  */
 class FeedItem extends Model
 {

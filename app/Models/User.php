@@ -56,9 +56,9 @@ use Laravel\Sanctum\HasApiTokens;
  * @method static Builder|User whereTwoFactorRecoveryCodes($value)
  * @method static Builder|User whereTwoFactorSecret($value)
  * @method static Builder|User whereUpdatedAt($value)
- * @mixin \Eloquent
  * @property int $is_admin
  * @method static Builder|User whereIsAdmin($value)
+ * @mixin \Eloquent
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
