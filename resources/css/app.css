@@ -1,3 +1,66 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    /**
+    * Miscellaneous
+    */
+    .color-scheme-dark {
+        color-scheme: dark;
+    }
+}
+
+@layer components {
+    /**
+     * Inputs
+     */
+    .label-required:after {
+        @apply text-pink-600 ml-1;
+
+        content: '*';
+    }
+
+    /**
+     * Typography
+     */
+    .text-muted {
+        @apply text-gray-500;
+    }
+
+    kbd {
+        @apply px-1.5 py-1 font-bold text-xs text-gray-500 border border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-700 rounded whitespace-nowrap;
+    }
+
+    /**
+     * Custom mini scrollbar (vertical
+     */
+    .scrollbar-y-sm::-webkit-scrollbar {
+        @apply w-1.5;
+    }
+    .scrollbar-y-sm::-webkit-scrollbar-track {
+        @apply bg-transparent;
+    }
+    .scrollbar-y-sm::-webkit-scrollbar-thumb {
+        @apply bg-gray-200 dark:bg-gray-700 rounded;
+    }
+    .scrollbar-y-sm::-webkit-scrollbar-thumb:hover {
+        @apply bg-gray-300 dark:bg-gray-600;
+    }
+
+    /**
+     * Custom mini scrollbar (horizontal)
+     */
+    .scrollbar-x-sm::-webkit-scrollbar {
+        @apply h-1.5;
+    }
+    .scrollbar-x-sm::-webkit-scrollbar-track {
+        @apply bg-transparent;
+    }
+    .scrollbar-x-sm::-webkit-scrollbar-thumb {
+        @apply bg-gray-200 dark:bg-gray-700 rounded;
+    }
+    .scrollbar-x-sm::-webkit-scrollbar-thumb:hover {
+        @apply bg-gray-300 dark:bg-gray-600;
+    }
+}
