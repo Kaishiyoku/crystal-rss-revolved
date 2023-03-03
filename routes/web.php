@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FeedController;
+use App\Http\Controllers\FeedDiscovererController;
+use App\Http\Controllers\FeedUrlDiscovererController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -34,6 +37,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('categories', CategoryController::class)->except('show');
+    Route::post('discover-feed', FeedDiscovererController::class)->name('discover-feed');
+    Route::post('discover-feed-urls', FeedUrlDiscovererController::class)->name('discover-feed-urls');
+    Route::resource('feeds', FeedController::class)->except('show');
 });
 
 require __DIR__.'/auth.php';

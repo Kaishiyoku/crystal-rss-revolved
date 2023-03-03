@@ -82,4 +82,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Category::class)->orderBy('name');
     }
+
+    public function feeds(): HasMany
+    {
+        return $this->hasMany(Feed::class)->orderBy('name');
+    }
 }

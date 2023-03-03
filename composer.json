@@ -8,6 +8,7 @@
         "php": "^8.1",
         "guzzlehttp/guzzle": "^7.2",
         "inertiajs/inertia-laravel": "^0.6.3",
+        "kaishiyoku/hera-rss-crawler": "^4.0",
         "laravel/framework": "^10.0",
         "laravel/sanctum": "^3.2",
         "laravel/telescope": "^4.14",
