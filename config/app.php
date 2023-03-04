@@ -69,7 +69,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Europe/Berlin',
 
     /*
     |--------------------------------------------------------------------------
@@ -83,6 +83,8 @@ return [
     */
 
     'locale' => 'en',
+
+    'available_locales' => ['en', 'de'],
 
     /*
     |--------------------------------------------------------------------------
@@ -142,6 +144,25 @@ return [
         'driver' => 'file',
         // 'store'  => 'redis',
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Custom config values
+    |--------------------------------------------------------------------------
+    |
+    | Custom configuration values.
+    |
+    */
+
+    'rss_crawler_retry_count' => env('RSS_CRAWLER_RETRY_COUNT', 2),
+
+    'feed_items_per_page' => env('FEED_ITEMS_PER_PAGE', 15),
+
+    'months_after_pruning_feed_items' => env('MONTHS_AFTER_PRUNING_FEED_ITEMS', 2),
+
+    'contact_email' => env('CONTACT_EMAIL'),
+
+    'github_url' => env('GITHUB_URL'),
 
     /*
     |--------------------------------------------------------------------------
