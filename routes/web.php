@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FeedController;
 use App\Http\Controllers\FeedDiscovererController;
 use App\Http\Controllers\FeedUrlDiscovererController;
@@ -28,17 +29,17 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('categories', CategoryController::class)->except('show');
+
     Route::post('discover-feed', FeedDiscovererController::class)->name('discover-feed');
     Route::post('discover-feed-urls', FeedUrlDiscovererController::class)->name('discover-feed-urls');
+
     Route::resource('feeds', FeedController::class)->except('show');
 });
 

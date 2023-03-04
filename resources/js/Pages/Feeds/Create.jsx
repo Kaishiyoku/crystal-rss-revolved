@@ -3,7 +3,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import Header from '@/Components/Page/Header';
 import Form from '@/Pages/Feeds/Partials/Form';
 
-export default function Index(props) {
+export default function Create(props) {
     return (
         <AuthenticatedLayout
             auth={props.auth}

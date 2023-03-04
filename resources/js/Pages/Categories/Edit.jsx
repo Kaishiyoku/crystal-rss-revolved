@@ -5,7 +5,7 @@ import DangerButton from '@/Components/DangerButton';
 import Form from '@/Pages/Categories/Partials/Form';
 import Actions from '@/Components/Actions';
 
-export default function Index(props) {
+export default function Edit(props) {
     const {delete: destroy, processing} = useForm();
 
     const handleDelete = () => {
