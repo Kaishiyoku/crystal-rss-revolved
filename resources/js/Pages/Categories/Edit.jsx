@@ -3,6 +3,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import Header from '@/Components/Page/Header';
 import DangerButton from '@/Components/DangerButton';
 import Form from '@/Pages/Categories/Partials/Form';
+import Actions from '@/Components/Actions';
 
 export default function Index(props) {
     const {delete: destroy, processing} = useForm();
@@ -19,17 +20,15 @@ export default function Index(props) {
         >
             <Head title="Edit category" />
 
-            <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    {props.canDelete && (
-                        <DangerButton disabled={processing} onClick={handleDelete}>
-                            Delete
-                        </DangerButton>
-                    )}
+            <Actions>
+                {props.canDelete && (
+                    <DangerButton disabled={processing} onClick={handleDelete}>
+                        Delete
+                    </DangerButton>
+                )}
+            </Actions>
 
-                    <Form method="put" action={route('categories.update', props.category)} category={props.category}/>
-                </div>
-            </div>
+            <Form method="put" action={route('categories.update', props.category)} category={props.category}/>
         </AuthenticatedLayout>
     );
 }

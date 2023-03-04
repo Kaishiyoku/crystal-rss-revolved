@@ -3,6 +3,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import Header from '@/Components/Page/Header';
 import Form from '@/Pages/Feeds/Partials/Form';
 import DangerButton from '@/Components/DangerButton';
+import Actions from '@/Components/Actions';
 
 export default function Edit(props) {
     const {delete: destroy, processing} = useForm();
@@ -19,22 +20,20 @@ export default function Edit(props) {
         >
             <Head title="Edit feed"/>
 
-            <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    {props.canDelete && (
-                        <DangerButton disabled={processing} onClick={handleDelete} className="mb-5">
-                            Delete
-                        </DangerButton>
-                    )}
+            <Actions>
+                {props.canDelete && (
+                    <DangerButton disabled={processing} onClick={handleDelete} className="mb-5">
+                        Delete
+                    </DangerButton>
+                )}
+            </Actions>
 
-                    <Form
-                        method="put"
-                        action={route('feeds.update', props.feed)}
-                        feed={props.feed}
-                        categories={props.categories}
-                    />
-                </div>
-            </div>
+            <Form
+                method="put"
+                action={route('feeds.update', props.feed)}
+                feed={props.feed}
+                categories={props.categories}
+            />
         </AuthenticatedLayout>
     );
 }
