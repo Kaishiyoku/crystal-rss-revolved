@@ -57,7 +57,11 @@ class FeedController extends Controller
      */
     public function edit(Feed $feed)
     {
-        //
+        return Inertia::render('Feeds/Edit', [
+            'categories' => Auth::user()->categories()->pluck('name', 'id')->map(fn(string $name, int $id) => ['value' => $id, 'name' => $name])->values(),
+            'feed' => $feed,
+            'canDelete' => Auth::user()->can('delete', $feed),
+        ]);
     }
 
     /**
@@ -65,7 +69,14 @@ class FeedController extends Controller
      */
     public function update(UpdateFeedRequest $request, Feed $feed)
     {
-        //
+        $validated = $request->validated();
+
+        $feed = $feed->fill($validated);
+        $feed->category_id = Arr::get($validated, 'category_id');
+
+        $feed->save();
+
+        return redirect()->route('feeds.index');
     }
 
     /**
@@ -73,6 +84,8 @@ class FeedController extends Controller
      */
     public function destroy(Feed $feed)
     {
-        //
+        $feed->delete();
+
+        return redirect()->route('feeds.index');
     }
 }

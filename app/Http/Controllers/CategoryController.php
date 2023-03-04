@@ -55,6 +55,7 @@ class CategoryController extends Controller
     {
         return Inertia::render('Categories/Edit', [
             'category' => $category,
+            'canDelete' => Auth::user()->can('delete', $category),
         ]);
     }
 
@@ -66,6 +67,8 @@ class CategoryController extends Controller
         $validated = $request->validated();
 
         $category->update($validated);
+
+        return redirect()->route('categories.index');
     }
 
     /**

@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class UpdateFeedRequest extends FormRequest
 {
@@ -11,7 +13,7 @@ class UpdateFeedRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +24,12 @@ class UpdateFeedRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'category_id' => ['required', 'integer', Rule::exists('categories', 'id')->where('user_id', Auth::id())],
+            'feed_url' => ['required', 'url', 'max:255'],
+            'site_url' => ['required', 'url', 'max:255'],
+            'favicon_url' => ['required', 'url', 'max:255'],
+            'name' => ['required', 'string', 'max:255'],
+            'language' => ['required', 'string', 'max:255'],
         ];
     }
 }

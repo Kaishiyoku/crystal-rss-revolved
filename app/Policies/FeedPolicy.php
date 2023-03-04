@@ -37,7 +37,7 @@ class FeedPolicy
      */
     public function update(User $user, Feed $feed): bool
     {
-        //
+        return $user->id === $feed->user_id;
     }
 
     /**
@@ -45,7 +45,7 @@ class FeedPolicy
      */
     public function delete(User $user, Feed $feed): bool
     {
-        //
+        return $user->id === $feed->user_id;
     }
 
     /**
