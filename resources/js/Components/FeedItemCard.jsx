@@ -8,16 +8,12 @@ export default function FeedItemCard({feedItem}) {
             key={feedItem.id}
             className="flex flex-col"
         >
-            {feedItem.has_image && (
+            {feedItem.has_image ? (
                 <Card.Image
                     src={feedItem.image_url}
                     alt={feedItem.title}
                 />
-            )}
-
-            {!feedItem.has_image && (
-                <Card.ImagePlaceholder/>
-            )}
+            ) : <Card.ImagePlaceholder/>}
 
             <Card.Body className="grow flex flex-col">
                 <div className="grow">
