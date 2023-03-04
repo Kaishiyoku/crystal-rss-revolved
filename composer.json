@@ -13,6 +13,7 @@
         "laravel/sanctum": "^3.2",
         "laravel/telescope": "^4.14",
         "laravel/tinker": "^2.8",
+        "neitanod/forceutf8": "^2.0",
         "tightenco/ziggy": "^1.0"
     },
     "require-dev": {
@@ -37,7 +38,10 @@
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
-        }
+        },
+        "files": [
+            "app/helpers.php"
+        ]
     },
     "scripts": {
         "post-autoload-dump": [

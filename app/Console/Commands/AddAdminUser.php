@@ -63,6 +63,8 @@ class AddAdminUser extends Command
         $user->is_administrator = true;
         $user->save();
 
+        $user->markEmailAsVerified();
+
         event(new Registered($user));
 
         $this->line('Administrative user added.');

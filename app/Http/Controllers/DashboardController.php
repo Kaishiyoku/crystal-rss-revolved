@@ -53,7 +53,7 @@ class DashboardController extends Controller
             ->get()
             ->map(fn(Feed $feed) => [
                 'label' => $feed->name,
-                'description' => "{$feed->category->getName()} ({$feed->feed_items_count})",
+                'description' => "{$feed->category->name} ({$feed->feed_items_count})",
                 'url' => route('dashboard', [$feed]),
             ])
             ->when($selectedFeed, fn($feedOptions) => $feedOptions->prepend(null)->prepend([
