@@ -1,49 +1,63 @@
 import Card from '@/Components/Card';
 import PhotoSolidIcon from '@/Icons/PhotoSolidIcon';
 import SecondaryButton from '@/Components/SecondaryButton';
+import {useState} from 'react';
+import clsx from 'clsx';
 
 export default function FeedItemCard({feedItem}) {
+    const [internalFeedItem, setInternalFeedItem] = useState(feedItem);
+
+    const toggle = () => {
+        axios.put(route('toggle-feed-item', feedItem))
+            .then((response) => {
+                setInternalFeedItem(response.data);
+            });
+    };
+
     return (
         <Card
-            key={feedItem.id}
-            className="flex flex-col"
+            key={internalFeedItem.id}
+            className={clsx('flex flex-col transition ease-out duration-300', {'opacity-50': internalFeedItem.read_at})}
         >
-            {feedItem.has_image ? (
+            {internalFeedItem.has_image ? (
                 <Card.Image
-                    src={feedItem.image_url}
-                    alt={feedItem.title}
+                    src={internalFeedItem.image_url}
+                    alt={internalFeedItem.title}
                 />
             ) : <Card.ImagePlaceholder/>}
 
             <Card.Body className="grow flex flex-col">
                 <div className="grow">
-                    <Card.HeaderLink href={feedItem.url}>
-                        {feedItem.title}
+                    <Card.HeaderLink href={internalFeedItem.url}>
+                        {internalFeedItem.title}
                     </Card.HeaderLink>
 
                     <div className="flex items-center py-2">
-                        {feedItem.feed.favicon_url ? (
+                        {internalFeedItem.feed.favicon_url ? (
                             <img
                                 loading="lazy"
-                                src={feedItem.feed.favicon_url}
-                                alt={feedItem.feed.name}
+                                src={internalFeedItem.feed.favicon_url}
+                                alt={internalFeedItem.feed.name}
                                 className="w-4 h-4 mr-2"
                             />
                         ) : <PhotoSolidIcon className="w-4 h-4 mr-2 text-muted"/>}
 
                         <div className="text-sm text-muted">
-                            {feedItem.feed.name}
+                            {internalFeedItem.feed.name}
                         </div>
                     </div>
 
                     <div className="text-muted overflow-hidden line-clamp-6 xl:line-clamp-3 break-all">
-                        {feedItem.description}
+                        {internalFeedItem.description}
                     </div>
                 </div>
 
                 <div className="pt-2">
-                    <SecondaryButton className="w-full">
-                        Mark as read
+                    <SecondaryButton
+                        className="w-full"
+                        onClick={toggle}
+                    >
+                        {internalFeedItem.read_at ? 'Mark as unread' : 'Mark as read'}
                     </SecondaryButton>
                 </div>
             </Card.Body>

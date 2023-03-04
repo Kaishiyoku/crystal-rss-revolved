@@ -6,6 +6,7 @@ use App\Http\Controllers\FeedController;
 use App\Http\Controllers\FeedDiscovererController;
 use App\Http\Controllers\FeedUrlDiscovererController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ToggleFeedItemController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -41,6 +42,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('discover-feed-urls', FeedUrlDiscovererController::class)->name('discover-feed-urls');
 
     Route::resource('feeds', FeedController::class)->except('show');
+    Route::put('/feeds/{feedItem}/toggle', ToggleFeedItemController::class)->name('toggle-feed-item');
 });
 
 require __DIR__.'/auth.php';
