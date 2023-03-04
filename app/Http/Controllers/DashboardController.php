@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\DashboardRequest;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
@@ -11,14 +12,33 @@ class DashboardController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(Request $request)
+    public function __invoke(DashboardRequest $request)
     {
+        $feedId = $request->exists('feed_id') ? $request->integer('feed_id') : null;
+
         $totalNumberOfFeedItems = Auth::user()->feedItems()->unread()->count();
-        $feedItems = Auth::user()->feedItems()->unread()->with('feed')->cursorPaginate();
+        $unreadFeeds = Auth::user()->feeds()
+            ->select(['id', 'name'])
+            ->whereHas('feedItems', function (Builder $query) {
+                $query->unread();
+            })
+            ->withCount(['feedItems' => function (Builder $query) {
+                $query->unread();
+            }])
+            ->get();
+
+        $feedItems = Auth::user()->feedItems()
+            ->unread()
+            ->when($feedId, fn(Builder $query) => $query->where('feed_id', $feedId))
+            ->with('feed')
+            ->cursorPaginate()
+            ->withQueryString();
 
         return Inertia::render('Dashboard', [
             'totalNumberOfFeedItems' => $totalNumberOfFeedItems,
+            'unreadFeeds' => $unreadFeeds,
             'feedItems' => $feedItems,
+            'currentCursor' => $request->query('cursor'),
         ]);
     }
 }
