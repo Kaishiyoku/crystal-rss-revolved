@@ -41,6 +41,7 @@ export default function Form({method, action, feed, categories}) {
 
         axios.post(route('discover-feed'), {feed_url: feedUrl})
             .then((response) => {
+                console.log(response.data);
                 setData({...data, ...response.data})
 
                 setSearchUrl('');
@@ -156,7 +157,7 @@ export default function Form({method, action, feed, categories}) {
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="favicon_url" value="Favicon URL" required/>
+                    <InputLabel htmlFor="favicon_url" value="Favicon URL"/>
 
                     <TextInput
                         id="favicon_url"
@@ -164,7 +165,6 @@ export default function Form({method, action, feed, categories}) {
                         value={data.favicon_url}
                         onChange={(e) => setData('favicon_url', e.target.value)}
                         disabled={isDiscoverFeedProcessing}
-                        required
                     />
 
                     <InputError className="mt-2" message={errors.site_url}/>

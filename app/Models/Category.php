@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property int $id
  * @property int $user_id
  * @property string $name
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Feed> $feeds
+ * @property-read int|null $feeds_count
  * @property-read \App\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|Category newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Category newQuery()

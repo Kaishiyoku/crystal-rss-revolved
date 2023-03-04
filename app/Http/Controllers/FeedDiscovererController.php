@@ -27,9 +27,9 @@ class FeedDiscovererController extends Controller
             $feedMetadata = $heraRssCrawler->parseFeed($discoveredFeedUrls->first());
 
             return response()->json([
-                'feed_url' => $feedMetadata->getFeedUrl(),
+                'feed_url' => $feedMetadata->getFeedUrl() ?? $feedMetadata->getUrl(),
                 'site_url' => $feedMetadata->getUrl(),
-                'favicon_url' => $heraRssCrawler->discoverFavicon($feedMetadata->getUrl()),
+                'favicon_url' => $heraRssCrawler->discoverFavicon($feedMetadata->getUrl()) ?? '',
                 'name' => $feedMetadata->getTitle(),
                 'language' => $feedMetadata->getLanguage() ?? '',
             ]);

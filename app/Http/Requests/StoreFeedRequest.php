@@ -27,7 +27,7 @@ class StoreFeedRequest extends FormRequest
             'category_id' => ['required', 'integer', Rule::exists('categories', 'id')->where('user_id', Auth::id())],
             'feed_url' => ['required', 'url', 'max:255'],
             'site_url' => ['required', 'url', 'max:255'],
-            'favicon_url' => ['required', 'url', 'max:255'],
+            'favicon_url' => ['nullable', 'url', 'max:255'],
             'name' => ['required', 'string', 'max:255'],
             'language' => ['required', 'string', 'max:255'],
         ];
