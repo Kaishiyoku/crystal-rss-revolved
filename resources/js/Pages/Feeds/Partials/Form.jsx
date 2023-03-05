@@ -4,7 +4,6 @@ import TextInput from '@/Components/TextInput';
 import InputError from '@/Components/InputError';
 import PrimaryButton from '@/Components/PrimaryButton';
 import Select from '@/Components/Select';
-import {Transition} from '@headlessui/react';
 import SecondaryButton from '@/Components/SecondaryButton';
 import {useState} from 'react';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
@@ -65,31 +64,14 @@ export default function Form({method, action, feed, categories}) {
     return (
         <>
             <div className="flex">
-                <div className="relative grow">
-                    <TextInput
-                        id="search_url"
-                        className="grow w-full rounded-r-none border-r-0"
-                        placeholder={t('Search URL...')}
-                        value={searchUrl}
-                        onChange={(e) => setSearchUrl(e.target.value)}
-                        isFocused
-                    />
-
-                    <Transition
-                        show={isDiscoverFeedProcessing}
-                        enterFrom="opacity-0"
-                        leaveTo="opacity-0"
-                        className="transition ease-in-out"
-                    >
-                        <svg className="absolute right-0 top-2.5 animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg"
-                             fill="none" viewBox="0 0 24 24">
-                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
-                                    strokeWidth="4"></circle>
-                            <path className="opacity-75" fill="currentColor"
-                                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                    </Transition>
-                </div>
+                <TextInput
+                    id="search_url"
+                    className="grow w-full rounded-r-none border-r-0"
+                    placeholder={t('Search URL...')}
+                    value={searchUrl}
+                    onChange={(e) => setSearchUrl(e.target.value)}
+                    isFocused
+                />
 
                 <SecondaryButton
                     className="rounded-l-none"

@@ -1,5 +1,5 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import {Head, Link, router} from '@inertiajs/react';
+import {Head, Link} from '@inertiajs/react';
 import Header from '@/Components/Page/Header';
 import {useState} from 'react';
 import FeedItemCard from '@/Components/FeedItemCard';

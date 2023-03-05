@@ -28,11 +28,11 @@ createInertiaApp({
                     }
                 }}
             >
-                <App {...props} />
+                <App {...props}/>
             </LaravelReactI18nProvider>
         );
     },
     progress: {
-        color: '#4B5563',
+        color: '#4f46e5',
     },
 });
