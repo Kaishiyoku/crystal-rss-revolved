@@ -53,7 +53,10 @@ export default function Dashboard(props) {
                         </span>
                     </Dropdown.Trigger>
 
-                    <Dropdown.Content align="left">
+                    <Dropdown.Content
+                        align="left"
+                        width={96}
+                    >
                         {props.unreadFeeds.map((unreadFeed) => (
                             <Dropdown.Link
                                 key={unreadFeed.id}
