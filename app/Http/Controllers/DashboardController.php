@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\DashboardRequest;
+use App\Models\FeedItem;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -33,6 +34,11 @@ class DashboardController extends Controller
             ->with('feed')
             ->cursorPaginate()
             ->withQueryString();
+
+        // if there are no unread feed items go back to dashboard without query strings
+        if (!$feedItems->hasPages()) {
+            return redirect()->route('dashboard');
+        }
 
         return Inertia::render('Dashboard', [
             'totalNumberOfFeedItems' => $totalNumberOfFeedItems,
