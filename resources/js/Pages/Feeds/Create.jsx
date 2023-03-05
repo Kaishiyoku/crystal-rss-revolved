@@ -2,15 +2,18 @@ import {Head} from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import Header from '@/Components/Page/Header';
 import Form from '@/Pages/Feeds/Partials/Form';
+import {useLaravelReactI18n} from 'laravel-react-i18n';
 
 export default function Create(props) {
+    const {t} = useLaravelReactI18n();
+
     return (
         <AuthenticatedLayout
             auth={props.auth}
             errors={props.errors}
-            header={<Header>Add feed</Header>}
+            header={<Header>{t('Add feed')}</Header>}
         >
-            <Head title="Add feed"/>
+            <Head title={t('Add feed')}/>
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">

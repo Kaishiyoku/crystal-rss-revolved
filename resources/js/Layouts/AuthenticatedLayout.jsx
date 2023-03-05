@@ -4,8 +4,10 @@ import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Link } from '@inertiajs/react';
+import {useLaravelReactI18n} from 'laravel-react-i18n';
 
 export default function Authenticated({ auth, header, actions, children }) {
+    const {t} = useLaravelReactI18n();
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
     return (
@@ -22,15 +24,15 @@ export default function Authenticated({ auth, header, actions, children }) {
 
                             <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <NavLink href={route('dashboard')} active={route().current('dashboard')}>
-                                    Dashboard
+                                    {t('Dashboard')}
                                 </NavLink>
 
                                 <NavLink href={route('categories.index')} active={route().current('categories.*')}>
-                                    Categories
+                                    {t('Categories')}
                                 </NavLink>
 
                                 <NavLink href={route('feeds.index')} active={route().current('feeds.*')}>
-                                    Feeds
+                                    {t('Feeds')}
                                 </NavLink>
                             </div>
                         </div>
@@ -63,9 +65,11 @@ export default function Authenticated({ auth, header, actions, children }) {
                                     </Dropdown.Trigger>
 
                                     <Dropdown.Content>
-                                        <Dropdown.Link href={route('profile.edit')}>Profile</Dropdown.Link>
+                                        <Dropdown.Link href={route('profile.edit')}>
+                                            {t('Profile')}
+                                        </Dropdown.Link>
                                         <Dropdown.Link href={route('logout')} method="post" as="button">
-                                            Log Out
+                                            {t('Log Out')}
                                         </Dropdown.Link>
                                     </Dropdown.Content>
                                 </Dropdown>

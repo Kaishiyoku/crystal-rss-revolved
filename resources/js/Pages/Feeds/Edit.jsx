@@ -4,8 +4,10 @@ import Header from '@/Components/Page/Header';
 import Form from '@/Pages/Feeds/Partials/Form';
 import DangerButton from '@/Components/DangerButton';
 import Actions from '@/Components/Actions';
+import {useLaravelReactI18n} from 'laravel-react-i18n';
 
 export default function Edit(props) {
+    const {t} = useLaravelReactI18n();
     const {delete: destroy, processing} = useForm();
 
     const handleDelete = () => {
@@ -16,14 +18,14 @@ export default function Edit(props) {
         <AuthenticatedLayout
             auth={props.auth}
             errors={props.errors}
-            header={<Header>Edit feed</Header>}
+            header={<Header>{t('Edit feed')}</Header>}
         >
-            <Head title="Edit feed"/>
+            <Head title={t('Edit feed')}/>
 
             <Actions>
                 {props.canDelete && (
                     <DangerButton disabled={processing} onClick={handleDelete} className="mb-5">
-                        Delete
+                        {t('Delete')}
                     </DangerButton>
                 )}
             </Actions>

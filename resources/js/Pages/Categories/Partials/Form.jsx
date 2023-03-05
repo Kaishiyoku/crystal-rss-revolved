@@ -3,8 +3,10 @@ import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
 import InputError from '@/Components/InputError';
 import PrimaryButton from '@/Components/PrimaryButton';
+import {useLaravelReactI18n} from 'laravel-react-i18n';
 
 export default function Form({method, action, category}) {
+    const {t} = useLaravelReactI18n();
     const {data, setData, post, put, errors, processing, recentlySuccessful} = useForm({
         name: category.name ?? '',
     });
@@ -20,7 +22,7 @@ export default function Form({method, action, category}) {
     return (
         <form onSubmit={submit} className="mt-6 space-y-6">
             <div>
-                <InputLabel htmlFor="name" value="Name" required/>
+                <InputLabel htmlFor="name" value={t('validation.attributes.name')} required/>
 
                 <TextInput
                     id="name"
@@ -35,7 +37,9 @@ export default function Form({method, action, category}) {
             </div>
 
             <div className="flex items-center gap-4">
-                <PrimaryButton disabled={processing}>Save</PrimaryButton>
+                <PrimaryButton disabled={processing}>
+                    {t('Save')}
+                </PrimaryButton>
             </div>
         </form>
     );

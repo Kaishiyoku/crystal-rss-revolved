@@ -7,8 +7,10 @@ import Select from '@/Components/Select';
 import {Transition} from '@headlessui/react';
 import SecondaryButton from '@/Components/SecondaryButton';
 import {useState} from 'react';
+import {useLaravelReactI18n} from 'laravel-react-i18n';
 
 export default function Form({method, action, feed, categories}) {
+    const {t} = useLaravelReactI18n();
     const [isDiscoverFeedProcessing, setIsDiscoverFeedProcessing] = useState(false);
     const [searchUrl, setSearchUrl] = useState('');
     const [discoveredFeedUrls, setDiscoveredFeedUrls] = useState([]);
@@ -41,7 +43,6 @@ export default function Form({method, action, feed, categories}) {
 
         axios.post(route('discover-feed'), {feed_url: feedUrl})
             .then((response) => {
-                console.log(response.data);
                 setData({...data, ...response.data})
 
                 setSearchUrl('');
@@ -68,7 +69,7 @@ export default function Form({method, action, feed, categories}) {
                     <TextInput
                         id="search_url"
                         className="grow w-full rounded-r-none border-r-0"
-                        placeholder="Search URL"
+                        placeholder={t('Search URL...')}
                         value={searchUrl}
                         onChange={(e) => setSearchUrl(e.target.value)}
                         isFocused
@@ -95,7 +96,7 @@ export default function Form({method, action, feed, categories}) {
                     onClick={() => discoverFeedUrls(searchUrl)}
                     disabled={isDiscoverFeedProcessing || searchUrl.length < 5}
                 >
-                    Search
+                    {t('Search')}
                 </SecondaryButton>
             </div>
 
@@ -111,7 +112,7 @@ export default function Form({method, action, feed, categories}) {
 
             <form onSubmit={submit} className="mt-6 space-y-6">
                 <div>
-                    <InputLabel htmlFor="category_id" value="Category" required/>
+                    <InputLabel htmlFor="category_id" value={t('validation.attributes.category_id')} required/>
 
                     <Select
                         id="category_id"
@@ -127,7 +128,7 @@ export default function Form({method, action, feed, categories}) {
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="feed_url" value="Feed URL" required/>
+                    <InputLabel htmlFor="feed_url" value={t('validation.attributes.feed_url')} required/>
 
                     <TextInput
                         id="feed_url"
@@ -142,7 +143,7 @@ export default function Form({method, action, feed, categories}) {
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="site_url" value="Site URL" required/>
+                    <InputLabel htmlFor="site_url" value={t('validation.attributes.site_url')} required/>
 
                     <TextInput
                         id="site_url"
@@ -157,7 +158,7 @@ export default function Form({method, action, feed, categories}) {
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="favicon_url" value="Favicon URL"/>
+                    <InputLabel htmlFor="favicon_url" value={t('validation.attributes.favicon_url')}/>
 
                     <TextInput
                         id="favicon_url"
@@ -171,7 +172,7 @@ export default function Form({method, action, feed, categories}) {
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="name" value="Name" required/>
+                    <InputLabel htmlFor="name" value={t('validation.attributes.name')} required/>
 
                     <TextInput
                         id="name"
@@ -186,7 +187,7 @@ export default function Form({method, action, feed, categories}) {
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="language" value="Language" required/>
+                    <InputLabel htmlFor="language" value={t('validation.attributes.language')} required/>
 
                     <TextInput
                         id="language"
@@ -201,7 +202,9 @@ export default function Form({method, action, feed, categories}) {
                 </div>
 
                 <div className="flex items-center gap-4">
-                    <PrimaryButton disabled={processing || isDiscoverFeedProcessing}>Save</PrimaryButton>
+                    <PrimaryButton disabled={processing || isDiscoverFeedProcessing}>
+                        {t('Save')}
+                    </PrimaryButton>
                 </div>
             </form>
         </>

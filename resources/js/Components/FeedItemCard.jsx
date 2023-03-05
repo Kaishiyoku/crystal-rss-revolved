@@ -3,8 +3,10 @@ import PhotoSolidIcon from '@/Icons/PhotoSolidIcon';
 import SecondaryButton from '@/Components/SecondaryButton';
 import {useState} from 'react';
 import clsx from 'clsx';
+import {useLaravelReactI18n} from 'laravel-react-i18n';
 
 export default function FeedItemCard({feedItem}) {
+    const {t} = useLaravelReactI18n();
     const [internalFeedItem, setInternalFeedItem] = useState(feedItem);
 
     const toggle = () => {
@@ -57,7 +59,7 @@ export default function FeedItemCard({feedItem}) {
                         className="w-full"
                         onClick={toggle}
                     >
-                        {internalFeedItem.read_at ? 'Mark as unread' : 'Mark as read'}
+                        {internalFeedItem.read_at ? t('Mark as unread') : t('Mark as read')}
                     </SecondaryButton>
                 </div>
             </Card.Body>

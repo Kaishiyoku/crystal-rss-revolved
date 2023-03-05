@@ -4,14 +4,18 @@ import Header from '@/Components/Page/Header';
 import {useState} from 'react';
 import FeedItemCard from '@/Components/FeedItemCard';
 import Dropdown from '@/Components/Dropdown';
+import {useLaravelReactI18n} from 'laravel-react-i18n';
 
 export default function Dashboard(props) {
+    const {t, tChoice} = useLaravelReactI18n();
     const [allFeedItems, setAllFeedItems] = useState(props.feedItems.data);
 
     const header = (
         <div>
-            <Header>Dashboard</Header>
-            <div>{props.totalNumberOfFeedItems}</div>
+            <Header>{t('Dashboard')}</Header>
+            <div className="text-muted">
+                {tChoice('dashboard.unread_articles', props.totalNumberOfFeedItems)}
+            </div>
         </div>
     );
 
@@ -31,7 +35,7 @@ export default function Dashboard(props) {
                                 type="button"
                                 className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150"
                             >
-                                Filter by feed
+                                {t('Filter by feed...')}
 
                                 <svg
                                     className="ml-2 -mr-0.5 h-4 w-4"
@@ -81,7 +85,7 @@ export default function Dashboard(props) {
                         preserveState
                         preserveScroll
                     >
-                        Load more
+                        {t('Load more')}
                     </Link>
                 )}
             </div>
