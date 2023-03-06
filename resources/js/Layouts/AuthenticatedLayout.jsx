@@ -68,6 +68,11 @@ export default function Authenticated({ auth, header, actions, children }) {
                                         <Dropdown.Link href={route('profile.edit')}>
                                             {t('Profile')}
                                         </Dropdown.Link>
+                                        {auth.user.is_administrator && (
+                                            <Dropdown.Link href={route('telescope')} component="a">
+                                                {t('Telescope')}
+                                            </Dropdown.Link>
+                                        )}
                                         <Dropdown.Link href={route('logout')} method="post" as="button">
                                             {t('Log Out')}
                                         </Dropdown.Link>
@@ -119,6 +124,11 @@ export default function Authenticated({ auth, header, actions, children }) {
 
                         <div className="mt-3 space-y-1">
                             <ResponsiveNavLink href={route('profile.edit')}>Profile</ResponsiveNavLink>
+                            {auth.user.is_administrator && (
+                                <ResponsiveNavLink href={route('telescope')} component="a">
+                                    {t('Telescope')}
+                                </ResponsiveNavLink>
+                            )}
                             <ResponsiveNavLink method="post" href={route('logout')} as="button">
                                 Log Out
                             </ResponsiveNavLink>
