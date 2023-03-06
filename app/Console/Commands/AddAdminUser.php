@@ -60,7 +60,7 @@ class AddAdminUser extends Command
             'password' => Hash::make($password),
         ]);
 
-        $user->is_administrator = true;
+        $user->is_admin = true;
         $user->save();
 
         $user->markEmailAsVerified();
