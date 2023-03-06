@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    margin-bottom: 0 !important;
+}
+
 @layer base {
     /**
     * Miscellaneous
@@ -72,6 +76,9 @@
     }
 
     .link-secondary {
-        @apply font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-gray-500;
+        @apply font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-gray-500 transition;
+    }
+    .link-light {
+        @apply font-semibold text-indigo-200 hover:text-white border-b-2 border-b-indigo-200/20 hover:border-b-indigo-200/50 focus:outline focus:outline-2 focus:rounded-sm focus:outline-gray-500 transition;
     }
 }
