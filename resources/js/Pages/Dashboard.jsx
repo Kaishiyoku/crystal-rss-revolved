@@ -23,7 +23,7 @@ export default function Dashboard(props) {
     const markAllAsRead = async () => {
         await axios.put(route('mark-all-as-read'));
 
-        router.visit(route('dashboard'));
+        router.get(route('dashboard'));
     };
 
     const actions = (
