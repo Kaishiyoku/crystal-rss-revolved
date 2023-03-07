@@ -63,7 +63,7 @@ const Content = ({align = 'right', width = 48, contentClasses = 'p-2 border dark
                 leaveTo="transform opacity-0 scale-95"
             >
                 <div
-                    className={`absolute z-50 mt-2 rounded-md shadow-lg dark:shadow-black/25 backdrop-blur-lg ${alignmentClasses} ${widthClasses}`}
+                    className={`absolute z-50 mt-2 rounded-md shadow-lg dark:shadow-black/25 backdrop-blur-lg max-w-full ${alignmentClasses} ${widthClasses}`}
                     onClick={() => setOpen(false)}
                 >
                     <div className={clsx('max-h-[350px] overflow-y-auto scrollbar-y-sm rounded-md ring-1 ring-black ring-opacity-5', contentClasses)}>
