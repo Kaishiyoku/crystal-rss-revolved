@@ -1,6 +1,7 @@
 import {useState, createContext, useContext, Fragment} from 'react';
 import {Link} from '@inertiajs/react';
 import {Transition} from '@headlessui/react';
+import clsx from 'clsx';
 
 const DropDownContext = createContext();
 
@@ -65,7 +66,11 @@ const Content = ({align = 'right', width = 48, contentClasses = 'p-2 border dark
                     className={`absolute z-50 mt-2 rounded-md shadow-lg dark:shadow-black/25 backdrop-blur-lg ${alignmentClasses} ${widthClasses}`}
                     onClick={() => setOpen(false)}
                 >
-                    <div className={`rounded-md ring-1 ring-black ring-opacity-5 ` + contentClasses}>{children}</div>
+                    <div className={clsx('max-h-[350px] overflow-y-auto scrollbar-y-sm rounded-md ring-1 ring-black ring-opacity-5', contentClasses)}>
+                        <div>
+                            {children}
+                        </div>
+                    </div>
                 </div>
             </Transition>
         </>
