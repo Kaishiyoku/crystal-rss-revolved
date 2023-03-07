@@ -1,11 +1,11 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import {Head, Link} from '@inertiajs/react';
+import {Head, Link, router} from '@inertiajs/react';
 import Header from '@/Components/Page/Header';
 import {useState} from 'react';
 import FeedItemCard from '@/Components/FeedItemCard';
-import Dropdown from '@/Components/Dropdown';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import FeedFilterDropdown from '@/Components/FeedFilterDropdown';
+import SecondaryButton from '@/Components/SecondaryButton';
 
 export default function Dashboard(props) {
     const {t, tChoice} = useLaravelReactI18n();
@@ -20,13 +20,30 @@ export default function Dashboard(props) {
         </div>
     );
 
+    const markAllAsRead = async () => {
+        await axios.put(route('mark-all-as-read'));
+
+        router.visit(route('dashboard'));
+    };
+
+    const actions = (
+        <>
+            {props.totalNumberOfFeedItems > 0 && (
+                <SecondaryButton confirm onClick={markAllAsRead}>
+                    {t('Mark all as read')}
+                </SecondaryButton>
+            )}
+        </>
+    );
+
     return (
         <AuthenticatedLayout
             auth={props.auth}
             errors={props.errors}
             header={header}
+            actions={actions}
         >
-            <Head title="Dashboard" />
+            <Head title="Dashboard"/>
 
             <FeedFilterDropdown feeds={props.unreadFeeds}/>
 

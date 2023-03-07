@@ -144,6 +144,10 @@ export default function Authenticated({ auth, header, actions, children }) {
             )}
 
             <main className="max-w-7xl mx-auto py-12 sm:px-6 lg:px-8">
+                <div className="flex justify-end pb-5">
+                    {actions}
+                </div>
+
                 {children}
             </main>
         </div>

@@ -1,4 +1,21 @@
-export default function SecondaryButton({ type = 'button', className = '', disabled, children, ...props }) {
+import noop from '@/Components/Utils/noop';
+import {useLaravelReactI18n} from 'laravel-react-i18n';
+
+export default function SecondaryButton({type = 'button', className = '', confirm = false, disabled, children, onClick = noop, ...props}) {
+    const {t} = useLaravelReactI18n();
+
+    const handleOnClick = () => {
+        if (confirm) {
+            if (window.confirm(t('Are you sure?'))) {
+                onClick();
+            }
+
+            return;
+        }
+
+        onClick();
+    };
+
     return (
         <button
             {...props}
@@ -8,6 +25,7 @@ export default function SecondaryButton({ type = 'button', className = '', disab
                     disabled && 'opacity-25'
                 } ` + className
             }
+            onClick={handleOnClick}
             disabled={disabled}
         >
             {children}

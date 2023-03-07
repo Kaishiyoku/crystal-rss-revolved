@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FeedController;
 use App\Http\Controllers\FeedDiscovererController;
 use App\Http\Controllers\FeedUrlDiscovererController;
+use App\Http\Controllers\MarkAllUnreadFeedItemsAsReadController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ToggleFeedItemController;
 use Illuminate\Foundation\Application;
@@ -43,6 +44,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('discover-feed', FeedDiscovererController::class)->name('discover-feed');
     Route::post('discover-feed-urls', FeedUrlDiscovererController::class)->name('discover-feed-urls');
 
+    Route::put('/feeds/mark-all-as-read', MarkAllUnreadFeedItemsAsReadController::class)->name('mark-all-as-read');
     Route::resource('feeds', FeedController::class)->except('show');
     Route::put('/feeds/{feedItem}/toggle', ToggleFeedItemController::class)->name('toggle-feed-item');
 });
