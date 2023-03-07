@@ -3,11 +3,7 @@ import ApplicationLogo from '@/Components/ApplicationLogo';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 
 export default function Welcome(props) {
-    const {t, getActiveLanguage, isLoaded} = useLaravelReactI18n();
-
-    if (!isLoaded(getActiveLanguage())) {
-        return null;
-    }
+    const {t} = useLaravelReactI18n();
 
     return (
         <>

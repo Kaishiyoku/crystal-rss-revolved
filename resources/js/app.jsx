@@ -4,7 +4,7 @@ import '../css/app.css';
 import {createRoot} from 'react-dom/client';
 import {createInertiaApp} from '@inertiajs/react';
 import {resolvePageComponent} from 'laravel-vite-plugin/inertia-helpers';
-import {LaravelReactI18nProvider} from 'laravel-react-i18n';
+import {LaravelReactI18nProvider, useLaravelReactI18n} from 'laravel-react-i18n';
 
 window.appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
 
@@ -13,6 +13,17 @@ createInertiaApp({
     resolve: (name) => resolvePageComponent(`./Pages/${name}.jsx`, import.meta.glob('./Pages/**/*.jsx')),
     setup({el, App, props}) {
         const root = createRoot(el);
+
+        const AppWithLoadedTranslations = () => {
+            const {getActiveLanguage, isLoaded} = useLaravelReactI18n();
+
+            // wait until all translations are loaded
+            if (!isLoaded(getActiveLanguage())) {
+                return null;
+            }
+
+            return <App {...props}/>;
+        };
 
         root.render(
             <LaravelReactI18nProvider
@@ -28,7 +39,7 @@ createInertiaApp({
                     }
                 }}
             >
-                <App {...props}/>
+                <AppWithLoadedTranslations {...props}/>
             </LaravelReactI18nProvider>
         );
     },
