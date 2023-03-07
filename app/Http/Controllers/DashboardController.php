@@ -35,8 +35,8 @@ class DashboardController extends Controller
             ->cursorPaginate()
             ->withQueryString();
 
-        // if there are no unread feed items go back to dashboard without query strings
-        if (!$feedItems->hasPages()) {
+        // if feed filtering is active and there are no unread feed items go back to dashboard without query strings
+        if ($feedId && !$feedItems->hasPages()) {
             return redirect()->route('dashboard');
         }
 
