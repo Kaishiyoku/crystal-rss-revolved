@@ -7,6 +7,7 @@ import Select from '@/Components/Select';
 import SecondaryButton from '@/Components/SecondaryButton';
 import {useState} from 'react';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
+import Card from '@/Components/Card';
 
 export default function Form({method, action, feed, categories}) {
     const {t} = useLaravelReactI18n();
@@ -83,13 +84,13 @@ export default function Form({method, action, feed, categories}) {
             </div>
 
             {discoveredFeedUrls.length > 0 && (
-                <div className="mt-4 divide-y dark:divide-gray-700">
+                <Card className="mt-4 divide-y dark:divide-gray-700">
                     {discoveredFeedUrls.map((discoveredFeedUrl) => (
-                        <button key={discoveredFeedUrl} type="button" className="block w-full text-left px-4 py-2 dark:text-gray-300 bg-gray-800 dark:hover:bg-gray-600 first:rounded-t last:rounded-b" onClick={selectDiscoveredFeedUrl(discoveredFeedUrl)}>
+                        <button key={discoveredFeedUrl} type="button" className="block w-full text-left px-4 py-2 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600 first:rounded-t last:rounded-b transition" onClick={selectDiscoveredFeedUrl(discoveredFeedUrl)}>
                             {discoveredFeedUrl}
                         </button>
                     ))}
-                </div>
+                </Card>
             )}
 
             <form onSubmit={submit} className="mt-6 space-y-6">

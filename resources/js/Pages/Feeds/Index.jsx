@@ -12,6 +12,7 @@ export default function Index(props) {
             auth={props.auth}
             errors={props.errors}
             header={<Header>{t('Feeds')}</Header>}
+            withMobileSpacing
         >
             <Head title={t('Feeds')}/>
 

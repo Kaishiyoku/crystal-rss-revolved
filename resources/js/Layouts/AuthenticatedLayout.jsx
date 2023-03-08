@@ -1,12 +1,13 @@
-import { useState } from 'react';
+import {useState} from 'react';
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
-import { Link } from '@inertiajs/react';
+import {Link} from '@inertiajs/react';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
+import clsx from 'clsx';
 
-export default function Authenticated({ auth, header, actions, children }) {
+export default function Authenticated({auth, header, actions, withMobileSpacing = false, children}) {
     const {t} = useLaravelReactI18n();
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
@@ -18,7 +19,7 @@ export default function Authenticated({ auth, header, actions, children }) {
                         <div className="flex">
                             <div className="shrink-0 flex items-center">
                                 <Link href="/">
-                                    <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                                    <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200"/>
                                 </Link>
                             </div>
 
@@ -112,6 +113,14 @@ export default function Authenticated({ auth, header, actions, children }) {
                         <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
                             Dashboard
                         </ResponsiveNavLink>
+
+                        <ResponsiveNavLink href={route('categories.index')} active={route().current('categories.*')}>
+                            {t('Categories')}
+                        </ResponsiveNavLink>
+
+                        <ResponsiveNavLink href={route('feeds.index')} active={route().current('feeds.*')}>
+                            {t('Feeds')}
+                        </ResponsiveNavLink>
                     </div>
 
                     <div className="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
@@ -144,11 +153,13 @@ export default function Authenticated({ auth, header, actions, children }) {
             )}
 
             <main className="max-w-7xl mx-auto py-12 sm:px-6 lg:px-8">
-                <div className="flex justify-end pb-5">
+                <div className="flex sm:justify-end px-4 sm:px-0 pb-5">
                     {actions}
                 </div>
 
-                {children}
+                <div className={clsx({'px-4 sm:px-0': withMobileSpacing})}>
+                    {children}
+                </div>
             </main>
         </div>
     );

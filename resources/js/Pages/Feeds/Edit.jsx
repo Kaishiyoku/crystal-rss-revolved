@@ -19,6 +19,7 @@ export default function Edit(props) {
             auth={props.auth}
             errors={props.errors}
             header={<Header>{t('Edit feed')}</Header>}
+            withMobileSpacing
         >
             <Head title={t('Edit feed')}/>
 

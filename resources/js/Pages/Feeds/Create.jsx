@@ -12,6 +12,7 @@ export default function Create(props) {
             auth={props.auth}
             errors={props.errors}
             header={<Header>{t('Add feed')}</Header>}
+            withMobileSpacing
         >
             <Head title={t('Add feed')}/>
 
