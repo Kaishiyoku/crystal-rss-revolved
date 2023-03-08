@@ -1,9 +1,9 @@
 import Card from '@/Components/Card';
 import PhotoSolidIcon from '@/Icons/PhotoSolidIcon';
-import SecondaryButton from '@/Components/SecondaryButton';
 import {useState} from 'react';
 import clsx from 'clsx';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
+import {SecondaryButton} from '@/Components/Button';
 
 export default function FeedItemCard({feedItem}) {
     const {t} = useLaravelReactI18n();

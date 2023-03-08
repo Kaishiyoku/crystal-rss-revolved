@@ -2,8 +2,8 @@ import {useForm} from '@inertiajs/react';
 import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
 import InputError from '@/Components/InputError';
-import PrimaryButton from '@/Components/PrimaryButton';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
+import {PrimaryButton} from '@/Components/Button';
 
 export default function Form({method, action, category}) {
     const {t} = useLaravelReactI18n();
@@ -37,7 +37,7 @@ export default function Form({method, action, category}) {
             </div>
 
             <div className="flex items-center gap-4">
-                <PrimaryButton disabled={processing}>
+                <PrimaryButton type="submit" disabled={processing}>
                     {t('Save')}
                 </PrimaryButton>
             </div>

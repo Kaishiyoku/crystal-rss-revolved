@@ -2,9 +2,9 @@ import {Head, useForm} from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import Header from '@/Components/Page/Header';
 import Form from '@/Pages/Feeds/Partials/Form';
-import DangerButton from '@/Components/DangerButton';
 import Actions from '@/Components/Actions';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
+import {DangerButton} from '@/Components/Button';
 
 export default function Edit(props) {
     const {t} = useLaravelReactI18n();

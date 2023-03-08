@@ -5,7 +5,7 @@ import {useState} from 'react';
 import FeedItemCard from '@/Components/FeedItemCard';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import FeedFilterDropdown from '@/Components/FeedFilterDropdown';
-import SecondaryButton from '@/Components/SecondaryButton';
+import {SecondaryButton} from '@/Components/Button';
 
 export default function Dashboard(props) {
     const {t, tChoice} = useLaravelReactI18n();

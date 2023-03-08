@@ -2,12 +2,11 @@ import {useForm} from '@inertiajs/react';
 import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
 import InputError from '@/Components/InputError';
-import PrimaryButton from '@/Components/PrimaryButton';
 import Select from '@/Components/Select';
-import SecondaryButton from '@/Components/SecondaryButton';
 import {useState} from 'react';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import Card from '@/Components/Card';
+import {PrimaryButton, SecondaryButton} from '@/Components/Button';
 
 export default function Form({method, action, feed, categories}) {
     const {t} = useLaravelReactI18n();
@@ -185,7 +184,7 @@ export default function Form({method, action, feed, categories}) {
                 </div>
 
                 <div className="flex items-center gap-4">
-                    <PrimaryButton disabled={processing || isDiscoverFeedProcessing}>
+                    <PrimaryButton type="submit" disabled={processing || isDiscoverFeedProcessing}>
                         {t('Save')}
                     </PrimaryButton>
                 </div>
