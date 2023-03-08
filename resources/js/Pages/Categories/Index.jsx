@@ -19,7 +19,7 @@ export default function Index(props) {
             <Actions>
                 <Link
                     href={route('categories.create')}
-                    className="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                    className="link-secondary"
                 >
                     {t('Add category')}
                 </Link>
@@ -29,7 +29,7 @@ export default function Index(props) {
                 <Link
                     key={category.id}
                     href={route('categories.edit', category)}
-                    className="block font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                    className="block link-secondary"
                 >
                     {category.name}
                 </Link>
