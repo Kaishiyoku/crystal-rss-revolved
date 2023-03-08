@@ -39,11 +39,21 @@ export default function FeedFilterDropdown({selectedFeed, feeds}) {
                     align="left"
                     width={96}
                 >
+                    {selectedFeed && (
+                        <>
+                            <Dropdown.Link href={route('dashboard')}>
+                                {t('All feeds')}
+                            </Dropdown.Link>
+
+                            <Dropdown.Spacer/>
+                        </>
+                    )}
+
                     {feeds.map((feed) => (
                         <Dropdown.Link
                             key={feed.id}
                             href={`${route('dashboard')}?feed_id=${feed.id}`}
-                            active={selectedFeed.id === feed.id}
+                            active={selectedFeed?.id === feed.id}
                         >
                             {feed.name} ({feed.feed_items_count})
                         </Dropdown.Link>

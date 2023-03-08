@@ -97,8 +97,11 @@ const DropdownLink = ({component = Link, active = false, className = '', childre
     );
 };
 
+const Spacer = () => <div className="pt-2 mb-2 border-b dark:border-gray-600"/>;
+
 Dropdown.Trigger = Trigger;
 Dropdown.Content = Content;
 Dropdown.Link = DropdownLink;
+Dropdown.Spacer = Spacer;
 
 export default Dropdown;
