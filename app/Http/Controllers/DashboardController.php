@@ -14,7 +14,7 @@ class DashboardController extends Controller
      */
     public function __invoke(DashboardRequest $request)
     {
-        $selectedFeedId = $request->exists('feed_id') ? $request->integer('feed_id') : null;
+        $feedId = $request->exists('feed_id') ? $request->integer('feed_id') : null;
 
         $totalNumberOfFeedItems = Auth::user()->feedItems()->unread()->count();
         $unreadFeeds = Auth::user()->feeds()
@@ -29,18 +29,18 @@ class DashboardController extends Controller
 
         $feedItems = Auth::user()->feedItems()
             ->unread()
-            ->when($selectedFeedId, fn(Builder $query) => $query->where('feed_id', $selectedFeedId))
+            ->when($feedId, fn(Builder $query) => $query->where('feed_id', $feedId))
             ->with('feed')
             ->cursorPaginate()
             ->withQueryString();
 
         // if feed filtering is active and there are no unread feed items go back to dashboard without query strings
-        if ($selectedFeedId && $feedItems->isEmpty()) {
+        if ($feedId && $feedItems->isEmpty()) {
             return redirect()->route('dashboard');
         }
 
         return Inertia::render('Dashboard', [
-            'selectedFeedId' => $selectedFeedId,
+            'selectedFeed' => Auth::user()->feeds()->find($feedId),
             'totalNumberOfFeedItems' => $totalNumberOfFeedItems,
             'unreadFeeds' => $unreadFeeds,
             'feedItems' => $feedItems,
