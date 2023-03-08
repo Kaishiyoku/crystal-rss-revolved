@@ -4,7 +4,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 10.2.0.
+ * Generated for Laravel 10.3.2.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -19657,14 +19657,15 @@ namespace  {
              * @param array|string $columns
              * @param string $pageName
              * @param int|null $page
+             * @param \Closure|int|null $total
              * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator 
              * @throws \InvalidArgumentException
              * @static 
              */ 
-            public static function paginate($perPage = null, $columns = [], $pageName = 'page', $page = null)
+            public static function paginate($perPage = null, $columns = [], $pageName = 'page', $page = null, $total = null)
             {
                                 /** @var \Illuminate\Database\Eloquent\Builder $instance */
-                                return $instance->paginate($perPage, $columns, $pageName, $page);
+                                return $instance->paginate($perPage, $columns, $pageName, $page, $total);
             }
              
                 /**
