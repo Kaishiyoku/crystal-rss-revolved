@@ -77,16 +77,20 @@ const Content = ({align = 'right', width = 48, contentClasses = 'p-2 border dark
     );
 };
 
-const DropdownLink = ({component = Link, className = '', children, ...props}) => {
+const DropdownLink = ({component = Link, active = false, className = '', children, ...props}) => {
     const Component = component;
 
     return (
         <Component
             {...props}
-            className={
-                'block w-full text-left px-4 py-2 text-sm leading-5 border-l-4 rounded focus:outline-none transition duration-150 ease-in-out text-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-200 dark:focus:bg-gray-600 dark:focus:text-gray-300 border-transparent' +
+            className={clsx(
+                'block w-full text-left px-4 py-2 text-sm leading-5 border-l-4 rounded focus:outline-none transition duration-150 ease-in-out  border-transparent',
+                {
+                    'text-indigo-300 bg-indigo-700 hover:bg-indigo-600 focus:bg-indigo-500 focus:text-indigo-50': active,
+                    'text-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-200 dark:focus:bg-gray-600 dark:focus:text-gray-300': !active,
+                },
                 className
-            }
+            )}
         >
             {children}
         </Component>

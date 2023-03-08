@@ -1,7 +1,8 @@
 import Dropdown from '@/Components/Dropdown';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
+import {SecondaryButton} from '@/Components/Button';
 
-export default function FeedFilterDropdown({feeds}) {
+export default function FeedFilterDropdown({selectedFeedId, feeds}) {
     const {t} = useLaravelReactI18n();
 
     if (feeds.length === 0) {
@@ -15,7 +16,7 @@ export default function FeedFilterDropdown({feeds}) {
                             <span className="inline-flex rounded-md">
                                 <button
                                     type="button"
-                                    className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150"
+                                    className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 transition ease-in-out duration-150"
                                 >
                                     {t('Filter by feed...')}
 
@@ -43,6 +44,7 @@ export default function FeedFilterDropdown({feeds}) {
                         <Dropdown.Link
                             key={feed.id}
                             href={`${route('dashboard')}?feed_id=${feed.id}`}
+                            active={selectedFeedId === feed.id}
                         >
                             {feed.name} ({feed.feed_items_count})
                         </Dropdown.Link>

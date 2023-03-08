@@ -66,7 +66,7 @@ export default function Authenticated({auth, header, actions, withMobileSpacing 
                                     </Dropdown.Trigger>
 
                                     <Dropdown.Content>
-                                        <Dropdown.Link href={route('profile.edit')}>
+                                        <Dropdown.Link href={route('profile.edit')} active={route().current('profile.edit')}>
                                             {t('Profile')}
                                         </Dropdown.Link>
                                         {auth.user.is_admin && (
