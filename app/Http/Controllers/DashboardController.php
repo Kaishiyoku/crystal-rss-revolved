@@ -6,6 +6,7 @@ use App\Http\Requests\DashboardRequest;
 use App\Models\FeedItem;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 
 class DashboardController extends Controller
@@ -36,7 +37,7 @@ class DashboardController extends Controller
             ->withQueryString();
 
         // if feed filtering is active and there are no unread feed items go back to dashboard without query strings
-        if ($feedId && !$feedItems->hasPages()) {
+        if ($feedId && $feedItems->isEmpty()) {
             return redirect()->route('dashboard');
         }
 
