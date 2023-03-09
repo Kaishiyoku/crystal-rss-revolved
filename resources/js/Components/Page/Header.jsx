@@ -1,3 +1,13 @@
-const Header = ({children}) => <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">{children}</h2>;
+export default function Header({subTitle = null, children}) {
+    return (
+        <h2 className="font-semibold text-gray-800 dark:text-gray-300 leading-tight">
+            {children}
 
-export default Header;
+            {subTitle && (
+                <span className="ml-2 text-sm text-muted">
+                    {subTitle}
+                </span>
+            )}
+        </h2>
+    );
+}

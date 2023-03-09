@@ -11,37 +11,30 @@ export default function Dashboard(props) {
     const {t, tChoice} = useLaravelReactI18n();
     const [allFeedItems, setAllFeedItems] = useState(props.feedItems.data);
 
-    const header = (
-        <div>
-            <Header>{t('Dashboard')}</Header>
-            <div className="text-muted">
-                {tChoice('dashboard.unread_articles', props.totalNumberOfFeedItems)}
-            </div>
-        </div>
-    );
-
     const markAllAsRead = async () => {
         await axios.put(route('mark-all-as-read'));
 
         router.get(route('dashboard'));
     };
 
-    const actions = (
-        <>
-            {props.totalNumberOfFeedItems > 0 && (
-                <SecondaryButton confirm onClick={markAllAsRead}>
-                    {t('Mark all as read')}
-                </SecondaryButton>
-            )}
-        </>
-    );
-
     return (
         <AuthenticatedLayout
             auth={props.auth}
             errors={props.errors}
-            header={header}
-            actions={actions}
+            header={
+                <Header subTitle={tChoice('dashboard.unread_articles', props.totalNumberOfFeedItems)}>
+                    {t('Dashboard')}
+                </Header>
+            }
+            actions={
+                <>
+                    {props.totalNumberOfFeedItems > 0 && (
+                        <SecondaryButton confirm onClick={markAllAsRead}>
+                            {t('Mark all as read')}
+                        </SecondaryButton>
+                    )}
+                </>
+            }
         >
             <Head title="Dashboard"/>
 
