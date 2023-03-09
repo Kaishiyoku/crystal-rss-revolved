@@ -1,7 +1,7 @@
-import noop from '@/Components/Utils/noop';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
+import noop from '@/Utils/noop';
 
 const Button = ({variant, type = 'button', className = '', confirm = false, disabled, children, onClick = noop, ...props}) => {
     const {t} = useLaravelReactI18n();
