@@ -11,17 +11,15 @@ export default function FeedItemCard({feedItem}) {
     const [internalFeedItem, setInternalFeedItem] = useState(feedItem);
     const [totalNumberOfFeedItems, setTotalNumberOfFeedItems] = useContext(TotalNumberOfFeedItemsContext);
 
-    useEffect(() => {
-        if (internalFeedItem.read_at) {
-            setTotalNumberOfFeedItems(totalNumberOfFeedItems - 1);
-        } else {
-            setTotalNumberOfFeedItems(totalNumberOfFeedItems + 1);
-        }
-    }, [internalFeedItem]);
-
     const toggle = () => {
         axios.put(route('toggle-feed-item', internalFeedItem))
             .then((response) => {
+                if (response.data.read_at) {
+                    setTotalNumberOfFeedItems(totalNumberOfFeedItems - 1);
+                } else {
+                    setTotalNumberOfFeedItems(totalNumberOfFeedItems + 1);
+                }
+
                 setInternalFeedItem(response.data);
             });
     };
