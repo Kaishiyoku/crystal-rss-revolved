@@ -1,16 +1,26 @@
 import Card from '@/Components/Card';
 import PhotoSolidIcon from '@/Icons/PhotoSolidIcon';
-import {useState} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import clsx from 'clsx';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import {SecondaryButton} from '@/Components/Button';
+import TotalNumberOfFeedItemsContext from '@/Contexts/TotalNumberOfFeedItemsContext';
 
 export default function FeedItemCard({feedItem}) {
     const {t} = useLaravelReactI18n();
     const [internalFeedItem, setInternalFeedItem] = useState(feedItem);
+    const [totalNumberOfFeedItems, setTotalNumberOfFeedItems] = useContext(TotalNumberOfFeedItemsContext);
+
+    useEffect(() => {
+        if (internalFeedItem.read_at) {
+            setTotalNumberOfFeedItems(totalNumberOfFeedItems - 1);
+        } else {
+            setTotalNumberOfFeedItems(totalNumberOfFeedItems + 1);
+        }
+    }, [internalFeedItem]);
 
     const toggle = () => {
-        axios.put(route('toggle-feed-item', feedItem))
+        axios.put(route('toggle-feed-item', internalFeedItem))
             .then((response) => {
                 setInternalFeedItem(response.data);
             });
