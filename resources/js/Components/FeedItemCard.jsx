@@ -1,12 +1,17 @@
 import Card from '@/Components/Card';
 import PhotoSolidIcon from '@/Icons/PhotoSolidIcon';
-import {useContext, useEffect, useState} from 'react';
+import {useContext, useState} from 'react';
 import clsx from 'clsx';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import {SecondaryButton} from '@/Components/Button';
 import TotalNumberOfFeedItemsContext from '@/Contexts/TotalNumberOfFeedItemsContext';
 
+/**
+ * @param {FeedItem} feedItem
+ * @returns {JSX.Element}
+ */
 export default function FeedItemCard({feedItem}) {
+    console.log(feedItem.feed.created_at);
     const {t} = useLaravelReactI18n();
     const [internalFeedItem, setInternalFeedItem] = useState(feedItem);
     const [totalNumberOfFeedItems, setTotalNumberOfFeedItems] = useContext(TotalNumberOfFeedItemsContext);
