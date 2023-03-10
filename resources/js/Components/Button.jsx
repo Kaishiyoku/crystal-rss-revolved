@@ -32,7 +32,8 @@ const Button = ({variant, type = 'button', className = '', confirm = false, disa
                     'text-gray-900 border-gray-300 bg-white hover:border-gray-300 hover:bg-gray-100 focus:ring-gray-300 dark:text-white dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600 dark:focus:ring-gray-600': variant === 'secondary',
                     'text-white border-pink-600 bg-pink-500 hover:border-pink-700 hover:bg-pink-600 focus:ring-pink-600 dark:border-pink-500 dark:bg-pink-600 dark:hover:border-pink-600 dark:hover:bg-pink-700 dark:focus:ring-pink-500': variant === 'danger',
 
-                }
+                },
+                className
             )}
             onClick={handleOnClick}
             disabled={disabled}
@@ -71,7 +72,7 @@ const SecondaryButton = ({className, ...props}) => {
     return (
         <Button
             variant="secondary"
-            className={clsx('', className)}
+            className={className}
             {...props}
         />
     );

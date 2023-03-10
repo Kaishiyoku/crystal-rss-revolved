@@ -4,8 +4,10 @@ import TextInput from '@/Components/TextInput';
 import { Link, useForm, usePage } from '@inertiajs/react';
 import { Transition } from '@headlessui/react';
 import {PrimaryButton} from '@/Components/Button';
+import {useLaravelReactI18n} from 'laravel-react-i18n';
 
 export default function UpdateProfileInformation({ mustVerifyEmail, status, className }) {
+    const {t} = useLaravelReactI18n();
     const user = usePage().props.auth.user;
 
     const { data, setData, patch, errors, processing, recentlySuccessful } = useForm({
@@ -22,10 +24,10 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
     return (
         <section className={className}>
             <header>
-                <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">Profile Information</h2>
+                <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">{t('Profile Information')}</h2>
 
                 <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                    Update your account's profile information and email address.
+                    {t('Update your account\'s profile information and email address.')}
                 </p>
             </header>
 
@@ -85,7 +87,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                 )}
 
                 <div className="flex items-center gap-4">
-                    <PrimaryButton type="submit" disabled={processing}>Save</PrimaryButton>
+                    <PrimaryButton type="submit" disabled={processing}>{t('Save')}</PrimaryButton>
 
                     <Transition
                         show={recentlySuccessful}
@@ -93,7 +95,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                         leaveTo="opacity-0"
                         className="transition ease-in-out"
                     >
-                        <p className="text-sm text-gray-600 dark:text-gray-400">Saved.</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">{t('Saved.')}</p>
                     </Transition>
                 </div>
             </form>

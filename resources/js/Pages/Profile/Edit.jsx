@@ -13,7 +13,7 @@ export default function Edit({ auth, mustVerifyEmail, status }) {
         >
             <Head title="Profile" />
 
-            <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+            <div className="mb-8 p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
                 <UpdateProfileInformationForm
                     mustVerifyEmail={mustVerifyEmail}
                     status={status}
@@ -21,7 +21,7 @@ export default function Edit({ auth, mustVerifyEmail, status }) {
                 />
             </div>
 
-            <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+            <div className="mb-8 p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
                 <UpdatePasswordForm className="max-w-xl" />
             </div>
 
