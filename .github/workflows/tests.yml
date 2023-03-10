@@ -26,6 +26,9 @@ jobs:
     
     - name: Start MariaDB
       run: sudo /etc/init.d/mysql start
+      
+    - name: Create MariaDB database
+      run: mysql -uroot -proot -e 'CREATE DATABASE test'
 
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.github', '.env');"
