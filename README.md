@@ -8,10 +8,18 @@ Any RSS feed can be added and article summaries are then being fetched and displ
 
 The feed reader is optimized for usage on smartphones.
 
-# Version 3.x
+# Major release notes
 
-Version 3.x is a complete rewrite of the codebase with the use of Inertia.js, so expect breaking changes. I tried to keep the database structure the same as in version 2.x. Please note that some DB table fields are no longer used but you should be able to just upgrade to version 3.x without having to remigrating the whole database.
+## Version 3.x
 
+Version 3.x is a complete rewrite of the codebase with the use of Inertia.js, so expect breaking changes.
+I tried to keep the database structure the same as in version 2.x.
+Please note that some DB table fields are no longer used, but you should be able to just upgrade
+to version 3.x without having to remigrating the whole database.
+
+* minimum PHP version: 8.1
+* based on Laravel 10
+* no API (maybe I will bring it back in the future)
 
 # Installation
 
