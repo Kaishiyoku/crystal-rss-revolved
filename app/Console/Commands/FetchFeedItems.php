@@ -31,7 +31,7 @@ class FetchFeedItems extends Command
      *
      * @var string
      */
-    protected $description = 'Fetches new feed items';
+    protected $description = 'Fetch new feed items';
 
     private LoggerInterface $logger;
 

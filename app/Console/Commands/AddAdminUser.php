@@ -23,7 +23,7 @@ class AddAdminUser extends Command
      *
      * @var string
      */
-    protected $description = 'Adds an administrative user';
+    protected $description = 'Add an admin user';
 
     /**
      * Execute the console command.

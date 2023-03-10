@@ -22,7 +22,7 @@ class CheckFeedFavicons extends Command
      *
      * @var string
      */
-    protected $description = 'Checks for changed feed favicons';
+    protected $description = 'Check for changed feed favicons and update them';
 
     private LoggerInterface $logger;
 
