@@ -11,13 +11,6 @@ jobs:
 
     runs-on: ubuntu-22.04
     
-    env:
-      DB_HOST: 127.0.0.1
-      DB_PORT: ${{ job.services.mysql.ports[3306] }}
-      DB_USERNAME: root
-      DB_PASSWORD: root
-      DB_DATABASE: test
-    
     services:
       mysql:
         image: mysql:5.7
