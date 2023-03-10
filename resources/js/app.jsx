@@ -6,6 +6,8 @@ import {createInertiaApp} from '@inertiajs/react';
 import {resolvePageComponent} from 'laravel-vite-plugin/inertia-helpers';
 import {LaravelReactI18nProvider, useLaravelReactI18n} from 'laravel-react-i18n';
 
+const browserLang = navigator.language.substring(0, 2);
+
 window.appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
 
 createInertiaApp({
@@ -27,7 +29,7 @@ createInertiaApp({
 
         root.render(
             <LaravelReactI18nProvider
-                lang="de"
+                lang={browserLang}
                 fallbackLang="en"
                 resolve={async (lang) => {
                     const langs = import.meta.glob('../../lang/*.json')
