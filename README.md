@@ -49,7 +49,6 @@ to version 3.x without having to remigrating the whole database.
 * you can mark articles as read
 * read articles are being deleted automatically after a while
 * the website is fully responsive and mobile-friendly
-* Crystal RSS offers an API, the documentation can be found here: https://crystal-rss.de/docs/
 
 
 # Screenshots
