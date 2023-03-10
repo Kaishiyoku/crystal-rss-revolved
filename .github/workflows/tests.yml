@@ -11,23 +11,21 @@ jobs:
 
     runs-on: ubuntu-latest
     
-    services:
-      mariadb:
-        image: mariadb:15.1
-        ports:
-          - 3306
-        env:
-          MYSQL_USER: root
-          MYSQL_PASSWORD: root
-          MYSQL_DATABASE: test
-          MYSQL_ROOT_PASSWORD: root
-        options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=2s --health-retries=3
-
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
+    - uses: shogo82148/actions-setup-mysql@v1
+      with:
+        distribution: 'mariadb'
+        mysql-version: '10.6'
+        root-password: 'root'
+        user: 'root'
+        password: 'root'
     
     - name: Verify MariaDB connection
-      run: mysql -D test -e 'SELECT VERSION()'
+      run: mysql -u root -h 127.0.0.1 -e 'SELECT version()'
+      
+    - name: Create MariaDB database
+      run: mysql -u root -h 127.0.0.1 -e 'CREATE DATABASE test'
 
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.github', '.env');"
