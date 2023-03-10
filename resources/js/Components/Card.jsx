@@ -35,7 +35,7 @@ const HeaderLink = ({href, children}) => {
     return (
         <a
             href={href}
-            className="link-primary inline-block text-lg font-semibold leading-6"
+            className="link-primary inline-block text-xl font-semibold leading-6"
         >
             {children}
         </a>
