@@ -10,16 +10,23 @@ jobs:
   laravel-tests:
 
     runs-on: ubuntu-latest
+    
+    services:
+      mariadb:
+        image: mariadb:latest
+        ports:
+          - 3306
+        env:
+          MYSQL_USER: root
+          MYSQL_PASSWORD: root
+          MYSQL_DATABASE: test
+          MYSQL_ROOT_PASSWORD: root
+        options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=2s --health-retries=3
 
     steps:
-    - uses: ankane/setup-mariadb@v1
-      with:
-        mariadb-version: 10.6
-        database: test
-    
     - uses: actions/checkout@v2
     
-    - name: Verify MySQL connection
+    - name: Verify MariaDB connection
       run: mysql -D test -e 'SELECT VERSION()'
 
     - name: Copy .env
