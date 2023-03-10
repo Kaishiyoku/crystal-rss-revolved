@@ -25,10 +25,10 @@ jobs:
     - uses: actions/checkout@v3
     
     - name: Verify MariaDB connection
-      run: mysql -u root -h 127.0.0.1 -e 'SELECT version()'
+      run: mysql -u root -e 'SELECT version()'
       
     - name: Create MariaDB database
-      run: mysql -u root -h 127.0.0.1 -e 'CREATE DATABASE test'
+      run: mysql -u root -e 'CREATE DATABASE test'
 
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.github', '.env');"
