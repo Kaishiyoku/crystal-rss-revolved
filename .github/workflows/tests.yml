@@ -24,6 +24,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
+    - name: Start MariaDB
+      run: sudo /etc/init.d/mysql start
+    
     - name: Verify MariaDB connection
       run: mysql -u root -e 'SELECT version()'
       
