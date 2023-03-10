@@ -4,151 +4,88 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreFeedRequest;
 use App\Http\Requests\UpdateFeedRequest;
-use App\Models\Category;
 use App\Models\Feed;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
-use Kaishiyoku\HeraRssCrawler\HeraRssCrawler;
+use Inertia\Inertia;
 
 class FeedController extends Controller
 {
-    /**
-     * @var HeraRssCrawler
-     */
-    private $heraRssCrawler;
-
-    /**
-     * @param HeraRssCrawler $heraRssCrawler
-     */
-    public function __construct(HeraRssCrawler $heraRssCrawler)
+    public function __construct()
     {
-        $this->heraRssCrawler = $heraRssCrawler;
+        $this->authorizeResource(Feed::class);
     }
 
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Contracts\View\View
      */
     public function index()
     {
-        $feeds = Auth::user()->feeds()
-            ->withCount('feedItems')
-            ->with('category')
-            ->orderBy('name')
-            ->get();
-
-        return view('feed.index', [
-            'feeds' => $feeds,
+        return Inertia::render('Feeds/Index', [
+            'feeds' => Auth::user()->feeds()->with('category')->withCount('feedItems')->get(),
         ]);
     }
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Contracts\View\View
      */
     public function create()
     {
-        $availableCategoryOptions = Category::getAvailableOptions();
-
-        return view('feed.create', [
+        return Inertia::render('Feeds/Create', [
+            'categories' => Auth::user()->categories()->pluck('name', 'id')->map(fn(string $name, int $id) => ['value' => $id, 'name' => $name])->values(),
             'feed' => new Feed(),
-            'availableCategoryOptions' => $availableCategoryOptions,
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreFeedRequest  $request
-     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(StoreFeedRequest $request)
     {
-        $this->authorize('create', Feed::class);
-
         $validated = $request->validated();
 
-        Auth::user()->feeds()->save(new Feed(Arr::add($validated, 'favicon_url', $this->discoverFaviconUrl(Arr::get($validated, 'site_url')))));
+        $feed = new Feed($validated);
+        $feed->category_id = Arr::get($validated, 'category_id');
+
+        Auth::user()->feeds()->save($feed);
 
         return redirect()->route('feeds.index');
     }
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Feed  $feed
-     * @return \Illuminate\Contracts\View\View
      */
     public function edit(Feed $feed)
     {
-        $this->authorize('update', $feed);
-
-        return view('feed.edit', [
+        return Inertia::render('Feeds/Edit', [
+            'categories' => Auth::user()->categories()->pluck('name', 'id')->map(fn(string $name, int $id) => ['value' => $id, 'name' => $name])->values(),
             'feed' => $feed,
-            'availableCategoryOptions' => Category::getAvailableOptions(),
+            'canDelete' => Auth::user()->can('delete', $feed),
         ]);
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateFeedRequest  $request
-     * @param  \App\Models\Feed  $feed
-     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(UpdateFeedRequest $request, Feed $feed)
     {
         $validated = $request->validated();
 
-        $feed->update(Arr::add($validated, 'favicon_url', $this->discoverFaviconUrl(Arr::get($validated, 'site_url'))));
+        $feed = $feed->fill($validated);
+        $feed->category_id = Arr::get($validated, 'category_id');
+
+        $feed->save();
 
         return redirect()->route('feeds.index');
     }
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Feed  $feed
-     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Feed $feed)
     {
-        $this->authorize('delete', $feed);
-
-        $feed->feedItems()->delete();
         $feed->delete();
 
         return redirect()->route('feeds.index');
-    }
-
-    /**
-     * Mark all unread feed items as read.
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function markAllAsRead()
-    {
-        $now = now();
-
-        Auth::user()->feeds()
-            ->with('unreadFeedItems')
-            ->get()
-            ->each(function (Feed $feed) use ($now) {
-                $feed->unreadFeedItems()->update(['read_at' => $now]);
-            });
-
-        return redirect()->route('dashboard');
-    }
-
-    /**
-     * @param string $siteUrl
-     * @return string|null
-     * @throws \Exception
-     */
-    private function discoverFaviconUrl($siteUrl)
-    {
-        return $this->heraRssCrawler->discoverFavicon($siteUrl);
     }
 }

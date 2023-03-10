@@ -2,54 +2,34 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Category;
-use App\Rules\ValidFeedUrl;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
-/**
- * @bodyParam category_id int required The ID of the category.
- * @bodyParam feed_url string required The URL of the feed.
- * @bodyParam site_url string required The URL of the website.
- * @bodyParam name string required THe name of the feed.
- */
 class StoreFeedRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
-     *
-     * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
-        return $this->user()->tokenCan('feed:create');
+        return true;
     }
 
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            'category_id' => ['required', Rule::in(optional(Category::getAvailableOptions())->keys())],
-            'feed_url' => ['required', 'url', new ValidFeedUrl()],
-            'site_url' => ['required', 'url'],
-            'name' => ['required', Rule::unique('feeds', 'name')->where('user_id', optional($this->user())->id)],
-            'language' => ['nullable', 'string'],
-        ];
-    }
-
-    public function bodyParameters()
-    {
-        return [
-            'category_id',
-            'feed_url',
-            'site_url',
-            'name',
-            'language',
+            'category_id' => ['required', 'integer', Rule::exists('categories', 'id')->where('user_id', Auth::id())],
+            'feed_url' => ['required', 'url', 'max:255'],
+            'site_url' => ['required', 'url', 'max:255'],
+            'favicon_url' => ['nullable', 'url', 'max:255'],
+            'name' => ['required', 'string', 'max:255'],
+            'language' => ['required', 'string', 'max:255'],
         ];
     }
 }

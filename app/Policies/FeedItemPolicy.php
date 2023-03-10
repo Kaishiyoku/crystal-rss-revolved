@@ -4,90 +4,62 @@ namespace App\Policies;
 
 use App\Models\FeedItem;
 use App\Models\User;
-use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Auth\Access\Response;
 
 class FeedItemPolicy
 {
-    use HandlesAuthorization;
-
     /**
      * Determine whether the user can view any models.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool|void
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool
     {
         //
     }
 
     /**
      * Determine whether the user can view the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\FeedItem  $feedItem
-     * @return \Illuminate\Auth\Access\Response|bool|void
      */
-    public function view(User $user, FeedItem $feedItem)
+    public function view(User $user, FeedItem $feedItem): bool
     {
         //
     }
 
     /**
      * Determine whether the user can create models.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool|void
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
         //
     }
 
     /**
      * Determine whether the user can update the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\FeedItem  $feedItem
-     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, FeedItem $feedItem)
+    public function update(User $user, FeedItem $feedItem): bool
     {
         return $user->id === $feedItem->feed->user_id;
     }
 
     /**
      * Determine whether the user can delete the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\FeedItem  $feedItem
-     * @return \Illuminate\Auth\Access\Response|bool|void
      */
-    public function delete(User $user, FeedItem $feedItem)
+    public function delete(User $user, FeedItem $feedItem): bool
     {
         //
     }
 
     /**
      * Determine whether the user can restore the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\FeedItem  $feedItem
-     * @return \Illuminate\Auth\Access\Response|bool|void
      */
-    public function restore(User $user, FeedItem $feedItem)
+    public function restore(User $user, FeedItem $feedItem): bool
     {
         //
     }
 
     /**
      * Determine whether the user can permanently delete the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\FeedItem  $feedItem
-     * @return \Illuminate\Auth\Access\Response|bool|void
      */
-    public function forceDelete(User $user, FeedItem $feedItem)
+    public function forceDelete(User $user, FeedItem $feedItem): bool
     {
         //
     }

@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\MassPrunable;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Str;
 
 /**
@@ -13,21 +13,20 @@ use Illuminate\Support\Str;
  *
  * @property int $id
  * @property int $feed_id
+ * @property string $checksum
  * @property string $url
  * @property string $title
  * @property string|null $image_url
  * @property string|null $image_mimetype
  * @property string|null $description
  * @property \Illuminate\Support\Carbon $posted_at
- * @property string $checksum
- * @property string|null $read_at
+ * @property \Illuminate\Support\Carbon|null $read_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Feed $feed
- * @property-read mixed $formatted_posted_at
- * @property-read mixed $has_image
  * @method static Builder|FeedItem newModelQuery()
  * @method static Builder|FeedItem newQuery()
+ * @method static Builder|FeedItem ofFeed(?int $feedId)
  * @method static Builder|FeedItem query()
  * @method static Builder|FeedItem unread()
  * @method static Builder|FeedItem whereChecksum($value)
@@ -42,27 +41,23 @@ use Illuminate\Support\Str;
  * @method static Builder|FeedItem whereTitle($value)
  * @method static Builder|FeedItem whereUpdatedAt($value)
  * @method static Builder|FeedItem whereUrl($value)
- * @method static Builder|FeedItem ofFeed($feedId)
- * @method static \Database\Factories\FeedItemFactory factory(...$parameters)
  * @mixin \Eloquent
  */
 class FeedItem extends Model
 {
-    use HasFactory, MassPrunable;
-
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var array<int, string>
      */
     protected $fillable = [
+        'checksum',
         'url',
         'title',
         'image_url',
         'image_mimetype',
         'description',
         'posted_at',
-        'checksum',
         'read_at',
     ];
 
@@ -73,6 +68,7 @@ class FeedItem extends Model
      */
     protected $casts = [
         'posted_at' => 'datetime',
+        'read_at' => 'datetime',
     ];
 
     /**
@@ -81,53 +77,55 @@ class FeedItem extends Model
      * @var array
      */
     protected $appends = [
-        'formatted_posted_at',
         'has_image',
     ];
 
     /**
-     * Get the prunable model query.
+     * Get the number of models to return per page.
      *
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return int
      */
-    public function prunable()
+    public function getPerPage()
+    {
+        return config('app.feed_items_per_page');
+    }
+
+    /**
+     * Get the prunable model query.
+     */
+    public function prunable(): Builder
     {
         return static::where('read_at', '<=', now()->subMonths(config('app.months_after_pruning_feed_items')));
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * Does the feed item has an image?
      */
-    public function feed()
+    protected function hasImage(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->image_url && Str::startsWith($this->image_mimetype, 'image/'),
+        );
+    }
+
+    public function feed(): BelongsTo
     {
         return $this->belongsTo(Feed::class);
     }
 
-    public function scopeUnread($query)
+    /**
+     * Scope a query to only include unread feed items.
+     */
+    public function scopeUnread(Builder $query): void
     {
-        return $query->whereNull('read_at');
-    }
-
-    public function scopeOfFeed($query, $feedId)
-    {
-        return $query->when($feedId, fn($query) => $query->where('feed_id', $feedId));
+        $query->whereNull('read_at');
     }
 
     /**
-     * @return bool
+     * Scope a query to only include feed items of a given feed if the feed ID is not null.
      */
-    public function hasImage()
+    public function scopeOfFeed(Builder $query, ?int $feedId): void
     {
-        return $this->image_url && Str::startsWith($this->image_mimetype, 'image/');
-    }
-
-    public function getFormattedPostedAtAttribute()
-    {
-        return $this->posted_at->format(__('date.datetime'));
-    }
-
-    public function getHasImageAttribute()
-    {
-        return $this->hasImage();
+        $query->when($feedId, fn($query) => $query->where('feed_id', $feedId));
     }
 }

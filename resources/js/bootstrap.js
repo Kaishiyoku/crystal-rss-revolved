@@ -1,15 +1,37 @@
-import axios from 'axios';
-import onDomReady from './utils/onDomReady';
-
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = axios;
+import NProgress from 'nprogress';
+import axios from 'axios';
 
+window.axios = axios;
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.interceptors.request.use(
+    (config) => {
+        // Do something before request is sent
+        NProgress.start();
+
+        return config;
+    },
+    (error) => {
+        NProgress.done();
+
+        return Promise.reject(error);
+    });
+axios.interceptors.response.use(
+    (response) => {
+        NProgress.done();
+
+        return response;
+    },
+    (error) => {
+        NProgress.done();
+
+        return Promise.reject(error);
+    });
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
@@ -17,16 +39,18 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  * allows your team to easily build robust real-time web applications.
  */
 
-onDomReady(() => {
-    document.querySelectorAll('[data-confirm]').forEach((element) => {
-        element.addEventListener('click', (event) => {
-            const confirmationText = element.getAttribute('data-confirm');
+// import Echo from 'laravel-echo';
 
-            if (!confirm(confirmationText)) {
-                event.preventDefault();
+// import Pusher from 'pusher-js';
+// window.Pusher = Pusher;
 
-                return false;
-            }
-        });
-    });
-});
+// window.Echo = new Echo({
+//     broadcaster: 'pusher',
+//     key: import.meta.env.VITE_PUSHER_APP_KEY,
+//     cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER ?? 'mt1',
+//     wsHost: import.meta.env.VITE_PUSHER_HOST ? import.meta.env.VITE_PUSHER_HOST : `ws-${import.meta.env.VITE_PUSHER_APP_CLUSTER}.pusher.com`,
+//     wsPort: import.meta.env.VITE_PUSHER_PORT ?? 80,
+//     wssPort: import.meta.env.VITE_PUSHER_PORT ?? 443,
+//     forceTLS: (import.meta.env.VITE_PUSHER_SCHEME ?? 'https') === 'https',
+//     enabledTransports: ['ws', 'wss'],
+// });

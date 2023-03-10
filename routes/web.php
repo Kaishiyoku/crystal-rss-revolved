@@ -3,10 +3,14 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FeedController;
-use App\Http\Controllers\ToggleFeedItemReadAtController;
-use App\Http\Controllers\UserSettingsController;
-use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\FeedDiscovererController;
+use App\Http\Controllers\FeedUrlDiscovererController;
+use App\Http\Controllers\MarkAllUnreadFeedItemsAsReadController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ToggleFeedItemController;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,14 +23,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', WelcomeController::class)->name('welcome');
-
-Route::middleware(['auth:sanctum', 'verified'])->group(function () {
-    Route::get('/dashboard/{feed?}/{previousFirstFeedItemChecksum?}/{previousLastFeedItemChecksum?}', DashboardController::class)->name('dashboard');
-
-    Route::resource('categories', CategoryController::class)->except(['show']);
-    Route::put('/feeds/mark_all_as_read', [FeedController::class, 'markAllAsRead'])->name('feeds.mark_all_as_read');
-    Route::resource('feeds', FeedController::class)->except(['show']);
-    Route::put('/feed_items/{feedItem}/read', ToggleFeedItemReadAtController::class)->name('feed_items.toggle_mark_as_read');
-    Route::put('/user/settings', UserSettingsController::class)->name('user-edit-settings');
+Route::get('/', function () {
+    return Inertia::render('Welcome', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'contactEmail' => config('app.contact_email'),
+        'githubUrl' => config('app.github_url'),
+    ]);
 });
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', DashboardController::class)->name('dashboard');
+
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::resource('categories', CategoryController::class)->except('show');
+
+    Route::post('discover-feed', FeedDiscovererController::class)->name('discover-feed');
+    Route::post('discover-feed-urls', FeedUrlDiscovererController::class)->name('discover-feed-urls');
+
+    Route::put('/feeds/mark-all-as-read', MarkAllUnreadFeedItemsAsReadController::class)->name('mark-all-as-read');
+    Route::resource('feeds', FeedController::class)->except('show');
+    Route::put('/feeds/{feedItem}/toggle', ToggleFeedItemController::class)->name('toggle-feed-item');
+});
+
+require __DIR__.'/auth.php';

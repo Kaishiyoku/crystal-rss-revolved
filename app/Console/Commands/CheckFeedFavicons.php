@@ -15,24 +15,19 @@ class CheckFeedFavicons extends Command
      *
      * @var string
      */
-    protected $signature = 'feed:favicons';
+    protected $signature = 'app:check-feed-favicons';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Check for changed favicons';
+    protected $description = 'Checks for changed feed favicons';
 
     private LoggerInterface $logger;
 
     private HeraRssCrawler $heraRssCrawler;
 
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         parent::__construct();
@@ -43,29 +38,26 @@ class CheckFeedFavicons extends Command
         $this->heraRssCrawler->setRetryCount(config('app.rss_crawler_retry_count'));
     }
 
-
     /**
      * Execute the console command.
-     *
-     * @return int
      */
-    public function handle()
+    public function handle(): void
     {
         Feed::all()->each(function (Feed $feed) {
             $feed->fill([
                 'favicon_url' => $this->heraRssCrawler->discoverFavicon($feed->site_url),
             ]);
 
-            // only save if the favicon has changed
-            if ($feed->isDirty()) {
-                $feed->save();
-
-                $this->logger->info("Updated favicon for feed #{$feed->id}: {$feed->name}");
-            } else {
+            // only save if the favicon has been changed
+            if ($feed->isClean()) {
                 $this->logger->info("No favicon update needed for feed #{$feed->id}: {$feed->name}");
-            }
-        });
 
-        return 0;
+                return;
+            }
+
+            $feed->save();
+
+            $this->logger->info("Updated favicon for feed #{$feed->id}: {$feed->name}");
+        });
     }
 }

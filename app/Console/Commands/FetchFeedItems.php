@@ -2,7 +2,6 @@
 
 namespace App\Console\Commands;
 
-use App\Events\NewFeedItemsFetched;
 use App\Models\Feed;
 use App\Models\FeedItem;
 use App\Models\User;
@@ -13,10 +12,10 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use Kaishiyoku\HeraRssCrawler\HeraRssCrawler;
-use Kaishiyoku\HeraRssCrawler\Models\Rss\FeedItem as RssFeedItem;
 use Psr\Log\LoggerInterface;
-use Str;
+use Kaishiyoku\HeraRssCrawler\Models\Rss\FeedItem as RssFeedItem;
 
 class FetchFeedItems extends Command
 {
@@ -25,14 +24,14 @@ class FetchFeedItems extends Command
      *
      * @var string
      */
-    protected $signature = 'feed:fetch';
+    protected $signature = 'app:fetch-feed-items';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Fetch feed items';
+    protected $description = 'Fetches new feed items';
 
     private LoggerInterface $logger;
 
@@ -43,11 +42,6 @@ class FetchFeedItems extends Command
      */
     private Collection $newFeedItemIdsPerUserId;
 
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         parent::__construct();
@@ -61,10 +55,8 @@ class FetchFeedItems extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return int
      */
-    public function handle()
+    public function handle(): void
     {
         $startTime = microtime(true);
 
@@ -83,8 +75,6 @@ class FetchFeedItems extends Command
         $executionTimeInSeconds = round(microtime(true) - $startTime);
 
         $this->logger->info("Duration: {$executionTimeInSeconds}s");
-
-        return 0;
     }
 
     private function fetchFeedsForUser(User $user): void

@@ -1,8 +1,6 @@
 <?php
 
-use App\Http\Controllers\Api\V1\CategoryController;
-use App\Http\Controllers\Api\V1\FeedController;
-use App\Http\Controllers\Api\V1\HomeController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -11,24 +9,11 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 |
 | Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "api" middleware group. Make something great!
 |
 */
 
-Route::prefix('v1')->as('api.v1.')->middleware('api')->group(function () {
-    Route::get('/health_check', [HomeController::class, 'healthCheck'])->name('health_check');
-
-    Route::middleware(['auth:sanctum', 'verified'])->group(function () {
-        Route::get('/user', [HomeController::class, 'user'])->name('user');
-
-        Route::resource('/categories', CategoryController::class)->except(['create', 'edit']);
-
-        Route::put('/feeds/mark_all_as_read', [FeedController::class, 'markAllAsRead'])->name('feeds.mark_all_as_read');
-        Route::resource('/feeds', FeedController::class)->except(['create', 'edit']);
-    });
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
 });
-
-Route::fallback(function () {
-    return response()->json(['message' => 'Not Found.'], 404);
-})->name('api.fallback.404');

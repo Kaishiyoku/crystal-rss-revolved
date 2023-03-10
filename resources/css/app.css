@@ -2,69 +2,83 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    margin-bottom: 0 !important;
+}
+
 @layer base {
     /**
-     * Colors
-     */
-    .text-muted {
-        @apply text-gray-500;
-    }
-    /**
-     * Typography
-     */
-    .hyphens-auto {
-        hyphens: auto;
-    }
-
-    /**
-     * Alpine.js
-     */
-    [x-cloak] {
-        display: none !important;
-    }
-
-    /**
-     * Custom mini scrollbar
-     */
-    .scrollbar-custom::-webkit-scrollbar {
-        @apply w-1.5;
-    }
-    .scrollbar-custom::-webkit-scrollbar-track {
-        @apply bg-transparent;
-    }
-    .scrollbar-custom::-webkit-scrollbar-thumb {
-        @apply bg-gray-200 dark:bg-gray-800 rounded;
-    }
-    .scrollbar-custom::-webkit-scrollbar-thumb:hover {
-        @apply bg-gray-300 dark:bg-gray-700;
+    * Miscellaneous
+    */
+    .color-scheme-dark {
+        color-scheme: dark;
     }
 }
 
 @layer components {
     /**
-     * Alerts
+     * Inputs
      */
-    .alert {
-        @apply p-4 my-4 border-l-4 sm:rounded;
+    .label-required:after {
+        @apply text-pink-600 ml-1;
+
+        content: '*';
     }
 
-    .alert--cta {
-        @apply inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:border-gray-900 focus:ring ring-gray-400 disabled:opacity-25 transition ease-in-out duration-150;
+    /**
+     * Typography
+     */
+    .text-muted {
+        @apply text-gray-500;
     }
 
-    .alert--info {
-        @apply bg-secondary-100 dark:bg-secondary-800 text-secondary-800 dark:text-secondary-400 border-secondary-400 dark:border-secondary-500;
+    kbd {
+        @apply px-1.5 py-1 font-bold text-xs text-gray-500 border border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-700 rounded whitespace-nowrap;
     }
-    .alert--info .alert--cta {
-        @apply bg-secondary-500 dark:bg-secondary-500 text-secondary-100 dark:text-secondary-200 border-secondary-600 dark:border-secondary-400 dark:hover:text-secondary-900 hover:bg-secondary-700 dark:hover:bg-secondary-100 hover:border-secondary-800;
+
+    /**
+     * Custom mini scrollbar (vertical
+     */
+    .scrollbar-y-sm::-webkit-scrollbar {
+        @apply w-1.5;
     }
-    .alert--success {
-        @apply bg-green-100 dark:bg-green-800 text-green-800 dark:text-green-400 border-green-400 dark:border-green-500;
+    .scrollbar-y-sm::-webkit-scrollbar-track {
+        @apply bg-transparent;
     }
-    .alert--warning {
-        @apply bg-yellow-100 dark:bg-yellow-800 text-yellow-800 dark:text-yellow-400 border-yellow-400 dark:border-yellow-500;
+    .scrollbar-y-sm::-webkit-scrollbar-thumb {
+        @apply bg-gray-600/50 dark:bg-gray-400/50 rounded;
     }
-    .alert--danger {
-        @apply bg-red-100 dark:bg-red-800 text-red-800 dark:text-red-400 border-red-400 dark:border-red-500;
+    .scrollbar-y-sm::-webkit-scrollbar-thumb:hover {
+        @apply bg-gray-700/50 dark:bg-gray-300/50;
+    }
+
+    /**
+     * Custom mini scrollbar (horizontal)
+     */
+    .scrollbar-x-sm::-webkit-scrollbar {
+        @apply h-1.5;
+    }
+    .scrollbar-x-sm::-webkit-scrollbar-track {
+        @apply bg-transparent;
+    }
+    .scrollbar-x-sm::-webkit-scrollbar-thumb {
+        @apply bg-gray-600/50 dark:bg-gray-400/50 rounded;
+    }
+    .scrollbar-x-sm::-webkit-scrollbar-thumb:hover {
+        @apply bg-gray-700/50 dark:bg-gray-300/50;
+    }
+
+    /**
+     * Links
+     */
+    .link-primary {
+        @apply text-indigo-600 dark:text-indigo-400 underline decoration-transparent hover:decoration-indigo-600 dark:hover:decoration-indigo-400 transition;
+    }
+
+    .link-secondary {
+        @apply font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-gray-500 transition;
+    }
+    .link-light {
+        @apply font-semibold text-indigo-200 hover:text-white border-b-2 border-b-indigo-200/20 hover:border-b-indigo-200/50 focus:outline focus:outline-2 focus:rounded-sm focus:outline-gray-500 transition;
     }
 }
