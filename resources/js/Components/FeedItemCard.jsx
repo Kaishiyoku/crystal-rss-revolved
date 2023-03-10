@@ -11,7 +11,6 @@ import TotalNumberOfFeedItemsContext from '@/Contexts/TotalNumberOfFeedItemsCont
  * @returns {JSX.Element}
  */
 export default function FeedItemCard({feedItem}) {
-    console.log(feedItem.feed.created_at);
     const {t} = useLaravelReactI18n();
     const [internalFeedItem, setInternalFeedItem] = useState(feedItem);
     const [totalNumberOfFeedItems, setTotalNumberOfFeedItems] = useContext(TotalNumberOfFeedItemsContext);

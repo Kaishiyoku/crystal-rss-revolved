@@ -1,8 +1,8 @@
 import {Head} from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import Header from '@/Components/Page/Header';
 import Form from '@/Pages/Categories/Partials/Form';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
+import BreadcrumbsContainer from '@/Components/Breadcrumbs/BreadcrumbsContainer';
 
 export default function Create(props) {
     const {t} = useLaravelReactI18n();
@@ -11,7 +11,7 @@ export default function Create(props) {
         <AuthenticatedLayout
             auth={props.auth}
             errors={props.errors}
-            header={<Header>{t('Add category')}</Header>}
+            header={<BreadcrumbsContainer breadcrumbs={props.breadcrumbs}/>}
             withMobileSpacing
         >
             <Head title={t('Add category')}/>

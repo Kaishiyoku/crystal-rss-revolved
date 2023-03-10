@@ -1,10 +1,10 @@
 import {Head, useForm} from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import Header from '@/Components/Page/Header';
 import Form from '@/Pages/Feeds/Partials/Form';
 import Actions from '@/Components/Actions';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import {DangerButton} from '@/Components/Button';
+import BreadcrumbsContainer from '@/Components/Breadcrumbs/BreadcrumbsContainer';
 
 export default function Edit(props) {
     const {t} = useLaravelReactI18n();
@@ -18,7 +18,7 @@ export default function Edit(props) {
         <AuthenticatedLayout
             auth={props.auth}
             errors={props.errors}
-            header={<Header>{t('Edit feed')}</Header>}
+            header={<BreadcrumbsContainer breadcrumbs={props.breadcrumbs}/>}
             withMobileSpacing
         >
             <Head title={t('Edit feed')}/>
