@@ -1,12 +1,13 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import {Head, Link, router} from '@inertiajs/react';
 import Header from '@/Components/Page/Header';
-import {createContext, useState} from 'react';
+import {useState} from 'react';
 import FeedItemCard from '@/Components/FeedItemCard';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import FeedFilterDropdown from '@/Components/FeedFilterDropdown';
-import {SecondaryButton} from '@/Components/Button';
 import TotalNumberOfFeedItemsContext from '@/Contexts/TotalNumberOfFeedItemsContext';
+import Actions from '@/Components/Actions';
+import {SecondaryButton} from '@/Components/Button';
 
 export default function Dashboard(props) {
     const {t, tChoice} = useLaravelReactI18n();
@@ -29,17 +30,16 @@ export default function Dashboard(props) {
                         {t('Dashboard')}
                     </Header>
                 }
-                actions={
-                    <>
-                        {props.totalNumberOfFeedItems > 0 && (
-                            <SecondaryButton confirm onClick={markAllAsRead}>
-                                {t('Mark all as read')}
-                            </SecondaryButton>
-                        )}
-                    </>
-                }
             >
                 <Head title="Dashboard"/>
+
+                <Actions>
+                    {totalNumberOfFeedItems > 0 && (
+                        <SecondaryButton confirm onClick={markAllAsRead}>
+                            {t('Mark all as read')}
+                        </SecondaryButton>
+                    )}
+                </Actions>
 
                 <FeedFilterDropdown selectedFeed={props.selectedFeed} feeds={props.unreadFeeds}/>
 
