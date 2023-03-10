@@ -41,4 +41,13 @@
  * @property {string} url
  */
 
+/**
+ * @typedef {Object} Category
+ *
+ * @property {number} id
+ * @property {string} name
+ * @property {number} user_id
+ * @property {number?} feeds_count
+ */
+
 export default {};

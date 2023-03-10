@@ -21,7 +21,7 @@ class CategoryController extends Controller
     public function index()
     {
         return Inertia::render('Categories/Index', [
-            'categories' => Auth::user()->categories,
+            'categories' => Auth::user()->categories()->withCount('feeds')->get(),
             'canCreate' => Auth::user()->can('create', Category::class),
         ]);
     }

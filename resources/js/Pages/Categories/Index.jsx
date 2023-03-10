@@ -1,22 +1,29 @@
-import {Link, Head} from '@inertiajs/react';
+import {Head, Link} from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import Header from '@/Components/Page/Header';
 import Actions from '@/Components/Actions';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
+import LinkListCardContainer from '@/Components/LinkListCardContainer';
+import CardLink from '@/Components/CardLink';
 
-export default function Index(props) {
-    const {t} = useLaravelReactI18n();
+/**
+ * @param {Category[]} categories
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
+export default function Index({categories, ...props}) {
+    const {t, tChoice} = useLaravelReactI18n();
 
     return (
         <AuthenticatedLayout
             auth={props.auth}
             errors={props.errors}
             header={<Header>{t('Categories')}</Header>}
-            withMobileSpacing
         >
             <Head title={t('Categories')}/>
 
-            <Actions>
+            <Actions withMobileSpacing>
                 <Link
                     href={route('categories.create')}
                     className="link-secondary"
@@ -25,15 +32,23 @@ export default function Index(props) {
                 </Link>
             </Actions>
 
-            {props.categories.map((category) => (
-                <Link
-                    key={category.id}
-                    href={route('categories.edit', category)}
-                    className="block link-secondary"
-                >
-                    {category.name}
-                </Link>
-            ))}
+            <LinkListCardContainer>
+                {categories.map((category) => (
+                    <CardLink
+                        key={category.id}
+                        href={route('categories.edit', category)}
+                        className="flex justify-between"
+                    >
+                        <div>
+                            {category.name}
+                        </div>
+
+                        <div className="text-muted">
+                            {tChoice('category.feeds_count', category.feeds_count)}
+                        </div>
+                    </CardLink>
+                ))}
+            </LinkListCardContainer>
         </AuthenticatedLayout>
     );
 }
