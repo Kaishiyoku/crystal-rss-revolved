@@ -12,10 +12,13 @@ import TotalNumberOfFeedItemsContext from '@/Contexts/TotalNumberOfFeedItemsCont
  */
 export default function FeedItemCard({feedItem}) {
     const {t} = useLaravelReactI18n();
-    const [internalFeedItem, setInternalFeedItem] = useState(feedItem);
     const [totalNumberOfFeedItems, setTotalNumberOfFeedItems] = useContext(TotalNumberOfFeedItemsContext);
+    const [internalFeedItem, setInternalFeedItem] = useState(feedItem);
+    const [processing, setProcessing] = useState();
 
     const toggle = () => {
+        setProcessing(true);
+
         axios.put(route('toggle-feed-item', internalFeedItem))
             .then((response) => {
                 if (response.data.read_at) {
@@ -25,7 +28,8 @@ export default function FeedItemCard({feedItem}) {
                 }
 
                 setInternalFeedItem(response.data);
-            });
+            })
+            .finally(() => setProcessing(false));
     };
 
     return (
@@ -70,6 +74,7 @@ export default function FeedItemCard({feedItem}) {
                     <SecondaryButton
                         className="w-full"
                         onClick={toggle}
+                        disabled={processing}
                     >
                         {internalFeedItem.read_at ? t('Mark as unread') : t('Mark as read')}
                     </SecondaryButton>
