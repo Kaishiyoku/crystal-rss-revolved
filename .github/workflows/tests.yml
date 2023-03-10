@@ -29,10 +29,10 @@ jobs:
       run: sudo /etc/init.d/mysql start
     
     - name: Verify MariaDB connection
-      run: mysql -u root -e 'SELECT version()'
+      run: mysql -u root -p root -e 'SELECT version()'
       
     - name: Create MariaDB database
-      run: mysql -u root -e 'CREATE DATABASE test'
+      run: mysql -u root -p root -e 'CREATE DATABASE test'
 
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.github', '.env');"
@@ -61,3 +61,4 @@ jobs:
         DB_HOST: 127.0.0.1
         DB_PORT: ${{ job.services.mysql.ports[3306] }}
         DB_USERNAME: root
+        DB_PASSWORD: root
