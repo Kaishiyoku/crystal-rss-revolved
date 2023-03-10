@@ -40,7 +40,7 @@ class DashboardController extends Controller
         }
 
         return Inertia::render('Dashboard', [
-            'selectedFeed' => Auth::user()->feeds()->find($feedId),
+            'selectedFeed' => $feedId ? $unreadFeeds->firstWhere('id', $feedId) : null,
             'totalNumberOfFeedItems' => $totalNumberOfFeedItems,
             'unreadFeeds' => $unreadFeeds,
             'feedItems' => $feedItems,
