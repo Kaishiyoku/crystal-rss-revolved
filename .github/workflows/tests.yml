@@ -54,5 +54,6 @@ jobs:
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       run: php artisan test
       env:
+        DB_HOST: 127.0.0.1
         DB_PORT: ${{ job.services.mysql.ports[3306] }}
         DB_USERNAME: root
