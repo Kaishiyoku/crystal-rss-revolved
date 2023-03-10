@@ -5,7 +5,7 @@ import slug from 'slug';
  * @param {Breadcrumb[]} breadcrumbs
  * @returns {JSX.Element|null}
  */
-export default function BreadcrumbsContainer({breadcrumbs}) {
+export default function Breadcrumbs({breadcrumbs}) {
     if (!breadcrumbs) {
         return null;
     }
@@ -19,12 +19,12 @@ export default function BreadcrumbsContainer({breadcrumbs}) {
     const breadcrumbMapper = (breadcrumb, index, arr) => {
         const breadcrumbElement = breadcrumb.url ? (
             <li key={slug(breadcrumb.title)}>
-                <Link href={breadcrumb.url} className="font-semibold text-indigo-400 hover:text-indigo-300 transition">
+                <Link href={breadcrumb.url} className="font-semibold text-indigo-400 hover:text-indigo-300 leading-tight transition">
                     {breadcrumb.title}
                 </Link>
             </li>
         ) : (
-            <li key={slug(breadcrumb.title)} className="font-semibold">
+            <li key={slug(breadcrumb.title)} className="font-semibold text-gray-800 dark:text-gray-300 leading-tight">
                 {breadcrumb.title}
             </li>
         );
