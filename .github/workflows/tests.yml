@@ -23,13 +23,6 @@ jobs:
     
     steps:
     - uses: actions/checkout@v3
-    - uses: shogo82148/actions-setup-mysql@v1
-      with:
-        distribution: 'mariadb'
-        mysql-version: '10.6'
-        root-password: 'root'
-        user: 'root'
-        password: 'root'
     
     - name: Verify MariaDB connection
       run: mysql -u root -h 127.0.0.1 -e 'SELECT version()'
