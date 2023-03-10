@@ -1,5 +1,6 @@
 import {Link} from '@inertiajs/react';
 import slug from 'slug';
+import {useEffect, useRef} from 'react';
 
 /**
  * @param {Breadcrumb[]} breadcrumbs
@@ -9,6 +10,18 @@ export default function Breadcrumbs({breadcrumbs}) {
     if (!breadcrumbs) {
         return null;
     }
+
+    const breadcrumbsRef = useRef();
+
+    useEffect(() => {
+        setTimeout(() => {
+            breadcrumbsRef.current.scrollTo({
+                top: 0,
+                left: breadcrumbsRef.current.getBoundingClientRect().right,
+                behavior: 'smooth',
+            })
+        }, 250);
+    }, []);
 
     /**
      * @param {Breadcrumb} breadcrumb
@@ -45,7 +58,7 @@ export default function Breadcrumbs({breadcrumbs}) {
     };
 
     return (
-        <div className="overflow-y-hidden overflow-x-auto scrollbar-x-sm whitespace-nowrap" data-breadcrumbs="">
+        <div className="overflow-y-hidden overflow-x-auto scrollbar-x-sm whitespace-nowrap" ref={breadcrumbsRef}>
             <nav className="flex" aria-label="Breadcrumb">
                 <ol role="list" className="flex items-center space-x-2">
                     {breadcrumbs.map(breadcrumbMapper).flat()}
