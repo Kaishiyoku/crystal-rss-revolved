@@ -11,6 +11,7 @@
  * @property {number} category_id
  * @property {string} created_at
  * @property {string|null} favicon_url
+ * @property {number?} feed_items_count
  * @property {string} feed_url
  * @property {number} id
  * @property {string} language
@@ -48,6 +49,12 @@
  * @property {string} name
  * @property {number} user_id
  * @property {number?} feeds_count
+ */
+
+/**
+ * @typedef {Feed} FeedWithCategory
+ *
+ * @property {Category} category
  */
 
 export default {};

@@ -22,7 +22,7 @@ class FeedController extends Controller
     public function index()
     {
         return Inertia::render('Feeds/Index', [
-            'feeds' => Auth::user()->feeds,
+            'feeds' => Auth::user()->feeds()->with('category')->withCount('feedItems')->get(),
         ]);
     }
 
