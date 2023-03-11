@@ -3,8 +3,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import Header from '@/Components/Page/Header';
 import Actions from '@/Components/Actions';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
-import LinkListCardContainer from '@/Components/LinkListCardContainer';
-import CardLink from '@/Components/CardLink';
+import LinkStack from '@/Components/LinkStack';
 import formatDateTime from '@/Utils/formatDateTime';
 import EmptyState from '@/Components/EmptyState';
 import NewspaperOutlineIcon from '@/Icons/NewspaperOutlineIcon';
@@ -37,12 +36,12 @@ export default function Index({feeds, ...props}) {
             </Actions>
 
             {feeds.length > 0 ? (
-                <LinkListCardContainer>
+                <LinkStack>
                     {feeds.map((feed) => (
-                        <CardLink
+                        <LinkStack.Item
                             key={feed.id}
                             href={route('feeds.edit', feed)}
-                            className="sm:flex justify-between"
+                            className="block sm:flex justify-between"
                         >
                             <div>
                                 <div>
@@ -63,9 +62,9 @@ export default function Index({feeds, ...props}) {
                             <div className="text-sm sm:text-base text-muted">
                                 {tChoice('feed.feed_items_count', feed.feed_items_count)}
                             </div>
-                        </CardLink>
+                        </LinkStack.Item>
                     ))}
-                </LinkListCardContainer>
+                </LinkStack>
             ) : (
                 <EmptyState
                     icon={NewspaperOutlineIcon}

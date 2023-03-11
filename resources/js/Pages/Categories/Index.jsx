@@ -3,8 +3,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import Header from '@/Components/Page/Header';
 import Actions from '@/Components/Actions';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
-import LinkListCardContainer from '@/Components/LinkListCardContainer';
-import CardLink from '@/Components/CardLink';
+import LinkStack from '@/Components/LinkStack';
 import EmptyState from '@/Components/EmptyState';
 import TagOutlineIcon from '@/Icons/TagOutlineIcon';
 
@@ -35,9 +34,9 @@ export default function Index({categories, ...props}) {
             </Actions>
 
             {categories.length > 0 ? (
-                <LinkListCardContainer>
+                <LinkStack>
                     {categories.map((category) => (
-                        <CardLink
+                        <LinkStack.Item
                             key={category.id}
                             href={route('categories.edit', category)}
                             className="flex justify-between"
@@ -49,9 +48,9 @@ export default function Index({categories, ...props}) {
                             <div className="text-muted">
                                 {tChoice('category.feeds_count', category.feeds_count)}
                             </div>
-                        </CardLink>
+                        </LinkStack.Item>
                     ))}
-                </LinkListCardContainer>
+                </LinkStack>
             ) : (
                 <EmptyState
                     icon={TagOutlineIcon}
