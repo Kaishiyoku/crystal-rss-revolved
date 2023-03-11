@@ -8,6 +8,8 @@ import FeedFilterDropdown from '@/Components/FeedFilterDropdown';
 import TotalNumberOfFeedItemsContext from '@/Contexts/TotalNumberOfFeedItemsContext';
 import Actions from '@/Components/Actions';
 import {SecondaryButton} from '@/Components/Button';
+import NewspaperOutlineIcon from '@/Icons/NewspaperOutlineIcon';
+import EmptyState from '@/Components/EmptyState';
 
 export default function Dashboard(props) {
     const {t, tChoice} = useLaravelReactI18n();
@@ -43,14 +45,22 @@ export default function Dashboard(props) {
 
                 <FeedFilterDropdown selectedFeed={props.selectedFeed} feeds={props.unreadFeeds}/>
 
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-16 sm:gap-y-4">
-                    {allFeedItems.map((feedItem) => (
-                        <FeedItemCard
-                            key={feedItem.id}
-                            feedItem={feedItem}
-                        />
-                    ))}
-                </div>
+                {allFeedItems.length > 0 ? (
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-16 sm:gap-y-4">
+                        {allFeedItems.map((feedItem) => (
+                            <FeedItemCard
+                                key={feedItem.id}
+                                feedItem={feedItem}
+                            />
+                        ))}
+                    </div>
+                ) : (
+                    <EmptyState
+                        icon={NewspaperOutlineIcon}
+                        message={t('No unread articles.')}
+                        description={t('Come back later.')}
+                    />
+                )}
 
                 <div className="pt-5 px-4 sm:px-0">
                     {props.feedItems.next_cursor && (
