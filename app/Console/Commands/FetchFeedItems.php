@@ -99,9 +99,17 @@ class FetchFeedItems extends Command
             $rssFeed->getFeedItems()->each(function (RssFeedItem $rssFeedItem) use ($feed) {
                 $this->storeRssFeedItem($feed, $rssFeedItem);
             });
+
+            $feed->last_failed_at = null;
+            if ($feed->isDirty()) {
+                $feed->save();
+            }
         } catch (ClientException | Exception $exception) {
             $this->logger->error($exception, [$feed->feed_url]);
             Telescope::catch($exception, ['feed-updater', $feed->feed_url]);
+
+            $feed->last_failed_at = now();
+            $feed->save();
         }
 
         $feed->last_checked_at = now();

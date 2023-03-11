@@ -1,10 +1,11 @@
-import {Link, Head} from '@inertiajs/react';
+import {Head, Link} from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import Header from '@/Components/Page/Header';
 import Actions from '@/Components/Actions';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import LinkListCardContainer from '@/Components/LinkListCardContainer';
 import CardLink from '@/Components/CardLink';
+import formatDateTime from '@/Utils/formatDateTime';
 
 /**
  * @param {FeedWithCategory[]} feeds
@@ -44,6 +45,12 @@ export default function Index({feeds, ...props}) {
                             <div>
                                 {feed.name}
                             </div>
+
+                            {feed.last_failed_at && (
+                                <div className="text-sm text-pink-500">
+                                    {t('feed.last_failed_at', {date: formatDateTime(feed.last_failed_at)})}
+                                </div>
+                            )}
 
                             <div className="text-sm sm:text-base text-muted">
                                 {feed.category.name}

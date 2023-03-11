@@ -16,6 +16,7 @@
  * @property {number} id
  * @property {string} language
  * @property {string|null} last_checked_at
+ * @property {string|null} last_failed_at
  * @property {string} name
  * @property {string} site_url
  * @property {string} updated_at

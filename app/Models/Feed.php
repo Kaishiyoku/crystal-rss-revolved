@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $name
  * @property string $language
  * @property string|null $last_checked_at
+ * @property string|null $last_failed_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Category $category
@@ -34,6 +35,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder|Feed whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Feed whereLanguage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Feed whereLastCheckedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Feed whereLastFailedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Feed whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Feed whereSiteUrl($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Feed whereUpdatedAt($value)
