@@ -5,6 +5,8 @@ import Actions from '@/Components/Actions';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import LinkListCardContainer from '@/Components/LinkListCardContainer';
 import CardLink from '@/Components/CardLink';
+import EmptyState from '@/Components/EmptyState';
+import TagOutlineIcon from '@/Icons/TagOutlineIcon';
 
 /**
  * @param {Category[]} categories
@@ -32,23 +34,31 @@ export default function Index({categories, ...props}) {
                 </Link>
             </Actions>
 
-            <LinkListCardContainer>
-                {categories.map((category) => (
-                    <CardLink
-                        key={category.id}
-                        href={route('categories.edit', category)}
-                        className="flex justify-between"
-                    >
-                        <div>
-                            {category.name}
-                        </div>
+            {categories.length > 0 ? (
+                <LinkListCardContainer>
+                    {categories.map((category) => (
+                        <CardLink
+                            key={category.id}
+                            href={route('categories.edit', category)}
+                            className="flex justify-between"
+                        >
+                            <div>
+                                {category.name}
+                            </div>
 
-                        <div className="text-muted">
-                            {tChoice('category.feeds_count', category.feeds_count)}
-                        </div>
-                    </CardLink>
-                ))}
-            </LinkListCardContainer>
+                            <div className="text-muted">
+                                {tChoice('category.feeds_count', category.feeds_count)}
+                            </div>
+                        </CardLink>
+                    ))}
+                </LinkListCardContainer>
+            ) : (
+                <EmptyState
+                    icon={TagOutlineIcon}
+                    message={t('No categories.')}
+                    description={t('Get started by creating a new category.')}
+                />
+            )}
         </AuthenticatedLayout>
     );
 }
