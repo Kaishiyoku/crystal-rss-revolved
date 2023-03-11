@@ -32,7 +32,7 @@ export default function Breadcrumbs({breadcrumbs}) {
     const breadcrumbMapper = (breadcrumb, index, arr) => {
         const breadcrumbElement = breadcrumb.url ? (
             <li key={slug(breadcrumb.title)}>
-                <Link href={breadcrumb.url} className="font-semibold text-indigo-400 hover:text-indigo-300 leading-tight transition">
+                <Link href={breadcrumb.url} className="font-semibold text-violet-400 hover:text-violet-300 leading-tight transition">
                     {breadcrumb.title}
                 </Link>
             </li>

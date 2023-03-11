@@ -25,8 +25,8 @@ const Image = ({src, alt}) => {
 
 const ImagePlaceholder = () => {
     return (
-        <div className="flex justify-center h-72 md:h-56 bg-gray-300 dark:bg-gray-700 sm:rounded-t-md">
-            <PhotoSolidIcon className="h-full text-white"/>
+        <div className="flex justify-center h-72 md:h-56 bg-gradient-to-br from-cyan-300 to-violet-400 dark:from-cyan-900 dark:to-violet-700 saturate-[.20] sm:rounded-t-md">
+            <PhotoSolidIcon className="h-full text-white mix-blend-soft-light"/>
         </div>
     );
 };

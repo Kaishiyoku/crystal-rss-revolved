@@ -8,7 +8,7 @@ export default function Welcome(props) {
     return (
         <>
             <Head title="Welcome" />
-            <div className="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-gradient-to-br from-indigo-500 to-purple-500">
+            <div className="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-gradient-to-br from-violet-500 to-purple-500">
                 <div className="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
                     {props.auth.user ? (
                         <Link
@@ -42,7 +42,7 @@ export default function Welcome(props) {
                             <ApplicationLogo className="h-full p-5"/>
                         </div>
 
-                        <div className="text-6xl md:text-8xl text-center pt-8 text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 to-purple-300">
+                        <div className="text-6xl md:text-8xl text-center pt-8 text-transparent bg-clip-text bg-gradient-to-r from-violet-300 to-purple-300">
                             {window.appName}
                         </div>
 

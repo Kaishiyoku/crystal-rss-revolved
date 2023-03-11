@@ -28,7 +28,7 @@ const Button = ({as: Component = 'button', variant, type = 'button', className =
                 'shadow focus:shadow-md dark:shadow-black',
                 'rounded-md px-4 py-3 sm:py-2',
                 {
-                    'text-white border-indigo-600 bg-indigo-500 hover:border-indigo-700 hover:bg-indigo-600 focus:ring-indigo-600 dark:border-indigo-500 dark:bg-indigo-600 dark:hover:border-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-500': variant === 'primary',
+                    'text-white border-violet-600 bg-violet-500 hover:border-violet-700 hover:bg-violet-600 focus:ring-violet-600 dark:border-violet-500 dark:bg-violet-600 dark:hover:border-violet-600 dark:hover:bg-violet-700 dark:focus:ring-violet-500': variant === 'primary',
                     'text-gray-900 border-gray-300 bg-white hover:border-gray-300 hover:bg-gray-100 focus:ring-gray-300 dark:text-white dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600 dark:focus:ring-gray-600': variant === 'secondary',
                     'text-white border-pink-600 bg-pink-500 hover:border-pink-700 hover:bg-pink-600 focus:ring-pink-600 dark:border-pink-500 dark:bg-pink-600 dark:hover:border-pink-600 dark:hover:bg-pink-700 dark:focus:ring-pink-500': variant === 'danger',
 

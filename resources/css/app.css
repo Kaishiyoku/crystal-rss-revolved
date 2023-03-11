@@ -72,13 +72,13 @@ body {
      * Links
      */
     .link-primary {
-        @apply text-indigo-600 dark:text-indigo-400 underline decoration-transparent hover:decoration-indigo-600 dark:hover:decoration-indigo-400 transition;
+        @apply text-violet-600 dark:text-violet-400 underline decoration-transparent hover:decoration-violet-600 dark:hover:decoration-violet-400 transition;
     }
 
     .link-secondary {
         @apply font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-gray-500 transition;
     }
     .link-light {
-        @apply font-semibold text-indigo-200 hover:text-white border-b-2 border-b-indigo-200/20 hover:border-b-indigo-200/50 focus:outline focus:outline-2 focus:rounded-sm focus:outline-gray-500 transition;
+        @apply font-semibold text-violet-200 hover:text-white border-b-2 border-b-violet-200/20 hover:border-b-violet-200/50 focus:outline focus:outline-2 focus:rounded-sm focus:outline-gray-500 transition;
     }
 }
