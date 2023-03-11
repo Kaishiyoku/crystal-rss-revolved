@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import noop from '@/Utils/noop';
 
-const Button = ({variant, type = 'button', className = '', confirm = false, disabled, children, onClick = noop, ...props}) => {
+const Button = ({as: Component = 'button', variant, type = 'button', className = '', confirm = false, disabled, children, onClick = noop, ...props}) => {
     const {t} = useLaravelReactI18n();
 
     const handleOnClick = () => {
@@ -19,7 +19,7 @@ const Button = ({variant, type = 'button', className = '', confirm = false, disa
     };
 
     return (
-        <button
+        <Component
             {...props}
             type={type}
             className={clsx(
@@ -39,10 +39,11 @@ const Button = ({variant, type = 'button', className = '', confirm = false, disa
             disabled={disabled}
         >
             {children}
-        </button>
+        </Component>
     );
 };
 Button.propTypes = {
+    as: PropTypes.any,
     variant: PropTypes.oneOf(['primary', 'secondary', 'danger']).isRequired,
     type: PropTypes.oneOf(['button', 'submit', 'reset']),
     className: PropTypes.any,
@@ -61,6 +62,7 @@ const PrimaryButton = ({className, ...props}) => {
     );
 };
 PrimaryButton.propTypes = {
+    as: PropTypes.any,
     type: PropTypes.oneOf(['button', 'submit', 'reset']),
     className: PropTypes.any,
     confirm: PropTypes.bool,
@@ -78,6 +80,7 @@ const SecondaryButton = ({className, ...props}) => {
     );
 };
 SecondaryButton.propTypes = {
+    as: PropTypes.any,
     type: PropTypes.oneOf(['button', 'submit', 'reset']),
     className: PropTypes.any,
     confirm: PropTypes.bool,
@@ -96,6 +99,7 @@ const DangerButton = ({confirm, className, ...props}) => {
     );
 };
 DangerButton.propTypes = {
+    as: PropTypes.any,
     type: PropTypes.oneOf(['button', 'submit', 'reset']),
     className: PropTypes.any,
     disabled: PropTypes.bool,
