@@ -7,10 +7,11 @@ import {SecondaryButton} from '@/Components/Button';
 import TotalNumberOfFeedItemsContext from '@/Contexts/TotalNumberOfFeedItemsContext';
 
 /**
+ * @param {number} hueRotationIndex
  * @param {FeedItem} feedItem
  * @returns {JSX.Element}
  */
-export default function FeedItemCard({feedItem}) {
+export default function FeedItemCard({hueRotationIndex, feedItem}) {
     const {t} = useLaravelReactI18n();
     const [totalNumberOfFeedItems, setTotalNumberOfFeedItems] = useContext(TotalNumberOfFeedItemsContext);
     const [internalFeedItem, setInternalFeedItem] = useState(feedItem);
@@ -42,7 +43,7 @@ export default function FeedItemCard({feedItem}) {
                     src={internalFeedItem.image_url}
                     alt={internalFeedItem.title}
                 />
-            ) : <Card.ImagePlaceholder/>}
+            ) : <Card.ImagePlaceholder className={clsx({'hue-rotate-0': hueRotationIndex === 0, 'hue-rotate-30': hueRotationIndex === 1, 'hue-rotate-60': hueRotationIndex === 2, 'hue-rotate-15': hueRotationIndex === 3, 'hue-rotate-180': hueRotationIndex === 4, 'hue-rotate-90': hueRotationIndex === 5})}/>}
 
             <Card.Body className="grow flex flex-col">
                 <div className="grow">

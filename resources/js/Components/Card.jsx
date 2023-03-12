@@ -23,9 +23,9 @@ const Image = ({src, alt}) => {
     );
 };
 
-const ImagePlaceholder = () => {
+const ImagePlaceholder = ({className}) => {
     return (
-        <div className="flex justify-center h-72 md:h-56 bg-gradient-to-br from-cyan-300 to-violet-400 dark:from-cyan-900 dark:to-violet-700 saturate-[.20] sm:rounded-t-md">
+        <div className={clsx('flex justify-center h-72 md:h-56 bg-gradient-to-br from-cyan-300 to-violet-400 dark:from-cyan-900 dark:to-violet-700 saturate-[.20] sm:rounded-t-md', className)}>
             <PhotoSolidIcon className="h-full text-white mix-blend-soft-light"/>
         </div>
     );
