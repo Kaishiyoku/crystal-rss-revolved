@@ -7,7 +7,7 @@ import {Link} from '@inertiajs/react';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import clsx from 'clsx';
 
-export default function Authenticated({auth, header, withMobileSpacing = false, children}) {
+export default function Authenticated({auth, header, hasMobileSpacing = false, children}) {
     const {t} = useLaravelReactI18n();
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
@@ -155,7 +155,7 @@ export default function Authenticated({auth, header, withMobileSpacing = false, 
             )}
 
             <main className="max-w-7xl mx-auto py-12 sm:px-6 lg:px-8">
-                <div className={clsx({'px-4 sm:px-0': withMobileSpacing})}>
+                <div className={clsx({'px-4 sm:px-0': hasMobileSpacing})}>
                     {children}
                 </div>
             </main>

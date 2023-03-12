@@ -16,7 +16,7 @@ export default function Create(props) {
             auth={props.auth}
             errors={props.errors}
             header={<Breadcrumbs breadcrumbs={props.breadcrumbs}/>}
-            withMobileSpacing
+            hasMobileSpacing
         >
             <Head title={t('Add feed')}/>
 

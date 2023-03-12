@@ -35,7 +35,7 @@ export default function Dashboard(props) {
             >
                 <Head title="Dashboard"/>
 
-                <Actions>
+                <Actions hasMobileSpacing>
                     {totalNumberOfFeedItems > 0 && (
                         <SecondaryButton confirm onClick={markAllAsRead}>
                             {t('Mark all as read')}
