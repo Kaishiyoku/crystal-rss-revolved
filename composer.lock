@@ -1179,16 +1179,16 @@
         },
         {
             "name": "kaishiyoku/hera-rss-crawler",
-            "version": "5.1.2",
+            "version": "5.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Kaishiyoku/hera-rss-crawler.git",
-                "reference": "9064a051bc849849d9a285583974315badd48cb8"
+                "reference": "78e2f44a888d46a7dd66d4d6952c7479cc2277c9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Kaishiyoku/hera-rss-crawler/zipball/9064a051bc849849d9a285583974315badd48cb8",
-                "reference": "9064a051bc849849d9a285583974315badd48cb8",
+                "url": "https://api.github.com/repos/Kaishiyoku/hera-rss-crawler/zipball/78e2f44a888d46a7dd66d4d6952c7479cc2277c9",
+                "reference": "78e2f44a888d46a7dd66d4d6952c7479cc2277c9",
                 "shasum": ""
             },
             "require": {
@@ -1244,7 +1244,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Kaishiyoku/hera-rss-crawler/issues",
-                "source": "https://github.com/Kaishiyoku/hera-rss-crawler/tree/5.1.2"
+                "source": "https://github.com/Kaishiyoku/hera-rss-crawler/tree/5.1.4"
             },
             "funding": [
                 {
@@ -1252,7 +1252,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-03-12T19:33:19+00:00"
+            "time": "2023-03-12T20:37:21+00:00"
         },
         {
             "name": "laminas/laminas-escaper",
