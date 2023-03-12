@@ -1,8 +1,9 @@
 import Dropdown from '@/Components/Dropdown';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import {SecondaryButton} from '@/Components/Button';
+import clsx from 'clsx';
 
-export default function FeedFilterDropdown({selectedFeed, feeds}) {
+export default function FeedFilterDropdown({selectedFeed, feeds, ...props}) {
     const {t} = useLaravelReactI18n();
 
     if (feeds.length === 0) {
@@ -10,7 +11,7 @@ export default function FeedFilterDropdown({selectedFeed, feeds}) {
     }
 
     return (
-        <div className="px-4 sm:px-0 pb-5">
+        <div {...props}>
             <Dropdown>
                 <Dropdown.Trigger className="inline">
                     <SecondaryButton hasMobileFullSize className="justify-between">

@@ -6,7 +6,7 @@ export default function Actions({hasMobileSpacing = false, className, children})
     }
 
     return (
-        <div className={clsx('flex sm:justify-end pb-5', {'px-4 sm:px-0': hasMobileSpacing}, className)}>
+        <div className={clsx('sm:flex sm:justify-end pb-5', {'px-4 sm:px-0': hasMobileSpacing}, className)}>
             {children}
         </div>
     );

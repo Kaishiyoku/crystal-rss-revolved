@@ -36,14 +36,14 @@ export default function Dashboard(props) {
                 <Head title="Dashboard"/>
 
                 <Actions hasMobileSpacing>
+                    <FeedFilterDropdown selectedFeed={props.selectedFeed} feeds={props.unreadFeeds}/>
+
                     {totalNumberOfFeedItems > 0 && (
-                        <SecondaryButton confirm onClick={markAllAsRead} hasMobileFullSize>
+                        <SecondaryButton confirm onClick={markAllAsRead} className="sm:ml-1 mt-1 sm:mt-0" hasMobileFullSize>
                             {t('Mark all as read')}
                         </SecondaryButton>
                     )}
                 </Actions>
-
-                <FeedFilterDropdown selectedFeed={props.selectedFeed} feeds={props.unreadFeeds}/>
 
                 {allFeedItems.length > 0 ? (
                     <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-16 sm:gap-y-4">
