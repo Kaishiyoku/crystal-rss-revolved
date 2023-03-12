@@ -37,7 +37,7 @@ export default function Dashboard(props) {
 
                 <Actions hasMobileSpacing>
                     {totalNumberOfFeedItems > 0 && (
-                        <SecondaryButton confirm onClick={markAllAsRead}>
+                        <SecondaryButton confirm onClick={markAllAsRead} hasMobileFullSize>
                             {t('Mark all as read')}
                         </SecondaryButton>
                     )}

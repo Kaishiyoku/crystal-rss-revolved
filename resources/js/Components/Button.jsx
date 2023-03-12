@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import noop from '@/Utils/noop';
 
-const Button = ({as: Component = 'button', variant, type = 'button', className = '', confirm = false, disabled, children, onClick = noop, ...props}) => {
+const Button = ({as: Component = 'button', variant, type = 'button', hasMobileFullSize = false, className = '', confirm = false, disabled, children, onClick = noop, ...props}) => {
     const {t} = useLaravelReactI18n();
 
     const handleOnClick = () => {
@@ -31,7 +31,7 @@ const Button = ({as: Component = 'button', variant, type = 'button', className =
                     'text-white border-violet-600 bg-violet-500 hover:border-violet-700 hover:bg-violet-600 focus:ring-violet-600 dark:border-violet-500 dark:bg-violet-600 dark:hover:border-violet-600 dark:hover:bg-violet-700 dark:focus:ring-violet-500': variant === 'primary',
                     'text-gray-900 border-gray-300 bg-white hover:border-gray-300 hover:bg-gray-100 focus:ring-gray-300 dark:text-white dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600 dark:focus:ring-gray-600': variant === 'secondary',
                     'text-white border-pink-600 bg-pink-500 hover:border-pink-700 hover:bg-pink-600 focus:ring-pink-600 dark:border-pink-500 dark:bg-pink-600 dark:hover:border-pink-600 dark:hover:bg-pink-700 dark:focus:ring-pink-500': variant === 'danger',
-
+                    'w-full sm:w-auto': hasMobileFullSize,
                 },
                 className
             )}
@@ -46,6 +46,7 @@ Button.propTypes = {
     as: PropTypes.any,
     variant: PropTypes.oneOf(['primary', 'secondary', 'danger']).isRequired,
     type: PropTypes.oneOf(['button', 'submit', 'reset']),
+    hasMobileFullSize: PropTypes.bool,
     className: PropTypes.any,
     confirm: PropTypes.bool,
     disabled: PropTypes.bool,
@@ -64,6 +65,7 @@ const PrimaryButton = ({className, ...props}) => {
 PrimaryButton.propTypes = {
     as: PropTypes.any,
     type: PropTypes.oneOf(['button', 'submit', 'reset']),
+    hasMobileFullSize: PropTypes.bool,
     className: PropTypes.any,
     confirm: PropTypes.bool,
     disabled: PropTypes.bool,
@@ -82,6 +84,7 @@ const SecondaryButton = ({className, ...props}) => {
 SecondaryButton.propTypes = {
     as: PropTypes.any,
     type: PropTypes.oneOf(['button', 'submit', 'reset']),
+    hasMobileFullSize: PropTypes.bool,
     className: PropTypes.any,
     confirm: PropTypes.bool,
     disabled: PropTypes.bool,
@@ -101,6 +104,7 @@ const DangerButton = ({confirm, className, ...props}) => {
 DangerButton.propTypes = {
     as: PropTypes.any,
     type: PropTypes.oneOf(['button', 'submit', 'reset']),
+    hasMobileFullSize: PropTypes.bool,
     className: PropTypes.any,
     disabled: PropTypes.bool,
     onClick: PropTypes.func,
