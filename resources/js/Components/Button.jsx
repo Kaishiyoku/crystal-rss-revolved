@@ -24,7 +24,7 @@ const Button = ({as: Component = 'button', variant, type = 'button', hasMobileFu
             type={type}
             className={clsx(
                 'inline-flex items-center transition ease-in disabled:opacity-50 disabled:cursor-not-allowed',
-                'font-semibold text-xs uppercase tracking-widest border focus:ring-1',
+                'font-semibold text-sm tracking-widest border focus:ring-1',
                 'shadow focus:shadow-md dark:shadow-black',
                 'rounded-md px-4 py-3 sm:py-2',
                 {
