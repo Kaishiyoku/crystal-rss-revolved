@@ -16,11 +16,7 @@ export default function Create(props) {
         >
             <Head title={t('Add category')}/>
 
-            <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <Form method="post" action={route('categories.store')} category={props.category}/>
-                </div>
-            </div>
+            <Form method="post" action={route('categories.store')} category={props.category}/>
         </AuthenticatedLayout>
     );
 }
