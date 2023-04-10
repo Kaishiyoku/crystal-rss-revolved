@@ -84,6 +84,7 @@ class FeedController extends Controller
      */
     public function destroy(Feed $feed)
     {
+        $feed->feedItems()->delete();
         $feed->delete();
 
         return redirect()->route('feeds.index');
