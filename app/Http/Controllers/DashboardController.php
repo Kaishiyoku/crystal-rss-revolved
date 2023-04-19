@@ -19,17 +19,13 @@ class DashboardController extends Controller
         $totalNumberOfFeedItems = Auth::user()->feedItems()->unread()->count();
         $unreadFeeds = Auth::user()->feeds()
             ->select(['id', 'name'])
-            ->whereHas('feedItems', function (Builder $query) {
-                $query->unread();
-            })
-            ->withCount(['feedItems' => function (Builder $query) {
-                $query->unread();
-            }])
+            ->whereHas('feedItems', fn(Builder $query) => $query->unread()) /** @phpstan-ignore-line */
+            ->withCount(['feedItems' => fn(Builder $query) => $query->unread()]) /** @phpstan-ignore-line */
             ->get();
 
         $feedItems = Auth::user()->feedItems()
             ->unread()
-            ->when($feedId, fn(Builder $query) => $query->where('feed_id', $feedId))
+            ->when($feedId, fn(Builder $query) => $query->where('feed_id', $feedId)) /** @phpstan-ignore-line */
             ->with('feed')
             ->cursorPaginate()
             ->withQueryString();

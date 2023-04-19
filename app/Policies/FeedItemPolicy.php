@@ -13,7 +13,7 @@ class FeedItemPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -21,7 +21,7 @@ class FeedItemPolicy
      */
     public function view(User $user, FeedItem $feedItem): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -29,7 +29,7 @@ class FeedItemPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -45,7 +45,7 @@ class FeedItemPolicy
      */
     public function delete(User $user, FeedItem $feedItem): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -53,7 +53,7 @@ class FeedItemPolicy
      */
     public function restore(User $user, FeedItem $feedItem): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -61,6 +61,6 @@ class FeedItemPolicy
      */
     public function forceDelete(User $user, FeedItem $feedItem): bool
     {
-        //
+        return false;
     }
 }
