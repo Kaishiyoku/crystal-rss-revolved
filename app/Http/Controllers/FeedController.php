@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreFeedRequest;
 use App\Http\Requests\UpdateFeedRequest;
 use App\Models\Feed;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class FeedController extends Controller
 {
@@ -19,7 +21,7 @@ class FeedController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): Response
     {
         return Inertia::render('Feeds/Index', [
             'feeds' => Auth::user()->feeds()->with('category')->withCount('feedItems')->get(),
@@ -29,7 +31,7 @@ class FeedController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): Response
     {
         return Inertia::render('Feeds/Create', [
             'categories' => Auth::user()->categories()->pluck('name', 'id')->map(fn(string $name, int $id) => ['value' => $id, 'name' => $name])->values(),
@@ -40,7 +42,7 @@ class FeedController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreFeedRequest $request)
+    public function store(StoreFeedRequest $request): RedirectResponse
     {
         $validated = $request->validated();
 
@@ -55,7 +57,7 @@ class FeedController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Feed $feed)
+    public function edit(Feed $feed): Response
     {
         return Inertia::render('Feeds/Edit', [
             'categories' => Auth::user()->categories()->pluck('name', 'id')->map(fn(string $name, int $id) => ['value' => $id, 'name' => $name])->values(),
@@ -67,7 +69,7 @@ class FeedController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateFeedRequest $request, Feed $feed)
+    public function update(UpdateFeedRequest $request, Feed $feed): RedirectResponse
     {
         $validated = $request->validated();
 
@@ -82,7 +84,7 @@ class FeedController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Feed $feed)
+    public function destroy(Feed $feed): RedirectResponse
     {
         $feed->feedItems()->delete();
         $feed->delete();

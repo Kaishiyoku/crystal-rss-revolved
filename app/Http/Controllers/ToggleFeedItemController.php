@@ -8,6 +8,8 @@ class ToggleFeedItemController extends Controller
 {
     /**
      * Handle the incoming request.
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
     public function __invoke(FeedItem $feedItem)
     {

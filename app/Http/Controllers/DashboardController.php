@@ -4,15 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\DashboardRequest;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class DashboardController extends Controller
 {
     /**
      * Handle the incoming request.
      */
-    public function __invoke(DashboardRequest $request)
+    public function __invoke(DashboardRequest $request): RedirectResponse|Response
     {
         $feedId = $request->exists('feed_id') ? $request->integer('feed_id') : null;
 

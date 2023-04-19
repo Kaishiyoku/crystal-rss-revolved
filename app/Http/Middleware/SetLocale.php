@@ -18,10 +18,18 @@ class SetLocale
     public function handle(Request $request, Closure $next): Response
     {
         $httpLocale = Str::substr($request->server('HTTP_ACCEPT_LANGUAGE'), 0, 2);
-        $locale = collect(config('app.available_locales'))->contains($httpLocale) ? $httpLocale : config('app.fallback_locale');
+        $locale = collect($this->availableLocales())->contains($httpLocale) ? $httpLocale : config('app.fallback_locale');
 
         App::setLocale($locale);
 
         return $next($request);
+    }
+
+    /**
+     * @return array<string>
+     */
+    private function availableLocales(): array
+    {
+        return config('app.available_locales');
     }
 }
