@@ -142,7 +142,7 @@ class FetchFeedItems extends Command
         $feed->feedItems()->save($feedItem);
 
         $this->newFeedItemIdsPerUserId->put($feed->user_id, with(
-            $this->newFeedItemIdsPerUserId->get($feed->user_id), fn($collection) => $collection ? $collection->push($feedItem->id) : collect($feedItem->id)
+            $this->newFeedItemIdsPerUserId->get($feed->user_id), fn($collection) => $collection ? $collection->push($feedItem->id) : collect($feedItem->id) /** @phpstan-ignore-line */
         ));
     }
 }

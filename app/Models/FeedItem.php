@@ -64,7 +64,7 @@ class FeedItem extends Model
     /**
      * The attributes that should be cast.
      *
-     * @var array
+     * @var array<string, string>
      */
     protected $casts = [
         'posted_at' => 'datetime',
@@ -74,7 +74,7 @@ class FeedItem extends Model
     /**
      * The accessors to append to the model's array form.
      *
-     * @var array
+     * @var array<string>
      */
     protected $appends = [
         'has_image',

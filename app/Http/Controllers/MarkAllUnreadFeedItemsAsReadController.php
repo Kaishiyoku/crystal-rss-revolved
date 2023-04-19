@@ -9,6 +9,8 @@ class MarkAllUnreadFeedItemsAsReadController extends Controller
 {
     /**
      * Handle the incoming request.
+     *
+     * @return void
      */
     public function __invoke(Request $request)
     {

@@ -30,6 +30,7 @@
         "laravel/sail": "^1.18",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^7.0",
+        "nunomaduro/larastan": "^2.5",
         "phpunit/phpunit": "^10.0",
         "spatie/laravel-ignition": "^2.0"
     },
@@ -67,7 +68,8 @@
             "php artisan ide-helper:generate",
             "php artisan ide-helper:meta",
             "php artisan ide-helper:models --dir=\"app/Models\" --write --reset"
-        ]
+        ],
+        "analyze": "./vendor/bin/phpstan analyse"
     },
     "extra": {
         "laravel": {

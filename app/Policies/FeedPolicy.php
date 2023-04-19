@@ -21,7 +21,7 @@ class FeedPolicy
      */
     public function view(User $user, Feed $feed): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -53,7 +53,7 @@ class FeedPolicy
      */
     public function restore(User $user, Feed $feed): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -61,6 +61,6 @@ class FeedPolicy
      */
     public function forceDelete(User $user, Feed $feed): bool
     {
-        //
+        return false;
     }
 }

@@ -10,6 +10,9 @@ class FeedUrlDiscovererController extends Controller
 {
     /**
      * Handle the incoming request.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
      */
     public function __invoke(FeedUrlDiscovererRequest $request, HeraRssCrawler $heraRssCrawler)
     {
