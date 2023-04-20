@@ -20,8 +20,7 @@ window.axios.interceptors.request.use(
         NProgress.done();
 
         return Promise.reject(error);
-    },
-);
+    });
 
 axios.interceptors.response.use(
     (response) => {
