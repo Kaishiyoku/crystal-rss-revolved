@@ -12,9 +12,6 @@ use Tests\TestCase;
 
 class AddAdminUserTest extends TestCase
 {
-    /**
-     * Test if an admin user is being created successfully.
-     */
     public function test_admin_user_creation(): void
     {
         Event::fake();

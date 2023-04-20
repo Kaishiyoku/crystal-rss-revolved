@@ -8,7 +8,6 @@ use App\Http\Controllers\FeedUrlDiscovererController;
 use App\Http\Controllers\MarkAllUnreadFeedItemsAsReadController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ToggleFeedItemController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
