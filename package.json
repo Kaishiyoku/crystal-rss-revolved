@@ -8,7 +8,7 @@
         "@headlessui/react": "^1.7.14",
         "@inertiajs/react": "^1.0.3",
         "@tailwindcss/forms": "^0.5.3",
-        "@vitejs/plugin-react": "^3.0.0",
+        "@vitejs/plugin-react": "^4.0.0",
         "autoprefixer": "^10.4.14",
         "axios": "^1.3.5",
         "clsx": "^1.2.1",
