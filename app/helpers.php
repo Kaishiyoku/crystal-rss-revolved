@@ -2,19 +2,17 @@
 
 declare(strict_types=1);
 
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Http;
+use GuzzleHttp\Psr7\Header;
+
 if (!function_exists('getContentTypeForUrl')) {
     function getContentTypeForUrl(string $url): ?string
     {
         try {
-            $headers = get_headers($url, true);
+            $contentTypeHeaders = Arr::flatten(Header::parse(Http::get($url)->header('Content-Type')));
 
-            $contentType = Arr::get($headers, 'Content-Type');
-
-            if (is_array($contentType)) {
-                return null;
-            }
-
-            return $contentType;
+            return Arr::get($contentTypeHeaders, 0);
         } catch (Exception $e) {
             return null;
         }
