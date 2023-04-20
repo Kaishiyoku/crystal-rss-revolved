@@ -4,7 +4,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 10.7.1.
+ * Generated for Laravel 10.8.0.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -9693,7 +9693,7 @@
                     /**
          * Start defining a series of piped processes.
          *
-         * @param callable $callback
+         * @param callable|array $callback
          * @return \Illuminate\Process\Pipe 
          * @static 
          */ 
@@ -18709,7 +18709,7 @@
      *
      * @method static array getCurrentRoute()
      * @mixin \Illuminate\Support\Traits\Macroable
-     * @see Manager
+     * @see \Diglactic\Breadcrumbs\Manager
      */ 
         class Breadcrumbs {
                     /**
