@@ -8,6 +8,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules;
+use Illuminate\Validation\ValidationException;
 
 class AddAdminUser extends Command
 {
@@ -51,7 +52,7 @@ class AddAdminUser extends Command
                 $this->error($message);
             });
 
-            return;
+            throw new ValidationException($validator);
         }
 
         $user = User::create([
