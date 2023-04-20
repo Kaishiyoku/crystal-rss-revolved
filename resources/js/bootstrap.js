@@ -20,7 +20,9 @@ window.axios.interceptors.request.use(
         NProgress.done();
 
         return Promise.reject(error);
-    });
+    },
+);
+
 axios.interceptors.response.use(
     (response) => {
         NProgress.done();
@@ -31,7 +33,8 @@ axios.interceptors.response.use(
         NProgress.done();
 
         return Promise.reject(error);
-    });
+    },
+);
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
@@ -48,7 +51,9 @@ axios.interceptors.response.use(
 //     broadcaster: 'pusher',
 //     key: import.meta.env.VITE_PUSHER_APP_KEY,
 //     cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER ?? 'mt1',
-//     wsHost: import.meta.env.VITE_PUSHER_HOST ? import.meta.env.VITE_PUSHER_HOST : `ws-${import.meta.env.VITE_PUSHER_APP_CLUSTER}.pusher.com`,
+//     wsHost: import.meta.env.VITE_PUSHER_HOST
+//         ? import.meta.env.VITE_PUSHER_HOST
+//         : `ws-${import.meta.env.VITE_PUSHER_APP_CLUSTER}.pusher.com`,
 //     wsPort: import.meta.env.VITE_PUSHER_PORT ?? 80,
 //     wssPort: import.meta.env.VITE_PUSHER_PORT ?? 443,
 //     forceTLS: (import.meta.env.VITE_PUSHER_SCHEME ?? 'https') === 'https',
