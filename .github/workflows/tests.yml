@@ -43,7 +43,7 @@ jobs:
       run: chmod -R 777 storage bootstrap/cache
       
     - name: Install npm dependencies
-      run: npm install
+      run: npm ci
       
     - name: Compile assets
       run: npm run build
