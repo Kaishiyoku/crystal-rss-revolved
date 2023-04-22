@@ -1,13 +1,13 @@
 import {Head, Link} from '@inertiajs/react';
-import ApplicationLogo from '@/Components/ApplicationLogo';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
+import ApplicationLogo from '@/Components/ApplicationLogo';
 
 export default function Welcome(props) {
     const {t} = useLaravelReactI18n();
 
     return (
         <>
-            <Head title="Welcome" />
+            <Head title="Welcome"/>
             <div className="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-gradient-to-br from-violet-500 to-purple-500">
                 <div className="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
                     {props.auth.user ? (

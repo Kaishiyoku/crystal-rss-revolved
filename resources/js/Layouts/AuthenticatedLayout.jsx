@@ -1,11 +1,11 @@
 import {useState} from 'react';
+import {Link} from '@inertiajs/react';
+import {useLaravelReactI18n} from 'laravel-react-i18n';
+import clsx from 'clsx';
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
-import {Link} from '@inertiajs/react';
-import {useLaravelReactI18n} from 'laravel-react-i18n';
-import clsx from 'clsx';
 
 export default function Authenticated({auth, header, hasMobileSpacing = false, children}) {
     const {t} = useLaravelReactI18n();
@@ -19,7 +19,8 @@ export default function Authenticated({auth, header, hasMobileSpacing = false, c
                         <div className="flex">
                             <div className="shrink-0 flex items-center">
                                 <Link href="/">
-                                    <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200"/>
+                                    <ApplicationLogo
+                                        className="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200"/>
                                 </Link>
                             </div>
 
@@ -66,7 +67,8 @@ export default function Authenticated({auth, header, hasMobileSpacing = false, c
                                     </Dropdown.Trigger>
 
                                     <Dropdown.Content>
-                                        <Dropdown.Link href={route('profile.edit')} active={route().current('profile.edit')}>
+                                        <Dropdown.Link href={route('profile.edit')}
+                                                       active={route().current('profile.edit')}>
                                             {t('Profile')}
                                         </Dropdown.Link>
                                         {!!auth.user.is_admin && (

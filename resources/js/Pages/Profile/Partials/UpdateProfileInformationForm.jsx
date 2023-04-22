@@ -1,16 +1,18 @@
+import {Link, useForm, usePage} from '@inertiajs/react';
+import {Transition} from '@headlessui/react';
+import {useLaravelReactI18n} from 'laravel-react-i18n';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
-import { Link, useForm, usePage } from '@inertiajs/react';
-import { Transition } from '@headlessui/react';
 import {PrimaryButton} from '@/Components/Button';
-import {useLaravelReactI18n} from 'laravel-react-i18n';
 
-export default function UpdateProfileInformation({ mustVerifyEmail, status, className }) {
+export default function UpdateProfileInformation({mustVerifyEmail, status, className}) {
     const {t} = useLaravelReactI18n();
-    const user = usePage().props.auth.user;
+    const {user} = usePage().props.auth;
 
-    const { data, setData, patch, errors, processing, recentlySuccessful } = useForm({
+    const {
+        data, setData, patch, errors, processing, recentlySuccessful
+    } = useForm({
         name: user.name,
         email: user.email,
     });
@@ -33,7 +35,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
 
             <form onSubmit={submit} className="mt-6 space-y-6">
                 <div>
-                    <InputLabel htmlFor="name" value="Name" />
+                    <InputLabel htmlFor="name" value="Name"/>
 
                     <TextInput
                         id="name"
@@ -45,11 +47,11 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                         autoComplete="name"
                     />
 
-                    <InputError className="mt-2" message={errors.name} />
+                    <InputError className="mt-2" message={errors.name}/>
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="email" value="Email" />
+                    <InputLabel htmlFor="email" value="Email"/>
 
                     <TextInput
                         id="email"
@@ -61,7 +63,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                         autoComplete="username"
                     />
 
-                    <InputError className="mt-2" message={errors.email} />
+                    <InputError className="mt-2" message={errors.email}/>
                 </div>
 
                 {mustVerifyEmail && user.email_verified_at === null && (

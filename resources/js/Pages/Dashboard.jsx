@@ -39,7 +39,8 @@ export default function Dashboard(props) {
                     <FeedFilterDropdown selectedFeed={props.selectedFeed} feeds={props.unreadFeeds}/>
 
                     {totalNumberOfFeedItems > 0 && (
-                        <SecondaryButton confirm onClick={markAllAsRead} className="sm:ml-1 mt-1 sm:mt-0" hasMobileFullSize>
+                        <SecondaryButton confirm onClick={markAllAsRead} className="sm:ml-1 mt-1 sm:mt-0"
+                                         hasMobileFullSize>
                             {t('Mark all as read')}
                         </SecondaryButton>
                     )}

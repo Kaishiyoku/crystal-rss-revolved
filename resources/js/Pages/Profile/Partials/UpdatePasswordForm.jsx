@@ -1,18 +1,20 @@
-import { useRef } from 'react';
+import {useRef} from 'react';
+import {useForm} from '@inertiajs/react';
+import {Transition} from '@headlessui/react';
+import {useLaravelReactI18n} from 'laravel-react-i18n';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
-import { useForm } from '@inertiajs/react';
-import { Transition } from '@headlessui/react';
 import {PrimaryButton} from '@/Components/Button';
-import {useLaravelReactI18n} from 'laravel-react-i18n';
 
-export default function UpdatePasswordForm({ className }) {
+export default function UpdatePasswordForm({className}) {
     const {t} = useLaravelReactI18n();
     const passwordInput = useRef();
     const currentPasswordInput = useRef();
 
-    const { data, setData, errors, put, reset, processing, recentlySuccessful } = useForm({
+    const {
+        data, setData, errors, put, reset, processing, recentlySuccessful,
+    } = useForm({
         current_password: '',
         password: '',
         password_confirmation: '',
@@ -50,7 +52,7 @@ export default function UpdatePasswordForm({ className }) {
 
             <form onSubmit={updatePassword} className="mt-6 space-y-6">
                 <div>
-                    <InputLabel htmlFor="current_password" value={t('Current Password')} />
+                    <InputLabel htmlFor="current_password" value={t('Current Password')}/>
 
                     <TextInput
                         id="current_password"
@@ -62,11 +64,11 @@ export default function UpdatePasswordForm({ className }) {
                         autoComplete="current-password"
                     />
 
-                    <InputError message={errors.current_password} className="mt-2" />
+                    <InputError message={errors.current_password} className="mt-2"/>
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="password" value={t('New Password')} />
+                    <InputLabel htmlFor="password" value={t('New Password')}/>
 
                     <TextInput
                         id="password"
@@ -78,11 +80,11 @@ export default function UpdatePasswordForm({ className }) {
                         autoComplete="new-password"
                     />
 
-                    <InputError message={errors.password} className="mt-2" />
+                    <InputError message={errors.password} className="mt-2"/>
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="password_confirmation" value={t('Confirm Password')} />
+                    <InputLabel htmlFor="password_confirmation" value={t('Confirm Password')}/>
 
                     <TextInput
                         id="password_confirmation"
@@ -93,7 +95,7 @@ export default function UpdatePasswordForm({ className }) {
                         autoComplete="new-password"
                     />
 
-                    <InputError message={errors.password_confirmation} className="mt-2" />
+                    <InputError message={errors.password_confirmation} className="mt-2"/>
                 </div>
 
                 <div className="flex items-center gap-4">

@@ -85,7 +85,9 @@ export default function Form({method, action, feed, categories}) {
             {discoveredFeedUrls.length > 0 && (
                 <Card className="mt-4 divide-y dark:divide-gray-700">
                     {discoveredFeedUrls.map((discoveredFeedUrl) => (
-                        <button key={discoveredFeedUrl} type="button" className="block w-full text-left px-4 py-2 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600 first:rounded-t last:rounded-b transition" onClick={selectDiscoveredFeedUrl(discoveredFeedUrl)}>
+                        <button key={discoveredFeedUrl} type="button"
+                                className="block w-full text-left px-4 py-2 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600 first:rounded-t last:rounded-b transition"
+                                onClick={selectDiscoveredFeedUrl(discoveredFeedUrl)}>
                             {discoveredFeedUrl}
                         </button>
                     ))}

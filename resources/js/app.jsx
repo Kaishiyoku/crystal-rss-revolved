@@ -42,7 +42,7 @@ createInertiaApp({
                 }}
             >
                 <AppWithLoadedTranslations {...props}/>
-            </LaravelReactI18nProvider>
+            </LaravelReactI18nProvider>,
         );
     },
     progress: {

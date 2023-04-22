@@ -3,7 +3,7 @@
     "scripts": {
         "dev": "vite",
         "build": "vite build",
-        "lint": "eslint resources/js/**/*.js"
+        "lint": "eslint --ext .js,.jsx resources/js"
     },
     "devDependencies": {
         "@headlessui/react": "^1.7.14",
