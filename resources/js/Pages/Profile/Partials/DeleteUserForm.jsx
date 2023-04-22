@@ -19,9 +19,7 @@ export default function DeleteUserForm({className}) {
         processing,
         reset,
         errors,
-    } = useForm({
-        password: '',
-    });
+    } = useForm({password: ''});
 
     const confirmUserDeletion = () => {
         setConfirmingUserDeletion(true);

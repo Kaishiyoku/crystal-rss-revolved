@@ -7,9 +7,7 @@ import {Head, useForm} from '@inertiajs/react';
 import {PrimaryButton} from '@/Components/Button';
 
 export default function ConfirmPassword() {
-    const {data, setData, post, processing, errors, reset} = useForm({
-        password: '',
-    });
+    const {data, setData, post, processing, errors, reset} = useForm({password: ''});
 
     useEffect(() => {
         return () => {

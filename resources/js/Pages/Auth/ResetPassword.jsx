@@ -8,8 +8,8 @@ import {PrimaryButton} from '@/Components/Button';
 
 export default function ResetPassword({token, email}) {
     const {data, setData, post, processing, errors, reset} = useForm({
-        token: token,
-        email: email,
+        token,
+        email,
         password: '',
         password_confirmation: '',
     });

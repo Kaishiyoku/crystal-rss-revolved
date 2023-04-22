@@ -10,9 +10,7 @@ export default function UpdateProfileInformation({mustVerifyEmail, status, class
     const {t} = useLaravelReactI18n();
     const {user} = usePage().props.auth;
 
-    const {
-        data, setData, patch, errors, processing, recentlySuccessful
-    } = useForm({
+    const {data, setData, patch, errors, processing, recentlySuccessful} = useForm({
         name: user.name,
         email: user.email,
     });

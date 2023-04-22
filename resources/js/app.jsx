@@ -32,7 +32,7 @@ createInertiaApp({
                 lang={browserLang}
                 fallbackLang="en"
                 resolve={async (lang) => {
-                    const langs = import.meta.glob('../../lang/*.json')
+                    const langs = import.meta.glob('../../lang/*.json');
 
                     const fn = langs[`../../lang/${lang}.json`];
 
@@ -42,10 +42,8 @@ createInertiaApp({
                 }}
             >
                 <AppWithLoadedTranslations {...props}/>
-            </LaravelReactI18nProvider>,
+            </LaravelReactI18nProvider>
         );
     },
-    progress: {
-        color: '#7c3aed',
-    },
+    progress: {color: '#7c3aed'},
 });

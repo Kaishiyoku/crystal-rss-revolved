@@ -1,4 +1,3 @@
-import {useLaravelReactI18n} from 'laravel-react-i18n';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import noop from '@/Utils/noop';
@@ -6,7 +5,6 @@ import {useState} from 'react';
 import ConfirmModal from '@/Components/ConfirmModal';
 
 const Button = ({as: Component = 'button', variant, type = 'button', hasMobileFullSize = false, className = '', confirm = false, disabled, children, onClick = noop, ...props}) => {
-    const {t} = useLaravelReactI18n();
     const [showConfirmModal, setShowConfirmModal] = useState(false);
 
     const handleOnClick = () => {
@@ -24,7 +22,9 @@ const Button = ({as: Component = 'button', variant, type = 'button', hasMobileFu
             <ConfirmModal
                 show={showConfirmModal}
                 onClose={() => setShowConfirmModal(false)}
-                onConfirm={() => {onClick(); setShowConfirmModal(false);}}
+                onConfirm={() => {
+                    onClick(); setShowConfirmModal(false);
+                }}
             />
 
             <Component

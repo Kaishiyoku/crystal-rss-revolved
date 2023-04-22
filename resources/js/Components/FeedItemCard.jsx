@@ -38,12 +38,25 @@ export default function FeedItemCard({hueRotationIndex, feedItem}) {
             key={internalFeedItem.id}
             className={clsx('flex flex-col transition ease-out duration-300', {'opacity-50': internalFeedItem.read_at})}
         >
-            {internalFeedItem.has_image ? (
-                <Card.Image
-                    src={internalFeedItem.image_url}
-                    alt={internalFeedItem.title}
-                />
-            ) : <Card.ImagePlaceholder className={clsx({'hue-rotate-0': hueRotationIndex === 0, 'hue-rotate-30': hueRotationIndex === 1, 'hue-rotate-60': hueRotationIndex === 2, 'hue-rotate-15': hueRotationIndex === 3, 'hue-rotate-180': hueRotationIndex === 4, 'hue-rotate-90': hueRotationIndex === 5})}/>}
+            {internalFeedItem.has_image
+                ? (
+                    <Card.Image
+                        src={internalFeedItem.image_url}
+                        alt={internalFeedItem.title}
+                    />
+                )
+                : (
+                    <Card.ImagePlaceholder
+                        className={clsx({
+                            'hue-rotate-0': hueRotationIndex === 0,
+                            'hue-rotate-30': hueRotationIndex === 1,
+                            'hue-rotate-60': hueRotationIndex === 2,
+                            'hue-rotate-15': hueRotationIndex === 3,
+                            'hue-rotate-180': hueRotationIndex === 4,
+                            'hue-rotate-90': hueRotationIndex === 5,
+                        })}
+                    />
+                )}
 
             <Card.Body className="grow flex flex-col">
                 <div className="grow">
@@ -52,14 +65,16 @@ export default function FeedItemCard({hueRotationIndex, feedItem}) {
                     </Card.HeaderLink>
 
                     <div className="flex items-center py-2">
-                        {internalFeedItem.feed.favicon_url ? (
-                            <img
-                                loading="lazy"
-                                src={internalFeedItem.feed.favicon_url}
-                                alt={internalFeedItem.feed.name}
-                                className="w-4 h-4 mr-2"
-                            />
-                        ) : <PhotoSolidIcon className="w-4 h-4 mr-2 text-muted"/>}
+                        {internalFeedItem.feed.favicon_url
+                            ? (
+                                <img
+                                    loading="lazy"
+                                    src={internalFeedItem.feed.favicon_url}
+                                    alt={internalFeedItem.feed.name}
+                                    className="w-4 h-4 mr-2"
+                                />
+                            )
+                            : <PhotoSolidIcon className="w-4 h-4 mr-2 text-muted"/>}
 
                         <div className="text-sm text-muted">
                             {internalFeedItem.feed.name}

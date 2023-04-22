@@ -5,7 +5,7 @@
     },
     "extends": [
         "plugin:react/recommended",
-        "airbnb"
+        "standard"
     ],
     "overrides": [],
     "parserOptions": {
@@ -15,20 +15,19 @@
     "plugins": [
         "react"
     ],
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    },
     "rules": {
         "indent": ["error", 4],
-        "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
         "object-curly-spacing": ["error", "never"],
         "react/react-in-jsx-scope": "off",
-        "react/jsx-props-no-spreading": "off",
-        "react/jsx-tag-spacing": ["error", {"beforeSelfClosing": "never"}],
-        "react/jsx-indent": ["error", 4],
-        "react/jsx-indent-props": ["error", 4],
-        "import/no-unresolved": "off",
-        "import/extensions": "off",
         "no-undef": "off",
         "react/prop-types": "off",
-        "react/destructuring-assignment": "off",
-        "object-curly-newline": ["error", { "multiline": true }]
+        "semi": ["error", "always"],
+        "space-before-function-paren": ["error", {"anonymous": "always", "named": "never", "asyncArrow": "always"}],
+        "comma-dangle": ["error", {"arrays": "always-multiline", "objects": "always-multiline", "imports": "never", "exports": "always-multiline", "functions": "never"}]
     }
 }

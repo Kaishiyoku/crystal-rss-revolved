@@ -39,30 +39,36 @@ export default function Dashboard(props) {
                     <FeedFilterDropdown selectedFeed={props.selectedFeed} feeds={props.unreadFeeds}/>
 
                     {totalNumberOfFeedItems > 0 && (
-                        <SecondaryButton confirm onClick={markAllAsRead} className="sm:ml-1 mt-1 sm:mt-0"
-                                         hasMobileFullSize>
+                        <SecondaryButton
+                            confirm
+                            onClick={markAllAsRead}
+                            className="sm:ml-1 mt-1 sm:mt-0"
+                            hasMobileFullSize
+                        >
                             {t('Mark all as read')}
                         </SecondaryButton>
                     )}
                 </Actions>
 
-                {allFeedItems.length > 0 ? (
-                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-16 sm:gap-y-4">
-                        {allFeedItems.map((feedItem, index) => (
-                            <FeedItemCard
-                                key={feedItem.id}
-                                hueRotationIndex={index % 6}
-                                feedItem={feedItem}
-                            />
-                        ))}
-                    </div>
-                ) : (
-                    <EmptyState
-                        icon={NewspaperOutlineIcon}
-                        message={t('No unread articles.')}
-                        description={t('Come back later.')}
-                    />
-                )}
+                {allFeedItems.length > 0
+                    ? (
+                        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-16 sm:gap-y-4">
+                            {allFeedItems.map((feedItem, index) => (
+                                <FeedItemCard
+                                    key={feedItem.id}
+                                    hueRotationIndex={index % 6}
+                                    feedItem={feedItem}
+                                />
+                            ))}
+                        </div>
+                    )
+                    : (
+                        <EmptyState
+                            icon={NewspaperOutlineIcon}
+                            message={t('No unread articles.')}
+                            description={t('Come back later.')}
+                        />
+                    )}
 
                 <div className="pt-5 px-4 sm:px-0">
                     {props.feedItems.next_cursor && (

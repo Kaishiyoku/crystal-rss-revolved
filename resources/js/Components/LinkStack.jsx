@@ -5,7 +5,7 @@ const LinkStack = ({children}) => {
         <div className="divide-y divide-gray-200 dark:divide-gray-800">
             {children}
         </div>
-    )
+    );
 };
 
 const Item = ({href, children, className, ...props}) => {

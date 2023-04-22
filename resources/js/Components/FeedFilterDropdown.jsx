@@ -1,7 +1,6 @@
 import Dropdown from '@/Components/Dropdown';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import {SecondaryButton} from '@/Components/Button';
-import clsx from 'clsx';
 
 export default function FeedFilterDropdown({selectedFeed, feeds, ...props}) {
     const {t} = useLaravelReactI18n();

@@ -1,14 +1,14 @@
-import { useEffect } from 'react';
+import {useEffect} from 'react';
 import Checkbox from '@/Components/Checkbox';
 import GuestLayout from '@/Layouts/GuestLayout';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
-import { Head, Link, useForm } from '@inertiajs/react';
+import {Head, Link, useForm} from '@inertiajs/react';
 import {PrimaryButton} from '@/Components/Button';
 
-export default function Login({ status, canResetPassword }) {
-    const { data, setData, post, processing, errors, reset } = useForm({
+export default function Login({status, canResetPassword}) {
+    const {data, setData, post, processing, errors, reset} = useForm({
         email: '',
         password: '',
         remember: '',
@@ -32,13 +32,13 @@ export default function Login({ status, canResetPassword }) {
 
     return (
         <GuestLayout>
-            <Head title="Log in" />
+            <Head title="Log in"/>
 
             {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
 
             <form onSubmit={submit}>
                 <div>
-                    <InputLabel htmlFor="email" value="Email" />
+                    <InputLabel htmlFor="email" value="Email"/>
 
                     <TextInput
                         id="email"
@@ -51,11 +51,11 @@ export default function Login({ status, canResetPassword }) {
                         onChange={handleOnChange}
                     />
 
-                    <InputError message={errors.email} className="mt-2" />
+                    <InputError message={errors.email} className="mt-2"/>
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
+                    <InputLabel htmlFor="password" value="Password"/>
 
                     <TextInput
                         id="password"
@@ -67,12 +67,12 @@ export default function Login({ status, canResetPassword }) {
                         onChange={handleOnChange}
                     />
 
-                    <InputError message={errors.password} className="mt-2" />
+                    <InputError message={errors.password} className="mt-2"/>
                 </div>
 
                 <div className="block mt-4">
                     <label className="flex items-center">
-                        <Checkbox name="remember" value={data.remember} onChange={handleOnChange} />
+                        <Checkbox name="remember" value={data.remember} onChange={handleOnChange}/>
                         <span className="ml-2 text-sm text-gray-600 dark:text-gray-400">Remember me</span>
                     </label>
                 </div>

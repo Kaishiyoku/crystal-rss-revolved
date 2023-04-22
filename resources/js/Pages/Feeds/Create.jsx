@@ -20,25 +20,27 @@ export default function Create(props) {
         >
             <Head title={t('Add feed')}/>
 
-            {props.categories.length > 0 ? (
-                <Form
-                    method="post"
-                    action={route('feeds.store')}
-                    feed={props.feed}
-                    categories={props.categories}
-                />
-            ) : (
-                <EmptyState
-                    icon={ExclamationCircleOutlineIcon}
-                    message={t('Please create a category first.')}
-                    description={t('There have to be at least one category before you can create a feed.')}
-                >
-                    <PrimaryButton as={Link} href={route('categories.create')} className="mt-6">
-                        <PlusOutlineIcon className="w-4 h-4 mr-2"/>
-                        <div>{t('New category')}</div>
-                    </PrimaryButton>
-                </EmptyState>
-            )}
+            {props.categories.length > 0
+                ? (
+                    <Form
+                        method="post"
+                        action={route('feeds.store')}
+                        feed={props.feed}
+                        categories={props.categories}
+                    />
+                )
+                : (
+                    <EmptyState
+                        icon={ExclamationCircleOutlineIcon}
+                        message={t('Please create a category first.')}
+                        description={t('There have to be at least one category before you can create a feed.')}
+                    >
+                        <PrimaryButton as={Link} href={route('categories.create')} className="mt-6">
+                            <PlusOutlineIcon className="w-4 h-4 mr-2"/>
+                            <div>{t('New category')}</div>
+                        </PrimaryButton>
+                    </EmptyState>
+                )}
         </AuthenticatedLayout>
     );
 }

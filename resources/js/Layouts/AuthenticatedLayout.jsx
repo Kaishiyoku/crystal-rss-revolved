@@ -67,8 +67,10 @@ export default function Authenticated({auth, header, hasMobileSpacing = false, c
                                     </Dropdown.Trigger>
 
                                     <Dropdown.Content>
-                                        <Dropdown.Link href={route('profile.edit')}
-                                                       active={route().current('profile.edit')}>
+                                        <Dropdown.Link
+                                            href={route('profile.edit')}
+                                            active={route().current('profile.edit')}
+                                        >
                                             {t('Profile')}
                                         </Dropdown.Link>
                                         {!!auth.user.is_admin && (

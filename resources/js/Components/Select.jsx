@@ -1,8 +1,8 @@
-import { forwardRef, useEffect, useRef } from 'react';
+import {forwardRef, useEffect, useRef} from 'react';
 import clsx from 'clsx';
 
-export default forwardRef(function Select({ options = [], className = '', isFocused = false, ...props }, ref) {
-    const input = ref ? ref : useRef();
+export default forwardRef(function Select({options = [], className = '', isFocused = false, ...props}, ref) {
+    const input = ref || useRef();
 
     useEffect(() => {
         if (isFocused) {

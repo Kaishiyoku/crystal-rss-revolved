@@ -12,9 +12,7 @@ export default function UpdatePasswordForm({className}) {
     const passwordInput = useRef();
     const currentPasswordInput = useRef();
 
-    const {
-        data, setData, errors, put, reset, processing, recentlySuccessful,
-    } = useForm({
+    const {data, setData, errors, put, reset, processing, recentlySuccessful} = useForm({
         current_password: '',
         password: '',
         password_confirmation: '',

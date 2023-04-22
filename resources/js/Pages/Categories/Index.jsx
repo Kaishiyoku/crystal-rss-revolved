@@ -33,31 +33,33 @@ export default function Index({categories, ...props}) {
                 </Link>
             </Actions>
 
-            {categories.length > 0 ? (
-                <LinkStack>
-                    {categories.map((category) => (
-                        <LinkStack.Item
-                            key={category.id}
-                            href={route('categories.edit', category)}
-                            className="flex justify-between"
-                        >
-                            <div>
-                                {category.name}
-                            </div>
+            {categories.length > 0
+                ? (
+                    <LinkStack>
+                        {categories.map((category) => (
+                            <LinkStack.Item
+                                key={category.id}
+                                href={route('categories.edit', category)}
+                                className="flex justify-between"
+                            >
+                                <div>
+                                    {category.name}
+                                </div>
 
-                            <div className="text-muted">
-                                {tChoice('category.feeds_count', category.feeds_count)}
-                            </div>
-                        </LinkStack.Item>
-                    ))}
-                </LinkStack>
-            ) : (
-                <EmptyState
-                    icon={TagOutlineIcon}
-                    message={t('No categories.')}
-                    description={t('Get started by creating a new category.')}
-                />
-            )}
+                                <div className="text-muted">
+                                    {tChoice('category.feeds_count', category.feeds_count)}
+                                </div>
+                            </LinkStack.Item>
+                        ))}
+                    </LinkStack>
+                )
+                : (
+                    <EmptyState
+                        icon={TagOutlineIcon}
+                        message={t('No categories.')}
+                        description={t('Get started by creating a new category.')}
+                    />
+                )}
         </AuthenticatedLayout>
     );
 }

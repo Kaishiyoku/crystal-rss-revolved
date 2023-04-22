@@ -14,7 +14,7 @@ export default function Form({method, action, feed, categories}) {
     const [searchUrl, setSearchUrl] = useState('');
     const [discoveredFeedUrls, setDiscoveredFeedUrls] = useState([]);
 
-    const {data, setData, post, put, errors, processing, recentlySuccessful} = useForm({
+    const {data, setData, post, put, errors, processing} = useForm({
         category_id: feed.category_id ?? categories[0].value,
         feed_url: feed.feed_url ?? '',
         site_url: feed.site_url ?? '',
@@ -38,11 +38,11 @@ export default function Form({method, action, feed, categories}) {
     };
 
     const selectDiscoveredFeedUrl = (feedUrl) => () => {
-        setIsDiscoverFeedProcessing(true)
+        setIsDiscoverFeedProcessing(true);
 
         axios.post(route('discover-feed'), {feed_url: feedUrl})
             .then((response) => {
-                setData({...data, ...response.data})
+                setData({...data, ...response.data});
 
                 setSearchUrl('');
                 setDiscoveredFeedUrls([]);
@@ -85,9 +85,12 @@ export default function Form({method, action, feed, categories}) {
             {discoveredFeedUrls.length > 0 && (
                 <Card className="mt-4 divide-y dark:divide-gray-700">
                     {discoveredFeedUrls.map((discoveredFeedUrl) => (
-                        <button key={discoveredFeedUrl} type="button"
-                                className="block w-full text-left px-4 py-2 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600 first:rounded-t last:rounded-b transition"
-                                onClick={selectDiscoveredFeedUrl(discoveredFeedUrl)}>
+                        <button
+                            key={discoveredFeedUrl}
+                            type="button"
+                            className="block w-full text-left px-4 py-2 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600 first:rounded-t last:rounded-b transition"
+                            onClick={selectDiscoveredFeedUrl(discoveredFeedUrl)}
+                        >
                             {discoveredFeedUrl}
                         </button>
                     ))}

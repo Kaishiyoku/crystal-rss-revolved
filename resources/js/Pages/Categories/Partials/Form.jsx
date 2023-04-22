@@ -7,9 +7,7 @@ import {PrimaryButton} from '@/Components/Button';
 
 export default function Form({method, action, category}) {
     const {t} = useLaravelReactI18n();
-    const {data, setData, post, put, errors, processing, recentlySuccessful} = useForm({
-        name: category.name ?? '',
-    });
+    const {data, setData, post, put, errors, processing} = useForm({name: category.name ?? ''});
 
     const submit = (e) => {
         e.preventDefault();

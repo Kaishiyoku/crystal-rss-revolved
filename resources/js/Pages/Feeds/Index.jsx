@@ -35,43 +35,45 @@ export default function Index({feeds, ...props}) {
                 </Link>
             </Actions>
 
-            {feeds.length > 0 ? (
-                <LinkStack>
-                    {feeds.map((feed) => (
-                        <LinkStack.Item
-                            key={feed.id}
-                            href={route('feeds.edit', feed)}
-                            className="block sm:flex justify-between"
-                        >
-                            <div>
+            {feeds.length > 0
+                ? (
+                    <LinkStack>
+                        {feeds.map((feed) => (
+                            <LinkStack.Item
+                                key={feed.id}
+                                href={route('feeds.edit', feed)}
+                                className="block sm:flex justify-between"
+                            >
                                 <div>
-                                    {feed.name}
-                                </div>
-
-                                {feed.last_failed_at && (
-                                    <div className="text-sm text-pink-500">
-                                        {t('feed.last_failed_at', {date: formatDateTime(feed.last_failed_at)})}
+                                    <div>
+                                        {feed.name}
                                     </div>
-                                )}
+
+                                    {feed.last_failed_at && (
+                                        <div className="text-sm text-pink-500">
+                                            {t('feed.last_failed_at', {date: formatDateTime(feed.last_failed_at)})}
+                                        </div>
+                                    )}
+
+                                    <div className="text-sm sm:text-base text-muted">
+                                        {feed.category.name}
+                                    </div>
+                                </div>
 
                                 <div className="text-sm sm:text-base text-muted">
-                                    {feed.category.name}
+                                    {tChoice('feed.feed_items_count', feed.feed_items_count)}
                                 </div>
-                            </div>
-
-                            <div className="text-sm sm:text-base text-muted">
-                                {tChoice('feed.feed_items_count', feed.feed_items_count)}
-                            </div>
-                        </LinkStack.Item>
-                    ))}
-                </LinkStack>
-            ) : (
-                <EmptyState
-                    icon={NewspaperOutlineIcon}
-                    message={t('No feeds.')}
-                    description={t('Get started by creating a new feed.')}
-                />
-            )}
+                            </LinkStack.Item>
+                        ))}
+                    </LinkStack>
+                )
+                : (
+                    <EmptyState
+                        icon={NewspaperOutlineIcon}
+                        message={t('No feeds.')}
+                        description={t('Get started by creating a new feed.')}
+                    />
+                )}
         </AuthenticatedLayout>
     );
 }
