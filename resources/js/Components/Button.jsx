@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import noop from '@/Utils/noop';
 import {useState} from 'react';
-import ConfirmModal from '@/Components/ConfirmModal';
+import ConfirmModal from '@/Components/Modal/ConfirmModal';
 
 const Button = ({as: Component = 'button', variant, type = 'button', hasMobileFullSize = false, className = '', confirm = false, disabled, children, onClick = noop, ...props}) => {
     const [showConfirmModal, setShowConfirmModal] = useState(false);

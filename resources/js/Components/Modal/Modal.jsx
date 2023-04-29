@@ -1,7 +1,7 @@
 import {Fragment, useEffect} from 'react';
 import {Dialog, Transition} from '@headlessui/react';
 
-export default function Modal({children, show = false, maxWidth = '2xl', closeable = true, onClose = () => {}}) {
+const Modal = ({children, show = false, maxWidth = '2xl', closeable = true, onClose = () => {}}) => {
     useEffect(() => {
         document.body.style.overflowY = show ? 'hidden' : null;
     }, [show]);
@@ -50,7 +50,7 @@ export default function Modal({children, show = false, maxWidth = '2xl', closeab
                     leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                 >
                     <Dialog.Panel
-                        className={`mb-6 bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-xl transform transition-all w-full sm:mx-auto ${maxWidthClass}`}
+                        className={`mb-4 bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-xl transform transition-all w-full sm:mx-auto ${maxWidthClass}`}
                     >
                         {children}
                     </Dialog.Panel>
@@ -58,4 +58,37 @@ export default function Modal({children, show = false, maxWidth = '2xl', closeab
             </Dialog>
         </Transition>
     );
-}
+};
+
+const ModalHeader = ({children}) => {
+    return (
+        <div className="px-4 pt-4">
+            <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">
+                {children}
+            </h2>
+        </div>
+    );
+};
+
+const ModalBody = ({children}) => {
+    return (
+        <div className="p-4">
+            {children}
+        </div>
+    );
+};
+
+const ModalFooter = ({children}) => {
+    return (
+        <div className="mt-4 px-4 pb-4 flex justify-end">
+            {children}
+        </div>
+    );
+};
+
+export {
+    Modal,
+    ModalHeader,
+    ModalBody,
+    ModalFooter,
+};
