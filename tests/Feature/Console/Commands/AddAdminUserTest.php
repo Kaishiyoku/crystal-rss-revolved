@@ -16,7 +16,6 @@ class AddAdminUserTest extends TestCase
     {
         Event::fake();
 
-
         $expectedName = 'Test';
         $expectedEmail = 'test@test.dev';
 
