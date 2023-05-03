@@ -62,4 +62,12 @@ class EmailVerificationTest extends TestCase
 
         $this->assertFalse($user->fresh()->hasVerifiedEmail());
     }
+
+    public function test_email_has_already_been_verified(): void
+    {
+        $response = $this->actingAs(User::factory()->create())->get('/verify-email');
+
+        $response->assertStatus(302);
+        $response->assertRedirect(RouteServiceProvider::HOME);
+    }
 }
