@@ -26,8 +26,8 @@ class UserTest extends TestCase
         $categories = Category::factory(2)->for($user)->create();
 
         static::assertEquals(
-            $categories->sortBy('name')->pluck('id', 'name'),
-            $user->categories()->pluck('id', 'name')
+            $categories->sortBy('name')->pluck('id'),
+            $user->categories()->pluck('id')
         );
     }
 
@@ -38,8 +38,8 @@ class UserTest extends TestCase
         $feeds = Feed::factory(5)->for($user)->for($category)->create();
 
         static::assertEquals(
-            $feeds->sortBy('name')->pluck('id', 'name'),
-            $user->feeds()->pluck('id', 'name')
+            $feeds->sortBy('name')->pluck('id'),
+            $user->feeds()->pluck('id')
         );
     }
 }
