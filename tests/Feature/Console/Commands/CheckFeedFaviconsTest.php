@@ -5,6 +5,7 @@ namespace Tests\Feature\Console\Commands;
 use App\Console\Commands\CheckFeedFavicons;
 use App\Models\Feed;
 use Illuminate\Console\Command;
+use Kaishiyoku\HeraRssCrawler\HeraRssCrawler;
 use Tests\TestCase;
 
 class CheckFeedFaviconsTest extends TestCase
@@ -12,20 +13,23 @@ class CheckFeedFaviconsTest extends TestCase
     public function test_update_feed_favicon_urls(): void
     {
         $invalidFaviconUrl = 'filled_but_will_change';
-        $validFaviconUrl = 'https://petapixel.com/wp-content/themes/petapixel-2017/assets/prod/img/favicon.ico';
+        $validFaviconUrl = 'https://laravel-news.com/apple-touch-icon.png';
 
         $feedWithoutFavicon = Feed::factory()->create([
-            'site_url' => 'https://petapixel.com/',
+            'site_url' => 'https://laravel-news.com/',
             'favicon_url' => null,
         ]);
         $feedWithChangingFavicon = Feed::factory()->create([
-            'site_url' => 'https://petapixel.com/',
+            'site_url' => 'https://laravel-news.com/',
             'favicon_url' => $invalidFaviconUrl,
         ]);
         $feedWithoutChangingFavicon = Feed::factory()->create([
-            'site_url' => 'https://petapixel.com/',
+            'site_url' => 'https://laravel-news.com/',
             'favicon_url' => $validFaviconUrl,
         ]);
+
+        $heraRssCrawlerMock = $this->partialMock(HeraRssCrawler::class);
+        $heraRssCrawlerMock->shouldReceive('discoverFavicon')->times(3)->andReturn($validFaviconUrl);
 
         $this->artisan(CheckFeedFavicons::class)
             ->assertExitCode(Command::SUCCESS);

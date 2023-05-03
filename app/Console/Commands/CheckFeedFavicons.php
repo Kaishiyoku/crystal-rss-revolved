@@ -28,14 +28,16 @@ class CheckFeedFavicons extends Command
 
     private HeraRssCrawler $heraRssCrawler;
 
-    public function __construct()
+    public function __construct(HeraRssCrawler $heraRssCrawler)
     {
         parent::__construct();
 
         $this->logger = Log::channel('feed_updater');
-        $this->heraRssCrawler = new HeraRssCrawler();
-        $this->heraRssCrawler->setLogger($this->logger);
-        $this->heraRssCrawler->setRetryCount(config('app.rss_crawler_retry_count'));
+
+        $heraRssCrawler->setLogger($this->logger);
+        $heraRssCrawler->setRetryCount(config('app.rss_crawler_retry_count'));
+
+        $this->heraRssCrawler = $heraRssCrawler;
     }
 
     /**
