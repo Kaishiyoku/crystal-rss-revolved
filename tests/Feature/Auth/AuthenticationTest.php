@@ -4,7 +4,9 @@ namespace Tests\Feature\Auth;
 
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
 class AuthenticationTest extends TestCase
@@ -50,5 +52,35 @@ class AuthenticationTest extends TestCase
         $this->post('/logout');
 
         $this->assertGuest();
+    }
+
+    public function test_user_exceeds_rate_limiting(): void
+    {
+        Event::fake();
+
+        $user = User::factory()->create();
+
+        collect(range(0, 5))->each(function (int $index) use ($user) {
+            $response = $this->post('/login', [
+                'email' => $user->email,
+                'password' => 'wrong-password',
+            ]);
+
+            if ($index === 5) {
+                Event::assertDispatched(Lockout::class);
+                $response->assertSessionHasErrors(['email']);
+            }
+        });
+
+        $this->assertGuest();
+    }
+
+    public function test_redirect_if_authenticated(): void
+    {
+        $this->actingAs(User::factory()->create());
+
+        $response = $this->get('/register');
+
+        $response->assertRedirect(RouteServiceProvider::HOME);
     }
 }
