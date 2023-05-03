@@ -1175,16 +1175,16 @@
         },
         {
             "name": "kaishiyoku/hera-rss-crawler",
-            "version": "5.1.6",
+            "version": "5.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Kaishiyoku/hera-rss-crawler.git",
-                "reference": "2ba9e5729ecbd7c17d26ab642aeb9c428f27661c"
+                "reference": "5d7c6c89c82996ea72761429332ac62f1ddef3c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Kaishiyoku/hera-rss-crawler/zipball/2ba9e5729ecbd7c17d26ab642aeb9c428f27661c",
-                "reference": "2ba9e5729ecbd7c17d26ab642aeb9c428f27661c",
+                "url": "https://api.github.com/repos/Kaishiyoku/hera-rss-crawler/zipball/5d7c6c89c82996ea72761429332ac62f1ddef3c2",
+                "reference": "5d7c6c89c82996ea72761429332ac62f1ddef3c2",
                 "shasum": ""
             },
             "require": {
@@ -1240,7 +1240,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Kaishiyoku/hera-rss-crawler/issues",
-                "source": "https://github.com/Kaishiyoku/hera-rss-crawler/tree/5.1.6"
+                "source": "https://github.com/Kaishiyoku/hera-rss-crawler/tree/5.1.7"
             },
             "funding": [
                 {
@@ -1248,7 +1248,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-05-02T09:31:11+00:00"
+            "time": "2023-05-03T10:12:45+00:00"
         },
         {
             "name": "laminas/laminas-escaper",
@@ -8271,16 +8271,16 @@
         },
         {
             "name": "laravel-lang/lang",
-            "version": "12.21.4",
+            "version": "12.21.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Lang/lang.git",
-                "reference": "f270a9de8ae3f865185d3fba0fb12b7764869a4a"
+                "reference": "673d03bbcb4b200d243a86a0f3383d4addfe3563"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Lang/lang/zipball/f270a9de8ae3f865185d3fba0fb12b7764869a4a",
-                "reference": "f270a9de8ae3f865185d3fba0fb12b7764869a4a",
+                "url": "https://api.github.com/repos/Laravel-Lang/lang/zipball/673d03bbcb4b200d243a86a0f3383d4addfe3563",
+                "reference": "673d03bbcb4b200d243a86a0f3383d4addfe3563",
                 "shasum": ""
             },
             "require": {
@@ -8333,7 +8333,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2023-04-24T08:48:59+00:00"
+            "time": "2023-05-03T07:01:07+00:00"
         },
         {
             "name": "laravel-lang/publisher",
