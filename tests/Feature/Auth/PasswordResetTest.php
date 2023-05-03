@@ -89,4 +89,14 @@ class PasswordResetTest extends TestCase
         Event::assertNotDispatched(PasswordReset::class);
         $response->assertSessionHasErrors(['email']);
     }
+
+    public function test_reset_password_link_cannot_be_requested_for_nonexisting_user(): void
+    {
+        Notification::fake();
+
+        $response = $this->post('/forgot-password', ['email' => 'nonexistent-email@test.dev']);
+
+        Notification::assertNothingSent();
+        $response->assertStatus(302);
+    }
 }
