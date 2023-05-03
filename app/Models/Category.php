@@ -52,6 +52,6 @@ class Category extends Model
 
     public function feeds(): HasMany
     {
-        return $this->hasMany(Feed::class);
+        return $this->hasMany(Feed::class)->orderBy('name');
     }
 }
