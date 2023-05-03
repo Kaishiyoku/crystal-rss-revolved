@@ -5,11 +5,14 @@ namespace Tests\Feature\Console\Commands;
 use App\Console\Commands\CheckFeedFavicons;
 use App\Models\Feed;
 use Illuminate\Console\Command;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Kaishiyoku\HeraRssCrawler\HeraRssCrawler;
 use Tests\TestCase;
 
 class CheckFeedFaviconsTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function test_update_feed_favicon_urls(): void
     {
         $invalidFaviconUrl = 'filled_but_will_change';

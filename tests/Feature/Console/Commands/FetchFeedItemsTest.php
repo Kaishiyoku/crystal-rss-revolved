@@ -6,6 +6,7 @@ use App\Console\Commands\FetchFeedItems;
 use App\Models\Feed;
 use App\Models\User;
 use Illuminate\Console\Command;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Collection;
 use Kaishiyoku\HeraRssCrawler\HeraRssCrawler;
 use Kaishiyoku\HeraRssCrawler\Models\Rss\Feed as RssFeed;
@@ -16,6 +17,8 @@ use Tests\TestCase;
 
 class FetchFeedItemsTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function test_fetch_feed_items_only_for_verified_users(): void
     {
         $expectedNumberOfFeedItems = 2;

@@ -6,12 +6,15 @@ use App\Console\Commands\AddAdminUser;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Console\Command;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Validation\ValidationException;
 use Tests\TestCase;
 
 class AddAdminUserTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function test_admin_user_creation(): void
     {
         Event::fake();
