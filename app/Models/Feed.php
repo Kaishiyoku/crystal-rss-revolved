@@ -73,6 +73,6 @@ class Feed extends Model
 
     public function feedItems(): HasMany
     {
-        return $this->hasMany(FeedItem::class);
+        return $this->hasMany(FeedItem::class)->orderByDesc('posted_at');
     }
 }
