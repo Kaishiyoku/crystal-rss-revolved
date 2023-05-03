@@ -106,4 +106,22 @@ class EmailVerificationTest extends TestCase
         $response->assertStatus(302);
         $response->assertRedirect(RouteServiceProvider::HOME);
     }
+
+    public function test_email_cannot_be_verified_because_it_already_is(): void
+    {
+        $user = User::factory()->create();
+
+        Event::fake();
+
+        $verificationUrl = URL::temporarySignedRoute(
+            'verification.verify',
+            now()->addMinutes(60),
+            ['id' => $user->id, 'hash' => sha1($user->email)]
+        );
+
+        $response = $this->actingAs($user)->get($verificationUrl);
+
+        Event::assertNotDispatched(Verified::class);
+        $response->assertRedirect(RouteServiceProvider::HOME.'?verified=1');
+    }
 }
