@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\MassPrunable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Str;
@@ -46,7 +47,7 @@ use Illuminate\Support\Str;
  */
 class FeedItem extends Model
 {
-    use HasFactory;
+    use HasFactory, MassPrunable;
 
     /**
      * The attributes that are mass assignable.
@@ -111,11 +112,6 @@ class FeedItem extends Model
         );
     }
 
-    public function feed(): BelongsTo
-    {
-        return $this->belongsTo(Feed::class);
-    }
-
     /**
      * Scope a query to only include unread feed items.
      */
@@ -130,5 +126,10 @@ class FeedItem extends Model
     public function scopeOfFeed(Builder $query, ?int $feedId): void
     {
         $query->when($feedId, fn($query) => $query->where('feed_id', $feedId));
+    }
+
+    public function feed(): BelongsTo
+    {
+        return $this->belongsTo(Feed::class);
     }
 }
