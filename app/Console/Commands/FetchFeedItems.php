@@ -92,10 +92,6 @@ class FetchFeedItems extends Command
         try {
             $rssFeed = $this->heraRssCrawler->parseFeed($feed->feed_url);
 
-            if (!$rssFeed) {
-                return;
-            }
-
             $rssFeed->getFeedItems()->each(function (RssFeedItem $rssFeedItem) use ($feed) {
                 $this->storeRssFeedItem($feed, $rssFeedItem);
             });
