@@ -6,12 +6,13 @@ use App\Models\Feed;
 use App\Models\FeedItem;
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Config;
 use Tests\TestCase;
 
 class FeedItemTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, WithFaker;
 
     public function test_feed_item_belongs_to_feed(): void
     {
@@ -55,8 +56,8 @@ class FeedItemTest extends TestCase
     {
         $feedItemWithImage = FeedItem::factory()
             ->state([
-                'image_url' => fake()->imageUrl(),
-                'image_mimetype' => fake()->randomElement(['image/png', 'image/jpeg']),
+                'image_url' => $this->faker()->imageUrl(),
+                'image_mimetype' => $this->faker()->randomElement(['image/png', 'image/jpeg']),
             ])
             ->create();
 
@@ -69,7 +70,7 @@ class FeedItemTest extends TestCase
 
         $feedItemWithInvalidImageMimetype = FeedItem::factory()
             ->state([
-                'image_url' => fake()->imageUrl(),
+                'image_url' => $this->faker()->imageUrl(),
                 'image_mimetype' => 'text/plain',
             ])
             ->create();
