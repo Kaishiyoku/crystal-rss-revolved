@@ -4,6 +4,7 @@ namespace Tests\Feature\Models;
 
 use App\Models\Feed;
 use App\Models\FeedItem;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -98,6 +99,8 @@ class FeedItemTest extends TestCase
 
     public function test_prunable(): void
     {
+        $this->freezeTime();
+
         $prunableFeedItemIds = FeedItem::factory(10)->state(['read_at' => now()->subMonths(5)])->create()->pluck('id');
         $notPrunableFeedItemIds = FeedItem::factory(10)->state(['read_at' => now()->subMonths(5)->addSecond()])->create()->pluck('id');
 
