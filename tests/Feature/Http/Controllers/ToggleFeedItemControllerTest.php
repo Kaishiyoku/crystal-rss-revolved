@@ -1,6 +1,6 @@
 <?php
 
-namespace Http\Controllers;
+namespace Tests\Feature\Http\Controllers;
 
 use App\Models\Feed;
 use App\Models\FeedItem;
