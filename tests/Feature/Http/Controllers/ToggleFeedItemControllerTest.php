@@ -37,7 +37,7 @@ class ToggleFeedItemControllerTest extends TestCase
 
         $this->put(route('toggle-feed-item', $feedItem))
             ->assertOk()
-            ->assertJsonPath(null);
+            ->assertJsonPath('read_at', null);
     }
 
     public function test_cannot_toggle_feed_item_of_another_user(): void
