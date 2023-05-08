@@ -26,6 +26,7 @@ use Illuminate\Support\Str;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Feed $feed
+ * @method static \Database\Factories\FeedItemFactory factory($count = null, $state = [])
  * @method static Builder|FeedItem newModelQuery()
  * @method static Builder|FeedItem newQuery()
  * @method static Builder|FeedItem ofFeed(?int $feedId)
