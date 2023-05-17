@@ -17,10 +17,10 @@ createInertiaApp({
         const root = createRoot(el);
 
         const AppWithLoadedTranslations = () => {
-            const {getActiveLanguage, isLoaded} = useLaravelReactI18n();
+            const {loading} = useLaravelReactI18n();
 
             // wait until all translations are loaded
-            if (!isLoaded(getActiveLanguage())) {
+            if (loading) {
                 return null;
             }
 
@@ -29,17 +29,9 @@ createInertiaApp({
 
         root.render(
             <LaravelReactI18nProvider
-                lang={browserLang}
-                fallbackLang="en"
-                resolve={async (lang) => {
-                    const langs = import.meta.glob('../../lang/*.json');
-
-                    const fn = langs[`../../lang/${lang}.json`];
-
-                    if (typeof fn === 'function') {
-                        return await fn();
-                    }
-                }}
+                locale={browserLang}
+                fallbackLocale="en"
+                files={import.meta.glob('/lang/*.json', {eager: true})}
             >
                 <AppWithLoadedTranslations {...props}/>
             </LaravelReactI18nProvider>

@@ -11,7 +11,7 @@ const localizedDateTimeFormats = {
  * @returns {string}
  */
 export default function formatDateTime(dateStr) {
-    const {getActiveLanguage} = useLaravelReactI18n();
+    const {currentLocale} = useLaravelReactI18n();
 
-    return format(parseISO(dateStr), localizedDateTimeFormats[getActiveLanguage()]);
+    return format(parseISO(dateStr), localizedDateTimeFormats[currentLocale()]);
 }
