@@ -4,9 +4,9 @@ import '../css/app.css';
 import {createRoot} from 'react-dom/client';
 import {createInertiaApp} from '@inertiajs/react';
 import {resolvePageComponent} from 'laravel-vite-plugin/inertia-helpers';
-import {LaravelReactI18nProvider, useLaravelReactI18n} from 'laravel-react-i18n';
-
-const browserLang = navigator.language.substring(0, 2);
+import {LaravelReactI18nProvider} from 'laravel-react-i18n';
+import getBrowserLocale from '@/Utils/getBrowserLocale';
+import AppWithLoadedTranslations from '@/Components/AppWithLoadedTranslations';
 
 window.appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
 
@@ -14,26 +14,13 @@ createInertiaApp({
     title: (title) => `${title} - ${window.appName}`,
     resolve: (name) => resolvePageComponent(`./Pages/${name}.jsx`, import.meta.glob('./Pages/**/*.jsx')),
     setup({el, App, props}) {
-        const root = createRoot(el);
-
-        const AppWithLoadedTranslations = () => {
-            const {loading} = useLaravelReactI18n();
-
-            // wait until all translations are loaded
-            if (loading) {
-                return null;
-            }
-
-            return <App {...props}/>;
-        };
-
-        root.render(
+        createRoot(el).render(
             <LaravelReactI18nProvider
-                locale={browserLang}
+                locale={getBrowserLocale()}
                 fallbackLocale="en"
                 files={import.meta.glob('/lang/*.json', {eager: true})}
             >
-                <AppWithLoadedTranslations {...props}/>
+                <AppWithLoadedTranslations app={App} {...props}/>
             </LaravelReactI18nProvider>
         );
     },
