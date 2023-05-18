@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {Fragment, useEffect, useState} from 'react';
 import {Link} from '@inertiajs/react';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import clsx from 'clsx';
@@ -6,10 +6,15 @@ import ApplicationLogo from '@/Components/ApplicationLogo';
 import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
+import {Transition} from '@headlessui/react';
 
 export default function Authenticated({auth, header, hasMobileSpacing = false, children}) {
     const {t} = useLaravelReactI18n();
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
+
+    useEffect(() => {
+        document.body.style.overflowY = showingNavigationDropdown ? 'hidden' : null;
+    }, [showingNavigationDropdown]);
 
     return (
         <div className="min-h-screen text-gray-800 dark:text-gray-300 bg-gray-100 dark:bg-gray-900">
@@ -112,42 +117,54 @@ export default function Authenticated({auth, header, hasMobileSpacing = false, c
                     </div>
                 </div>
 
-                <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
-                    <div className="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
-                            Dashboard
-                        </ResponsiveNavLink>
-
-                        <ResponsiveNavLink href={route('categories.index')} active={route().current('categories.*')}>
-                            {t('Categories')}
-                        </ResponsiveNavLink>
-
-                        <ResponsiveNavLink href={route('feeds.index')} active={route().current('feeds.*')}>
-                            {t('Feeds')}
-                        </ResponsiveNavLink>
-                    </div>
-
-                    <div className="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
-                        <div className="px-4">
-                            <div className="font-medium text-base text-gray-800 dark:text-gray-200">
-                                {auth.user.name}
-                            </div>
-                            <div className="font-medium text-sm text-gray-500">{auth.user.email}</div>
-                        </div>
-
-                        <div className="mt-3 space-y-1">
-                            <ResponsiveNavLink href={route('profile.edit')}>Profile</ResponsiveNavLink>
-                            {!!auth.user.is_admin && (
-                                <ResponsiveNavLink href={route('telescope')} component="a">
-                                    {t('Telescope')}
+                <Transition show={showingNavigationDropdown} as={Fragment} leave="duration-200">
+                    <Transition.Child
+                        as={Fragment}
+                        enter="ease-out duration-300"
+                        enterFrom="opacity-0 -translate-y-8 sm:translate-y-0"
+                        enterTo="opacity-100 translate-y-0"
+                        leave="ease-in duration-200"
+                        leaveFrom="opacity-100 translate-y-0"
+                        leaveTo="opacity-0 -translate-y-8 sm:translate-y-0"
+                    >
+                        <div className="fixed overflow-y-auto scrollbar-y-sm pb-16 top-14 bg-gray-800 z-20 w-full h-full sm:hidden">
+                            <div className="pt-2 pb-3 space-y-1">
+                                <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
+                                    Dashboard
                                 </ResponsiveNavLink>
-                            )}
-                            <ResponsiveNavLink method="post" href={route('logout')} as="button">
-                                Log Out
-                            </ResponsiveNavLink>
+
+                                <ResponsiveNavLink href={route('categories.index')} active={route().current('categories.*')}>
+                                    {t('Categories')}
+                                </ResponsiveNavLink>
+
+                                <ResponsiveNavLink href={route('feeds.index')} active={route().current('feeds.*')}>
+                                    {t('Feeds')}
+                                </ResponsiveNavLink>
+                            </div>
+
+                            <div className="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
+                                <div className="px-4">
+                                    <div className="font-medium text-base text-gray-800 dark:text-gray-200">
+                                        {auth.user.name}
+                                    </div>
+                                    <div className="font-medium text-sm text-gray-500">{auth.user.email}</div>
+                                </div>
+
+                                <div className="mt-3 space-y-1">
+                                    <ResponsiveNavLink href={route('profile.edit')}>Profile</ResponsiveNavLink>
+                                    {!!auth.user.is_admin && (
+                                        <ResponsiveNavLink href={route('telescope')} component="a">
+                                            {t('Telescope')}
+                                        </ResponsiveNavLink>
+                                    )}
+                                    <ResponsiveNavLink method="post" href={route('logout')} as="button">
+                                        Log Out
+                                    </ResponsiveNavLink>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                    </Transition.Child>
+                </Transition>
             </nav>
 
             {(header) && (
