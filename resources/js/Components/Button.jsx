@@ -31,15 +31,15 @@ const Button = ({as: Component = 'button', variant, type = 'button', hasMobileFu
 
             <Component
                 className={clsx(
-                    'inline-flex items-center transition ease-in disabled:opacity-50 disabled:cursor-not-allowed',
+                    'inline-flex items-center transition ease-in disabled:opacity-50 disabled:saturate-50 disabled:cursor-not-allowed',
                     'text-sm tracking-widest font-semibold focus:ring-1',
-                    'rounded-md px-4 py-3 sm:py-2',
+                    'rounded-md px-5 sm:px-4 py-3.5 sm:py-2.5',
                     'focus:shadow-md dark:focus:shadow-black',
                     {
-                        'text-white bg-violet-500 hover:bg-violet-600 focus:ring-violet-600': variant === 'primary',
-                        'text-violet-700 hover:text-violet-800 border border-violet-300 bg-white hover:bg-violet-200 focus:ring-violet-600': variant === 'secondary',
-                        'text-white bg-pink-500 hover:bg-pink-600 focus:ring-pink-600': variant === 'danger',
-                        'text-violet-700 hover:bg-violet-200 focus:ring-violet-400': variant === 'plain',
+                        'text-violet-100 bg-violet-500 hover:bg-violet-600 disabled:hover:bg-violet-500 focus:ring-violet-600': variant === 'primary',
+                        'text-violet-700 dark:text-violet-500 hover:text-violet-800 dark:hover:text-violet-300 border border-violet-300 dark:border-violet-500 dark:hover:border-violet-800 hover:bg-violet-200 dark:hover:bg-violet-800 dark:disabled:text-violet-500 disabled:dark:hover:border-violet-500 disabled:hover:bg-transparent dark:disabled:hover:bg-transparent focus:ring-violet-600': variant === 'secondary',
+                        'text-pink-100 bg-pink-500 hover:bg-pink-600 disabled:hover:bg-pink-500 focus:ring-pink-600': variant === 'danger',
+                        'text-violet-700 dark:text-violet-500 dark:hover:text-violet-300 hover:bg-violet-200 dark:hover:bg-violet-800 dark:disabled:hover:text-violet-500 disabled:bg-transparent dark:disabled:bg-transparent focus:ring-violet-400 dark:focus:ring-violet-600': variant === 'plain',
                         'w-full sm:w-auto': hasMobileFullSize,
                     },
                     className
