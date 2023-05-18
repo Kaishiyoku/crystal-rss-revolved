@@ -74,7 +74,7 @@ export default function Form({method, action, feed, categories}) {
                 />
 
                 <SecondaryButton
-                    className="rounded-l-none bg-white"
+                    className="rounded-l-none bg-white dark:bg-gray-900"
                     onClick={() => discoverFeedUrls(searchUrl)}
                     disabled={isDiscoverFeedProcessing || searchUrl.length < 5}
                 >

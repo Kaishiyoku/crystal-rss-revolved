@@ -33,8 +33,8 @@ const Button = ({as: Component = 'button', variant, type = 'button', hasMobileFu
                 className={clsx(
                     'inline-flex items-center transition ease-in disabled:opacity-50 disabled:saturate-50 disabled:cursor-not-allowed',
                     'text-sm tracking-widest font-semibold focus:ring-1',
-                    'rounded-md px-5 sm:px-4 py-3.5 sm:py-2.5',
-                    'focus:shadow-md dark:focus:shadow-black',
+                    'rounded-full px-5 sm:px-4 py-3.5 sm:py-2.5',
+                    'focus:shadow-md dark:focus:shadow-black/20',
                     {
                         'text-violet-100 bg-violet-500 hover:bg-violet-600 disabled:hover:bg-violet-500 focus:ring-violet-600': variant === 'primary',
                         'text-violet-700 dark:text-violet-500 hover:text-violet-800 dark:hover:text-violet-300 border border-violet-300 dark:border-violet-500 dark:hover:border-violet-800 hover:bg-violet-200 dark:hover:bg-violet-800 dark:disabled:text-violet-500 disabled:dark:hover:border-violet-500 disabled:hover:bg-transparent dark:disabled:hover:bg-transparent focus:ring-violet-600': variant === 'secondary',

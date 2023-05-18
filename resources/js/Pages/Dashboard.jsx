@@ -42,7 +42,7 @@ export default function Dashboard(props) {
                         <SecondaryButton
                             confirm
                             onClick={markAllAsRead}
-                            className="sm:ml-1 mt-1 sm:mt-0"
+                            className="sm:ml-2 mt-1 sm:mt-0"
                             hasMobileFullSize
                         >
                             {t('Mark all as read')}

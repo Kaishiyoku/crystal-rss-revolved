@@ -63,10 +63,10 @@ const Content = ({align = 'right', width = 48, contentClasses = 'p-2 border dark
                 leaveTo="transform opacity-0 scale-95"
             >
                 <div
-                    className={`absolute z-50 mt-2 rounded-md shadow-lg dark:shadow-black/25 backdrop-blur-lg max-w-full sm:max-w-none ${alignmentClasses} ${widthClasses}`}
+                    className={`absolute z-50 mt-2 rounded-xl shadow-lg dark:shadow-black/25 backdrop-blur-lg max-w-full sm:max-w-none ${alignmentClasses} ${widthClasses}`}
                     onClick={() => setOpen(false)}
                 >
-                    <div className={clsx('max-h-[350px] overflow-y-auto scrollbar-y-sm rounded-md ring-1 ring-black ring-opacity-5', contentClasses)}>
+                    <div className={clsx('max-h-[350px] overflow-y-auto scrollbar-y-sm rounded-xl ring-1 ring-black ring-opacity-5', contentClasses)}>
                         <div>
                             {children}
                         </div>
@@ -84,7 +84,7 @@ const DropdownLink = ({component = Link, active = false, className = '', childre
         <Component
             {...props}
             className={clsx(
-                'block w-full text-left px-4 py-2 text-sm leading-5 border-l-4 rounded focus:outline-none transition duration-150 ease-in-out  border-transparent',
+                'block w-full text-left px-4 py-2 text-sm leading-5 border-l-4 rounded-md focus:outline-none transition duration-150 ease-in-out border-transparent',
                 {
                     'text-violet-100 bg-violet-500 hover:bg-violet-600 focus:bg-violet-500 focus:text-violet-50': active,
                     'text-gray-700 dark:text-gray-400 hover:bg-gray-400/25 dark:hover:bg-gray-700 focus:bg-gray-500/25 dark:focus:bg-gray-600 dark:focus:text-gray-300': !active,

@@ -4,7 +4,7 @@ import InputLabel from '@/Components/InputLabel';
 import {Modal} from '@/Components/Modal/Modal';
 import TextInput from '@/Components/TextInput';
 import {useForm} from '@inertiajs/react';
-import {DangerButton, SecondaryButton} from '@/Components/Button';
+import {DangerButton, PrimaryButton, SecondaryButton} from '@/Components/Button';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 
 export default function DeleteUserForm({className}) {
@@ -52,7 +52,7 @@ export default function DeleteUserForm({className}) {
                 </p>
             </header>
 
-            <DangerButton onClick={confirmUserDeletion}>{t('Delete Account')}</DangerButton>
+            <DangerButton onClick={confirmUserDeletion} confirm={false}>{t('Delete Account')}</DangerButton>
 
             <Modal show={confirmingUserDeletion} onClose={closeModal}>
                 <form onSubmit={deleteUser} className="p-6">
@@ -74,7 +74,7 @@ export default function DeleteUserForm({className}) {
                             ref={passwordInput}
                             value={data.password}
                             onChange={(e) => setData('password', e.target.value)}
-                            className="mt-1 block w-3/4"
+                            className="mt-1 block w-full"
                             isFocused
                             placeholder={t('Password')}
                         />
@@ -85,7 +85,7 @@ export default function DeleteUserForm({className}) {
                     <div className="mt-6 flex justify-end">
                         <SecondaryButton onClick={closeModal}>{t('Cancel')}</SecondaryButton>
 
-                        <DangerButton type="submit" className="ml-3" disabled={processing}>
+                        <DangerButton type="submit" className="ml-3" confirm={false} disabled={processing}>
                             {t('Delete Account')}
                         </DangerButton>
                     </div>
