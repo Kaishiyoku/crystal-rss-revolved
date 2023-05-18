@@ -1,6 +1,7 @@
 import {Head, Link} from '@inertiajs/react';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import ApplicationLogo from '@/Components/ApplicationLogo';
+import {PlainButton, PrimaryButton} from '@/Components/Button';
 
 export default function Welcome(props) {
     const {t} = useLaravelReactI18n();
@@ -69,15 +70,15 @@ export default function Welcome(props) {
 
                             <div className="mt-16 space-x-4 text-xl">
                                 {props.contactEmail && (
-                                    <a href={`mailto:${props.contactEmail}`} className="link-light">
+                                    <PlainButton as="a" href={`mailto:${props.contactEmail}`}>
                                         {t('Contact')}
-                                    </a>
+                                    </PlainButton>
                                 )}
 
                                 {props.githubUrl && (
-                                    <a href={props.githubUrl} className="link-light">
+                                    <PlainButton as="a" href={props.githubUrl}>
                                         {t('GitHub')}
-                                    </a>
+                                    </PlainButton>
                                 )}
                             </div>
                         </div>
