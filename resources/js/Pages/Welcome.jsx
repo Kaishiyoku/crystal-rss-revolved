@@ -70,15 +70,15 @@ export default function Welcome(props) {
 
                             <div className="mt-16 space-x-4 text-xl">
                                 {props.contactEmail && (
-                                    <PlainButton as="a" href={`mailto:${props.contactEmail}`}>
+                                    <a href={`mailto:${props.contactEmail}`} className="button-welcome">
                                         {t('Contact')}
-                                    </PlainButton>
+                                    </a>
                                 )}
 
                                 {props.githubUrl && (
-                                    <PlainButton as="a" href={props.githubUrl}>
+                                    <a href={props.githubUrl} className="button-welcome">
                                         {t('GitHub')}
-                                    </PlainButton>
+                                    </a>
                                 )}
                             </div>
                         </div>

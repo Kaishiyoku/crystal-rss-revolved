@@ -81,4 +81,11 @@ body {
     .link-light {
         @apply font-semibold text-violet-200 hover:text-white underline decoration-transparent hover:decoration-violet-300 focus:outline focus:outline-2 focus:rounded-sm focus:outline-gray-500 transition;
     }
+
+    /**
+     * Welcome Button
+     */
+    .button-welcome {
+        @apply inline-flex items-center transition ease-in disabled:opacity-50 disabled:cursor-not-allowed text-sm tracking-widest font-semibold focus:ring-1 rounded-md px-4 py-3 sm:py-2 focus:shadow-md dark:focus:shadow-black text-violet-200 border border-white/25 hover:bg-white/25 focus:ring-white/50;
+    }
 }
