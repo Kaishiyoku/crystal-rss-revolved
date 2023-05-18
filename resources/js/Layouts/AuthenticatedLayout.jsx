@@ -14,6 +14,7 @@ export default function Authenticated({auth, header, hasMobileSpacing = false, c
 
     useEffect(() => {
         document.body.style.overflowY = showingNavigationDropdown ? 'hidden' : null;
+        document.body.style.position = showingNavigationDropdown ? 'fixed' : null;
     }, [showingNavigationDropdown]);
 
     return (
