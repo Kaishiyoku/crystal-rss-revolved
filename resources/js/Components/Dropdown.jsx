@@ -31,7 +31,7 @@ const Trigger = ({className, children}) => {
     );
 };
 
-const Content = ({align = 'right', width = 48, contentClasses = 'p-2 border dark:border-gray-700 bg-white/50 dark:bg-gray-800/80', children}) => {
+const Content = ({align = 'right', width = 48, contentClasses = 'p-2 border dark:border-gray-700 bg-white/80 dark:bg-gray-800/80', children}) => {
     const {open, setOpen} = useContext(DropDownContext);
 
     let alignmentClasses = 'origin-top';
@@ -86,7 +86,7 @@ const DropdownLink = ({component = Link, active = false, className = '', childre
             className={clsx(
                 'block w-full text-left px-4 py-2 text-sm leading-5 border-l-4 rounded focus:outline-none transition duration-150 ease-in-out  border-transparent',
                 {
-                    'text-violet-300 bg-violet-700 hover:bg-violet-600 focus:bg-violet-500 focus:text-violet-50': active,
+                    'text-violet-100 bg-violet-500 hover:bg-violet-600 focus:bg-violet-500 focus:text-violet-50': active,
                     'text-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-200 dark:focus:bg-gray-600 dark:focus:text-gray-300': !active,
                 },
                 className

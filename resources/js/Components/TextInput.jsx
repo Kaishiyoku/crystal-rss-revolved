@@ -14,7 +14,11 @@ export default forwardRef(function TextInput({type = 'text', className = '', isF
         <input
             {...props}
             type={type}
-            className={clsx('border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-violet-500 dark:focus:border-violet-600 focus:ring-violet-500 dark:focus:ring-violet-600 rounded-md shadow-sm', className, {'opacity-50': props.disabled})}
+            className={clsx(
+                'border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-violet-500 dark:focus:border-violet-600 focus:ring-violet-500 dark:focus:ring-violet-600 rounded-md shadow-sm transition',
+                className,
+                {'opacity-50': props.disabled},
+            )}
             ref={input}
         />
     );
