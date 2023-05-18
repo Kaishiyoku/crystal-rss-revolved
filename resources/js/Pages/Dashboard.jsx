@@ -7,7 +7,7 @@ import {useLaravelReactI18n} from 'laravel-react-i18n';
 import FeedFilterDropdown from '@/Components/FeedFilterDropdown';
 import TotalNumberOfFeedItemsContext from '@/Contexts/TotalNumberOfFeedItemsContext';
 import Actions from '@/Components/Actions';
-import {DangerButton, PlainButton, PrimaryButton, SecondaryButton} from '@/Components/Button';
+import {SecondaryButton} from '@/Components/Button';
 import NewspaperOutlineIcon from '@/Icons/NewspaperOutlineIcon';
 import EmptyState from '@/Components/EmptyState';
 
@@ -49,42 +49,6 @@ export default function Dashboard(props) {
                         </SecondaryButton>
                     )}
                 </Actions>
-
-                <div className="mb-4 flex space-x-2">
-                    <PrimaryButton>
-                        Primary Button
-                    </PrimaryButton>
-
-                    <SecondaryButton>
-                        Secondary Button
-                    </SecondaryButton>
-
-                    <DangerButton>
-                        Danger Button
-                    </DangerButton>
-
-                    <PlainButton>
-                        Plain Button
-                    </PlainButton>
-                </div>
-
-                <div className="mb-12 flex space-x-2">
-                    <PrimaryButton disabled>
-                        Primary Button
-                    </PrimaryButton>
-
-                    <SecondaryButton disabled>
-                        Secondary Button
-                    </SecondaryButton>
-
-                    <DangerButton disabled>
-                        Danger Button
-                    </DangerButton>
-
-                    <PlainButton disabled>
-                        Plain Button
-                    </PlainButton>
-                </div>
 
                 {allFeedItems.length > 0
                     ? (
