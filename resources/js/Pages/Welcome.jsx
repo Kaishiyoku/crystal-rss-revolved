@@ -1,7 +1,6 @@
 import {Head, Link} from '@inertiajs/react';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import ApplicationLogo from '@/Components/ApplicationLogo';
-import {PlainButton, PrimaryButton} from '@/Components/Button';
 
 export default function Welcome(props) {
     const {t} = useLaravelReactI18n();
@@ -9,31 +8,22 @@ export default function Welcome(props) {
     return (
         <>
             <Head title="Welcome"/>
-            <div
-                className="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-gradient-to-br from-violet-500 to-purple-500">
+
+            <div className="relative sm:flex sm:justify-center sm:items-center py-12 min-h-screen bg-gradient-to-br from-violet-500 to-purple-500">
                 <div className="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
                     {props.auth.user
                         ? (
-                            <Link
-                                href={route('dashboard')}
-                                className="link-light"
-                            >
+                            <Link href={route('dashboard')} className="link-light">
                                 {t('Dashboard')}
                             </Link>
                         )
                         : (
                             <>
-                                <Link
-                                    href={route('login')}
-                                    className="link-light"
-                                >
+                                <Link href={route('login')} className="link-light">
                                     {t('Log in')}
                                 </Link>
 
-                                <Link
-                                    href={route('register')}
-                                    className="link-light ml-4"
-                                >
+                                <Link href={route('register')} className="link-light ml-4">
                                     {t('Register')}
                                 </Link>
                             </>
@@ -46,8 +36,7 @@ export default function Welcome(props) {
                             <ApplicationLogo className="h-full p-5"/>
                         </div>
 
-                        <div
-                            className="text-6xl md:text-8xl text-center pt-8 text-transparent bg-clip-text bg-gradient-to-r from-violet-300 to-purple-300">
+                        <div className="text-6xl md:text-8xl text-center pt-8 text-transparent bg-clip-text bg-gradient-to-r from-violet-300 to-purple-300">
                             {window.appName}
                         </div>
 
@@ -68,7 +57,7 @@ export default function Welcome(props) {
                                 {t('welcome.text_3')}
                             </p>
 
-                            <div className="mt-16 space-x-4 text-xl">
+                            <div className="mt-16 space-x-2 text-xl">
                                 {props.contactEmail && (
                                     <a href={`mailto:${props.contactEmail}`} className="button-welcome">
                                         {t('Contact')}
