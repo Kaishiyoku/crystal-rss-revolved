@@ -6,8 +6,10 @@ import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
 import {Head, Link, useForm} from '@inertiajs/react';
 import {PrimaryButton} from '@/Components/Button';
+import {useLaravelReactI18n} from 'laravel-react-i18n';
 
 export default function Login({status, canResetPassword}) {
+    const {t} = useLaravelReactI18n();
     const {data, setData, post, processing, errors, reset} = useForm({
         email: '',
         password: '',
@@ -32,13 +34,13 @@ export default function Login({status, canResetPassword}) {
 
     return (
         <GuestLayout>
-            <Head title="Log in"/>
+            <Head title={t('Log in')}/>
 
             {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
 
             <form onSubmit={submit}>
                 <div>
-                    <InputLabel htmlFor="email" value="Email"/>
+                    <InputLabel htmlFor="email" value={t('Email')}/>
 
                     <TextInput
                         id="email"
@@ -55,7 +57,7 @@ export default function Login({status, canResetPassword}) {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password"/>
+                    <InputLabel htmlFor="password" value={t('Password')}/>
 
                     <TextInput
                         id="password"
@@ -73,7 +75,7 @@ export default function Login({status, canResetPassword}) {
                 <div className="block mt-4">
                     <label className="flex items-center">
                         <Checkbox name="remember" value={data.remember} onChange={handleOnChange}/>
-                        <span className="ml-2 text-sm text-gray-600 dark:text-gray-400">Remember me</span>
+                        <span className="ml-2 text-sm text-gray-600 dark:text-gray-400">{t('Remember me')}</span>
                     </label>
                 </div>
 
@@ -83,12 +85,12 @@ export default function Login({status, canResetPassword}) {
                             href={route('password.request')}
                             className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 dark:focus:ring-offset-gray-800"
                         >
-                            Forgot your password?
+                            {t('Forgot your password?')}
                         </Link>
                     )}
 
                     <PrimaryButton type="submit" className="ml-4" disabled={processing}>
-                        Log in
+                        {t('Log in')}
                     </PrimaryButton>
                 </div>
             </form>
