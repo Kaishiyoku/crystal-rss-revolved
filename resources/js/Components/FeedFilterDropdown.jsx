@@ -1,6 +1,8 @@
 import Dropdown from '@/Components/Dropdown';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import {SecondaryButton} from '@/Components/Button';
+import FunnelOutlineIcon from '@/Icons/FunnelOutlineIcon';
+import DropdownArrowIcon from '@/Icons/DropdownArrowIcon';
 
 export default function FeedFilterDropdown({selectedFeed, feeds, ...props}) {
     const {t} = useLaravelReactI18n();
@@ -13,23 +15,12 @@ export default function FeedFilterDropdown({selectedFeed, feeds, ...props}) {
         <div {...props}>
             <Dropdown>
                 <Dropdown.Trigger className="inline">
-                    <SecondaryButton hasMobileFullSize className="justify-between">
+                    <SecondaryButton hasMobileFullSize className="justify-between" icon={FunnelOutlineIcon}>
                         <div>
                             {selectedFeed ? `${selectedFeed.name} (${selectedFeed.feed_items_count})` : t('Filter by feed...')}
                         </div>
 
-                        <svg
-                            className="ml-2 -mr-0.5 h-4 w-4"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                        >
-                            <path
-                                fillRule="evenodd"
-                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                clipRule="evenodd"
-                            />
-                        </svg>
+                        <DropdownArrowIcon/>
                     </SecondaryButton>
                 </Dropdown.Trigger>
 

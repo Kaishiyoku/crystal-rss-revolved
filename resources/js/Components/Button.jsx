@@ -4,7 +4,7 @@ import noop from '@/Utils/noop';
 import {useState} from 'react';
 import ConfirmModal from '@/Components/Modal/ConfirmModal';
 
-const Button = ({as: Component = 'button', variant, type = 'button', hasMobileFullSize = false, className = '', confirm = false, disabled, children, onClick = noop, ...props}) => {
+const Button = ({as: Component = 'button', variant, icon: Icon = null, type = 'button', hasMobileFullSize = false, className = '', confirm = false, disabled, children, onClick = noop, ...props}) => {
     const [showConfirmModal, setShowConfirmModal] = useState(false);
 
     const handleOnClick = () => {
@@ -31,7 +31,7 @@ const Button = ({as: Component = 'button', variant, type = 'button', hasMobileFu
 
             <Component
                 className={clsx(
-                    'inline-flex items-center transition ease-in disabled:opacity-50 disabled:saturate-50 disabled:cursor-not-allowed',
+                    'inline-flex space-x-2 items-center transition ease-in disabled:opacity-50 disabled:saturate-50 disabled:cursor-not-allowed',
                     'text-sm tracking-widest font-semibold focus:ring-1',
                     'rounded-lg px-5 sm:px-4 py-3.5 sm:py-2.5',
                     'focus:shadow-md dark:focus:shadow-black/20',
@@ -49,7 +49,11 @@ const Button = ({as: Component = 'button', variant, type = 'button', hasMobileFu
                 {...props}
                 {...additionalProps}
             >
-                {children}
+                {Icon && <Icon className="grow-0 w-5 h-5"/>}
+
+                <span className="grow inline-flex justify-between space-x-2">
+                    {children}
+                </span>
             </Component>
         </>
     );
@@ -57,6 +61,7 @@ const Button = ({as: Component = 'button', variant, type = 'button', hasMobileFu
 Button.propTypes = {
     as: PropTypes.any,
     variant: PropTypes.oneOf(['primary', 'secondary', 'danger', 'plain']).isRequired,
+    icon: PropTypes.node,
     type: PropTypes.oneOf(['button', 'submit', 'reset']),
     hasMobileFullSize: PropTypes.bool,
     className: PropTypes.any,
@@ -76,6 +81,7 @@ const PrimaryButton = ({className, ...props}) => {
 };
 PrimaryButton.propTypes = {
     as: PropTypes.any,
+    icon: PropTypes.node,
     type: PropTypes.oneOf(['button', 'submit', 'reset']),
     hasMobileFullSize: PropTypes.bool,
     className: PropTypes.any,
@@ -95,6 +101,7 @@ const SecondaryButton = ({className, ...props}) => {
 };
 SecondaryButton.propTypes = {
     as: PropTypes.any,
+    icon: PropTypes.node,
     type: PropTypes.oneOf(['button', 'submit', 'reset']),
     hasMobileFullSize: PropTypes.bool,
     className: PropTypes.any,
@@ -115,6 +122,7 @@ const DangerButton = ({confirm = true, className, ...props}) => {
 };
 DangerButton.propTypes = {
     as: PropTypes.any,
+    icon: PropTypes.node,
     type: PropTypes.oneOf(['button', 'submit', 'reset']),
     hasMobileFullSize: PropTypes.bool,
     className: PropTypes.any,
@@ -134,6 +142,7 @@ const PlainButton = ({className, ...props}) => {
 };
 PlainButton.propTypes = {
     as: PropTypes.any,
+    icon: PropTypes.node,
     type: PropTypes.oneOf(['button', 'submit', 'reset']),
     hasMobileFullSize: PropTypes.bool,
     className: PropTypes.any,

@@ -7,9 +7,10 @@ import {useLaravelReactI18n} from 'laravel-react-i18n';
 import FeedFilterDropdown from '@/Components/FeedFilterDropdown';
 import TotalNumberOfFeedItemsContext from '@/Contexts/TotalNumberOfFeedItemsContext';
 import Actions from '@/Components/Actions';
-import {DangerButton, PlainButton, PrimaryButton, SecondaryButton} from '@/Components/Button';
+import {SecondaryButton} from '@/Components/Button';
 import NewspaperOutlineIcon from '@/Icons/NewspaperOutlineIcon';
 import EmptyState from '@/Components/EmptyState';
+import EyeOutlineIcon from '@/Icons/EyeOutlineIcon';
 
 export default function Dashboard(props) {
     const {t, tChoice} = useLaravelReactI18n();
@@ -42,6 +43,7 @@ export default function Dashboard(props) {
                         <SecondaryButton
                             confirm
                             onClick={markAllAsRead}
+                            icon={EyeOutlineIcon}
                             className="sm:ml-2 mt-1 sm:mt-0"
                             hasMobileFullSize
                         >

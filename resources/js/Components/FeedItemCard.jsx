@@ -5,6 +5,8 @@ import clsx from 'clsx';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import {SecondaryButton} from '@/Components/Button';
 import TotalNumberOfFeedItemsContext from '@/Contexts/TotalNumberOfFeedItemsContext';
+import EyeOutlineIcon from '@/Icons/EyeOutlineIcon';
+import EyeSlashOutlineIcon from '@/Icons/EyeSlashOutlineIcon';
 
 /**
  * @param {number} hueRotationIndex
@@ -88,9 +90,10 @@ export default function FeedItemCard({hueRotationIndex, feedItem}) {
 
                 <div className="pt-2">
                     <SecondaryButton
-                        className="w-full"
                         onClick={toggle}
                         disabled={processing}
+                        icon={internalFeedItem.read_at ? EyeSlashOutlineIcon : EyeOutlineIcon}
+                        className="w-full"
                     >
                         {internalFeedItem.read_at ? t('Mark as unread') : t('Mark as read')}
                     </SecondaryButton>
