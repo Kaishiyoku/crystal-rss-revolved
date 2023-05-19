@@ -10,7 +10,7 @@ const LinkStack = ({children}) => {
 
 const Item = ({href, children, className, ...props}) => {
     return (
-        <a href={href} className={clsx('px-4 py-2 hover:bg-gray-200 hover:dark:bg-gray-800 transition sm:first:rounded-t-xl sm:last:rounded-b-xl', className)}>
+        <a href={href} className={clsx('px-4 py-2 hover:bg-gray-200 hover:dark:bg-gray-800 transition sm:first:rounded-t-lg sm:last:rounded-b-lg', className)}>
             {children}
         </a>
     );

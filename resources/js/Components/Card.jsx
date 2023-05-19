@@ -4,7 +4,7 @@ import PhotoSolidIcon from '@/Icons/PhotoSolidIcon';
 const Card = ({children, className, ...props}) => {
     return (
         <div
-            className={clsx('shadow-md dark:shadow-black/10 bg-white dark:bg-gray-800 sm:rounded-xl', className)}
+            className={clsx('shadow-md dark:shadow-black/10 bg-white dark:bg-gray-800 sm:rounded-lg', className)}
             {...props}
         >
             {children}
@@ -18,14 +18,14 @@ const Image = ({src, alt}) => {
             loading="lazy"
             src={src}
             alt={alt}
-            className="object-cover w-full h-72 md:h-56 sm:rounded-t-xl"
+            className="object-cover w-full h-72 md:h-56 sm:rounded-t-lg"
         />
     );
 };
 
 const ImagePlaceholder = ({className}) => {
     return (
-        <div className={clsx('flex justify-center h-72 md:h-56 bg-gradient-to-br from-cyan-300 to-violet-400 dark:from-cyan-900 dark:to-violet-700 saturate-[.20] sm:rounded-t-xl', className)}>
+        <div className={clsx('flex justify-center h-72 md:h-56 bg-gradient-to-br from-cyan-300 to-violet-400 dark:from-cyan-900 dark:to-violet-700 saturate-[.20] sm:rounded-t-lg', className)}>
             <PhotoSolidIcon className="h-full text-white mix-blend-soft-light"/>
         </div>
     );

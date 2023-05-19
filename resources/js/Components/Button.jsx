@@ -33,7 +33,7 @@ const Button = ({as: Component = 'button', variant, type = 'button', hasMobileFu
                 className={clsx(
                     'inline-flex items-center transition ease-in disabled:opacity-50 disabled:saturate-50 disabled:cursor-not-allowed',
                     'text-sm tracking-widest font-semibold focus:ring-1',
-                    'rounded-full px-5 sm:px-4 py-3.5 sm:py-2.5',
+                    'rounded-lg px-5 sm:px-4 py-3.5 sm:py-2.5',
                     'focus:shadow-md dark:focus:shadow-black/20',
                     {
                         'text-violet-100 bg-violet-500 hover:bg-violet-600 disabled:hover:bg-violet-500 focus:ring-violet-600': variant === 'primary',
