@@ -15,7 +15,11 @@ export default function FeedFilterDropdown({selectedFeed, feeds, ...props}) {
         <div {...props}>
             <Dropdown>
                 <Dropdown.Trigger className="inline">
-                    <SecondaryButton hasMobileFullSize className="justify-between" icon={FunnelOutlineIcon}>
+                    <SecondaryButton
+                        className="justify-between"
+                        icon={FunnelOutlineIcon}
+                        hasMobileFullSize
+                    >
                         <div>
                             {selectedFeed ? `${selectedFeed.name} (${selectedFeed.feed_items_count})` : t('Filter by feed...')}
                         </div>

@@ -61,7 +61,7 @@ const Button = ({as: Component = 'button', variant, icon: Icon = null, type = 'b
 Button.propTypes = {
     as: PropTypes.any,
     variant: PropTypes.oneOf(['primary', 'secondary', 'danger', 'plain']).isRequired,
-    icon: PropTypes.node,
+    icon: PropTypes.elementType,
     type: PropTypes.oneOf(['button', 'submit', 'reset']),
     hasMobileFullSize: PropTypes.bool,
     className: PropTypes.any,
@@ -81,7 +81,7 @@ const PrimaryButton = ({className, ...props}) => {
 };
 PrimaryButton.propTypes = {
     as: PropTypes.any,
-    icon: PropTypes.node,
+    icon: PropTypes.elementType,
     type: PropTypes.oneOf(['button', 'submit', 'reset']),
     hasMobileFullSize: PropTypes.bool,
     className: PropTypes.any,
@@ -101,7 +101,7 @@ const SecondaryButton = ({className, ...props}) => {
 };
 SecondaryButton.propTypes = {
     as: PropTypes.any,
-    icon: PropTypes.node,
+    icon: PropTypes.elementType,
     type: PropTypes.oneOf(['button', 'submit', 'reset']),
     hasMobileFullSize: PropTypes.bool,
     className: PropTypes.any,
@@ -122,7 +122,7 @@ const DangerButton = ({confirm = true, className, ...props}) => {
 };
 DangerButton.propTypes = {
     as: PropTypes.any,
-    icon: PropTypes.node,
+    icon: PropTypes.elementType,
     type: PropTypes.oneOf(['button', 'submit', 'reset']),
     hasMobileFullSize: PropTypes.bool,
     className: PropTypes.any,
@@ -142,7 +142,7 @@ const PlainButton = ({className, ...props}) => {
 };
 PlainButton.propTypes = {
     as: PropTypes.any,
-    icon: PropTypes.node,
+    icon: PropTypes.elementType,
     type: PropTypes.oneOf(['button', 'submit', 'reset']),
     hasMobileFullSize: PropTypes.bool,
     className: PropTypes.any,
