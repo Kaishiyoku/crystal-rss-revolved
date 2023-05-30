@@ -80,9 +80,8 @@ class FetchFeedItemsTest extends TestCase
     }
 
     /**
-     * @param int $numberOfFeedItems
-     * @param Collection<RssFeedItem> $rssFeedItems
-     * @return RssFeed
+     * @param  Collection<RssFeedItem>  $rssFeedItems
+     *
      * @throws ReflectionException
      */
     private static function getDummyRssFeed(int $numberOfFeedItems): RssFeed
@@ -100,7 +99,7 @@ class FetchFeedItemsTest extends TestCase
         $rssFeed->setId('dummy-feed');
         $rssFeed->setLanguage('en');
         $rssFeed->setUrl(null);
-        $rssFeed->setFeedItems(collect(range(1, $numberOfFeedItems))->map(fn(int $id) => static::getDummyRssFeedItem($id)));
+        $rssFeed->setFeedItems(collect(range(1, $numberOfFeedItems))->map(fn (int $id) => static::getDummyRssFeedItem($id)));
         $rssFeed->setChecksum(HeraRssCrawler::generateChecksumForFeed($rssFeed));
 
         return $rssFeed;

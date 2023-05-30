@@ -34,7 +34,7 @@ class FeedController extends Controller
     public function create(): Response
     {
         return Inertia::render('Feeds/Create', [
-            'categories' => Auth::user()->categories()->pluck('name', 'id')->map(fn(string $name, int $id) => ['value' => $id, 'name' => $name])->values(),
+            'categories' => Auth::user()->categories()->pluck('name', 'id')->map(fn (string $name, int $id) => ['value' => $id, 'name' => $name])->values(),
             'feed' => new Feed(),
         ]);
     }
@@ -60,7 +60,7 @@ class FeedController extends Controller
     public function edit(Feed $feed): Response
     {
         return Inertia::render('Feeds/Edit', [
-            'categories' => Auth::user()->categories()->pluck('name', 'id')->map(fn(string $name, int $id) => ['value' => $id, 'name' => $name])->values(),
+            'categories' => Auth::user()->categories()->pluck('name', 'id')->map(fn (string $name, int $id) => ['value' => $id, 'name' => $name])->values(),
             'feed' => $feed,
             'canDelete' => Auth::user()->can('delete', $feed),
         ]);

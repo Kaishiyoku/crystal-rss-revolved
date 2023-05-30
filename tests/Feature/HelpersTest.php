@@ -10,7 +10,7 @@ it('should get the proper content type for a given url', function () {
         'https://laravelnews.s3.amazonaws.com/images/laravel-10-featured.png',
     ]);
 
-    expect($urls->map(fn(string $url) => getContentTypeForUrl($url))->toArray())->toBe([
+    expect($urls->map(fn (string $url) => getContentTypeForUrl($url))->toArray())->toBe([
         'text/html',
         'image/jpeg',
         'image/jpeg',

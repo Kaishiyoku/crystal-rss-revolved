@@ -3,7 +3,6 @@
 namespace Tests\Feature\Providers;
 
 use App\Models\User;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 use Tests\TestCase;
 
 class TelescopeServiceProviderTest extends TestCase

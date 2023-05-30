@@ -4,7 +4,6 @@ namespace Tests\Feature\Models;
 
 use App\Models\Feed;
 use App\Models\FeedItem;
-use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -83,7 +82,7 @@ class FeedItemTest extends TestCase
         static::assertFalse($feedItemWithInvalidImageMimetype->has_image);
 
         $feedItems->each(function (FeedItem $feedItem) {
-            static::assertSame(!!$feedItem->image_url, $feedItem->has_image);
+            static::assertSame((bool) $feedItem->image_url, $feedItem->has_image);
         });
     }
 

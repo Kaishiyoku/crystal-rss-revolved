@@ -14,9 +14,9 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Kaishiyoku\HeraRssCrawler\HeraRssCrawler;
+use Kaishiyoku\HeraRssCrawler\Models\Rss\FeedItem as RssFeedItem;
 use Laravel\Telescope\Telescope;
 use Psr\Log\LoggerInterface;
-use Kaishiyoku\HeraRssCrawler\Models\Rss\FeedItem as RssFeedItem;
 
 class FetchFeedItems extends Command
 {
@@ -70,7 +70,7 @@ class FetchFeedItems extends Command
         });
 
         $this->newFeedItemIdsPerUserId
-            ->filter(fn($feedItemIds) => $feedItemIds->isNotEmpty())
+            ->filter(fn ($feedItemIds) => $feedItemIds->isNotEmpty())
             ->each(function ($feedItemIds, $userId) {
                 $this->logger->info("Number of new feed items for user #{$userId}: {$feedItemIds->count()}");
             });
@@ -102,7 +102,7 @@ class FetchFeedItems extends Command
             if ($feed->isDirty()) {
                 $feed->save();
             }
-        } catch (ClientException | Exception $exception) {
+        } catch (ClientException|Exception $exception) {
             $this->logger->error($exception, [$feed->feed_url]);
             Telescope::catch($exception, ['feed-updater', $feed->feed_url]);
 
@@ -119,7 +119,7 @@ class FetchFeedItems extends Command
     {
         // don't save duplicate items, items without a creation date or items which are older than the prune time
         if (FeedItem::whereChecksum($rssFeedItem->getChecksum())->count() > 0
-            || !$rssFeedItem->getCreatedAt()
+            || ! $rssFeedItem->getCreatedAt()
             || $rssFeedItem->getCreatedAt()->isBefore(now()->subMonths(config('app.months_after_pruning_feed_items')))) {
             return;
         }
@@ -140,7 +140,7 @@ class FetchFeedItems extends Command
         $feed->feedItems()->save($feedItem);
 
         $this->newFeedItemIdsPerUserId->put($feed->user_id, with(
-            $this->newFeedItemIdsPerUserId->get($feed->user_id), fn($collection) => $collection ? $collection->push($feedItem->id) : collect($feedItem->id) /** @phpstan-ignore-line */
+            $this->newFeedItemIdsPerUserId->get($feed->user_id), fn ($collection) => $collection ? $collection->push($feedItem->id) : collect($feedItem->id) /** @phpstan-ignore-line */
         ));
     }
 }

@@ -6,7 +6,6 @@ use App\Http\Requests\DashboardRequest;
 use App\Models\Feed;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Tests\TestCase;
 

@@ -3,7 +3,6 @@
 use App\Models\Category;
 use App\Models\Feed;
 use Diglactic\Breadcrumbs\Breadcrumbs;
-
 use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
 
 // Categories
@@ -23,7 +22,6 @@ Breadcrumbs::for('categories.edit', function (BreadcrumbTrail $trail, Category $
     $trail->push($category->name);
     $trail->push(__('Edit'));
 });
-
 
 // Feeds
 Breadcrumbs::for('feeds', function (BreadcrumbTrail $trail) {

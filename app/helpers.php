@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
+use GuzzleHttp\Psr7\Header;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Http;
-use GuzzleHttp\Psr7\Header;
 
-if (!function_exists('getContentTypeForUrl')) {
+if (! function_exists('getContentTypeForUrl')) {
     function getContentTypeForUrl(string $url): ?string
     {
         try {

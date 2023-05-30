@@ -26,6 +26,7 @@ use Illuminate\Support\Str;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Feed $feed
+ *
  * @method static \Database\Factories\FeedItemFactory factory($count = null, $state = [])
  * @method static Builder|FeedItem newModelQuery()
  * @method static Builder|FeedItem newQuery()
@@ -44,6 +45,7 @@ use Illuminate\Support\Str;
  * @method static Builder|FeedItem whereTitle($value)
  * @method static Builder|FeedItem whereUpdatedAt($value)
  * @method static Builder|FeedItem whereUrl($value)
+ *
  * @mixin \Eloquent
  */
 class FeedItem extends Model
@@ -126,7 +128,7 @@ class FeedItem extends Model
      */
     public function scopeOfFeed(Builder $query, ?int $feedId): void
     {
-        $query->when($feedId, fn($query) => $query->where('feed_id', $feedId));
+        $query->when($feedId, fn ($query) => $query->where('feed_id', $feedId));
     }
 
     public function feed(): BelongsTo

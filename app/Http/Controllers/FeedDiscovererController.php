@@ -14,6 +14,7 @@ class FeedDiscovererController extends Controller
      * Handle the incoming request.
      *
      * @return \Illuminate\Http\JsonResponse
+     *
      * @throws \Exception
      */
     public function __invoke(FeedDiscovererRequest $request, HeraRssCrawler $heraRssCrawler)
