@@ -9,7 +9,7 @@ export default function Welcome(props) {
         <>
             <Head title={t('Welcome')}/>
 
-            <div className="relative sm:flex sm:justify-center sm:items-center py-12 min-h-screen bg-gradient-to-br from-violet-500 to-purple-500">
+            <div className="relative sm:flex sm:justify-center sm:items-center sm:pt-12 pb-4 sm:pb-12 min-h-screen bg-gradient-to-br from-violet-500 to-purple-500">
                 <div className="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
                     {props.auth.user
                         ? (
