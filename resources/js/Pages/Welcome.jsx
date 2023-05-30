@@ -7,7 +7,7 @@ export default function Welcome(props) {
 
     return (
         <>
-            <Head title="Welcome"/>
+            <Head title={t('Welcome')}/>
 
             <div className="relative sm:flex sm:justify-center sm:items-center py-12 min-h-screen bg-gradient-to-br from-violet-500 to-purple-500">
                 <div className="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
