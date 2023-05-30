@@ -4,7 +4,7 @@ import InputLabel from '@/Components/InputLabel';
 import {Modal} from '@/Components/Modal/Modal';
 import TextInput from '@/Components/TextInput';
 import {useForm} from '@inertiajs/react';
-import {DangerButton, PrimaryButton, SecondaryButton} from '@/Components/Button';
+import {DangerButton, SecondaryButton} from '@/Components/Button';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 
 export default function DeleteUserForm({className}) {

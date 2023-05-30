@@ -1,7 +1,6 @@
 import {Head, Link} from '@inertiajs/react';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import ApplicationLogo from '@/Components/ApplicationLogo';
-import {PlainButton} from '@/Components/Button';
 
 export default function Welcome(props) {
     const {t} = useLaravelReactI18n();
