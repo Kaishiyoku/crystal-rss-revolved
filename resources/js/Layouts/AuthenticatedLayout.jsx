@@ -119,7 +119,7 @@ export default function Authenticated({auth, header, hasMobileSpacing = false, c
                         leaveFrom="opacity-100 translate-y-0"
                         leaveTo="opacity-0 -translate-y-8 sm:translate-y-0"
                     >
-                        <div className="fixed overflow-y-auto scrollbar-y-sm pb-16 top-14 bg-gray-800 z-20 w-full h-full sm:hidden">
+                        <div className="fixed overflow-y-auto scrollbar-y-sm pb-16 top-14 bg-white dark:bg-gray-800 z-20 w-full h-full sm:hidden">
                             <div className="pt-2 pb-3 space-y-1">
                                 <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
                                     Dashboard
