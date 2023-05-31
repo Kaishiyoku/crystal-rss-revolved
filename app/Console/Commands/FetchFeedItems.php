@@ -129,7 +129,7 @@ class FetchFeedItems extends Command
 
         $feedItem = new FeedItem([
             'url' => $rssFeedItem->getPermalink(),
-            'title' => Encoding::toUTF8($rssFeedItem->getTitle()),
+            'title' => Str::limit(Encoding::toUTF8($rssFeedItem->getTitle()), 512),
             'image_url' => $imageUrl,
             'image_mimetype' => $imageMimetype,
             'description' => Str::limit(Encoding::toUTF8(strip_tags($rssFeedItem->getDescription())), 1024),
