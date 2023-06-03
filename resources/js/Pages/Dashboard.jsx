@@ -36,7 +36,7 @@ export default function Dashboard(props) {
             >
                 <Head title="Dashboard"/>
 
-                <div className="px-4 sm:px-0 mb-8">
+                <div className="sm:flex sm:justify-end px-4 sm:px-0 mb-8">
                     <FeedFilterDropdown selectedFeed={props.selectedFeed} feeds={props.unreadFeeds}/>
 
                     {totalNumberOfFeedItems > 0 && (
