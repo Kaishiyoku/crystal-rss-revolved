@@ -6,7 +6,6 @@ import FeedItemCard from '@/Components/FeedItemCard';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import FeedFilterDropdown from '@/Components/FeedFilterDropdown';
 import TotalNumberOfFeedItemsContext from '@/Contexts/TotalNumberOfFeedItemsContext';
-import Actions from '@/Components/Actions';
 import {SecondaryButton} from '@/Components/Button';
 import NewspaperOutlineIcon from '@/Icons/NewspaperOutlineIcon';
 import EmptyState from '@/Components/EmptyState';
