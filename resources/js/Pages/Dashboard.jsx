@@ -36,7 +36,7 @@ export default function Dashboard(props) {
             >
                 <Head title="Dashboard"/>
 
-                <Actions hasMobileSpacing>
+                <div className="px-4 sm:px-0 mb-8">
                     <FeedFilterDropdown selectedFeed={props.selectedFeed} feeds={props.unreadFeeds}/>
 
                     {totalNumberOfFeedItems > 0 && (
@@ -50,7 +50,7 @@ export default function Dashboard(props) {
                             {t('Mark all as read')}
                         </SecondaryButton>
                     )}
-                </Actions>
+                </div>
 
                 {allFeedItems.length > 0
                     ? (
