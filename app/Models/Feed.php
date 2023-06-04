@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string|null $favicon_url
  * @property string $name
  * @property string $language
+ * @property bool $is_purgeable
  * @property string|null $last_checked_at
  * @property string|null $last_failed_at
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -36,6 +37,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder|Feed whereFaviconUrl($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Feed whereFeedUrl($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Feed whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Feed whereIsPurgeable($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Feed whereLanguage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Feed whereLastCheckedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Feed whereLastFailedAt($value)
@@ -61,6 +63,16 @@ class Feed extends Model
         'favicon_url',
         'name',
         'language',
+        'is_purgeable',
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'is_purgeable' => 'bool',
     ];
 
     public function user(): BelongsTo

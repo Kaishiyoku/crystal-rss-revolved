@@ -30,6 +30,7 @@ class UpdateFeedRequest extends FormRequest
             'favicon_url' => ['nullable', 'url', 'max:255'],
             'name' => ['required', 'string', 'max:255'],
             'language' => ['required', 'string', 'max:255'],
+            'is_purgeable' => ['required', 'bool'],
         ];
     }
 }

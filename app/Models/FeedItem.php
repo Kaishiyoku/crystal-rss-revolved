@@ -102,7 +102,11 @@ class FeedItem extends Model
      */
     public function prunable(): Builder
     {
-        return static::where('read_at', '<=', now()->subMonths(config('app.months_after_pruning_feed_items')));
+        return static::query()
+            ->where('read_at', '<=', now()->subMonths(config('app.months_after_pruning_feed_items')))
+            ->whereHas('feed', function (Builder $query) {
+                $query->where('is_purgeable', true);
+            });
     }
 
     /**

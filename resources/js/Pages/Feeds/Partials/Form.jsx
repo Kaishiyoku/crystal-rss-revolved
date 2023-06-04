@@ -1,4 +1,4 @@
-import {useForm} from '@inertiajs/react';
+import {useForm, usePage} from '@inertiajs/react';
 import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
 import InputError from '@/Components/InputError';
@@ -7,9 +7,11 @@ import {useState} from 'react';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import Card from '@/Components/Card';
 import {PrimaryButton, SecondaryButton} from '@/Components/Button';
+import Checkbox from '@/Components/Checkbox';
 
 export default function Form({method, action, feed, categories}) {
-    const {t} = useLaravelReactI18n();
+    const {t, tChoice} = useLaravelReactI18n();
+    const {monthsAfterPruningFeedItems} = usePage().props;
     const [isDiscoverFeedProcessing, setIsDiscoverFeedProcessing] = useState(false);
     const [searchUrl, setSearchUrl] = useState('');
     const [discoveredFeedUrls, setDiscoveredFeedUrls] = useState([]);
@@ -21,6 +23,7 @@ export default function Form({method, action, feed, categories}) {
         favicon_url: feed.favicon_url ?? '',
         name: feed.name ?? '',
         language: feed.language ?? '',
+        is_purgeable: feed.is_purgeable ?? true,
     });
 
     const discoverFeedUrls = (searchUrl) => {
@@ -186,6 +189,19 @@ export default function Form({method, action, feed, categories}) {
                     />
 
                     <InputError className="mt-2" message={errors.name}/>
+                </div>
+
+                <div>
+                    <label className="flex items-center w-fit">
+                        <Checkbox
+                            name="is_purgeable"
+                            checked={data.is_purgeable}
+                            value={data.is_purgeable}
+                            disabled={isDiscoverFeedProcessing}
+                            onChange={(e) => setData('is_purgeable', e.target.checked)}
+                        />
+                        <span className="ml-2 text-sm text-gray-600 dark:text-gray-400">{tChoice('feed.purge', monthsAfterPruningFeedItems)}</span>
+                    </label>
                 </div>
 
                 <div className="flex items-center gap-4">

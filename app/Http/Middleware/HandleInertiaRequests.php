@@ -39,6 +39,7 @@ class HandleInertiaRequests extends Middleware
                     'location' => $request->url(),
                 ]);
             },
+            'monthsAfterPruningFeedItems' => fn () => $request->user() ? config('app.months_after_pruning_feed_items') : null,
         ]);
     }
 }
