@@ -42,8 +42,8 @@ class AddAdminUser extends Command
             'password' => $password,
             'password_confirmation' => $passwordConfirmation,
         ], [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:'.User::class,
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
