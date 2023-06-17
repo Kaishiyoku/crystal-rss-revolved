@@ -14,7 +14,7 @@ class FeedDiscovererControllerTest extends TestCase
     {
         $this->actingAs(User::factory()->create());
 
-        $this->post(route('discover-feed'), ['feed_url' => 'https://tailwindcss.com'])
+        $this->post(route('discover-feed'), ['feed_url' => 'https://tailwindcss.com/feeds/feed.xml'])
             ->assertJsonIsObject()
             ->assertJsonStructure([
                 'feed_url',
