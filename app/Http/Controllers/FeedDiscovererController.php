@@ -37,9 +37,9 @@ class FeedDiscovererController extends Controller
                 'name' => $feedMetadata->getTitle(),
                 'language' => $feedMetadata->getLanguage() ?? '',
             ]);
-        } catch (ConnectException $e) {
+        } catch (ConnectException) {
             abort(422, 'The given URL is invalid.');
-        } catch (ClientException $e) {
+        } catch (ClientException) {
             abort(422, 'The given URL could not be resolved.');
         }
     }
