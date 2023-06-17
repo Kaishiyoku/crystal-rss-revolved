@@ -35,7 +35,7 @@ class HandleInertiaRequests extends Middleware
                 'user' => $request->user(),
             ],
             'locale' => $request->getLocale(),
-            'localeValues' => collect(config('app.available_locales'))->map(fn (string $locale) => ['label' => __('common.locale.'.$locale), 'value' => $locale]),
+            'localeValues' => collect($this->availableLocales())->map(fn (string $locale) => ['label' => __('common.locale.'.$locale), 'value' => $locale]),
             'ziggy' => function () use ($request) {
                 return array_merge((new Ziggy)->toArray(), [
                     'location' => $request->url(),
@@ -43,5 +43,13 @@ class HandleInertiaRequests extends Middleware
             },
             'monthsAfterPruningFeedItems' => fn () => $request->user() ? config('app.months_after_pruning_feed_items') : null,
         ]);
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    private function availableLocales(): array
+    {
+        return config('app.available_locales');
     }
 }
