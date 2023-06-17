@@ -90,7 +90,7 @@ class CategoryControllerTest extends TestCase
         $response = $this->post(route('categories.store'), ['name' => $expectedName]);
 
         $response->assertRedirect(route('categories.create'));
-        $response->assertSessionHasErrors(['name' => 'The name has already been taken.']);
+        $response->assertSessionHasErrors(['name' => 'The Name has already been taken.']);
         static::assertSame(1, $user->categories()->count());
     }
 
@@ -102,7 +102,7 @@ class CategoryControllerTest extends TestCase
         $response = $this->post(route('categories.store'), ['name' => ' ']);
 
         $response->assertRedirect(route('categories.create'));
-        $response->assertSessionHasErrors(['name' => 'The name field is required.']);
+        $response->assertSessionHasErrors(['name' => 'The Name field is required.']);
         static::assertSame(0, $user->categories()->count());
     }
 
@@ -169,7 +169,7 @@ class CategoryControllerTest extends TestCase
         $response = $this->put(route('categories.update', $category), ['name' => 'Test 1']);
 
         $response->assertRedirect(route('categories.edit', $category));
-        $response->assertSessionHasErrors(['name' => 'The name has already been taken.']);
+        $response->assertSessionHasErrors(['name' => 'The Name has already been taken.']);
     }
 
     public function test_delete(): void
