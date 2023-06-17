@@ -34,6 +34,8 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
             ],
+            'locale' => $request->getLocale(),
+            'localeValues' => collect(config('app.available_locales'))->map(fn (string $locale) => ['label' => __('common.locale.'.$locale), 'value' => $locale]),
             'ziggy' => function () use ($request) {
                 return array_merge((new Ziggy)->toArray(), [
                     'location' => $request->url(),
