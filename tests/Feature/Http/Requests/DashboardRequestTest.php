@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Http\Requests;
+namespace Http\Requests;
 
 use App\Http\Requests\DashboardRequest;
 use App\Models\Feed;
@@ -13,41 +13,62 @@ class DashboardRequestTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_validation_succeeds(): void
+    private const FEED_ID = 1;
+
+    private const FEED_ID_OF_ANOTHER_USER = 2;
+
+    protected function setUp(): void
     {
-        $user = User::factory()->create();
-        $feed = Feed::factory()->for($user)->create();
+        parent::setUp();
 
-        $expectedData = ['feed_id' => $feed->id];
+        $this->actingAs($user = User::factory()->create());
 
-        $this->actingAs($user);
-
-        $request = new DashboardRequest($expectedData);
-        $validatedData = $request->validate($request->rules());
-
-        static::assertSame($expectedData, $validatedData);
+        Feed::factory()->for($user)->state(['id' => static::FEED_ID])->create();
+        Feed::factory()->state(['id' => static::FEED_ID_OF_ANOTHER_USER])->create();
     }
 
-    public function test_non_existing_feed_id(): void
+    public function test_authorize(): void
     {
-        $this->actingAs(User::factory()->create());
-
-        static::expectException(ValidationException::class);
-
-        $request = new DashboardRequest(['feed_id' => 1]);
-        $request->validate($request->rules());
+        static::assertTrue((new DashboardRequest())->authorize());
     }
 
-    public function test_feed_id_of_wrong_user(): void
+    /**
+     * @dataProvider validationDataProvider
+     */
+    public function test_validate(array $data, bool $shouldSucceed, string $expectedExceptionMessage = null): void
     {
-        $this->actingAs(User::factory()->create());
+        $request = new DashboardRequest($data);
 
-        $anotherUser = User::factory()->create();
-        $feedOfAnotherUser = Feed::factory()->for($anotherUser)->create();
+        if (! $shouldSucceed) {
+            static::expectException(ValidationException::class);
+            static::expectExceptionMessage($expectedExceptionMessage);
+        }
 
-        static::expectException(ValidationException::class);
+        $validated = $request->validate($request->rules());
 
-        $request = new DashboardRequest(['feed_id' => $feedOfAnotherUser->id]);
-        $request->validate($request->rules());
+        if ($shouldSucceed) {
+            static::assertSame($data, $validated);
+        }
+    }
+
+    public static function validationDataProvider(): array
+    {
+        return [
+            'succeeds' => [
+                static::makeData(static::FEED_ID),
+                true,
+            ],
+            'feed_id of another user' => [
+                static::makeData(static::FEED_ID_OF_ANOTHER_USER),
+                false,
+                'The selected Feed is invalid',
+            ],
+        ];
+    }
+
+    private static function makeData(mixed $feedId): array {
+        return [
+            'feed_id' => $feedId,
+        ];
     }
 }

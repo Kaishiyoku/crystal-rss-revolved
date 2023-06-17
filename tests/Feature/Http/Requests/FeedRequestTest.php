@@ -1,13 +1,12 @@
 <?php
 
-namespace Tests\Feature\Requests;
+namespace Http\Requests;
 
 use App\Http\Requests\StoreFeedRequest;
 use App\Http\Requests\UpdateFeedRequest;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Tests\TestCase;
@@ -37,158 +36,158 @@ class FeedRequestTest extends TestCase
     }
 
     /**
-     * @dataProvider rulesDataProvider
+     * @dataProvider validationDataProvider
      */
-    public function test_store_rules(array $request, bool $shouldSucceed, string $expectedExceptionMessage = null): void
+    public function test_validate_store(array $data, bool $shouldSucceed, string $expectedExceptionMessage = null): void
     {
-        $storeFeedRequest = new StoreFeedRequest([], $request);
+        $request = new StoreFeedRequest($data);
 
         if (! $shouldSucceed) {
             static::expectException(ValidationException::class);
             static::expectExceptionMessage($expectedExceptionMessage);
         }
 
-        $validated = Validator::validate($request, $storeFeedRequest->rules());
+        $validated = $request->validate($request->rules());
 
         if ($shouldSucceed) {
-            static::assertSame($request, $validated);
+            static::assertSame($data, $validated);
         }
     }
 
     /**
-     * @dataProvider rulesDataProvider
+     * @dataProvider validationDataProvider
      */
-    public function test_update_rules(array $request, bool $shouldSucceed, string $expectedExceptionMessage = null): void
+    public function test_validate_update(array $data, bool $shouldSucceed, string $expectedExceptionMessage = null): void
     {
-        $updateFeedRequest = new UpdateFeedRequest([], $request);
+        $request = new UpdateFeedRequest($data);
 
         if (! $shouldSucceed) {
             static::expectException(ValidationException::class);
             static::expectExceptionMessage($expectedExceptionMessage);
         }
 
-        $validated = Validator::validate($request, $updateFeedRequest->rules());
+        $validated = $request->validate($request->rules());
 
         if ($shouldSucceed) {
-            static::assertSame($request, $validated);
+            static::assertSame($data, $validated);
         }
     }
 
-    public static function rulesDataProvider(): array
+    public static function validationDataProvider(): array
     {
         return [
             'succeeds' => [
-                static::makeRequest(),
+                static::makeData(),
                 true,
             ],
             'missing category_id' => [
-                static::makeRequest(categoryId: ''),
+                static::makeData(categoryId: ''),
                 false,
                 'The Category field is required',
             ],
             'invalid category_id' => [
-                static::makeRequest(categoryId: '-'),
+                static::makeData(categoryId: '-'),
                 false,
                 'The Category must be an integer.',
             ],
             'non-existing category_id' => [
-                static::makeRequest(categoryId: 999),
+                static::makeData(categoryId: 999),
                 false,
                 'The selected Category is invalid.',
             ],
             'category_id of another user' => [
-                static::makeRequest(categoryId: static::CATEGORY_ID_OF_ANOTHER_USER),
+                static::makeData(categoryId: static::CATEGORY_ID_OF_ANOTHER_USER),
                 false,
                 'The selected Category is invalid.',
             ],
             'missing feed_url' => [
-                static::makeRequest(feedUrl: ''),
+                static::makeData(feedUrl: ''),
                 false,
                 'The Feed URL field is required.',
             ],
             'invalid feed_url' => [
-                static::makeRequest(feedUrl: 'mailto:test@test.de'),
+                static::makeData(feedUrl: 'mailto:test@test.de'),
                 false,
                 'The Feed URL format is invalid.',
             ],
             'overly long feed_url' => [
-                static::makeRequest(feedUrl: 'https://google.de/?test='.Str::random(232)),
+                static::makeData(feedUrl: 'https://google.de/?test='.Str::random(232)),
                 false,
                 'The Feed URL may not be greater than 255 characters.',
             ],
             'missing site_url' => [
-                static::makeRequest(siteUrl: ''),
+                static::makeData(siteUrl: ''),
                 false,
                 'The Site URL field is required.',
             ],
             'invalid site_url' => [
-                static::makeRequest(siteUrl: 'mailto:test@test.de'),
+                static::makeData(siteUrl: 'mailto:test@test.de'),
                 false,
                 'The Site URL format is invalid.',
             ],
             'overly long site_url' => [
-                static::makeRequest(siteUrl: 'https://google.de/?test='.Str::random(232)),
+                static::makeData(siteUrl: 'https://google.de/?test='.Str::random(232)),
                 false,
                 'The Site URL may not be greater than 255 characters.',
             ],
             'nullable favicon_url' => [
-                static::makeRequest(faviconUrl: ''),
+                static::makeData(faviconUrl: ''),
                 true,
             ],
             'invalid favicon_url' => [
-                static::makeRequest(faviconUrl: 'mailto:test@test.de'),
+                static::makeData(faviconUrl: 'mailto:test@test.de'),
                 false,
                 'The Favicon URL format is invalid.'
             ],
             'overly long favicon_url' => [
-                static::makeRequest(faviconUrl: 'https://google.de/?test='.Str::random(232)),
+                static::makeData(faviconUrl: 'https://google.de/?test='.Str::random(232)),
                 false,
                 'The Favicon URL may not be greater than 255 characters.',
             ],
             'missing name' => [
-                static::makeRequest(name: ''),
+                static::makeData(name: ''),
                 false,
                 'The Name field is required.',
             ],
             'invalid name' => [
-                static::makeRequest(name: 123),
+                static::makeData(name: 123),
                 false,
                 'The Name must be a string.',
             ],
             'overly long name' => [
-                static::makeRequest(name: Str::random(256)),
+                static::makeData(name: Str::random(256)),
                 false,
                 'The Name may not be greater than 255 characters.',
             ],
             'missing language' => [
-                static::makeRequest(language: ''),
+                static::makeData(language: ''),
                 false,
                 'The Language field is required.',
             ],
             'invalid language' => [
-                static::makeRequest(language: 123),
+                static::makeData(language: 123),
                 false,
                 'The Language must be a string.',
             ],
             'overly long language' => [
-                static::makeRequest(language: Str::random(256)),
+                static::makeData(language: Str::random(256)),
                 false,
                 'The Language may not be greater than 255 characters.',
             ],
             'missing is_purgeable' => [
-                static::makeRequest(isPurgeable: ''),
+                static::makeData(isPurgeable: ''),
                 false,
                 'The Purgeable field is required.',
             ],
             'invalid is_purgeable' => [
-                static::makeRequest(isPurgeable: '#000000'),
+                static::makeData(isPurgeable: '#000000'),
                 false,
                 'The Purgeable field must be true or false.',
             ],
         ];
     }
 
-    private static function makeRequest(
+    private static function makeData(
         mixed $categoryId = null,
         mixed $feedUrl = null,
         mixed $siteUrl = null,

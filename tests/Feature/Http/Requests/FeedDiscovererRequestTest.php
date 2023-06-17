@@ -3,28 +3,64 @@
 namespace Http\Requests;
 
 use App\Http\Requests\FeedDiscovererRequest;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Tests\TestCase;
 
 class FeedDiscovererRequestTest extends TestCase
 {
-    public function test_validation_succeeds(): void
+    public function test_authorize(): void
     {
-        $expectedData = ['feed_url' => 'https://test.dev'];
-
-        $request = new FeedDiscovererRequest($expectedData);
-        $validatedData = $request->validate($request->rules());
-
-        static::assertSame($expectedData, $validatedData);
+        static::assertTrue((new FeedDiscovererRequest())->authorize());
     }
 
-    public function test_invalid_url(): void
+    /**
+     * @dataProvider validationDataProvider
+     */
+    public function test_validate(array $data, bool $shouldSucceed, string $expectedExceptionMessage = null): void
     {
-        $expectedData = ['feed_url' => 'test.dev'];
+        $request = new FeedDiscovererRequest($data);
 
-        static::expectException(ValidationException::class);
+        if (! $shouldSucceed) {
+            static::expectException(ValidationException::class);
+            static::expectExceptionMessage($expectedExceptionMessage);
+        }
 
-        $request = new FeedDiscovererRequest($expectedData);
-        $request->validate($request->rules());
+        $validated = $request->validate($request->rules());
+
+        if ($shouldSucceed) {
+            static::assertSame($data, $validated);
+        }
+    }
+
+    public static function validationDataProvider(): array
+    {
+        return [
+            'succeeds' => [
+                static::makeData('https://tailwindcss.com/feeds/feed.xml'),
+                true,
+            ],
+            'missing feed_url' => [
+                static::makeData(''),
+                false,
+                'The Feed URL field is required.',
+            ],
+            'invalid feed_url' => [
+                static::makeData('mailto:test@test.de'),
+                false,
+                'The Feed URL format is invalid.'
+            ],
+            'overly long feed_url' => [
+                static::makeData('https://google.de/?test='.Str::random(232)),
+                false,
+                'The Feed URL may not be greater than 255 characters.',
+            ],
+        ];
+    }
+
+    private static function makeData(mixed $feedUrl): array {
+        return [
+            'feed_url' => $feedUrl,
+        ];
     }
 }
