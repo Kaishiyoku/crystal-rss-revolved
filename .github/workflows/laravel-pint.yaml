@@ -1,0 +1,42 @@
+name: "Laravel Pint"
+
+on:
+  push:
+    paths-ignore:
+      - "**.md"
+      - 'docs/**'
+    # Prevent duplicating jobs on PR-s from local branches
+    branches:
+      - "master"
+  pull_request:
+    paths-ignore:
+      - "**.md"
+      - 'docs/**'
+  schedule:
+    - cron: "0 0 * * *"
+
+concurrency:
+  group: sa-${{ github.head_ref || github.run_id }} # will be canceled on subsequent pushes in pull requests but not branches
+  cancel-in-progress: true
+
+jobs:
+  static-analysis:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Checkout code"
+        uses: "actions/checkout@v3"
+
+      - name: "Setup PHP"
+        uses: "shivammathur/setup-php@v2"
+        with:
+          php-version: 8.1
+          extensions: "dom, curl, libxml, mbstring, zip, fileinfo"
+          tools: "composer:v2"
+          coverage: "none"
+
+      - name: "Install dependencies from composer.json"
+        run: "composer install --no-interaction --no-progress --dev"
+
+      - name: "Execute Laravel Pint"
+        run: "./vendor/bin/pint --test"
