@@ -218,5 +218,6 @@ return [
         'username' => 'Benutzername',
         'year' => 'Jahr',
         'is_purgeable' => 'Aufräumbar',
+        'feed_id' => 'Feed',
     ],
 ];
