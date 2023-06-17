@@ -3,7 +3,6 @@
 namespace Requests;
 
 use App\Http\Requests\FeedDiscovererRequest;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
@@ -11,8 +10,6 @@ use Tests\TestCase;
 
 class FeedDiscovererRequestTest extends TestCase
 {
-    use RefreshDatabase;
-
     public function test_authorize(): void
     {
         static::assertTrue((new FeedDiscovererRequest())->authorize());
