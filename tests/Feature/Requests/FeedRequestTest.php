@@ -7,7 +7,6 @@ use App\Http\Requests\UpdateFeedRequest;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
@@ -16,7 +15,6 @@ use Tests\TestCase;
 class FeedRequestTest extends TestCase
 {
     use RefreshDatabase;
-    use WithFaker;
 
     private const CATEGORY_ID = 1;
 

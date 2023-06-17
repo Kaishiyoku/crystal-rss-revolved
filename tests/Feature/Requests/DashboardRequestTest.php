@@ -7,7 +7,6 @@ use App\Http\Requests\StoreFeedRequest;
 use App\Models\Feed;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Tests\TestCase;
@@ -15,7 +14,6 @@ use Tests\TestCase;
 class DashboardRequestTest extends TestCase
 {
     use RefreshDatabase;
-    use WithFaker;
 
     private const FEED_ID = 1;
 
@@ -41,7 +39,7 @@ class DashboardRequestTest extends TestCase
      */
     public function test_rules(array $request, bool $shouldSucceed, string $expectedExceptionMessage = null): void
     {
-        $dashboardRequest = new DashboardRequest([], $request);
+        $dashboardRequest = new DashboardRequest($request);
 
         if (! $shouldSucceed) {
             static::expectException(ValidationException::class);
