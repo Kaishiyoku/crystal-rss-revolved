@@ -48,7 +48,7 @@ class FeedUrlDiscovererRequestTest extends TestCase
             'invalid feed_url' => [
                 static::makeData('mailto:test@test.de'),
                 false,
-                'The Feed URL format is invalid.'
+                'The Feed URL format is invalid.',
             ],
             'overly long feed_url' => [
                 static::makeData('https://google.de/?test='.Str::random(232)),
@@ -58,7 +58,8 @@ class FeedUrlDiscovererRequestTest extends TestCase
         ];
     }
 
-    private static function makeData(mixed $feedUrl): array {
+    private static function makeData(mixed $feedUrl): array
+    {
         return [
             'feed_url' => $feedUrl,
         ];

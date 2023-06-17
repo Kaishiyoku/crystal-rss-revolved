@@ -66,7 +66,8 @@ class DashboardRequestTest extends TestCase
         ];
     }
 
-    private static function makeData(mixed $feedId): array {
+    private static function makeData(mixed $feedId): array
+    {
         return [
             'feed_id' => $feedId,
         ];

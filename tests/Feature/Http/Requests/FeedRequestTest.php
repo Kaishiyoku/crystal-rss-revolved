@@ -137,7 +137,7 @@ class FeedRequestTest extends TestCase
             'invalid favicon_url' => [
                 static::makeData(faviconUrl: 'mailto:test@test.de'),
                 false,
-                'The Favicon URL format is invalid.'
+                'The Favicon URL format is invalid.',
             ],
             'overly long favicon_url' => [
                 static::makeData(faviconUrl: 'https://google.de/?test='.Str::random(232)),
