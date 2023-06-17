@@ -25,6 +25,16 @@ class FeedDiscovererControllerTest extends TestCase
             ]);
     }
 
+    public function test_no_feed_found(): void
+    {
+        $this->actingAs(User::factory()->create());
+
+        $response = $this->post(route('discover-feed'), ['feed_url' => 'https://v2.wttr.in/']);
+
+        $response->assertNotFound();
+        static::assertSame('No feeds found.', $response->exception->getMessage());
+    }
+
     public function test_cannot_access_as_guest(): void
     {
         $this->post(route('discover-feed'))
