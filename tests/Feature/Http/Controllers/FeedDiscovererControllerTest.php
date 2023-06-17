@@ -21,7 +21,7 @@ class FeedDiscovererControllerTest extends TestCase
                 'site_url',
                 'favicon_url',
                 'name',
-                'language'
+                'language',
             ]);
     }
 
