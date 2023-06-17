@@ -217,5 +217,6 @@ return [
         'updated_at' => 'Aktualisiert am',
         'username' => 'Benutzername',
         'year' => 'Jahr',
+        'is_purgeable' => 'Aufräumbar',
     ],
 ];

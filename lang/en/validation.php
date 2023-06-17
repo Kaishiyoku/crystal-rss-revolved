@@ -182,7 +182,7 @@ return [
         'minute' => 'minute',
         'mobile' => 'mobile',
         'month' => 'month',
-        'name' => 'name',
+        'name' => 'Name',
         'national_code' => 'national code',
         'number' => 'number',
         'password' => 'password',
@@ -217,5 +217,6 @@ return [
         'updated_at' => 'updated at',
         'username' => 'username',
         'year' => 'year',
+        'is_purgeable' => 'Purgeable',
     ],
 ];
