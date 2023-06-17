@@ -20,7 +20,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  static-analysis:
+  laravel-pint:
     runs-on: ubuntu-latest
 
     steps:
