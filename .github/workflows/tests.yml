@@ -52,4 +52,4 @@ jobs:
       run: php artisan migrate
 
     - name: Execute tests (Unit and Feature tests) via PHPUnit
-      run: php artisan test --min=100
+      run: php artisan test --coverage --min=100
