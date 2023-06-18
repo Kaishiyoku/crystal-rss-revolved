@@ -201,7 +201,7 @@ class FeedRequestTest extends TestCase
             'feed_url' => $feedUrl ?? 'https://tailwindcss.com/feeds/feed.xml',
             'site_url' => $siteUrl ?? 'https://tailwindcss.com/blog',
             'favicon_url' => $faviconUrl ?? 'https://tailwindcss.com/blog/favicons/apple-touch-icon.png?v=3',
-            'name' => $name ?? 'https://tailwindcss.com/feeds/feed.xml',
+            'name' => $name ?? 'Tailwind CSS Blog',
             'language' => $language ?? 'en',
             'is_purgeable' => $isPurgeable ?? true,
         ];

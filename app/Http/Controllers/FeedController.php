@@ -25,6 +25,7 @@ class FeedController extends Controller
     {
         return Inertia::render('Feeds/Index', [
             'feeds' => Auth::user()->feeds()->with('category')->withCount('feedItems')->get(),
+            'canCreate' => Auth::user()->can('create', Feed::class),
         ]);
     }
 
