@@ -29,4 +29,24 @@ class FeedItemFactory extends Factory
             'updated_at' => fake()->dateTime(),
         ];
     }
+
+    /**
+     * Indicate that the model's read at date is null.
+     */
+    public function unread(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'read_at' => null,
+        ]);
+    }
+
+    /**
+     * Indicate that the model's read at date is set.
+     */
+    public function read(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'read_at' => fake()->dateTime(),
+        ]);
+    }
 }
