@@ -25,7 +25,7 @@ const Modal = ({children, show = false, maxWidth = '2xl', closeable = true, onCl
             <Dialog
                 as="div"
                 id="modal"
-                className="fixed inset-0 flex overflow-y-auto px-4 py-6 sm:px-0 items-center z-50 transform transition-all backdrop-blur"
+                className="fixed inset-0 flex max-h-full px-4 py-6 sm:px-0 items-center z-50 transform transition-all backdrop-blur"
                 onClose={close}
             >
                 <Transition.Child
@@ -50,7 +50,7 @@ const Modal = ({children, show = false, maxWidth = '2xl', closeable = true, onCl
                     leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                 >
                     <Dialog.Panel
-                        className={`mb-4 bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-xl transform transition-all w-full sm:mx-auto ${maxWidthClass}`}
+                        className={`flex flex-col mb-4 bg-white dark:bg-gray-800 rounded-lg max-h-full shadow-xl transform transition-all w-full sm:mx-auto ${maxWidthClass}`}
                     >
                         {children}
                     </Dialog.Panel>
@@ -62,8 +62,8 @@ const Modal = ({children, show = false, maxWidth = '2xl', closeable = true, onCl
 
 const ModalHeader = ({children}) => {
     return (
-        <div className="px-4 pt-4">
-            <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">
+        <div className="p-4">
+            <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100 pr-8">
                 {children}
             </h2>
         </div>
@@ -72,7 +72,7 @@ const ModalHeader = ({children}) => {
 
 const ModalBody = ({children}) => {
     return (
-        <div className="p-4">
+        <div className="p-4 overflow-y-auto">
             {children}
         </div>
     );
