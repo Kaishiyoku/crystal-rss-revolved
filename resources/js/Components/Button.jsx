@@ -40,7 +40,7 @@ const Button = ({as: Component = 'button', variant, icon: Icon = null, type = 'b
                     {
                         'rounded-lg px-5 sm:px-4 py-3.5 sm:py-2.5': variant !== 'headless',
                         'text-violet-100 bg-violet-500 hover:bg-violet-600 disabled:hover:bg-violet-500 focus:ring-violet-600': variant === 'primary',
-                        'text-violet-600 dark:text-violet-500 hover:text-violet-100 dark:hover:text-violet-100 border border-violet-600 dark:border-violet-500 dark:hover:border-violet-800 hover:bg-violet-600 disabled:hover:text-violet-600 dark:disabled:text-violet-500 disabled:dark:hover:border-violet-500 disabled:hover:bg-transparent dark:disabled:hover:bg-transparent focus:ring-violet-600': variant === 'secondary',
+                        'text-violet-600 dark:text-violet-500 hover:text-violet-100 dark:hover:text-violet-100 border border-violet-600 dark:border-violet-500 dark:hover:border-violet-800 bg-white dark:bg-gray-900 hover:bg-violet-600 disabled:hover:text-violet-600 dark:disabled:text-violet-500 disabled:dark:hover:border-violet-500 disabled:hover:bg-transparent dark:disabled:hover:bg-transparent focus:ring-violet-600': variant === 'secondary',
                         'text-pink-100 bg-pink-500 hover:bg-pink-600 disabled:hover:bg-pink-500 focus:ring-pink-600': variant === 'danger',
                         'text-violet-600 dark:text-violet-500 hover:text-violet-100 dark:hover:text-violet-100 hover:bg-violet-600 disabled:hover:text-violet-600 dark:disabled:hover:text-violet-500 disabled:bg-transparent dark:disabled:bg-transparent focus:ring-violet-400 dark:focus:ring-violet-600': variant === 'plain',
                         'w-full sm:w-auto': hasMobileFullSize,
