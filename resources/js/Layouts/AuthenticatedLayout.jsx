@@ -1,7 +1,6 @@
 import {Fragment, useEffect, useState} from 'react';
 import {Link} from '@inertiajs/react';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
-import clsx from 'clsx';
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
