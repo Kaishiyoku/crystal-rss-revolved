@@ -22,7 +22,6 @@ export default function Index({feeds, ...props}) {
             auth={props.auth}
             errors={props.errors}
             header={<Header>{t('Feeds')}</Header>}
-            hasMobileSpacing
         >
             <Head title={t('Feeds')}/>
 

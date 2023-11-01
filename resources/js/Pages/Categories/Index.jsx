@@ -24,7 +24,7 @@ export default function Index({categories, ...props}) {
         >
             <Head title={t('Categories')}/>
 
-            <Actions hasMobileSpacing>
+            <Actions>
                 <Link
                     href={route('categories.create')}
                     className="link-secondary"

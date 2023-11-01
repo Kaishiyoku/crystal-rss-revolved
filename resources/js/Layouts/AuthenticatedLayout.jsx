@@ -9,7 +9,7 @@ import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import {Transition} from '@headlessui/react';
 import DropdownArrowIcon from '@/Icons/DropdownArrowIcon';
 
-export default function Authenticated({auth, header, hasMobileSpacing = false, children}) {
+export default function Authenticated({auth, header, children}) {
     const {t} = useLaravelReactI18n();
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
@@ -167,10 +167,8 @@ export default function Authenticated({auth, header, hasMobileSpacing = false, c
                 </header>
             )}
 
-            <main className="max-w-7xl mx-auto py-12 sm:px-6 lg:px-8">
-                <div className={clsx({'px-4 sm:px-0': hasMobileSpacing})}>
-                    {children}
-                </div>
+            <main className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+                {children}
             </main>
         </div>
     );

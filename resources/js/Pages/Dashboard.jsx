@@ -35,7 +35,7 @@ export default function Dashboard(props) {
             >
                 <Head title="Dashboard"/>
 
-                <div className="sm:flex sm:justify-end px-4 sm:px-0 mb-8">
+                <div className="sm:flex sm:justify-end mb-8">
                     <FeedFilterDropdown selectedFeed={props.selectedFeed} feeds={props.unreadFeeds}/>
 
                     {totalNumberOfFeedItems > 0 && (
@@ -71,7 +71,7 @@ export default function Dashboard(props) {
                         />
                     )}
 
-                <div className="pt-5 px-4 sm:px-0">
+                <div className="pt-5">
                     {props.feedItems.next_cursor && (
                         <Link
                             className="link-secondary"

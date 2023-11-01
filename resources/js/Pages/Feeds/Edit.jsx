@@ -19,7 +19,6 @@ export default function Edit(props) {
             auth={props.auth}
             errors={props.errors}
             header={<Breadcrumbs breadcrumbs={props.breadcrumbs}/>}
-            hasMobileSpacing
         >
             <Head title={t('Edit feed')}/>
 

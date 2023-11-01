@@ -7,7 +7,7 @@ import {useLaravelReactI18n} from 'laravel-react-i18n';
 import XMarkOutlineIcon from '@/Icons/XMarkOutlineIcon';
 import EllipsisVerticalOutlineIcon from '@/Icons/EllipsisVerticalOutlineIcon';
 
-const MobileActions = ({hasMobileSpacing, children}) => {
+const MobileActions = ({children}) => {
     const {t} = useLaravelReactI18n();
     const [show, setShow] = useState(false);
 
@@ -21,7 +21,7 @@ const MobileActions = ({hasMobileSpacing, children}) => {
 
     return (
         <div className="sm:hidden">
-            <div className={clsx('pb-8', {'px-4': hasMobileSpacing})}>
+            <div className="pb-8">
                 <SecondaryButton
                     onClick={() => setShow(true)}
                     className="w-full"
@@ -76,7 +76,7 @@ const MobileActions = ({hasMobileSpacing, children}) => {
     );
 };
 
-export default function Actions({hasMobileSpacing = false, className, children}) {
+export default function Actions({className, children}) {
     if (!children) {
         return null;
     }
@@ -87,7 +87,7 @@ export default function Actions({hasMobileSpacing = false, className, children})
                 {children}
             </div>
 
-            <MobileActions hasMobileSpacing={hasMobileSpacing}>
+            <MobileActions>
                 {children}
             </MobileActions>
         </>

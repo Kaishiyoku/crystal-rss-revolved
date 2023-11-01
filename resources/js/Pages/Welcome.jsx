@@ -40,7 +40,7 @@ export default function Welcome(props) {
                             {window.appName}
                         </div>
 
-                        <div className="max-w-xl mx-auto mt-16 px-4 sm:px-0 py-4 text-gray-200">
+                        <div className="max-w-xl mx-auto mt-16 py-4 text-gray-200">
                             <p className="text-2xl pb-8">
                                 {t('welcome.headline', {name: window.appName})}
                             </p>
