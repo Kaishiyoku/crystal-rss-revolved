@@ -8,6 +8,7 @@ import TotalNumberOfFeedItemsContext from '@/Contexts/TotalNumberOfFeedItemsCont
 import EyeOutlineIcon from '@/Icons/EyeOutlineIcon';
 import EyeSlashOutlineIcon from '@/Icons/EyeSlashOutlineIcon';
 import formatDateTime from '@/Utils/formatDateTime';
+import CalendarDaysSolidIcon from '@/Icons/CalendarDaysSolidIcon';
 
 /**
  * @param {number} hueRotationIndex
@@ -68,7 +69,8 @@ export default function FeedItemCard({hueRotationIndex, feedItem}) {
                     </Card.HeaderLink>
 
                     <div className="text-sm text-muted pt-2 pb-4">
-                        <div className="pb-1">
+                        <div className="flex items-center pb-1">
+                            <CalendarDaysSolidIcon className="w-5 h-5 mr-2"/>
                             {formatDateTime(internalFeedItem.posted_at)}
                         </div>
 
@@ -82,7 +84,7 @@ export default function FeedItemCard({hueRotationIndex, feedItem}) {
                                         className="w-4 h-4 mr-2"
                                     />
                                 )
-                                : <PhotoSolidIcon className="w-4 h-4 mr-2"/>}
+                                : <PhotoSolidIcon className="w-5 h-5 mr-2"/>}
 
                             <div>
                                 {internalFeedItem.feed.name}
