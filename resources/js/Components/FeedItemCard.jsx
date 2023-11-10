@@ -7,6 +7,7 @@ import {SecondaryButton} from '@/Components/Button';
 import TotalNumberOfFeedItemsContext from '@/Contexts/TotalNumberOfFeedItemsContext';
 import EyeOutlineIcon from '@/Icons/EyeOutlineIcon';
 import EyeSlashOutlineIcon from '@/Icons/EyeSlashOutlineIcon';
+import formatDateTime from '@/Utils/formatDateTime';
 
 /**
  * @param {number} hueRotationIndex
@@ -66,20 +67,26 @@ export default function FeedItemCard({hueRotationIndex, feedItem}) {
                         {internalFeedItem.title}
                     </Card.HeaderLink>
 
-                    <div className="flex items-center py-2">
-                        {internalFeedItem.feed.favicon_url
-                            ? (
-                                <img
-                                    loading="lazy"
-                                    src={internalFeedItem.feed.favicon_url}
-                                    alt={internalFeedItem.feed.name}
-                                    className="w-4 h-4 mr-2"
-                                />
-                            )
-                            : <PhotoSolidIcon className="w-4 h-4 mr-2 text-muted"/>}
+                    <div className="text-sm text-muted pt-2 pb-4">
+                        <div className="pb-1">
+                            {formatDateTime(internalFeedItem.posted_at)}
+                        </div>
 
-                        <div className="text-sm text-muted">
-                            {internalFeedItem.feed.name}
+                        <div className="flex items-center">
+                            {internalFeedItem.feed.favicon_url
+                                ? (
+                                    <img
+                                        loading="lazy"
+                                        src={internalFeedItem.feed.favicon_url}
+                                        alt={internalFeedItem.feed.name}
+                                        className="w-4 h-4 mr-2"
+                                    />
+                                )
+                                : <PhotoSolidIcon className="w-4 h-4 mr-2"/>}
+
+                            <div>
+                                {internalFeedItem.feed.name}
+                            </div>
                         </div>
                     </div>
 
