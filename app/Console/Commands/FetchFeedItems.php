@@ -91,12 +91,16 @@ class FetchFeedItems extends Command
     {
         $this->logger->info("Fetching feed {$feed->name}");
 
+        $minFeedDate = today()->subMonths(config('app.fetch_articles_not_older_than_months'));
+
         try {
             $rssFeed = $this->heraRssCrawler->parseFeed($feed->feed_url);
 
-            $rssFeed->getFeedItems()->each(function (RssFeedItem $rssFeedItem) use ($feed) {
-                $this->storeRssFeedItem($feed, $rssFeedItem);
-            });
+            $rssFeed->getFeedItems()
+                ->filter(fn (RssFeedItem $rssFeedItem) => $rssFeedItem->getCreatedAt()?->gte($minFeedDate))
+                ->each(function (RssFeedItem $rssFeedItem) use ($feed) {
+                    $this->storeRssFeedItem($feed, $rssFeedItem);
+                });
 
             $feed->last_failed_at = null;
             if ($feed->isDirty()) {

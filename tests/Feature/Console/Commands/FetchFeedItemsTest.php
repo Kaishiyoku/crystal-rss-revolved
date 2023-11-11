@@ -4,7 +4,9 @@ namespace Tests\Feature\Console\Commands;
 
 use App\Console\Commands\FetchFeedItems;
 use App\Models\Feed;
+use App\Models\FeedItem;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Collection;
@@ -79,6 +81,42 @@ class FetchFeedItemsTest extends TestCase
         static::assertSame($numberOfFeedItems, $feed->feedItems()->count());
     }
 
+    public function test_does_not_store_older_feed_items(): void
+    {
+        $this->freezeTime();
+
+        $expectedNumberOfFeedItems = 2;
+
+        $user = User::factory()->create();
+        $feed = Feed::factory()->state(['feed_url' => 'https://feed.laravel-news.com/'])->recycle($user)->create();
+
+        $dummyRssFeed = static::getDummyRssFeed($expectedNumberOfFeedItems);
+        $dummyRssFeed->setFeedItems($dummyRssFeed->getFeedItems()
+            ->merge([
+                static::getDummyRssFeedItem(
+                    3,
+                    now()
+                        ->subMonths(config('app.fetch_articles_not_older_than_months'))
+                        ->subDay()
+                ),
+            ]));
+
+        $heraRssCrawlerMock = $this->partialMock(HeraRssCrawler::class);
+        $heraRssCrawlerMock->shouldReceive('parseFeed')->once()->andReturn($dummyRssFeed);
+
+        $this->artisan(FetchFeedItems::class)
+            ->assertExitCode(Command::SUCCESS);
+
+        $numberOfFeedItems = $feed->feedItems()->count();
+
+        static::assertSame($expectedNumberOfFeedItems, $numberOfFeedItems);
+
+        $feed->feedItems
+            ->each(function (FeedItem $feedItem) {
+                static::assertTrue($feedItem->posted_at->gte(today()->subMonths(config('app.fetch_articles_not_older_than_months'))));
+            });
+    }
+
     /**
      * @param  Collection<RssFeedItem>  $rssFeedItems
      *
@@ -105,7 +143,7 @@ class FetchFeedItemsTest extends TestCase
         return $rssFeed;
     }
 
-    private static function getDummyRssFeedItem(int $id): RssFeedItem
+    private static function getDummyRssFeedItem(int $id, Carbon $date = null): RssFeedItem
     {
         $rssFeedItem = new RssFeedItem();
         $rssFeedItem->setCategories(collect());
@@ -116,8 +154,8 @@ class FetchFeedItemsTest extends TestCase
         $rssFeedItem->setCommentFeedLink('https://test.dev');
         $rssFeedItem->setCommentLink('https://test.dev');
         $rssFeedItem->setContent('Dummy content');
-        $rssFeedItem->setCreatedAt(now());
-        $rssFeedItem->setUpdatedAt(now());
+        $rssFeedItem->setCreatedAt($date ?? now());
+        $rssFeedItem->setUpdatedAt($date ?? now());
         $rssFeedItem->setDescription('Dummy description');
         $rssFeedItem->setEnclosureUrl("https://test.dev/{$id}");
         $rssFeedItem->setImageUrls(collect());
