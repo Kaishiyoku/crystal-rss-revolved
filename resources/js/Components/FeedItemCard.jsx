@@ -82,7 +82,7 @@ export default function FeedItemCard({hueRotationIndex, feedItem}) {
                                         loading="lazy"
                                         src={internalFeedItem.feed.favicon_url}
                                         alt={internalFeedItem.feed.name}
-                                        className="w-4 h-4 mr-2"
+                                        className="w-5 h-5 rounded mr-2"
                                     />
                                 )
                                 : <PhotoSolidIcon className="w-5 h-5 mr-2"/>}
