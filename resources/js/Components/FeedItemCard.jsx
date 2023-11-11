@@ -9,6 +9,7 @@ import EyeOutlineIcon from '@/Icons/EyeOutlineIcon';
 import EyeSlashOutlineIcon from '@/Icons/EyeSlashOutlineIcon';
 import formatDateTime from '@/Utils/formatDateTime';
 import CalendarDaysSolidIcon from '@/Icons/CalendarDaysSolidIcon';
+import PropTypes from 'prop-types';
 
 /**
  * @param {number} hueRotationIndex
@@ -111,3 +112,7 @@ export default function FeedItemCard({hueRotationIndex, feedItem}) {
         </Card>
     );
 }
+FeedItemCard.propTypes = {
+    hueRotationIndex: PropTypes.number.isRequired,
+    feedItem: PropTypes.object.isRequired,
+};
