@@ -1,7 +1,9 @@
 import clsx from 'clsx';
 import PhotoSolidIcon from '@/Icons/PhotoSolidIcon';
+import {ReactNode} from 'react';
+import {OtherProps} from '@/types';
 
-const Card = ({children, className, ...props}) => {
+const Card = ({children, className = '', ...props}: {children: ReactNode; className?: string; props?: OtherProps;}) => {
     return (
         <div
             className={clsx('shadow-md dark:shadow-black/10 bg-white dark:bg-gray-800 rounded-lg', className)}
@@ -12,7 +14,7 @@ const Card = ({children, className, ...props}) => {
     );
 };
 
-const Image = ({src, alt}) => {
+const Image = ({src, alt}: {src: string; alt: string;}) => {
     return (
         <img
             loading="lazy"
@@ -23,7 +25,7 @@ const Image = ({src, alt}) => {
     );
 };
 
-const ImagePlaceholder = ({className}) => {
+const ImagePlaceholder = ({className = ''}: {className?: string}) => {
     return (
         <div className={clsx('flex justify-center h-72 md:h-56 bg-gradient-to-br from-cyan-300 to-violet-400 dark:from-cyan-900 dark:to-violet-700 saturate-[.20] rounded-t-lg', className)}>
             <PhotoSolidIcon className="h-full text-white mix-blend-soft-light"/>
@@ -31,7 +33,7 @@ const ImagePlaceholder = ({className}) => {
     );
 };
 
-const HeaderLink = ({href, children}) => {
+const HeaderLink = ({href, children}: {href: string; children: ReactNode;}) => {
     return (
         <a
             href={href}
@@ -42,7 +44,7 @@ const HeaderLink = ({href, children}) => {
     );
 };
 
-const Body = ({children, className, ...props}) => {
+const Body = ({children, className = '', ...props}: {children: ReactNode; className?: string; props?: OtherProps}) => {
     return (
         <div
             className={clsx('p-4', className)}

@@ -19,7 +19,7 @@ const Dropdown = ({children}) => {
     );
 };
 
-const Trigger = ({className, children}) => {
+const Trigger = ({className = '', children}) => {
     const {open, setOpen, toggleOpen} = useContext(DropDownContext);
 
     return (

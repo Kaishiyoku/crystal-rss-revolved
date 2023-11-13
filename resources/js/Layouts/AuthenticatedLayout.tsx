@@ -1,4 +1,4 @@
-import {Fragment, useEffect, useState} from 'react';
+import {Fragment, ReactNode, useEffect, useState} from 'react';
 import {Link} from '@inertiajs/react';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import ApplicationLogo from '@/Components/ApplicationLogo';
@@ -7,15 +7,16 @@ import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import {Transition} from '@headlessui/react';
 import DropdownArrowIcon from '@/Icons/DropdownArrowIcon';
+import {PageProps} from '@/types';
 
-export default function Authenticated({auth, header, children}) {
+export default function Authenticated({auth, header, children}: PageProps & {header: ReactNode; children: ReactNode}) {
     const {t} = useLaravelReactI18n();
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
     useEffect(() => {
-        document.body.style.overflowY = showingNavigationDropdown ? 'hidden' : null;
-        document.body.style.position = showingNavigationDropdown ? 'fixed' : null;
-        document.body.style.width = showingNavigationDropdown ? '100%' : null;
+        document.body.style.overflowY = showingNavigationDropdown ? 'hidden' : '';
+        document.body.style.position = showingNavigationDropdown ? 'fixed' : '';
+        document.body.style.width = showingNavigationDropdown ? '100%' : '';
     }, [showingNavigationDropdown]);
 
     return (
@@ -70,7 +71,7 @@ export default function Authenticated({auth, header, children}) {
                                             {t('Profile')}
                                         </Dropdown.Link>
                                         {!!auth.user.is_admin && (
-                                            <Dropdown.Link href={route('telescope')} component="a">
+                                            <Dropdown.Link href={route('telescope')} as="a">
                                                 {t('Telescope')}
                                             </Dropdown.Link>
                                         )}
@@ -142,14 +143,16 @@ export default function Authenticated({auth, header, children}) {
                                 </div>
 
                                 <div className="mt-3 space-y-1">
-                                    <ResponsiveNavLink href={route('profile.edit')}>Profile</ResponsiveNavLink>
+                                    <ResponsiveNavLink href={route('profile.edit')}>
+                                        {t('Profile')}
+                                    </ResponsiveNavLink>
                                     {!!auth.user.is_admin && (
-                                        <ResponsiveNavLink href={route('telescope')} component="a">
+                                        <ResponsiveNavLink href={route('telescope')} as="a">
                                             {t('Telescope')}
                                         </ResponsiveNavLink>
                                     )}
                                     <ResponsiveNavLink method="post" href={route('logout')} as="button">
-                                        Log Out
+                                        {t('Log Out')}
                                     </ResponsiveNavLink>
                                 </div>
                             </div>
