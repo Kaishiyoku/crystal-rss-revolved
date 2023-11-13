@@ -12,7 +12,10 @@
         "noEmit": true,
         "paths": {
             "@/*": ["./resources/js/*"]
-        }
+        },
+        "typeRoots": [
+            "resources/js/types/global.d.ts"
+        ]
     },
     "include": ["resources/js/**/*.ts", "resources/js/**/*.tsx", "resources/js/**/*.d.ts"]
 }
