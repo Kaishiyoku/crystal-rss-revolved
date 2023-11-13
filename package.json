@@ -2,19 +2,25 @@
     "private": true,
     "scripts": {
         "dev": "vite",
-        "build": "vite build",
+        "build": "tsc && vite build",
         "lint": "eslint --ext .js,.jsx resources/js"
     },
     "devDependencies": {
         "@headlessui/react": "^1.7.14",
         "@inertiajs/react": "^1.0.3",
         "@tailwindcss/forms": "^0.5.3",
+        "@types/node": "^20.9.0",
+        "@types/react": "^18.2.37",
+        "@types/react-dom": "^18.2.15",
+        "@types/ziggy-js": "^1.8.0",
+        "@typescript-eslint/eslint-plugin": "^6.11.0",
+        "@typescript-eslint/parser": "^6.11.0",
         "@vitejs/plugin-react": "^4.0.0",
         "autoprefixer": "^10.4.14",
         "axios": "^1.3.5",
         "clsx": "^2.0.0",
         "date-fns": "^2.29.3",
-        "eslint": "^8.38.0",
+        "eslint": "^8.53.0",
         "eslint-config-standard": "^17.0.0",
         "eslint-plugin-import": "^2.27.5",
         "eslint-plugin-n": "^16.0.0",
@@ -30,6 +36,7 @@
         "react-dom": "^18.2.0",
         "slug": "^8.2.2",
         "tailwindcss": "^3.3.1",
+        "typescript": "^5.2.2",
         "vite": "^4.2.1"
     }
 }
