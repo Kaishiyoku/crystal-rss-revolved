@@ -1,5 +1,5 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import {Head, Link, router} from '@inertiajs/react';
+import {Head, router} from '@inertiajs/react';
 import Header from '@/Components/Page/Header';
 import {useState} from 'react';
 import FeedItemCard from '@/Components/FeedItemCard';
@@ -39,7 +39,7 @@ export default function Dashboard(props: DashboardPageProps) {
             only: ['feedItems'],
             preserveState: true,
             preserveScroll: true,
-            onSuccess: (page) => setAllFeedItems([...allFeedItems, ...(page.props as DashboardPageProps).feedItems.data])
+            onSuccess: (page) => setAllFeedItems([...allFeedItems, ...(page.props as DashboardPageProps).feedItems.data]),
         });
     };
 
