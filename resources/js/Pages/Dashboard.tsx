@@ -12,7 +12,14 @@ import EmptyState from '@/Components/EmptyState';
 import EyeOutlineIcon from '@/Icons/EyeOutlineIcon';
 import {CursorPagination, FeedItem, PageProps, ShortFeed} from '@/types';
 
-export default function Dashboard(props: PageProps & { selectedFeed: ShortFeed; unreadFeeds: ShortFeed[]; totalNumberOfFeedItems: number; feedItems: CursorPagination<FeedItem>; }) {
+type DashboardPageProps = PageProps & {
+    selectedFeed: ShortFeed;
+    unreadFeeds: ShortFeed[];
+    totalNumberOfFeedItems: number;
+    feedItems: CursorPagination<FeedItem>;
+};
+
+export default function Dashboard(props: DashboardPageProps) {
     const {t, tChoice} = useLaravelReactI18n();
     const [allFeedItems, setAllFeedItems] = useState(props.feedItems.data);
     const [totalNumberOfFeedItems, setTotalNumberOfFeedItems] = useState(props.totalNumberOfFeedItems);
@@ -21,6 +28,19 @@ export default function Dashboard(props: PageProps & { selectedFeed: ShortFeed; 
         await window.axios.put(route('mark-all-as-read'));
 
         router.get(route('dashboard'));
+    };
+
+    const loadMore = () => {
+        if (!props.feedItems.next_page_url) {
+            return;
+        }
+
+        router.get(props.feedItems.next_page_url, undefined, {
+            only: ['feedItems'],
+            preserveState: true,
+            preserveScroll: true,
+            onSuccess: (page) => setAllFeedItems([...allFeedItems, ...(page.props as DashboardPageProps).feedItems.data])
+        });
     };
 
     return (
@@ -77,16 +97,13 @@ export default function Dashboard(props: PageProps & { selectedFeed: ShortFeed; 
 
                 <div className="pt-5">
                     {props.feedItems.next_page_url && (
-                        <Link
+                        <button
+                            type="button"
                             className="link-secondary"
-                            href={props.feedItems.next_page_url}
-                            only={['feedItems']}
-                            onSuccess={(state) => setAllFeedItems([...allFeedItems, ...state.props.feedItems.data])}
-                            preserveState
-                            preserveScroll
+                            onClick={loadMore}
                         >
                             {t('Load more')}
-                        </Link>
+                        </button>
                     )}
                 </div>
             </AuthenticatedLayout>
