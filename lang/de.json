@@ -96,5 +96,7 @@
     "Yes": "Ja",
     "No": "Nein",
     "Welcome": "Willkommen",
-    "Actions": "Aktionen"
+    "Actions": "Aktionen",
+    "Do you really want to mark all articles as read?": "Wollen Sie wirklich alle Artikel als gelesen markieren?",
+    "Mark all articles as read": "Alle Artikel als gelesen markieren"
 }

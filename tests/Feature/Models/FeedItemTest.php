@@ -39,16 +39,16 @@ class FeedItemTest extends TestCase
         $feedItemIdsOfFeedB = FeedItem::factory(5)->for($feedB)->create()->pluck('id');
 
         static::assertEquals(
-            $feedItemIdsOfFeedA->sortByDesc('posted_at'),
-            FeedItem::ofFeed($feedA->id)->pluck('id')
+            $feedItemIdsOfFeedA->sort()->values(),
+            FeedItem::ofFeed($feedA->id)->pluck('id')->sort()->values()
         );
         static::assertEquals(
-            $feedItemIdsOfFeedB->sortByDesc('posted_at'),
-            FeedItem::ofFeed($feedB->id)->pluck('id')
+            $feedItemIdsOfFeedB->sort()->values(),
+            FeedItem::ofFeed($feedB->id)->pluck('id')->sort()->values()
         );
         static::assertEqualsCanonicalizing(
-            $feedItemIdsOfFeedA->merge($feedItemIdsOfFeedB),
-            FeedItem::ofFeed(null)->pluck('id')
+            $feedItemIdsOfFeedA->merge($feedItemIdsOfFeedB)->sort()->values(),
+            FeedItem::ofFeed(null)->pluck('id')->sort()->values()
         );
     }
 
