@@ -12,8 +12,6 @@ import {RouteParams} from 'ziggy-js';
 export default function Index({categories, ...props}: PageProps & { categories: Category[]; }) {
     const {t, tChoice} = useLaravelReactI18n();
 
-    console.log(categories);
-
     return (
         <AuthenticatedLayout
             auth={props.auth}
