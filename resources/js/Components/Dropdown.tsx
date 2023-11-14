@@ -1,7 +1,8 @@
 import {useState, createContext, useContext, Fragment, PropsWithChildren, Dispatch, SetStateAction} from 'react';
-import {InertiaLinkProps} from '@inertiajs/react';
+import {InertiaLinkProps, Link} from '@inertiajs/react';
 import {Transition} from '@headlessui/react';
 import noop from '@/Utils/noop';
+import clsx from 'clsx';
 
 type DropDownContextType = {
     open: boolean;
@@ -85,15 +86,15 @@ const Content = ({align = 'right', width = 48, contentClasses = 'py-1 bg-white d
     );
 };
 
-const Link = ({active = false, className = '', children, ...props}: InertiaLinkProps & { active?: boolean; }) => {
+const DropdownLink = ({active = false, className = '', children, ...props}: InertiaLinkProps & { active?: boolean; }) => {
     return (
         <Link
-            active={active}
             {...props}
-            className={
-                'block w-full px-4 py-2 text-start text-sm leading-5 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-800 transition duration-150 ease-in-out ' +
-                className
-            }
+            className={clsx(
+                'block w-full px-4 py-2 text-start text-sm leading-5 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-800 transition duration-150 ease-in-out',
+                className,
+                {'bg-red-500': active}
+            )}
         >
             {children}
         </Link>
@@ -104,7 +105,7 @@ const Spacer = () => <div className="pt-2 mb-2 border-b dark:border-gray-600"/>;
 
 Dropdown.Trigger = Trigger;
 Dropdown.Content = Content;
-Dropdown.Link = Link;
+Dropdown.Link = DropdownLink;
 Dropdown.Spacer = Spacer;
 
 export default Dropdown;
