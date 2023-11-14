@@ -34,6 +34,8 @@
         "space-before-function-paren": ["error", {"anonymous": "always", "named": "never", "asyncArrow": "always"}],
         "comma-dangle": ["error", {"arrays": "always-multiline", "objects": "always-multiline", "imports": "never", "exports": "always-multiline", "functions": "never"}],
         "no-void": "off",
-        "@typescript-eslint/no-floating-promises": ["error", {"ignoreVoid": true}]
+        "@typescript-eslint/no-floating-promises": ["error", {"ignoreVoid": true}],
+        "@typescript-eslint/member-delimiter-style": ["error", {"multiline": {"delimiter": "semi", "requireLast": true}, "singleline": {"delimiter": "semi", "requireLast": true}}],
+        "@typescript-eslint/type-annotation-spacing": ["error", {"before": true, "after": true, "overrides": {"colon": {"before": false, "after": true}}}]
     }
 }

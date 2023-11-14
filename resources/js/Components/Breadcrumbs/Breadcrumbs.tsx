@@ -2,20 +2,21 @@ import {Link} from '@inertiajs/react';
 import slug from 'slug';
 import {useEffect, useRef} from 'react';
 
-/**
- * @param {Breadcrumb[]} breadcrumbs
- * @returns {JSX.Element|null}
- */
-export default function Breadcrumbs({breadcrumbs}) {
+type Breadcrumb = {
+    title: string;
+    url: string | null;
+}
+
+export default function Breadcrumbs({breadcrumbs}: { breadcrumbs: Breadcrumb[]; }) {
     if (!breadcrumbs) {
         return null;
     }
 
-    const breadcrumbsRef = useRef();
+    const breadcrumbsRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         setTimeout(() => {
-            breadcrumbsRef.current.scrollTo({
+            breadcrumbsRef.current?.scrollTo({
                 top: 0,
                 left: breadcrumbsRef.current.getBoundingClientRect().right,
                 behavior: 'smooth',
@@ -23,13 +24,7 @@ export default function Breadcrumbs({breadcrumbs}) {
         }, 250);
     }, []);
 
-    /**
-     * @param {Breadcrumb} breadcrumb
-     * @param {number} index
-     * @param {Breadcrumb[]} arr
-     * @returns {JSX.Element}
-     */
-    const breadcrumbMapper = (breadcrumb, index, arr) => {
+    const breadcrumbMapper = (breadcrumb: Breadcrumb, index: number, arr: Breadcrumb[]) => {
         const breadcrumbElement = breadcrumb.url
             ? (
                 <li key={slug(breadcrumb.title)}>

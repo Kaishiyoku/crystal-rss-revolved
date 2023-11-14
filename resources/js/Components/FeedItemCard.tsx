@@ -10,22 +10,19 @@ import EyeSlashOutlineIcon from '@/Icons/EyeSlashOutlineIcon';
 import formatDateTime from '@/Utils/formatDateTime';
 import CalendarDaysSolidIcon from '@/Icons/CalendarDaysSolidIcon';
 import PropTypes from 'prop-types';
+import {FeedItem} from '@/types';
+import { RouteParams } from 'ziggy-js';
 
-/**
- * @param {number} hueRotationIndex
- * @param {FeedItem} feedItem
- * @returns {JSX.Element}
- */
-export default function FeedItemCard({hueRotationIndex, feedItem}) {
+export default function FeedItemCard({hueRotationIndex, feedItem}: { hueRotationIndex: 0 | 1 | 2 | 3 | 4 | 5 | 6; feedItem: FeedItem; }) {
     const {t} = useLaravelReactI18n();
-    const [totalNumberOfFeedItems, setTotalNumberOfFeedItems] = useContext(TotalNumberOfFeedItemsContext);
+    const {totalNumberOfFeedItems, setTotalNumberOfFeedItems} = useContext(TotalNumberOfFeedItemsContext);
     const [internalFeedItem, setInternalFeedItem] = useState(feedItem);
-    const [processing, setProcessing] = useState();
+    const [processing, setProcessing] = useState(false);
 
     const toggle = () => {
         setProcessing(true);
 
-        axios.put(route('toggle-feed-item', internalFeedItem))
+        void window.axios.put(route('toggle-feed-item', internalFeedItem as unknown as RouteParams<'toggle-feed-item'>))
             .then((response) => {
                 if (response.data.read_at) {
                     setTotalNumberOfFeedItems(totalNumberOfFeedItems - 1);
@@ -43,7 +40,7 @@ export default function FeedItemCard({hueRotationIndex, feedItem}) {
             key={internalFeedItem.id}
             className={clsx('flex flex-col transition ease-out duration-300', {'opacity-50': internalFeedItem.read_at})}
         >
-            {internalFeedItem.has_image
+            {internalFeedItem.has_image && internalFeedItem.image_url
                 ? (
                     <Card.Image
                         src={internalFeedItem.image_url}

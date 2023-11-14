@@ -1,4 +1,6 @@
-export default function ApplicationLogo(props) {
+import {OtherProps} from '@/types';
+
+export default function ApplicationLogo(props: OtherProps) {
     return (
         <svg
             {...props}

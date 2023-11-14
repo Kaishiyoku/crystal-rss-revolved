@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import {Children, cloneElement, Fragment, useState} from 'react';
+import {Children, cloneElement, Fragment, ReactNode, useState} from 'react';
 import {Transition} from '@headlessui/react';
 import {HeadlessButton, SecondaryButton} from '@/Components/Button.jsx';
 import {is} from 'ramda';
@@ -7,15 +7,17 @@ import {useLaravelReactI18n} from 'laravel-react-i18n';
 import XMarkOutlineIcon from '@/Icons/XMarkOutlineIcon';
 import EllipsisVerticalOutlineIcon from '@/Icons/EllipsisVerticalOutlineIcon';
 
-const MobileActions = ({children}) => {
+const MobileActions = ({children}: {children: ReactNode}) => {
     const {t} = useLaravelReactI18n();
     const [show, setShow] = useState(false);
 
+    // @ts-expect-error it doesn't matter what type children is because it must be some kind of clonable element
     const adjustedChildren = Children.map(children, (child) => {
         if (!is(Object, child)) {
             return child;
         }
 
+        // @ts-expect-error it doesn't matter what type child is because it must be some kind of clonable element
         return cloneElement(child, {className: clsx(child.props.className, 'px-4 py-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition')});
     });
 
@@ -76,7 +78,7 @@ const MobileActions = ({children}) => {
     );
 };
 
-export default function Actions({className, children}) {
+export default function Actions({className = '', children}: {className?: string; children: ReactNode}) {
     if (!children) {
         return null;
     }

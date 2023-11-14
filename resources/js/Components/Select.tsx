@@ -1,12 +1,24 @@
-import {forwardRef, useEffect, useRef} from 'react';
+import {forwardRef, InputHTMLAttributes, useEffect, useImperativeHandle, useRef} from 'react';
 import clsx from 'clsx';
 
-export default forwardRef(function Select({options = [], className = '', isFocused = false, ...props}, ref) {
-    const input = ref || useRef();
+export default forwardRef(function Select(
+    {
+        options = [],
+        className = '',
+        isFocused = false,
+        ...props
+    }: InputHTMLAttributes<HTMLSelectElement> & { options: { value: string | number; name: string; }[]; isFocused?: boolean; },
+    ref
+) {
+    const localRef = useRef<HTMLSelectElement>(null);
+
+    useImperativeHandle(ref, () => ({
+        focus: () => localRef.current?.focus(),
+    }));
 
     useEffect(() => {
         if (isFocused) {
-            input.current.focus();
+            localRef.current?.focus();
         }
     }, []);
 
@@ -18,7 +30,7 @@ export default forwardRef(function Select({options = [], className = '', isFocus
                 className,
                 {'opacity-50': props.disabled}
             )}
-            ref={input}
+            ref={localRef}
         >
             {options.map((option) => (
                 <option key={option.value} value={option.value}>{option.name}</option>

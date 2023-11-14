@@ -1,4 +1,7 @@
-export default function EmptyState({icon: Icon, message, description, children}) {
+import {FunctionComponent, ReactNode} from 'react';
+import {IconProps} from '@/types';
+
+export default function EmptyState({icon: Icon, message, description, children}: {icon: FunctionComponent<IconProps>; message: string; description: string; children: ReactNode}) {
     return (
         <div className="flex flex-col items-center">
             <div className="flex flex-col items-center max-w-sm">

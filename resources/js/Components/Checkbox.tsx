@@ -1,4 +1,6 @@
-export default function Checkbox({className = '', ...props}) {
+import {OtherProps} from '@/types';
+
+export default function Checkbox({className = '', ...props}: {className?: string, props: OtherProps}) {
     return (
         <input
             {...props}
