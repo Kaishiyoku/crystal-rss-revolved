@@ -2,7 +2,6 @@ import ApplicationLogo from '@/Components/ApplicationLogo';
 import {Link} from '@inertiajs/react';
 import Card from '@/Components/Card';
 import {ReactNode} from 'react';
-import {PageProps} from '@/types';
 
 export default function Guest({children}: {children: ReactNode; }) {
     return (

@@ -1,5 +1,4 @@
 import clsx from 'clsx';
-import {OtherProps} from '@/types';
 
 export default function InputLabel(
     {

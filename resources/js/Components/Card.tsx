@@ -25,7 +25,7 @@ const Image = ({src, alt}: {src: string; alt: string;}) => {
     );
 };
 
-const ImagePlaceholder = ({className = ''}: {className?: string}) => {
+const ImagePlaceholder = ({className = ''}: { className?: string; }) => {
     return (
         <div className={clsx('flex justify-center h-72 md:h-56 bg-gradient-to-br from-cyan-300 to-violet-400 dark:from-cyan-900 dark:to-violet-700 saturate-[.20] rounded-t-lg', className)}>
             <PhotoSolidIcon className="h-full text-white mix-blend-soft-light"/>
@@ -44,7 +44,7 @@ const HeaderLink = ({href, children}: {href: string; children: ReactNode;}) => {
     );
 };
 
-const Body = ({children, className = '', ...props}: {children: ReactNode; className?: string; props?: OtherProps}) => {
+const Body = ({children, className = '', ...props}: { children: ReactNode; className?: string; props?: OtherProps; }) => {
     return (
         <div
             className={clsx('p-4', className)}

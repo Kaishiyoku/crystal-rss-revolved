@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import {ReactNode} from 'react';
 
-const LinkStack = ({children}: { children: ReactNode }) => {
+const LinkStack = ({children}: { children: ReactNode; }) => {
     return (
         <div className="divide-y divide-gray-200 dark:divide-gray-800">
             {children}

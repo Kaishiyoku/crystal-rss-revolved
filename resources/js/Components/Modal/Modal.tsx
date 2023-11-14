@@ -74,7 +74,7 @@ const Modal = (
     );
 };
 
-const ModalHeader = ({children}: {children: ReactNode}) => {
+const ModalHeader = ({children}: { children: ReactNode; }) => {
     return (
         <div className="p-4">
             <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100 pr-8">
@@ -84,7 +84,7 @@ const ModalHeader = ({children}: {children: ReactNode}) => {
     );
 };
 
-const ModalBody = ({children}: {children: ReactNode}) => {
+const ModalBody = ({children}: { children: ReactNode; }) => {
     return (
         <div className="p-4 overflow-y-auto">
             {children}
@@ -92,7 +92,7 @@ const ModalBody = ({children}: {children: ReactNode}) => {
     );
 };
 
-const ModalFooter = ({children}: {children: ReactNode}) => {
+const ModalFooter = ({children}: { children: ReactNode; }) => {
     return (
         <div className="mt-4 px-4 pb-4 flex justify-end">
             {children}
