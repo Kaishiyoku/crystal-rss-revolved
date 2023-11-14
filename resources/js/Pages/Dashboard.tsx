@@ -10,9 +10,9 @@ import {SecondaryButton} from '@/Components/Button';
 import NewspaperOutlineIcon from '@/Icons/NewspaperOutlineIcon';
 import EmptyState from '@/Components/EmptyState';
 import EyeOutlineIcon from '@/Icons/EyeOutlineIcon';
-import {Feed, FeedItem, PageProps, CursorPagination} from '@/types';
+import {CursorPagination, FeedItem, PageProps, ShortFeed} from '@/types';
 
-export default function Dashboard(props: PageProps & { selectedFeed: Feed; unreadFeeds: Feed[]; totalNumberOfFeedItems: number; feedItems: CursorPagination<FeedItem>; }) {
+export default function Dashboard(props: PageProps & { selectedFeed: ShortFeed; unreadFeeds: ShortFeed[]; totalNumberOfFeedItems: number; feedItems: CursorPagination<FeedItem>; }) {
     const {t, tChoice} = useLaravelReactI18n();
     const [allFeedItems, setAllFeedItems] = useState(props.feedItems.data);
     const [totalNumberOfFeedItems, setTotalNumberOfFeedItems] = useState(props.totalNumberOfFeedItems);

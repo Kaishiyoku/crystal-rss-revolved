@@ -11,6 +11,12 @@ export interface User {
     is_admin: boolean;
 }
 
+export interface ShortFeed {
+    id: number;
+    feed_items_count: number;
+    name: string;
+}
+
 export interface Feed {
     id: number;
     favicon_url: string | null;
@@ -22,12 +28,17 @@ export interface Feed {
     site_url: string;
     language: string;
     is_purgeable: boolean;
+    created_at: string;
+    last_checked_at: string | null;
+    updated_at: string | null;
+    user_id: number;
 }
 
 export interface Category {
     id: number;
     name: string;
     feeds_count: number;
+    user_id: number;
 }
 
 export type SelectNumberOption = {
@@ -42,6 +53,12 @@ export type SelectStringOption = {
 
 export interface FeedItem {
     id: number;
+    checksum: string;
+    created_at: string;
+    feed_id: number;
+    image_mimetype: string | null;
+    laravel_through_key: number;
+    updated_at: string | null;
     has_image: boolean;
     image_url: string | null;
     title: string;
@@ -56,6 +73,10 @@ export type CursorPagination<T> = {
     data: T[];
     next_cursor: string | null;
     next_page_url: string | null;
+    path: string;
+    per_page: number;
+    prev_cursor: string | null;
+    prev_page_url: string | null;
 };
 
 export type BasePageProps = {
