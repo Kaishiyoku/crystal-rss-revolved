@@ -11,7 +11,7 @@ import formatDateTime from '@/Utils/formatDateTime';
 import CalendarDaysSolidIcon from '@/Icons/CalendarDaysSolidIcon';
 import PropTypes from 'prop-types';
 import {FeedItem} from '@/types';
-import { RouteParams } from 'ziggy-js';
+import {RouteParams} from 'ziggy-js';
 
 export default function FeedItemCard({hueRotationIndex, feedItem}: { hueRotationIndex: number; feedItem: FeedItem; }) {
     const {t} = useLaravelReactI18n();
