@@ -7,14 +7,10 @@ import LinkStack from '@/Components/LinkStack';
 import formatDateTime from '@/Utils/formatDateTime';
 import EmptyState from '@/Components/EmptyState';
 import NewspaperOutlineIcon from '@/Icons/NewspaperOutlineIcon';
+import {Category, Feed, PageProps} from '@/types';
+import {RouteParams} from 'ziggy-js';
 
-/**
- * @param {FeedWithCategory[]} feeds
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
-export default function Index({feeds, ...props}) {
+export default function Index({feeds, ...props}: PageProps & { feeds: Array<Feed & { category: Category; }>; }) {
     const {t, tChoice} = useLaravelReactI18n();
 
     return (
@@ -40,7 +36,7 @@ export default function Index({feeds, ...props}) {
                         {feeds.map((feed) => (
                             <LinkStack.Item
                                 key={feed.id}
-                                href={route('feeds.edit', feed)}
+                                href={route('feeds.edit', feed as unknown as RouteParams<'feeds.edit'>)}
                                 className="block sm:flex justify-between"
                             >
                                 <div>

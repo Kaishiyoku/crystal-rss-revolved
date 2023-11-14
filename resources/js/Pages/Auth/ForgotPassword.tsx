@@ -4,17 +4,21 @@ import TextInput from '@/Components/TextInput';
 import {Head, useForm} from '@inertiajs/react';
 import {PrimaryButton} from '@/Components/Button';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
+import React from 'react';
 
-export default function ForgotPassword({status}) {
+export default function ForgotPassword({status}: { status: string; }) {
     const {t} = useLaravelReactI18n();
     const {data, setData, post, processing, errors} = useForm({email: ''});
 
-    const onHandleChange = (event) => {
-        setData(event.target.name, event.target.value);
+    const onHandleChange = (event: React.FormEvent<HTMLInputElement>) => {
+        const target = event.target as HTMLInputElement;
+
+        // @ts-expect-error we know which fields can occur here
+        setData(target.name, target.value);
     };
 
-    const submit = (e) => {
-        e.preventDefault();
+    const submit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
 
         post(route('password.email'));
     };

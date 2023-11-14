@@ -12,7 +12,7 @@ window.appName = window.document.getElementsByTagName('title')[0]?.innerText || 
 
 void createInertiaApp({
     title: (title: string): string => `${title} - ${window.appName}`,
-    resolve: (name: string) => resolvePageComponent(`./Pages/${name}.jsx`, import.meta.glob('./Pages/**/*.jsx')),
+    resolve: (name: string) => resolvePageComponent(`./Pages/${name}.tsx`, import.meta.glob('./Pages/**/*.tsx')),
     setup({el, App, props}) {
         createRoot(el).render(
             <LaravelReactI18nProvider

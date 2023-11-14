@@ -4,13 +4,15 @@ import TextInput from '@/Components/TextInput';
 import InputError from '@/Components/InputError';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import {PrimaryButton} from '@/Components/Button';
+import {Category} from '@/types';
+import React from 'react';
 
-export default function Form({method, action, category}) {
+export default function Form({method, action, category}: { method: 'post' | 'put'; action: string; category: Category; }) {
     const {t} = useLaravelReactI18n();
     const {data, setData, post, put, errors, processing} = useForm({name: category.name ?? ''});
 
-    const submit = (e) => {
-        e.preventDefault();
+    const submit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
 
         const request = method === 'post' ? post : put;
 

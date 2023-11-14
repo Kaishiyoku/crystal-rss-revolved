@@ -3,15 +3,16 @@ import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
 import InputError from '@/Components/InputError';
 import Select from '@/Components/Select';
-import {useState} from 'react';
+import React, {useState} from 'react';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import Card from '@/Components/Card';
 import {PrimaryButton, SecondaryButton} from '@/Components/Button';
 import Checkbox from '@/Components/Checkbox';
+import {Feed, PageProps, SelectNumberOption} from '@/types';
 
-export default function Form({method, action, feed, categories}) {
+export default function Form({method, action, feed, categories}: { method: 'post' | 'put'; action: string; feed: Feed; categories: SelectNumberOption[]; }) {
     const {t, tChoice} = useLaravelReactI18n();
-    const {monthsAfterPruningFeedItems} = usePage().props;
+    const {monthsAfterPruningFeedItems} = usePage().props as PageProps;
     const [isDiscoverFeedProcessing, setIsDiscoverFeedProcessing] = useState(false);
     const [searchUrl, setSearchUrl] = useState('');
     const [discoveredFeedUrls, setDiscoveredFeedUrls] = useState([]);
@@ -26,11 +27,11 @@ export default function Form({method, action, feed, categories}) {
         is_purgeable: feed.is_purgeable ?? true,
     });
 
-    const discoverFeedUrls = (searchUrl) => {
+    const discoverFeedUrls = (searchUrl: string) => {
         setDiscoveredFeedUrls([]);
         setIsDiscoverFeedProcessing(true);
 
-        axios.post(route('discover-feed-urls'), {feed_url: searchUrl})
+        window.axios.post(route('discover-feed-urls'), {feed_url: searchUrl})
             .then((response) => {
                 setDiscoveredFeedUrls(response.data);
             })
@@ -40,10 +41,10 @@ export default function Form({method, action, feed, categories}) {
             .finally(() => setIsDiscoverFeedProcessing(false));
     };
 
-    const selectDiscoveredFeedUrl = (feedUrl) => () => {
+    const selectDiscoveredFeedUrl = (feedUrl: string) => () => {
         setIsDiscoverFeedProcessing(true);
 
-        axios.post(route('discover-feed'), {feed_url: feedUrl})
+        window.axios.post(route('discover-feed'), {feed_url: feedUrl})
             .then((response) => {
                 setData({...data, ...response.data});
 
@@ -56,8 +57,8 @@ export default function Form({method, action, feed, categories}) {
             .finally(() => setIsDiscoverFeedProcessing(false));
     };
 
-    const submit = (e) => {
-        e.preventDefault();
+    const submit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
 
         const request = method === 'post' ? post : put;
 
@@ -109,7 +110,7 @@ export default function Form({method, action, feed, categories}) {
                         className="mt-1 block w-full"
                         value={data.category_id}
                         options={categories}
-                        onChange={(e) => setData('category_id', e.target.value)}
+                        onChange={(event: React.FormEvent<HTMLSelectElement>) => setData('category_id', parseInt(event.currentTarget.value, 10))}
                         disabled={isDiscoverFeedProcessing}
                         required
                     />
@@ -198,7 +199,7 @@ export default function Form({method, action, feed, categories}) {
                             checked={data.is_purgeable}
                             value={data.is_purgeable}
                             disabled={isDiscoverFeedProcessing}
-                            onChange={(e) => setData('is_purgeable', e.target.checked)}
+                            onChange={(e) => setData('is_purgeable', e.currentTarget.checked)}
                         />
                         <span className="ml-2 text-sm text-gray-600 dark:text-gray-400">{tChoice('feed.purge', monthsAfterPruningFeedItems)}</span>
                     </label>

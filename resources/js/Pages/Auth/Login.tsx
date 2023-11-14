@@ -1,4 +1,4 @@
-import {useEffect} from 'react';
+import React, {useEffect} from 'react';
 import Checkbox from '@/Components/Checkbox';
 import GuestLayout from '@/Layouts/GuestLayout';
 import InputError from '@/Components/InputError';
@@ -8,7 +8,7 @@ import {Head, Link, useForm} from '@inertiajs/react';
 import {PrimaryButton} from '@/Components/Button';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 
-export default function Login({status, canResetPassword}) {
+export default function Login({status, canResetPassword}: { status: string; canResetPassword: boolean; }) {
     const {t} = useLaravelReactI18n();
     const {data, setData, post, processing, errors, reset} = useForm({
         email: '',
@@ -22,12 +22,15 @@ export default function Login({status, canResetPassword}) {
         };
     }, []);
 
-    const handleOnChange = (event) => {
-        setData(event.target.name, event.target.type === 'checkbox' ? event.target.checked : event.target.value);
+    const handleOnChange = (event: React.FormEvent<HTMLInputElement>) => {
+        const target = event.target as HTMLInputElement;
+
+        // @ts-expect-error we know which fields can occur here
+        setData(target.name, target.type === 'checkbox' ? target.checked : target.value);
     };
 
-    const submit = (e) => {
-        e.preventDefault();
+    const submit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
 
         post(route('login'));
     };

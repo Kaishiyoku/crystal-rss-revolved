@@ -5,13 +5,15 @@ import Actions from '@/Components/Actions';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import {DangerButton} from '@/Components/Button';
 import Breadcrumbs from '@/Components/Breadcrumbs/Breadcrumbs';
+import {Feed, PageProps, SelectNumberOption} from '@/types';
+import {RouteParams} from 'ziggy-js';
 
-export default function Edit(props) {
+export default function Edit({feed, categories, canDelete, ...props}: PageProps & { feed: Feed; categories: SelectNumberOption[]; canDelete: boolean; }) {
     const {t} = useLaravelReactI18n();
     const {delete: destroy, processing} = useForm();
 
     const handleDelete = () => {
-        destroy(route('feeds.destroy', props.feed));
+        destroy(route('feeds.destroy', props.feed as unknown as RouteParams<'feeds.destroy'>));
     };
 
     return (
@@ -23,7 +25,7 @@ export default function Edit(props) {
             <Head title={t('Edit feed')}/>
 
             <Actions>
-                {props.canDelete && (
+                {canDelete && (
                     <DangerButton disabled={processing} onClick={handleDelete} className="mb-5">
                         {t('Delete')}
                     </DangerButton>
@@ -32,9 +34,9 @@ export default function Edit(props) {
 
             <Form
                 method="put"
-                action={route('feeds.update', props.feed)}
-                feed={props.feed}
-                categories={props.categories}
+                action={route('feeds.update', feed as unknown as RouteParams<'feeds.update'>)}
+                feed={feed}
+                categories={categories}
             />
         </AuthenticatedLayout>
     );

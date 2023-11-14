@@ -1,4 +1,4 @@
-import {useRef, useState} from 'react';
+import React, {useRef, useState} from 'react';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import {Modal} from '@/Components/Modal/Modal';
@@ -7,10 +7,10 @@ import {useForm} from '@inertiajs/react';
 import {DangerButton, SecondaryButton} from '@/Components/Button';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 
-export default function DeleteUserForm({className}) {
+export default function DeleteUserForm({className = ''}: { className?: string; }) {
     const {t} = useLaravelReactI18n();
     const [confirmingUserDeletion, setConfirmingUserDeletion] = useState(false);
-    const passwordInput = useRef();
+    const passwordInput = useRef<HTMLInputElement>();
 
     const {
         data,
@@ -25,13 +25,13 @@ export default function DeleteUserForm({className}) {
         setConfirmingUserDeletion(true);
     };
 
-    const deleteUser = (e) => {
-        e.preventDefault();
+    const deleteUser = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
 
         destroy(route('profile.destroy'), {
             preserveScroll: true,
             onSuccess: () => closeModal(),
-            onError: () => passwordInput.current.focus(),
+            onError: () => passwordInput.current?.focus(),
             onFinish: () => reset(),
         });
     };

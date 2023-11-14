@@ -1,4 +1,4 @@
-import {useEffect} from 'react';
+import React, {useEffect} from 'react';
 import GuestLayout from '@/Layouts/GuestLayout';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
@@ -17,12 +17,15 @@ export default function ConfirmPassword() {
         };
     }, []);
 
-    const handleOnChange = (event) => {
-        setData(event.target.name, event.target.value);
+    const handleOnChange = (event: React.FormEvent<HTMLInputElement>) => {
+        const target = event.target as HTMLInputElement;
+
+        // @ts-expect-error we know which fields can occur here
+        setData(target.name, target.value);
     };
 
-    const submit = (e) => {
-        e.preventDefault();
+    const submit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
 
         post(route('password.confirm'));
     };

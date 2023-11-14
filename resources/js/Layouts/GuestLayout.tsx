@@ -4,7 +4,7 @@ import Card from '@/Components/Card';
 import {ReactNode} from 'react';
 import {PageProps} from '@/types';
 
-export default function Guest({children}: PageProps & {children: ReactNode}) {
+export default function Guest({children}: {children: ReactNode; }) {
     return (
         <div className="min-h-screen flex flex-col sm:justify-center items-center py-12 bg-gray-100 dark:bg-gray-900">
             <div className="mb-8">

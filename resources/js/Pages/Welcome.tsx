@@ -1,8 +1,9 @@
 import {Head, Link} from '@inertiajs/react';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import ApplicationLogo from '@/Components/ApplicationLogo';
+import {WelcomeProps} from '@/types';
 
-export default function Welcome(props) {
+export default function Welcome(props: WelcomeProps) {
     const {t} = useLaravelReactI18n();
 
     return (

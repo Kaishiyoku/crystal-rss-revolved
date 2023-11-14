@@ -3,8 +3,9 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import Form from '@/Pages/Categories/Partials/Form';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import Breadcrumbs from '@/Components/Breadcrumbs/Breadcrumbs';
+import {Category, PageProps} from '@/types';
 
-export default function Create(props) {
+export default function Create({category, ...props}: PageProps & { category: Category; }) {
     const {t} = useLaravelReactI18n();
 
     return (
@@ -15,7 +16,10 @@ export default function Create(props) {
         >
             <Head title={t('Add category')}/>
 
-            <Form method="post" action={route('categories.store')} category={props.category}/>
+            <Form
+                method="post" action={route('categories.store')}
+                category={category}
+            />
         </AuthenticatedLayout>
     );
 }

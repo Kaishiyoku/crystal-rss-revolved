@@ -2,13 +2,14 @@ import GuestLayout from '@/Layouts/GuestLayout';
 import {Head, Link, useForm} from '@inertiajs/react';
 import {PrimaryButton} from '@/Components/Button';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
+import React from 'react';
 
-export default function VerifyEmail({status}) {
+export default function VerifyEmail({status}: { status: string; }) {
     const {t} = useLaravelReactI18n();
     const {post, processing} = useForm({});
 
-    const submit = (e) => {
-        e.preventDefault();
+    const submit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
 
         post(route('verification.send'));
     };

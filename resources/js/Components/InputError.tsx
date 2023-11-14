@@ -1,9 +1,7 @@
-import {OtherProps} from '@/types';
-
-export default function InputError({message, className = '', ...props}: {message: string; className?: string, props: OtherProps}) {
+export default function InputError({message, className = ''}: { message?: string; className?: string; }) {
     return message
         ? (
-            <p {...props} className={'text-sm text-red-600 dark:text-red-400 ' + className}>
+            <p className={'text-sm text-red-600 dark:text-red-400 ' + className}>
                 {message}
             </p>
         )

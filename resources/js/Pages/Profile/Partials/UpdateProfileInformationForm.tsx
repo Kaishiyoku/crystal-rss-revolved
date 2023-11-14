@@ -5,18 +5,21 @@ import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
 import {PrimaryButton} from '@/Components/Button';
+import {User} from '@/types';
+import React from 'react';
 
-export default function UpdateProfileInformation({mustVerifyEmail, status, className}) {
+export default function UpdateProfileInformation({mustVerifyEmail, status, className}: { mustVerifyEmail: boolean; status: string; className?: string; }) {
     const {t} = useLaravelReactI18n();
-    const {user} = usePage().props.auth;
+    // @ts-expect-error we know that the page props include the authenticated user
+    const user = usePage().props.auth.user as User;
 
     const {data, setData, patch, errors, processing, recentlySuccessful} = useForm({
         name: user.name,
         email: user.email,
     });
 
-    const submit = (e) => {
-        e.preventDefault();
+    const submit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
 
         patch(route('profile.update'));
     };

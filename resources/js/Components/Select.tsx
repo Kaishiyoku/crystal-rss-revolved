@@ -1,5 +1,6 @@
 import {forwardRef, InputHTMLAttributes, useEffect, useImperativeHandle, useRef} from 'react';
 import clsx from 'clsx';
+import {SelectNumberOption, SelectStringOption} from '@/types';
 
 export default forwardRef(function Select(
     {
@@ -7,7 +8,7 @@ export default forwardRef(function Select(
         className = '',
         isFocused = false,
         ...props
-    }: InputHTMLAttributes<HTMLSelectElement> & { options: { value: string | number; name: string; }[]; isFocused?: boolean; },
+    }: InputHTMLAttributes<HTMLSelectElement> & { options: Array<SelectNumberOption|SelectStringOption>; isFocused?: boolean; },
     ref
 ) {
     const localRef = useRef<HTMLSelectElement>(null);

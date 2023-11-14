@@ -6,8 +6,9 @@ import Breadcrumbs from '@/Components/Breadcrumbs/Breadcrumbs';
 import EmptyState from '@/Components/EmptyState';
 import ExclamationCircleOutlineIcon from '@/Icons/ExclamationCircleOutlineIcon';
 import PlusOutlineIcon from '@/Icons/PlusOutlineIcon';
+import {Feed, PageProps, SelectNumberOption} from '@/types';
 
-export default function Create(props) {
+export default function Create({feed, categories, ...props}: PageProps & { feed: Feed; categories: SelectNumberOption[]; }) {
     const {t} = useLaravelReactI18n();
 
     return (
@@ -18,13 +19,13 @@ export default function Create(props) {
         >
             <Head title={t('Add feed')}/>
 
-            {props.categories.length > 0
+            {categories.length > 0
                 ? (
                     <Form
                         method="post"
                         action={route('feeds.store')}
-                        feed={props.feed}
-                        categories={props.categories}
+                        feed={feed}
+                        categories={categories}
                     />
                 )
                 : (
@@ -33,13 +34,13 @@ export default function Create(props) {
                         message={t('Please create a category first.')}
                         description={t('There have to be at least one category before you can create a feed.')}
                     >
-                       <Link
-                           href={route('categories.create')}
-                           className="link-secondary mt-6"
-                       >
-                           <PlusOutlineIcon className="w-4 h-4 mr-2"/>
-                           <div>{t('New category')}</div>
-                       </Link>
+                        <Link
+                            href={route('categories.create')}
+                            className="link-secondary mt-6"
+                        >
+                            <PlusOutlineIcon className="w-4 h-4 mr-2"/>
+                            <div>{t('New category')}</div>
+                        </Link>
                     </EmptyState>
                 )}
         </AuthenticatedLayout>

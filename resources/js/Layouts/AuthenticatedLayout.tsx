@@ -7,9 +7,9 @@ import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import {Transition} from '@headlessui/react';
 import DropdownArrowIcon from '@/Icons/DropdownArrowIcon';
-import {PageProps} from '@/types';
+import {BasePageProps} from '@/types';
 
-export default function Authenticated({auth, header, children}: PageProps & {header: ReactNode; children: ReactNode}) {
+export default function Authenticated({auth, header, children}: BasePageProps & { header: ReactNode; children: ReactNode; }) {
     const {t} = useLaravelReactI18n();
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 

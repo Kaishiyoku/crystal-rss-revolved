@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
 import {FeedItem} from '@/types';
 import { RouteParams } from 'ziggy-js';
 
-export default function FeedItemCard({hueRotationIndex, feedItem}: { hueRotationIndex: 0 | 1 | 2 | 3 | 4 | 5 | 6; feedItem: FeedItem; }) {
+export default function FeedItemCard({hueRotationIndex, feedItem}: { hueRotationIndex: number; feedItem: FeedItem; }) {
     const {t} = useLaravelReactI18n();
     const {totalNumberOfFeedItems, setTotalNumberOfFeedItems} = useContext(TotalNumberOfFeedItemsContext);
     const [internalFeedItem, setInternalFeedItem] = useState(feedItem);

@@ -10,20 +10,21 @@ import {SecondaryButton} from '@/Components/Button';
 import NewspaperOutlineIcon from '@/Icons/NewspaperOutlineIcon';
 import EmptyState from '@/Components/EmptyState';
 import EyeOutlineIcon from '@/Icons/EyeOutlineIcon';
+import {Feed, FeedItem, PageProps, CursorPagination} from '@/types';
 
-export default function Dashboard(props) {
+export default function Dashboard(props: PageProps & { selectedFeed: Feed; unreadFeeds: Feed[]; totalNumberOfFeedItems: number; feedItems: CursorPagination<FeedItem>; }) {
     const {t, tChoice} = useLaravelReactI18n();
     const [allFeedItems, setAllFeedItems] = useState(props.feedItems.data);
     const [totalNumberOfFeedItems, setTotalNumberOfFeedItems] = useState(props.totalNumberOfFeedItems);
 
     const markAllAsRead = async () => {
-        await axios.put(route('mark-all-as-read'));
+        await window.axios.put(route('mark-all-as-read'));
 
         router.get(route('dashboard'));
     };
 
     return (
-        <TotalNumberOfFeedItemsContext.Provider value={[totalNumberOfFeedItems, setTotalNumberOfFeedItems]}>
+        <TotalNumberOfFeedItemsContext.Provider value={{totalNumberOfFeedItems, setTotalNumberOfFeedItems}}>
             <AuthenticatedLayout
                 auth={props.auth}
                 errors={props.errors}
@@ -41,6 +42,9 @@ export default function Dashboard(props) {
                     {totalNumberOfFeedItems > 0 && (
                         <SecondaryButton
                             confirm
+                            confirmTitle={t('Do you really want to mark all articles as read?')}
+                            confirmCancelTitle={t('Cancel')}
+                            confirmSubmitTitle={t('Mark all articles as read')}
                             onClick={markAllAsRead}
                             icon={EyeOutlineIcon}
                             className="sm:ml-2 mt-1 sm:mt-0"
@@ -72,7 +76,7 @@ export default function Dashboard(props) {
                     )}
 
                 <div className="pt-5">
-                    {props.feedItems.next_cursor && (
+                    {props.feedItems.next_page_url && (
                         <Link
                             className="link-secondary"
                             href={props.feedItems.next_page_url}
