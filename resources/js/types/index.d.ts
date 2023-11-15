@@ -103,3 +103,11 @@ export type OtherProps = {
 export type IconProps = {
     className?: string;
 };
+
+export type DiscoveredFeed = {
+    feed_url: string;
+    site_url: string;
+    favicon_url: string;
+    name: string;
+    language: string;
+};

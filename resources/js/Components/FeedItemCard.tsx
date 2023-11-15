@@ -9,7 +9,6 @@ import EyeOutlineIcon from '@/Icons/EyeOutlineIcon';
 import EyeSlashOutlineIcon from '@/Icons/EyeSlashOutlineIcon';
 import formatDateTime from '@/Utils/formatDateTime';
 import CalendarDaysSolidIcon from '@/Icons/CalendarDaysSolidIcon';
-import PropTypes from 'prop-types';
 import {FeedItem} from '@/types';
 import {RouteParams} from 'ziggy-js';
 
@@ -22,15 +21,16 @@ export default function FeedItemCard({hueRotationIndex, feedItem}: { hueRotation
     const toggle = () => {
         setProcessing(true);
 
-        void window.axios.put(route('toggle-feed-item', internalFeedItem as unknown as RouteParams<'toggle-feed-item'>))
-            .then((response) => {
-                if (response.data.read_at) {
+        void window.ky.put(route('toggle-feed-item', internalFeedItem as unknown as RouteParams<'toggle-feed-item'>))
+            .json<FeedItem>()
+            .then((data) => {
+                if (data.read_at) {
                     setTotalNumberOfFeedItems(totalNumberOfFeedItems - 1);
                 } else {
                     setTotalNumberOfFeedItems(totalNumberOfFeedItems + 1);
                 }
 
-                setInternalFeedItem(response.data);
+                setInternalFeedItem(data);
             })
             .finally(() => setProcessing(false));
     };
@@ -109,7 +109,3 @@ export default function FeedItemCard({hueRotationIndex, feedItem}: { hueRotation
         </Card>
     );
 }
-FeedItemCard.propTypes = {
-    hueRotationIndex: PropTypes.number.isRequired,
-    feedItem: PropTypes.object.isRequired,
-};

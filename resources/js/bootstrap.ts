@@ -1,40 +1,37 @@
+import ky from 'ky';
 import NProgress from 'nprogress';
-import axios from 'axios';
+import Cookies from 'js-cookie';
 
-/**
- * We'll load the axios HTTP library which allows us to easily issue requests
- * to our Laravel back-end. This library automatically handles sending the
- * CSRF token as a header based on the value of the "XSRF" token cookie.
- */
-
-window.axios = axios;
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-window.axios.interceptors.request.use(
-    (config) => {
-        // Do something before request is sent
-        NProgress.start();
-
-        return config;
+window.ky = ky.extend({
+    headers: {
+        Accept: 'application/json',
     },
-    (error) => {
-        NProgress.done();
+    hooks: {
+        beforeRequest: [
+            (request) => {
+                NProgress.start();
 
-        return Promise.reject(error);
-    }
-);
+                if (window.location.host === new URL(request.url).host) {
+                    request.headers.set('X-XSRF-TOKEN', Cookies.get('XSRF-TOKEN') ?? '');
+                }
+            },
+        ],
+        afterResponse: [
+            (request, options, response) => {
+                NProgress.done();
 
-axios.interceptors.response.use(
-    (response) => {
-        NProgress.done();
+                return response;
+            },
+        ],
+        beforeError: [
+            (error) => {
+                NProgress.done();
 
-        return response;
+                return error;
+            },
+        ],
     },
-    (error) => {
-        NProgress.done();
-
-        return Promise.reject(error);
-    }
-);
+});
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

@@ -25,7 +25,7 @@ export default function Dashboard(props: DashboardPageProps) {
     const [totalNumberOfFeedItems, setTotalNumberOfFeedItems] = useState(props.totalNumberOfFeedItems);
 
     const markAllAsRead = async () => {
-        await window.axios.put(route('mark-all-as-read'));
+        await window.ky.put(route('mark-all-as-read'));
 
         router.get(route('dashboard'));
     };

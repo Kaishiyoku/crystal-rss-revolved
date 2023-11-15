@@ -1,9 +1,9 @@
-import {AxiosInstance} from 'axios';
 import ziggyRoute, {Config as ZiggyConfig} from 'ziggy-js';
+import {KyInstance} from 'ky';
 
 declare global {
     interface Window {
-        axios: AxiosInstance;
+        ky: KyInstance;
         appName: string;
     }
 

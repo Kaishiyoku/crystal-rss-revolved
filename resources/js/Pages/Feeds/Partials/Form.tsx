@@ -8,14 +8,14 @@ import {useLaravelReactI18n} from 'laravel-react-i18n';
 import Card from '@/Components/Card';
 import {PrimaryButton, SecondaryButton} from '@/Components/Button';
 import Checkbox from '@/Components/Checkbox';
-import {Feed, PageProps, SelectNumberOption} from '@/types';
+import {DiscoveredFeed, Feed, PageProps, SelectNumberOption} from '@/types';
 
 export default function Form({method, action, feed, categories}: { method: 'post' | 'put'; action: string; feed: Feed; categories: SelectNumberOption[]; }) {
     const {t, tChoice} = useLaravelReactI18n();
     const {monthsAfterPruningFeedItems} = usePage().props as PageProps;
     const [isDiscoverFeedProcessing, setIsDiscoverFeedProcessing] = useState(false);
     const [searchUrl, setSearchUrl] = useState('');
-    const [discoveredFeedUrls, setDiscoveredFeedUrls] = useState([]);
+    const [discoveredFeedUrls, setDiscoveredFeedUrls] = useState<string[]>([]);
 
     const {data, setData, post, put, errors, processing} = useForm({
         category_id: feed.category_id ?? categories[0].value,
@@ -31,9 +31,10 @@ export default function Form({method, action, feed, categories}: { method: 'post
         setDiscoveredFeedUrls([]);
         setIsDiscoverFeedProcessing(true);
 
-        window.axios.post(route('discover-feed-urls'), {feed_url: searchUrl})
-            .then((response) => {
-                setDiscoveredFeedUrls(response.data);
+        window.ky.post(route('discover-feed-urls'), {json: {feed_url: searchUrl}})
+            .json<string[]>()
+            .then((data) => {
+                setDiscoveredFeedUrls(data);
             })
             .catch((error) => {
                 console.error(error);
@@ -44,9 +45,10 @@ export default function Form({method, action, feed, categories}: { method: 'post
     const selectDiscoveredFeedUrl = (feedUrl: string) => () => {
         setIsDiscoverFeedProcessing(true);
 
-        window.axios.post(route('discover-feed'), {feed_url: feedUrl})
-            .then((response) => {
-                setData({...data, ...response.data});
+        window.ky.post(route('discover-feed'), {json: {feed_url: feedUrl}})
+            .json<DiscoveredFeed>()
+            .then((responseData) => {
+                setData({...data, ...responseData});
 
                 setSearchUrl('');
                 setDiscoveredFeedUrls([]);
