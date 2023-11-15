@@ -24,5 +24,8 @@ void createInertiaApp({
             </LaravelReactI18nProvider>
         );
     },
-    progress: {color: '#7c3aed'},
+    progress: {
+        delay: 50,
+        color: '#7c3aed',
+    },
 });
