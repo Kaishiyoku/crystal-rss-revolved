@@ -31,7 +31,7 @@ export default function Welcome(props: WelcomeProps) {
                         )}
                 </div>
 
-                <div className="max-w-6xl mx-auto sm:px-6 lg:px-8">
+                <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex flex-col justify-center items-center pt-8 sm:pt-0">
                         <div className="flex justify-center items-center bg-white/25 p-2 rounded-full w-40 h-40">
                             <ApplicationLogo className="h-full p-5"/>

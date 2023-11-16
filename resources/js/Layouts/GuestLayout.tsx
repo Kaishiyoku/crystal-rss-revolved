@@ -5,7 +5,7 @@ import {ReactNode} from 'react';
 
 export default function Guest({children}: {children: ReactNode; }) {
     return (
-        <div className="min-h-screen flex flex-col sm:justify-center items-center py-12 bg-gray-100 dark:bg-gray-900">
+        <div className="min-h-screen flex flex-col sm:justify-center items-center px-4 sm:px-6 lg:px-8 py-12 bg-gray-100 dark:bg-gray-900">
             <div className="mb-8">
                 <Link href="/">
                     <ApplicationLogo className="w-20 h-20 fill-current text-gray-500"/>
