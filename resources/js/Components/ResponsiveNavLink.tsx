@@ -2,7 +2,7 @@ import {Link} from '@inertiajs/react';
 import {ReactNode} from 'react';
 import {OtherProps} from '@/types';
 
-interface ResponsiveNavLinkProps {
+type ResponsiveNavLinkProps = {
     as?: string;
     active?: boolean;
     href: string;
@@ -10,7 +10,7 @@ interface ResponsiveNavLinkProps {
     className?: string;
     children: ReactNode;
     props?: OtherProps;
-}
+};
 
 export default function ResponsiveNavLink({as, active = false, href, method, className = '', children, ...props}: ResponsiveNavLinkProps) {
     return (

@@ -4,8 +4,8 @@ import TextInput from '@/Components/TextInput';
 import InputError from '@/Components/InputError';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import {PrimaryButton} from '@/Components/Button';
-import {Category} from '@/types';
 import React from 'react';
+import Category from '@/types/Models/Category';
 
 export default function Form({method, action, category}: { method: 'post' | 'put'; action: string; category: Category; }) {
     const {t} = useLaravelReactI18n();

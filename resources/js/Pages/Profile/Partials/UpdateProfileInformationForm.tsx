@@ -5,8 +5,8 @@ import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
 import {PrimaryButton} from '@/Components/Button';
-import {User} from '@/types';
 import React from 'react';
+import User from '@/types/Models/User';
 
 export default function UpdateProfileInformation({mustVerifyEmail, status, className}: { mustVerifyEmail: boolean; status: string; className?: string; }) {
     const {t} = useLaravelReactI18n();

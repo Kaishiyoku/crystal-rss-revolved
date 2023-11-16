@@ -5,8 +5,10 @@ import Actions from '@/Components/Actions';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import {DangerButton} from '@/Components/Button';
 import Breadcrumbs from '@/Components/Breadcrumbs/Breadcrumbs';
-import {Feed, PageProps, SelectNumberOption} from '@/types';
+import {PageProps} from '@/types';
 import {RouteParams} from 'ziggy-js';
+import {SelectNumberOption} from '@/types/SelectOption';
+import Feed from '@/types/Models/Feed';
 
 export default function Edit({feed, categories, canDelete, ...props}: PageProps & { feed: Feed; categories: SelectNumberOption[]; canDelete: boolean; }) {
     const {t} = useLaravelReactI18n();

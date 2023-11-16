@@ -5,8 +5,9 @@ import Actions from '@/Components/Actions';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import {DangerButton} from '@/Components/Button';
 import Breadcrumbs from '@/Components/Breadcrumbs/Breadcrumbs';
-import {Category, PageProps} from '@/types';
+import {PageProps} from '@/types';
 import {RouteParams} from 'ziggy-js';
+import Category from '@/types/Models/Category';
 
 export default function Edit({category, canDelete, ...props}: PageProps & { category: Category; canDelete: boolean; }) {
     const {t} = useLaravelReactI18n();

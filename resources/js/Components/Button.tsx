@@ -22,9 +22,12 @@ type ButtonProps = {
     children?: ReactNode;
 };
 
-type ConfirmButtonProps =
-    ButtonProps
-    & { confirm?: boolean; confirmTitle?: string; confirmCancelTitle?: string; confirmSubmitTitle?: string; };
+type ConfirmButtonProps = ButtonProps & {
+    confirm?: boolean;
+    confirmTitle?: string;
+    confirmCancelTitle?: string;
+    confirmSubmitTitle?: string;
+};
 
 const Button = (
     {
@@ -99,7 +102,20 @@ const Button = (
     );
 };
 
-const PrimaryButton = ({icon, type, hasMobileFullSize, className, disabled, onClick, children, confirm = false, confirmTitle, confirmSubmitTitle, confirmCancelTitle}: ConfirmButtonProps) => {
+const PrimaryButton = (
+    {
+        icon,
+        type,
+        hasMobileFullSize,
+        className,
+        disabled,
+        onClick,
+        children,
+        confirm = false,
+        confirmTitle,
+        confirmSubmitTitle,
+        confirmCancelTitle,
+    }: ConfirmButtonProps) => {
     return (
         <Button
             variant={ButtonVariant.Primary}
@@ -119,7 +135,20 @@ const PrimaryButton = ({icon, type, hasMobileFullSize, className, disabled, onCl
     );
 };
 
-const SecondaryButton = ({icon, type, hasMobileFullSize, className, disabled, onClick, children, confirm = false, confirmTitle, confirmSubmitTitle, confirmCancelTitle}: ConfirmButtonProps) => {
+const SecondaryButton = (
+    {
+        icon,
+        type,
+        hasMobileFullSize,
+        className,
+        disabled,
+        onClick,
+        children,
+        confirm = false,
+        confirmTitle,
+        confirmSubmitTitle,
+        confirmCancelTitle,
+    }: ConfirmButtonProps) => {
     return (
         <Button
             variant={ButtonVariant.Secondary}
@@ -139,7 +168,20 @@ const SecondaryButton = ({icon, type, hasMobileFullSize, className, disabled, on
     );
 };
 
-const DangerButton = ({icon, type, hasMobileFullSize, className, disabled, onClick, children, confirm = true, confirmTitle, confirmSubmitTitle, confirmCancelTitle}: ConfirmButtonProps) => {
+const DangerButton = (
+    {
+        icon,
+        type,
+        hasMobileFullSize,
+        className,
+        disabled,
+        onClick,
+        children,
+        confirm = true,
+        confirmTitle,
+        confirmSubmitTitle,
+        confirmCancelTitle,
+    }: ConfirmButtonProps) => {
     return (
         <Button
             variant={ButtonVariant.Danger}
@@ -159,7 +201,20 @@ const DangerButton = ({icon, type, hasMobileFullSize, className, disabled, onCli
     );
 };
 
-const PlainButton = ({icon, type, hasMobileFullSize, className, disabled, onClick, children, confirm = false, confirmTitle, confirmSubmitTitle, confirmCancelTitle}: ConfirmButtonProps) => {
+const PlainButton = (
+    {
+        icon,
+        type,
+        hasMobileFullSize,
+        className,
+        disabled,
+        onClick,
+        children,
+        confirm = false,
+        confirmTitle,
+        confirmSubmitTitle,
+        confirmCancelTitle,
+    }: ConfirmButtonProps) => {
     return (
         <Button
             variant={ButtonVariant.Plain}
@@ -179,7 +234,20 @@ const PlainButton = ({icon, type, hasMobileFullSize, className, disabled, onClic
     );
 };
 
-const HeadlessButton = ({icon, type, hasMobileFullSize, className, disabled, onClick, children, confirm = false, confirmTitle, confirmSubmitTitle, confirmCancelTitle}: ConfirmButtonProps) => {
+const HeadlessButton = (
+    {
+        icon,
+        type,
+        hasMobileFullSize,
+        className,
+        disabled,
+        onClick,
+        children,
+        confirm = false,
+        confirmTitle,
+        confirmSubmitTitle,
+        confirmCancelTitle,
+    }: ConfirmButtonProps) => {
     return (
         <Button
             variant={ButtonVariant.Headless}

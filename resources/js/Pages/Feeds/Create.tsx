@@ -6,7 +6,9 @@ import Breadcrumbs from '@/Components/Breadcrumbs/Breadcrumbs';
 import EmptyState from '@/Components/EmptyState';
 import ExclamationCircleOutlineIcon from '@/Icons/ExclamationCircleOutlineIcon';
 import PlusOutlineIcon from '@/Icons/PlusOutlineIcon';
-import {Feed, PageProps, SelectNumberOption} from '@/types';
+import {PageProps} from '@/types';
+import Feed from '@/types/Models/Feed';
+import {SelectNumberOption} from '@/types/SelectOption';
 
 export default function Create({feed, categories, ...props}: PageProps & { feed: Feed; categories: SelectNumberOption[]; }) {
     const {t} = useLaravelReactI18n();

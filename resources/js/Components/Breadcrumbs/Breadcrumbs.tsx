@@ -1,7 +1,7 @@
 import {Link} from '@inertiajs/react';
 import slug from 'slug';
 import {useEffect, useRef} from 'react';
-import {Breadcrumb} from '@/types';
+import Breadcrumb from '@/types/Breadcrumb';
 
 export default function Breadcrumbs({breadcrumbs}: { breadcrumbs?: Breadcrumb[]; }) {
     if (!breadcrumbs) {

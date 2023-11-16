@@ -7,10 +7,11 @@ import LinkStack from '@/Components/LinkStack';
 import formatDateTime from '@/Utils/formatDateTime';
 import EmptyState from '@/Components/EmptyState';
 import NewspaperOutlineIcon from '@/Icons/NewspaperOutlineIcon';
-import {Category, Feed, PageProps} from '@/types';
+import {PageProps} from '@/types';
 import {RouteParams} from 'ziggy-js';
+import Feed from '@/types/Models/Feed';
 
-export default function Index({feeds, ...props}: PageProps & { feeds: Array<Feed & { category: Category; }>; }) {
+export default function Index({feeds, ...props}: PageProps & { feeds: Feed[]; }) {
     const {t, tChoice} = useLaravelReactI18n();
 
     return (

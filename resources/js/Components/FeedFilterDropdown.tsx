@@ -3,7 +3,8 @@ import {useLaravelReactI18n} from 'laravel-react-i18n';
 import {SecondaryButton} from '@/Components/Button';
 import FunnelOutlineIcon from '@/Icons/FunnelOutlineIcon';
 import DropdownArrowIcon from '@/Icons/DropdownArrowIcon';
-import {OtherProps, ShortFeed} from '@/types';
+import {OtherProps} from '@/types';
+import ShortFeed from '@/types/Models/ShortFeed';
 
 export default function FeedFilterDropdown({selectedFeed, feeds, ...props}: { selectedFeed: ShortFeed; feeds: ShortFeed[]; props?: OtherProps; }) {
     const {t} = useLaravelReactI18n();

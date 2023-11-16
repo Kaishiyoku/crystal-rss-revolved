@@ -10,7 +10,10 @@ import {SecondaryButton} from '@/Components/Button';
 import NewspaperOutlineIcon from '@/Icons/NewspaperOutlineIcon';
 import EmptyState from '@/Components/EmptyState';
 import EyeOutlineIcon from '@/Icons/EyeOutlineIcon';
-import {CursorPagination, FeedItem, PageProps, ShortFeed} from '@/types';
+import {PageProps} from '@/types';
+import ShortFeed from '@/types/Models/ShortFeed';
+import CursorPagination from '@/types/CursorPagination';
+import FeedItem from '@/types/Models/FeedItem';
 
 type DashboardPageProps = PageProps & {
     selectedFeed: ShortFeed;
