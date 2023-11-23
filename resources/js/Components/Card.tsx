@@ -6,7 +6,7 @@ import {OtherProps} from '@/types';
 const Card = ({children, className = '', ...props}: {children: ReactNode; className?: string; props?: OtherProps;}) => {
     return (
         <div
-            className={clsx('shadow-md dark:shadow-black/10 bg-white dark:bg-gray-800 rounded-lg', className)}
+            className={clsx('shadow-md dark:shadow-black/25 bg-white dark:bg-gray-800 rounded-lg', className)}
             {...props}
         >
             {children}

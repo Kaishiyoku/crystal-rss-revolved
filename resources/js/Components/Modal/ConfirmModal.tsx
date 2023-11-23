@@ -13,7 +13,7 @@ type ConfirmModalProps = {
 
 export default function ConfirmModal({show, title, submitTitle, cancelTitle, onClose, onConfirm}: ConfirmModalProps) {
     return (
-        <Modal show={show} onClose={onClose} maxWidth="sm">
+        <Modal show={show} onClose={onClose} maxWidth="md">
             <ModalHeader>
                 {title}
             </ModalHeader>
