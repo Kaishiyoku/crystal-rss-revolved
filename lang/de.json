@@ -98,5 +98,9 @@
     "Welcome": "Willkommen",
     "Actions": "Aktionen",
     "Do you really want to mark all articles as read?": "Wollen Sie wirklich alle Artikel als gelesen markieren?",
-    "Mark all articles as read": "Alle Artikel als gelesen markieren"
+    "Mark all articles as read": "Alle Artikel als gelesen markieren",
+    "Delete category": "Kategorie löschen",
+    "Do you really want to delete this category?": "Wollen Sie wirklich diese Kategorie löschen?",
+    "Delete feed": "Feed löschen",
+    "Do you really want to delete this feed?": "Wollen Sie wirklich diesen Feed löschen?"
 }

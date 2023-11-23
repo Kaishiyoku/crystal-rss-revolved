@@ -27,7 +27,13 @@ export default function Edit({category, canDelete, ...props}: PageProps & { cate
 
             <Actions>
                 {canDelete && (
-                    <DangerButton disabled={processing} onClick={handleDelete}>
+                    <DangerButton
+                        disabled={processing}
+                        confirmTitle={t('Do you really want to delete this category?')}
+                        confirmSubmitTitle={t('Delete category')}
+                        confirmCancelTitle={t('Cancel')}
+                        onClick={handleDelete}
+                    >
                         {t('Delete')}
                     </DangerButton>
                 )}

@@ -84,7 +84,7 @@ export default function Actions({className = '', children}: { className?: string
 
     return (
         <>
-            <div className={clsx('hidden sm:flex justify-end pb-5 space-x-4', className)}>
+            <div className={clsx('hidden sm:flex justify-end pb-8 space-x-4', className)}>
                 {children}
             </div>
 

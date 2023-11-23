@@ -28,7 +28,13 @@ export default function Edit({feed, categories, canDelete, ...props}: PageProps 
 
             <Actions>
                 {canDelete && (
-                    <DangerButton disabled={processing} onClick={handleDelete} className="mb-5">
+                    <DangerButton
+                        disabled={processing}
+                        confirmTitle={t('Do you really want to delete this feed?')}
+                        confirmSubmitTitle={t('Delete feed')}
+                        confirmCancelTitle={t('Cancel')}
+                        onClick={handleDelete}
+                    >
                         {t('Delete')}
                     </DangerButton>
                 )}
