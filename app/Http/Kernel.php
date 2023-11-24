@@ -2,7 +2,6 @@
 
 namespace App\Http;
 
-use App\Http\Middleware\HandleLocale;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 /**
