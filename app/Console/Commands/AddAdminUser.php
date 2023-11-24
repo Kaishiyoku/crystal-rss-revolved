@@ -6,10 +6,9 @@ use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules;
-
-use function Laravel\Prompts\password;
-use function Laravel\Prompts\text;
+use Illuminate\Validation\ValidationException;
 
 class AddAdminUser extends Command
 {
@@ -32,46 +31,29 @@ class AddAdminUser extends Command
      */
     public function handle(): void
     {
-        $name = text(
-            label: 'What is your name?',
-            required: true,
-            validate: fn (string $value) => match (true) {
-                strlen($value) < 3 => 'The name must be at least 3 characters.',
-                strlen($value) > 255 => 'The name must not exceed 255 characters.',
-                default => null,
-            },
-            hint: 'This will be displayed on your profile.',
-        );
+        $name = $this->ask('Name');
+        $email = $this->ask('Email');
+        $password = $this->secret('Password');
+        $passwordConfirmation = $this->secret('Password confirmation');
 
-        $email = text(
-            label: 'What is your email address?',
-            required: true,
-            validate: function (string $value) {
-                $validator = validator(['email' => $value], ['email' => ['email', 'max:255', 'unique:'.User::class]]);
+        $validator = Validator::make([
+            'name' => $name,
+            'email' => $email,
+            'password' => $password,
+            'password_confirmation' => $passwordConfirmation,
+        ], [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
 
-                if ($validator->fails()) {
-                    return $validator->errors()->first();
-                }
+        if ($validator->fails()) {
+            collect($validator->messages()->all())->each(function (string $message) {
+                $this->error($message);
+            });
 
-                return null;
-            },
-            hint: 'This will be used for logging in to your account.',
-        );
-
-        $password = password(
-            label: 'What is your password?',
-            required: true,
-            validate: function (string $value) {
-                $validator = validator(['password' => $value], ['password' => [Rules\Password::defaults()]]);
-
-                if ($validator->fails()) {
-                    return $validator->errors()->first();
-                }
-
-                return null;
-            },
-            hint: 'Minimum 8 characters.',
-        );
+            throw new ValidationException($validator);
+        }
 
         $user = User::create([
             'name' => $name,
