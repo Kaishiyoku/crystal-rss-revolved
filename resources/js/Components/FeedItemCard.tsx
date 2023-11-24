@@ -102,7 +102,7 @@ export default function FeedItemCard({hueRotationIndex, feedItem}: { hueRotation
                         icon={internalFeedItem.read_at ? EyeSlashOutlineIcon : EyeOutlineIcon}
                         className="w-full"
                     >
-                        {internalFeedItem.read_at ? t('Mark as unread') : t('Mark as read')}
+                        {internalFeedItem.read_at ? t('Read') : t('Unread')}
                     </SecondaryButton>
                 </div>
             </Card.Body>
