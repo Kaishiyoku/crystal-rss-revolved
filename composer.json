@@ -11,6 +11,7 @@
         "inertiajs/inertia-laravel": "^0.6.3",
         "kaishiyoku/hera-rss-crawler": "^6.0",
         "laravel/framework": "^10.0",
+        "laravel/prompts": "^0.1.13",
         "laravel/sanctum": "^3.2",
         "laravel/telescope": "^4.14",
         "laravel/tinker": "^2.8",
