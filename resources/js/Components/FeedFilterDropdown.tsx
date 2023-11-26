@@ -1,6 +1,6 @@
 import Dropdown from '@/Components/Dropdown';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
-import {SecondaryButton} from '@/Components/Button';
+import {TertiaryButton} from '@/Components/Button';
 import FunnelOutlineIcon from '@/Icons/FunnelOutlineIcon';
 import DropdownArrowIcon from '@/Icons/DropdownArrowIcon';
 import {OtherProps} from '@/types';
@@ -17,7 +17,7 @@ export default function FeedFilterDropdown({selectedFeed, feeds, ...props}: { se
         <div {...props}>
             <Dropdown>
                 <Dropdown.Trigger className="inline">
-                    <SecondaryButton
+                    <TertiaryButton
                         className="justify-between"
                         icon={FunnelOutlineIcon}
                         hasMobileFullSize
@@ -27,7 +27,7 @@ export default function FeedFilterDropdown({selectedFeed, feeds, ...props}: { se
                         </div>
 
                         <DropdownArrowIcon/>
-                    </SecondaryButton>
+                    </TertiaryButton>
                 </Dropdown.Trigger>
 
                 <Dropdown.Content

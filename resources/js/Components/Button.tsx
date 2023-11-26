@@ -8,6 +8,7 @@ enum ButtonVariant {
     Headless = 'headless',
     Primary = 'primary',
     Secondary = 'secondary',
+    Tertiary = 'tertiary',
     Danger = 'danger',
 }
 
@@ -78,10 +79,11 @@ const Button = (
                     'inline-flex space-x-2 items-center transition ease-in disabled:opacity-50 disabled:saturate-50 disabled:cursor-not-allowed',
                     'text-sm tracking-widest font-semibold',
                     {
-                        'rounded-lg px-5 py-2.5 shadow focus:ring-2 focus:ring-black dark:focus:ring-white focus:shadow-none': variant !== ButtonVariant.Headless,
+                        'rounded-lg px-5 py-2.5 shadow dark:shadow-black/25 focus:ring-0 focus:ring-black dark:focus:ring-white focus:shadow-none active:shadow-none': variant !== ButtonVariant.Headless,
                         'shadow-md shadow-black/20 dark:shadow-black/25 text-violet-100 bg-violet-500 hover:bg-violet-700 disabled:hover:bg-violet-500': variant === ButtonVariant.Primary,
-                        'text-gray-600 dark:text-gray-500 dark:hover:text-gray-100 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 disabled:hover:text-gray-600 dark:disabled:text-gray-500 disabled:hover:bg-white dark:disabled:hover:bg-gray-800': variant === ButtonVariant.Secondary,
-                        'text-pink-600 dark:text-pink-500 dark:hover:text-pink-200 bg-white dark:bg-pink-950 hover:bg-pink-100 dark:hover:bg-pink-800 disabled:hover:text-pink-600 dark:disabled:text-pink-500 disabled:hover:bg-white dark:disabled:hover:bg-pink-950': variant === ButtonVariant.Danger,
+                        'text-gray-600 dark:text-gray-400 dark:hover:text-gray-100 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 disabled:hover:text-gray-600 dark:disabled:text-gray-500 disabled:hover:bg-white dark:disabled:hover:bg-gray-800': variant === ButtonVariant.Secondary,
+                        'text-gray-600 dark:text-gray-400 dark:hover:text-gray-100 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 disabled:hover:text-gray-600 dark:disabled:text-gray-500 disabled:hover:bg-white dark:disabled:hover:bg-gray-800': variant === ButtonVariant.Tertiary,
+                        'text-pink-950 dark:text-pink-300 dark:hover:text-pink-200 bg-pink-200 dark:bg-pink-900 hover:bg-pink-300 dark:hover:bg-pink-800 disabled:hover:text-pink-600 dark:disabled:text-pink-500 disabled:hover:bg-white dark:disabled:hover:bg-pink-950': variant === ButtonVariant.Danger,
                         'w-full sm:w-auto': hasMobileFullSize,
                     },
                     className
@@ -149,6 +151,39 @@ const SecondaryButton = (
     return (
         <Button
             variant={ButtonVariant.Secondary}
+            icon={icon}
+            type={type}
+            hasMobileFullSize={hasMobileFullSize}
+            className={className}
+            disabled={disabled}
+            onClick={onClick}
+            confirm={confirm}
+            confirmTitle={confirmTitle}
+            confirmSubmitTitle={confirmSubmitTitle}
+            confirmCancelTitle={confirmCancelTitle}
+        >
+            {children}
+        </Button>
+    );
+};
+
+const TertiaryButton = (
+    {
+        icon,
+        type,
+        hasMobileFullSize,
+        className,
+        disabled,
+        onClick,
+        children,
+        confirm = false,
+        confirmTitle,
+        confirmSubmitTitle,
+        confirmCancelTitle,
+    }: ConfirmButtonProps) => {
+    return (
+        <Button
+            variant={ButtonVariant.Tertiary}
             icon={icon}
             type={type}
             hasMobileFullSize={hasMobileFullSize}
@@ -234,6 +269,7 @@ const HeadlessButton = (
 export {
     PrimaryButton,
     SecondaryButton,
+    TertiaryButton,
     DangerButton,
     HeadlessButton,
 };

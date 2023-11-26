@@ -6,7 +6,7 @@ import FeedItemCard from '@/Components/FeedItemCard';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import FeedFilterDropdown from '@/Components/FeedFilterDropdown';
 import TotalNumberOfFeedItemsContext from '@/Contexts/TotalNumberOfFeedItemsContext';
-import {SecondaryButton} from '@/Components/Button';
+import {TertiaryButton} from '@/Components/Button';
 import NewspaperOutlineIcon from '@/Icons/NewspaperOutlineIcon';
 import EmptyState from '@/Components/EmptyState';
 import EyeOutlineIcon from '@/Icons/EyeOutlineIcon';
@@ -63,7 +63,7 @@ export default function Dashboard(props: DashboardPageProps) {
                     <FeedFilterDropdown selectedFeed={props.selectedFeed} feeds={props.unreadFeeds}/>
 
                     {totalNumberOfFeedItems > 0 && (
-                        <SecondaryButton
+                        <TertiaryButton
                             confirm
                             confirmTitle={t('Do you really want to mark all articles as read?')}
                             confirmCancelTitle={t('Cancel')}
@@ -74,7 +74,7 @@ export default function Dashboard(props: DashboardPageProps) {
                             hasMobileFullSize
                         >
                             {t('Mark all as read')}
-                        </SecondaryButton>
+                        </TertiaryButton>
                     )}
                 </div>
 
