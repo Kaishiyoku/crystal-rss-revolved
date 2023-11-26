@@ -36,16 +36,16 @@ export default function Welcome(props: WelcomeProps) {
 
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex flex-col justify-center items-center pt-8 sm:pt-0">
-                        <div className="flex justify-center items-center bg-white/25 p-2 rounded-full w-40 h-40">
+                        <div className="flex justify-center items-center bg-white/25 p-2 rounded-full w-52 h-52">
                             <ApplicationLogo className="h-full p-5"/>
                         </div>
 
-                        <div className="text-6xl md:text-8xl text-center pt-8 text-transparent bg-clip-text bg-gradient-to-r from-violet-300 to-purple-300">
+                        <div className="text-6xl md:text-8xl text-center pt-8 text-transparent bg-clip-text bg-gradient-to-r from-violet-200 to-purple-200">
                             {appName}
                         </div>
 
-                        <div className="max-w-xl mx-auto mt-16 py-4 text-gray-200">
-                            <p className="text-2xl pb-8">
+                        <div className="max-w-xl mx-auto mt-8 py-4 text-gray-200">
+                            <p className="text-xl pb-4">
                                 {t('welcome.headline', {name: appName})}
                             </p>
 
@@ -63,13 +63,13 @@ export default function Welcome(props: WelcomeProps) {
 
                             <div className="mt-16 space-x-2 text-xl">
                                 {props.contactEmail && (
-                                    <a href={`mailto:${props.contactEmail}`} className="button-welcome">
+                                    <a href={`mailto:${props.contactEmail}`} className="link-light">
                                         {t('Contact')}
                                     </a>
                                 )}
 
                                 {props.githubUrl && (
-                                    <a href={props.githubUrl} className="button-welcome">
+                                    <a href={props.githubUrl} className="link-light">
                                         {t('GitHub')}
                                     </a>
                                 )}
