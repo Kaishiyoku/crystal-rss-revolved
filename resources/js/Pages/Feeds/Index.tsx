@@ -41,7 +41,7 @@ export default function Index({feeds, ...props}: PageProps & { feeds: Feed[]; })
                                 className="block sm:flex justify-between"
                             >
                                 <div>
-                                    <div>
+                                    <div className="font-semibold">
                                         {feed.name}
                                     </div>
 

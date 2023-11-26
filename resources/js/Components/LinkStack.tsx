@@ -1,11 +1,12 @@
 import clsx from 'clsx';
 import {ReactNode} from 'react';
+import Card from '@/Components/Card';
 
 const LinkStack = ({children}: { children: ReactNode; }) => {
     return (
-        <div className="divide-y divide-gray-200 dark:divide-gray-800">
+        <Card>
             {children}
-        </div>
+        </Card>
     );
 };
 
@@ -21,7 +22,7 @@ const Item = (
     }
 ) => {
     return (
-        <a href={href} className={clsx('px-4 py-2 hover:bg-gray-200 hover:dark:bg-gray-800 transition first:rounded-t-lg last:rounded-b-lg', className)}>
+        <a href={href} className={clsx('px-4 py-3 hover:bg-gray-50 hover:dark:bg-gray-800 transition ease-in-out first:rounded-t-lg last:rounded-b-lg', className)}>
             {children}
         </a>
     );

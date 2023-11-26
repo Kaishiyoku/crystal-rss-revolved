@@ -37,9 +37,9 @@ export default function Index({categories, ...props}: PageProps & { categories: 
                             <LinkStack.Item
                                 key={category.id}
                                 href={route('categories.edit', category as unknown as RouteParams<'categories.edit'>)}
-                                className="flex justify-between"
+                                className="block"
                             >
-                                <div>
+                                <div className="font-semibold">
                                     {category.name}
                                 </div>
 
