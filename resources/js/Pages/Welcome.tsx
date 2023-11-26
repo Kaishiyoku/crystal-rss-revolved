@@ -37,36 +37,36 @@ export default function Welcome(props: WelcomeProps) {
                             <ApplicationLogo className="h-full p-5"/>
                         </div>
 
-                        <div className="text-6xl md:text-8xl text-center pt-8 text-transparent bg-clip-text bg-gradient-to-r from-violet-200 to-purple-200">
+                        <div className="text-6xl md:text-8xl text-center py-8 text-transparent bg-clip-text bg-gradient-to-r from-violet-200 to-purple-200">
                             {window.appName}
                         </div>
 
-                        <div className="max-w-xl mx-auto mt-8 py-4 text-gray-200">
-                            <p className="text-xl pb-4">
+                        <div className="prose prose-2xl prose-invert max-w-xl">
+                            <p>
                                 {t('welcome.headline', {name: window.appName})}
                             </p>
 
-                            <p className="text-xl pb-4">
+                            <p>
                                 {t('welcome.text_1')}
                             </p>
 
-                            <p className="text-xl pb-4">
+                            <p>
                                 {t('welcome.text_2')}
                             </p>
 
-                            <p className="text-xl">
+                            <p>
                                 {t('welcome.text_3')}
                             </p>
 
-                            <div className="mt-16 space-x-2 text-xl">
+                            <div className="flex space-x-4">
                                 {props.contactEmail && (
-                                    <a href={`mailto:${props.contactEmail}`} className="link-light">
+                                    <a href={`mailto:${props.contactEmail}`}>
                                         {t('Contact')}
                                     </a>
                                 )}
 
                                 {props.githubUrl && (
-                                    <a href={props.githubUrl} className="link-light">
+                                    <a href={props.githubUrl}>
                                         {t('GitHub')}
                                     </a>
                                 )}
