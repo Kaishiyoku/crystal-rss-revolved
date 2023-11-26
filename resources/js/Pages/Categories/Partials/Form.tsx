@@ -26,7 +26,7 @@ export default function Form({method, action, category}: { method: 'post' | 'put
 
                 <TextInput
                     id="name"
-                    className="mt-1 block w-full"
+                    className="mt-1 block w-full max-w-xl"
                     value={data.name}
                     onChange={(e) => setData('name', e.target.value)}
                     required
