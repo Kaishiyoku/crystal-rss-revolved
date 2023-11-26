@@ -6,7 +6,7 @@ import Select from '@/Components/Select';
 import React, {useState} from 'react';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import Card from '@/Components/Card';
-import {PrimaryButton, SecondaryButton, TertiaryButton} from '@/Components/Button';
+import {PrimaryButton, TertiaryButton} from '@/Components/Button';
 import Checkbox from '@/Components/Checkbox';
 import {PageProps} from '@/types';
 import {SelectNumberOption} from '@/types/SelectOption';

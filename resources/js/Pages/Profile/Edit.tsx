@@ -5,7 +5,6 @@ import UpdateProfileInformationForm from './Partials/UpdateProfileInformationFor
 import {Head} from '@inertiajs/react';
 import Header from '@/Components/Page/Header';
 import {BasePageProps} from '@/types';
-import Card from '@/Components/Card';
 
 export default function Edit({auth, errors, mustVerifyEmail, status}: BasePageProps & { mustVerifyEmail: boolean; status: string; }) {
     return (
