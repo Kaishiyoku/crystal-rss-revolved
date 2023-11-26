@@ -2,9 +2,12 @@ import {Head, Link} from '@inertiajs/react';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import {WelcomeProps} from '@/types';
+import getAppName from '@/Utils/getAppName';
 
 export default function Welcome(props: WelcomeProps) {
     const {t} = useLaravelReactI18n();
+
+    const appName = getAppName();
 
     return (
         <>
@@ -38,12 +41,12 @@ export default function Welcome(props: WelcomeProps) {
                         </div>
 
                         <div className="text-6xl md:text-8xl text-center pt-8 text-transparent bg-clip-text bg-gradient-to-r from-violet-300 to-purple-300">
-                            {window.appName}
+                            {appName}
                         </div>
 
                         <div className="max-w-xl mx-auto mt-16 py-4 text-gray-200">
                             <p className="text-2xl pb-8">
-                                {t('welcome.headline', {name: window.appName})}
+                                {t('welcome.headline', {name: appName})}
                             </p>
 
                             <p className="text-xl pb-4">

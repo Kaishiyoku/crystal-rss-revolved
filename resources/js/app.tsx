@@ -7,11 +7,12 @@ import {resolvePageComponent} from 'laravel-vite-plugin/inertia-helpers';
 import {LaravelReactI18nProvider} from 'laravel-react-i18n';
 import getBrowserLocale from '@/Utils/getBrowserLocale';
 import AppWithLoadedTranslations from '@/Components/AppWithLoadedTranslations';
+import getAppName from '@/Utils/getAppName';
 
-window.appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
+const appName = getAppName();
 
 void createInertiaApp({
-    title: (title: string): string => `${title} - ${window.appName}`,
+    title: (title: string): string => `${title} - ${appName}`,
     resolve: (name: string) => resolvePageComponent(`./Pages/${name}.tsx`, import.meta.glob('./Pages/**/*.tsx')),
     setup({el, App, props}) {
         createRoot(el).render(
