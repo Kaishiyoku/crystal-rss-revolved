@@ -5,6 +5,7 @@ import UpdateProfileInformationForm from './Partials/UpdateProfileInformationFor
 import {Head} from '@inertiajs/react';
 import Header from '@/Components/Page/Header';
 import {BasePageProps} from '@/types';
+import Card from '@/Components/Card';
 
 export default function Edit({auth, errors, mustVerifyEmail, status}: BasePageProps & { mustVerifyEmail: boolean; status: string; }) {
     return (
@@ -15,20 +16,15 @@ export default function Edit({auth, errors, mustVerifyEmail, status}: BasePagePr
         >
             <Head title="Profile"/>
 
-            <div className="mb-8 p-4 sm:p-8 bg-white dark:bg-gray-800 shadow rounded-lg">
+            <div className="space-y-8">
                 <UpdateProfileInformationForm
                     mustVerifyEmail={mustVerifyEmail}
                     status={status}
-                    className="max-w-xl"
                 />
-            </div>
 
-            <div className="mb-8 p-4 sm:p-8 bg-white dark:bg-gray-800 shadow rounded-lg">
-                <UpdatePasswordForm className="max-w-xl"/>
-            </div>
+                <UpdatePasswordForm/>
 
-            <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow rounded-lg">
-                <DeleteUserForm className="max-w-xl"/>
+                <DeleteUserForm/>
             </div>
         </AuthenticatedLayout>
     );

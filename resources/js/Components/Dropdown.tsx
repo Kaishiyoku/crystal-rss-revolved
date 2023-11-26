@@ -42,7 +42,7 @@ const Trigger = ({children, className = ''}: PropsWithChildren<{ className?: str
     );
 };
 
-const Content = ({align = 'right', width = 48, contentClasses = 'p-2 border dark:border-gray-700 bg-white/80 dark:bg-gray-800/80', children}: PropsWithChildren<{ align?: 'left' | 'right'; width?: 48 | 96; contentClasses?: string; }>) => {
+const Content = ({align = 'right', width = 48, contentClasses = 'p-2 bg-white/80 dark:bg-gray-800/80', children}: PropsWithChildren<{ align?: 'left' | 'right'; width?: 48 | 96; contentClasses?: string; }>) => {
     const {open, setOpen} = useContext(DropDownContext);
 
     let alignmentClasses = 'origin-top';
@@ -91,7 +91,7 @@ const DropdownLink = ({active = false, className = '', children, ...props}: Iner
         <Link
             {...props}
             className={clsx(
-                'block w-full text-left px-4 py-2 text-sm leading-5 border-l-4 rounded-lg focus:outline-none transition duration-150 ease-in-out border-transparent',
+                'block w-full text-left px-4 py-2 text-sm leading-5 rounded-lg focus:outline-none transition duration-150 ease-in-out',
                 {
                     'text-violet-100 bg-violet-500 hover:bg-violet-600 focus:bg-violet-500 focus:text-violet-50': active,
                     'text-gray-700 dark:text-gray-400 hover:bg-gray-400/25 dark:hover:bg-gray-700 focus:bg-gray-500/25 dark:focus:bg-gray-600 dark:focus:text-gray-300': !active,

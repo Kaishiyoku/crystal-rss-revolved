@@ -6,8 +6,9 @@ import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
 import {PrimaryButton} from '@/Components/Button';
+import Card from '@/Components/Card';
 
-export default function UpdatePasswordForm({className = ''}: { className?: string; }) {
+export default function UpdatePasswordForm() {
     const {t} = useLaravelReactI18n();
     const passwordInput = useRef<HTMLInputElement>();
     const currentPasswordInput = useRef<HTMLInputElement>();
@@ -39,76 +40,77 @@ export default function UpdatePasswordForm({className = ''}: { className?: strin
     };
 
     return (
-        <section className={className}>
-            <header>
-                <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">{t('Update Password')}</h2>
+        <Card>
+            <div className="max-w-xl sm:p-4">
+                <Card.Header
+                    title={t('Update Password')}
+                    description={t('Ensure your account is using a long, random password to stay secure.')}
+                />
 
-                <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                    {t('Ensure your account is using a long, random password to stay secure.')}
-                </p>
-            </header>
+                <Card.Body>
+                    <form onSubmit={updatePassword} className="space-y-6">
+                        <div>
+                            <InputLabel htmlFor="current_password" value={t('Current Password')}/>
 
-            <form onSubmit={updatePassword} className="mt-6 space-y-6">
-                <div>
-                    <InputLabel htmlFor="current_password" value={t('Current Password')}/>
+                            <TextInput
+                                id="current_password"
+                                ref={currentPasswordInput}
+                                value={data.current_password}
+                                onChange={(e) => setData('current_password', e.target.value)}
+                                type="password"
+                                className="mt-1 block w-full"
+                                autoComplete="current-password"
+                            />
 
-                    <TextInput
-                        id="current_password"
-                        ref={currentPasswordInput}
-                        value={data.current_password}
-                        onChange={(e) => setData('current_password', e.target.value)}
-                        type="password"
-                        className="mt-1 block w-full"
-                        autoComplete="current-password"
-                    />
+                            <InputError message={errors.current_password} className="mt-2"/>
+                        </div>
 
-                    <InputError message={errors.current_password} className="mt-2"/>
-                </div>
+                        <div>
+                            <InputLabel htmlFor="password" value={t('New Password')}/>
 
-                <div>
-                    <InputLabel htmlFor="password" value={t('New Password')}/>
+                            <TextInput
+                                id="password"
+                                ref={passwordInput}
+                                value={data.password}
+                                onChange={(e) => setData('password', e.target.value)}
+                                type="password"
+                                className="mt-1 block w-full"
+                                autoComplete="new-password"
+                            />
 
-                    <TextInput
-                        id="password"
-                        ref={passwordInput}
-                        value={data.password}
-                        onChange={(e) => setData('password', e.target.value)}
-                        type="password"
-                        className="mt-1 block w-full"
-                        autoComplete="new-password"
-                    />
+                            <InputError message={errors.password} className="mt-2"/>
+                        </div>
 
-                    <InputError message={errors.password} className="mt-2"/>
-                </div>
+                        <div>
+                            <InputLabel htmlFor="password_confirmation" value={t('Confirm Password')}/>
 
-                <div>
-                    <InputLabel htmlFor="password_confirmation" value={t('Confirm Password')}/>
+                            <TextInput
+                                id="password_confirmation"
+                                value={data.password_confirmation}
+                                onChange={(e) => setData('password_confirmation', e.target.value)}
+                                type="password"
+                                className="mt-1 block w-full"
+                                autoComplete="new-password"
+                            />
 
-                    <TextInput
-                        id="password_confirmation"
-                        value={data.password_confirmation}
-                        onChange={(e) => setData('password_confirmation', e.target.value)}
-                        type="password"
-                        className="mt-1 block w-full"
-                        autoComplete="new-password"
-                    />
+                            <InputError message={errors.password_confirmation} className="mt-2"/>
+                        </div>
 
-                    <InputError message={errors.password_confirmation} className="mt-2"/>
-                </div>
+                        <div className="flex items-center gap-4">
+                            <PrimaryButton type="submit" disabled={processing}>{t('Save')}</PrimaryButton>
 
-                <div className="flex items-center gap-4">
-                    <PrimaryButton type="submit" disabled={processing}>{t('Save')}</PrimaryButton>
-
-                    <Transition
-                        show={recentlySuccessful}
-                        enterFrom="opacity-0"
-                        leaveTo="opacity-0"
-                        className="transition ease-in-out"
-                    >
-                        <p className="text-sm text-gray-600 dark:text-gray-400">{t('Saved.')}</p>
-                    </Transition>
-                </div>
-            </form>
-        </section>
+                            <Transition
+                                show={recentlySuccessful}
+                                enterFrom="opacity-0"
+                                leaveTo="opacity-0"
+                                className="transition ease-in-out"
+                            >
+                                <p className="text-sm text-gray-600 dark:text-gray-400">{t('Saved.')}</p>
+                            </Transition>
+                        </div>
+                    </form>
+                </Card.Body>
+            </div>
+        </Card>
     );
 }

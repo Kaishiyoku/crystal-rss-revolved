@@ -6,8 +6,9 @@ import TextInput from '@/Components/TextInput';
 import {useForm} from '@inertiajs/react';
 import {DangerButton, SecondaryButton} from '@/Components/Button';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
+import Card from '@/Components/Card';
 
-export default function DeleteUserForm({className = ''}: { className?: string; }) {
+export default function DeleteUserForm() {
     const {t} = useLaravelReactI18n();
     const [confirmingUserDeletion, setConfirmingUserDeletion] = useState(false);
     const passwordInput = useRef<HTMLInputElement>();
@@ -43,16 +44,17 @@ export default function DeleteUserForm({className = ''}: { className?: string; }
     };
 
     return (
-        <section className={`space-y-6 ${className}`}>
-            <header>
-                <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">{t('Delete Account')}</h2>
+        <Card>
+            <div className="max-w-xl sm:p-4">
+                <Card.Header
+                    title={t('Delete Account')}
+                    description={t('Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.')}
+                />
 
-                <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                    {t('Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.')}
-                </p>
-            </header>
-
-            <DangerButton onClick={confirmUserDeletion} confirm={false}>{t('Delete Account')}</DangerButton>
+                <Card.Body>
+                    <DangerButton onClick={confirmUserDeletion} confirm={false}>{t('Delete Account')}</DangerButton>
+                </Card.Body>
+            </div>
 
             <Modal show={confirmingUserDeletion} onClose={closeModal}>
                 <form onSubmit={deleteUser} className="p-6">
@@ -91,6 +93,6 @@ export default function DeleteUserForm({className = ''}: { className?: string; }
                     </div>
                 </form>
             </Modal>
-        </section>
+        </Card>
     );
 }

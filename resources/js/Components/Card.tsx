@@ -1,12 +1,12 @@
 import clsx from 'clsx';
 import PhotoSolidIcon from '@/Icons/PhotoSolidIcon';
-import {ReactNode} from 'react';
+import React, {ReactNode} from 'react';
 import {OtherProps} from '@/types';
 
 const Card = ({children, className = '', ...props}: {children: ReactNode; className?: string; props?: OtherProps;}) => {
     return (
         <div
-            className={clsx('shadow-md dark:shadow-black/25 bg-white dark:bg-gray-800 rounded-lg', className)}
+            className={clsx('shadow dark:shadow-black/25 bg-white dark:bg-gray-800 rounded-lg', className)}
             {...props}
         >
             {children}
@@ -33,7 +33,23 @@ const ImagePlaceholder = ({className = ''}: { className?: string; }) => {
     );
 };
 
-const HeaderLink = ({href, children}: {href: string; children: ReactNode;}) => {
+const Header = ({title, description}: { title: string; description?: string; }) => {
+    return (
+        <div className="px-4 pt-4">
+            <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">
+                {title}
+            </h2>
+
+            {description && (
+                <div className="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                    {description}
+                </div>
+            )}
+        </div>
+    );
+};
+
+const HeaderLink = ({href, children}: { href: string; children: ReactNode; }) => {
     return (
         <a
             href={href}
@@ -57,6 +73,7 @@ const Body = ({children, className = '', ...props}: { children: ReactNode; class
 
 Card.Image = Image;
 Card.ImagePlaceholder = ImagePlaceholder;
+Card.Header = Header;
 Card.HeaderLink = HeaderLink;
 Card.Body = Body;
 
