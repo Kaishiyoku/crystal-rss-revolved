@@ -22,7 +22,7 @@ export default function FeedFilterDropdown({selectedFeed, feeds, ...props}: { se
                         icon={FunnelOutlineIcon}
                         hasMobileFullSize
                     >
-                        <div>
+                        <div className="max-w-[200px] truncate" title={selectedFeed ? `${selectedFeed.name} (${selectedFeed.feed_items_count})` : t('Filter by feed...')}>
                             {selectedFeed ? `${selectedFeed.name} (${selectedFeed.feed_items_count})` : t('Filter by feed...')}
                         </div>
 

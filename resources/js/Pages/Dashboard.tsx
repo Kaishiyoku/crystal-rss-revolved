@@ -59,7 +59,7 @@ export default function Dashboard(props: DashboardPageProps) {
             >
                 <Head title="Dashboard"/>
 
-                <div className="sm:flex sm:justify-end mb-8">
+                <div className="flex flex-col sm:flex-row sm:space-x-2 space-y-2 sm:space-y-0 pb-8">
                     <FeedFilterDropdown selectedFeed={props.selectedFeed} feeds={props.unreadFeeds}/>
 
                     {totalNumberOfFeedItems > 0 && (
@@ -70,7 +70,6 @@ export default function Dashboard(props: DashboardPageProps) {
                             confirmSubmitTitle={t('Mark all articles as read')}
                             onClick={markAllAsRead}
                             icon={EyeOutlineIcon}
-                            className="sm:ml-2 mt-1 sm:mt-0"
                             hasMobileFullSize
                         >
                             {t('Mark all as read')}

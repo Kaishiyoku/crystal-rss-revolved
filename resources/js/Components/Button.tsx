@@ -76,7 +76,7 @@ const Button = (
             <button
                 type={type}
                 className={clsx(
-                    'inline-flex space-x-2 items-center transition ease-in disabled:opacity-50 disabled:saturate-50 disabled:cursor-not-allowed',
+                    'inline-flex space-x-2 items-center text-left transition ease-in disabled:opacity-50 disabled:saturate-50 disabled:cursor-not-allowed',
                     'text-sm tracking-widest font-semibold',
                     {
                         'rounded-lg px-5 py-2.5 shadow dark:shadow-black/25 focus:ring-0 focus:ring-black dark:focus:ring-white focus:shadow-none active:shadow-none': variant !== ButtonVariant.Headless,
@@ -91,7 +91,7 @@ const Button = (
                 onClick={handleOnClick}
                 disabled={disabled}
             >
-                {Icon && <Icon className="grow-0 w-5 h-5"/>}
+                {Icon && <Icon className="grow-0 shrink-0 w-5 h-5"/>}
 
                 <span className="grow inline-flex justify-between space-x-2">
                     {children}
