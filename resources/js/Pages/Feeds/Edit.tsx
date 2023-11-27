@@ -15,7 +15,7 @@ export default function Edit({feed, categories, canDelete, ...props}: PageProps 
     const {delete: destroy, processing} = useForm();
 
     const handleDelete = () => {
-        destroy(route('feeds.destroy', props.feed as unknown as RouteParams<'feeds.destroy'>));
+        destroy(route('feeds.destroy', feed as unknown as RouteParams<'feeds.destroy'>));
     };
 
     return (
