@@ -58,7 +58,8 @@ export default function FeedItemCard({hueRotationIndex, feedItem}: { hueRotation
                             'hue-rotate-90': hueRotationIndex === 5,
                         })}
                     />
-                )}
+                )
+            }
 
             <Card.Body className="grow flex flex-col">
                 <div className="grow">
