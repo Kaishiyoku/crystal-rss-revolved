@@ -35,7 +35,7 @@ class ProfileUpdateRequestTest extends TestCase
     /**
      * @dataProvider validationDataProvider
      */
-    public function test_validate(array $data, bool $shouldSucceed, string $expectedExceptionMessage = null): void
+    public function test_validate(array $data, bool $shouldSucceed, ?string $expectedExceptionMessage = null): void
     {
         $request = new ProfileUpdateRequest($data);
         $request->setUserResolver(fn () => $this->user);

@@ -38,7 +38,7 @@ class FeedRequestTest extends TestCase
     /**
      * @dataProvider validationDataProvider
      */
-    public function test_validate_store(array $data, bool $shouldSucceed, string $expectedExceptionMessage = null): void
+    public function test_validate_store(array $data, bool $shouldSucceed, ?string $expectedExceptionMessage = null): void
     {
         $request = new StoreFeedRequest($data);
 
@@ -57,7 +57,7 @@ class FeedRequestTest extends TestCase
     /**
      * @dataProvider validationDataProvider
      */
-    public function test_validate_update(array $data, bool $shouldSucceed, string $expectedExceptionMessage = null): void
+    public function test_validate_update(array $data, bool $shouldSucceed, ?string $expectedExceptionMessage = null): void
     {
         $request = new UpdateFeedRequest($data);
 

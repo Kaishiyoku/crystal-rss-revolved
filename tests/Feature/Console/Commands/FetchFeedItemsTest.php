@@ -143,7 +143,7 @@ class FetchFeedItemsTest extends TestCase
         return $rssFeed;
     }
 
-    private static function getDummyRssFeedItem(int $id, Carbon $date = null): RssFeedItem
+    private static function getDummyRssFeedItem(int $id, ?Carbon $date = null): RssFeedItem
     {
         $rssFeedItem = new RssFeedItem();
         $rssFeedItem->setCategories(collect());
