@@ -22,7 +22,7 @@ const Item = (
     }
 ) => {
     return (
-        <a href={href} className={clsx('px-4 py-3 hover:bg-gray-50 hover:dark:bg-gray-800 transition ease-in-out first:rounded-t-lg last:rounded-b-lg', className)}>
+        <a href={href} className={clsx('px-4 py-3 hover:bg-gray-50 hover:dark:bg-gray-700 transition ease-in-out first:rounded-t-lg last:rounded-b-lg', className)}>
             {children}
         </a>
     );
