@@ -54,10 +54,6 @@ export default function Welcome(props: WelcomeProps) {
                                 {t('welcome.text_2')}
                             </p>
 
-                            <p>
-                                {t('welcome.text_3')}
-                            </p>
-
                             <div className="flex space-x-4">
                                 {props.contactEmail && (
                                     <a href={`mailto:${props.contactEmail}`}>
