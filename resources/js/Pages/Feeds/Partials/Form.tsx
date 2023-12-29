@@ -210,7 +210,10 @@ export default function Form({method, action, feed, categories}: { method: 'post
                             disabled={isDiscoverFeedProcessing}
                             onChange={(e) => setData('is_purgeable', e.currentTarget.checked)}
                         />
-                        <span className="ml-2 text-sm text-gray-600 dark:text-gray-400">{tChoice('feed.purge', monthsAfterPruningFeedItems)}</span>
+
+                        <span className="ml-2 text-sm text-gray-600 dark:text-gray-400">
+                            {tChoice('feed.purge', monthsAfterPruningFeedItems)}
+                        </span>
                     </label>
                 </div>
 

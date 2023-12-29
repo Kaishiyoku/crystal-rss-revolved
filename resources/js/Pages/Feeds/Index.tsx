@@ -1,4 +1,4 @@
-import {Head, Link} from '@inertiajs/react';
+import {Head, Link, usePage} from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import Header from '@/Components/Page/Header';
 import Actions from '@/Components/Actions';
@@ -59,20 +59,29 @@ export default function Index({feeds, ...props}: PageProps & { feeds: Feed[]; })
                                             {feed.name}
                                         </div>
 
-                                        {feed.last_failed_at && (
-                                            <div className="text-sm text-pink-500">
-                                                {t('feed.last_failed_at', {date: formatDateTime(feed.last_failed_at)})}
-                                            </div>
-                                        )}
-
                                         <div className="text-sm text-muted">
                                             {feed.category.name}
                                         </div>
                                     </div>
                                 </div>
 
-                                <div className="text-sm sm:text-base text-muted">
-                                    {tChoice('feed.feed_items_count', feed.feed_items_count)}
+                                <div className="text-sm text-right">
+                                    <div className="text-muted">
+                                        {tChoice('feed.feed_items_count', feed.feed_items_count)}
+                                    </div>
+
+                                    <div className="text-muted">
+                                        {feed.is_purgeable
+                                            ? tChoice('feed.purge', props.monthsAfterPruningFeedItems)
+                                            : t('feed.no_purge')
+                                        }
+                                    </div>
+
+                                    {feed.last_failed_at && (
+                                        <div className="text-pink-500">
+                                            {t('feed.last_failed_at', {date: formatDateTime(feed.last_failed_at)})}
+                                        </div>
+                                    )}
                                 </div>
                             </LinkStack.Item>
                         ))}
