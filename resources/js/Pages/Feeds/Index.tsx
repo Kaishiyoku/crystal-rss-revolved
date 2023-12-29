@@ -10,6 +10,7 @@ import NewspaperOutlineIcon from '@/Icons/NewspaperOutlineIcon';
 import {PageProps} from '@/types';
 import {RouteParams} from 'ziggy-js';
 import Feed from '@/types/Models/Feed';
+import PhotoSolidIcon from '@/Icons/PhotoSolidIcon';
 
 export default function Index({feeds, ...props}: PageProps & { feeds: Feed[]; }) {
     const {t, tChoice} = useLaravelReactI18n();
@@ -40,19 +41,33 @@ export default function Index({feeds, ...props}: PageProps & { feeds: Feed[]; })
                                 href={route('feeds.edit', feed as unknown as RouteParams<'feeds.edit'>)}
                                 className="block sm:flex justify-between"
                             >
-                                <div>
-                                    <div className="font-semibold">
-                                        {feed.name}
-                                    </div>
+                                <div className="flex items-center">
+                                    {feed.favicon_url
+                                        ? (
+                                            <img
+                                                loading="lazy"
+                                                src={feed.favicon_url}
+                                                alt={feed.name}
+                                                className="w-5 h-5 rounded mr-4"
+                                            />
+                                        )
+                                        : <PhotoSolidIcon className="w-5 h-5 mr-4"/>
+                                    }
 
-                                    {feed.last_failed_at && (
-                                        <div className="text-sm text-pink-500">
-                                            {t('feed.last_failed_at', {date: formatDateTime(feed.last_failed_at)})}
+                                    <div>
+                                        <div className="font-semibold">
+                                            {feed.name}
                                         </div>
-                                    )}
 
-                                    <div className="text-sm sm:text-base text-muted">
-                                        {feed.category.name}
+                                        {feed.last_failed_at && (
+                                            <div className="text-sm text-pink-500">
+                                                {t('feed.last_failed_at', {date: formatDateTime(feed.last_failed_at)})}
+                                            </div>
+                                        )}
+
+                                        <div className="text-sm text-muted">
+                                            {feed.category.name}
+                                        </div>
                                     </div>
                                 </div>
 
