@@ -161,17 +161,15 @@ export default function Authenticated({auth, header, children}: BasePageProps & 
                         </Transition.Child>
                     </Transition>
                 </nav>
-
-                {(header) && (
-                    <header className="bg-white dark:bg-gray-800">
-                        <div className="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
-                            {header}
-                        </div>
-                    </header>
-                )}
             </div>
 
-            <main className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            {(header) && (
+                <header className="text-xl max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    {header}
+                </header>
+            )}
+
+            <main className="max-w-7xl mx-auto pb-12 px-4 sm:px-6 lg:px-8">
                 {children}
             </main>
         </div>
