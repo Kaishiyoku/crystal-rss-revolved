@@ -1,4 +1,4 @@
-import {Head, Link, usePage} from '@inertiajs/react';
+import {Head, Link} from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import Header from '@/Components/Page/Header';
 import Actions from '@/Components/Actions';
