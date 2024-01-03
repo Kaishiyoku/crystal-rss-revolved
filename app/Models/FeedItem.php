@@ -81,7 +81,7 @@ class FeedItem extends Model
     /**
      * The accessors to append to the model's array form.
      *
-     * @var array<string>
+     * @var array<int, string>
      */
     protected $appends = [
         'has_image',
