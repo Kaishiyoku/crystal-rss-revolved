@@ -43,7 +43,7 @@ export default function Index({categories, ...props}: PageProps & { categories: 
                                     {category.name}
                                 </div>
 
-                                <div className="text-muted">
+                                <div className="text-sm text-muted">
                                     {tChoice('category.feeds_count', category.feeds_count)}
                                 </div>
                             </LinkStack.Item>
