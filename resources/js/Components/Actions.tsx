@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import {Children, cloneElement, Fragment, ReactNode, useState} from 'react';
 import {Transition} from '@headlessui/react';
-import {HeadlessButton, SecondaryButton, TertiaryButton} from '@/Components/Button.jsx';
+import {HeadlessButton, TertiaryButton} from '@/Components/Button.jsx';
 import {is} from 'ramda';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import XMarkOutlineIcon from '@/Icons/XMarkOutlineIcon';
