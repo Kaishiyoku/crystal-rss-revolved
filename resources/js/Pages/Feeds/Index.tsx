@@ -62,10 +62,29 @@ export default function Index({feeds, ...props}: PageProps & { feeds: Feed[]; })
                                         <div className="text-sm text-muted">
                                             {feed.category.name}
                                         </div>
+
+                                        <div className="sm:hidden text-sm">
+                                            <div className="text-muted">
+                                                {tChoice('feed.feed_items_count', feed.feed_items_count)}
+                                            </div>
+
+                                            <div className="text-muted">
+                                                {feed.is_purgeable
+                                                    ? tChoice('feed.purge', props.monthsAfterPruningFeedItems)
+                                                    : t('feed.no_purge')
+                                                }
+                                            </div>
+
+                                            {feed.last_failed_at && (
+                                                <div className="text-pink-500">
+                                                    {t('feed.last_failed_at', {date: formatDateTime(feed.last_failed_at)})}
+                                                </div>
+                                            )}
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div className="text-sm text-right">
+                                <div className="hidden sm:block text-sm text-right">
                                     <div className="text-muted">
                                         {tChoice('feed.feed_items_count', feed.feed_items_count)}
                                     </div>
