@@ -102,5 +102,8 @@
     "Delete feed": "Feed löschen",
     "Do you really want to delete this feed?": "Wollen Sie wirklich diesen Feed löschen?",
     "Unread": "Ungelesen",
-    "Read": "Gelesen"
+    "Read": "Gelesen",
+    ":name is a minimalist newsfeed reader.": ":name ist ein minimalistischer Newsfeed-Reader.",
+    "The features are limited by intention to be able to concentrate on what matters: reading the news.": "Die Funktionen beschränken sich absichtlich nur auf das Wesentliche, damit man sich auf das konzentrieren kann, auf was es ankommt: die Nachrichten zu lesen.",
+    "Any RSS feed can be added and article summaries are then being fetched and displayed on the dashboard automatically.": "Es kann jeder beliebige RSS Feed hinzugefügt werden und Artikelzusammenfassungen werden dann automatisch geladen und auf dem Dashboard angezeigt."
 }

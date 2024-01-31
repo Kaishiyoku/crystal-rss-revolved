@@ -43,15 +43,15 @@ export default function Welcome(props: WelcomeProps) {
 
                         <div className="prose prose-2xl prose-invert max-w-xl">
                             <p>
-                                {t('welcome.headline', {name: window.appName})}
+                                {t(':name is a minimalist newsfeed reader.', {name: window.appName})}
                             </p>
 
                             <p>
-                                {t('welcome.text_1')}
+                                {t('The features are limited by intention to be able to concentrate on what matters: reading the news.')}
                             </p>
 
                             <p>
-                                {t('welcome.text_2')}
+                                {t('Any RSS feed can be added and article summaries are then being fetched and displayed on the dashboard automatically.')}
                             </p>
 
                             <div className="flex space-x-4">
