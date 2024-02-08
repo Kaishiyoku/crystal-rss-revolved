@@ -21,3 +21,7 @@ it('should get the proper content type for a given url', function () {
 it('should return null if an exception occurs', function () {
     expect(getContentTypeForUrl('https://nonexistent-url.dev'))->toBeNull();
 });
+
+it('should generate a proper blur hash', function () {
+    expect(generateBlurHashByUrl('https://picperf.io/https://laravelnews.s3.amazonaws.com/featured-images/dump-testresponse-featured.png'))->toBe('LM8i6OS2.mS3yrsAR*sA%$X8nOX8');
+});
