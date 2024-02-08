@@ -38,13 +38,13 @@ if (! function_exists('generateBlurHashByUrl')) {
 
             $pixels = [];
 
-            for ($y = 0; $y < $image->height(); ++$y) {
+            for ($y = 0; $y < $image->height(); $y++) {
                 $row = [];
 
-                for ($x = 0; $x < $image->width(); ++$x) {
+                for ($x = 0; $x < $image->width(); $x++) {
                     $colors = $image->pickColor($x, $y);
 
-                    if (!($colors instanceof RgbColor)) {
+                    if (! ($colors instanceof RgbColor)) {
                         $colors = $colors->convertTo(new RgbColorspace());
                     }
 
