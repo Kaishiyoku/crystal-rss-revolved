@@ -16,12 +16,19 @@ const Card = ({children, className = '', ...props}: {children: ReactNode; classN
 
 const Image = ({src, alt}: {src: string; alt: string;}) => {
     return (
-        <img
-            loading="lazy"
-            src={src}
-            alt={alt}
-            className="object-cover w-full h-72 md:h-56 rounded-t-lg"
-        />
+        <div className="relative flex items-center h-72 md:h-56 overflow-hidden rounded-t-lg">
+            <img
+                loading="lazy"
+                src={src}
+                alt={alt}
+                className="z-10 object-contain w-full"
+            />
+
+            <div
+                className="absolute size-full blur-xl"
+                style={{backgroundImage: `url(${src})`}}
+            />
+        </div>
     );
 };
 
