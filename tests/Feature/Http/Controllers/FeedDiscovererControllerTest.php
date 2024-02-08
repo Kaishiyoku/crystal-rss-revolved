@@ -29,7 +29,7 @@ class FeedDiscovererControllerTest extends TestCase
     {
         $this->actingAs(User::factory()->create());
 
-        $response = $this->post(route('discover-feed'), ['feed_url' => 'https://v2.wttr.in/']);
+        $response = $this->post(route('discover-feed'), ['feed_url' => 'https://blurha.sh/']);
 
         $response->assertNotFound();
         static::assertSame('No feeds found.', $response->exception->getMessage());

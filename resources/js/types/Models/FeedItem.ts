@@ -16,6 +16,7 @@ type FeedItem = {
     feed: Feed;
     description: string;
     read_at: string | null;
+    blur_hash: string | null;
 };
 
 export default FeedItem;

@@ -117,6 +117,29 @@ class FetchFeedItemsTest extends TestCase
             });
     }
 
+    public function test_generates_blur_hash_for_image(): void
+    {
+        $verifiedUser = User::factory()->create();
+        $verifiedUserFeed = Feed::factory()->state(['feed_url' => 'https://feed.laravel-news.com/'])->recycle($verifiedUser)->create();
+
+        $dummyRssFeed = static::getDummyRssFeed(1);
+        $dummyRssFeed->setFeedItems(collect([
+            static::getDummyRssFeedItem(
+                3,
+                null,
+                'https://picperf.io/https://laravelnews.s3.amazonaws.com/featured-images/dump-testresponse-featured.png'
+            ),
+        ]));
+
+        $heraRssCrawlerMock = $this->partialMock(HeraRssCrawler::class);
+        $heraRssCrawlerMock->shouldReceive('parseFeed')->once()->andReturn($dummyRssFeed);
+
+        $this->artisan(FetchFeedItems::class)
+            ->assertExitCode(Command::SUCCESS);
+
+        static::assertSame('LM8i6OS2.mS3yrsAR*sA%$X8nOX8', $verifiedUserFeed->feedItems->first()->blur_hash);
+    }
+
     /**
      * @param  Collection<RssFeedItem>  $rssFeedItems
      *
@@ -137,13 +160,14 @@ class FetchFeedItemsTest extends TestCase
         $rssFeed->setId('dummy-feed');
         $rssFeed->setLanguage('en');
         $rssFeed->setUrl(null);
-        $rssFeed->setFeedItems(collect(range(1, $numberOfFeedItems))->map(fn (int $id) => static::getDummyRssFeedItem($id)));
+        $rssFeed->setFeedItems(collect(range(1, $numberOfFeedItems))->map(fn (int $id
+        ) => static::getDummyRssFeedItem($id)));
         $rssFeed->setChecksum(HeraRssCrawler::generateChecksumForFeed($rssFeed));
 
         return $rssFeed;
     }
 
-    private static function getDummyRssFeedItem(int $id, ?Carbon $date = null): RssFeedItem
+    private static function getDummyRssFeedItem(int $id, ?Carbon $date = null, ?string $imageUrl = null): RssFeedItem
     {
         $rssFeedItem = new RssFeedItem();
         $rssFeedItem->setCategories(collect());
@@ -158,7 +182,7 @@ class FetchFeedItemsTest extends TestCase
         $rssFeedItem->setUpdatedAt($date ?? now());
         $rssFeedItem->setDescription('Dummy description');
         $rssFeedItem->setEnclosureUrl("https://test.dev/{$id}");
-        $rssFeedItem->setImageUrls(collect());
+        $rssFeedItem->setImageUrls($imageUrl ? collect([$imageUrl]) : collect());
         $rssFeedItem->setEncoding('utf-8');
         $rssFeedItem->setId("article-{$id}");
         $rssFeedItem->setLinks(collect());

@@ -45,6 +45,7 @@ export default function FeedItemCard({hueRotationIndex, feedItem}: { hueRotation
                     <Card.Image
                         src={internalFeedItem.image_url}
                         alt={internalFeedItem.title}
+                        blurHash={internalFeedItem.blur_hash}
                     />
                 )
                 : (

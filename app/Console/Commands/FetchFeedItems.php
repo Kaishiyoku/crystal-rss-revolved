@@ -136,6 +136,7 @@ class FetchFeedItems extends Command
             'title' => Str::limit(Encoding::toUTF8($rssFeedItem->getTitle()), 512),
             'image_url' => $imageUrl,
             'image_mimetype' => $imageMimetype,
+            'blur_hash' => $imageUrl ? generateBlurHashByUrl($imageUrl) : null,
             'description' => Str::limit(Encoding::toUTF8(strip_tags($rssFeedItem->getDescription())), 1024),
             'posted_at' => $rssFeedItem->getCreatedAt(),
             'checksum' => $rssFeedItem->getChecksum(),

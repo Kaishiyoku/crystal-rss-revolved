@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import PhotoSolidIcon from '@/Icons/PhotoSolidIcon';
 import React, {ReactNode} from 'react';
 import {OtherProps} from '@/types';
+import {BlurhashCanvas} from 'react-blurhash';
 
 const Card = ({children, className = '', ...props}: {children: ReactNode; className?: string; props?: OtherProps;}) => {
     return (
@@ -14,7 +15,7 @@ const Card = ({children, className = '', ...props}: {children: ReactNode; classN
     );
 };
 
-const Image = ({src, alt}: {src: string; alt: string;}) => {
+const Image = ({src, alt, blurHash = null}: {src: string; alt: string; blurHash: string | null;}) => {
     return (
         <div className="relative flex items-center h-72 md:h-56 overflow-hidden rounded-t-lg">
             <img
@@ -24,10 +25,10 @@ const Image = ({src, alt}: {src: string; alt: string;}) => {
                 className="z-10 object-contain w-full"
             />
 
-            <div
-                className="absolute size-full blur-xl"
-                style={{backgroundImage: `url(${src})`}}
-            />
+            {blurHash
+                ? <BlurhashCanvas hash={blurHash} className="absolute w-full h-full"/>
+                : <div className="absolute size-full blur-xl" style={{backgroundImage: `url(${src})`}}/>
+            }
         </div>
     );
 };
