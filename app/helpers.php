@@ -11,7 +11,6 @@ use Intervention\Image\Colors\Rgb\Channels\Red;
 use Intervention\Image\Colors\Rgb\Color as RgbColor;
 use Intervention\Image\Colors\Rgb\Colorspace as RgbColorspace;
 use Intervention\Image\Drivers\Gd\Driver as GdDriver;
-use Intervention\Image\Exceptions\DecoderException;
 use Intervention\Image\ImageManager;
 use kornrunner\Blurhash\Blurhash;
 
@@ -58,7 +57,7 @@ if (! function_exists('generateBlurHashByUrl')) {
             }
 
             return Blurhash::encode($pixels, 4, 3);
-        } catch (DecoderException) {
+        } catch (Exception) {
             return null;
         }
     }
