@@ -21,35 +21,43 @@ export default function Index({users, ...props}: PageProps & { users: (User & {f
 
             <Card>
                 <Table>
-                    <Table.Heading>{t('validation.attributes.name')}</Table.Heading>
-                    <Table.Heading>{t('validation.attributes.email_verified_at')}</Table.Heading>
-                    <Table.Heading hideOnMobile>{t('validation.attributes.is_admin')}</Table.Heading>
-                    <Table.Heading hideOnMobile>{t('Number of feeds')}</Table.Heading>
-                    <Table.Heading hideOnMobile>{t('Number of unread feed items')}</Table.Heading>
+                    <thead>
+                        <Table.HeadingRow>
+                            <Table.HeadingCell>{t('validation.attributes.name')}</Table.HeadingCell>
+                            <Table.HeadingCell>{t('validation.attributes.email_verified_at')}</Table.HeadingCell>
+                            <Table.HeadingCell hideOnMobile>{t('validation.attributes.is_admin')}</Table.HeadingCell>
+                            <Table.HeadingCell hideOnMobile>{t('Number of feeds')}</Table.HeadingCell>
+                            <Table.HeadingCell hideOnMobile>{t('Number of unread feed items')}</Table.HeadingCell>
+                        </Table.HeadingRow>
+                    </thead>
 
-                    {users.map((user) => (
-                        <Table.Row key={user.id}>
-                            <Table.MobileContainer>
-                                <Table.MobileText label={t('validation.attributes.is_admin')}>
-                                    {user.is_admin ? t('Yes') : t('No')}
-                                </Table.MobileText>
+                    <tbody>
+                        {users.map((user) => (
+                            <Table.Row key={user.id}>
+                                <Table.Cell highlighted>
+                                    {user.name}
 
-                                <Table.MobileText label={t('Number of feeds')}>
-                                    {user.feeds_count}
-                                </Table.MobileText>
+                                    <Table.MobileContainer>
+                                        <Table.MobileText label={t('validation.attributes.is_admin')}>
+                                            {user.is_admin ? t('Yes') : t('No')}
+                                        </Table.MobileText>
 
-                                <Table.MobileText label={t('Number of unread feed items')}>
-                                    {user.unread_feed_items_count}
-                                </Table.MobileText>
-                            </Table.MobileContainer>
+                                        <Table.MobileText label={t('Number of feeds')}>
+                                            {user.feeds_count}
+                                        </Table.MobileText>
 
-                            <Table.Cell highlighted>{user.name}</Table.Cell>
-                            <Table.Cell>{user.email_verified_at ? formatDateTime(user.email_verified_at) : '/'}</Table.Cell>
-                            <Table.Cell hideOnMobile>{user.is_admin ? t('Yes') : t('No')}</Table.Cell>
-                            <Table.Cell hideOnMobile>{user.feeds_count}</Table.Cell>
-                            <Table.Cell hideOnMobile>{user.unread_feed_items_count}</Table.Cell>
-                        </Table.Row>
-                    ))}
+                                        <Table.MobileText label={t('Number of unread feed items')}>
+                                            {user.unread_feed_items_count}
+                                        </Table.MobileText>
+                                    </Table.MobileContainer>
+                                </Table.Cell>
+                                <Table.Cell>{user.email_verified_at ? formatDateTime(user.email_verified_at) : '/'}</Table.Cell>
+                                <Table.Cell hideOnMobile>{user.is_admin ? t('Yes') : t('No')}</Table.Cell>
+                                <Table.Cell hideOnMobile>{user.feeds_count}</Table.Cell>
+                                <Table.Cell hideOnMobile>{user.unread_feed_items_count}</Table.Cell>
+                            </Table.Row>
+                        ))}
+                    </tbody>
                 </Table>
             </Card>
         </AuthenticatedLayout>
