@@ -100,17 +100,60 @@ class FeedItemTest extends TestCase
     {
         $this->freezeTime();
 
-        $prunableFeedItemIds = FeedItem::factory(10)->state(['read_at' => now()->subMonths(5)])->create()->pluck('id');
-        $notPrunableFeedItemIds = FeedItem::factory(10)->state(['read_at' => now()->subMonths(5)->addSecond()])->create()->pluck('id');
+        $readPrunableFeedItemIds = FeedItem::factory(10)
+            ->state(
+                [
+                    'read_at' => now()->subMonths(5),
+                    'created_at' => now()->subMonths(5),
+                ]
+            )
+            ->create()
+            ->pluck('id');
+        $unreadPrunableFeedItemIds = FeedItem::factory(10)
+            ->state(
+                [
+                    'read_at' => null,
+                    'created_at' => now()->subMonths(5),
+                ]
+            )
+            ->create()
+            ->pluck('id');
+        $readNotPrunableFeedItemIds = FeedItem::factory(10)
+            ->state(
+                [
+                    'read_at' => now()->subMonths(5)->addSecond(),
+                    'created_at' => now()->subMonths(5)->addSecond(),
+                ]
+            )
+            ->create()
+            ->pluck('id');
+        $unreadNotPrunableFeedItemIds = FeedItem::factory(10)
+            ->state(
+                [
+                    'read_at' => null,
+                    'created_at' => now(5)->subMonths(5)->addSecond(),
+                ]
+            )
+            ->create()
+            ->pluck('id');
 
         Config::set('app.months_after_pruning_feed_items', 5);
 
-        static::assertEquals($prunableFeedItemIds, (new FeedItem())->prunable()->pluck('id'));
-        static::assertNotContains($notPrunableFeedItemIds, (new FeedItem())->prunable()->pluck('id'));
+        static::assertEquals(
+            $readPrunableFeedItemIds->merge($unreadPrunableFeedItemIds)->values()->sort(),
+            (new FeedItem())->prunable()->pluck('id')
+        );
+        static::assertNotContains(
+            $readNotPrunableFeedItemIds->merge($unreadNotPrunableFeedItemIds)->values()->sort(),
+            (new FeedItem())->prunable()->pluck('id')
+        );
 
         $this->artisan('model:prune')
             ->assertExitCode(Command::SUCCESS);
 
-        static::assertEquals($notPrunableFeedItemIds, FeedItem::pluck('id'));
+        static::assertEquals(
+            $readNotPrunableFeedItemIds->merge($unreadNotPrunableFeedItemIds)->values()->sort(),
+            FeedItem::orderBy('id')->pluck('id')
+        );
     }
 }
