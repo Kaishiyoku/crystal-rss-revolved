@@ -1,6 +1,6 @@
-import React, {Children, cloneElement, createElement, ReactNode} from 'react';
+import React, {Children, cloneElement, ReactNode} from 'react';
 import clsx from 'clsx';
-import {filter, head} from 'ramda';
+import {head} from 'ramda';
 
 const Table = ({children}: {children: ReactNode;}) => {
     const headings = Children.toArray(children)
