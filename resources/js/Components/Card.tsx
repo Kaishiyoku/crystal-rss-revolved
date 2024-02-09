@@ -7,7 +7,7 @@ import {BlurhashCanvas} from 'react-blurhash';
 const Card = ({children, className = '', ...props}: {children: ReactNode; className?: string; props?: OtherProps;}) => {
     return (
         <div
-            className={clsx('shadow dark:shadow-black/25 bg-white dark:bg-gray-800 rounded-lg', className)}
+            className={clsx('shadow dark:shadow-black/25 bg-white dark:bg-gray-800 rounded-lg contain-paint', className)}
             {...props}
         >
             {children}

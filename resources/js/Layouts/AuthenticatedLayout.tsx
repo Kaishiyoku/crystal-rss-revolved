@@ -72,9 +72,21 @@ export default function Authenticated({auth, header, children}: BasePageProps & 
                                                 {t('Profile')}
                                             </Dropdown.Link>
                                             {!!auth.user.is_admin && (
-                                                <Dropdown.Link href={route('telescope')} as="a">
-                                                    {t('Telescope')}
-                                                </Dropdown.Link>
+                                                <>
+                                                    <Dropdown.Link
+                                                        href={route('admin.users.index')}
+                                                        active={route().current('admin.users.*')}
+                                                    >
+                                                        {t('Manage users')}
+                                                    </Dropdown.Link>
+
+                                                    <Dropdown.Link
+                                                        href={route('telescope')}
+                                                        as="a"
+                                                    >
+                                                        {t('Telescope')}
+                                                    </Dropdown.Link>
+                                                </>
                                             )}
                                             <Dropdown.Link href={route('logout')} method="post" as="button">
                                                 {t('Log Out')}
@@ -148,9 +160,18 @@ export default function Authenticated({auth, header, children}: BasePageProps & 
                                             {t('Profile')}
                                         </ResponsiveNavLink>
                                         {!!auth.user.is_admin && (
-                                            <ResponsiveNavLink href={route('telescope')} as="a">
-                                                {t('Telescope')}
-                                            </ResponsiveNavLink>
+                                            <>
+                                                <ResponsiveNavLink
+                                                    href={route('admin.users.index')}
+                                                    active={route().current('admin.users.*')}
+                                                >
+                                                    {t('Manage users')}
+                                                </ResponsiveNavLink>
+
+                                                <ResponsiveNavLink href={route('telescope')} as="a">
+                                                    {t('Telescope')}
+                                                </ResponsiveNavLink>
+                                            </>
                                         )}
                                         <ResponsiveNavLink method="post" href={route('logout')} as="button">
                                             {t('Log Out')}

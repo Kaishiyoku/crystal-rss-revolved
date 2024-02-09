@@ -219,5 +219,7 @@ return [
         'year' => 'Jahr',
         'is_purgeable' => 'Aufräumbar',
         'feed_id' => 'Feed',
+        'email_verified_at' => 'E-Mail verifiziert am',
+        'is_admin' => 'Administrator',
     ],
 ];
