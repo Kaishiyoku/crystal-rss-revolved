@@ -17,7 +17,7 @@ type UserWithStats = User & {
 
 export default function Index({users, ...props}: PageProps & { users: UserWithStats[]; }) {
     const {t} = useLaravelReactI18n();
-    const {delete: destroy, processing} = useForm();
+    const {delete: destroy, processing: deleteProcessing} = useForm();
 
     const handleDelete = (user: UserWithStats) => () => {
         destroy(route('admin.users.destroy', user as unknown as RouteParams<'admin.users.destroy'>));
@@ -27,9 +27,9 @@ export default function Index({users, ...props}: PageProps & { users: UserWithSt
         <AuthenticatedLayout
             auth={props.auth}
             errors={props.errors}
-            header={<Header>{t('Users')}</Header>}
+            header={<Header>{t('Manage users')}</Header>}
         >
-            <Head title={t('Users')}/>
+            <Head title={t('Manage users')}/>
 
             <Card>
                 <Table>
@@ -82,6 +82,7 @@ export default function Index({users, ...props}: PageProps & { users: UserWithSt
                                             confirmSubmitTitle={t('Delete user')}
                                             confirmCancelTitle={t('Cancel')}
                                             onClick={handleDelete(user)}
+                                            disabled={deleteProcessing}
                                         >
                                             {t('Delete')}
                                         </DangerButton>
