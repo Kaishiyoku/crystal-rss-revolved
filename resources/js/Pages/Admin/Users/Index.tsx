@@ -35,12 +35,15 @@ export default function Index({users, ...props}: PageProps & { users: UserWithSt
                 <Table>
                     <thead>
                         <Table.HeadingRow>
-                            <Table.HeadingCell>{t('validation.attributes.name')}</Table.HeadingCell>
-                            <Table.HeadingCell>{t('validation.attributes.email_verified_at')}</Table.HeadingCell>
+                            <Table.HeadingCell>
+                                <span className="hidden lg:inline">{t('validation.attributes.name')}</span>
+                                <span className="lg:hidden">{t('Users')}</span>
+                            </Table.HeadingCell>
+                            <Table.HeadingCell hideOnMobile>{t('validation.attributes.email_verified_at')}</Table.HeadingCell>
                             <Table.HeadingCell hideOnMobile>{t('validation.attributes.is_admin')}</Table.HeadingCell>
                             <Table.HeadingCell hideOnMobile>{t('Number of feeds')}</Table.HeadingCell>
                             <Table.HeadingCell hideOnMobile>{t('Number of unread feed items')}</Table.HeadingCell>
-                            <Table.HeadingCell><span className="sr-only">{t('Actions')}</span></Table.HeadingCell>
+                            <Table.HeadingCell hideOnMobile><span className="sr-only">{t('Actions')}</span></Table.HeadingCell>
                         </Table.HeadingRow>
                     </thead>
 
@@ -58,6 +61,10 @@ export default function Index({users, ...props}: PageProps & { users: UserWithSt
                                     </div>
 
                                     <Table.MobileContainer>
+                                        <Table.MobileText label={t('validation.attributes.email_verified_at')}>
+                                            {user.email_verified_at ? formatDateTime(user.email_verified_at) : '/'}
+                                        </Table.MobileText>
+
                                         <Table.MobileText label={t('validation.attributes.is_admin')}>
                                             {user.is_admin ? t('Yes') : t('No')}
                                         </Table.MobileText>
@@ -70,12 +77,26 @@ export default function Index({users, ...props}: PageProps & { users: UserWithSt
                                             {user.unread_feed_items_count}
                                         </Table.MobileText>
                                     </Table.MobileContainer>
+
+                                    <div className="lg:hidden pt-4">
+                                        {user.id !== props.auth.user.id && (
+                                            <DangerButton
+                                                confirmTitle={t('Do you really want to delete the user “:name”?', {name: user.name})}
+                                                confirmSubmitTitle={t('Delete user')}
+                                                confirmCancelTitle={t('Cancel')}
+                                                onClick={handleDelete(user)}
+                                                disabled={deleteProcessing}
+                                            >
+                                                {t('Delete')}
+                                            </DangerButton>
+                                        )}
+                                    </div>
                                 </Table.Cell>
-                                <Table.Cell>{user.email_verified_at ? formatDateTime(user.email_verified_at) : '/'}</Table.Cell>
+                                <Table.Cell hideOnMobile>{user.email_verified_at ? formatDateTime(user.email_verified_at) : '/'}</Table.Cell>
                                 <Table.Cell hideOnMobile>{user.is_admin ? t('Yes') : t('No')}</Table.Cell>
                                 <Table.Cell hideOnMobile>{user.feeds_count}</Table.Cell>
                                 <Table.Cell hideOnMobile>{user.unread_feed_items_count}</Table.Cell>
-                                <Table.Cell>
+                                <Table.Cell hideOnMobile>
                                     {user.id !== props.auth.user.id && (
                                         <DangerButton
                                             confirmTitle={t('Do you really want to delete the user “:name”?', {name: user.name})}
