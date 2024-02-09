@@ -41,11 +41,7 @@ if (! function_exists('generateBlurHashByUrl')) {
                 $row = [];
 
                 for ($x = 0; $x < $image->width(); $x++) {
-                    $colors = $image->pickColor($x, $y);
-
-                    if (! ($colors instanceof RgbColor)) {
-                        $colors = $colors->convertTo(new RgbColorspace());
-                    }
+                    $colors = $image->pickColor($x, $y)->convertTo(new RgbColorspace());
 
                     $row[] = [
                         $colors->channel(Red::class)->value(),
