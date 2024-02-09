@@ -219,5 +219,7 @@ return [
         'year' => 'year',
         'is_purgeable' => 'Purgeable',
         'feed_id' => 'Feed',
+        'email_verified_at' => 'Email verified at',
+        'is_admin' => 'Is admin',
     ],
 ];
