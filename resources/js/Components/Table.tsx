@@ -21,7 +21,7 @@ const HeadingCell = ({children, hideOnMobile = false, className = ''}: {children
     return (
         <th
             className={clsx(
-                'sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 pl-4 pr-3 text-left font-semibold text-gray-900 backdrop-blur backdrop-filter sm:pl-6 lg:pl-6',
+                'sticky top-0 z-10 border-b border-gray-300 dark:border-gray-500 bg-white dark:bg-gray-800 bg-opacity-75 py-3.5 pl-4 pr-3 text-left font-semibold text-gray-900 dark:text-gray-100 backdrop-blur backdrop-filter sm:pl-6 lg:pl-6',
                 className,
                 {
                     'hidden lg:table-cell': hideOnMobile,
@@ -35,7 +35,7 @@ const HeadingCell = ({children, hideOnMobile = false, className = ''}: {children
 
 const Row = ({children}: { children: ReactNode; }) => {
     return (
-        <tr className="even:bg-gray-50 odd:bg-white">
+        <tr className="even:bg-gray-50 dark:even:bg-gray-900 odd:bg-white dark:odd:bg-gray-800">
             {children}
         </tr>
     );
@@ -45,7 +45,7 @@ const Cell = ({children, highlighted = false, hideOnMobile = false}: {children: 
     return (
         <td
             className={clsx(
-                'align-top border-b border-gray-200 whitespace-nowrap py-4 pl-4 pr-3 font-medium text-gray-900 sm:pl-6 lg:pl-8',
+                'align-top border-b border-gray-200 dark:border-gray-600 whitespace-nowrap py-4 pl-4 pr-3 font-medium sm:pl-6 lg:pl-8',
                 {
                     'font-semibold': highlighted,
                     'hidden lg:table-cell': hideOnMobile,
