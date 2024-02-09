@@ -49,8 +49,8 @@ Route::middleware('auth')->group(function () {
         Route::resource('feeds', FeedController::class)->except('show');
         Route::put('/feeds/{feedItem}/toggle', ToggleFeedItemController::class)->name('toggle-feed-item');
 
-        Route::middleware('administrate')->group(function () {
-            Route::get('/admin/users', [AdminUserController::class, 'index'])->name('admin.users.index');
+        Route::middleware('administrate')->prefix('admin')->as('admin.')->group(function () {
+            Route::resource('users', AdminUserController::class)->only(['index', 'destroy']);
         });
     });
 });

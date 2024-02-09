@@ -108,5 +108,7 @@
     "Any RSS feed can be added and article summaries are then being fetched and displayed on the dashboard automatically.": "Es kann jeder beliebige RSS Feed hinzugefügt werden und Artikelzusammenfassungen werden dann automatisch geladen und auf dem Dashboard angezeigt.",
     "Number of feeds": "Anzahl Feeds",
     "Number of unread feed items": "Anzahl ungelesener Artikel",
-    "Users": "Benutzer"
+    "Users": "Benutzer",
+    "Delete user": "Benutzer löschen",
+    "Do you really want to delete the user “:name”?": "Wollen Sie den Benutzer „:name” wirklich löschen?"
 }
