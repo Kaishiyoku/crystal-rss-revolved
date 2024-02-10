@@ -7,7 +7,7 @@ import {useLaravelReactI18n} from 'laravel-react-i18n';
 import FeedFilterDropdown from '@/Components/FeedFilterDropdown';
 import TotalNumberOfFeedItemsContext from '@/Contexts/TotalNumberOfFeedItemsContext';
 import {TertiaryButton} from '@/Components/Button';
-import NewspaperOutlineIcon from '@/Icons/NewspaperOutlineIcon';
+import NewspaperSolidIcon from '@/Icons/NewspaperSolidIcon';
 import EmptyState from '@/Components/EmptyState';
 import EyeOutlineIcon from '@/Icons/EyeOutlineIcon';
 import {PageProps} from '@/types';
@@ -91,7 +91,7 @@ export default function Dashboard(props: DashboardPageProps) {
                     )
                     : (
                         <EmptyState
-                            icon={NewspaperOutlineIcon}
+                            icon={NewspaperSolidIcon}
                             message={t('No unread articles.')}
                             description={t('Come back later.')}
                         />

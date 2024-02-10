@@ -6,7 +6,7 @@ import {useLaravelReactI18n} from 'laravel-react-i18n';
 import LinkStack from '@/Components/LinkStack';
 import formatDateTime from '@/Utils/formatDateTime';
 import EmptyState from '@/Components/EmptyState';
-import NewspaperOutlineIcon from '@/Icons/NewspaperOutlineIcon';
+import NewspaperSolidIcon from '@/Icons/NewspaperSolidIcon';
 import {PageProps} from '@/types';
 import {RouteParams} from 'ziggy-js';
 import Feed from '@/types/Models/Feed';
@@ -108,7 +108,7 @@ export default function Index({feeds, ...props}: PageProps & { feeds: Feed[]; })
                 )
                 : (
                     <EmptyState
-                        icon={NewspaperOutlineIcon}
+                        icon={NewspaperSolidIcon}
                         message={t('No feeds.')}
                         description={t('Get started by creating a new feed.')}
                     />
