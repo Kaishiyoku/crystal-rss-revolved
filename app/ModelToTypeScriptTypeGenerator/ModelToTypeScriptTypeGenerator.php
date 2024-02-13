@@ -21,7 +21,7 @@ class ModelToTypeScriptTypeGenerator
     {
         $modelName = Str::of($this->model::class)->split('/\\\\/')->last();
 
-        $type = Type::fromModel($this->model);
+        $type = new Type($this->model);
 
         // TODO: consider model attributes
         // TODO: consider `$appends`

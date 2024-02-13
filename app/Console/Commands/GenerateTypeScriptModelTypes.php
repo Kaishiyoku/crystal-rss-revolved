@@ -2,15 +2,9 @@
 
 namespace App\Console\Commands;
 
-use App\Models\User;
 use App\ModelToTypeScriptTypeGenerator\ModelToTypeScriptTypeGenerator;
-use Closure;
 use Illuminate\Console\Command;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
-use ReflectionClass;
 
 class GenerateTypeScriptModelTypes extends Command
 {

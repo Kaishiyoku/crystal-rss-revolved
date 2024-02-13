@@ -10,33 +10,26 @@ use ReflectionClass;
 
 class Type
 {
-    public function __construct(
-        private readonly string $name,
+    private string $name;
 
-        /**
-         * @var Collection<TypeProperty>
-         */
-        private readonly Collection $properties,
-    ) {
-    }
+    /**
+     * @var Collection<TypeProperty>
+     */
+    private Collection $properties;
 
-    public static function fromModel(Model $model): self
-    {
-        $properties = collect([
+    public function __construct(Model $model) {
+        $this->name = (new ReflectionClass($model))->getShortName();
+
+        $this->properties = collect([
             ...Arr::pluck(Schema::getColumns($model->getTable()), 'name'),
             ...$model->getAppends(),
-        ])->map(static fn (string $fieldName) => TypeProperty::fromModelField($model, $fieldName));
-
-        return new self(
-            name: (new ReflectionClass($model))->getShortName(),
-            properties: $properties,
-        );
+        ])->map(fn (string $fieldName) => new TypeProperty($model, $fieldName));
     }
 
     public function toString(): string
     {
         $propertiesStr = $this->properties
-            ->map(static fn (TypeProperty $property) => $property->toString())
+            ->map(fn (TypeProperty $property) => $property->toString())
             ->join("\n    ");
 
         return <<<TS

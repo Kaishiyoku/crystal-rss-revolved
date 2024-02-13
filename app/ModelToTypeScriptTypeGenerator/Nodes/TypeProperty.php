@@ -3,7 +3,6 @@
 namespace App\ModelToTypeScriptTypeGenerator\Nodes;
 
 use App\ModelToTypeScriptTypeGenerator\Enums\ReturnType;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
@@ -16,55 +15,51 @@ use ReflectionProperty;
 
 class TypeProperty
 {
+    /**
+     * @var Collection<ReturnType>
+     */
+    private Collection $returnTypes;
+
+    private ?string $comment = null;
+
     public function __construct(
+        private readonly Model $model,
         public readonly string $name,
-
-        /**
-         * @var Collection<ReturnType>
-         */
-        public readonly Collection $returnTypes,
-
-        public readonly ?string $comment = null,
     ) {
-    }
+        $returnTypes = $this->getDatabaseSchemaReturnTypes();
+        $modelAttributeReturnTypes = $this->getModelAttributeReturnTypes();
 
-    public static function fromModelField(Model $model, string $fieldName): self
-    {
-        $comment = null;
-
-        $databaseColumnSchema = collect(Schema::getColumns($model->getTable()))
-            ->filter(static fn (array $column) => Arr::get($column, 'name') === $fieldName)
-            ->first();
-
-        $modelAttributeReturnTypes = static::getModelAttributeReturnTypesForField($model, $fieldName);
-
-        $returnTypes = static::mapDatabaseSchemaReturnTypes($databaseColumnSchema);
         if ($modelAttributeReturnTypes) {
             $returnTypes = $modelAttributeReturnTypes;
-            $comment .= 'model attribute';
+            $this->comment .= 'model attribute';
         }
 
         if (!$returnTypes) {
             $returnTypes = collect(ReturnType::Unknown);
-            $comment .= 'no return types found';
+            $this->comment .= 'no return types found';
         }
 
-        return new self(
-            name: $fieldName,
-            returnTypes: $returnTypes,
-            comment: $comment,
-        );
+        $this->returnTypes = $returnTypes;
+    }
+
+    public function toString(): string
+    {
+        $comment = $this->comment ? " /** {$this->comment} */" : '';
+
+        return <<<TS
+{$this->name}: {$this->returnTypes->map(fn (ReturnType $returnType) => $returnType->value)->join(' | ')}{$comment};
+TS;
+
     }
 
     /**
      * @return Collection<ReturnType>|null
      */
-    private static function getModelAttributeReturnTypesForField(Model $model, string $fieldName): ?Collection
+    private function getModelAttributeReturnTypes(): ?Collection
     {
         try {
-            $attributeReflectionMethod = new ReflectionMethod($model, Str::camel($fieldName));
-            /*** @var Attribute $attribute */
-            $attribute = $attributeReflectionMethod->getClosure($model)->call($model);
+            $attributeReflectionMethod = new ReflectionMethod($this->model, Str::camel($this->name));
+            $attribute = $attributeReflectionMethod->getClosure($this->model)->call($this->model);
             $attributeGetterReflectionProperty = new ReflectionProperty($attribute, 'get');
             $attributeGetterReflectionClosure = new ReflectionFunction($attributeGetterReflectionProperty->getValue($attribute));
 
@@ -75,10 +70,10 @@ class TypeProperty
             }
 
             return collect([
-                static::mapCodeReturnTypes($reflectionReturnType->getName()),
+                $this->mapCodeReturnTypes($reflectionReturnType->getName()),
                 $reflectionReturnType->allowsNull() ? ReturnType::Null : null,
             ])->filter();
-        } catch (ReflectionException $exception) {
+        } catch (ReflectionException) {
             return null;
         }
     }
@@ -86,8 +81,12 @@ class TypeProperty
     /**
      * @return Collection<ReturnType>|null
      */
-    private static function mapDatabaseSchemaReturnTypes(?array $databaseColumnSchema): ?Collection
+    private function getDatabaseSchemaReturnTypes(): ?Collection
     {
+        $databaseColumnSchema = collect(Schema::getColumns($this->model->getTable()))
+            ->filter(fn (array $column) => Arr::get($column, 'name') === $this->name)
+            ->first();
+
         if (!$databaseColumnSchema) {
             return null;
         }
@@ -104,20 +103,10 @@ class TypeProperty
         return $returnTypes;
     }
 
-    private static function mapCodeReturnTypes(string $codeTypeName): ReturnType
+    private function mapCodeReturnTypes(string $codeTypeName): ReturnType
     {
         return match ($codeTypeName) {
             'bool' => ReturnType::Boolean,
         };
-    }
-
-    public function toString(): string
-    {
-        $comment = $this->comment ? " /** {$this->comment} */" : '';
-
-        return <<<TS
-{$this->name}: {$this->returnTypes->map(static fn (ReturnType $returnType) => $returnType->value)->join(' | ')}{$comment};
-TS;
-
     }
 }
