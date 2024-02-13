@@ -118,7 +118,7 @@ class FeedItem extends Model
     protected function hasImage(): Attribute
     {
         return Attribute::make(
-            get: fn () => $this->image_url && Str::startsWith($this->image_mimetype, 'image/'),
+            get: fn (): bool => $this->image_url && Str::startsWith($this->image_mimetype, 'image/'),
         );
     }
 

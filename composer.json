@@ -24,7 +24,9 @@
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.8",
         "barryvdh/laravel-ide-helper": "^2.13",
+        "doctrine/dbal": "^3.8",
         "fakerphp/faker": "^1.9.1",
+        "larastan/larastan": "^2.5",
         "laravel-lang/common": "^3.1",
         "laravel/breeze": "^1.19",
         "laravel/envoy": "^2.8",
@@ -32,7 +34,6 @@
         "laravel/sail": "^1.18",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^7.0",
-        "larastan/larastan": "^2.5",
         "pestphp/pest": "^2.5",
         "pestphp/pest-plugin-laravel": "^2.0",
         "phpunit/phpunit": "^10.0",
