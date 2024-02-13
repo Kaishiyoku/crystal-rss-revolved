@@ -8,4 +8,5 @@ enum ReturnType: string
     case Number = 'number';
     case String = 'string';
     case Null = 'null';
+    case Unknown = 'unknown';
 }

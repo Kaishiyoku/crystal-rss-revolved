@@ -41,7 +41,12 @@ class TypeProperty
         $returnTypes = static::mapDatabaseSchemaReturnTypes($databaseColumnSchema);
         if ($modelAttributeReturnTypes) {
             $returnTypes = $modelAttributeReturnTypes;
-            $comment = 'model attribute';
+            $comment .= 'model attribute';
+        }
+
+        if (!$returnTypes) {
+            $returnTypes = collect(ReturnType::Unknown);
+            $comment .= 'no return types found';
         }
 
         return new self(
@@ -64,6 +69,10 @@ class TypeProperty
             $attributeGetterReflectionClosure = new ReflectionFunction($attributeGetterReflectionProperty->getValue($attribute));
 
             $reflectionReturnType = $attributeGetterReflectionClosure->getReturnType();
+
+            if (!$reflectionReturnType) {
+                return null;
+            }
 
             return collect([
                 static::mapCodeReturnTypes($reflectionReturnType->getName()),
