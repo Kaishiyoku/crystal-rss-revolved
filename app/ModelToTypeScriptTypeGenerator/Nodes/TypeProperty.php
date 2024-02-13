@@ -8,6 +8,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
+use InvalidArgumentException;
 use ReflectionException;
 use ReflectionFunction;
 use ReflectionMethod;
@@ -28,13 +29,19 @@ class TypeProperty
     ) {
         $returnTypes = $this->getDatabaseSchemaReturnTypes();
         $modelAttributeReturnTypes = $this->getModelAttributeReturnTypes();
+        $castReturnTypes = $this->getCastReturnTypes();
 
         if ($modelAttributeReturnTypes) {
             $returnTypes = $modelAttributeReturnTypes;
             $this->comment .= 'model attribute';
         }
 
-        if (!$returnTypes) {
+        if ($castReturnTypes) {
+            $returnTypes = $castReturnTypes;
+            $this->comment .= 'cast attribute';
+        }
+
+        if (! $returnTypes) {
             $returnTypes = collect(ReturnType::Unknown);
             $this->comment .= 'no return types found';
         }
@@ -65,7 +72,7 @@ TS;
 
             $reflectionReturnType = $attributeGetterReflectionClosure->getReturnType();
 
-            if (!$reflectionReturnType) {
+            if (! $reflectionReturnType) {
                 return null;
             }
 
@@ -81,19 +88,43 @@ TS;
     /**
      * @return Collection<ReturnType>|null
      */
+    private function getCastReturnTypes(): ?Collection
+    {
+        $castType = collect($this->model->getCasts())
+            ->filter(fn (string $castType, string $fieldName) => $fieldName === $this->name)
+            ->first();
+
+        if (! $castType) {
+            return null;
+        }
+
+        return collect(match ($castType) {
+            'int' => ReturnType::Number,
+            'bool' => ReturnType::Boolean,
+            'datetime' => ReturnType::String,
+            default => throw new InvalidArgumentException("cast return type \"{$castType}\"not matched"),
+        });
+    }
+
+    /**
+     * @return Collection<ReturnType>|null
+     */
     private function getDatabaseSchemaReturnTypes(): ?Collection
     {
         $databaseColumnSchema = collect(Schema::getColumns($this->model->getTable()))
             ->filter(fn (array $column) => Arr::get($column, 'name') === $this->name)
             ->first();
 
-        if (!$databaseColumnSchema) {
+        if (! $databaseColumnSchema) {
             return null;
         }
 
-        $returnTypes = collect(match (Arr::get($databaseColumnSchema, 'type_name')) {
+        $databaseTypeName = Arr::get($databaseColumnSchema, 'type_name');
+
+        $returnTypes = collect(match ($databaseTypeName) {
             'bigint', 'tinyint' => ReturnType::Number,
             'varchar', 'timestamp', 'datetime' => ReturnType::String,
+            default => throw new InvalidArgumentException("database schema return type \"{$databaseTypeName}\"not matched"),
         });
 
         if (Arr::get($databaseColumnSchema, 'nullable')) {
@@ -107,6 +138,7 @@ TS;
     {
         return match ($codeTypeName) {
             'bool' => ReturnType::Boolean,
+            default => throw new InvalidArgumentException("code return type \"{$codeTypeName}\"not matched"),
         };
     }
 }
