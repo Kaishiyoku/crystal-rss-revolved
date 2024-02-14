@@ -27,5 +27,7 @@ class GenerateModelsToTypeScript extends Command
     public function handle()
     {
         (new ModelToTypeScriptTypeGenerator())->generateAll();
+
+        $this->line('TypeScript types generated.');
     }
 }
