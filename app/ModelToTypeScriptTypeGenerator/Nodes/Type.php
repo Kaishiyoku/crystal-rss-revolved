@@ -61,11 +61,13 @@ class Type
 
     public function toString(): string
     {
+        $importDirectory = config('type-script-generator.import_directory');
+
         $imports = $this->relationshipProperties
-            ->map(function (string $relationshipName, string $fieldName) {
+            ->map(function (string $relationshipName, string $fieldName) use ($importDirectory) {
                 $adjustedRelationshipName = Str::replace('[]', '', $relationshipName);
 
-                return "import {$adjustedRelationshipName} from '@/types/generated/Models/{$adjustedRelationshipName}';";
+                return "import {$adjustedRelationshipName} from '{$importDirectory}/{$adjustedRelationshipName}';";
             })
             ->join("\n");
 

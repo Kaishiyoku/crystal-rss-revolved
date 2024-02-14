@@ -10,7 +10,15 @@ use ReflectionException;
 
 class ModelToTypeScriptTypeGenerator
 {
-    private string $outputDirectory = './resources/js/types/generated/Models';
+    private string $outputDirectory;
+
+    private string $modelDirectory;
+
+    public function __construct()
+    {
+        $this->outputDirectory = config('type-script-generator.output_directory');
+        $this->modelDirectory = config('type-script-generator.model_directory');
+    }
 
     public function generateAll(): void
     {
@@ -33,7 +41,7 @@ class ModelToTypeScriptTypeGenerator
         }
 
         file_put_contents(
-            filename: "./resources/js/types/generated/Models/{$modelName}.ts",
+            filename: "{$this->outputDirectory}/{$modelName}.ts",
             data: $type->toString(),
         );
     }
@@ -43,10 +51,16 @@ class ModelToTypeScriptTypeGenerator
      */
     private function getFullyQualifiedModelNames(): Collection
     {
-        return collect(array_diff(scandir('./app/Models'), ['..', '.']))
+        return collect(array_diff(scandir($this->modelDirectory), ['..', '.']))
             ->map(fn (string $fileName) => Str::of($fileName)
                 ->replaceEnd('.php', '')
-                ->prepend('App\\Models\\')
+                ->prepend(Str::of($this->modelDirectory)
+                    ->replaceFirst('./', '')
+                    ->append('\\')
+                    ->split('/\//')
+                    ->map(Str::ucfirst(...))
+                    ->join('\\')
+                )
                 ->toString()
             );
     }
