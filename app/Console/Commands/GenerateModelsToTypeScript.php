@@ -5,14 +5,14 @@ namespace App\Console\Commands;
 use App\ModelToTypeScriptTypeGenerator\ModelToTypeScriptTypeGenerator;
 use Illuminate\Console\Command;
 
-class GenerateTypeScriptModelTypes extends Command
+class GenerateModelsToTypeScript extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'app:generate-type-script-model-types';
+    protected $signature = 'app:generate-models-to-ts';
 
     /**
      * The console command description.
