@@ -28,7 +28,8 @@ class Type
      */
     private Collection $relationshipProperties;
 
-    public function __construct(private readonly Model $model) {
+    public function __construct(private readonly Model $model)
+    {
         $this->name = (new ReflectionClass($this->model))->getShortName();
 
         $this->properties = collect([
@@ -37,11 +38,7 @@ class Type
         ])->map(fn (string $fieldName) => new TypeProperty($this->model, $fieldName));
 
         $this->relationshipProperties = collect((new ReflectionClass($this->model))->getMethods(ReflectionMethod::IS_PUBLIC))
-            ->filter(fn (ReflectionMethod $reflectionMethod) => in_array($reflectionMethod->getReturnType(), [
-                BelongsTo::class,
-                HasMany::class,
-                HasManyThrough::class,
-            ]))
+            ->filter($this->filterRelationshipPropertyReturnType(...))
             ->mapWithKeys($this->mapRelationshipProperty(...));
     }
 
@@ -92,5 +89,14 @@ export default {$this->name};
 
 TS;
 
+    }
+
+    private function filterRelationshipPropertyReturnType(ReflectionMethod $reflectionMethod): bool
+    {
+        return in_array($reflectionMethod->getReturnType(), [
+            BelongsTo::class,
+            HasMany::class,
+            HasManyThrough::class,
+        ]);
     }
 }

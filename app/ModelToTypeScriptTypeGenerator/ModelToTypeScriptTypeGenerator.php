@@ -3,33 +3,51 @@
 namespace App\ModelToTypeScriptTypeGenerator;
 
 use App\ModelToTypeScriptTypeGenerator\Nodes\Type;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use ReflectionClass;
+use ReflectionException;
 
 class ModelToTypeScriptTypeGenerator
 {
     private string $outputDirectory = './resources/js/types/generated/Models';
 
-    private Model $model;
-
-    public function __construct(string $fullyQualifiedModelName)
+    public function generateAll(): void
     {
-        $this->model = new $fullyQualifiedModelName();
+        $this->getFullyQualifiedModelNames()
+            ->each($this->generateModel(...));
     }
 
-    public function generate(): void
+    /**
+     * @throws ReflectionException
+     */
+    public function generateModel(string $fullyQualifiedModelName): void
     {
-        $modelName = Str::of($this->model::class)->split('/\\\\/')->last();
+        $model = new $fullyQualifiedModelName();
+        $modelName = (new ReflectionClass($model))->getShortName();
 
-        $type = new Type($this->model);
+        $type = new Type($model);
 
-        // TODO: consider model attributes
-        // TODO: consider `$appends`
-
-        if (!file_exists($this->outputDirectory)) {
+        if (! file_exists($this->outputDirectory)) {
             mkdir($this->outputDirectory, 0755, true);
         }
 
-        file_put_contents("./resources/js/types/generated/Models/{$modelName}.ts", $type->toString());
+        file_put_contents(
+            filename: "./resources/js/types/generated/Models/{$modelName}.ts",
+            data: $type->toString(),
+        );
+    }
+
+    /**
+     * @return Collection<string>
+     */
+    private function getFullyQualifiedModelNames(): Collection
+    {
+        return collect(array_diff(scandir('./app/Models'), ['..', '.']))
+            ->map(fn (string $fileName) => Str::of($fileName)
+                ->replaceEnd('.php', '')
+                ->prepend('App\\Models\\')
+                ->toString()
+            );
     }
 }
