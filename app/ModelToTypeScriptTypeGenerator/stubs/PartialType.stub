@@ -1,0 +1,5 @@
+import {{ model }} from '{{ importPath }}';
+
+type {{ name }} = Pick<{{ model }}, {{ fields }}>;
+
+export default {{ name }};

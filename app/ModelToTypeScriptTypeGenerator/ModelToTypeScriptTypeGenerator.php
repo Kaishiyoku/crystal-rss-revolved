@@ -2,6 +2,7 @@
 
 namespace App\ModelToTypeScriptTypeGenerator;
 
+use App\ModelToTypeScriptTypeGenerator\Nodes\Partial;
 use App\ModelToTypeScriptTypeGenerator\Nodes\Type;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
@@ -31,6 +32,12 @@ class ModelToTypeScriptTypeGenerator
      */
     public function generateModel(string $fullyQualifiedModelName): void
     {
+        $this->generateModelType($fullyQualifiedModelName);
+        $this->generateModelPartialTypes($fullyQualifiedModelName);
+    }
+
+    private function generateModelType(string $fullyQualifiedModelName): void
+    {
         $model = new $fullyQualifiedModelName();
         $modelName = (new ReflectionClass($model))->getShortName();
 
@@ -44,6 +51,19 @@ class ModelToTypeScriptTypeGenerator
             filename: "{$this->outputDirectory}/{$modelName}.ts",
             data: $type->toString(),
         );
+    }
+
+    private function generateModelPartialTypes(string $fullyQualifiedModelName): void
+    {
+        collect(config('type-script-generator.partials'))
+            ->filter(fn (array $partialConfig) => $partialConfig['model'] === $fullyQualifiedModelName)
+            ->map(Partial::fromConfig(...))
+            ->each(function (Partial $partial) {
+                file_put_contents(
+                    filename: "{$this->outputDirectory}/{$partial->name}.ts",
+                    data: $partial->toString(),
+                );
+            });
     }
 
     /**
