@@ -4,6 +4,7 @@ namespace App\ModelToTypeScriptTypeGenerator\Nodes;
 
 use App\ModelToTypeScriptTypeGenerator\Enums\ReturnType;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Schema;
@@ -23,10 +24,14 @@ class TypeProperty
 
     private ?string $comment = null;
 
+    private Filesystem $files;
+
     public function __construct(
         private readonly Model $model,
         public readonly string $name,
     ) {
+        $this->files = new Filesystem();
+
         $returnTypes = $this->getDatabaseSchemaReturnTypes();
         $modelAttributeReturnTypes = $this->getModelAttributeReturnTypes();
         $castReturnTypes = $this->getCastReturnTypes();
@@ -51,12 +56,11 @@ class TypeProperty
 
     public function toString(): string
     {
-        $comment = $this->comment ? " /** {$this->comment} */" : '';
-
-        return <<<TS
-{$this->name}: {$this->returnTypes->map(fn (ReturnType $returnType) => $returnType->value)->join(' | ')}{$comment};
-TS;
-
+        return Str::of($this->files->get(__DIR__.'/../stubs/TypeProperty.stub'))
+            ->replace('{{ name }}', $this->name)
+            ->replace('{{ returnTypes }}', $this->returnTypes->map(fn (ReturnType $returnType) => $returnType->value)->join(' | '))
+            ->replace('{{ comment }}', $this->comment ? " /** {$this->comment} */" : '')
+            ->replaceLast("\n", '');
     }
 
     /**

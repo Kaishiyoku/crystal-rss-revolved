@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Schema;
@@ -28,8 +29,12 @@ class Type
      */
     private Collection $relationshipProperties;
 
+    private Filesystem $files;
+
     public function __construct(private readonly Model $model)
     {
+        $this->files = new Filesystem();
+
         $this->name = (new ReflectionClass($this->model))->getShortName();
 
         $this->properties = collect([
@@ -79,18 +84,11 @@ class Type
             ->map(fn (string $relationshipName, string $fieldName) => "{$fieldName}: {$relationshipName};")
             ->join("\n    ");
 
-        return <<<TS
-{$imports}
-
-type {$this->name} = {
-    {$propertiesStr}
-    {$relationshipPropertiesStr}
-}
-
-export default {$this->name};
-
-TS;
-
+        return Str::of($this->files->get(__DIR__.'/../stubs/Type.stub'))
+            ->replace('{{ imports }}', $imports)
+            ->replace('{{ name }}', $this->name)
+            ->replace('{{ properties }}', $propertiesStr)
+            ->replace('{{ relationshipProperties }}', $relationshipPropertiesStr);
     }
 
     private function filterRelationshipPropertyReturnType(ReflectionMethod $reflectionMethod): bool

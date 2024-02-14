@@ -1,0 +1,9 @@
+/* this file has been automatically generated */
+{{ imports }}
+
+type {{ name }} = {
+    {{ properties }}
+    {{ relationshipProperties }}
+}
+
+export default {{ name }};
