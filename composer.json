@@ -74,7 +74,7 @@
             "php artisan ide-helper:meta",
             "php artisan ide-helper:models --dir=\"app/Models\" --write --reset"
         ],
-        "analyze": "./vendor/bin/phpstan analyse",
+        "analyze": "./vendor/bin/phpstan analyse --memory-limit=256M",
         "pint": "./vendor/bin/pint"
     },
     "extra": {
