@@ -58,6 +58,7 @@
     deployment_npm
     deployment_finish
     change_storage_owner_to_www_data
+    restart_php_fpm
     health_check
     deployment_option_cleanup
 @endstory
@@ -162,6 +163,10 @@
     @endif
 @endtask
 
+@task('restart_php_fpm')
+    echo "Restarting php-fpm..."
+    sudo service php8.2-fpm restart
+@endtask
 
 @task('health_check')
     @if (! empty($healthUrl))
