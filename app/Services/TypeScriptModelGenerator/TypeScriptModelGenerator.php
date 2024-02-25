@@ -2,8 +2,10 @@
 
 namespace App\Services\TypeScriptModelGenerator;
 
+use App\Services\TypeScriptModelGenerator\Nodes\Inherited;
 use App\Services\TypeScriptModelGenerator\Nodes\Partial;
 use App\Services\TypeScriptModelGenerator\Nodes\Type;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use ReflectionClass;
@@ -34,6 +36,7 @@ class TypeScriptModelGenerator
     {
         $this->generateModelType($fullyQualifiedModelName);
         $this->generateModelPartialTypes($fullyQualifiedModelName);
+        $this->generateModelInheritedTypes($fullyQualifiedModelName);
     }
 
     private function generateModelType(string $fullyQualifiedModelName): void
@@ -56,12 +59,25 @@ class TypeScriptModelGenerator
     private function generateModelPartialTypes(string $fullyQualifiedModelName): void
     {
         collect(config('type-script-model-generator.partials'))
-            ->filter(fn (array $partialConfig) => $partialConfig['model'] === $fullyQualifiedModelName)
+            ->filter(fn (array $config) => Arr::get($config, 'model') === $fullyQualifiedModelName)
             ->map(Partial::fromConfig(...))
             ->each(function (Partial $partial) {
                 file_put_contents(
                     filename: "{$this->outputDirectory}/{$partial->name}.ts",
                     data: $partial->toString(),
+                );
+            });
+    }
+
+    private function generateModelInheritedTypes(string $fullyQualifiedModelName): void
+    {
+        collect(config('type-script-model-generator.inherited_types'))
+            ->filter(fn (array $config) => Arr::get($config, 'model') === $fullyQualifiedModelName)
+            ->map(Inherited::fromConfig(...))
+            ->each(function (Inherited $inherited) {
+                file_put_contents(
+                    filename: "{$this->outputDirectory}/{$inherited->name}.ts",
+                    data: $inherited->toString(),
                 );
             });
     }

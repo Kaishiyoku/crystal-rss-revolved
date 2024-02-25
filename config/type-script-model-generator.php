@@ -15,5 +15,17 @@ return [
             ],
         ],
     ],
+    'inherited_types' => [
+        [
+            'name' => 'FeedWithFeedItemsCount',
+            'model' => \App\Models\Feed::class,
+            'additional_fields' => [
+                [
+                    'name' => 'feed_items_count',
+                    'types' => ['number'],
+                ]
+            ],
+        ],
+    ],
 
 ];

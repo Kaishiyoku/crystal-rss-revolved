@@ -54,6 +54,22 @@ class TypeProperty
         $this->returnTypes = $returnTypes;
     }
 
+    public static function fromConfig(array $config): self
+    {
+        $self = new self(
+            model: new (Arr::get($config, 'model')),
+            name: Arr::get($config, 'name'),
+        );
+
+        $configReturnTypes = collect(Arr::get($config, 'types'))
+            ->map(ReturnType::from(...));
+
+        $self->returnTypes = $configReturnTypes->isEmpty() ? $self->returnTypes : $configReturnTypes;
+        $self->comment = $configReturnTypes->isEmpty() ? $self->comment : '';
+
+        return $self;
+    }
+
     public function toString(): string
     {
         return Str::of($this->files->get(__DIR__.'/../stubs/TypeProperty.stub'))

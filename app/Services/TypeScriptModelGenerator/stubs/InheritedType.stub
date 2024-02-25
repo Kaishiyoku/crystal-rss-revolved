@@ -1,6 +1,8 @@
 /* this file has been automatically generated */
 import {{ model }} from '{{ importPath }}';
 
-type {{ name }} = Pick<{{ model }}, {{ fields }}>;
+type {{ name }} = {{ model }} & {
+    {{ fields }}
+};
 
 export default {{ name }};
