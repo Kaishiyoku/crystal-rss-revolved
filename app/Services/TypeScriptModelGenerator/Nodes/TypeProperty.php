@@ -3,6 +3,7 @@
 namespace App\Services\TypeScriptModelGenerator\Nodes;
 
 use App\Services\TypeScriptModelGenerator\Enums\ReturnType;
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Arr;
@@ -10,13 +11,14 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
+use ReflectionClass;
 use ReflectionException;
 use ReflectionFunction;
 use ReflectionMethod;
 use ReflectionNamedType;
 use ReflectionProperty;
 
-class TypeProperty
+class TypeProperty implements Arrayable
 {
     /**
      * @var Collection<ReturnType>
@@ -81,6 +83,16 @@ class TypeProperty
             ->replace('{{ returnTypes }}', $this->returnTypes->map(fn (ReturnType $returnType) => $returnType->value)->join(' | '))
             ->replace('{{ comment }}', $this->comment ? " /** {$this->comment} */" : '')
             ->replaceLast("\n", '');
+    }
+
+    public function toArray()
+    {
+        return [
+            'returnTypes' => $this->returnTypes,
+            'comment' => $this->comment,
+            'model' => (new ReflectionClass($this->model))->getShortName(),
+            'name' => $this->name,
+        ];
     }
 
     /**

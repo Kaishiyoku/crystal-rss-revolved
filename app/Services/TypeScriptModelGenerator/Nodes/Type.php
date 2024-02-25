@@ -2,6 +2,7 @@
 
 namespace App\Services\TypeScriptModelGenerator\Nodes;
 
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -15,7 +16,7 @@ use Illuminate\Support\Str;
 use ReflectionClass;
 use ReflectionMethod;
 
-class Type
+class Type implements Arrayable
 {
     private string $name;
 
@@ -72,6 +73,16 @@ class Type
             ->replace('{{ name }}', $this->name)
             ->replace('{{ properties }}', $propertiesStr)
             ->replace('{{ relationshipProperties }}', $relationshipPropertiesStr);
+    }
+
+    public function toArray()
+    {
+        return [
+            'name' => $this->name,
+            'properties' => $this->properties,
+            'relationshipProperties' => $this->relationshipProperties,
+            'model' => (new ReflectionClass($this->model))->getShortName(),
+        ];
     }
 
     /**
