@@ -9,8 +9,8 @@ import EmptyState from '@/Components/EmptyState';
 import NewspaperSolidIcon from '@/Icons/NewspaperSolidIcon';
 import {PageProps} from '@/types';
 import {RouteParams} from 'ziggy-js';
-import Feed from '@/types/Models/Feed';
 import PhotoSolidIcon from '@/Icons/PhotoSolidIcon';
+import Feed from '@/types/generated/Models/Feed';
 
 export default function Index({feeds, ...props}: PageProps & { feeds: Feed[]; }) {
     const {t, tChoice} = useLaravelReactI18n();

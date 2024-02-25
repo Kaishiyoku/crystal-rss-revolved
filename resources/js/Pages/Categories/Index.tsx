@@ -8,7 +8,7 @@ import EmptyState from '@/Components/EmptyState';
 import TagOutlineIcon from '@/Icons/TagOutlineIcon';
 import {PageProps} from '@/types';
 import {RouteParams} from 'ziggy-js';
-import Category from '@/types/Models/Category';
+import Category from '@/types/generated/Models/Category';
 
 export default function Index({categories, ...props}: PageProps & { categories: Category[]; }) {
     const {t, tChoice} = useLaravelReactI18n();

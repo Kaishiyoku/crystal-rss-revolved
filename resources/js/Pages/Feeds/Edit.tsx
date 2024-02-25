@@ -8,7 +8,7 @@ import Breadcrumbs from '@/Components/Breadcrumbs/Breadcrumbs';
 import {PageProps} from '@/types';
 import {RouteParams} from 'ziggy-js';
 import {SelectNumberOption} from '@/types/SelectOption';
-import Feed from '@/types/Models/Feed';
+import Feed from '@/types/generated/Models/Feed';
 
 export default function Edit({feed, categories, canDelete, ...props}: PageProps & { feed: Feed; categories: SelectNumberOption[]; canDelete: boolean; }) {
     const {t} = useLaravelReactI18n();
