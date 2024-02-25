@@ -1,6 +1,7 @@
 <?php
 
 use App\Console\Commands\GenerateModelsToTypeScript;
+
 use function Pest\Laravel\artisan;
 
 it('generates TypeScript types', function () {

@@ -68,7 +68,7 @@ it('fails to validate the config', function (array $config, string $message, str
             'fields' => ['id', 'name'],
         ],
         'config field [model] is not a valid model (not a model class)',
-        InvalidArgumentException::class
+        InvalidArgumentException::class,
     ],
     'fields is not an array' => [
         [

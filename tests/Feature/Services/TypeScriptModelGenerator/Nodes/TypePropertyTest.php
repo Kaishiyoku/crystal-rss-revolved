@@ -2,7 +2,6 @@
 
 use App\Models\Feed;
 use App\Models\FeedItem;
-use App\Services\TypeScriptModelGenerator\Nodes\Type;
 use App\Services\TypeScriptModelGenerator\Nodes\TypeProperty;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
@@ -10,7 +9,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Str;
 
 it('builds a type property', function () {
-    $sampleModel = new class extends Model {
+    $sampleModel = new class extends Model
+    {
         /**
          * The attributes that should be cast.
          *

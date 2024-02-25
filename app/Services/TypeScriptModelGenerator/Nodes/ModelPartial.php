@@ -66,7 +66,7 @@ class ModelPartial
             throw new InvalidArgumentException('config field [model] is not a valid model (class not found)');
         }
 
-        if (!new (Arr::get($config, 'model')) instanceof Model) {
+        if (! new (Arr::get($config, 'model')) instanceof Model) {
             throw new InvalidArgumentException('config field [model] is not a valid model (not a model class)');
         }
     }

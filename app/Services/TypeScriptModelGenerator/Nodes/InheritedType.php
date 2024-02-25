@@ -11,11 +11,9 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
-use Illuminate\Validation\ValidationException;
 use InvalidArgumentException;
 use ReflectionClass;
 use ReflectionException;
-use function _PHPStan_cc8d35ffb\RingCentral\Psr7\try_fopen;
 
 class InheritedType
 {
@@ -77,7 +75,7 @@ class InheritedType
             throw new InvalidArgumentException('config field [model] is not a valid model (class not found)');
         }
 
-        if (!new (Arr::get($config, 'model')) instanceof Model) {
+        if (! new (Arr::get($config, 'model')) instanceof Model) {
             throw new InvalidArgumentException('config field [model] is not a valid model (not a model class)');
         }
     }

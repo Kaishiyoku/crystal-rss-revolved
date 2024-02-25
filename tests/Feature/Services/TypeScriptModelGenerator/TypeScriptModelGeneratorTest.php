@@ -2,10 +2,10 @@
 
 use App\Models\Feed;
 use App\Services\TypeScriptModelGenerator\TypeScriptModelGenerator;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Facades\Config;
 
-it('generates types for a model', closure: function() {
+it('generates types for a model', closure: function () {
     $files = new Filesystem();
     $customOutputDirectory = './test/resources/js/types/generated/Models';
 
