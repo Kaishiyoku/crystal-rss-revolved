@@ -56,7 +56,7 @@ class TypeProperty
     }
 
     /**
-     * @param  array{name: string, types: string[]}  $config
+     * @param  array{model: string, name: string, types: string[]}  $config
      */
     public static function fromInheritedTypeConfig(array $config): self
     {
