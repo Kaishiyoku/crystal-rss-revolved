@@ -9,8 +9,6 @@ import ShortFeedWithFeedItemsCount from '@/types/generated/Models/ShortFeedWithF
 export default function FeedFilterDropdown({selectedFeed, feeds, ...props}: { selectedFeed: ShortFeedWithFeedItemsCount; feeds: ShortFeedWithFeedItemsCount[]; props?: OtherProps; }) {
     const {t} = useLaravelReactI18n();
 
-    console.log(selectedFeed);
-
     if (feeds.length === 0) {
         return null;
     }
