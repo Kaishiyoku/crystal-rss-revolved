@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\ModelToTypeScriptTypeGenerator\ModelToTypeScriptTypeGenerator;
+use App\Services\TypeScriptModelGenerator\TypeScriptModelGenerator;
 use Illuminate\Console\Command;
 
 class GenerateModelsToTypeScript extends Command
@@ -26,7 +26,7 @@ class GenerateModelsToTypeScript extends Command
      */
     public function handle()
     {
-        (new ModelToTypeScriptTypeGenerator())->generateAll();
+        (new TypeScriptModelGenerator())->generateAll();
 
         $this->line('TypeScript types generated.');
     }

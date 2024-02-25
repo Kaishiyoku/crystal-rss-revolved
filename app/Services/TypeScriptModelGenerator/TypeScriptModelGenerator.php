@@ -1,6 +1,6 @@
 <?php
 
-namespace App\ModelToTypeScriptTypeGenerator;
+namespace App\Services\TypeScriptModelGenerator;
 
 use App\ModelToTypeScriptTypeGenerator\Nodes\Partial;
 use App\ModelToTypeScriptTypeGenerator\Nodes\Type;
@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 use ReflectionClass;
 use ReflectionException;
 
-class ModelToTypeScriptTypeGenerator
+class TypeScriptModelGenerator
 {
     private string $outputDirectory;
 
