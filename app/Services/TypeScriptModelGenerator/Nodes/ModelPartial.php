@@ -3,11 +3,11 @@
 namespace App\Services\TypeScriptModelGenerator\Nodes;
 
 use Error;
-use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
 use ReflectionClass;
@@ -45,25 +45,12 @@ class ModelPartial
 
     private static function validateConfig(array $config): void
     {
-        if (!Arr::has($config, ['name', 'model', 'fields'])) {
-            throw new InvalidArgumentException('invalid config array');
-        }
-
-        if (!is_string(Arr::get($config, 'name'))) {
-            throw new InvalidArgumentException('invalid config value ['.Arr::get($config, 'name').'] for the field [name]');
-        }
-
-        if (empty(Arr::get($config, 'name'))) {
-            throw new InvalidArgumentException('config field [name] may not be empty');
-        }
-
-        if (!is_string(Arr::get($config, 'model'))) {
-            throw new InvalidArgumentException('invalid config value ['.Arr::get($config, 'model').'] for the field [model]');
-        }
-
-        if (empty(Arr::get($config, 'model'))) {
-            throw new InvalidArgumentException('config field [model] may not be empty');
-        }
+        Validator::make($config, [
+            'name' => ['required', 'string', 'filled'],
+            'model' => ['required', 'string', 'filled'],
+            'fields' => ['required', 'array', 'filled'],
+            'fields.*' => ['required', 'string', 'filled'],
+        ])->validate();
 
         try {
             new (Arr::get($config, 'model'));
@@ -73,14 +60,6 @@ class ModelPartial
 
         if (!new (Arr::get($config, 'model')) instanceof Model) {
             throw new InvalidArgumentException('config field [model] is not a valid model (not a model class)');
-        }
-
-        if (!is_array(Arr::get($config, 'fields'))) {
-            throw new InvalidArgumentException('invalid config value ['.Arr::get($config, 'fields').'] for the field [fields]');
-        }
-
-        if (empty(Arr::get($config, 'fields'))) {
-            throw new InvalidArgumentException('config field [fields] may not be empty');
         }
     }
 
