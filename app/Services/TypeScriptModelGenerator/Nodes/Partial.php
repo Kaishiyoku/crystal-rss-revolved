@@ -28,7 +28,6 @@ class Partial
 
     /**
      * @param  array{name: string, model: string, fields: string[]}  $config
-     * @return self
      */
     public static function fromConfig(array $config): self
     {

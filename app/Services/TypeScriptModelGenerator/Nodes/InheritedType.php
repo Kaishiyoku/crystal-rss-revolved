@@ -28,7 +28,6 @@ class InheritedType
 
     /**
      * @param  array{name: string, model: string, additional_fields: string | string[]}  $config
-     * @return self
      */
     public static function fromConfig(array $config): self
     {

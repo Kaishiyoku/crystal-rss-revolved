@@ -57,7 +57,6 @@ class TypeProperty
 
     /**
      * @param  array{name: string, types: string[]}  $config
-     * @return self
      */
     public static function fromInheritedTypeConfig(array $config): self
     {
@@ -97,7 +96,7 @@ class TypeProperty
 
             $reflectionReturnType = $attributeGetterReflectionClosure->getReturnType();
 
-            if (!$reflectionReturnType instanceof ReflectionNamedType) {
+            if (! $reflectionReturnType instanceof ReflectionNamedType) {
                 return null;
             }
 
