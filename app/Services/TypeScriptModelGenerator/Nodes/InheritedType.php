@@ -2,18 +2,24 @@
 
 namespace App\Services\TypeScriptModelGenerator\Nodes;
 
+use App\Services\TypeScriptModelGenerator\Enums\ReturnType;
+use Error;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\ValidationException;
+use InvalidArgumentException;
 use ReflectionClass;
 
 class InheritedType
 {
     private Filesystem $files;
 
-    public function __construct(
+    private function __construct(
         public string $name,
 
         private readonly Model $model,
@@ -27,10 +33,12 @@ class InheritedType
     }
 
     /**
-     * @param  array{name: string, model: string, additional_fields: string | string[]}  $config
+     * @param  array{name: string, model: string, additional_fields: array{name: string, types: string[]}}  $config
      */
     public static function fromConfig(array $config): self
     {
+        static::validateConfig($config);
+
         return new self(
             name: Arr::get($config, 'name'),
             model: new (Arr::get($config, 'model')),
@@ -38,6 +46,32 @@ class InheritedType
                 ->map(fn (array $additionalFieldConfig) => array_merge($additionalFieldConfig, Arr::only($config, 'model')))
                 ->map(TypeProperty::fromInheritedTypeConfig(...))
         );
+    }
+
+    private static function validateConfig(array $config): void
+    {
+        Validator::make($config, [
+            'name' => ['required', 'string', 'filled'],
+            'model' => ['required', 'string', 'filled'],
+            'additional_fields' => ['required', 'array', 'filled'],
+            'additional_fields.*.name' => ['required', 'string', 'filled'],
+            'additional_fields.*.types' => [
+                'required',
+                'array',
+                'filled',
+                Rule::in(collect(ReturnType::cases())->map(fn (ReturnType $returnType) => $returnType->value)),
+            ],
+        ])->validate();
+
+        try {
+            new (Arr::get($config, 'model'));
+        } catch (Error) {
+            throw new InvalidArgumentException('config field [model] is not a valid model (class not found)');
+        }
+
+        if (!new (Arr::get($config, 'model')) instanceof Model) {
+            throw new InvalidArgumentException('config field [model] is not a valid model (not a model class)');
+        }
     }
 
     public function toString(): string
