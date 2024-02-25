@@ -1,5 +1,5 @@
-import User from '@/types/Models/User';
 import Breadcrumb from '@/types/Breadcrumb';
+import User from '@/types/generated/Models/User';
 
 export type BasePageProps = {
     errors: object;

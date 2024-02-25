@@ -1,0 +1,6 @@
+/* this file has been automatically generated */
+import {{ type }} from '{{ importPath }}';
+
+type {{ name }} = Pick<{{ type }}, {{ fields }}>;
+
+export default {{ name }};

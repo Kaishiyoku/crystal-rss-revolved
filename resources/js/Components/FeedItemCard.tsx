@@ -10,7 +10,7 @@ import EyeSlashOutlineIcon from '@/Icons/EyeSlashOutlineIcon';
 import formatDateTime from '@/Utils/formatDateTime';
 import CalendarDaysSolidIcon from '@/Icons/CalendarDaysSolidIcon';
 import {RouteParams} from 'ziggy-js';
-import FeedItem from '@/types/Models/FeedItem';
+import FeedItem from '@/types/generated/Models/FeedItem';
 
 export default function FeedItemCard({hueRotationIndex, feedItem}: { hueRotationIndex: number; feedItem: FeedItem; }) {
     const {t} = useLaravelReactI18n();

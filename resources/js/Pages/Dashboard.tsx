@@ -11,13 +11,13 @@ import NewspaperSolidIcon from '@/Icons/NewspaperSolidIcon';
 import EmptyState from '@/Components/EmptyState';
 import EyeOutlineIcon from '@/Icons/EyeOutlineIcon';
 import {PageProps} from '@/types';
-import ShortFeed from '@/types/Models/ShortFeed';
 import CursorPagination from '@/types/CursorPagination';
-import FeedItem from '@/types/Models/FeedItem';
+import FeedItem from '@/types/generated/Models/FeedItem';
+import ShortFeedWithFeedItemsCount from '@/types/generated/Models/ShortFeedWithFeedItemsCount';
 
 type DashboardPageProps = PageProps & {
-    selectedFeed: ShortFeed;
-    unreadFeeds: ShortFeed[];
+    selectedFeed: ShortFeedWithFeedItemsCount;
+    unreadFeeds: ShortFeedWithFeedItemsCount[];
     totalNumberOfFeedItems: number;
     feedItems: CursorPagination<FeedItem>;
 };

@@ -7,7 +7,7 @@ import {DangerButton} from '@/Components/Button';
 import Breadcrumbs from '@/Components/Breadcrumbs/Breadcrumbs';
 import {PageProps} from '@/types';
 import {RouteParams} from 'ziggy-js';
-import Category from '@/types/Models/Category';
+import Category from '@/types/generated/Models/Category';
 
 export default function Edit({category, canDelete, ...props}: PageProps & { category: Category; canDelete: boolean; }) {
     const {t} = useLaravelReactI18n();

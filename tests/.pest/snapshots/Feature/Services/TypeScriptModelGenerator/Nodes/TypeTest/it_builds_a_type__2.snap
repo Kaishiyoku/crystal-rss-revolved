@@ -1,0 +1,120 @@
+{
+    "name": "Feed",
+    "properties": [
+        {
+            "returnTypes": [
+                "number"
+            ],
+            "comment": "cast attribute",
+            "model": "Feed",
+            "name": "id"
+        },
+        {
+            "returnTypes": [
+                "number"
+            ],
+            "comment": null,
+            "model": "Feed",
+            "name": "user_id"
+        },
+        {
+            "returnTypes": [
+                "number"
+            ],
+            "comment": null,
+            "model": "Feed",
+            "name": "category_id"
+        },
+        {
+            "returnTypes": [
+                "string"
+            ],
+            "comment": null,
+            "model": "Feed",
+            "name": "feed_url"
+        },
+        {
+            "returnTypes": [
+                "string"
+            ],
+            "comment": null,
+            "model": "Feed",
+            "name": "site_url"
+        },
+        {
+            "returnTypes": [
+                "string",
+                "null"
+            ],
+            "comment": null,
+            "model": "Feed",
+            "name": "favicon_url"
+        },
+        {
+            "returnTypes": [
+                "string"
+            ],
+            "comment": null,
+            "model": "Feed",
+            "name": "name"
+        },
+        {
+            "returnTypes": [
+                "string"
+            ],
+            "comment": null,
+            "model": "Feed",
+            "name": "language"
+        },
+        {
+            "returnTypes": [
+                "boolean"
+            ],
+            "comment": "cast attribute",
+            "model": "Feed",
+            "name": "is_purgeable"
+        },
+        {
+            "returnTypes": [
+                "string",
+                "null"
+            ],
+            "comment": null,
+            "model": "Feed",
+            "name": "last_checked_at"
+        },
+        {
+            "returnTypes": [
+                "string",
+                "null"
+            ],
+            "comment": null,
+            "model": "Feed",
+            "name": "last_failed_at"
+        },
+        {
+            "returnTypes": [
+                "string",
+                "null"
+            ],
+            "comment": null,
+            "model": "Feed",
+            "name": "created_at"
+        },
+        {
+            "returnTypes": [
+                "string",
+                "null"
+            ],
+            "comment": null,
+            "model": "Feed",
+            "name": "updated_at"
+        }
+    ],
+    "relationshipProperties": {
+        "user": "User",
+        "category": "Category",
+        "feedItems": "FeedItem[]"
+    },
+    "model": "Feed"
+}

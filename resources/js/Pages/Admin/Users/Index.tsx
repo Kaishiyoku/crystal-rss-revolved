@@ -3,12 +3,12 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import Header from '@/Components/Page/Header';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import {PageProps} from '@/types';
-import User from '@/types/Models/User';
 import Table from '@/Components/Table';
 import Card from '@/Components/Card';
 import formatDateTime from '@/Utils/formatDateTime';
 import {DangerButton} from '@/Components/Button';
 import {RouteParams} from 'ziggy-js';
+import User from '@/types/generated/Models/User';
 
 type UserWithStats = User & {
     feeds_count: number;

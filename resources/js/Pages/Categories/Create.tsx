@@ -4,7 +4,7 @@ import Form from '@/Pages/Categories/Partials/Form';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import Breadcrumbs from '@/Components/Breadcrumbs/Breadcrumbs';
 import {PageProps} from '@/types';
-import Category from '@/types/Models/Category';
+import Category from '@/types/generated/Models/Category';
 
 export default function Create({category, ...props}: PageProps & { category: Category; }) {
     const {t} = useLaravelReactI18n();

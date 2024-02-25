@@ -10,8 +10,8 @@ import {PrimaryButton, TertiaryButton} from '@/Components/Button';
 import Checkbox from '@/Components/Checkbox';
 import {PageProps} from '@/types';
 import {SelectNumberOption} from '@/types/SelectOption';
-import Feed from '@/types/Models/Feed';
 import DiscoveredFeed from '@/types/DiscoveredFeed';
+import Feed from '@/types/generated/Models/Feed';
 
 export default function Form({method, action, feed, categories}: { method: 'post' | 'put'; action: string; feed: Feed; categories: SelectNumberOption[]; }) {
     const {t, tChoice} = useLaravelReactI18n();
