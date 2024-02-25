@@ -9,8 +9,10 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use InvalidArgumentException;
 use ReflectionClass;
+use ReflectionException;
 
 class ModelPartial
 {
@@ -45,8 +47,16 @@ class ModelPartial
 
     private static function validateConfig(array $config): void
     {
+        $modelName = '';
+
+        try {
+            $modelName = (new ReflectionClass(Arr::get($config, 'model')))->getShortName();
+        } catch (ReflectionException) {
+            // doesn't matter here
+        }
+
         Validator::make($config, [
-            'name' => ['required', 'string', 'filled'],
+            'name' => ['required', 'string', 'filled', Rule::notIn($modelName)],
             'model' => ['required', 'string', 'filled'],
             'fields' => ['required', 'array', 'filled'],
             'fields.*' => ['required', 'string', 'filled'],

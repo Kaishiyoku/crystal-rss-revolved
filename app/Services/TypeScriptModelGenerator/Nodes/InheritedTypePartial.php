@@ -7,6 +7,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class InheritedTypePartial
 {
@@ -52,11 +53,14 @@ class InheritedTypePartial
 
     private static function validateConfig(array $config): void
     {
-        // TODO: validate if there is a type with that name defined in the config
-
         Validator::make($config, [
-            'name' => ['required', 'string', 'filled'],
-            'type' => ['required', 'string', 'filled'],
+            'name' => ['required', 'string', 'filled', 'different:type'],
+            'type' => [
+                'required',
+                'string',
+                'filled',
+                Rule::in(data_get(config('type-script-model-generator.inherited_types'), '*.name')),
+            ],
             'fields' => ['required', 'array', 'filled'],
             'fields.*' => ['required', 'string', 'filled'],
         ])->validate();

@@ -14,6 +14,8 @@ use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 use InvalidArgumentException;
 use ReflectionClass;
+use ReflectionException;
+use function _PHPStan_cc8d35ffb\RingCentral\Psr7\try_fopen;
 
 class InheritedType
 {
@@ -50,8 +52,16 @@ class InheritedType
 
     private static function validateConfig(array $config): void
     {
+        $modelName = '';
+
+        try {
+            $modelName = (new ReflectionClass(Arr::get($config, 'model')))->getShortName();
+        } catch (ReflectionException) {
+            // doesn't matter here
+        }
+
         Validator::make($config, [
-            'name' => ['required', 'string', 'filled'],
+            'name' => ['required', 'string', 'filled', Rule::notIn($modelName)],
             'model' => ['required', 'string', 'filled'],
             'additional_fields' => ['required', 'array', 'filled'],
             'additional_fields.*.name' => ['required', 'string', 'filled'],

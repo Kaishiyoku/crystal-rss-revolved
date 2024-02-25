@@ -102,4 +102,12 @@ it('fails to validate the config', function (array $config, string $message, str
         ],
         'The fields.1 field is required.',
     ],
+    'name is the same as model name' => [
+        [
+            'name' => 'Feed',
+            'model' => Feed::class,
+            'fields' => ['id', 'name'],
+        ],
+        'The selected Name is invalid.',
+    ],
 ]);

@@ -1,6 +1,6 @@
 /* this file has been automatically generated */
-import ShortFeed from '@/types/generated/Models/ShortFeed';
+import FeedWithFeedItemsCount from '@/types/generated/Models/FeedWithFeedItemsCount';
 
-type ShortFeedWithFeedItemsCount = Pick<ShortFeed, 'id' | 'feed_items_count'>;
+type ShortFeedWithFeedItemsCount = Pick<FeedWithFeedItemsCount, 'id' | 'feed_items_count'>;
 
 export default ShortFeedWithFeedItemsCount;

@@ -203,4 +203,17 @@ it('fails to validate the config', function (array $config, string $message, str
         ],
         'The selected additional_fields.1.types is invalid.',
     ],
+    'name is the same as model name' => [
+        [
+            'name' => 'Feed',
+            'model' => Feed::class,
+            'additional_fields' => [
+                [
+                    'name' => 'feed_items_count',
+                    'types' => ['number', 'null'],
+                ],
+            ],
+        ],
+        'The selected Name is invalid.',
+    ],
 ]);
