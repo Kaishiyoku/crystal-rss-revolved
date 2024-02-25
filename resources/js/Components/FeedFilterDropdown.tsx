@@ -4,10 +4,12 @@ import {TertiaryButton} from '@/Components/Button';
 import FunnelOutlineIcon from '@/Icons/FunnelOutlineIcon';
 import DropdownArrowIcon from '@/Icons/DropdownArrowIcon';
 import {OtherProps} from '@/types';
-import ShortFeed from '@/types/Models/ShortFeed';
+import ShortFeed from '@/types/generated/Models/ShortFeed';
 
 export default function FeedFilterDropdown({selectedFeed, feeds, ...props}: { selectedFeed: ShortFeed; feeds: ShortFeed[]; props?: OtherProps; }) {
     const {t} = useLaravelReactI18n();
+
+    console.log(selectedFeed);
 
     if (feeds.length === 0) {
         return null;
