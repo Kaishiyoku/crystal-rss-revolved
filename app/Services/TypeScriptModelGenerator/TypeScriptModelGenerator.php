@@ -2,8 +2,8 @@
 
 namespace App\Services\TypeScriptModelGenerator;
 
-use App\ModelToTypeScriptTypeGenerator\Nodes\Partial;
-use App\ModelToTypeScriptTypeGenerator\Nodes\Type;
+use App\Services\TypeScriptModelGenerator\Nodes\Partial;
+use App\Services\TypeScriptModelGenerator\Nodes\Type;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use ReflectionClass;

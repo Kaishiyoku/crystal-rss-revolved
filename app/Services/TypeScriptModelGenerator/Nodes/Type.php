@@ -1,6 +1,6 @@
 <?php
 
-namespace App\ModelToTypeScriptTypeGenerator\Nodes;
+namespace App\Services\TypeScriptModelGenerator\Nodes;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;

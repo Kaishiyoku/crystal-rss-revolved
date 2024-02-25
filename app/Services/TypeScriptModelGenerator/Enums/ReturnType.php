@@ -1,6 +1,6 @@
 <?php
 
-namespace App\ModelToTypeScriptTypeGenerator\Enums;
+namespace App\Services\TypeScriptModelGenerator\Enums;
 
 enum ReturnType: string
 {
