@@ -26,13 +26,16 @@ class Partial
         $this->files = new Filesystem();
     }
 
-
+    /**
+     * @param  array{name: string, model: string, fields: string[]}  $config
+     * @return self
+     */
     public static function fromConfig(array $config): self
     {
         return new self(
             name: Arr::get($config, 'name'),
             model: new (Arr::get($config, 'model')),
-            fields: collect(Arr::get($config, 'fields'))
+            fields: collect((array) Arr::get($config, 'fields'))
         );
     }
 

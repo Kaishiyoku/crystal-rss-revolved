@@ -23,7 +23,7 @@ return [
                 [
                     'name' => 'feed_items_count',
                     'types' => ['number'],
-                ]
+                ],
             ],
         ],
     ],

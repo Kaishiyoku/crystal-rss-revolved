@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Services\TypeScriptModelGenerator\TypeScriptModelGenerator;
 use Illuminate\Console\Command;
+use Symfony\Component\Console\Command\Command as SymfonyCommand;
 
 class GenerateModelsToTypeScript extends Command
 {
@@ -24,10 +25,12 @@ class GenerateModelsToTypeScript extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): int
     {
         (new TypeScriptModelGenerator())->generateAll();
 
         $this->line('TypeScript types generated.');
+
+        return SymfonyCommand::SUCCESS;
     }
 }

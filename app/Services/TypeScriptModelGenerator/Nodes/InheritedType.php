@@ -9,7 +9,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use ReflectionClass;
 
-class Inherited
+class InheritedType
 {
     private Filesystem $files;
 
@@ -26,15 +26,18 @@ class Inherited
         $this->files = new Filesystem();
     }
 
-
+    /**
+     * @param  array{name: string, model: string, additional_fields: string | string[]}  $config
+     * @return self
+     */
     public static function fromConfig(array $config): self
     {
         return new self(
             name: Arr::get($config, 'name'),
             model: new (Arr::get($config, 'model')),
-            additionalFields: collect(Arr::get($config, 'additional_fields'))
+            additionalFields: collect((array) Arr::get($config, 'additional_fields'))
                 ->map(fn (array $additionalFieldConfig) => array_merge($additionalFieldConfig, Arr::only($config, 'model')))
-                ->map(TypeProperty::fromConfig(...))
+                ->map(TypeProperty::fromInheritedTypeConfig(...))
         );
     }
 

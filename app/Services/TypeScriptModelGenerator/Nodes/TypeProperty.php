@@ -13,6 +13,7 @@ use InvalidArgumentException;
 use ReflectionException;
 use ReflectionFunction;
 use ReflectionMethod;
+use ReflectionNamedType;
 use ReflectionProperty;
 
 class TypeProperty
@@ -47,21 +48,25 @@ class TypeProperty
         }
 
         if (! $returnTypes) {
-            $returnTypes = collect(ReturnType::Unknown);
+            $returnTypes = collect([ReturnType::Unknown]);
             $this->comment .= 'no return types found';
         }
 
         $this->returnTypes = $returnTypes;
     }
 
-    public static function fromConfig(array $config): self
+    /**
+     * @param  array{name: string, types: string[]}  $config
+     * @return self
+     */
+    public static function fromInheritedTypeConfig(array $config): self
     {
         $self = new self(
             model: new (Arr::get($config, 'model')),
             name: Arr::get($config, 'name'),
         );
 
-        $configReturnTypes = collect(Arr::get($config, 'types'))
+        $configReturnTypes = collect((array) Arr::get($config, 'types'))
             ->map(ReturnType::from(...));
 
         $self->returnTypes = $configReturnTypes->isEmpty() ? $self->returnTypes : $configReturnTypes;
@@ -92,7 +97,7 @@ class TypeProperty
 
             $reflectionReturnType = $attributeGetterReflectionClosure->getReturnType();
 
-            if (! $reflectionReturnType) {
+            if (!$reflectionReturnType instanceof ReflectionNamedType) {
                 return null;
             }
 
@@ -118,12 +123,12 @@ class TypeProperty
             return null;
         }
 
-        return collect(match ($castType) {
+        return collect([match ($castType) {
             'int' => ReturnType::Number,
             'bool' => ReturnType::Boolean,
             'datetime' => ReturnType::String,
             default => throw new InvalidArgumentException("cast return type \"{$castType}\"not matched"),
-        });
+        }]);
     }
 
     /**
@@ -141,11 +146,11 @@ class TypeProperty
 
         $databaseTypeName = Arr::get($databaseColumnSchema, 'type_name');
 
-        $returnTypes = collect(match ($databaseTypeName) {
+        $returnTypes = collect([match ($databaseTypeName) {
             'bigint', 'tinyint' => ReturnType::Number,
             'varchar', 'timestamp', 'datetime' => ReturnType::String,
             default => throw new InvalidArgumentException("database schema return type \"{$databaseTypeName}\"not matched"),
-        });
+        }]);
 
         if (Arr::get($databaseColumnSchema, 'nullable')) {
             $returnTypes->push(ReturnType::Null);

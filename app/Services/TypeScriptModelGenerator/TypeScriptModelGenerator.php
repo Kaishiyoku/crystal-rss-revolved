@@ -2,7 +2,7 @@
 
 namespace App\Services\TypeScriptModelGenerator;
 
-use App\Services\TypeScriptModelGenerator\Nodes\Inherited;
+use App\Services\TypeScriptModelGenerator\Nodes\InheritedType;
 use App\Services\TypeScriptModelGenerator\Nodes\Partial;
 use App\Services\TypeScriptModelGenerator\Nodes\Type;
 use Illuminate\Support\Arr;
@@ -58,7 +58,7 @@ class TypeScriptModelGenerator
 
     private function generateModelPartialTypes(string $fullyQualifiedModelName): void
     {
-        collect(config('type-script-model-generator.partials'))
+        collect((array) config('type-script-model-generator.partials'))
             ->filter(fn (array $config) => Arr::get($config, 'model') === $fullyQualifiedModelName)
             ->map(Partial::fromConfig(...))
             ->each(function (Partial $partial) {
@@ -71,10 +71,10 @@ class TypeScriptModelGenerator
 
     private function generateModelInheritedTypes(string $fullyQualifiedModelName): void
     {
-        collect(config('type-script-model-generator.inherited_types'))
+        collect((array) config('type-script-model-generator.inherited_types'))
             ->filter(fn (array $config) => Arr::get($config, 'model') === $fullyQualifiedModelName)
-            ->map(Inherited::fromConfig(...))
-            ->each(function (Inherited $inherited) {
+            ->map(InheritedType::fromConfig(...))
+            ->each(function (InheritedType $inherited) {
                 file_put_contents(
                     filename: "{$this->outputDirectory}/{$inherited->name}.ts",
                     data: $inherited->toString(),
@@ -87,7 +87,7 @@ class TypeScriptModelGenerator
      */
     private function getFullyQualifiedModelNames(): Collection
     {
-        return collect(array_diff(scandir($this->modelDirectory), ['..', '.']))
+        return collect(array_diff((array) scandir($this->modelDirectory), ['..', '.']))
             ->map(fn (string $fileName) => Str::of($fileName)
                 ->replaceEnd('.php', '')
                 ->prepend(Str::of($this->modelDirectory)
