@@ -47,23 +47,6 @@ class Type
             ->mapWithKeys($this->mapRelationshipProperty(...));
     }
 
-    /**
-     * @return array<string, string>
-     */
-    private function mapRelationshipProperty(ReflectionMethod $reflectionMethod): array
-    {
-        /*** @var Relation $relation */
-        $relation = $reflectionMethod->getClosure($this->model)->call($this->model);
-
-        $relationshipName = (new ReflectionClass($relation->getRelated()))->getShortName();
-
-        if (in_array($reflectionMethod->getReturnType(), [HasMany::class, HasManyThrough::class])) {
-            $relationshipName .= '[]';
-        }
-
-        return [$reflectionMethod->getName() => $relationshipName];
-    }
-
     public function toString(): string
     {
         $importDirectory = config('type-script-model-generator.import_directory');
@@ -89,6 +72,23 @@ class Type
             ->replace('{{ name }}', $this->name)
             ->replace('{{ properties }}', $propertiesStr)
             ->replace('{{ relationshipProperties }}', $relationshipPropertiesStr);
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    private function mapRelationshipProperty(ReflectionMethod $reflectionMethod): array
+    {
+        /*** @var Relation $relation */
+        $relation = $reflectionMethod->getClosure($this->model)->call($this->model);
+
+        $relationshipName = (new ReflectionClass($relation->getRelated()))->getShortName();
+
+        if (in_array($reflectionMethod->getReturnType(), [HasMany::class, HasManyThrough::class])) {
+            $relationshipName .= '[]';
+        }
+
+        return [$reflectionMethod->getName() => $relationshipName];
     }
 
     private function filterRelationshipPropertyReturnType(ReflectionMethod $reflectionMethod): bool
