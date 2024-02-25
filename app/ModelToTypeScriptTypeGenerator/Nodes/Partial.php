@@ -38,7 +38,7 @@ class Partial
 
     public function toString(): string
     {
-        $importDirectory = config('type-script-generator.import_directory');
+        $importDirectory = config('type-script-model-generator.import_directory');
         $modelName = (new ReflectionClass($this->model))->getShortName();
 
         return Str::of($this->files->get(__DIR__.'/../stubs/PartialType.stub'))

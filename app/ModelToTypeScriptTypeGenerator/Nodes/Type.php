@@ -66,7 +66,7 @@ class Type
 
     public function toString(): string
     {
-        $importDirectory = config('type-script-generator.import_directory');
+        $importDirectory = config('type-script-model-generator.import_directory');
 
         $imports = $this->relationshipProperties
             ->map(function (string $relationshipName, string $fieldName) use ($importDirectory) {

@@ -17,8 +17,8 @@ class TypeScriptModelGenerator
 
     public function __construct()
     {
-        $this->outputDirectory = config('type-script-generator.output_directory');
-        $this->modelDirectory = config('type-script-generator.model_directory');
+        $this->outputDirectory = config('type-script-model-generator.output_directory');
+        $this->modelDirectory = config('type-script-model-generator.model_directory');
     }
 
     public function generateAll(): void
@@ -55,7 +55,7 @@ class TypeScriptModelGenerator
 
     private function generateModelPartialTypes(string $fullyQualifiedModelName): void
     {
-        collect(config('type-script-generator.partials'))
+        collect(config('type-script-model-generator.partials'))
             ->filter(fn (array $partialConfig) => $partialConfig['model'] === $fullyQualifiedModelName)
             ->map(Partial::fromConfig(...))
             ->each(function (Partial $partial) {
