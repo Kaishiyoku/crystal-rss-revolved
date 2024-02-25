@@ -1,3 +1,4 @@
+/* this file has been automatically generated */
 import User from '@/types/generated/Models/User';
 import Category from '@/types/generated/Models/Category';
 import FeedItem from '@/types/generated/Models/FeedItem';

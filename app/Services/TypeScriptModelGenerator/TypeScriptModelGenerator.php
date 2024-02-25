@@ -3,8 +3,9 @@
 namespace App\Services\TypeScriptModelGenerator;
 
 use App\Services\TypeScriptModelGenerator\Nodes\InheritedType;
-use App\Services\TypeScriptModelGenerator\Nodes\Partial;
+use App\Services\TypeScriptModelGenerator\Nodes\ModelPartial;
 use App\Services\TypeScriptModelGenerator\Nodes\Type;
+use App\Services\TypeScriptModelGenerator\Nodes\InheritedTypePartial;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
@@ -27,6 +28,8 @@ class TypeScriptModelGenerator
     {
         $this->getFullyQualifiedModelNames()
             ->each($this->generateModel(...));
+
+        $this->generateInheritedTypePartialTypes();
     }
 
     /**
@@ -58,13 +61,13 @@ class TypeScriptModelGenerator
 
     private function generateModelPartialTypes(string $fullyQualifiedModelName): void
     {
-        collect((array) config('type-script-model-generator.partials'))
+        collect((array) config('type-script-model-generator.model_partials'))
             ->filter(fn (array $config) => Arr::get($config, 'model') === $fullyQualifiedModelName)
-            ->map(Partial::fromConfig(...))
-            ->each(function (Partial $partial) {
+            ->map(ModelPartial::fromConfig(...))
+            ->each(function (ModelPartial $modelPartial) {
                 file_put_contents(
-                    filename: "{$this->outputDirectory}/{$partial->name}.ts",
-                    data: $partial->toString(),
+                    filename: "{$this->outputDirectory}/{$modelPartial->name}.ts",
+                    data: $modelPartial->toString(),
                 );
             });
     }
@@ -74,10 +77,22 @@ class TypeScriptModelGenerator
         collect((array) config('type-script-model-generator.inherited_types'))
             ->filter(fn (array $config) => Arr::get($config, 'model') === $fullyQualifiedModelName)
             ->map(InheritedType::fromConfig(...))
-            ->each(function (InheritedType $inherited) {
+            ->each(function (InheritedType $inheritedType) {
                 file_put_contents(
-                    filename: "{$this->outputDirectory}/{$inherited->name}.ts",
-                    data: $inherited->toString(),
+                    filename: "{$this->outputDirectory}/{$inheritedType->name}.ts",
+                    data: $inheritedType->toString(),
+                );
+            });
+    }
+
+    private function generateInheritedTypePartialTypes(): void
+    {
+        collect((array) config('type-script-model-generator.inherited_type_partials'))
+            ->map(InheritedTypePartial::fromConfig(...))
+            ->each(function (InheritedTypePartial $typePartial) {
+                file_put_contents(
+                    filename: "{$this->outputDirectory}/{$typePartial->name}.ts",
+                    data: $typePartial->toString(),
                 );
             });
     }
