@@ -21,6 +21,16 @@ return [
     // extended model types with additional fields
     'inherited_types' => [
         [
+            'name' => 'CategoryWithFeedsCount',
+            'model' => \App\Models\Category::class,
+            'additional_fields' => [
+                [
+                    'name' => 'feeds_count',
+                    'types' => ['number'],
+                ],
+            ],
+        ],
+        [
             'name' => 'FeedWithFeedItemsCount',
             'model' => \App\Models\Feed::class,
             'additional_fields' => [

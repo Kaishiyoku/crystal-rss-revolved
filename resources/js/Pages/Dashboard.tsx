@@ -12,12 +12,12 @@ import EmptyState from '@/Components/EmptyState';
 import EyeOutlineIcon from '@/Icons/EyeOutlineIcon';
 import {PageProps} from '@/types';
 import CursorPagination from '@/types/CursorPagination';
-import ShortFeed from '@/types/generated/Models/ShortFeed';
 import FeedItem from '@/types/generated/Models/FeedItem';
+import ShortFeedWithFeedItemsCount from '@/types/generated/Models/ShortFeedWithFeedItemsCount';
 
 type DashboardPageProps = PageProps & {
-    selectedFeed: ShortFeed;
-    unreadFeeds: ShortFeed[];
+    selectedFeed: ShortFeedWithFeedItemsCount;
+    unreadFeeds: ShortFeedWithFeedItemsCount[];
     totalNumberOfFeedItems: number;
     feedItems: CursorPagination<FeedItem>;
 };
