@@ -19,14 +19,12 @@ class ModelPartial
     private Filesystem $files;
 
     private function __construct(
-        public string $name,
+        public readonly string $name,
 
-        private Model $model,
+        private readonly Model $model,
 
-        /**
-         * @var Collection<string>
-         */
-        private Collection $fields,
+        /*** @var Collection<string> */
+        private readonly Collection $fields,
     ) {
         $this->files = new Filesystem();
     }

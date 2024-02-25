@@ -14,14 +14,12 @@ class InheritedTypePartial
     private Filesystem $files;
 
     public function __construct(
-        public string $name,
+        public readonly string $name,
 
-        private string $type,
+        private readonly string $type,
 
-        /**
-         * @var Collection<string>
-         */
-        private Collection $fields,
+        /*** @var Collection<string> */
+        private readonly Collection $fields,
     ) {
         $this->files = new Filesystem();
     }

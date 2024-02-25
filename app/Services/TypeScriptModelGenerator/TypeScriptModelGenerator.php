@@ -3,9 +3,10 @@
 namespace App\Services\TypeScriptModelGenerator;
 
 use App\Services\TypeScriptModelGenerator\Nodes\InheritedType;
+use App\Services\TypeScriptModelGenerator\Nodes\InheritedTypePartial;
 use App\Services\TypeScriptModelGenerator\Nodes\ModelPartial;
 use App\Services\TypeScriptModelGenerator\Nodes\Type;
-use App\Services\TypeScriptModelGenerator\Nodes\InheritedTypePartial;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
@@ -18,10 +19,14 @@ class TypeScriptModelGenerator
 
     private string $modelDirectory;
 
+    private Filesystem $files;
+
     public function __construct()
     {
         $this->outputDirectory = config('type-script-model-generator.output_directory');
         $this->modelDirectory = config('type-script-model-generator.model_directory');
+
+        $this->files = new Filesystem();
     }
 
     public function generateAll(): void
@@ -50,12 +55,12 @@ class TypeScriptModelGenerator
         $type = new Type($model);
 
         if (! file_exists($this->outputDirectory)) {
-            mkdir($this->outputDirectory, 0755, true);
+            $this->files->makeDirectory($this->outputDirectory, 0755, true);
         }
 
-        file_put_contents(
-            filename: "{$this->outputDirectory}/{$modelName}.ts",
-            data: $type->toString(),
+        $this->files->put(
+            path: "{$this->outputDirectory}/{$modelName}.ts",
+            contents: $type->toString(),
         );
     }
 
@@ -65,9 +70,9 @@ class TypeScriptModelGenerator
             ->filter(fn (array $config) => Arr::get($config, 'model') === $fullyQualifiedModelName)
             ->map(ModelPartial::fromConfig(...))
             ->each(function (ModelPartial $modelPartial) {
-                file_put_contents(
-                    filename: "{$this->outputDirectory}/{$modelPartial->name}.ts",
-                    data: $modelPartial->toString(),
+                $this->files->put(
+                    path: "{$this->outputDirectory}/{$modelPartial->name}.ts",
+                    contents: $modelPartial->toString(),
                 );
             });
     }
@@ -78,9 +83,9 @@ class TypeScriptModelGenerator
             ->filter(fn (array $config) => Arr::get($config, 'model') === $fullyQualifiedModelName)
             ->map(InheritedType::fromConfig(...))
             ->each(function (InheritedType $inheritedType) {
-                file_put_contents(
-                    filename: "{$this->outputDirectory}/{$inheritedType->name}.ts",
-                    data: $inheritedType->toString(),
+                $this->files->put(
+                    path: "{$this->outputDirectory}/{$inheritedType->name}.ts",
+                    contents: $inheritedType->toString(),
                 );
             });
     }
@@ -90,9 +95,9 @@ class TypeScriptModelGenerator
         collect((array) config('type-script-model-generator.inherited_type_partials'))
             ->map(InheritedTypePartial::fromConfig(...))
             ->each(function (InheritedTypePartial $typePartial) {
-                file_put_contents(
-                    filename: "{$this->outputDirectory}/{$typePartial->name}.ts",
-                    data: $typePartial->toString(),
+                $this->files->put(
+                    path: "{$this->outputDirectory}/{$typePartial->name}.ts",
+                    contents: $typePartial->toString(),
                 );
             });
     }

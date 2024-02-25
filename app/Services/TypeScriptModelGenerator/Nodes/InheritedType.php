@@ -22,13 +22,11 @@ class InheritedType
     private Filesystem $files;
 
     private function __construct(
-        public string $name,
+        public readonly string $name,
 
         private readonly Model $model,
 
-        /**
-         * @var Collection<TypeProperty>
-         */
+        /*** @var Collection<TypeProperty> */
         private readonly Collection $additionalFields,
     ) {
         $this->files = new Filesystem();
