@@ -35,7 +35,7 @@ class InheritedType
      */
     public static function fromConfig(array $config): self
     {
-        static::validateConfig($config);
+        self::validateConfig($config);
 
         return new self(
             name: Arr::get($config, 'name'),
@@ -46,6 +46,9 @@ class InheritedType
         );
     }
 
+    /**
+     * @param  array{name: string, model: string, additional_fields: array{name: string, types: string[]}}  $config
+     */
     private static function validateConfig(array $config): void
     {
         $modelName = '';
