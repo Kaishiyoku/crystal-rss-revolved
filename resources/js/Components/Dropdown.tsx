@@ -1,8 +1,17 @@
-import {useState, createContext, useContext, Fragment, PropsWithChildren, Dispatch, SetStateAction} from 'react';
-import {InertiaLinkProps, Link} from '@inertiajs/react';
+import {
+    useState,
+    createContext,
+    useContext,
+    Fragment,
+    PropsWithChildren,
+    Dispatch,
+    SetStateAction,
+    ReactNode
+} from 'react';
 import {Transition} from '@headlessui/react';
 import noop from '@/Utils/noop';
 import clsx from 'clsx';
+import {Link} from 'react-router-dom';
 
 type DropDownContextType = {
     open: boolean;
@@ -86,10 +95,13 @@ const Content = ({align = 'right', width = 48, contentClasses = 'p-2 bg-white/80
     );
 };
 
-const DropdownLink = ({active = false, className = '', children, ...props}: InertiaLinkProps & { active?: boolean; }) => {
+const DropdownLink = ({to, active = false, className = '', children}: { to: string; active?: boolean; className?: string; children: ReactNode; }) => {
+    const {setOpen} = useContext(DropDownContext);
+
     return (
         <Link
-            {...props}
+            to={to}
+            onClick={() => setOpen(false)}
             className={clsx(
                 'block w-full text-left px-4 py-2 text-sm leading-5 rounded-lg focus:outline-none transition duration-150 ease-in-out',
                 {
