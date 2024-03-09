@@ -32,20 +32,10 @@ Route::get('/', function () {
     ]);
 });
 
-Route::any('/react', function () {
-    return view('app_react');
-});
-
-Route::any('/react/{any}', function () {
-    return view('app_react');
-});
-
-Route::any('/react/categories/create', function () {
-    return view('app_react');
-});
-
-Route::any('/react/categories/{category}/edit', function () {
-    return view('app_react');
+Route::group(['prefix' => 'v2'], function () {
+    Route::any('{all?}', function() {
+        return view('app_react');
+    })->where(['all' => '.*']);
 });
 
 Route::middleware('auth')->group(function () {

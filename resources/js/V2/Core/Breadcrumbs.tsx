@@ -1,8 +1,8 @@
 import {Link} from 'react-router-dom';
 import slug from 'slug';
 import {Fragment, useEffect, useRef} from 'react';
-import useBreadcrumbs from '@/React/Hooks/useBreadcrumbs';
-import Breadcrumb from '@/React/types/Breadcrumb';
+import useBreadcrumbs from '@/V2/Hooks/useBreadcrumbs';
+import Breadcrumb from '@/V2/types/Breadcrumb';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 
 const LinkBreadcrumb = ({breadcrumb}: { breadcrumb: Breadcrumb; }) => {

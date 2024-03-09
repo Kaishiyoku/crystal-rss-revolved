@@ -1,6 +1,6 @@
 import {useMatches} from 'react-router-dom';
-import Breadcrumb from '@/React/types/Breadcrumb';
-import RouteHandle from '@/React/types/RouteHandle';
+import Breadcrumb from '@/V2/types/Breadcrumb';
+import RouteHandle from '@/V2/types/RouteHandle';
 
 export default function useBreadcrumbs() {
     const matches = useMatches();
