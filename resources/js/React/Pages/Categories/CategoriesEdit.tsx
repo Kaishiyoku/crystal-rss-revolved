@@ -33,7 +33,7 @@ export default function CategoriesEdit() {
                             id="name"
                             name="name"
                             defaultValue={category.name}
-                            className="block w-full max-w-xl"
+                            className="block w-full"
                             required
                             isFocused
                         />

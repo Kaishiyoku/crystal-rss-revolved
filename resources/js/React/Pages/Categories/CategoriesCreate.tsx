@@ -23,13 +23,13 @@ export default function CategoriesCreate() {
             </ModalHeader>
 
             <ModalBody>
-                <Form method="post" action="/react/categories/create">
-                    <div className="mb-4">
+                <Form method="post" action="/react/categories/create" className="space-y-4">
+                    <div>
                         <InputLabel htmlFor="name" value={t('validation.attributes.name')} required/>
                         <TextInput
                             id="name"
                             name="name"
-                            className="block w-full max-w-xl"
+                            className="block w-full"
                             required
                             isFocused
                         />
