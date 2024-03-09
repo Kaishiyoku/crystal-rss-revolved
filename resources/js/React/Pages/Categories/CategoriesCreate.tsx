@@ -8,6 +8,7 @@ import {PrimaryButton} from '@/Components/Button';
 import InputLabel from '@/Components/InputLabel';
 import React from 'react';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
+import {Pane, PaneBody, PaneHeader} from '@/Components/Modal/Pane';
 
 type CategoriesCreateValidationErrors = ValidationErrors & { name?: string; } | null;
 
@@ -17,12 +18,12 @@ export default function CategoriesCreate() {
     const {show, handleClose} = usePageModal(errors, '/react/categories');
 
     return (
-        <Modal appear show={show} onClose={handleClose}>
-            <ModalHeader>
+        <Pane appear show={show} onClose={handleClose}>
+            <PaneHeader>
                 {t('Add category')}
-            </ModalHeader>
+            </PaneHeader>
 
-            <ModalBody>
+            <PaneBody>
                 <Form method="post" action="/react/categories/create" className="space-y-4">
                     <div>
                         <InputLabel htmlFor="name" value={t('validation.attributes.name')} required/>
@@ -40,7 +41,7 @@ export default function CategoriesCreate() {
                         {t('Save')}
                     </PrimaryButton>
                 </Form>
-            </ModalBody>
-        </Modal>
+            </PaneBody>
+        </Pane>
     );
 }
