@@ -3,34 +3,43 @@ import slug from 'slug';
 import {Fragment, useEffect, useRef} from 'react';
 import useBreadcrumbs from '@/React/Hooks/useBreadcrumbs';
 import Breadcrumb from '@/React/types/Breadcrumb';
+import {useLaravelReactI18n} from 'laravel-react-i18n';
 
-const LinkBreadcrumb = ({breadcrumb}: { breadcrumb: Breadcrumb; }) => (
-    <li>
-        {breadcrumb.headline}
-    </li>
-);
+const LinkBreadcrumb = ({breadcrumb}: { breadcrumb: Breadcrumb; }) => {
+    const {t} = useLaravelReactI18n();
 
-const TextBreadcrumb = ({breadcrumb}: { breadcrumb: Breadcrumb; }) => (
-    <Fragment>
+    return (
         <li>
-            <Link to={breadcrumb.pathname} className="font-semibold text-violet-400 hover:text-violet-300 leading-tight transition">
-                {breadcrumb.headline}
-            </Link>
+            {t(breadcrumb.headline)}
         </li>
+    );
+};
 
-        <li>
-            <svg
-                className="h-5 w-5 flex-shrink-0 stroke-current"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                aria-hidden="true"
-            >
-                <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z" strokeWidth=".5"/>
-            </svg>
-        </li>
-    </Fragment>
-);
+const TextBreadcrumb = ({breadcrumb}: { breadcrumb: Breadcrumb; }) => {
+    const {t} = useLaravelReactI18n();
+
+    return (
+        <Fragment>
+            <li>
+                <Link to={breadcrumb.pathname} className="font-semibold text-violet-400 hover:text-violet-300 leading-tight transition">
+                    {t(breadcrumb.headline)}
+                </Link>
+            </li>
+
+            <li>
+                <svg
+                    className="h-5 w-5 flex-shrink-0 stroke-current"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    aria-hidden="true"
+                >
+                    <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z" strokeWidth=".5"/>
+                </svg>
+            </li>
+        </Fragment>
+    );
+};
 
 export default function Breadcrumbs() {
     const breadcrumbs = useBreadcrumbs();

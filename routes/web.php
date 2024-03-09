@@ -40,6 +40,10 @@ Route::any('/react/{any}', function () {
     return view('app_react');
 });
 
+Route::any('/react/categories/create', function () {
+    return view('app_react');
+});
+
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
 

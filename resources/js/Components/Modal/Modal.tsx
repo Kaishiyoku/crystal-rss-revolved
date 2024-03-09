@@ -4,12 +4,14 @@ import {Dialog, Transition} from '@headlessui/react';
 const Modal = (
     {
         children,
+        appear = false,
         show = false,
         maxWidth = '2xl',
         closeable = true,
         onClose = () => {},
     }: {
         children: ReactNode;
+        appear?: boolean;
         show?: boolean;
         maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | '2xl';
         closeable?: boolean;
@@ -35,7 +37,7 @@ const Modal = (
     }[maxWidth];
 
     return (
-        <Transition show={show} as={Fragment} leave="duration-200">
+        <Transition appear={appear} show={show} as={Fragment} leave="duration-200">
             <Dialog
                 as="div"
                 id="modal"
@@ -77,7 +79,7 @@ const Modal = (
 const ModalHeader = ({children}: { children: ReactNode; }) => {
     return (
         <div className="p-6">
-            <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100 pr-8">
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 pr-8">
                 {children}
             </h2>
         </div>
@@ -100,9 +102,12 @@ const ModalFooter = ({children}: { children: ReactNode; }) => {
     );
 };
 
+const modalLeaveDuration = 200;
+
 export {
     Modal,
     ModalHeader,
     ModalBody,
     ModalFooter,
+    modalLeaveDuration,
 };
