@@ -6,6 +6,12 @@ import {ActionFunction} from '@remix-run/router/utils';
 const updateCategoryAction: ActionFunction = async ({params, request: req}) => {
     const formData = await req.formData();
 
+    if (formData.get('intent') === 'delete') {
+        await request.delete(`/api/categories/${params.categoryId}`);
+
+        return null;
+    }
+
     try {
         await request.put(`/api/categories/${params.categoryId}`, {json: Object.fromEntries(formData)});
     } catch (exception) {

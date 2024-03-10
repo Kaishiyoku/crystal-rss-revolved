@@ -1,23 +1,32 @@
-import {Form, useActionData, useLoaderData, useParams} from 'react-router-dom';
+import {Form, useActionData, useLoaderData, useParams, useSubmit} from 'react-router-dom';
 import TextInput from '@/Components/TextInput';
 import usePageModal from '@/V2/Hooks/usePageModal';
 import ValidationErrors from '@/V2/types/ValidationErrors';
 import InputError from '@/Components/InputError';
-import {PrimaryButton} from '@/Components/Button';
+import {HeadlessButton, PrimaryButton} from '@/Components/Button';
 import InputLabel from '@/Components/InputLabel';
 import React from 'react';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
-import Category from '@/types/generated/Models/Category';
-import {Pane, PaneBody, PaneHeader} from '@/Components/Modal/Pane';
+import {Pane, PaneBody, PaneFooter, PaneHeader} from '@/Components/Modal/Pane';
+import CategoryLoaderType from '@/V2/types/CategoryLoaderType';
+import Actions from '@/Components/Actions';
 
 type CategoriesCreateValidationErrors = ValidationErrors & { name?: string; } | null;
 
 export default function CategoriesEdit() {
     const {t} = useLaravelReactI18n();
     const {categoryId} = useParams();
-    const category = useLoaderData() as Category;
+    const {category, canDelete} = useLoaderData() as CategoryLoaderType;
     const errors = useActionData() as CategoriesCreateValidationErrors;
     const {show, handleClose} = usePageModal(errors, '/app/categories');
+    const submit = useSubmit();
+
+    const handleDelete = () => {
+        const formData = new FormData();
+        formData.append('intent', 'delete');
+
+        submit(formData, {method: 'delete', action: `/app/categories/${categoryId}/edit`});
+    };
 
     return (
         <Pane appear show={show} onClose={handleClose}>
@@ -45,6 +54,23 @@ export default function CategoriesEdit() {
                     </PrimaryButton>
                 </Form>
             </PaneBody>
+
+            <PaneFooter>
+                <Actions footer>
+                    {canDelete && (
+                        <HeadlessButton
+                            confirm
+                            confirmTitle={t('Do you really want to delete this category?')}
+                            confirmSubmitTitle={t('Delete category')}
+                            confirmCancelTitle={t('Cancel')}
+                            onClick={handleDelete}
+                            className="link-danger"
+                        >
+                            {t('Delete')}
+                        </HeadlessButton>
+                    )}
+                </Actions>
+            </PaneFooter>
         </Pane>
     );
 }

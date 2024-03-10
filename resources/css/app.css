@@ -92,6 +92,9 @@ body {
     .link-light {
         @apply font-semibold text-violet-200 hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-white/50 transition;
     }
+    .link-danger {
+        @apply font-semibold text-pink-600 hover:text-pink-900 dark:text-pink-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-pink-500 transition;
+    }
 
     /**
      * Buttons

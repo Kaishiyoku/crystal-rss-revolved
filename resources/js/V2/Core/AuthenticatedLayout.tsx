@@ -21,7 +21,7 @@ const AuthenticatedLayout = () => {
     }, []);
 
     useEffect(() => {
-        document.querySelector('title')!.textContent = t(match?.handle.title);
+        document.querySelector('title')!.textContent = t(match?.handle.titleKey);
     }, [location]);
 
     const handleLogout = async () => {
