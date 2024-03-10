@@ -1,7 +1,6 @@
 type RouteHandle = {
     hide?: boolean;
-    title: string;
-    headline: string;
+    titleKey: string;
 };
 
 export default RouteHandle;
