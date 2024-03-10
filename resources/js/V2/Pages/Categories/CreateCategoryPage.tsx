@@ -1,4 +1,3 @@
-import {Modal, ModalBody, ModalHeader} from '@/Components/Modal/Modal';
 import {Form, useActionData} from 'react-router-dom';
 import TextInput from '@/Components/TextInput';
 import usePageModal from '@/V2/Hooks/usePageModal';
@@ -12,7 +11,7 @@ import {Pane, PaneBody, PaneHeader} from '@/Components/Modal/Pane';
 
 type CategoriesCreateValidationErrors = ValidationErrors & { name?: string; } | null;
 
-export default function CategoriesCreate() {
+export default function CreateCategoryPage() {
     const {t} = useLaravelReactI18n();
     const errors = useActionData() as CategoriesCreateValidationErrors;
     const {show, handleClose} = usePageModal(errors, '/app/categories');

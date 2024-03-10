@@ -7,7 +7,7 @@ import EmptyState from '@/Components/EmptyState';
 import TagOutlineIcon from '@/Icons/TagOutlineIcon';
 import CategoriesLoaderType from '@/V2/types/CategoriesLoaderType';
 
-export default function CategoriesIndex() {
+export default function CategoriesIndexPage() {
     const {categories, canCreate} = useLoaderData() as CategoriesLoaderType;
     const {t, tChoice} = useLaravelReactI18n();
 
