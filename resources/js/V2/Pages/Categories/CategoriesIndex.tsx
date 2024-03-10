@@ -5,18 +5,20 @@ import LinkStack from '@/Components/LinkStack';
 import {isEmpty} from 'ramda';
 import EmptyState from '@/Components/EmptyState';
 import TagOutlineIcon from '@/Icons/TagOutlineIcon';
-import CategoryWithFeedsCount from '@/types/generated/Models/CategoryWithFeedsCount';
+import CategoriesLoaderType from '@/V2/types/CategoriesLoaderType';
 
 export default function CategoriesIndex() {
-    const categories = useLoaderData() as CategoryWithFeedsCount[];
+    const {categories, canCreate} = useLoaderData() as CategoriesLoaderType;
     const {t, tChoice} = useLaravelReactI18n();
 
     return (
         <div>
             <Actions>
-                <Link to="/app/categories/create" className="link-secondary">
-                    {t('Add category')}
-                </Link>
+                {canCreate && (
+                    <Link to="/app/categories/create" className="link-secondary">
+                        {t('Add category')}
+                    </Link>
+                )}
             </Actions>
 
             {isEmpty(categories)
