@@ -11,6 +11,11 @@ import updateCategoryAction from '@/V2/Core/Router/Actions/updateCategoryAction'
 import ErrorPage from '@/V2/Core/ErrorPage';
 import AuthProvider from '@/V2/Core/AuthProvider';
 import createCategoryAction from '@/V2/Core/Router/Actions/createCategoryAction';
+import FeedsIndexPage from '@/V2/Pages/Feeds/FeedsIndexPage';
+import feedsLoader from '@/V2/Core/Router/Loaders/feedsLoader';
+import CreateFeedPage from '@/V2/Pages/Feeds/CreateFeedPage';
+import createFeedLoader from '@/V2/Core/Router/Loaders/createFeedLoader';
+import createFeedAction from '@/V2/Core/Router/Actions/createFeedAction';
 
 const router = createBrowserRouter([
     {
@@ -38,6 +43,21 @@ const router = createBrowserRouter([
                         loader: categoryLoader('/edit'),
                         action: updateCategoryAction,
                         handle: {hide: true, titleKey: 'Edit category'} as RouteHandle,
+                    },
+                ],
+            },
+            {
+                path: 'feeds',
+                element: <FeedsIndexPage/>,
+                loader: feedsLoader,
+                handle: {titleKey: 'Feeds'} as RouteHandle,
+                children: [
+                    {
+                        path: 'create',
+                        element: <CreateFeedPage/>,
+                        loader: createFeedLoader,
+                        action: createFeedAction,
+                        handle: {hide: true, titleKey: 'Add feed'} as RouteHandle,
                     },
                 ],
             },

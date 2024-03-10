@@ -151,7 +151,7 @@ export default function Form({method, action, feed, categories}: { method: 'post
                             required
                         />
 
-                        <InputError className="mt-2" message={errors.name}/>
+                        <InputError className="mt-2" message={errors.language}/>
                     </div>
                 </div>
 
