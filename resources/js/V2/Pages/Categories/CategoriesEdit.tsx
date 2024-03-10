@@ -18,7 +18,7 @@ export default function CategoriesEdit() {
     const {categoryId} = useParams();
     const category = useLoaderData() as Category;
     const errors = useActionData() as CategoriesCreateValidationErrors;
-    const {show, handleClose} = usePageModal(errors, '/v2/categories');
+    const {show, handleClose} = usePageModal(errors, '/app/categories');
 
     return (
         <Pane appear show={show} onClose={handleClose}>
@@ -27,7 +27,7 @@ export default function CategoriesEdit() {
             </PaneHeader>
 
             <PaneBody>
-                <Form method="put" action={`/v2/categories/${categoryId}/edit`} className="space-y-4">
+                <Form method="put" action={`/app/categories/${categoryId}/edit`} className="space-y-4">
                     <div>
                         <InputLabel htmlFor="name" value={t('validation.attributes.name')} required/>
                         <TextInput

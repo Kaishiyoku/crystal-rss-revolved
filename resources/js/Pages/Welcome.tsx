@@ -14,9 +14,9 @@ export default function Welcome(props: WelcomeProps) {
                 <div className="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
                     {props.auth.user
                         ? (
-                            <Link href={route('dashboard')} className="link-light">
+                            <a href="/app" className="link-light">
                                 {t('Dashboard')}
-                            </Link>
+                            </a>
                         )
                         : (
                             <>

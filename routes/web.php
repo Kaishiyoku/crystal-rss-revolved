@@ -10,6 +10,7 @@ use App\Http\Controllers\MarkAllUnreadFeedItemsAsReadController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ToggleFeedItemController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 /*
@@ -32,7 +33,7 @@ Route::get('/', function () {
     ]);
 });
 
-Route::group(['prefix' => 'v2'], function () {
+Route::group(['prefix' => 'app'], function () {
     Route::any('{all?}', function() {
         return view('app_react');
     })->where(['all' => '.*']);
