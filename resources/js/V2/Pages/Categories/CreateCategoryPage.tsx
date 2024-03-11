@@ -18,7 +18,10 @@ export default function CreateCategoryPage() {
             </PaneHeader>
 
             <PaneBody>
-                <CategoryForm action="/app/categories/create" errors={errors}/>
+                <CategoryForm
+                    action="/app/categories/create"
+                    errors={errors}
+                />
             </PaneBody>
         </Pane>
     );
