@@ -11,13 +11,13 @@ import {Pane, PaneBody, PaneFooter, PaneHeader} from '@/Components/Modal/Pane';
 import EditCategoryLoaderType from '@/V2/types/EditCategoryLoaderType';
 import Actions from '@/Components/Actions';
 
-type CategoriesCreateValidationErrors = ValidationErrors & { name?: string; } | null;
+type EditCategoryValidationErrors = ValidationErrors & { name?: string; } | null;
 
 export default function EditCategoryPage() {
     const {t} = useLaravelReactI18n();
     const {categoryId} = useParams();
     const {category, canDelete} = useLoaderData() as EditCategoryLoaderType;
-    const errors = useActionData() as CategoriesCreateValidationErrors;
+    const errors = useActionData() as EditCategoryValidationErrors;
     const {show, handleClose} = usePageModal(errors, '/app/categories');
     const submit = useSubmit();
 

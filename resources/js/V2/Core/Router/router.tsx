@@ -7,7 +7,7 @@ import RouteHandle from '@/V2/types/RouteHandle';
 import EditCategoryPage from '@/V2/Pages/Categories/EditCategoryPage';
 import editCategoryLoader from '@/V2/Core/Router/Loaders/editCategoryLoader';
 import layoutLoader from '@/V2/Core/Router/Loaders/layoutLoader';
-import updateCategoryAction from '@/V2/Core/Router/Actions/updateCategoryAction';
+import editCategoryAction from '@/V2/Core/Router/Actions/editCategoryAction';
 import ErrorPage from '@/V2/Core/ErrorPage';
 import AuthProvider from '@/V2/Core/AuthProvider';
 import createCategoryAction from '@/V2/Core/Router/Actions/createCategoryAction';
@@ -18,7 +18,7 @@ import createFeedLoader from '@/V2/Core/Router/Loaders/createFeedLoader';
 import createFeedAction from '@/V2/Core/Router/Actions/createFeedAction';
 import EditFeedPage from '@/V2/Pages/Feeds/EditFeedPage';
 import editFeedLoader from '@/V2/Core/Router/Loaders/editFeedLoader';
-import updateFeedAction from '@/V2/Core/Router/Actions/updateFeedAction';
+import editFeedAction from '@/V2/Core/Router/Actions/editFeedAction';
 
 const router = createBrowserRouter([
     {
@@ -44,7 +44,7 @@ const router = createBrowserRouter([
                         path: ':categoryId/edit',
                         element: <EditCategoryPage/>,
                         loader: editCategoryLoader,
-                        action: updateCategoryAction,
+                        action: editCategoryAction,
                         handle: {hide: true, titleKey: 'Edit category'} as RouteHandle,
                     },
                 ],
@@ -66,7 +66,7 @@ const router = createBrowserRouter([
                         path: ':feedId/edit',
                         element: <EditFeedPage/>,
                         loader: editFeedLoader,
-                        action: updateFeedAction,
+                        action: editFeedAction,
                         handle: {hide: true, titleKey: 'Edit feed'} as RouteHandle,
                     },
                 ],
