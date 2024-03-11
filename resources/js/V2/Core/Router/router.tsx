@@ -5,7 +5,7 @@ import CategoriesIndexPage from '@/V2/Pages/Categories/CategoriesIndexPage';
 import CreateCategoryPage from '@/V2/Pages/Categories/CreateCategoryPage';
 import RouteHandle from '@/V2/types/RouteHandle';
 import EditCategoryPage from '@/V2/Pages/Categories/EditCategoryPage';
-import categoryLoader from '@/V2/Core/Router/Loaders/categoryLoader';
+import editCategoryLoader from '@/V2/Core/Router/Loaders/editCategoryLoader';
 import layoutLoader from '@/V2/Core/Router/Loaders/layoutLoader';
 import updateCategoryAction from '@/V2/Core/Router/Actions/updateCategoryAction';
 import ErrorPage from '@/V2/Core/ErrorPage';
@@ -16,6 +16,9 @@ import feedsLoader from '@/V2/Core/Router/Loaders/feedsLoader';
 import CreateFeedPage from '@/V2/Pages/Feeds/CreateFeedPage';
 import createFeedLoader from '@/V2/Core/Router/Loaders/createFeedLoader';
 import createFeedAction from '@/V2/Core/Router/Actions/createFeedAction';
+import EditFeedPage from '@/V2/Pages/Feeds/EditFeedPage';
+import editFeedLoader from '@/V2/Core/Router/Loaders/editFeedLoader';
+import updateFeedAction from '@/V2/Core/Router/Actions/updateFeedAction';
 
 const router = createBrowserRouter([
     {
@@ -40,7 +43,7 @@ const router = createBrowserRouter([
                     {
                         path: ':categoryId/edit',
                         element: <EditCategoryPage/>,
-                        loader: categoryLoader('/edit'),
+                        loader: editCategoryLoader,
                         action: updateCategoryAction,
                         handle: {hide: true, titleKey: 'Edit category'} as RouteHandle,
                     },
@@ -58,6 +61,13 @@ const router = createBrowserRouter([
                         loader: createFeedLoader,
                         action: createFeedAction,
                         handle: {hide: true, titleKey: 'Add feed'} as RouteHandle,
+                    },
+                    {
+                        path: ':feedId/edit',
+                        element: <EditFeedPage/>,
+                        loader: editFeedLoader,
+                        action: updateFeedAction,
+                        handle: {hide: true, titleKey: 'Edit feed'} as RouteHandle,
                     },
                 ],
             },
