@@ -69,7 +69,7 @@ export default function FeedForm({action, feed = null, categories, errors}: { ac
 
     return (
         <Form method="post" action={action} className="space-y-4">
-            <div className="flex">
+            <div className="flex pb-8">
                 <TextInput
                     id="search_url"
                     className="grow w-full rounded-r-none border-r-0"
