@@ -1,4 +1,4 @@
-import {createBrowserRouter} from 'react-router-dom';
+import {createBrowserRouter, redirect} from 'react-router-dom';
 import categoriesLoader from '@/V2/Core/Router/Loaders/categoriesLoader';
 import AuthenticatedLayout from '@/V2/Core/AuthenticatedLayout';
 import CategoriesIndexPage from '@/V2/Pages/Categories/CategoriesIndexPage';
@@ -22,12 +22,16 @@ import editFeedAction from '@/V2/Core/Router/Actions/editFeedAction';
 
 const router = createBrowserRouter([
     {
-        path: '/app',
+        path: '/',
         element: <AuthProvider><AuthenticatedLayout/></AuthProvider>,
         errorElement: <ErrorPage/>,
         loader: layoutLoader,
         handle: {titleKey: 'Home'} as RouteHandle,
         children: [
+            {
+                path: 'login',
+                loader: () => redirect('/'),
+            },
             {
                 path: 'categories',
                 element: <CategoriesIndexPage/>,

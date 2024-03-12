@@ -14,14 +14,14 @@ export default function EditFeedPage() {
     const {feedId} = useParams();
     const {categories, feed, canDelete} = useLoaderData() as EditFeedLoaderType;
     const errors = useActionData() as EditFeedValidationErrors;
-    const {show, handleClose} = usePageModal(errors, '/app/feeds');
+    const {show, handleClose} = usePageModal(errors, '/feeds');
     const submit = useSubmit();
 
     const handleDelete = () => {
         const formData = new FormData();
         formData.append('intent', 'delete');
 
-        submit(formData, {method: 'delete', action: `/app/feeds/${feedId}/edit`});
+        submit(formData, {method: 'delete', action: `/feeds/${feedId}/edit`});
     };
 
     return (
@@ -32,7 +32,7 @@ export default function EditFeedPage() {
 
             <PaneBody>
                 <FeedForm
-                    action={`/app/feeds/${feedId}/edit`}
+                    action={`/feeds/${feedId}/edit`}
                     feed={feed}
                     categories={categories}
                     errors={errors}

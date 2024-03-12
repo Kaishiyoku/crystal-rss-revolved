@@ -19,7 +19,7 @@ export default function FeedsIndexPage() {
         <div>
             <Actions>
                 {canCreate && (
-                    <Link to="/app/feeds/create" className="link-secondary">
+                    <Link to="/feeds/create" className="link-secondary">
                         {t('Add feed')}
                     </Link>
                 )}
@@ -38,7 +38,7 @@ export default function FeedsIndexPage() {
                         {feeds.map((feed) => (
                             <LinkStack.Item
                                 key={feed.id}
-                                to={`/app/feeds/${feed.id}/edit`}
+                                to={`/feeds/${feed.id}/edit`}
                                 className="block sm:flex justify-between"
                             >
                                 <div className="flex items-center">

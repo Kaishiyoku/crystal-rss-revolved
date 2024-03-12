@@ -9,7 +9,7 @@ import CategoryForm from '@/V2/Pages/Categories/Partials/CategoryForm';
 export default function CreateCategoryPage() {
     const {t} = useLaravelReactI18n();
     const errors = useActionData() as CreateCategoryValidationErrors;
-    const {show, handleClose} = usePageModal(errors, '/app/categories');
+    const {show, handleClose} = usePageModal(errors, '/categories');
 
     return (
         <Pane appear show={show} onClose={handleClose}>
@@ -19,7 +19,7 @@ export default function CreateCategoryPage() {
 
             <PaneBody>
                 <CategoryForm
-                    action="/app/categories/create"
+                    action="/categories/create"
                     errors={errors}
                 />
             </PaneBody>

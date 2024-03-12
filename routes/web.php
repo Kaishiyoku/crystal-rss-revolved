@@ -24,19 +24,18 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', function (Request $request) {
+    if ($request->user())
+    {
+        return view('app_react');
+    }
+
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'contactEmail' => config('app.contact_email'),
         'githubUrl' => config('app.github_url'),
     ]);
-});
-
-Route::group(['prefix' => 'app'], function () {
-    Route::any('{all?}', function() {
-        return view('app_react');
-    })->where(['all' => '.*']);
 });
 
 Route::middleware('auth')->group(function () {
@@ -63,3 +62,7 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::get('{all?}', function() {
+    return view('app_react');
+})->where(['all' => '.*']);

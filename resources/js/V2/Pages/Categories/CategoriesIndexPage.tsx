@@ -15,7 +15,7 @@ export default function CategoriesIndexPage() {
         <div>
             <Actions>
                 {canCreate && (
-                    <Link to="/app/categories/create" className="link-secondary">
+                    <Link to="/categories/create" className="link-secondary">
                         {t('Add category')}
                     </Link>
                 )}
@@ -34,7 +34,7 @@ export default function CategoriesIndexPage() {
                         {categories.map((category) => (
                             <LinkStack.Item
                                 key={category.id}
-                                to={`/app/categories/${category.id}/edit`}
+                                to={`/categories/${category.id}/edit`}
                                 className="block"
                             >
                                 <div className="font-semibold">
