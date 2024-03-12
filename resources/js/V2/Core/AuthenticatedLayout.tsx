@@ -26,7 +26,9 @@ const AuthenticatedLayout = () => {
     }, []);
 
     useEffect(() => {
-        document.querySelector('title')!.textContent = t(match?.handle.titleKey);
+        if (match?.handle) {
+            document.querySelector('title')!.textContent = t(match?.handle.titleKey);
+        }
 
         setIsNavigationMenuOpen(false);
     }, [location]);
