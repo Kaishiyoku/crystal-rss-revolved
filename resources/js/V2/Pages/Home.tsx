@@ -11,6 +11,7 @@ import EmptyState from '@/Components/EmptyState';
 import Actions from '@/Components/Actions';
 import request from '@/V2/request';
 import HomeLocationState from '@/V2/types/HomeLocationState';
+import FeedItemCard from '@/Components/FeedItemCard';
 
 export default function Home() {
     const {t, tChoice} = useLaravelReactI18n();
@@ -80,8 +81,12 @@ export default function Home() {
             {length(feedItems.data) > 0
                 ? (
                     <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-16 sm:gap-y-4">
-                        {feedItems.data.map((feedItem) => (
-                            <div key={feedItem.id}>{feedItem.title}</div>
+                        {feedItems.data.map((feedItem, index) => (
+                            <FeedItemCard
+                                key={feedItem.id}
+                                hueRotationIndex={index % 6}
+                                feedItem={feedItem}
+                            />
                         ))}
                     </div>
                 )
