@@ -25,6 +25,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
     Route::resource('categories', CategoryController::class);
+    Route::put('/feeds/mark-all-as-read', \App\Http\Controllers\Api\MarkAllUnreadFeedItemsAsReadController::class)->name('mark-all-as-read');
     Route::resource('feeds', FeedController::class);
 
     Route::post('discover-feed', FeedDiscovererController::class)->name('discover-feed');
