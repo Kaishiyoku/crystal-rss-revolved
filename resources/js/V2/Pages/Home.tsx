@@ -103,7 +103,7 @@ export default function Home() {
                 )}
 
             {feedItems.next_cursor && (
-                <HeadlessButton className="link-secondary" onClick={handleLoadMore}>
+                <HeadlessButton className="link-secondary mt-8" onClick={handleLoadMore}>
                     {t('Load more')}
                 </HeadlessButton>
             )}

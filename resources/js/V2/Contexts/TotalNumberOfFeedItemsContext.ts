@@ -1,6 +1,6 @@
 import {createContext} from 'react';
-import noop from '@/Utils/noop';
 import TotalNumberOfFeedItemsContextType from '@/V2/types/TotalNumberOfFeedItemsContextType';
+import noop from '@/Utils/noop';
 
 const TotalNumberOfFeedItemsContext = createContext<TotalNumberOfFeedItemsContextType>({
     totalNumberOfFeedItems: 0,

@@ -1,6 +1,8 @@
+import {Dispatch, SetStateAction} from 'react';
+
 type TotalNumberOfFeedItemsContextType = {
     totalNumberOfFeedItems: number;
-    setTotalNumberOfFeedItems: (value: number) => void;
+    setTotalNumberOfFeedItems: Dispatch<SetStateAction<number>>;
 };
 
 export default TotalNumberOfFeedItemsContextType;
