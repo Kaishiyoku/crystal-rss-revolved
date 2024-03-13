@@ -1,6 +1,6 @@
 import Card from '@/Components/Card';
 import PhotoSolidIcon from '@/Icons/PhotoSolidIcon';
-import {useState} from 'react';
+import {useContext, useState} from 'react';
 import clsx from 'clsx';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import {SecondaryButton} from '@/Components/Button';
@@ -8,13 +8,13 @@ import EyeOutlineIcon from '@/Icons/EyeOutlineIcon';
 import EyeSlashOutlineIcon from '@/Icons/EyeSlashOutlineIcon';
 import formatDateTime from '@/Utils/formatDateTime';
 import CalendarDaysSolidIcon from '@/Icons/CalendarDaysSolidIcon';
-import {RouteParams} from 'ziggy-js';
 import FeedItem from '@/types/generated/Models/FeedItem';
 import request from '@/V2/request';
+import TotalNumberOfFeedItemsContext from '@/V2/Contexts/TotalNumberOfFeedItemsContext';
 
 export default function FeedItemCard({hueRotationIndex, feedItem}: { hueRotationIndex: number; feedItem: FeedItem; }) {
     const {t} = useLaravelReactI18n();
-    // const {totalNumberOfFeedItems, setTotalNumberOfFeedItems} = useContext(TotalNumberOfFeedItemsContext);
+    const {totalNumberOfFeedItems, setTotalNumberOfFeedItems} = useContext(TotalNumberOfFeedItemsContext);
     const [internalFeedItem, setInternalFeedItem] = useState(feedItem);
     const [processing, setProcessing] = useState(false);
 
@@ -24,11 +24,11 @@ export default function FeedItemCard({hueRotationIndex, feedItem}: { hueRotation
         void request.put(`/feeds/${internalFeedItem.id}/toggle`)
             .json<FeedItem>()
             .then((data) => {
-                // if (data.read_at) {
-                //     setTotalNumberOfFeedItems(totalNumberOfFeedItems - 1);
-                // } else {
-                //     setTotalNumberOfFeedItems(totalNumberOfFeedItems + 1);
-                // }
+                if (data.read_at) {
+                    setTotalNumberOfFeedItems(totalNumberOfFeedItems - 1);
+                } else {
+                    setTotalNumberOfFeedItems(totalNumberOfFeedItems + 1);
+                }
 
                 setInternalFeedItem(data);
             })
