@@ -3,9 +3,21 @@ import {LoaderFunction} from '@remix-run/router/utils';
 import FeedItemsLoaderType from '@/V2/types/FeedItemsLoaderType';
 
 const feedItemsLoader: LoaderFunction = async ({request: req}) => {
-    const cursor = new URL(req.url).searchParams.get('cursor');
+    const searchParams = new URL(req.url).searchParams;
+    const cursor = searchParams.get('cursor');
+    const feedId = searchParams.get('feed_id');
 
-    return await request(`/api/feed-items${cursor ? `?cursor=${cursor}` : ''}`).json<FeedItemsLoaderType>();
+    const customSearchParams = new URLSearchParams();
+
+    if (cursor) {
+        customSearchParams.set('cursor', cursor);
+    }
+
+    if (feedId) {
+        customSearchParams.set('feed_id', feedId);
+    }
+
+    return await request(`/api/feed-items${customSearchParams.size > 0 ? `?${customSearchParams.toString()}` : ''}`).json<FeedItemsLoaderType>();
 };
 
 export default feedItemsLoader;
