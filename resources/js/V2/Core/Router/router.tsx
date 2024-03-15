@@ -26,6 +26,9 @@ import Admin from '@/V2/Pages/Admin/Admin';
 import usersLoader from '@/V2/Core/Router/Loaders/usersLoader';
 import UsersIndexPage from '@/V2/Pages/Admin/Users/UsersIndexPage';
 import usersAction from '@/V2/Core/Router/Actions/usersAction';
+import ProfilePage from '@/V2/Pages/ProfilePage';
+import profileLoader from '@/V2/Core/Router/Loaders/profileLoader';
+import profileAction from '@/V2/Core/Router/Actions/profileAction';
 
 const router = createBrowserRouter([
     {
@@ -86,6 +89,13 @@ const router = createBrowserRouter([
                         handle: {hide: true, titleKey: 'Edit feed'} as RouteHandle,
                     },
                 ],
+            },
+            {
+                path: 'profile',
+                element: <ProfilePage/>,
+                loader: profileLoader,
+                action: profileAction,
+                handle: {titleKey: 'Profile'},
             },
             {
                 path: 'admin',

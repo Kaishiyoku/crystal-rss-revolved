@@ -70,6 +70,10 @@ const AuthenticatedLayout = () => {
                     </Dropdown.Trigger>
 
                     <Dropdown.Content>
+                        <Dropdown.Link to="/profile">
+                            {t('Profile')}
+                        </Dropdown.Link>
+
                         <Dropdown.Link to="/categories">
                             {t('Categories')}
                         </Dropdown.Link>
@@ -149,6 +153,10 @@ const AuthenticatedLayout = () => {
                             </Dropdown.Link>
 
                             <Dropdown.Spacer/>
+
+                            <Dropdown.Link to="/profile">
+                                {t('Profile')}
+                            </Dropdown.Link>
 
                             <Dropdown.Link to="/categories">
                                 {t('Categories')}

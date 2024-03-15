@@ -116,6 +116,8 @@ const PrimaryButton = (
         className,
         disabled,
         onClick,
+        name,
+        value,
         children,
         confirm = false,
         confirmTitle,
@@ -130,6 +132,8 @@ const PrimaryButton = (
             hasMobileFullSize={hasMobileFullSize}
             disabled={disabled}
             onClick={onClick}
+            name={name}
+            value={value}
             className={clsx('', className)}
             confirm={confirm}
             confirmTitle={confirmTitle}
