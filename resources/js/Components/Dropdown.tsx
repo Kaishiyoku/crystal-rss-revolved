@@ -143,7 +143,7 @@ const DropdownButton = ({onClick, className = '', children}: { onClick: () => vo
         >
             {children}
         </HeadlessButton>
-    )
+    );
 };
 
 const Spacer = () => <div className="pt-2 mb-2 border-b dark:border-gray-600"/>;
