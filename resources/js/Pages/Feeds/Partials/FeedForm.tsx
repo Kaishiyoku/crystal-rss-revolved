@@ -11,7 +11,7 @@ import EditFeedValidationErrors from '@/types/EditFeedValidationErrors';
 import LinkStack from '@/Components/LinkStack';
 import Select from '@/Components/Select';
 import Checkbox from '@/Components/Checkbox';
-import request from '@/Core/request';
+import rq from '@/Core/rq';
 import DiscoveredFeed from '@/types/DiscoveredFeed';
 import {SelectNumberOption} from '@/types/SelectOption';
 import useAuth from '@/Hooks/useAuth';
@@ -35,7 +35,7 @@ export default function FeedForm({action, feed = null, categories, errors}: { ac
         setDiscoveredFeedUrls([]);
         setIsDiscoverFeedProcessing(true);
 
-        request.post('/api/discover-feed-urls', {json: {feed_url: searchUrl}})
+        rq.post('/api/discover-feed-urls', {json: {feed_url: searchUrl}})
             .json<string[]>()
             .then((data) => {
                 setDiscoveredFeedUrls(data);
@@ -49,7 +49,7 @@ export default function FeedForm({action, feed = null, categories, errors}: { ac
     const selectDiscoveredFeedUrl = (feedUrl: string) => () => {
         setIsDiscoverFeedProcessing(true);
 
-        request.post('/api/discover-feed', {json: {feed_url: feedUrl}})
+        rq.post('/api/discover-feed', {json: {feed_url: feedUrl}})
             .json<DiscoveredFeed>()
             .then((responseData) => {
                 nameRef.current!.value = responseData.name;

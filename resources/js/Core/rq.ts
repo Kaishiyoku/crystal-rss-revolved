@@ -2,7 +2,7 @@ import ky from 'ky';
 import NProgress from 'nprogress';
 import Cookies from 'js-cookie';
 
-const request = ky.extend({
+const rq = ky.extend({
     headers: {
         Accept: 'application/json',
     },
@@ -33,4 +33,4 @@ const request = ky.extend({
     },
 });
 
-export default request;
+export default rq;
