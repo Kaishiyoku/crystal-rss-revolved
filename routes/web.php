@@ -1,16 +1,14 @@
 <?php
 
-use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FeedController;
 use App\Http\Controllers\FeedDiscovererController;
 use App\Http\Controllers\FeedUrlDiscovererController;
 use App\Http\Controllers\MarkAllUnreadFeedItemsAsReadController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ToggleFeedItemController;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 /*

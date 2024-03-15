@@ -219,6 +219,8 @@ const DangerButton = (
         className,
         disabled,
         onClick,
+        name,
+        value,
         children,
         confirm = true,
         confirmTitle,
@@ -234,6 +236,8 @@ const DangerButton = (
             className={className}
             disabled={disabled}
             onClick={onClick}
+            name={name}
+            value={value}
             confirm={confirm}
             confirmTitle={confirmTitle}
             confirmSubmitTitle={confirmSubmitTitle}

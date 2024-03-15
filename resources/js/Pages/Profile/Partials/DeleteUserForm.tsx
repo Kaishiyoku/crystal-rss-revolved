@@ -1,46 +1,34 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import {Modal} from '@/Components/Modal/Modal';
 import TextInput from '@/Components/TextInput';
-import {useForm} from '@inertiajs/react';
 import {DangerButton, SecondaryButton} from '@/Components/Button';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import Card from '@/Components/Card';
+import {Form, useActionData} from 'react-router-dom';
+import UpdatePasswordValidationErrors from '@/V2/types/UpdatePasswordValidationErrors';
 
 export default function DeleteUserForm() {
     const {t} = useLaravelReactI18n();
+    const errors = useActionData() as UpdatePasswordValidationErrors;
     const [confirmingUserDeletion, setConfirmingUserDeletion] = useState(false);
-    const passwordInput = useRef<HTMLInputElement>();
+    const passwordInput = useRef<HTMLInputElement>(null);
 
-    const {
-        data,
-        setData,
-        delete: destroy,
-        processing,
-        reset,
-        errors,
-    } = useForm({password: ''});
+    useEffect(() => {
+        if (errors) {
+            passwordInput.current?.focus();
+        }
+    }, [errors]);
 
     const confirmUserDeletion = () => {
         setConfirmingUserDeletion(true);
     };
 
-    const deleteUser = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-
-        destroy(route('profile.destroy'), {
-            preserveScroll: true,
-            onSuccess: () => closeModal(),
-            onError: () => passwordInput.current?.focus(),
-            onFinish: () => reset(),
-        });
-    };
-
     const closeModal = () => {
         setConfirmingUserDeletion(false);
 
-        reset();
+        // reset();
     };
 
     return (
@@ -52,12 +40,14 @@ export default function DeleteUserForm() {
                 />
 
                 <Card.Body>
-                    <DangerButton onClick={confirmUserDeletion} confirm={false}>{t('Delete Account')}</DangerButton>
+                    <DangerButton onClick={confirmUserDeletion} confirm={false}>
+                        {t('Delete Account')}
+                    </DangerButton>
                 </Card.Body>
             </div>
 
             <Modal show={confirmingUserDeletion} onClose={closeModal}>
-                <form onSubmit={deleteUser} className="p-6">
+                <Form method="put" action="/profile" className="p-6">
                     <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">
                         {t('Are you sure you want to delete your account?')}
                     </h2>
@@ -74,24 +64,25 @@ export default function DeleteUserForm() {
                             type="password"
                             name="password"
                             ref={passwordInput}
-                            value={data.password}
-                            onChange={(e) => setData('password', e.target.value)}
-                            className="mt-1 block w-full"
-                            isFocused
                             placeholder={t('Password')}
+                            className="block w-full"
+                            isFocused
+                            required
                         />
 
-                        <InputError message={errors.password} className="mt-2"/>
+                        <InputError message={errors?.password}/>
                     </div>
 
                     <div className="mt-6 flex justify-end">
-                        <SecondaryButton onClick={closeModal}>{t('Cancel')}</SecondaryButton>
+                        <SecondaryButton onClick={closeModal}>
+                            {t('Cancel')}
+                        </SecondaryButton>
 
-                        <DangerButton type="submit" className="ml-3" confirm={false} disabled={processing}>
+                        <DangerButton type="submit" className="ml-3" confirm={false} name="intent" value="delete">
                             {t('Delete Account')}
                         </DangerButton>
                     </div>
-                </form>
+                </Form>
             </Modal>
         </Card>
     );
