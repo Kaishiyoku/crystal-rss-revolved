@@ -78,6 +78,10 @@ const AuthenticatedLayout = () => {
                             {t('Feeds')}
                         </Dropdown.Link>
 
+                        <Dropdown.Link to="/admin/users">
+                            {t('Users')}
+                        </Dropdown.Link>
+
                         <Dropdown.Link to="/telescope" external>
                             {t('Telescope')}
                         </Dropdown.Link>
@@ -144,6 +148,10 @@ const AuthenticatedLayout = () => {
 
                             <Dropdown.Link to="/feeds">
                                 {t('Feeds')}
+                            </Dropdown.Link>
+
+                            <Dropdown.Link to="/admin/users">
+                                {t('Users')}
                             </Dropdown.Link>
 
                             <Dropdown.Link to="/telescope" external>

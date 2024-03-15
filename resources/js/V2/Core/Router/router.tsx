@@ -22,6 +22,10 @@ import editFeedAction from '@/V2/Core/Router/Actions/editFeedAction';
 import Home from '@/V2/Pages/Home';
 import feedItemsLoader from '@/V2/Core/Router/Loaders/feedItemsLoader';
 import TotalNumberOfFeedItemsProvider from '@/V2/Core/TotalNumberOfFeedItemsProvider';
+import Admin from '@/V2/Pages/Admin/Admin';
+import usersLoader from '@/V2/Core/Router/Loaders/usersLoader';
+import UsersIndexPage from '@/V2/Pages/Admin/Users/UsersIndexPage';
+import usersAction from '@/V2/Core/Router/Actions/usersAction';
 
 const router = createBrowserRouter([
     {
@@ -80,6 +84,19 @@ const router = createBrowserRouter([
                         loader: editFeedLoader,
                         action: editFeedAction,
                         handle: {hide: true, titleKey: 'Edit feed'} as RouteHandle,
+                    },
+                ],
+            },
+            {
+                path: 'admin',
+                element: <Admin/>,
+                children: [
+                    {
+                        path: 'users',
+                        element: <UsersIndexPage/>,
+                        loader: usersLoader,
+                        action: usersAction,
+                        handle: {titleKey: 'Users'} as RouteHandle,
                     },
                 ],
             },
