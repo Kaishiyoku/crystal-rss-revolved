@@ -10,7 +10,7 @@ export default function Admin() {
         if (!user?.is_admin) {
             navigate('/');
         }
-    }, []);
+    }, [user]);
 
     return <Outlet/>;
 }

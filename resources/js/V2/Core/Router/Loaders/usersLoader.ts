@@ -1,9 +1,23 @@
 import request from '@/V2/request';
 import {LoaderFunction} from '@remix-run/router/utils';
-import FeedsLoaderType from '@/V2/types/FeedsLoaderType';
+import UsersLoaderType from '@/V2/types/UsersLoaderType';
+import {redirect} from 'react-router-dom';
+import {HTTPError} from 'ky';
 
 const usersLoader: LoaderFunction = async () => {
-    return await request('/api/admin/users').json<FeedsLoaderType>();
+    try {
+        return await request('/api/admin/users').json<UsersLoaderType>();
+    } catch (error) {
+        const errorResponse = (error as HTTPError).response;
+
+        if (errorResponse.status === 401) {
+            window.location.href = '/login';
+
+            return null;
+        }
+
+        return redirect('/');
+    }
 };
 
 export default usersLoader;

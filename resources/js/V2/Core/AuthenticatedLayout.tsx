@@ -78,13 +78,19 @@ const AuthenticatedLayout = () => {
                             {t('Feeds')}
                         </Dropdown.Link>
 
-                        <Dropdown.Link to="/admin/users">
-                            {t('Users')}
-                        </Dropdown.Link>
+                        {user.is_admin && (
+                            <>
+                                <Dropdown.Spacer/>
 
-                        <Dropdown.Link to="/telescope" external>
-                            {t('Telescope')}
-                        </Dropdown.Link>
+                                <Dropdown.Link to="/admin/users">
+                                    {t('Users')}
+                                </Dropdown.Link>
+
+                                <Dropdown.Link to="/telescope" external>
+                                    {t('Telescope')}
+                                </Dropdown.Link>
+                            </>
+                        )}
 
                         <Dropdown.Spacer/>
 
@@ -142,6 +148,8 @@ const AuthenticatedLayout = () => {
                                 {t('Home')}
                             </Dropdown.Link>
 
+                            <Dropdown.Spacer/>
+
                             <Dropdown.Link to="/categories">
                                 {t('Categories')}
                             </Dropdown.Link>
@@ -150,13 +158,19 @@ const AuthenticatedLayout = () => {
                                 {t('Feeds')}
                             </Dropdown.Link>
 
-                            <Dropdown.Link to="/admin/users">
-                                {t('Users')}
-                            </Dropdown.Link>
+                            {user.is_admin && (
+                                <>
+                                    <Dropdown.Spacer/>
 
-                            <Dropdown.Link to="/telescope" external>
-                                {t('Telescope')}
-                            </Dropdown.Link>
+                                    <Dropdown.Link to="/admin/users">
+                                        {t('Users')}
+                                    </Dropdown.Link>
+
+                                    <Dropdown.Link to="/telescope" external>
+                                        {t('Telescope')}
+                                    </Dropdown.Link>
+                                </>
+                            )}
                         </div>
 
                         <div className="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
