@@ -1,6 +1,7 @@
 import request from '@/V2/request';
 import {ActionFunction} from '@remix-run/router/utils';
 import handleRequestValidationError from '@/V2/Core/Router/Helpers/handleRequestValidationError';
+import toast from 'react-hot-toast';
 
 const createFeedAction: ActionFunction = async ({request: req}) => {
     const formData = await req.formData();
@@ -9,7 +10,11 @@ const createFeedAction: ActionFunction = async ({request: req}) => {
         formData.append('is_purgeable', '0');
     }
 
-    return await handleRequestValidationError(() => request.post('/api/feeds', {json: Object.fromEntries(formData)}));
+    const response = await handleRequestValidationError(() => request.post('/api/feeds', {json: Object.fromEntries(formData)}));
+
+    toast('Feed saved.');
+
+    return response;
 };
 
 export default createFeedAction;

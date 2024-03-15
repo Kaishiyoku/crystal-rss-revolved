@@ -2,16 +2,25 @@ import request from '@/V2/request';
 import {ActionFunction} from '@remix-run/router/utils';
 import handleRequestValidationError from '@/V2/Core/Router/Helpers/handleRequestValidationError';
 import {redirect} from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const profileAction: ActionFunction = async ({request: req}) => {
     const formData = await req.formData();
 
     if (formData.get('intent') === 'update-profile') {
-        return await handleRequestValidationError(() => request.patch('/api/profile', {json: Object.fromEntries(formData)}), '/');
+        const response = await handleRequestValidationError(() => request.patch('/api/profile', {json: Object.fromEntries(formData)}), '/');
+
+        toast('Profile saved.');
+
+        return response;
     }
 
     if (formData.get('intent') === 'update-password') {
-        return await handleRequestValidationError(() => request.put('/api/password', {json: Object.fromEntries(formData)}), '/');
+        const response = await handleRequestValidationError(() => request.put('/api/password', {json: Object.fromEntries(formData)}), '/');
+
+        toast('Password updated.');
+
+        return response;
     }
 
     if (formData.get('intent') === 'delete') {

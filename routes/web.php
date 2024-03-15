@@ -40,14 +40,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
     Route::middleware('verified')->group(function () {
-        Route::resource('categories', CategoryController::class)->except('show');
 
-        Route::post('discover-feed', FeedDiscovererController::class)->name('discover-feed');
-        Route::post('discover-feed-urls', FeedUrlDiscovererController::class)->name('discover-feed-urls');
-
-        Route::put('/feeds/mark-all-as-read', MarkAllUnreadFeedItemsAsReadController::class)->name('mark-all-as-read');
-        Route::resource('feeds', FeedController::class)->except('show');
-        Route::put('/feeds/{feedItem}/toggle', ToggleFeedItemController::class)->name('toggle-feed-item');
     });
 });
 

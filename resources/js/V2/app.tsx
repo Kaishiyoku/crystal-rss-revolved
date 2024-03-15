@@ -1,10 +1,9 @@
 import {createRoot} from 'react-dom/client';
-import {RouterProvider} from 'react-router-dom';
-import router from '@/V2/Core/Router/router';
 import NProgress from 'nprogress';
 import {LaravelReactI18nProvider} from 'laravel-react-i18n';
 import getBrowserLocale from '@/Utils/getBrowserLocale';
 import AppWithLoadedTranslations from '@/Components/AppWithLoadedTranslations';
+import AppWithToasts from '@/V2/AppWithToasts';
 
 NProgress.configure({
     showSpinner: false,
@@ -17,7 +16,7 @@ const App = () => {
             fallbackLocale="en"
             files={import.meta.glob('/lang/*.json', {eager: true})}
         >
-            <AppWithLoadedTranslations app={RouterProvider} router={router}/>
+            <AppWithLoadedTranslations app={AppWithToasts}/>
         </LaravelReactI18nProvider>
     );
 };

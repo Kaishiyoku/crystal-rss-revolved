@@ -1,6 +1,7 @@
 import request from '@/V2/request';
 import {ActionFunction} from '@remix-run/router/utils';
 import handleRequestValidationError from '@/V2/Core/Router/Helpers/handleRequestValidationError';
+import toast from 'react-hot-toast';
 
 const editFeedAction: ActionFunction = async ({params, request: req}) => {
     const formData = await req.formData();
@@ -12,10 +13,16 @@ const editFeedAction: ActionFunction = async ({params, request: req}) => {
     if (formData.get('intent') === 'delete') {
         await request.delete(`/api/feeds/${params.feedId}`);
 
+        toast('Feed deleted.');
+
         return null;
     }
 
-    return await handleRequestValidationError(() => request.put(`/api/feeds/${params.feedId}`, {json: Object.fromEntries(formData)}));
+    const response = await handleRequestValidationError(() => request.put(`/api/feeds/${params.feedId}`, {json: Object.fromEntries(formData)}));
+
+    toast('Feed saved.');
+
+    return response;
 };
 
 export default editFeedAction;
