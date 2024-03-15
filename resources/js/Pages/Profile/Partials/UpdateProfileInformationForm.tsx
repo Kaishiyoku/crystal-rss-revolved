@@ -7,7 +7,7 @@ import React from 'react';
 import Card from '@/Components/Card';
 import User from '@/types/generated/Models/User';
 import {Form, useActionData} from 'react-router-dom';
-import UpdateProfileValidationErrors from '@/V2/types/UpdateProfileValidationErrors';
+import UpdateProfileValidationErrors from '@/types/UpdateProfileValidationErrors';
 
 export default function UpdateProfileInformation({mustVerifyEmail, status, user}: { mustVerifyEmail: boolean; status: string; user: User; }) {
     const {t} = useLaravelReactI18n();

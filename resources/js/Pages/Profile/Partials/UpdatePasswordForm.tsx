@@ -6,7 +6,7 @@ import TextInput from '@/Components/TextInput';
 import {PrimaryButton} from '@/Components/Button';
 import Card from '@/Components/Card';
 import {Form, useActionData} from 'react-router-dom';
-import UpdatePasswordValidationErrors from '@/V2/types/UpdatePasswordValidationErrors';
+import UpdatePasswordValidationErrors from '@/types/UpdatePasswordValidationErrors';
 
 export default function UpdatePasswordForm() {
     const {t} = useLaravelReactI18n();

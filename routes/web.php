@@ -25,7 +25,7 @@ use Inertia\Inertia;
 Route::get('/', function (Request $request) {
     if ($request->user())
     {
-        return view('app_react');
+        return view('app');
     }
 
     return Inertia::render('Welcome', [
@@ -37,8 +37,6 @@ Route::get('/', function (Request $request) {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', DashboardController::class)->name('dashboard');
-
     Route::middleware('verified')->group(function () {
 
     });
@@ -47,5 +45,5 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 Route::get('{all?}', function() {
-    return view('app_react');
+    return view('app');
 })->where(['all' => '.*']);
