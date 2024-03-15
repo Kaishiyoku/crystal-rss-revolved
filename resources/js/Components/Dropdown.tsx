@@ -96,8 +96,22 @@ const Content = ({align = 'right', width = 48, contentClasses = 'p-2 bg-white/80
     );
 };
 
-const DropdownLink = ({to, active = undefined, className = '', children}: { to: string; active?: boolean | undefined; className?: string; children: ReactNode; }) => {
+const DropdownLink = ({to, active = undefined, external = false, className = '', children}: { to: string; active?: boolean | undefined; external?: boolean; className?: string; children: ReactNode; }) => {
     const {setOpen} = useContext(DropDownContext);
+
+    if (external) {
+        return (
+            <a
+                href={to}
+                className={clsx(
+                    'block w-full text-left px-4 py-2 text-sm leading-5 rounded-lg focus:outline-none transition duration-150 ease-in-out text-gray-700 dark:text-gray-400 hover:bg-gray-400/25 dark:hover:bg-gray-700 focus:bg-gray-500/25 dark:focus:bg-gray-600 dark:focus:text-gray-300',
+                    className
+                )}
+            >
+                {children}
+            </a>
+        );
+    }
 
     return (
         <NavLink
