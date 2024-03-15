@@ -34,9 +34,9 @@ const AuthenticatedLayout = () => {
     }, [location]);
 
     useEffect(() => {
-        // document.body.style.overflowY = isNavigationMenuOpen ? 'hidden' : '';
-        // document.body.style.position = isNavigationMenuOpen ? 'fixed' : '';
-        // document.body.style.width = isNavigationMenuOpen ? '100%' : '';
+        document.body.style.overflowY = isNavigationMenuOpen ? 'hidden' : '';
+        document.body.style.position = isNavigationMenuOpen ? 'fixed' : '';
+        document.body.style.width = isNavigationMenuOpen ? '100%' : '';
     }, [isNavigationMenuOpen]);
 
     const handleLogout = async () => {
