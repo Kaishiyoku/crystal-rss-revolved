@@ -73,6 +73,7 @@ class Feed extends Model
      */
     protected $casts = [
         'is_purgeable' => 'bool',
+        'last_checked_at' => 'datetime',
     ];
 
     public function user(): BelongsTo

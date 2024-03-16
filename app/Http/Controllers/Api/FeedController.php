@@ -7,7 +7,6 @@ use App\Http\Requests\StoreFeedRequest;
 use App\Http\Requests\UpdateFeedRequest;
 use App\Models\Feed;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
@@ -43,7 +42,7 @@ class FeedController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreFeedRequest $request): RedirectResponse
+    public function store(StoreFeedRequest $request): JsonResponse
     {
         $validated = $request->validated();
 
@@ -52,7 +51,7 @@ class FeedController extends Controller
 
         Auth::user()->feeds()->save($feed);
 
-        return redirect()->route('feeds.index');
+        return response()->json();
     }
 
     /**
