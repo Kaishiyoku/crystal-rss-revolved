@@ -8,8 +8,6 @@ use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
-use Inertia\Inertia;
-use Inertia\Response;
 
 class CategoryController extends Controller
 {
@@ -26,16 +24,6 @@ class CategoryController extends Controller
         return response()->json([
             'categories' => Auth::user()->categories()->withCount('feeds')->get(),
             'canCreate' => Auth::user()->can('create', Category::class),
-        ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create(): Response
-    {
-        return Inertia::render('Categories/Create', [
-            'category' => new Category(),
         ]);
     }
 

@@ -1,13 +1,12 @@
 <?php
 
-namespace Tests\Feature\Http\Controllers;
+namespace Http\Controllers\Api;
 
-use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\Api\CategoryController;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Arr;
-use Inertia\Testing\AssertableInertia as Assert;
 use Tests\TestCase;
 
 class CategoryControllerTest extends TestCase
@@ -36,31 +35,19 @@ class CategoryControllerTest extends TestCase
     {
         $this->actingAs($user = User::factory()->create());
 
-        Category::factory()->for($user)->create();
+        $category = Category::factory()->for($user)->create();
 
-        $this->get(route('categories.index'))
-            ->assertInertia(fn (Assert $page) => $page
-                ->component('Categories/Index')
-                ->count('categories', 1)
-                ->where('canCreate', true)
-            );
+        $this->json('get', route('api.categories.index'))
+            ->assertJson([
+                'categories' => [$category->toArray()],
+                'canCreate' => true,
+            ]);
     }
 
     public function test_cannot_access_index_as_guest(): void
     {
-        $response = $this->get(route('categories.index'));
-
-        $response->assertRedirect('/login');
-    }
-
-    public function test_create(): void
-    {
-        $this->actingAs(User::factory()->create());
-
-        $this->get(route('categories.create'))
-            ->assertInertia(fn (Assert $page) => $page
-                ->has('category')
-            );
+        $this->json('get', route('api.categories.index'))
+            ->assertUnauthorized();
     }
 
     public function test_store(): void
@@ -72,9 +59,9 @@ class CategoryControllerTest extends TestCase
         // here we test if the unique rule is only applied to a specific user's categories
         Category::factory()->state(['name' => $expectedName]);
 
-        $response = $this->post(route('categories.store'), ['name' => $expectedName]);
-
-        $response->assertRedirect(route('categories.index'));
+        $this->json('post', route('api.categories.store'), ['name' => $expectedName])
+            ->assertOk()
+            ->assertJson([]);
         static::assertSame(1, $user->categories()->count());
         static::assertSame($user->id, $user->categories()->first()->user_id);
         static::assertSame($expectedName, $user->categories()->first()->name);
@@ -86,11 +73,14 @@ class CategoryControllerTest extends TestCase
 
         $expectedName = 'Test';
 
-        $this->get(route('categories.create'));
-        $response = $this->post(route('categories.store'), ['name' => $expectedName]);
-
-        $response->assertRedirect(route('categories.create'));
-        $response->assertSessionHasErrors(['name' => 'The Name has already been taken.']);
+        $this->json('post', route('api.categories.store'), ['name' => $expectedName])
+            ->assertUnprocessable()
+            ->assertJson([
+                'message' => 'The Name has already been taken.',
+                'errors' => [
+                    'name' => ['The Name has already been taken.'],
+                ],
+            ]);
         static::assertSame(1, $user->categories()->count());
     }
 
@@ -98,11 +88,14 @@ class CategoryControllerTest extends TestCase
     {
         $this->actingAs($user = User::factory()->create());
 
-        $this->get(route('categories.create'));
-        $response = $this->post(route('categories.store'), ['name' => ' ']);
-
-        $response->assertRedirect(route('categories.create'));
-        $response->assertSessionHasErrors(['name' => 'The Name field is required.']);
+        $this->json('post', route('api.categories.store'), ['name' => ' '])
+            ->assertUnprocessable()
+            ->assertJson([
+                'message' => 'The Name field is required.',
+                'errors' => [
+                    'name' => ['The Name field is required.'],
+                ],
+            ]);
         static::assertSame(0, $user->categories()->count());
     }
 
@@ -112,11 +105,11 @@ class CategoryControllerTest extends TestCase
 
         $category = Category::factory()->for($user)->create();
 
-        $this->get(route('categories.edit', $category))
-            ->assertInertia(fn (Assert $page) => $page
-                ->has('category')
-                ->where('canDelete', true)
-            );
+        $this->json('get', route('api.categories.edit', $category))
+            ->assertJson([
+                'category' => $category->toArray(),
+                'canDelete' => true,
+            ]);
     }
 
     public function test_cannot_edit_category_of_another_user(): void
@@ -125,7 +118,7 @@ class CategoryControllerTest extends TestCase
 
         $category = Category::factory()->create();
 
-        $this->get(route('categories.edit', $category))
+        $this->json('get', route('api.categories.edit', $category))
             ->assertForbidden();
     }
 
@@ -140,9 +133,9 @@ class CategoryControllerTest extends TestCase
         // here we test if the unique rule is only applied to a specific user's categories
         Category::factory()->state(['name' => $expectedName]);
 
-        $response = $this->put(route('categories.update', $category), ['name' => $expectedName]);
-
-        $response->assertRedirect(route('categories.index'));
+        $this->json('put', route('api.categories.update', $category), ['name' => $expectedName])
+            ->assertOk()
+            ->assertJson([]);
         static::assertSame($user->id, $user->categories()->first()->user_id);
         static::assertSame($expectedName, $user->categories()->first()->name);
     }
@@ -153,7 +146,7 @@ class CategoryControllerTest extends TestCase
 
         $category = Category::factory()->create();
 
-        $this->put(route('categories.update', $category), ['name' => 'Test (updated)'])
+        $this->json('put', route('api.categories.update', $category), ['name' => 'Test (updated)'])
             ->assertForbidden();
     }
 
@@ -164,12 +157,14 @@ class CategoryControllerTest extends TestCase
         Category::factory()->state(['name' => 'Test 1'])->for($user)->create();
         $category = Category::factory()->state(['name' => 'Test 2'])->for($user)->create();
 
-        $this->get(route('categories.edit', $category));
-
-        $response = $this->put(route('categories.update', $category), ['name' => 'Test 1']);
-
-        $response->assertRedirect(route('categories.edit', $category));
-        $response->assertSessionHasErrors(['name' => 'The Name has already been taken.']);
+        $this->json('put', route('api.categories.update', $category), ['name' => 'Test 1'])
+            ->assertUnprocessable()
+            ->assertJson([
+                'message' => 'The Name has already been taken.',
+                'errors' => [
+                    'name' => ['The Name has already been taken.'],
+                ],
+            ]);
     }
 
     public function test_delete(): void
@@ -178,9 +173,9 @@ class CategoryControllerTest extends TestCase
 
         $category = Category::factory()->for($user)->create();
 
-        $response = $this->delete(route('categories.destroy', $category));
-
-        $response->assertRedirect(route('categories.index'));
+        $this->json('delete', route('api.categories.destroy', $category))
+            ->assertOk()
+            ->assertJson([]);
         static::assertSame(0, $user->categories()->count());
     }
 
@@ -190,7 +185,7 @@ class CategoryControllerTest extends TestCase
 
         $category = Category::factory()->create();
 
-        $this->delete(route('categories.destroy', $category))
+        $this->json('delete', route('api.categories.destroy', $category))
             ->assertForbidden();
 
         static::assertSame(1, Category::count());
