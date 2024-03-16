@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Http\Controllers;
+namespace Http\Controllers\Api;
 
 use App\Models\Feed;
 use App\Models\FeedItem;
@@ -27,7 +27,7 @@ class MarkAllUnreadFeedItemsAsReadControllerTest extends TestCase
         static::assertSame(50, $user->feedItems()->unread()->count());
         static::assertSame(100, $user->feedItems()->whereNotNull('read_at')->count());
 
-        $this->put(route('mark-all-as-read'))
+        $this->json('put', route('api.mark-all-as-read'))
             ->assertOk();
 
         static::assertSame(0, $user->feedItems()->unread()->count());
@@ -36,7 +36,7 @@ class MarkAllUnreadFeedItemsAsReadControllerTest extends TestCase
 
     public function test_cannot_access_as_guest(): void
     {
-        $this->put(route('mark-all-as-read'))
-            ->assertRedirect('/login');
+        $this->json('put', route('api.mark-all-as-read'))
+            ->assertUnauthorized();
     }
 }
