@@ -92,6 +92,6 @@ class InheritedType
             ->replace('{{ model }}', $modelName)
             ->replace('{{ importPath }}', "{$importDirectory}/{$modelName}")
             ->replace('{{ name }}', $this->name)
-            ->replace('{{ fields }}', $this->additionalFields->map(fn (TypeProperty $typeProperty) => $typeProperty->toString())->join("\n"));
+            ->replace('{{ fields }}', $this->additionalFields->map(fn (TypeProperty $typeProperty) => $typeProperty->toString())->join("\n    "));
     }
 }

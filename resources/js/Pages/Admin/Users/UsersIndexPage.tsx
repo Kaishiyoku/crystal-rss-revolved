@@ -5,7 +5,7 @@ import {useLaravelReactI18n} from 'laravel-react-i18n';
 import formatDateTime from '@/Utils/formatDateTime';
 import {DangerButton} from '@/Components/Button';
 import useAuth from '@/Hooks/useAuth';
-import UserWithFeedsAndUnreadFeedItemsCount from '@/types/generated/Models/UserWithFeedsAndUnreadFeedItemsCount';
+import UserWithFeedsCountAndUnreadFeedItemsCount from '@/types/generated/Models/UserWithFeedsCountAndUnreadFeedItemsCount';
 
 export default function UsersIndexPage() {
     const {t} = useLaravelReactI18n();
@@ -13,7 +13,7 @@ export default function UsersIndexPage() {
     const {user: authUser} = useAuth();
     const {users} = useLoaderData() as UsersLoaderType;
 
-    const handleDelete = (user: UserWithFeedsAndUnreadFeedItemsCount) => () => {
+    const handleDelete = (user: UserWithFeedsCountAndUnreadFeedItemsCount) => () => {
         fetcher.submit({intent: 'delete', userId: user.id}, {method: 'delete', action: '/admin/users', fetcherKey: 'delete'});
     };
 

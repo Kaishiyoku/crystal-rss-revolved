@@ -13,7 +13,7 @@ type Feed = {
     name: string;
     language: string;
     is_purgeable: boolean /** cast attribute */;
-    last_checked_at: string | null;
+    last_checked_at: string /** cast attribute */;
     last_failed_at: string | null;
     created_at: string | null;
     updated_at: string | null;
