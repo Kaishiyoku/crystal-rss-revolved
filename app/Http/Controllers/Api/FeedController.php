@@ -93,7 +93,7 @@ class FeedController extends Controller
     }
 
     /**
-     * @return Collection<int, array<{value: int, name: string}>>
+     * @return Collection<int, array{value: int, name: string}>
      */
     private function categories(): Collection
     {
