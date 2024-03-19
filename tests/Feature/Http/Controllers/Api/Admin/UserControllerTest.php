@@ -9,7 +9,6 @@ use App\Models\FeedItem;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Arr;
-use Inertia\Testing\AssertableInertia as Assert;
 use Tests\TestCase;
 
 class UserControllerTest extends TestCase
