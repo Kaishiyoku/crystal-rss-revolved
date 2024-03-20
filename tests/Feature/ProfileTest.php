@@ -10,31 +10,31 @@ class ProfileTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_profile_page_is_displayed(): void
+    public function test_profile_edit_information_is_returned(): void
     {
         $user = User::factory()->create();
 
-        $response = $this
+        $this
             ->actingAs($user)
-            ->get('/profile');
-
-        $response->assertOk();
+            ->json('get', route('api.profile.edit'))
+            ->assertJson([
+                'mustVerifyEmail' => true,
+                'status' => null,
+                'user' => $user->toArray(),
+            ]);
     }
 
     public function test_profile_information_can_be_updated(): void
     {
         $user = User::factory()->create();
 
-        $response = $this
+        $this
             ->actingAs($user)
-            ->patch('/profile', [
+            ->json('patch', route('api.profile.update'), [
                 'name' => 'Test User',
                 'email' => 'test@example.com',
-            ]);
-
-        $response
-            ->assertSessionHasNoErrors()
-            ->assertRedirect('/profile');
+            ])
+            ->assertJson([]);
 
         $user->refresh();
 
@@ -47,16 +47,13 @@ class ProfileTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $response = $this
+        $this
             ->actingAs($user)
-            ->patch('/profile', [
+            ->json('patch', route('api.profile.update'), [
                 'name' => 'Test User',
                 'email' => $user->email,
-            ]);
-
-        $response
-            ->assertSessionHasNoErrors()
-            ->assertRedirect('/profile');
+            ])
+            ->assertJson([]);
 
         $this->assertNotNull($user->refresh()->email_verified_at);
     }
@@ -65,17 +62,14 @@ class ProfileTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $response = $this
+        $this
             ->actingAs($user)
-            ->delete('/profile', [
+            ->json('delete', route('api.profile.destroy'), [
                 'password' => 'password',
-            ]);
+            ])
+            ->assertJson([]);
 
-        $response
-            ->assertSessionHasNoErrors()
-            ->assertRedirect('/');
-
-        $this->assertGuest();
+        $this->assertGuest('web');
         $this->assertNull($user->fresh());
     }
 
@@ -83,16 +77,12 @@ class ProfileTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $response = $this
+        $this
             ->actingAs($user)
-            ->from('/profile')
-            ->delete('/profile', [
+            ->json('delete', route('api.profile.destroy'), [
                 'password' => 'wrong-password',
-            ]);
-
-        $response
-            ->assertSessionHasErrors('password')
-            ->assertRedirect('/profile');
+            ])
+            ->assertJson([]);
 
         $this->assertNotNull($user->fresh());
     }

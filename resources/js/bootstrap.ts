@@ -1,6 +1,7 @@
 import ky from 'ky';
 import NProgress from 'nprogress';
 import Cookies from 'js-cookie';
+import 'nprogress/nprogress.css';
 
 window.ky = ky.extend({
     headers: {

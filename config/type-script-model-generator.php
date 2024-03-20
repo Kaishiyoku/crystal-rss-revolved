@@ -40,6 +40,20 @@ return [
                 ],
             ],
         ],
+        [
+            'name' => 'UserWithFeedsCountAndUnreadFeedItemsCount',
+            'model' => \App\Models\User::class,
+            'additional_fields' => [
+                [
+                    'name' => 'feeds_count',
+                    'types' => ['number'],
+                ],
+                [
+                    'name' => 'unread_feed_items_count',
+                    'types' => ['number'],
+                ],
+            ],
+        ],
     ],
 
     // partials by using already generated inherited types

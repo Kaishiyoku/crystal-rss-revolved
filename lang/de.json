@@ -111,5 +111,16 @@
     "Users": "Benutzer",
     "Delete user": "Benutzer löschen",
     "Do you really want to delete the user “:name”?": "Wollen Sie den Benutzer „:name” wirklich löschen?",
-    "Manage users": "Benutzer verwalten"
+    "Manage users": "Benutzer verwalten",
+    "Home": "Startseite",
+    "Edit feed": "Feed ändern",
+    "Category saved.": "Kategorie gespeichert.",
+    "Category deleted.": "Kategorie gelöscht.",
+    "Feed saved.": "Feed gespeichert.",
+    "Feed deleted.": "Feed gelöscht",
+    "Profile saved.": "Profil gespeichert",
+    "Password updated.": "Passwort geändert.",
+    "User deleted.": "Benutzer gelöscht.",
+    "404—The requested site could not be found.": "404—Die angeforderte Seite konnte nicht gefunden werden.",
+    "Back to landing page": "Zurück zur Startseite"
 }

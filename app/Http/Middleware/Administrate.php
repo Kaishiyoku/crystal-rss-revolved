@@ -19,6 +19,12 @@ class Administrate
             return $next($request);
         }
 
+        if ($request->acceptsJson()) {
+            abort(Response::HTTP_FORBIDDEN);
+        }
+
+        // @codeCoverageIgnoreStart
         return redirect('/');
+        // @codeCoverageIgnoreEnd
     }
 }

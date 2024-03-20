@@ -1,8 +1,18 @@
-import {useState, createContext, useContext, Fragment, PropsWithChildren, Dispatch, SetStateAction} from 'react';
-import {InertiaLinkProps, Link} from '@inertiajs/react';
+import {
+    createContext,
+    Dispatch,
+    Fragment,
+    PropsWithChildren,
+    ReactNode,
+    SetStateAction,
+    useContext,
+    useState
+} from 'react';
 import {Transition} from '@headlessui/react';
 import noop from '@/Utils/noop';
 import clsx from 'clsx';
+import {NavLink} from 'react-router-dom';
+import {HeadlessButton} from '@/Components/Button';
 
 type DropDownContextType = {
     open: boolean;
@@ -86,29 +96,62 @@ const Content = ({align = 'right', width = 48, contentClasses = 'p-2 bg-white/80
     );
 };
 
-const DropdownLink = ({active = false, className = '', children, ...props}: InertiaLinkProps & { active?: boolean; }) => {
+const DropdownLink = ({to, active = undefined, external = false, className = '', children}: { to: string; active?: boolean | undefined; external?: boolean; className?: string; children: ReactNode; }) => {
+    const {setOpen} = useContext(DropDownContext);
+
+    if (external) {
+        return (
+            <a
+                href={to}
+                className={clsx(
+                    'block w-full text-left px-4 py-2 text-sm leading-5 rounded-lg focus:outline-none transition duration-150 ease-in-out text-gray-700 dark:text-gray-400 hover:bg-gray-400/25 dark:hover:bg-gray-700 focus:bg-gray-500/25 dark:focus:bg-gray-600 dark:focus:text-gray-300',
+                    className
+                )}
+            >
+                {children}
+            </a>
+        );
+    }
+
     return (
-        <Link
-            {...props}
-            className={clsx(
+        <NavLink
+            to={to}
+            end
+            onClick={() => setOpen(false)}
+            className={({isActive}) => clsx(
                 'block w-full text-left px-4 py-2 text-sm leading-5 rounded-lg focus:outline-none transition duration-150 ease-in-out',
                 {
-                    'text-violet-100 bg-violet-500 hover:bg-violet-600 focus:bg-violet-500 focus:text-violet-50': active,
-                    'text-gray-700 dark:text-gray-400 hover:bg-gray-400/25 dark:hover:bg-gray-700 focus:bg-gray-500/25 dark:focus:bg-gray-600 dark:focus:text-gray-300': !active,
+                    'text-violet-100 bg-violet-500 hover:bg-violet-600 focus:bg-violet-500 focus:text-violet-50': active !== undefined ? active : isActive,
+                    'text-gray-700 dark:text-gray-400 hover:bg-gray-400/25 dark:hover:bg-gray-700 focus:bg-gray-500/25 dark:focus:bg-gray-600 dark:focus:text-gray-300': active !== undefined ? !active : !isActive,
                 },
                 className
             )}
         >
             {children}
-        </Link>
+        </NavLink>
     );
 };
 
-const Spacer = () => <div className="pt-2 mb-2 border-b dark:border-gray-600"/>;
+const DropdownButton = ({onClick, className = '', children}: { onClick: () => void; className?: string; children: ReactNode; }) => {
+    return (
+        <HeadlessButton
+            onClick={onClick}
+            className={clsx(
+                'block w-full text-left px-4 py-2 text-sm leading-5 rounded-lg focus:outline-none transition duration-150 ease-in-out text-gray-700 dark:text-gray-400 hover:bg-gray-400/25 dark:hover:bg-gray-700 focus:bg-gray-500/25 dark:focus:bg-gray-600 dark:focus:text-gray-300',
+                className
+            )}
+        >
+            {children}
+        </HeadlessButton>
+    );
+};
+
+const Spacer = () => <div className="pt-2 mb-2 border-b dark:border-gray-700"/>;
 
 Dropdown.Trigger = Trigger;
 Dropdown.Content = Content;
 Dropdown.Link = DropdownLink;
+Dropdown.Button = DropdownButton;
 Dropdown.Spacer = Spacer;
 
 export default Dropdown;

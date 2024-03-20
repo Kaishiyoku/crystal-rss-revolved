@@ -1,43 +1,35 @@
-import React, {useRef} from 'react';
-import {useForm} from '@inertiajs/react';
-import {Transition} from '@headlessui/react';
+import React, {useEffect, useRef} from 'react';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
 import {PrimaryButton} from '@/Components/Button';
 import Card from '@/Components/Card';
+import {Form, useActionData} from 'react-router-dom';
+import UpdatePasswordValidationErrors from '@/types/UpdatePasswordValidationErrors';
 
 export default function UpdatePasswordForm() {
     const {t} = useLaravelReactI18n();
-    const passwordInput = useRef<HTMLInputElement>();
-    const currentPasswordInput = useRef<HTMLInputElement>();
+    const errors = useActionData() as UpdatePasswordValidationErrors;
+    const currentPasswordInput = useRef<HTMLInputElement>(null);
+    const passwordInput = useRef<HTMLInputElement>(null);
+    const passwordConfirmationInput = useRef<HTMLInputElement>(null);
 
-    const {data, setData, errors, put, reset, processing, recentlySuccessful} = useForm({
-        current_password: '',
-        password: '',
-        password_confirmation: '',
-    });
+    useEffect(() => {
+        if (errors && currentPasswordInput.current && passwordInput.current && passwordConfirmationInput.current) {
+            currentPasswordInput.current.value = '';
+            passwordInput.current.value = '';
+            passwordConfirmationInput.current.value = '';
+        }
 
-    const updatePassword = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
+        if (errors?.password) {
+            passwordInput.current?.focus();
+        }
 
-        put(route('password.update'), {
-            preserveScroll: true,
-            onSuccess: () => reset(),
-            onError: () => {
-                if (errors.password) {
-                    reset('password', 'password_confirmation');
-                    passwordInput.current?.focus();
-                }
-
-                if (errors.current_password) {
-                    reset('current_password');
-                    currentPasswordInput.current?.focus();
-                }
-            },
-        });
-    };
+        if (errors?.current_password) {
+            currentPasswordInput.current?.focus();
+        }
+    }, [errors]);
 
     return (
         <Card>
@@ -48,21 +40,20 @@ export default function UpdatePasswordForm() {
                 />
 
                 <Card.Body>
-                    <form onSubmit={updatePassword} className="space-y-6">
+                    <Form method="put" action="/profile" className="space-y-4">
                         <div>
                             <InputLabel htmlFor="current_password" value={t('Current Password')}/>
 
                             <TextInput
                                 id="current_password"
+                                name="current_password"
                                 ref={currentPasswordInput}
-                                value={data.current_password}
-                                onChange={(e) => setData('current_password', e.target.value)}
                                 type="password"
-                                className="mt-1 block w-full"
+                                className="block w-full"
                                 autoComplete="current-password"
                             />
 
-                            <InputError message={errors.current_password} className="mt-2"/>
+                            <InputError message={errors?.current_password}/>
                         </div>
 
                         <div>
@@ -70,15 +61,14 @@ export default function UpdatePasswordForm() {
 
                             <TextInput
                                 id="password"
+                                name="password"
                                 ref={passwordInput}
-                                value={data.password}
-                                onChange={(e) => setData('password', e.target.value)}
                                 type="password"
-                                className="mt-1 block w-full"
+                                className="block w-full"
                                 autoComplete="new-password"
                             />
 
-                            <InputError message={errors.password} className="mt-2"/>
+                            <InputError message={errors?.password}/>
                         </div>
 
                         <div>
@@ -86,29 +76,20 @@ export default function UpdatePasswordForm() {
 
                             <TextInput
                                 id="password_confirmation"
-                                value={data.password_confirmation}
-                                onChange={(e) => setData('password_confirmation', e.target.value)}
+                                name="password_confirmation"
+                                ref={passwordConfirmationInput}
                                 type="password"
                                 className="mt-1 block w-full"
                                 autoComplete="new-password"
                             />
 
-                            <InputError message={errors.password_confirmation} className="mt-2"/>
+                            <InputError message={errors?.password_confirmation}/>
                         </div>
 
-                        <div className="flex items-center gap-4">
-                            <PrimaryButton type="submit" disabled={processing}>{t('Save')}</PrimaryButton>
-
-                            <Transition
-                                show={recentlySuccessful}
-                                enterFrom="opacity-0"
-                                leaveTo="opacity-0"
-                                className="transition ease-in-out"
-                            >
-                                <p className="text-sm text-gray-600 dark:text-gray-400">{t('Saved.')}</p>
-                            </Transition>
-                        </div>
-                    </form>
+                        <PrimaryButton type="submit" name="intent" value="update-password">
+                            {t('Save')}
+                        </PrimaryButton>
+                    </Form>
                 </Card.Body>
             </div>
         </Card>

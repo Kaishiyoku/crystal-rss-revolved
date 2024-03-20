@@ -1,30 +1,33 @@
 import clsx from 'clsx';
 import {ReactNode} from 'react';
-import Card from '@/Components/Card';
+import {Link} from 'react-router-dom';
 
 const LinkStack = ({children}: { children: ReactNode; }) => {
     return (
-        <Card>
+        <div>
             {children}
-        </Card>
+        </div>
     );
 };
 
 const Item = (
     {
-        href,
+        to,
         children,
         className = '',
     }: {
-        href: string;
+        to: string;
         children: ReactNode;
         className?: string;
     }
 ) => {
     return (
-        <a href={href} className={clsx('px-4 py-3 hover:bg-gray-50 hover:dark:bg-gray-700 transition ease-in-out first:rounded-t-lg last:rounded-b-lg', className)}>
+        <Link
+            to={to}
+            className={clsx('px-4 py-3 hover:bg-gray-100 hover:dark:bg-gray-800 transition ease-in-out first:rounded-t-lg last:rounded-b-lg', className)}
+        >
             {children}
-        </a>
+        </Link>
     );
 };
 

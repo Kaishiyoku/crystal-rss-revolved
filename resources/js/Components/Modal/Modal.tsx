@@ -1,15 +1,19 @@
 import {Fragment, ReactNode, useEffect} from 'react';
 import {Dialog, Transition} from '@headlessui/react';
+import {HeadlessButton} from '@/Components/Button';
+import XMarkOutlineIcon from '@/Icons/XMarkOutlineIcon';
 
 const Modal = (
     {
         children,
+        appear = false,
         show = false,
         maxWidth = '2xl',
         closeable = true,
         onClose = () => {},
     }: {
         children: ReactNode;
+        appear?: boolean;
         show?: boolean;
         maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | '2xl';
         closeable?: boolean;
@@ -20,7 +24,7 @@ const Modal = (
         document.body.style.overflowY = show ? 'hidden' : '';
     }, [show]);
 
-    const close = () => {
+    const handleClose = () => {
         if (closeable) {
             onClose();
         }
@@ -35,12 +39,12 @@ const Modal = (
     }[maxWidth];
 
     return (
-        <Transition show={show} as={Fragment} leave="duration-200">
+        <Transition appear={appear} show={show} as={Fragment} leave="duration-200">
             <Dialog
                 as="div"
                 id="modal"
                 className="fixed inset-0 flex max-h-full px-4 py-6 sm:px-0 items-center z-50 transform transition-all backdrop-blur"
-                onClose={close}
+                onClose={handleClose}
             >
                 <Transition.Child
                     as={Fragment}
@@ -66,6 +70,12 @@ const Modal = (
                     <Dialog.Panel
                         className={`flex flex-col mb-4 bg-white dark:bg-gray-800 rounded-lg max-h-full shadow-xl transform transition-all w-full sm:mx-auto ${maxWidthClass}`}
                     >
+                        {closeable && (
+                            <HeadlessButton onClick={onClose} className="absolute top-0 right-0 mt-2 mr-2 button-icon">
+                                <XMarkOutlineIcon className="w-5 h-5"/>
+                            </HeadlessButton>
+                        )}
+
                         {children}
                     </Dialog.Panel>
                 </Transition.Child>
@@ -77,7 +87,7 @@ const Modal = (
 const ModalHeader = ({children}: { children: ReactNode; }) => {
     return (
         <div className="p-6">
-            <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100 pr-8">
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 pr-8">
                 {children}
             </h2>
         </div>
@@ -100,9 +110,12 @@ const ModalFooter = ({children}: { children: ReactNode; }) => {
     );
 };
 
+const modalLeaveDuration = 200;
+
 export {
     Modal,
     ModalHeader,
     ModalBody,
     ModalFooter,
+    modalLeaveDuration,
 };

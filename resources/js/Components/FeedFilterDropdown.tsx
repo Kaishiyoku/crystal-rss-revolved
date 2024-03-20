@@ -5,20 +5,24 @@ import FunnelOutlineIcon from '@/Icons/FunnelOutlineIcon';
 import DropdownArrowIcon from '@/Icons/DropdownArrowIcon';
 import {OtherProps} from '@/types';
 import ShortFeedWithFeedItemsCount from '@/types/generated/Models/ShortFeedWithFeedItemsCount';
+import {length} from 'ramda';
 
-export default function FeedFilterDropdown({selectedFeed, feeds, ...props}: { selectedFeed: ShortFeedWithFeedItemsCount; feeds: ShortFeedWithFeedItemsCount[]; props?: OtherProps; }) {
+export default function FeedFilterDropdown({selectedFeed, feeds, ...props}: { selectedFeed: ShortFeedWithFeedItemsCount | null; feeds: ShortFeedWithFeedItemsCount[]; props?: OtherProps; }) {
     const {t} = useLaravelReactI18n();
 
-    if (feeds.length === 0) {
+    if (length(feeds) === 0) {
         return null;
     }
+
+    const getFeedFilterUrl = (id: number) => {
+        return `/?${new URLSearchParams({feed_id: id.toString()}).toString()}`;
+    };
 
     return (
         <div {...props}>
             <Dropdown>
                 <Dropdown.Trigger className="inline">
                     <TertiaryButton
-                        className="justify-between"
                         icon={FunnelOutlineIcon}
                         hasMobileFullSize
                     >
@@ -36,7 +40,7 @@ export default function FeedFilterDropdown({selectedFeed, feeds, ...props}: { se
                 >
                     {selectedFeed && (
                         <>
-                            <Dropdown.Link href={route('dashboard')}>
+                            <Dropdown.Link to="/" active={false}>
                                 {t('All feeds')}
                             </Dropdown.Link>
 
@@ -47,7 +51,7 @@ export default function FeedFilterDropdown({selectedFeed, feeds, ...props}: { se
                     {feeds.map((feed) => (
                         <Dropdown.Link
                             key={feed.id}
-                            href={`${route('dashboard')}?feed_id=${feed.id}`}
+                            to={getFeedFilterUrl(feed.id)}
                             active={selectedFeed?.id === feed.id}
                         >
                             {feed.name} ({feed.feed_items_count})

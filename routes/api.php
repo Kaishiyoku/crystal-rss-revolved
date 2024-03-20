@@ -1,5 +1,16 @@
 <?php
 
+use App\Http\Controllers\Api\Admin\UserController;
+use App\Http\Controllers\Api\Auth\PasswordController;
+use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\DashboardController;
+use App\Http\Controllers\Api\FeedController;
+use App\Http\Controllers\Api\FeedDiscovererController;
+use App\Http\Controllers\Api\FeedUrlDiscovererController;
+use App\Http\Controllers\Api\MarkAllUnreadFeedItemsAsReadController;
+use App\Http\Controllers\Api\ProfileController;
+use App\Http\Controllers\Api\ToggleFeedItemController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +25,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->as('api.')->group(function () {
+    Route::get('/user', fn (Request $request) => $request->user());
+
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::put('/password', [PasswordController::class, 'update'])->name('password.update');
+
+    Route::delete('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
+    Route::resource('categories', CategoryController::class)->except(['create']);
+    Route::put('/feeds/mark-all-as-read', MarkAllUnreadFeedItemsAsReadController::class)->name('mark-all-as-read');
+    Route::resource('feeds', FeedController::class);
+    Route::put('/feeds/{feedItem}/toggle', ToggleFeedItemController::class)->name('toggle-feed-item');
+
+    Route::post('discover-feed', FeedDiscovererController::class)->name('discover-feed');
+    Route::post('discover-feed-urls', FeedUrlDiscovererController::class)->name('discover-feed-urls');
+
+    Route::get('feed-items', DashboardController::class)->name('dashboard');
+
+    Route::middleware('administrate')->prefix('admin')->as('admin.')->group(function () {
+        Route::resource('users', UserController::class)->only(['index', 'destroy']);
+    });
 });

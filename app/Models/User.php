@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
@@ -86,9 +87,28 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array<int, string>
+     */
+    protected $appends = [
+        'months_after_pruning_feed_items',
+    ];
+
     public function scopeVerified(Builder $query): void
     {
         $query->whereNotNull('email_verified_at');
+    }
+
+    /**
+     * Does the feed item has an image?
+     */
+    protected function monthsAfterPruningFeedItems(): Attribute
+    {
+        return Attribute::make(
+            get: fn (): int => config('app.months_after_pruning_feed_items'),
+        );
     }
 
     public function categories(): HasMany
