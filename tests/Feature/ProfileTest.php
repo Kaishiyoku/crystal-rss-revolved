@@ -10,6 +10,20 @@ class ProfileTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function test_profile_edit_information_is_returned(): void
+    {
+        $user = User::factory()->create();
+
+        $this
+            ->actingAs($user)
+            ->json('get', route('api.profile.edit'))
+            ->assertJson([
+                'mustVerifyEmail' => true,
+                'status' => null,
+                'user' => $user->toArray(),
+            ]);
+    }
+
     public function test_profile_information_can_be_updated(): void
     {
         $user = User::factory()->create();

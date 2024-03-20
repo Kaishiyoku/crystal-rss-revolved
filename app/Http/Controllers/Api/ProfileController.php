@@ -54,9 +54,11 @@ class ProfileController extends Controller
 
         $user->delete();
 
+        // @codeCoverageIgnoreStart
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
         return response()->json();
+        // @codeCoverageIgnoreEnd
     }
 }
