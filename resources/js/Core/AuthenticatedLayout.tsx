@@ -148,7 +148,7 @@ const AuthenticatedLayout = () => {
                 >
                     <div className="fixed overflow-y-auto scrollbar-y-sm px-4 pt-16 pb-16 top-0 bg-white/50 dark:bg-gray-800/50 z-20 w-full h-full backdrop-blur-lg sm:hidden">
                         <div className="pt-2 pb-3 space-y-1">
-                            <Dropdown.Link to="/app">
+                            <Dropdown.Link to="/">
                                 {t('Home')}
                             </Dropdown.Link>
 
