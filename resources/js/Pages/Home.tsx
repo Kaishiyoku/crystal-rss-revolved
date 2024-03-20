@@ -88,9 +88,11 @@ export default function Home() {
 
     return (
         <div>
-            <div className="pb-4">
-                {tChoice('dashboard.unread_articles', totalNumberOfFeedItems)}
-            </div>
+            {totalNumberOfFeedItems > 0 && (
+                <div className="pb-4">
+                    {tChoice('dashboard.unread_articles', totalNumberOfFeedItems)}
+                </div>
+            )}
 
             <div className="flex flex-col sm:flex-row sm:space-x-2 space-y-2 sm:space-y-0 pb-8">
                 {data.feedItems && <FeedFilterDropdown selectedFeed={data.selectedFeed} feeds={data.unreadFeeds}/>}
