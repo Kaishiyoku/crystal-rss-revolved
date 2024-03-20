@@ -79,11 +79,11 @@ export default function Home() {
     }, [fetcher]);
 
     const markAllAsRead = async () => {
-        await rq.put('/feeds/mark-all-as-read');
-
-        setTotalNumberOfFeedItems(0);
+        await rq.put('/api/feeds/mark-all-as-read');
 
         navigate('/');
+
+        setTotalNumberOfFeedItems(0);
     };
 
     return (
