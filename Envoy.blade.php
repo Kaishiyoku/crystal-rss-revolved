@@ -16,6 +16,11 @@
     $path = $_ENV['DEPLOY_PATH'] ?? null;
     $healthUrl = $_ENV['DEPLOY_HEALTH_CHECK'] ?? null;
     $branch = $_ENV['DEPLOY_BRANCH'] ?: 'master';
+    $supervisorCommandName = $_ENV['DEPLOY_SUPERVISOR_COMMAND_NAME'];
+
+    if (!$supervisorCommandName) {
+        throw new Exception('No supervisor command name specified');
+    }
 
     if (substr($path, 0, 1) !== '/') {
         throw new Exception('Careful - your deployment path does not begin with /');
@@ -50,6 +55,7 @@
 
 @story('deploy')
     deployment_start
+    stop_queue
     change_storage_owner_to_deployment_user
     deployment_links
     deployment_composer
@@ -59,6 +65,7 @@
     deployment_finish
     change_storage_owner_to_www_data
     restart_php_fpm
+    start_queue
     health_check
     deployment_option_cleanup
 @endstory
@@ -81,6 +88,19 @@
     echo "Deployment ({{ $date }}) started"
     git clone {{ $repo }} --branch={{ $branch }} --depth=1 -q {{ $release }}
     echo "Repository cloned"
+@endtask
+
+@task('stop_queue')
+    cd {{ $path }}/current
+    php artisan horizon:terminate
+    sudo supervisorctl stop {{ $supervisorCommandName }}
+@endtask
+
+@task('start_queue')
+    sudo supervisorctl start {{ $supervisorCommandName }}
+
+    cd {{ $release }}
+    php artisan horizon:start
 @endtask
 
 @task('change_storage_owner_to_deployment_user')

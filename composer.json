@@ -18,7 +18,7 @@
         "laravel/telescope": "^4.14",
         "laravel/tinker": "^2.8",
         "neitanod/forceutf8": "^2.0",
-        "predis/predis": "^2.1",
+        "predis/predis": "^2.2",
         "robertboes/inertia-breadcrumbs": "^0.3.0",
         "tightenco/ziggy": "^1.0"
     },
@@ -61,7 +61,6 @@
             "@php artisan package:discover --ansi"
         ],
         "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
         ],
         "post-root-package-install": [
