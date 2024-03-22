@@ -1,8 +1,8 @@
 import React, {useEffect, useRef} from 'react';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import TextInput from '@/Components/TextInput';
+import InputError from '@/Components/Form/InputError';
+import InputLabel from '@/Components/Form/InputLabel';
+import TextInput from '@/Components/Form/TextInput';
 import {PrimaryButton} from '@/Components/Button';
 import Card from '@/Components/Card';
 import {Form, useActionData} from 'react-router-dom';

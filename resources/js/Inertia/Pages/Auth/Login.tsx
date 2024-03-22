@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
-import Checkbox from '@/Components/Checkbox';
+import Checkbox from '@/Components/Form/Checkbox';
 import GuestLayout from '@/Layouts/GuestLayout';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import TextInput from '@/Components/TextInput';
+import InputError from '@/Components/Form/InputError';
+import InputLabel from '@/Components/Form/InputLabel';
+import TextInput from '@/Components/Form/TextInput';
 import {Head, Link, useForm} from '@inertiajs/react';
 import {PrimaryButton} from '@/Components/Button';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
