@@ -2,20 +2,13 @@
 
 namespace App\Console\Commands;
 
+use App\Jobs\FetchFeed;
 use App\Models\Feed;
-use App\Models\FeedItem;
 use App\Models\User;
-use Exception;
-use ForceUTF8\Encoding;
-use GuzzleHttp\Exception\ClientException;
 use Illuminate\Console\Command;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
 use Kaishiyoku\HeraRssCrawler\HeraRssCrawler;
-use Kaishiyoku\HeraRssCrawler\Models\Rss\FeedItem as RssFeedItem;
-use Laravel\Telescope\Telescope;
 use Psr\Log\LoggerInterface;
 
 class FetchFeedItems extends Command
@@ -35,8 +28,6 @@ class FetchFeedItems extends Command
     protected $description = 'Fetch new feed items';
 
     private LoggerInterface $logger;
-
-    private HeraRssCrawler $heraRssCrawler;
 
     /**
      * @var Collection<Collection<int>>
@@ -89,63 +80,6 @@ class FetchFeedItems extends Command
 
     private function fetchFeed(Feed $feed): void
     {
-        $this->logger->info("Fetching feed {$feed->name}");
-
-        $minFeedDate = today()->subMonths(config('app.fetch_articles_not_older_than_months'));
-
-        try {
-            $rssFeed = $this->heraRssCrawler->parseFeed($feed->feed_url);
-
-            $rssFeed->getFeedItems()
-                ->filter(fn (RssFeedItem $rssFeedItem) => $rssFeedItem->getCreatedAt()?->gte($minFeedDate))
-                ->each(function (RssFeedItem $rssFeedItem) use ($feed) {
-                    $this->storeRssFeedItem($feed, $rssFeedItem);
-                });
-
-            $feed->last_failed_at = null;
-            if ($feed->isDirty()) {
-                $feed->save();
-            }
-        } catch (ClientException|Exception $exception) {
-            $this->logger->error($exception, [$feed->feed_url]);
-            Telescope::catch($exception, ['feed-updater', $feed->feed_url]);
-
-            $feed->last_failed_at = now();
-            $feed->save();
-        }
-
-        $feed->last_checked_at = now();
-
-        $feed->save();
-    }
-
-    private function storeRssFeedItem(Feed $feed, RssFeedItem $rssFeedItem): void
-    {
-        // don't save duplicate items, items without a creation date or items which are older than the prune time
-        if (FeedItem::whereChecksum($rssFeedItem->getChecksum())->count() > 0
-            || ! $rssFeedItem->getCreatedAt()
-            || $rssFeedItem->getCreatedAt()->isBefore(now()->subMonths(config('app.months_after_pruning_feed_items')))) {
-            return;
-        }
-
-        $imageUrl = Arr::first($rssFeedItem->getImageUrls()) ?? $rssFeedItem->getEnclosureUrl();
-        $imageMimetype = $imageUrl ? getContentTypeForUrl($imageUrl) : null;
-
-        $feedItem = new FeedItem([
-            'url' => $rssFeedItem->getPermalink(),
-            'title' => Str::limit(Encoding::toUTF8($rssFeedItem->getTitle()), 512),
-            'image_url' => $imageUrl,
-            'image_mimetype' => $imageMimetype,
-            'blur_hash' => $imageUrl ? generateBlurHashByUrl($imageUrl) : null,
-            'description' => Str::limit(Encoding::toUTF8(strip_tags($rssFeedItem->getDescription())), 1024),
-            'posted_at' => $rssFeedItem->getCreatedAt(),
-            'checksum' => $rssFeedItem->getChecksum(),
-        ]);
-
-        $feed->feedItems()->save($feedItem);
-
-        $this->newFeedItemIdsPerUserId->put($feed->user_id, with(
-            $this->newFeedItemIdsPerUserId->get($feed->user_id), fn ($collection) => $collection ? $collection->push($feedItem->id) : collect($feedItem->id) /** @phpstan-ignore-line */
-        ));
+        FetchFeed::dispatch($feed);
     }
 }
