@@ -91,16 +91,13 @@
 @endtask
 
 @task('stop_queue')
-    cd {{ $path }}/current
-    php artisan horizon:terminate
+    echo "Stopping supervisor command..."
     sudo supervisorctl stop {{ $supervisorCommandName }}
 @endtask
 
 @task('start_queue')
+    echo "Starting supervisor command..."
     sudo supervisorctl start {{ $supervisorCommandName }}
-
-    cd {{ $release }}
-    php artisan horizon:start
 @endtask
 
 @task('change_storage_owner_to_deployment_user')
