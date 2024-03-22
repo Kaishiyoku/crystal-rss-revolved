@@ -119,7 +119,7 @@ const DropdownLink = ({to, active = undefined, external = false, className = '',
             end
             onClick={() => setOpen(false)}
             className={({isActive}) => clsx(
-                'block w-full text-left px-4 py-2 text-sm leading-5 rounded-lg focus:outline-none transition duration-150 ease-in-out',
+                'block w-full text-left px-4 py-3 sm:py-2 text-sm leading-5 rounded-lg focus:outline-none transition duration-150 ease-in-out',
                 {
                     'text-violet-100 bg-violet-500 hover:bg-violet-600 focus:bg-violet-500 focus:text-violet-50': active !== undefined ? active : isActive,
                     'text-gray-700 dark:text-gray-400 hover:bg-gray-400/25 dark:hover:bg-gray-700 focus:bg-gray-500/25 dark:focus:bg-gray-600 dark:focus:text-gray-300': active !== undefined ? !active : !isActive,
@@ -137,7 +137,7 @@ const DropdownButton = ({onClick, className = '', children}: { onClick: () => vo
         <HeadlessButton
             onClick={onClick}
             className={clsx(
-                'block w-full text-left px-4 py-2 text-sm leading-5 rounded-lg focus:outline-none transition duration-150 ease-in-out text-gray-700 dark:text-gray-400 hover:bg-gray-400/25 dark:hover:bg-gray-700 focus:bg-gray-500/25 dark:focus:bg-gray-600 dark:focus:text-gray-300',
+                'block w-full text-left px-4 py-3 sm:py-2 text-sm leading-5 rounded-lg focus:outline-none transition duration-150 ease-in-out text-gray-700 dark:text-gray-400 hover:bg-gray-400/25 dark:hover:bg-gray-700 focus:bg-gray-500/25 dark:focus:bg-gray-600 dark:focus:text-gray-300',
                 className
             )}
         >
