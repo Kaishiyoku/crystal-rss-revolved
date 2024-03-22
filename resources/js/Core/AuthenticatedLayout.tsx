@@ -97,6 +97,10 @@ const AuthenticatedLayout = () => {
                                 <Dropdown.Link to="/telescope" external>
                                     {t('Telescope')}
                                 </Dropdown.Link>
+
+                                <Dropdown.Link to="/horizon" external>
+                                    {t('Horizon')}
+                                </Dropdown.Link>
                             </>
                         )}
 
@@ -180,6 +184,10 @@ const AuthenticatedLayout = () => {
 
                                     <Dropdown.Link to="/telescope" external>
                                         {t('Telescope')}
+                                    </Dropdown.Link>
+
+                                    <Dropdown.Link to="/horizon" external>
+                                        {t('Horizon')}
                                     </Dropdown.Link>
                                 </>
                             )}
