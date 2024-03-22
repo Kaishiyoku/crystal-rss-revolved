@@ -88,7 +88,7 @@ export default function Home() {
 
     return (
         <div>
-            {totalNumberOfFeedItems > 0 && (
+            {(totalNumberOfFeedItems > 0 || length(data.feedItems.data) > 0) && (
                 <div className="pb-4">
                     {tChoice('dashboard.unread_articles', totalNumberOfFeedItems)}
                 </div>
