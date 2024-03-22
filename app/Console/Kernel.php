@@ -22,6 +22,7 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('model:prune')->daily();
         $schedule->command('telescope:prune', ['--hours' => 72])->daily();
+        $schedule->command('horizon:snapshot')->everyFiveMinutes();
     }
 
     /**
