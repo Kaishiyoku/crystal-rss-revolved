@@ -113,7 +113,7 @@ class FetchFeed implements ShouldQueue
 
         $this->newFeedItemIdsPerUserId->put($this->feed->user_id, with(
             $this->newFeedItemIdsPerUserId->get($this->feed->user_id), fn ($collection
-        ) => $collection ? $collection->push($feedItem->id) : collect($feedItem->id)/** @phpstan-ignore-line */
+            ) => $collection ? $collection->push($feedItem->id) : collect($feedItem->id) /** @phpstan-ignore-line */
         ));
     }
 }

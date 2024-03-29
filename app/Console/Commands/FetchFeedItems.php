@@ -8,7 +8,6 @@ use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
-use Kaishiyoku\HeraRssCrawler\HeraRssCrawler;
 use Psr\Log\LoggerInterface;
 
 class FetchFeedItems extends Command
@@ -34,17 +33,12 @@ class FetchFeedItems extends Command
      */
     private Collection $newFeedItemIdsPerUserId;
 
-    public function __construct(HeraRssCrawler $heraRssCrawler)
+    public function __construct()
     {
         parent::__construct();
 
         $this->logger = Log::channel('feed_updater');
         $this->newFeedItemIdsPerUserId = collect();
-
-        $heraRssCrawler->setLogger($this->logger);
-        $heraRssCrawler->setRetryCount(config('app.rss_crawler_retry_count'));
-
-        $this->heraRssCrawler = $heraRssCrawler;
     }
 
     /**
