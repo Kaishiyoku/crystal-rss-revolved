@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class FeedItemFactory extends Factory
 {
-    protected $model = FeedItem::class;
-
     public function definition(): array
     {
         $imageUrl = fake()->optional()->imageUrl();
