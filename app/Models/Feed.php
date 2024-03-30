@@ -67,15 +67,18 @@ class Feed extends Model
     ];
 
     /**
-     * The attributes that should be cast.
+     * Get the attributes that should be cast.
      *
-     * @var array<string, string>
+     * @return array<string, string>
      */
-    protected $casts = [
-        'is_purgeable' => 'bool',
-        'last_checked_at' => 'datetime',
-        'last_failed_at' => 'datetime',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'is_purgeable' => 'bool',
+            'last_checked_at' => 'datetime',
+            'last_failed_at' => 'datetime',
+        ];
+    }
 
     public function user(): BelongsTo
     {

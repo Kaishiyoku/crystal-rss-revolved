@@ -72,16 +72,6 @@ class FeedItem extends Model
     ];
 
     /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'posted_at' => 'datetime',
-        'read_at' => 'datetime',
-    ];
-
-    /**
      * The accessors to append to the model's array form.
      *
      * @var array<int, string>
@@ -89,6 +79,19 @@ class FeedItem extends Model
     protected $appends = [
         'has_image',
     ];
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'posted_at' => 'datetime',
+            'read_at' => 'datetime',
+        ];
+    }
 
     /**
      * Get the number of models to return per page.
