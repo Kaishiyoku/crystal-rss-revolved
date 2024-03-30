@@ -19,25 +19,5 @@ return [
 
     'github_url' => env('GITHUB_URL'),
 
-    'providers' => ServiceProvider::defaultProviders()->merge([
-        /*
-         * Laravel Framework Service Providers...
-         */
-
-        /*
-         * Package Service Providers...
-         */
-
-        /*
-         * Application Service Providers...
-         */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
-        App\Providers\TelescopeServiceProvider::class,
-        App\Providers\HorizonServiceProvider::class,
-    ])->toArray(),
 
 ];
