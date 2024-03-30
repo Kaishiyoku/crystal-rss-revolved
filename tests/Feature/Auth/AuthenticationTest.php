@@ -2,9 +2,8 @@
 
 namespace Tests\Feature\Auth;
 
-use App\Providers\AppServiceProvider;
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
+use App\Providers\AppServiceProvider;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;

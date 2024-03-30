@@ -2,9 +2,8 @@
 
 namespace Tests\Feature\Auth;
 
-use App\Providers\AppServiceProvider;
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
+use App\Providers\AppServiceProvider;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Foundation\Testing\RefreshDatabase;

@@ -10,7 +10,6 @@ Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote')->hourly();
 
-
 Schedule::command(FetchFeedItems::class)->everyThirtyMinutes();
 Schedule::command(CheckFeedFavicons::class)->dailyAt('02:00');
 

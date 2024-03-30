@@ -1,8 +1,5 @@
 <?php
 
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Facade;
-
 return [
 
     'available_locales' => ['en', 'de'],
@@ -18,6 +15,5 @@ return [
     'contact_email' => env('CONTACT_EMAIL'),
 
     'github_url' => env('GITHUB_URL'),
-
 
 ];
