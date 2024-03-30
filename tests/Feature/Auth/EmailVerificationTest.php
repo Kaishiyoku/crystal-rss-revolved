@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Auth;
 
+use App\Providers\AppServiceProvider;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Verified;
@@ -45,7 +46,7 @@ class EmailVerificationTest extends TestCase
 
         Event::assertDispatched(Verified::class);
         $this->assertTrue($user->fresh()->hasVerifiedEmail());
-        $response->assertRedirect(RouteServiceProvider::HOME.'?verified=1');
+        $response->assertRedirect(AppServiceProvider::HOME.'?verified=1');
     }
 
     public function test_email_is_not_verified_with_invalid_hash(): void
@@ -70,7 +71,7 @@ class EmailVerificationTest extends TestCase
         $response = $this->actingAs(User::factory()->create())->get('/verify-email');
 
         $response->assertStatus(302);
-        $response->assertRedirect(RouteServiceProvider::HOME);
+        $response->assertRedirect(AppServiceProvider::HOME);
     }
 
     public function test_email_verification_notification_has_been_sent(): void
@@ -104,7 +105,7 @@ class EmailVerificationTest extends TestCase
 
         Notification::assertNotSentTo($user, VerifyEmail::class);
         $response->assertStatus(302);
-        $response->assertRedirect(RouteServiceProvider::HOME);
+        $response->assertRedirect(AppServiceProvider::HOME);
     }
 
     public function test_email_cannot_be_verified_because_it_already_is(): void
@@ -122,6 +123,6 @@ class EmailVerificationTest extends TestCase
         $response = $this->actingAs($user)->get($verificationUrl);
 
         Event::assertNotDispatched(Verified::class);
-        $response->assertRedirect(RouteServiceProvider::HOME.'?verified=1');
+        $response->assertRedirect(AppServiceProvider::HOME.'?verified=1');
     }
 }
