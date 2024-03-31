@@ -77,7 +77,8 @@
             "php artisan ide-helper:models --dir=\"app/Models\" --write --reset"
         ],
         "analyze": "./vendor/bin/phpstan analyse --memory-limit=256M",
-        "pint": "./vendor/bin/pint"
+        "pint": "./vendor/bin/pint",
+        "deploy": "./vendor/bin/envoy run deploy --ansi"
     },
     "extra": {
         "laravel": {
