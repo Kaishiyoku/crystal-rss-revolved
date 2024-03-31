@@ -48,12 +48,12 @@ class FeedDiscovererRequestTest extends TestCase
             'invalid feed_url' => [
                 static::makeData('mailto:test@test.de'),
                 false,
-                'The Feed URL format is invalid.',
+                'The Feed URL field must be a valid URL.',
             ],
             'overly long feed_url' => [
                 static::makeData('https://google.de/?test='.Str::random(232)),
                 false,
-                'The Feed URL may not be greater than 255 characters.',
+                'The Feed URL field must not be greater than 255 characters.',
             ],
         ];
     }

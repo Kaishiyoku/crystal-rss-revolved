@@ -62,22 +62,22 @@ class ProfileUpdateRequestTest extends TestCase
             'invalid name' => [
                 static::makeData(name: 123),
                 false,
-                'The Name must be a string.',
+                'The Name field must be a string.',
             ],
             'overly long name' => [
                 static::makeData(name: Str::random(256)),
                 false,
-                'The Name may not be greater than 255 characters.',
+                'The Name field must not be greater than 255 characters.',
             ],
             'invalid email' => [
                 static::makeData(email: 'test'),
                 false,
-                'The email must be a valid email address.',
+                'The email field must be a valid email address.',
             ],
             'overly long email' => [
                 static::makeData(email: Str::random(248).'@test.de'),
                 false,
-                'The email may not be greater than 255 characters.',
+                'The email field must not be greater than 255 characters.',
             ],
             'email of own user' => [
                 static::makeData(email: static::USER_EMAIL),

@@ -37,7 +37,7 @@ it('fails to validate the config', function (array $config, string $message, str
             'type' => 'FeedWithFeedItemsCount',
             'fields' => ['id', 'feed_items_count'],
         ],
-        'The Name must be a string.',
+        'The Name field must be a string.',
     ],
     'name is empty' => [
         [
@@ -53,7 +53,7 @@ it('fails to validate the config', function (array $config, string $message, str
             'type' => 1,
             'fields' => ['id', 'feed_items_count'],
         ],
-        'The type must be a string.',
+        'The type field must be a string.',
     ],
     'type is empty' => [
         [
@@ -77,7 +77,7 @@ it('fails to validate the config', function (array $config, string $message, str
             'type' => 'FeedWithFeedItemsCount',
             'fields' => 1,
         ],
-        'The fields must be an array.',
+        'The fields field must be an array.',
     ],
     'fields is empty' => [
         [
@@ -93,7 +93,7 @@ it('fails to validate the config', function (array $config, string $message, str
             'type' => 'FeedWithFeedItemsCount',
             'fields' => ['id', 1],
         ],
-        'The fields.1 must be a string.',
+        'The fields.1 field must be a string.',
     ],
     'fields.* is empty' => [
         [
@@ -109,6 +109,6 @@ it('fails to validate the config', function (array $config, string $message, str
             'type' => 'FeedWithFeedItemsCount',
             'fields' => ['id', 'feed_items_count'],
         ],
-        'The Name and type must be different.',
+        'The Name field and type must be different.',
     ],
 ]);

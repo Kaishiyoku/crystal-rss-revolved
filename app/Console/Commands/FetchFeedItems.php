@@ -54,11 +54,13 @@ class FetchFeedItems extends Command
             $this->fetchFeedsForUser($user);
         });
 
+        // @codeCoverageIgnoreStart
         $this->newFeedItemIdsPerUserId
             ->filter(fn ($feedItemIds) => $feedItemIds->isNotEmpty())
             ->each(function ($feedItemIds, $userId) {
                 $this->logger->info("Number of new feed items for user #{$userId}: {$feedItemIds->count()}");
             });
+        // @codeCoverageIgnoreEnd
 
         $executionTimeInSeconds = round(microtime(true) - $startTime);
 

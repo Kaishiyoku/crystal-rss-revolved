@@ -2,43 +2,45 @@
     "name": "laravel/laravel",
     "type": "project",
     "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
     "license": "MIT",
     "require": {
-        "php": "^8.1",
-        "diglactic/laravel-breadcrumbs": "^8.1",
+        "php": "^8.2",
+        "diglactic/laravel-breadcrumbs": "^9.0",
         "guzzlehttp/guzzle": "^7.2",
-        "inertiajs/inertia-laravel": "^0.6.3",
+        "inertiajs/inertia-laravel": "^1.0",
         "intervention/image": "^3.3",
         "kaishiyoku/hera-rss-crawler": "^6.0",
         "kornrunner/blurhash": "^1.2",
-        "laravel/framework": "^10.0",
+        "laravel/framework": "^11.0",
         "laravel/horizon": "^5.23",
-        "laravel/sanctum": "^3.2",
-        "laravel/telescope": "^4.14",
-        "laravel/tinker": "^2.8",
+        "laravel/sanctum": "^4.0",
+        "laravel/telescope": "^5.0",
+        "laravel/tinker": "^2.9",
         "neitanod/forceutf8": "^2.0",
         "predis/predis": "^2.2",
-        "robertboes/inertia-breadcrumbs": "^0.3.0",
-        "tightenco/ziggy": "^1.0"
+        "tightenco/ziggy": "^2.0"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.8",
-        "barryvdh/laravel-ide-helper": "^2.13",
+        "barryvdh/laravel-debugbar": "^3.10",
+        "barryvdh/laravel-ide-helper": "^3.0",
         "doctrine/dbal": "^3.8",
-        "fakerphp/faker": "^1.9.1",
-        "larastan/larastan": "^2.5",
+        "fakerphp/faker": "^1.23",
+        "larastan/larastan": "^2.8",
         "laravel-lang/common": "^3.1",
-        "laravel/breeze": "^1.19",
-        "laravel/envoy": "^2.8",
-        "laravel/pint": "^1.10",
-        "laravel/sail": "^1.18",
-        "mockery/mockery": "^1.4.4",
-        "nunomaduro/collision": "^7.0",
-        "pestphp/pest": "^2.5",
-        "pestphp/pest-plugin-laravel": "^2.0",
-        "phpunit/phpunit": "^10.0",
-        "spatie/laravel-ignition": "^2.0"
+        "laravel/breeze": "^2.0",
+        "laravel/envoy": "^2.9",
+        "laravel/pint": "^1.13",
+        "laravel/sail": "^1.26",
+        "mockery/mockery": "^1.6",
+        "nunomaduro/collision": "^8.0",
+        "pestphp/pest": "^2.23",
+        "pestphp/pest-plugin-laravel": "^2.2",
+        "phpunit/phpunit": "^10.5",
+        "spatie/laravel-ignition": "^2.4"
     },
     "autoload": {
         "psr-4": {
@@ -91,6 +93,6 @@
             "php-http/discovery": true
         }
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "prefer-stable": true
 }

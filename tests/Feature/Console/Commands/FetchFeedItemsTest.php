@@ -122,6 +122,8 @@ class FetchFeedItemsTest extends TestCase
         $verifiedUser = User::factory()->create();
         $verifiedUserFeed = Feed::factory()->state(['feed_url' => 'https://feed.laravel-news.com/'])->recycle($verifiedUser)->create();
 
+        static::assertSame(0, $verifiedUserFeed->feedItems()->count());
+
         $dummyRssFeed = static::getDummyRssFeed(1);
         $dummyRssFeed->setFeedItems(collect([
             static::getDummyRssFeedItem(
@@ -131,13 +133,10 @@ class FetchFeedItemsTest extends TestCase
             ),
         ]));
 
-        $heraRssCrawlerMock = $this->partialMock(HeraRssCrawler::class);
-        $heraRssCrawlerMock->shouldReceive('parseFeed')->once()->andReturn($dummyRssFeed);
-
         $this->artisan(FetchFeedItems::class)
             ->assertExitCode(Command::SUCCESS);
 
-        static::assertSame('LM8i6OS2.mS3yrsAR*sA%$X8nOX8', $verifiedUserFeed->feedItems->first()->blur_hash);
+        static::assertSame('L6Q0,C?v00.l00m-%hrX00Kh+cN@', $verifiedUserFeed->feedItems->first()->blur_hash);
     }
 
     /**

@@ -88,7 +88,7 @@ class FeedRequestTest extends TestCase
             'invalid category_id' => [
                 static::makeData(categoryId: '-'),
                 false,
-                'The Category must be an integer.',
+                'The Category field must be an integer.',
             ],
             'non-existing category_id' => [
                 static::makeData(categoryId: 999),
@@ -108,12 +108,12 @@ class FeedRequestTest extends TestCase
             'invalid feed_url' => [
                 static::makeData(feedUrl: 'mailto:test@test.de'),
                 false,
-                'The Feed URL format is invalid.',
+                'The Feed URL field must be a valid URL.',
             ],
             'overly long feed_url' => [
                 static::makeData(feedUrl: 'https://google.de/?test='.Str::random(232)),
                 false,
-                'The Feed URL may not be greater than 255 characters.',
+                'The Feed URL field must not be greater than 255 characters.',
             ],
             'missing site_url' => [
                 static::makeData(siteUrl: ''),
@@ -123,12 +123,12 @@ class FeedRequestTest extends TestCase
             'invalid site_url' => [
                 static::makeData(siteUrl: 'mailto:test@test.de'),
                 false,
-                'The Site URL format is invalid.',
+                'The Site URL field must be a valid URL.',
             ],
             'overly long site_url' => [
                 static::makeData(siteUrl: 'https://google.de/?test='.Str::random(232)),
                 false,
-                'The Site URL may not be greater than 255 characters.',
+                'The Site URL field must not be greater than 255 characters.',
             ],
             'nullable favicon_url' => [
                 static::makeData(faviconUrl: ''),
@@ -137,12 +137,12 @@ class FeedRequestTest extends TestCase
             'invalid favicon_url' => [
                 static::makeData(faviconUrl: 'mailto:test@test.de'),
                 false,
-                'The Favicon URL format is invalid.',
+                'The Favicon URL field must be a valid URL.',
             ],
             'overly long favicon_url' => [
                 static::makeData(faviconUrl: 'https://google.de/?test='.Str::random(232)),
                 false,
-                'The Favicon URL may not be greater than 255 characters.',
+                'The Favicon URL field must not be greater than 255 characters.',
             ],
             'missing name' => [
                 static::makeData(name: ''),
@@ -152,12 +152,12 @@ class FeedRequestTest extends TestCase
             'invalid name' => [
                 static::makeData(name: 123),
                 false,
-                'The Name must be a string.',
+                'The Name field must be a string.',
             ],
             'overly long name' => [
                 static::makeData(name: Str::random(256)),
                 false,
-                'The Name may not be greater than 255 characters.',
+                'The Name field must not be greater than 255 characters.',
             ],
             'missing language' => [
                 static::makeData(language: ''),
@@ -167,12 +167,12 @@ class FeedRequestTest extends TestCase
             'invalid language' => [
                 static::makeData(language: 123),
                 false,
-                'The Language must be a string.',
+                'The Language field must be a string.',
             ],
             'overly long language' => [
                 static::makeData(language: Str::random(256)),
                 false,
-                'The Language may not be greater than 255 characters.',
+                'The Language field must not be greater than 255 characters.',
             ],
             'missing is_purgeable' => [
                 static::makeData(isPurgeable: ''),

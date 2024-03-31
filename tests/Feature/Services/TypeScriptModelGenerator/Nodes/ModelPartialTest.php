@@ -26,7 +26,7 @@ it('fails to validate the config', function (array $config, string $message, str
             'model' => Feed::class,
             'fields' => ['id', 'name'],
         ],
-        'The Name must be a string.',
+        'The Name field must be a string.',
     ],
     'name is empty' => [
         [
@@ -42,7 +42,7 @@ it('fails to validate the config', function (array $config, string $message, str
             'model' => 1,
             'fields' => ['id', 'name'],
         ],
-        'The model must be a string.',
+        'The model field must be a string.',
     ],
     'model is empty' => [
         [
@@ -76,7 +76,7 @@ it('fails to validate the config', function (array $config, string $message, str
             'model' => Feed::class,
             'fields' => 1,
         ],
-        'The fields must be an array.',
+        'The fields field must be an array.',
     ],
     'fields is empty' => [
         [
@@ -92,7 +92,7 @@ it('fails to validate the config', function (array $config, string $message, str
             'model' => Feed::class,
             'fields' => ['id', 1],
         ],
-        'The fields.1 must be a string.',
+        'The fields.1 field must be a string.',
     ],
     'fields.* is empty' => [
         [
