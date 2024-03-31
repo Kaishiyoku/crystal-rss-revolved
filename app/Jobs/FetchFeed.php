@@ -13,7 +13,6 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\Attributes\WithoutRelations;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -33,8 +32,6 @@ class FetchFeed implements ShouldQueue
      */
     private Collection $newFeedItemIdsPerUserId;
 
-    private HeraRssCrawler $heraRssCrawler;
-
     /**
      * Create a new job instance.
      */
@@ -47,21 +44,17 @@ class FetchFeed implements ShouldQueue
     /**
      * Execute the job.
      */
-    public function handle(): void
+    public function handle(HeraRssCrawler $heraRssCrawler): void
     {
         $this->logger = Log::channel('feed_updater');
         $this->newFeedItemIdsPerUserId = collect();
-
-        $this->heraRssCrawler = new HeraRssCrawler();
-        $this->heraRssCrawler->setLogger($this->logger);
-        $this->heraRssCrawler->setRetryCount(config('app.rss_crawler_retry_count'));
 
         $this->logger->info("Fetching feed {$this->feed->name}");
 
         $minFeedDate = today()->subMonths(config('app.fetch_articles_not_older_than_months'));
 
         try {
-            $rssFeed = $this->heraRssCrawler->parseFeed($this->feed->feed_url);
+            $rssFeed = $heraRssCrawler->parseFeed($this->feed->feed_url);
 
             $rssFeed->getFeedItems()
                 ->filter(fn (RssFeedItem $rssFeedItem) => $rssFeedItem->getCreatedAt()?->gte($minFeedDate))
@@ -95,7 +88,7 @@ class FetchFeed implements ShouldQueue
             return;
         }
 
-        $imageUrl = Arr::first($rssFeedItem->getImageUrls()) ?? $rssFeedItem->getEnclosureUrl();
+        $imageUrl = $rssFeedItem->getImageUrls()->first() ?? $rssFeedItem->getEnclosureUrl();
         $imageMimetype = $imageUrl ? getContentTypeForUrl($imageUrl) : null;
 
         $feedItem = new FeedItem([

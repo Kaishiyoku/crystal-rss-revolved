@@ -46,7 +46,7 @@ it('fails to validate the config', function (array $config, string $message, str
                 ],
             ],
         ],
-        'The Name must be a string.',
+        'The Name field must be a string.',
     ],
     'model is empty' => [
         [
@@ -72,7 +72,7 @@ it('fails to validate the config', function (array $config, string $message, str
                 ],
             ],
         ],
-        'The model must be a string.',
+        'The model field must be a string.',
     ],
     'model is not instantiable' => [
         [
@@ -108,7 +108,7 @@ it('fails to validate the config', function (array $config, string $message, str
             'model' => Feed::class,
             'additional_fields' => 1,
         ],
-        'The additional fields must be an array.',
+        'The additional fields field must be an array.',
     ],
     'additional_fields is empty' => [
         [
@@ -133,7 +133,7 @@ it('fails to validate the config', function (array $config, string $message, str
                 ],
             ],
         ],
-        'The additional_fields.1.name must be a string.',
+        'The additional_fields.1.name field must be a string.',
     ],
     'additional_fields.*.name is empty' => [
         [
@@ -167,7 +167,7 @@ it('fails to validate the config', function (array $config, string $message, str
                 ],
             ],
         ],
-        'The additional_fields.1.types must be an array.',
+        'The additional_fields.1.types field must be an array.',
     ],
     'additional_fields.*.types is empty' => [
         [
