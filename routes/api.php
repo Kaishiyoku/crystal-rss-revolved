@@ -44,7 +44,7 @@ Route::middleware('auth:sanctum')->as('api.')->group(function () {
     Route::post('discover-feed', FeedDiscovererController::class)->name('discover-feed');
     Route::post('discover-feed-urls', FeedUrlDiscovererController::class)->name('discover-feed-urls');
 
-    Route::get('feed-items', DashboardController::class)->name('dashboard');
+    Route::get('feed-items', DashboardController::class);
 
     Route::middleware('administrate')->prefix('admin')->as('admin.')->group(function () {
         Route::resource('users', UserController::class)->only(['index', 'destroy']);

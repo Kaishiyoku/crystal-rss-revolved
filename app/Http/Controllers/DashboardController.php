@@ -1,21 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\DashboardRequest;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Response;
-use Illuminate\Routing\ResponseFactory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class DashboardController extends Controller
 {
     /**
      * Handle the incoming request.
      */
-    public function __invoke(DashboardRequest $request): ResponseFactory|JsonResponse
+    public function __invoke(DashboardRequest $request): RedirectResponse|Response
     {
         $feedId = $request->exists('feed_id') ? $request->integer('feed_id') : null;
 
@@ -34,11 +33,11 @@ class DashboardController extends Controller
             ->withQueryString();
 
         // if feed filtering is active and there are no unread feed items go back to dashboard without query strings
-//        if ($feedId && $feedItems->isEmpty()) {
-//            return response()->json(new \stdClass());
-//        }
+        if ($feedId && $feedItems->isEmpty()) {
+            return redirect()->route('dashboard');
+        }
 
-        return response()->json([
+        return Inertia::render('Dashboard', [
             'selectedFeed' => $feedId ? $unreadFeeds->firstWhere('id', $feedId) : null,
             'totalNumberOfFeedItems' => $totalNumberOfFeedItems,
             'unreadFeeds' => $unreadFeeds,
