@@ -1,8 +1,8 @@
-import {useFetcher, useLoaderData, useNavigate, useSearchParams} from 'react-router-dom';
+import {Location, useFetcher, useLoaderData, useLocation, useNavigate, useSearchParams} from 'react-router-dom';
 import FeedItemsLoaderType from '@/V2/types/FeedItemsLoaderType';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import {HeadlessButton} from '@/Components/Button';
-import {useContext, useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import FeedItem from '@/types/generated/Models/FeedItem';
 import CursorPagination from '@/types/CursorPagination';
 import {length} from 'ramda';
@@ -10,22 +10,18 @@ import NewspaperSolidIcon from '@/Icons/NewspaperSolidIcon';
 import EmptyState from '@/Components/EmptyState';
 import Actions from '@/Components/Actions';
 import request from '@/V2/request';
+import HomeLocationState from '@/V2/types/HomeLocationState';
 import FeedItemCard from '@/Components/FeedItemCard';
-import TotalNumberOfFeedItemsContext from '@/V2/Contexts/TotalNumberOfFeedItemsContext';
 
 export default function Home() {
     const {t, tChoice} = useLaravelReactI18n();
     const fetcher = useFetcher();
     const navigate = useNavigate();
-    const {feedItems: initialFeedItems, totalNumberOfFeedItems: initialTotalNumberOfFeedItems} = useLoaderData() as FeedItemsLoaderType;
+    const location: Location<HomeLocationState> = useLocation();
+    const {feedItems: initialFeedItems, totalNumberOfFeedItems} = useLoaderData() as FeedItemsLoaderType;
     const [searchParams, setSearchParams] = useSearchParams();
-    const {totalNumberOfFeedItems, setTotalNumberOfFeedItems} = useContext(TotalNumberOfFeedItemsContext);
 
     const [feedItems, setFeedItems] = useState<CursorPagination<FeedItem>>(initialFeedItems);
-
-    useEffect(() => {
-        setTotalNumberOfFeedItems(initialTotalNumberOfFeedItems);
-    }, []);
 
     const handleLoadMore = () => {
         if (!feedItems.next_cursor) {

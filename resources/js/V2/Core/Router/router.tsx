@@ -21,7 +21,6 @@ import editFeedLoader from '@/V2/Core/Router/Loaders/editFeedLoader';
 import editFeedAction from '@/V2/Core/Router/Actions/editFeedAction';
 import Home from '@/V2/Pages/Home';
 import feedItemsLoader from '@/V2/Core/Router/Loaders/feedItemsLoader';
-import TotalNumberOfFeedItemsProvider from '@/V2/Core/TotalNumberOfFeedItemsProvider';
 
 const router = createBrowserRouter([
     {
@@ -33,7 +32,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/',
-                element: <TotalNumberOfFeedItemsProvider><Home/></TotalNumberOfFeedItemsProvider>,
+                element: <Home/>,
                 loader: feedItemsLoader,
             },
             {
