@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\DashboardRequest;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Response;
-use Illuminate\Routing\ResponseFactory;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -15,7 +13,7 @@ class DashboardController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(DashboardRequest $request): ResponseFactory|JsonResponse
+    public function __invoke(DashboardRequest $request): JsonResponse
     {
         $feedId = $request->exists('feed_id') ? $request->integer('feed_id') : null;
 
@@ -34,9 +32,9 @@ class DashboardController extends Controller
             ->withQueryString();
 
         // if feed filtering is active and there are no unread feed items go back to dashboard without query strings
-//        if ($feedId && $feedItems->isEmpty()) {
-//            return response()->json(new \stdClass());
-//        }
+        if ($feedId && $feedItems->isEmpty()) {
+            return response()->json(null);
+        }
 
         return response()->json([
             'selectedFeed' => $feedId ? $unreadFeeds->firstWhere('id', $feedId) : null,

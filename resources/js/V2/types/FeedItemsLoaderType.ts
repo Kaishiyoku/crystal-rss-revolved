@@ -1,13 +1,12 @@
 import FeedItem from '@/types/generated/Models/FeedItem';
 import CursorPagination from '@/types/CursorPagination';
-import ShortFeedWithFeedItemsCount from '@/types/generated/Models/ShortFeedWithFeedItemsCount';
+import Feed from '@/types/generated/Models/Feed';
 
 type FeedItemsLoaderType = {
-    selectedFeed: ShortFeedWithFeedItemsCount | null;
+    selectedFeed: Feed | null;
     totalNumberOfFeedItems: number;
-    unreadFeeds: ShortFeedWithFeedItemsCount[];
+    unreadFeeds: Feed[];
     feedItems: CursorPagination<FeedItem>;
     currentCursor: number;
-};
-
+}
 export default FeedItemsLoaderType;
