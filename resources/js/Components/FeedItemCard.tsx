@@ -21,7 +21,7 @@ export default function FeedItemCard({hueRotationIndex, feedItem}: { hueRotation
     const toggle = () => {
         setProcessing(true);
 
-        void rq.put(`/api/feeds/${internalFeedItem.id}/toggle`)
+        void rq.put(`/feeds/${internalFeedItem.id}/toggle`)
             .json<FeedItem>()
             .then((data) => {
                 if (data.read_at) {
