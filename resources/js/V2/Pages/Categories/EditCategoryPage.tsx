@@ -1,13 +1,17 @@
-import {useActionData, useLoaderData, useParams, useSubmit} from 'react-router-dom';
+import {Form, useActionData, useLoaderData, useParams, useSubmit} from 'react-router-dom';
+import TextInput from '@/Components/TextInput';
 import usePageModal from '@/V2/Hooks/usePageModal';
-import {HeadlessButton} from '@/Components/Button';
+import ValidationErrors from '@/V2/types/ValidationErrors';
+import InputError from '@/Components/InputError';
+import {HeadlessButton, PrimaryButton} from '@/Components/Button';
+import InputLabel from '@/Components/InputLabel';
 import React from 'react';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import {Pane, PaneBody, PaneFooter, PaneHeader} from '@/Components/Modal/Pane';
 import EditCategoryLoaderType from '@/V2/types/EditCategoryLoaderType';
 import Actions from '@/Components/Actions';
-import CategoryForm from '@/V2/Pages/Categories/Partials/CategoryForm';
-import EditCategoryValidationErrors from '@/V2/types/EditCategoryValidationErrors';
+
+type EditCategoryValidationErrors = ValidationErrors & { name?: string; } | null;
 
 export default function EditCategoryPage() {
     const {t} = useLaravelReactI18n();
@@ -31,11 +35,24 @@ export default function EditCategoryPage() {
             </PaneHeader>
 
             <PaneBody>
-                <CategoryForm
-                    action={`/app/categories/${categoryId}/edit`}
-                    category={category}
-                    errors={errors}
-                />
+                <Form method="put" action={`/app/categories/${categoryId}/edit`} className="space-y-4">
+                    <div>
+                        <InputLabel htmlFor="name" value={t('validation.attributes.name')} required/>
+                        <TextInput
+                            id="name"
+                            name="name"
+                            defaultValue={category.name}
+                            className="block w-full"
+                            required
+                            isFocused
+                        />
+                        <InputError message={errors?.name}/>
+                    </div>
+
+                    <PrimaryButton type="submit">
+                        {t('Save')}
+                    </PrimaryButton>
+                </Form>
             </PaneBody>
 
             <PaneFooter>
