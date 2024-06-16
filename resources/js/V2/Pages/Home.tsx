@@ -1,16 +1,16 @@
 import {useFetcher, useLoaderData, useNavigate, useSearchParams} from 'react-router-dom';
 import FeedItemsLoaderType from '@/V2/types/FeedItemsLoaderType';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
-import {HeadlessButton, TertiaryButton} from '@/Components/Button';
+import {HeadlessButton} from '@/Components/Button';
 import {useContext, useEffect, useState} from 'react';
 import {isEmpty, length} from 'ramda';
 import NewspaperSolidIcon from '@/Icons/NewspaperSolidIcon';
 import EmptyState from '@/Components/EmptyState';
+import Actions from '@/Components/Actions';
 import request from '@/V2/request';
 import FeedItemCard from '@/Components/FeedItemCard';
 import TotalNumberOfFeedItemsContext from '@/V2/Contexts/TotalNumberOfFeedItemsContext';
 import FeedFilterDropdown from '@/Components/FeedFilterDropdown';
-import EyeOutlineIcon from '@/Icons/EyeOutlineIcon';
 
 export default function Home() {
     const {t, tChoice} = useLaravelReactI18n();
@@ -92,23 +92,23 @@ export default function Home() {
                 {tChoice('dashboard.unread_articles', totalNumberOfFeedItems)}
             </div>
 
-            <div className="flex flex-col sm:flex-row sm:space-x-2 space-y-2 sm:space-y-0 pb-8">
+            <Actions>
                 {data.feedItems && <FeedFilterDropdown selectedFeed={data.selectedFeed} feeds={data.unreadFeeds}/>}
 
                 {totalNumberOfFeedItems > 0 && (
-                    <TertiaryButton
+                    <HeadlessButton
                         confirm
                         confirmTitle={t('Do you really want to mark all articles as read?')}
                         confirmCancelTitle={t('Cancel')}
                         confirmSubmitTitle={t('Mark all articles as read')}
                         onClick={markAllAsRead}
-                        icon={EyeOutlineIcon}
+                        className="link-secondary"
                         hasMobileFullSize
                     >
                         {t('Mark all as read')}
-                    </TertiaryButton>
+                    </HeadlessButton>
                 )}
-            </div>
+            </Actions>
 
             {length(data.feedItems.data) > 0
                 ? (
