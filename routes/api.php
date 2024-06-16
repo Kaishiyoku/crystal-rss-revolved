@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Api\Admin\UserController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\FeedController;
@@ -34,8 +33,4 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('discover-feed-urls', FeedUrlDiscovererController::class)->name('discover-feed-urls');
 
     Route::get('feed-items', DashboardController::class);
-
-    Route::middleware('administrate')->prefix('admin')->as('admin.')->group(function () {
-        Route::resource('users', UserController::class)->only(['index', 'destroy']);
-    });
 });

@@ -90,7 +90,7 @@ const Button = (
                         'shadow-md shadow-black/20 dark:shadow-black/25 text-violet-100 bg-violet-500 hover:bg-violet-700 disabled:hover:bg-violet-500': variant === ButtonVariant.Primary,
                         'text-gray-600 dark:text-gray-400 dark:hover:text-gray-100 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 disabled:hover:text-gray-600 dark:disabled:text-gray-500 disabled:hover:bg-white dark:disabled:hover:bg-gray-800': variant === ButtonVariant.Secondary,
                         'text-gray-600 dark:text-gray-400 dark:hover:text-gray-100 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 disabled:hover:text-gray-600 dark:disabled:text-gray-500 disabled:hover:bg-white dark:disabled:hover:bg-gray-800': variant === ButtonVariant.Tertiary,
-                        'text-pink-100 dark:text-pink-100 dark:hover:text-pink-200 bg-pink-500 dark:bg-pink-700 hover:bg-pink-600 dark:hover:bg-pink-800 disabled:hover:text-pink-600 dark:disabled:text-pink-500 disabled:hover:bg-white dark:disabled:hover:bg-pink-950': variant === ButtonVariant.Danger,
+                        'text-pink-950 dark:text-pink-300 dark:hover:text-pink-200 bg-pink-200 dark:bg-pink-900 hover:bg-pink-300 dark:hover:bg-pink-800 disabled:hover:text-pink-600 dark:disabled:text-pink-500 disabled:hover:bg-white dark:disabled:hover:bg-pink-950': variant === ButtonVariant.Danger,
                         'w-full sm:w-auto': hasMobileFullSize,
                     },
                     className
