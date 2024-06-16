@@ -9,12 +9,12 @@ import EyeSlashOutlineIcon from '@/Icons/EyeSlashOutlineIcon';
 import formatDateTime from '@/Utils/formatDateTime';
 import CalendarDaysSolidIcon from '@/Icons/CalendarDaysSolidIcon';
 import FeedItem from '@/types/generated/Models/FeedItem';
-import request from '@/Core/request';
-import TotalNumberOfFeedItemsContext from '@/Contexts/TotalNumberOfFeedItemsContext';
+import request from '@/V2/request';
+import TotalNumberOfFeedItemsContext from '@/V2/Contexts/TotalNumberOfFeedItemsContext';
 
 export default function FeedItemCard({hueRotationIndex, feedItem}: { hueRotationIndex: number; feedItem: FeedItem; }) {
     const {t} = useLaravelReactI18n();
-    const {setTotalNumberOfFeedItems} = useContext(TotalNumberOfFeedItemsContext);
+    const {totalNumberOfFeedItems, setTotalNumberOfFeedItems} = useContext(TotalNumberOfFeedItemsContext);
     const [internalFeedItem, setInternalFeedItem] = useState(feedItem);
     const [processing, setProcessing] = useState(false);
 

@@ -7,7 +7,7 @@ import {DangerButton, SecondaryButton} from '@/Components/Button';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import Card from '@/Components/Card';
 import {Form, useActionData} from 'react-router-dom';
-import UpdatePasswordValidationErrors from '@/types/UpdatePasswordValidationErrors';
+import UpdatePasswordValidationErrors from '@/V2/types/UpdatePasswordValidationErrors';
 
 export default function DeleteUserForm() {
     const {t} = useLaravelReactI18n();
