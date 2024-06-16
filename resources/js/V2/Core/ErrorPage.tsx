@@ -1,20 +1,16 @@
-import {Link} from 'react-router-dom';
-import ArrowUturnLeftSolidIcon from '@/Icons/ArrowUturnLeftSolidIcon';
-import {useLaravelReactI18n} from 'laravel-react-i18n';
+import {isRouteErrorResponse, useAsyncError, useRouteError} from 'react-router-dom';
 
 export default function ErrorPage() {
-    const {t} = useLaravelReactI18n();
+    const error = useRouteError();
+    const asyncError = useAsyncError();
 
-    return (
-        <main className="max-w-7xl mx-auto pb-12 px-4 sm:px-6 lg:px-8 py-12">
-            <div className="text-2xl pb-4">
-                {t('We’re sorry; an error occurred.')}
-            </div>
+    if (asyncError) {
+        return <div>Async error occurred: {JSON.stringify({asyncError})}</div>;
+    }
 
-            <Link to="/" className="link-secondary inline-flex space-x-2">
-                <ArrowUturnLeftSolidIcon className="size-5"/>
-                <span>{t('Back to landing page')}</span>
-            </Link>
-        </main>
-    );
+    if (isRouteErrorResponse(error)) {
+        return <div>{error.status} {error.statusText}.</div>;
+    }
+
+    return <div>Unknown error occurred: {JSON.stringify(error)}</div>;
 }
