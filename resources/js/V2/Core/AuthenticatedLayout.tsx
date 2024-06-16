@@ -62,8 +62,6 @@ const AuthenticatedLayout = () => {
                             {t('Feeds')}
                         </Dropdown.Link>
 
-                        <Dropdown.Spacer/>
-
                         <Dropdown.Button onClick={handleLogout}>
                             {t('Logout')}
                         </Dropdown.Button>
