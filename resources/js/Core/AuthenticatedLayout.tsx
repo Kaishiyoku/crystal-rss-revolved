@@ -70,10 +70,6 @@ const AuthenticatedLayout = () => {
                     </Dropdown.Trigger>
 
                     <Dropdown.Content>
-                        <Dropdown.Link to="/">
-                            {t('Home')}
-                        </Dropdown.Link>
-
                         <Dropdown.Link to="/profile">
                             {t('Profile')}
                         </Dropdown.Link>
