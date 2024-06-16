@@ -1,5 +1,5 @@
 import {createBrowserRouter} from 'react-router-dom';
-import categoriesLoader from '@/V2/Core/Router/Loaders/categoriesLoader';
+import categoriesLoader from '@/V2/Pages/Categories/Loaders/categoriesLoader';
 import AuthenticatedLayout from '@/V2/Core/AuthenticatedLayout';
 import CategoriesIndex from '@/V2/Pages/Categories/CategoriesIndex';
 import CategoriesCreate from '@/V2/Pages/Categories/CategoriesCreate';
@@ -8,24 +8,30 @@ import {HTTPError} from 'ky';
 import ValidationErrors from '@/V2/types/ValidationErrors';
 import RouteHandle from '@/V2/types/RouteHandle';
 import CategoriesEdit from '@/V2/Pages/Categories/CategoriesEdit';
-import categoryLoader from '@/V2/Core/Router/Loaders/categoryLoader';
-import layoutLoader from '@/V2/Core/Router/Loaders/layoutLoader';
-import updateCategoryAction from '@/V2/Core/Router/Actions/updateCategoryAction';
-import ErrorPage from '@/V2/Core/ErrorPage';
+import categoryLoader from '@/V2/Pages/Categories/Loaders/categoryLoader';
+import layoutLoader from '@/V2/Pages/Loaders/layoutLoader';
+
+const Error = () => <div>An error occurred.</div>;
 
 const router = createBrowserRouter([
     {
         path: '/v2',
         element: <AuthenticatedLayout/>,
-        errorElement: <ErrorPage/>,
+        errorElement: <Error/>,
         loader: layoutLoader,
-        handle: {titleKey: 'Home'} as RouteHandle,
+        handle: {
+            title: 'Home',
+            headline: 'Home',
+        } as RouteHandle,
         children: [
             {
                 path: 'categories',
                 element: <CategoriesIndex/>,
                 loader: categoriesLoader,
-                handle: {titleKey: 'Categories'} as RouteHandle,
+                handle: {
+                    title: 'Categories',
+                    headline: 'Categories',
+                } as RouteHandle,
                 children: [
                     {
                         path: 'create',
@@ -47,14 +53,38 @@ const router = createBrowserRouter([
 
                             return null;
                         },
-                        handle: {hide: true, titleKey: 'Add category'} as RouteHandle,
+                        handle: {
+                            hide: true,
+                            title: 'Add category',
+                            headline: 'Add category',
+                        } as RouteHandle,
                     },
                     {
                         path: ':categoryId/edit',
                         element: <CategoriesEdit/>,
                         loader: categoryLoader('/edit'),
-                        action: updateCategoryAction,
-                        handle: {hide: true, titleKey: 'Edit category'} as RouteHandle,
+                        action: async ({params, request: req}) => {
+                            const formData = await req.formData();
+
+                            try {
+                                await request.put(`/api/categories/${params.categoryId}`, {json: Object.fromEntries(formData)});
+                            } catch (exception) {
+                                const errorResponse = (exception as HTTPError).response;
+
+                                if (errorResponse.status !== 422) {
+                                    throw exception;
+                                }
+
+                                return (await errorResponse.json() as { errors: ValidationErrors; }).errors;
+                            }
+
+                            return null;
+                        },
+                        handle: {
+                            hide: true,
+                            title: 'Edit category',
+                            headline: 'Edit category',
+                        } as RouteHandle,
                     },
                 ],
             },

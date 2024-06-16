@@ -1,8 +1,8 @@
 import Category from '@/types/generated/Models/Category';
 import request from '@/V2/request';
-import {LoaderFunction} from '@remix-run/router/utils';
+import {Params} from 'react-router-dom';
 
-const categoryLoader = (suffix?: string): LoaderFunction => async ({params}) => {
+const categoryLoader = (suffix?: string) => async ({params}: { params: Params; }) => {
     const data = await request(`/api/categories/${params.categoryId}${suffix}`).json<{ category: Category; canDelete: boolean; }>();
 
     return data.category;
