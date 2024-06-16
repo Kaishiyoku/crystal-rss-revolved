@@ -9,11 +9,11 @@ import React from 'react';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import {Pane, PaneBody, PaneHeader} from '@/Components/Modal/Pane';
 
-type CreateCategoryValidationErrors = ValidationErrors & { name?: string; } | null;
+type CategoriesCreateValidationErrors = ValidationErrors & { name?: string; } | null;
 
 export default function CreateCategoryPage() {
     const {t} = useLaravelReactI18n();
-    const errors = useActionData() as CreateCategoryValidationErrors;
+    const errors = useActionData() as CategoriesCreateValidationErrors;
     const {show, handleClose} = usePageModal(errors, '/app/categories');
 
     return (

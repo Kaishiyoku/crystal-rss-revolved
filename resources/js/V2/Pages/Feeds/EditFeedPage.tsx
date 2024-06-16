@@ -37,7 +37,6 @@ export default function EditFeedPage() {
     const [isDiscoverFeedProcessing, setIsDiscoverFeedProcessing] = useState(false);
     const [searchUrl, setSearchUrl] = useState('');
     const [discoveredFeedUrls, setDiscoveredFeedUrls] = useState<string[]>([]);
-
     const nameRef = useRef<HTMLInputElement>(null);
     const languageRef = useRef<HTMLInputElement>(null);
     const feedUrlRef = useRef<HTMLInputElement>(null);

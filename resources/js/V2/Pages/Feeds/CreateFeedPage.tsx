@@ -5,7 +5,7 @@ import ValidationErrors from '@/V2/types/ValidationErrors';
 import InputError from '@/Components/InputError';
 import {PrimaryButton, SecondaryButton} from '@/Components/Button';
 import InputLabel from '@/Components/InputLabel';
-import React, {useRef, useState} from 'react';
+import React, {useImperativeHandle, useRef, useState} from 'react';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import {Pane, PaneBody, PaneHeader} from '@/Components/Modal/Pane';
 import Select from '@/Components/Select';
@@ -16,7 +16,7 @@ import request from '@/V2/request';
 import DiscoveredFeed from '@/types/DiscoveredFeed';
 import LinkStack from '@/Components/LinkStack';
 
-type CreateFeedValidationErrors = ValidationErrors & {
+type FeedsCreateValidationErrors = ValidationErrors & {
     name?: string;
     category_id?: string;
     language?: string;
@@ -29,12 +29,11 @@ export default function CreateFeedPage() {
     const {t, tChoice} = useLaravelReactI18n();
     const {user} = useAuth();
     const {categories} = useLoaderData() as CreateFeedLoaderType;
-    const errors = useActionData() as CreateFeedValidationErrors;
+    const errors = useActionData() as FeedsCreateValidationErrors;
     const {show, handleClose} = usePageModal(errors, '/app/feeds');
     const [isDiscoverFeedProcessing, setIsDiscoverFeedProcessing] = useState(false);
     const [searchUrl, setSearchUrl] = useState('');
     const [discoveredFeedUrls, setDiscoveredFeedUrls] = useState<string[]>([]);
-
     const nameRef = useRef<HTMLInputElement>(null);
     const languageRef = useRef<HTMLInputElement>(null);
     const feedUrlRef = useRef<HTMLInputElement>(null);
