@@ -25,9 +25,9 @@ export default function FeedItemCard({hueRotationIndex, feedItem}: { hueRotation
             .json<FeedItem>()
             .then((data) => {
                 if (data.read_at) {
-                    setTotalNumberOfFeedItems((prevState) => prevState - 1);
+                    setTotalNumberOfFeedItems(totalNumberOfFeedItems - 1);
                 } else {
-                    setTotalNumberOfFeedItems((prevState) => prevState + 1);
+                    setTotalNumberOfFeedItems(totalNumberOfFeedItems + 1);
                 }
 
                 setInternalFeedItem(data);
