@@ -1,10 +1,10 @@
 import {createBrowserRouter} from 'react-router-dom';
 import categoriesLoader from '@/V2/Core/Router/Loaders/categoriesLoader';
 import AuthenticatedLayout from '@/V2/Core/AuthenticatedLayout';
-import CategoriesIndexPage from '@/V2/Pages/Categories/CategoriesIndexPage';
-import CreateCategoryPage from '@/V2/Pages/Categories/CreateCategoryPage';
+import CategoriesIndex from '@/V2/Pages/Categories/CategoriesIndex';
+import CategoriesCreate from '@/V2/Pages/Categories/CategoriesCreate';
 import RouteHandle from '@/V2/types/RouteHandle';
-import EditCategoryPage from '@/V2/Pages/Categories/EditCategoryPage';
+import CategoriesEdit from '@/V2/Pages/Categories/CategoriesEdit';
 import categoryLoader from '@/V2/Core/Router/Loaders/categoryLoader';
 import layoutLoader from '@/V2/Core/Router/Loaders/layoutLoader';
 import updateCategoryAction from '@/V2/Core/Router/Actions/updateCategoryAction';
@@ -22,19 +22,19 @@ const router = createBrowserRouter([
         children: [
             {
                 path: 'categories',
-                element: <CategoriesIndexPage/>,
+                element: <CategoriesIndex/>,
                 loader: categoriesLoader,
                 handle: {titleKey: 'Categories'} as RouteHandle,
                 children: [
                     {
                         path: 'create',
-                        element: <CreateCategoryPage/>,
+                        element: <CategoriesCreate/>,
                         action: createCategoryAction,
                         handle: {hide: true, titleKey: 'Add category'} as RouteHandle,
                     },
                     {
                         path: ':categoryId/edit',
-                        element: <EditCategoryPage/>,
+                        element: <CategoriesEdit/>,
                         loader: categoryLoader('/edit'),
                         action: updateCategoryAction,
                         handle: {hide: true, titleKey: 'Edit category'} as RouteHandle,

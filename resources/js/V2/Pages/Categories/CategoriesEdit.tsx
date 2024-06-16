@@ -13,7 +13,7 @@ import Actions from '@/Components/Actions';
 
 type CategoriesCreateValidationErrors = ValidationErrors & { name?: string; } | null;
 
-export default function EditCategoryPage() {
+export default function CategoriesEdit() {
     const {t} = useLaravelReactI18n();
     const {categoryId} = useParams();
     const {category, canDelete} = useLoaderData() as CategoryLoaderType;
