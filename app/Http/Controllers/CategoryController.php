@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
-use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -21,9 +20,9 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): JsonResponse
+    public function index(): Response
     {
-        return response()->json([
+        return Inertia::render('Categories/Index', [
             'categories' => Auth::user()->categories()->withCount('feeds')->get(),
             'canCreate' => Auth::user()->can('create', Category::class),
         ]);
@@ -42,21 +41,21 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCategoryRequest $request): JsonResponse
+    public function store(StoreCategoryRequest $request): RedirectResponse
     {
         $validated = $request->validated();
 
         Auth::user()->categories()->save(new Category($validated));
 
-        return response()->json();
+        return redirect()->route('categories.index');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Category $category): JsonResponse
+    public function edit(Category $category): Response
     {
-        return response()->json([
+        return Inertia::render('Categories/Edit', [
             'category' => $category,
             'canDelete' => Auth::user()->can('delete', $category),
         ]);
@@ -65,22 +64,22 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCategoryRequest $request, Category $category): JsonResponse
+    public function update(UpdateCategoryRequest $request, Category $category): RedirectResponse
     {
         $validated = $request->validated();
 
         $category->update($validated);
 
-        return response()->json();
+        return redirect()->route('categories.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category): JsonResponse
+    public function destroy(Category $category): RedirectResponse
     {
         $category->delete();
 
-        return response()->json();
+        return redirect()->route('categories.index');
     }
 }
