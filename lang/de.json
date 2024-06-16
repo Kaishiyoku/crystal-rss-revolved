@@ -112,6 +112,5 @@
     "Delete user": "Benutzer löschen",
     "Do you really want to delete the user “:name”?": "Wollen Sie den Benutzer „:name” wirklich löschen?",
     "Manage users": "Benutzer verwalten",
-    "Home": "Startseite",
-    "Edit feed": "Feed ändern"
+    "Home": "Startseite"
 }
