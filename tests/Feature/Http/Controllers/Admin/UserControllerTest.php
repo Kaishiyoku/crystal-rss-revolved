@@ -1,8 +1,8 @@
 <?php
 
-namespace Http\Controllers\Api\Admin;
+namespace Http\Controllers\Admin;
 
-use App\Http\Controllers\Api\Admin\UserController;
+use App\Http\Controllers\Admin\UserController;
 use App\Models\Category;
 use App\Models\Feed;
 use App\Models\FeedItem;
@@ -40,25 +40,23 @@ class UserControllerTest extends TestCase
 
         User::factory()->count(5)->create();
 
-        $this->json('get', route('api.admin.users.index'))
-            ->assertJsonStructure([
-                'users',
-            ])
-            ->assertJsonCount(6, 'users');
+        $this->get(route('admin.users.index'))
+            ->assertInertia(fn (Assert $page) => $page
+                ->component('Admin/Users/Index')
+                ->count('users', 6)
+            );
     }
 
     public function test_cannot_access_index_as_guest(): void
     {
-        $this->json('get', route('api.admin.users.index'))
-            ->assertUnauthorized();
+        $this->get(route('admin.users.index'))
+            ->assertRedirect('/login');
     }
 
     public function test_cannot_access_index_as_normal_user(): void
     {
-        $this->actingAs(User::factory()->create());
-
-        $this->get(route('api.admin.users.index'))
-            ->assertForbidden();
+        $this->get(route('admin.users.index'))
+            ->assertRedirect('/login');
     }
 
     public function test_delete(): void
@@ -69,8 +67,8 @@ class UserControllerTest extends TestCase
             ->hasFeedItems(10)
             ->create();
 
-        $this->json('delete', route('api.admin.users.destroy', $user))
-            ->assertJson([]);
+        $this->delete(route('admin.users.destroy', $user))
+            ->assertRedirect(route('admin.users.index'));
 
         static::assertCount(1, User::get());
         static::assertCount(0, Category::get());
@@ -83,7 +81,7 @@ class UserControllerTest extends TestCase
     {
         $this->actingAs($user = User::factory()->admin()->create());
 
-        $this->json('delete', route('api.admin.users.destroy', $user))
+        $this->delete(route('admin.users.destroy', $user))
             ->assertForbidden();
 
         static::assertSame(1, User::count());
