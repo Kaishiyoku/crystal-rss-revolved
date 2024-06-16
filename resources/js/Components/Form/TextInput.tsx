@@ -1,4 +1,4 @@
-import {forwardRef, InputHTMLAttributes, useEffect, useImperativeHandle, useRef} from 'react';
+import {forwardRef, InputHTMLAttributes, Ref, useEffect, useImperativeHandle, useRef} from 'react';
 import clsx from 'clsx';
 
 type TextInputProps = InputHTMLAttributes<HTMLInputElement> & { isFocused?: boolean; };
