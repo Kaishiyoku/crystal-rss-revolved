@@ -86,7 +86,7 @@ const PaneHeader = ({children}: { children: ReactNode; }) => {
 
 const PaneBody = ({children}: { children: ReactNode; }) => {
     return (
-        <div className="grow p-6 overflow-y-auto">
+        <div className="p-6 overflow-y-auto">
             {children}
         </div>
     );

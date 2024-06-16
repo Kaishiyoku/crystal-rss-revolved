@@ -21,7 +21,7 @@ const MobileActions = ({children}: { children: ReactNode; }) => {
     });
 
     return (
-        <div className="sm:hidden w-full">
+        <div className="sm:hidden">
             <div className="pb-8">
                 <TertiaryButton
                     onClick={() => setShow(true)}
@@ -77,14 +77,14 @@ const MobileActions = ({children}: { children: ReactNode; }) => {
     );
 };
 
-export default function Actions({footer = false, className = '', children}: { footer?: boolean; className?: string; children: ReactNode; }) {
+export default function Actions({className = '', children}: { className?: string; children: ReactNode; }) {
     if (!children) {
         return null;
     }
 
     return (
         <>
-            <div className={clsx('hidden sm:flex justify-end space-x-4', {'pb-8': !footer}, className)}>
+            <div className={clsx('hidden sm:flex justify-end pb-8 space-x-4', className)}>
                 {children}
             </div>
 

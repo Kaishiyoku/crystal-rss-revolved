@@ -19,8 +19,6 @@ type ButtonProps = {
     className?: string;
     disabled?: boolean;
     onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-    name?: string;
-    value?: string | number;
     children?: ReactNode;
 };
 
@@ -40,8 +38,6 @@ const Button = (
         className = '',
         disabled = false,
         onClick = noop,
-        name,
-        value,
         children,
         confirm = false,
         confirmTitle,
@@ -53,8 +49,6 @@ const Button = (
 
     const handleOnClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         if (confirm) {
-            event.preventDefault();
-
             setShowConfirmModal(true);
 
             return;
@@ -81,12 +75,11 @@ const Button = (
 
             <button
                 type={type}
-                name={name}
-                value={value}
                 className={clsx(
                     'inline-flex space-x-2 items-center text-left transition ease-in disabled:opacity-50 disabled:saturate-50 disabled:cursor-not-allowed',
+                    'text-sm',
                     {
-                        'font-semibold text-sm tracking-widest rounded-lg px-5 py-2.5 shadow dark:shadow-black/25 focus:ring-0 focus:ring-black dark:focus:ring-white focus:shadow-none active:shadow-none': variant !== ButtonVariant.Headless,
+                        'font-semibold tracking-widest rounded-lg px-5 py-2.5 shadow dark:shadow-black/25 focus:ring-0 focus:ring-black dark:focus:ring-white focus:shadow-none active:shadow-none': variant !== ButtonVariant.Headless,
                         'shadow-md shadow-black/20 dark:shadow-black/25 text-violet-100 bg-violet-500 hover:bg-violet-700 disabled:hover:bg-violet-500': variant === ButtonVariant.Primary,
                         'text-gray-600 dark:text-gray-400 dark:hover:text-gray-100 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 disabled:hover:text-gray-600 dark:disabled:text-gray-500 disabled:hover:bg-white dark:disabled:hover:bg-gray-800': variant === ButtonVariant.Secondary,
                         'text-gray-600 dark:text-gray-400 dark:hover:text-gray-100 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 disabled:hover:text-gray-600 dark:disabled:text-gray-500 disabled:hover:bg-white dark:disabled:hover:bg-gray-800': variant === ButtonVariant.Tertiary,
@@ -248,8 +241,6 @@ const HeadlessButton = (
         className,
         disabled,
         onClick,
-        name,
-        value,
         children,
         confirm = false,
         confirmTitle,
@@ -265,8 +256,6 @@ const HeadlessButton = (
             className={className}
             disabled={disabled}
             onClick={onClick}
-            name={name}
-            value={value}
             confirm={confirm}
             confirmTitle={confirmTitle}
             confirmSubmitTitle={confirmSubmitTitle}

@@ -1,9 +1,11 @@
+import Category from '@/types/generated/Models/Category';
 import request from '@/V2/request';
 import {LoaderFunction} from '@remix-run/router/utils';
-import CategoriesLoaderType from '@/V2/types/CategoriesLoaderType';
 
 const categoryLoader = (suffix?: string): LoaderFunction => async ({params}) => {
-    return await request(`/api/categories/${params.categoryId}${suffix}`).json<CategoriesLoaderType>();
+    const data = await request(`/api/categories/${params.categoryId}${suffix}`).json<{ category: Category; canDelete: boolean; }>();
+
+    return data.category;
 };
 
 export default categoryLoader;

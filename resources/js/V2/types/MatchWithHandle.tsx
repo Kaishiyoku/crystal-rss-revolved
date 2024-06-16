@@ -1,8 +1,10 @@
 import {UIMatch} from 'react-router-dom';
-import RouteHandle from '@/V2/types/RouteHandle';
 
 type MatchWithHandle = UIMatch & {
-    handle: RouteHandle;
+    handle: {
+        headline: string;
+        title: string;
+    };
 };
 
 export default MatchWithHandle;
