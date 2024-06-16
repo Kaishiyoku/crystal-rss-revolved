@@ -27,7 +27,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::resource('categories', CategoryController::class);
     Route::put('/feeds/mark-all-as-read', \App\Http\Controllers\Api\MarkAllUnreadFeedItemsAsReadController::class)->name('mark-all-as-read');
     Route::resource('feeds', FeedController::class);
-    Route::put('/feeds/{feedItem}/toggle', \App\Http\Controllers\Api\ToggleFeedItemController::class)->name('toggle-feed-item');
 
     Route::post('discover-feed', FeedDiscovererController::class)->name('discover-feed');
     Route::post('discover-feed-urls', FeedUrlDiscovererController::class)->name('discover-feed-urls');
