@@ -154,8 +154,8 @@ const AuthenticatedLayout = () => {
                     leaveFrom="opacity-100 translate-y-0"
                     leaveTo="opacity-0 -translate-y-8 sm:translate-y-0"
                 >
-                    <div className="fixed overflow-y-auto scrollbar-y-sm px-4 pt-16 pb-16 top-0 bg-white dark:bg-gray-800 z-20 w-full h-full backdrop-blur-lg sm:hidden">
-                        <div className="space-y-1">
+                    <div className="fixed overflow-y-auto scrollbar-y-sm px-4 pt-16 pb-16 top-0 bg-white/50 dark:bg-gray-800/50 z-20 w-full h-full backdrop-blur-lg sm:hidden">
+                        <div className="pt-2 pb-3 space-y-1">
                             <Dropdown.Link to="/">
                                 {t('Home')}
                             </Dropdown.Link>
@@ -193,9 +193,7 @@ const AuthenticatedLayout = () => {
                             )}
                         </div>
 
-                        <Dropdown.Spacer/>
-
-                        <div className="pt-2">
+                        <div className="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
                             <div className="px-4">
                                 <div className="font-medium text-base text-gray-800 dark:text-gray-200">
                                     {user.name}

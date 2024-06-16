@@ -146,7 +146,7 @@ const DropdownButton = ({onClick, className = '', children}: { onClick: () => vo
     );
 };
 
-const Spacer = () => <div className="pt-2 mb-2 border-b dark:border-gray-700"/>;
+const Spacer = () => <div className="pt-2 mb-2 border-b dark:border-gray-600"/>;
 
 Dropdown.Trigger = Trigger;
 Dropdown.Content = Content;
