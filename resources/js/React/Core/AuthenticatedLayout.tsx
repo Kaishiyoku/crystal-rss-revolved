@@ -2,15 +2,13 @@ import {Outlet, useLocation, useMatches} from 'react-router-dom';
 import Breadcrumbs from '@/React/Core/Breadcrumbs';
 import {useEffect} from 'react';
 import MatchWithHandle from '@/React/types/MatchWithHandle';
-import {useLaravelReactI18n} from 'laravel-react-i18n';
 
 const AuthenticatedLayout = () => {
-    const {t} = useLaravelReactI18n();
     const location = useLocation();
     const match = useMatches().find((match) => match.pathname === location.pathname) as MatchWithHandle;
 
     useEffect(() => {
-        document.querySelector('title')!.textContent = t(match?.handle.title);
+        document.querySelector('title')!.textContent = match?.handle.title;
     }, [location]);
 
     return (

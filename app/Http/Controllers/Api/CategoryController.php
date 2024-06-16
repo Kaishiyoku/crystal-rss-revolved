@@ -43,13 +43,13 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCategoryRequest $request): JsonResponse
+    public function store(StoreCategoryRequest $request): RedirectResponse
     {
         $validated = $request->validated();
 
         Auth::user()->categories()->save(new Category($validated));
 
-        return response()->json();
+        return redirect()->route('categories.index');
     }
 
     /**
