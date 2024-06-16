@@ -11,6 +11,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class FeedController extends Controller
 {
@@ -58,10 +60,10 @@ class FeedController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Feed $feed): JsonResponse
+    public function edit(Feed $feed): Response
     {
-        return response()->json([
-            'categories' => $this->categories(),
+        return Inertia::render('Feeds/Edit', [
+            'categories' => Auth::user()->categories()->pluck('name', 'id')->map(fn (string $name, int $id) => ['value' => $id, 'name' => $name])->values(),
             'feed' => $feed,
             'canDelete' => Auth::user()->can('delete', $feed),
         ]);
@@ -70,7 +72,7 @@ class FeedController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateFeedRequest $request, Feed $feed): JsonResponse
+    public function update(UpdateFeedRequest $request, Feed $feed): RedirectResponse
     {
         $validated = $request->validated();
 
@@ -79,18 +81,18 @@ class FeedController extends Controller
 
         $feed->save();
 
-        return response()->json();
+        return redirect()->route('feeds.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Feed $feed): JsonResponse
+    public function destroy(Feed $feed): RedirectResponse
     {
         $feed->feedItems()->delete();
         $feed->delete();
 
-        return response()->json();
+        return redirect()->route('feeds.index');
     }
 
     /**

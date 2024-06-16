@@ -1,8 +1,8 @@
 import Category from '@/types/generated/Models/Category';
 
-type EditCategoryLoaderType = {
+type CategoryLoaderType = {
     category: Category;
     canDelete: boolean;
 }
 
-export default EditCategoryLoaderType;
+export default CategoryLoaderType;

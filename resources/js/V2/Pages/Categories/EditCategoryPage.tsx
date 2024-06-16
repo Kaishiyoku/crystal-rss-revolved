@@ -8,7 +8,7 @@ import InputLabel from '@/Components/InputLabel';
 import React from 'react';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import {Pane, PaneBody, PaneFooter, PaneHeader} from '@/Components/Modal/Pane';
-import EditCategoryLoaderType from '@/V2/types/EditCategoryLoaderType';
+import CategoryLoaderType from '@/V2/types/CategoryLoaderType';
 import Actions from '@/Components/Actions';
 
 type CategoriesCreateValidationErrors = ValidationErrors & { name?: string; } | null;
@@ -16,7 +16,7 @@ type CategoriesCreateValidationErrors = ValidationErrors & { name?: string; } | 
 export default function EditCategoryPage() {
     const {t} = useLaravelReactI18n();
     const {categoryId} = useParams();
-    const {category, canDelete} = useLoaderData() as EditCategoryLoaderType;
+    const {category, canDelete} = useLoaderData() as CategoryLoaderType;
     const errors = useActionData() as CategoriesCreateValidationErrors;
     const {show, handleClose} = usePageModal(errors, '/app/categories');
     const submit = useSubmit();
