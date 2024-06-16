@@ -11,7 +11,7 @@ export default function CreateFeedPage() {
     const {t} = useLaravelReactI18n();
     const {categories} = useLoaderData() as CreateFeedLoaderType;
     const errors = useActionData() as CreateFeedValidationErrors;
-    const {show, handleClose} = usePageModal(errors, '/feeds');
+    const {show, handleClose} = usePageModal(errors, '/app/feeds');
 
     return (
         <Pane appear show={show} onClose={handleClose}>
@@ -21,7 +21,7 @@ export default function CreateFeedPage() {
 
             <PaneBody>
                 <FeedForm
-                    action="/feeds/create"
+                    action="/app/feeds/create"
                     categories={categories}
                     errors={errors}
                 />

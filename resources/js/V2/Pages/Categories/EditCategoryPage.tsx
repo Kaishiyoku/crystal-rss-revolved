@@ -14,14 +14,14 @@ export default function EditCategoryPage() {
     const {categoryId} = useParams();
     const {category, canDelete} = useLoaderData() as EditCategoryLoaderType;
     const errors = useActionData() as EditCategoryValidationErrors;
-    const {show, handleClose} = usePageModal(errors, '/categories');
+    const {show, handleClose} = usePageModal(errors, '/app/categories');
     const submit = useSubmit();
 
     const handleDelete = () => {
         const formData = new FormData();
         formData.append('intent', 'delete');
 
-        submit(formData, {method: 'delete', action: `/categories/${categoryId}/edit`});
+        submit(formData, {method: 'delete', action: `/app/categories/${categoryId}/edit`});
     };
 
     return (
@@ -32,7 +32,7 @@ export default function EditCategoryPage() {
 
             <PaneBody>
                 <CategoryForm
-                    action={`/categories/${categoryId}/edit`}
+                    action={`/app/categories/${categoryId}/edit`}
                     category={category}
                     errors={errors}
                 />

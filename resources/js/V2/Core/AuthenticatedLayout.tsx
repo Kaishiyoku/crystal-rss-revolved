@@ -68,11 +68,11 @@ const AuthenticatedLayout = () => {
                     </Dropdown.Trigger>
 
                     <Dropdown.Content>
-                        <Dropdown.Link to="/categories">
+                        <Dropdown.Link to="/app/categories">
                             {t('Categories')}
                         </Dropdown.Link>
 
-                        <Dropdown.Link to="/feeds">
+                        <Dropdown.Link to="/app/feeds">
                             {t('Feeds')}
                         </Dropdown.Link>
 
@@ -132,11 +132,11 @@ const AuthenticatedLayout = () => {
                                 {t('Home')}
                             </Dropdown.Link>
 
-                            <Dropdown.Link to="/categories">
+                            <Dropdown.Link to="/app/categories">
                                 {t('Categories')}
                             </Dropdown.Link>
 
-                            <Dropdown.Link to="/feeds">
+                            <Dropdown.Link to="/app/feeds">
                                 {t('Feeds')}
                             </Dropdown.Link>
                         </div>
