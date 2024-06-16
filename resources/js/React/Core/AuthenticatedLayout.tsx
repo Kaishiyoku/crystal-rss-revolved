@@ -1,14 +1,12 @@
-import {Outlet, useLoaderData, useLocation, useMatches} from 'react-router-dom';
+import {Outlet, useLocation, useMatches} from 'react-router-dom';
 import Breadcrumbs from '@/React/Core/Breadcrumbs';
 import {useEffect} from 'react';
 import MatchWithHandle from '@/React/types/MatchWithHandle';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import Dropdown from '@/Components/Dropdown';
 import DropdownArrowIcon from '@/Icons/DropdownArrowIcon';
-import User from '@/types/generated/Models/User';
 
 const AuthenticatedLayout = () => {
-    const user = useLoaderData() as User;
     const {t} = useLaravelReactI18n();
     const location = useLocation();
     const match = useMatches().find((match) => match.pathname === location.pathname) as MatchWithHandle;
@@ -29,7 +27,7 @@ const AuthenticatedLayout = () => {
                                 type="button"
                                 className="inline-flex items-center space-x-2 text-gray-500 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700/50 dark:hover:text-white px-3 py-2 rounded-md text-sm transition"
                             >
-                                <span>{user.name}</span>
+                                <span>USER</span>
 
                                 <DropdownArrowIcon/>
                             </button>
