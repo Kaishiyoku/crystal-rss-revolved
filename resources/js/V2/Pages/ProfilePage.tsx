@@ -17,7 +17,7 @@ export default function ProfilePage() {
 
             <UpdatePasswordForm/>
 
-            <DeleteUserForm/>
+            {/*<DeleteUserForm/>*/}
         </div>
     );
 }
