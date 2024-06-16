@@ -1,9 +1,9 @@
 import {Link, useForm, usePage} from '@inertiajs/react';
 import {Transition} from '@headlessui/react';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import TextInput from '@/Components/TextInput';
+import InputError from '@/Components/Form/InputError';
+import InputLabel from '@/Components/Form/InputLabel';
+import TextInput from '@/Components/Form/TextInput';
 import {PrimaryButton} from '@/Components/Button';
 import React from 'react';
 import Card from '@/Components/Card';

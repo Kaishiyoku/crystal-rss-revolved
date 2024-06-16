@@ -1,13 +1,13 @@
 import {useForm, usePage} from '@inertiajs/react';
-import InputLabel from '@/Components/InputLabel';
-import TextInput from '@/Components/TextInput';
-import InputError from '@/Components/InputError';
-import Select from '@/Components/Select';
+import InputLabel from '@/Components/Form/InputLabel';
+import TextInput from '@/Components/Form/TextInput';
+import InputError from '@/Components/Form/InputError';
+import Select from '@/Components/Form/Select';
 import React, {useState} from 'react';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import Card from '@/Components/Card';
 import {PrimaryButton, TertiaryButton} from '@/Components/Button';
-import Checkbox from '@/Components/Checkbox';
+import Checkbox from '@/Components/Form/Checkbox';
 import {PageProps} from '@/types';
 import {SelectNumberOption} from '@/types/SelectOption';
 import DiscoveredFeed from '@/types/DiscoveredFeed';

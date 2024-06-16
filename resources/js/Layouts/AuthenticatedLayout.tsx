@@ -3,11 +3,11 @@ import {Link} from '@inertiajs/react';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import Dropdown from '@/Components/Dropdown';
-import NavLink from '@/Components/NavLink';
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import {Transition} from '@headlessui/react';
 import DropdownArrowIcon from '@/Icons/DropdownArrowIcon';
 import {BasePageProps} from '@/types';
+import NavLink from '@/Components/NavLink';
+import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 
 export default function Authenticated({auth, header, children}: BasePageProps & { header: ReactNode; children: ReactNode; }) {
     const {t} = useLaravelReactI18n();
