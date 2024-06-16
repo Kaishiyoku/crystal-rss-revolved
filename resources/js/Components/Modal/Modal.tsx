@@ -1,7 +1,5 @@
 import {Fragment, ReactNode, useEffect} from 'react';
 import {Dialog, Transition} from '@headlessui/react';
-import {HeadlessButton} from '@/Components/Button';
-import XMarkOutlineIcon from '@/Icons/XMarkOutlineIcon';
 
 const Modal = (
     {
@@ -70,12 +68,6 @@ const Modal = (
                     <Dialog.Panel
                         className={`flex flex-col mb-4 bg-white dark:bg-gray-800 rounded-lg max-h-full shadow-xl transform transition-all w-full sm:mx-auto ${maxWidthClass}`}
                     >
-                        {closeable && (
-                            <HeadlessButton onClick={onClose} className="absolute top-0 right-0 mt-2 mr-2 button-icon">
-                                <XMarkOutlineIcon className="w-5 h-5"/>
-                            </HeadlessButton>
-                        )}
-
                         {children}
                     </Dialog.Panel>
                 </Transition.Child>
