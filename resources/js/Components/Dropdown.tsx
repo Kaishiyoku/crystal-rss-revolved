@@ -102,7 +102,6 @@ const DropdownLink = ({to, className = '', children}: { to: string; className?: 
     return (
         <NavLink
             to={to}
-            end
             onClick={() => setOpen(false)}
             className={({isActive}) => clsx(
                 'block w-full text-left px-4 py-3 sm:py-2 text-sm leading-5 rounded-lg focus:outline-none transition duration-150 ease-in-out',
