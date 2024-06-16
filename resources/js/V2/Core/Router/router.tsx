@@ -19,8 +19,6 @@ import createFeedAction from '@/V2/Core/Router/Actions/createFeedAction';
 import EditFeedPage from '@/V2/Pages/Feeds/EditFeedPage';
 import editFeedLoader from '@/V2/Core/Router/Loaders/editFeedLoader';
 import editFeedAction from '@/V2/Core/Router/Actions/editFeedAction';
-import Home from '@/V2/Pages/Home';
-import feedItemsLoader from '@/V2/Core/Router/Loaders/feedItemsLoader';
 
 const router = createBrowserRouter([
     {
@@ -30,11 +28,6 @@ const router = createBrowserRouter([
         loader: layoutLoader,
         handle: {titleKey: 'Home'} as RouteHandle,
         children: [
-            {
-                path: '/',
-                element: <Home/>,
-                loader: feedItemsLoader,
-            },
             {
                 path: 'login',
                 loader: () => redirect('/'),

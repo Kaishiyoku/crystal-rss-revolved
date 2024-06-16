@@ -1,10 +1,8 @@
 <?php
 
 use App\Http\Controllers\Api\CategoryController;
-use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\FeedController;
 use App\Http\Controllers\Api\FeedDiscovererController;
-use App\Http\Controllers\Api\FeedUrlDiscovererController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -28,7 +26,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::resource('feeds', FeedController::class);
 
     Route::post('discover-feed', FeedDiscovererController::class)->name('discover-feed');
-    Route::post('discover-feed-urls', FeedUrlDiscovererController::class)->name('discover-feed-urls');
-
-    Route::get('feed-items', DashboardController::class);
+    Route::post('discover-feed-urls', \App\Http\Controllers\Api\FeedUrlDiscovererController::class)->name('discover-feed-urls');
 });
