@@ -1,5 +1,5 @@
-import './bootstrap';
-import '../css/app.css';
+import '../bootstrap';
+import '../../css/app.css';
 import {createRoot} from 'react-dom/client';
 import NProgress from 'nprogress';
 import {LaravelReactI18nProvider} from 'laravel-react-i18n';
