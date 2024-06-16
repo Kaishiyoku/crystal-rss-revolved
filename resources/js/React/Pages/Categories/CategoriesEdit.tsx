@@ -26,8 +26,8 @@ export default function CategoriesEdit() {
             </ModalHeader>
 
             <ModalBody>
-                <Form method="put" action={`/react/categories/${categoryId}/edit`} className="space-y-4">
-                    <div>
+                <Form method="put" action={`/react/categories/${categoryId}/edit`}>
+                    <div className="mb-4">
                         <InputLabel htmlFor="name" value={t('validation.attributes.name')} required/>
                         <TextInput
                             id="name"
