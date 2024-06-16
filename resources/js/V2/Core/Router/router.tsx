@@ -3,6 +3,9 @@ import categoriesLoader from '@/V2/Core/Router/Loaders/categoriesLoader';
 import AuthenticatedLayout from '@/V2/Core/AuthenticatedLayout';
 import CategoriesIndex from '@/V2/Pages/Categories/CategoriesIndex';
 import CategoriesCreate from '@/V2/Pages/Categories/CategoriesCreate';
+import request from '@/V2/request';
+import {HTTPError} from 'ky';
+import ValidationErrors from '@/V2/types/ValidationErrors';
 import RouteHandle from '@/V2/types/RouteHandle';
 import CategoriesEdit from '@/V2/Pages/Categories/CategoriesEdit';
 import categoryLoader from '@/V2/Core/Router/Loaders/categoryLoader';
@@ -10,7 +13,6 @@ import layoutLoader from '@/V2/Core/Router/Loaders/layoutLoader';
 import updateCategoryAction from '@/V2/Core/Router/Actions/updateCategoryAction';
 import ErrorPage from '@/V2/Core/ErrorPage';
 import AuthProvider from '@/V2/Core/AuthProvider';
-import createCategoryAction from '@/V2/Core/Router/Actions/createCategoryAction';
 
 const router = createBrowserRouter([
     {
@@ -29,7 +31,23 @@ const router = createBrowserRouter([
                     {
                         path: 'create',
                         element: <CategoriesCreate/>,
-                        action: createCategoryAction,
+                        action: async ({request: req}) => {
+                            const formData = await req.formData();
+
+                            try {
+                                await request.post('/api/categories', {json: Object.fromEntries(formData)});
+                            } catch (exception) {
+                                const errorResponse = (exception as HTTPError).response;
+
+                                if (errorResponse.status !== 422) {
+                                    throw exception;
+                                }
+
+                                return (await errorResponse.json() as { errors: ValidationErrors; }).errors;
+                            }
+
+                            return null;
+                        },
                         handle: {hide: true, titleKey: 'Add category'} as RouteHandle,
                     },
                     {
