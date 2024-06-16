@@ -11,7 +11,7 @@ import {
 import {Transition} from '@headlessui/react';
 import noop from '@/Utils/noop';
 import clsx from 'clsx';
-import {Link, NavLink} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {HeadlessButton} from '@/Components/Button';
 
 type DropDownContextType = {
@@ -96,24 +96,24 @@ const Content = ({align = 'right', width = 48, contentClasses = 'p-2 bg-white/80
     );
 };
 
-const DropdownLink = ({to, className = '', children}: { to: string; className?: string; children: ReactNode; }) => {
+const DropdownLink = ({to, active = false, className = '', children}: { to: string; active?: boolean; className?: string; children: ReactNode; }) => {
     const {setOpen} = useContext(DropDownContext);
 
     return (
-        <NavLink
+        <Link
             to={to}
             onClick={() => setOpen(false)}
-            className={({isActive}) => clsx(
-                'block w-full text-left px-4 py-3 sm:py-2 text-sm leading-5 rounded-lg focus:outline-none transition duration-150 ease-in-out',
+            className={clsx(
+                'block w-full text-left px-4 py-2 text-sm leading-5 rounded-lg focus:outline-none transition duration-150 ease-in-out',
                 {
-                    'text-violet-100 bg-violet-500 hover:bg-violet-600 focus:bg-violet-500 focus:text-violet-50': isActive,
-                    'text-gray-700 dark:text-gray-400 hover:bg-gray-400/25 dark:hover:bg-gray-700 focus:bg-gray-500/25 dark:focus:bg-gray-600 dark:focus:text-gray-300': !isActive,
+                    'text-violet-100 bg-violet-500 hover:bg-violet-600 focus:bg-violet-500 focus:text-violet-50': active,
+                    'text-gray-700 dark:text-gray-400 hover:bg-gray-400/25 dark:hover:bg-gray-700 focus:bg-gray-500/25 dark:focus:bg-gray-600 dark:focus:text-gray-300': !active,
                 },
                 className
             )}
         >
             {children}
-        </NavLink>
+        </Link>
     );
 };
 
@@ -122,7 +122,7 @@ const DropdownButton = ({onClick, className = '', children}: { onClick: () => vo
         <HeadlessButton
             onClick={onClick}
             className={clsx(
-                'block w-full text-left px-4 py-3 sm:py-2 text-sm leading-5 rounded-lg focus:outline-none transition duration-150 ease-in-out text-gray-700 dark:text-gray-400 hover:bg-gray-400/25 dark:hover:bg-gray-700 focus:bg-gray-500/25 dark:focus:bg-gray-600 dark:focus:text-gray-300',
+                'block w-full text-left px-4 py-2 text-sm leading-5 rounded-lg focus:outline-none transition duration-150 ease-in-out text-gray-700 dark:text-gray-400 hover:bg-gray-400/25 dark:hover:bg-gray-700 focus:bg-gray-500/25 dark:focus:bg-gray-600 dark:focus:text-gray-300',
                 className
             )}
         >
