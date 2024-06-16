@@ -29,7 +29,6 @@ import usersAction from '@/V2/Core/Router/Actions/usersAction';
 import ProfilePage from '@/V2/Pages/ProfilePage';
 import profileLoader from '@/V2/Core/Router/Loaders/profileLoader';
 import profileAction from '@/V2/Core/Router/Actions/profileAction';
-import NotFoundPage from '@/V2/Core/NotFoundPage';
 
 const router = createBrowserRouter([
     {
@@ -112,10 +111,6 @@ const router = createBrowserRouter([
                 ],
             },
         ],
-    },
-    {
-        path: '*',
-        element: <NotFoundPage/>,
     },
 ]);
 
