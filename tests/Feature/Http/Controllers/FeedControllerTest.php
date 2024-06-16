@@ -1,14 +1,15 @@
 <?php
 
-namespace Http\Controllers\Api;
+namespace Http\Controllers;
 
-use App\Http\Controllers\Api\FeedController;
+use App\Http\Controllers\FeedController;
 use App\Models\Category;
 use App\Models\Feed;
 use App\Models\FeedItem;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Arr;
+use Inertia\Testing\AssertableInertia as Assert;
 use Tests\TestCase;
 
 class FeedControllerTest extends TestCase
@@ -37,29 +38,31 @@ class FeedControllerTest extends TestCase
     {
         $this->actingAs($user = User::factory()->create());
 
-        $feed = Feed::factory()->for($user)->create();
+        Feed::factory()->for($user)->create();
 
-        $this->json('get', route('api.feeds.index'))
-            ->assertJson([
-                'feeds' => [$feed->toArray()],
-                'canCreate' => true,
-            ]);
+        $this->get(route('feeds.index'))
+            ->assertInertia(fn (Assert $page) => $page
+                ->component('Feeds/Index')
+                ->count('feeds', 1)
+                ->where('canCreate', true)
+            );
     }
 
     public function test_cannot_access_index_as_guest(): void
     {
-        $this->json('get', route('api.feeds.index'))
-            ->assertUnauthorized();
+        $response = $this->get(route('feeds.index'));
+
+        $response->assertRedirect('/login');
     }
 
     public function test_create(): void
     {
         $this->actingAs(User::factory()->create());
 
-        $this->json('get', route('api.feeds.create'))
-            ->assertJsonStructure([
-                'categories',
-            ]);
+        $this->get(route('feeds.create'))
+            ->assertInertia(fn (Assert $page) => $page
+                ->has('feed')
+            );
     }
 
     public function test_store(): void
@@ -74,7 +77,7 @@ class FeedControllerTest extends TestCase
         $language = 'en';
         $isPurgeable = true;
 
-        $this->json('post', route('api.feeds.store'), [
+        $response = $this->post(route('feeds.store'), [
             'category_id' => $category->id,
             'feed_url' => $feedUrl,
             'site_url' => $siteUrl,
@@ -82,8 +85,9 @@ class FeedControllerTest extends TestCase
             'name' => $name,
             'language' => $language,
             'is_purgeable' => $isPurgeable,
-        ])->assertJson([]);
+        ]);
 
+        $response->assertRedirect(route('feeds.index'));
         static::assertSame(1, $user->feeds()->count());
         static::assertSame($user->id, $user->feeds()->first()->user_id);
         static::assertSame($category->id, $user->feeds()->first()->category_id);
@@ -99,19 +103,11 @@ class FeedControllerTest extends TestCase
     {
         $this->actingAs($user = User::factory()->create());
 
-        $this->json('post', route('api.feeds.store'), ['name' => ' '])
-            ->assertUnprocessable()
-            ->assertJson([
-                'message' => 'The Category field is required. (and 5 more errors)',
-                'errors' => [
-                    'category_id' => ['The Category field is required.'],
-                    'feed_url' => ['The Feed URL field is required.'],
-                    'site_url' => ['The Site URL field is required.'],
-                    'name' => ['The Name field is required.'],
-                    'language' => ['The Language field is required.'],
-                    'is_purgeable' => ['The Purgeable field is required.'],
-                ],
-            ]);
+        $this->get(route('feeds.create'));
+        $response = $this->post(route('feeds.store'), ['name' => ' ']);
+
+        $response->assertRedirect(route('feeds.create'));
+        $response->assertSessionHasErrors(['name' => 'The Name field is required.']);
         static::assertSame(0, $user->feeds()->count());
     }
 
@@ -121,11 +117,11 @@ class FeedControllerTest extends TestCase
 
         $feed = Feed::factory()->for($user)->create();
 
-        $this->json('get', route('api.feeds.edit', $feed))
-            ->assertJson([
-                'feed' => $feed->toArray(),
-                'canDelete' => true,
-            ]);
+        $this->get(route('feeds.edit', $feed))
+            ->assertInertia(fn (Assert $page) => $page
+                ->has('feed')
+                ->where('canDelete', true)
+            );
     }
 
     public function test_cannot_edit_feed_of_another_user(): void
@@ -134,7 +130,7 @@ class FeedControllerTest extends TestCase
 
         $feed = Feed::factory()->create();
 
-        $this->json('get', route('api.feeds.edit', $feed))
+        $this->get(route('feeds.edit', $feed))
             ->assertForbidden();
     }
 
@@ -152,7 +148,7 @@ class FeedControllerTest extends TestCase
         $language = 'de';
         $isPurgeable = false;
 
-        $this->json('put', route('api.feeds.update', $feed), [
+        $response = $this->put(route('feeds.update', $feed), [
             'category_id' => $category->id,
             'feed_url' => $feedUrl,
             'site_url' => $siteUrl,
@@ -160,8 +156,9 @@ class FeedControllerTest extends TestCase
             'name' => $name,
             'language' => $language,
             'is_purgeable' => $isPurgeable,
-        ])->assertJson([]);
+        ]);
 
+        $response->assertRedirect(route('feeds.index'));
         static::assertSame($user->id, $user->feeds()->first()->user_id);
         static::assertSame($category->id, $user->feeds()->first()->category_id);
         static::assertSame($feedUrl, $user->feeds()->first()->feed_url);
@@ -178,7 +175,7 @@ class FeedControllerTest extends TestCase
 
         $feed = Feed::factory()->create();
 
-        $this->json('put', route('api.feeds.update', $feed), ['name' => 'Test (updated)'])
+        $this->put(route('feeds.update', $feed), ['name' => 'Test (updated)'])
             ->assertForbidden();
     }
 
@@ -188,8 +185,9 @@ class FeedControllerTest extends TestCase
 
         $feed = Feed::factory()->for($user)->hasFeedItems(10)->create();
 
-        $this->json('delete', route('api.feeds.destroy', $feed))
-            ->assertJson([]);
+        $response = $this->delete(route('feeds.destroy', $feed));
+
+        $response->assertRedirect(route('feeds.index'));
         static::assertSame(0, $user->feeds()->count());
         static::assertSame(0, $user->feedItems()->count());
     }
@@ -200,7 +198,7 @@ class FeedControllerTest extends TestCase
 
         $feed = Feed::factory()->hasFeedItems(10)->create();
 
-        $this->json('delete', route('api.feeds.destroy', $feed))
+        $this->delete(route('feeds.destroy', $feed))
             ->assertForbidden();
 
         static::assertSame(1, Feed::count());
