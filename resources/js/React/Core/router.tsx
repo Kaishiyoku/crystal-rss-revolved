@@ -1,21 +1,21 @@
 import {createBrowserRouter} from 'react-router-dom';
-import categoriesLoader from '@/V2/Pages/Categories/Loaders/categoriesLoader';
-import AuthenticatedLayout from '@/V2/Core/AuthenticatedLayout';
-import CategoriesIndex from '@/V2/Pages/Categories/CategoriesIndex';
-import CategoriesCreate from '@/V2/Pages/Categories/CategoriesCreate';
-import request from '@/V2/request';
+import categoriesLoader from '@/React/Pages/Categories/Loaders/categoriesLoader';
+import AuthenticatedLayout from '@/React/Core/AuthenticatedLayout';
+import CategoriesIndex from '@/React/Pages/Categories/CategoriesIndex';
+import CategoriesCreate from '@/React/Pages/Categories/CategoriesCreate';
+import request from '@/React/request';
 import {HTTPError} from 'ky';
-import ValidationErrors from '@/V2/types/ValidationErrors';
-import RouteHandle from '@/V2/types/RouteHandle';
-import CategoriesEdit from '@/V2/Pages/Categories/CategoriesEdit';
-import categoryLoader from '@/V2/Pages/Categories/Loaders/categoryLoader';
-import layoutLoader from '@/V2/Pages/Loaders/layoutLoader';
+import ValidationErrors from '@/React/types/ValidationErrors';
+import RouteHandle from '@/React/types/RouteHandle';
+import CategoriesEdit from '@/React/Pages/Categories/CategoriesEdit';
+import categoryLoader from '@/React/Pages/Categories/Loaders/categoryLoader';
+import layoutLoader from '@/React/Pages/Loaders/layoutLoader';
 
 const Error = () => <div>An error occurred.</div>;
 
 const router = createBrowserRouter([
     {
-        path: '/v2',
+        path: '/react',
         element: <AuthenticatedLayout/>,
         errorElement: <Error/>,
         loader: layoutLoader,

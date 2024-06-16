@@ -14,7 +14,7 @@ export default function CategoriesIndex() {
     return (
         <div>
             <Actions>
-                <Link to="/v2/categories/create" className="link-secondary">
+                <Link to="/react/categories/create" className="link-secondary">
                     {t('Add category')}
                 </Link>
             </Actions>
@@ -32,7 +32,7 @@ export default function CategoriesIndex() {
                         {categories.map((category) => (
                             <LinkStack.Item
                                 key={category.id}
-                                to={`/v2/categories/${category.id}/edit`}
+                                to={`/react/categories/${category.id}/edit`}
                                 className="block"
                             >
                                 <div className="font-semibold">

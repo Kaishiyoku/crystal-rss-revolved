@@ -1,5 +1,5 @@
 import Category from '@/types/generated/Models/Category';
-import request from '@/V2/request';
+import request from '@/React/request';
 import {Params} from 'react-router-dom';
 
 const categoryLoader = (suffix?: string) => async ({params}: { params: Params; }) => {

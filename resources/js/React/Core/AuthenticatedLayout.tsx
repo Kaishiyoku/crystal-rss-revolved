@@ -1,7 +1,7 @@
 import {Outlet, useLoaderData, useLocation, useMatches} from 'react-router-dom';
-import Breadcrumbs from '@/V2/Core/Breadcrumbs';
+import Breadcrumbs from '@/React/Core/Breadcrumbs';
 import {useEffect} from 'react';
-import MatchWithHandle from '@/V2/types/MatchWithHandle';
+import MatchWithHandle from '@/React/types/MatchWithHandle';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import Dropdown from '@/Components/Dropdown';
 import DropdownArrowIcon from '@/Icons/DropdownArrowIcon';
@@ -37,7 +37,7 @@ const AuthenticatedLayout = () => {
                     </Dropdown.Trigger>
 
                     <Dropdown.Content>
-                        <Dropdown.Link to="/v2/categories">
+                        <Dropdown.Link to="/react/categories">
                             {t('Categories')}
                         </Dropdown.Link>
                     </Dropdown.Content>

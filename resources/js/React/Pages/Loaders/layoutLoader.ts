@@ -1,4 +1,4 @@
-import request from '@/V2/request';
+import request from '@/React/request';
 import User from '@/types/generated/Models/User';
 
 const layoutLoader = async () => {
