@@ -1,8 +1,7 @@
 import {HTTPError, ResponsePromise} from 'ky';
 import ValidationErrors from '@/V2/types/ValidationErrors';
-import {redirect} from 'react-router-dom';
 
-export default async function handleRequestValidationError(requestFn: () => ResponsePromise, to?: string) {
+export default async function handleRequestValidationError(requestFn: () => ResponsePromise) {
     try {
         await requestFn();
     } catch (exception) {
@@ -13,10 +12,6 @@ export default async function handleRequestValidationError(requestFn: () => Resp
         }
 
         return (await errorResponse.json() as { errors: ValidationErrors; }).errors;
-    }
-
-    if (to) {
-        return redirect(to);
     }
 
     return null;

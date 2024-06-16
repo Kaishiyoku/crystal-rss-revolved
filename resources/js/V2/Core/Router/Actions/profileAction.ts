@@ -6,6 +6,8 @@ import {redirect} from 'react-router-dom';
 const profileAction: ActionFunction = async ({request: req}) => {
     const formData = await req.formData();
 
+    console.log(Object.fromEntries(formData));
+
     // if (formData.get('intent') === 'delete') {
     //     await request.delete(`/api/feeds/${params.feedId}`);
     //
@@ -13,11 +15,7 @@ const profileAction: ActionFunction = async ({request: req}) => {
     // }
 
     if (formData.get('intent') === 'update-profile') {
-        return await handleRequestValidationError(() => request.patch('/api/profile', {json: Object.fromEntries(formData)}), '/');
-    }
-
-    if (formData.get('intent') === 'update-password') {
-        return await handleRequestValidationError(() => request.put('/api/password', {json: Object.fromEntries(formData)}), '/');
+        return await handleRequestValidationError(() => request.patch('/api/profile', {json: Object.fromEntries(formData)}));
     }
 
     return redirect('/');
