@@ -16,7 +16,8 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function (Request $request) {
-    if ($request->user()) {
+    if ($request->user())
+    {
         return view('app');
     }
 
@@ -36,6 +37,6 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('{all?}', function () {
+Route::get('{all?}', function() {
     return view('app');
 })->where(['all' => '.*']);
