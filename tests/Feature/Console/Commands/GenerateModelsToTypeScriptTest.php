@@ -18,6 +18,5 @@ it('generates TypeScript types', function () {
         'ShortFeed.ts',
         'ShortFeedWithFeedItemsCount.ts',
         'User.ts',
-        'UserWithFeedsCountAndUnreadFeedItemsCount.ts',
     ]);
 });

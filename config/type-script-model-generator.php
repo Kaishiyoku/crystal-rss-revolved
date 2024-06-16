@@ -41,7 +41,7 @@ return [
             ],
         ],
         [
-            'name' => 'UserWithFeedsCountAndUnreadFeedItemsCount',
+            'name' => 'UserWithFeedsAndUnreadFeedItemsCount',
             'model' => \App\Models\User::class,
             'additional_fields' => [
                 [

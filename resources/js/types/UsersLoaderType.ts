@@ -1,6 +1,6 @@
-import UserWithFeedsCountAndUnreadFeedItemsCount from '@/types/generated/Models/UserWithFeedsCountAndUnreadFeedItemsCount';
+import UserWithFeedsAndUnreadFeedItemsCount from '@/types/generated/Models/UserWithFeedsAndUnreadFeedItemsCount';
 
 type UsersLoaderType = {
-    users: UserWithFeedsCountAndUnreadFeedItemsCount[];
+    users: UserWithFeedsAndUnreadFeedItemsCount[];
 }
 export default UsersLoaderType;
