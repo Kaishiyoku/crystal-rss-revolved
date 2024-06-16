@@ -7,7 +7,7 @@ import Dropdown from '@/Components/Dropdown';
 import DropdownArrowIcon from '@/Icons/DropdownArrowIcon';
 import useAuth from '@/Hooks/useAuth';
 import User from '@/types/generated/Models/User';
-import rq from '@/Core/rq';
+import request from '@/Core/request';
 import {Transition} from '@headlessui/react';
 import clsx from 'clsx';
 
@@ -40,7 +40,7 @@ const AuthenticatedLayout = () => {
     }, [isNavigationMenuOpen]);
 
     const handleLogout = async () => {
-        await rq.delete('/api/logout');
+        await request.delete('/api/logout');
 
         window.location.href = '/';
     };

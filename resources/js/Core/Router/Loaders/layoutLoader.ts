@@ -1,11 +1,11 @@
-import rq from '@/Core/rq';
+import request from '@/Core/request';
 import User from '@/types/generated/Models/User';
 import {LoaderFunction} from '@remix-run/router/utils';
 import {HTTPError} from 'ky';
 
 const layoutLoader: LoaderFunction = async () => {
     try {
-        return await rq('/api/user').json<User>();
+        return await request('/api/user').json<User>();
     } catch (error) {
         const errorResponse = (error as HTTPError).response;
 

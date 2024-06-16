@@ -1,12 +1,12 @@
-import rq from '@/Core/rq';
+import request from '@/Core/request';
 import {ActionFunction} from '@remix-run/router/utils';
 import handleRequestValidationError from '@/Core/Router/Helpers/handleRequestValidationError';
 import toast from 'react-hot-toast';
 
-const createCategoryAction: ActionFunction = async ({request}) => {
-    const formData = await request.formData();
+const createCategoryAction: ActionFunction = async ({request: req}) => {
+    const formData = await req.formData();
 
-    const response = await handleRequestValidationError(() => rq.post('/api/categories', {json: Object.fromEntries(formData)}));
+    const response = await handleRequestValidationError(() => request.post('/api/categories', {json: Object.fromEntries(formData)}));
 
     toast('Category saved.');
 

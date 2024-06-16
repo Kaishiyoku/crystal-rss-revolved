@@ -1,4 +1,4 @@
-import rq from '@/Core/rq';
+import request from '@/Core/request';
 import {LoaderFunction} from '@remix-run/router/utils';
 import UsersLoaderType from '@/types/UsersLoaderType';
 import {redirect} from 'react-router-dom';
@@ -6,7 +6,7 @@ import {HTTPError} from 'ky';
 
 const usersLoader: LoaderFunction = async () => {
     try {
-        return await rq('/api/admin/users').json<UsersLoaderType>();
+        return await request('/api/admin/users').json<UsersLoaderType>();
     } catch (error) {
         const errorResponse = (error as HTTPError).response;
 

@@ -1,6 +1,6 @@
-import InputLabel from '@/Components/Form/InputLabel';
-import TextInput from '@/Components/Form/TextInput';
-import InputError from '@/Components/Form/InputError';
+import InputLabel from '@/Components/InputLabel';
+import TextInput from '@/Components/TextInput';
+import InputError from '@/Components/InputError';
 import {PrimaryButton, SecondaryButton} from '@/Components/Button';
 import React, {useRef, useState} from 'react';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
@@ -9,9 +9,9 @@ import Feed from '@/types/generated/Models/Feed';
 import CreateFeedValidationErrors from '@/types/CreateFeedValidationErrors';
 import EditFeedValidationErrors from '@/types/EditFeedValidationErrors';
 import LinkStack from '@/Components/LinkStack';
-import Select from '@/Components/Form/Select';
-import Checkbox from '@/Components/Form/Checkbox';
-import rq from '@/Core/rq';
+import Select from '@/Components/Select';
+import Checkbox from '@/Components/Checkbox';
+import request from '@/Core/request';
 import DiscoveredFeed from '@/types/DiscoveredFeed';
 import {SelectNumberOption} from '@/types/SelectOption';
 import useAuth from '@/Hooks/useAuth';
@@ -35,7 +35,7 @@ export default function FeedForm({action, feed = null, categories, errors}: { ac
         setDiscoveredFeedUrls([]);
         setIsDiscoverFeedProcessing(true);
 
-        rq.post('/api/discover-feed-urls', {json: {feed_url: searchUrl}})
+        request.post('/api/discover-feed-urls', {json: {feed_url: searchUrl}})
             .json<string[]>()
             .then((data) => {
                 setDiscoveredFeedUrls(data);
@@ -49,7 +49,7 @@ export default function FeedForm({action, feed = null, categories, errors}: { ac
     const selectDiscoveredFeedUrl = (feedUrl: string) => () => {
         setIsDiscoverFeedProcessing(true);
 
-        rq.post('/api/discover-feed', {json: {feed_url: feedUrl}})
+        request.post('/api/discover-feed', {json: {feed_url: feedUrl}})
             .json<DiscoveredFeed>()
             .then((responseData) => {
                 nameRef.current!.value = responseData.name;

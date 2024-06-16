@@ -9,7 +9,7 @@ import EyeSlashOutlineIcon from '@/Icons/EyeSlashOutlineIcon';
 import formatDateTime from '@/Utils/formatDateTime';
 import CalendarDaysSolidIcon from '@/Icons/CalendarDaysSolidIcon';
 import FeedItem from '@/types/generated/Models/FeedItem';
-import rq from '@/Core/rq';
+import request from '@/Core/request';
 import TotalNumberOfFeedItemsContext from '@/Contexts/TotalNumberOfFeedItemsContext';
 
 export default function FeedItemCard({hueRotationIndex, feedItem}: { hueRotationIndex: number; feedItem: FeedItem; }) {
@@ -21,7 +21,7 @@ export default function FeedItemCard({hueRotationIndex, feedItem}: { hueRotation
     const toggle = () => {
         setProcessing(true);
 
-        void rq.put(`/feeds/${internalFeedItem.id}/toggle`)
+        void request.put(`/feeds/${internalFeedItem.id}/toggle`)
             .json<FeedItem>()
             .then((data) => {
                 if (data.read_at) {

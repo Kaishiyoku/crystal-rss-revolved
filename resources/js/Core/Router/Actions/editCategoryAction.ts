@@ -1,20 +1,20 @@
-import rq from '@/Core/rq';
+import request from '@/Core/request';
 import {ActionFunction} from '@remix-run/router/utils';
 import handleRequestValidationError from '@/Core/Router/Helpers/handleRequestValidationError';
 import toast from 'react-hot-toast';
 
-const editCategoryAction: ActionFunction = async ({params, request}) => {
-    const formData = await request.formData();
+const editCategoryAction: ActionFunction = async ({params, request: req}) => {
+    const formData = await req.formData();
 
     if (formData.get('intent') === 'delete') {
-        await rq.delete(`/api/categories/${params.categoryId}`);
+        await request.delete(`/api/categories/${params.categoryId}`);
 
         toast('Category deleted.');
 
         return null;
     }
 
-    const response = await handleRequestValidationError(() => rq.put(`/api/categories/${params.categoryId}`, {json: Object.fromEntries(formData)}));
+    const response = await handleRequestValidationError(() => request.put(`/api/categories/${params.categoryId}`, {json: Object.fromEntries(formData)}));
 
     toast('Category saved.');
 

@@ -1,9 +1,9 @@
-import rq from '@/Core/rq';
+import request from '@/Core/request';
 import {LoaderFunction} from '@remix-run/router/utils';
 import FeedItemsLoaderType from '@/types/FeedItemsLoaderType';
 
-const feedItemsLoader: LoaderFunction = async ({request}) => {
-    const searchParams = new URL(request.url).searchParams;
+const feedItemsLoader: LoaderFunction = async ({request: req}) => {
+    const searchParams = new URL(req.url).searchParams;
     const cursor = searchParams.get('cursor');
     const feedId = searchParams.get('feed_id');
 
@@ -17,7 +17,7 @@ const feedItemsLoader: LoaderFunction = async ({request}) => {
         customSearchParams.set('feed_id', feedId);
     }
 
-    return await rq(`/api/feed-items${customSearchParams.size > 0 ? `?${customSearchParams.toString()}` : ''}`).json<FeedItemsLoaderType>();
+    return await request(`/api/feed-items${customSearchParams.size > 0 ? `?${customSearchParams.toString()}` : ''}`).json<FeedItemsLoaderType>();
 };
 
 export default feedItemsLoader;

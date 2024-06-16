@@ -6,7 +6,7 @@ import {useContext, useEffect, useState} from 'react';
 import {isEmpty, length} from 'ramda';
 import NewspaperSolidIcon from '@/Icons/NewspaperSolidIcon';
 import EmptyState from '@/Components/EmptyState';
-import rq from '@/Core/rq';
+import request from '@/Core/request';
 import FeedItemCard from '@/Components/FeedItemCard';
 import TotalNumberOfFeedItemsContext from '@/Contexts/TotalNumberOfFeedItemsContext';
 import FeedFilterDropdown from '@/Components/FeedFilterDropdown';
@@ -79,7 +79,7 @@ export default function Home() {
     }, [fetcher]);
 
     const markAllAsRead = async () => {
-        await rq.put('/feeds/mark-all-as-read');
+        await request.put('/feeds/mark-all-as-read');
 
         setTotalNumberOfFeedItems(0);
 
