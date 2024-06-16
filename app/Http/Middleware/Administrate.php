@@ -23,8 +23,6 @@ class Administrate
             abort(Response::HTTP_FORBIDDEN);
         }
 
-        // @codeCoverageIgnoreStart
         return redirect('/');
-        // @codeCoverageIgnoreEnd
     }
 }
