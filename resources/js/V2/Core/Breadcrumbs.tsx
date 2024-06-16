@@ -10,7 +10,7 @@ const LinkBreadcrumb = ({breadcrumb}: { breadcrumb: Breadcrumb; }) => {
 
     return (
         <li>
-            {t(breadcrumb.titleKey)}
+            {t(breadcrumb.headline)}
         </li>
     );
 };
@@ -22,7 +22,7 @@ const TextBreadcrumb = ({breadcrumb}: { breadcrumb: Breadcrumb; }) => {
         <Fragment>
             <li>
                 <Link to={breadcrumb.pathname} className="font-semibold text-violet-400 hover:text-violet-300 leading-tight transition">
-                    {t(breadcrumb.titleKey)}
+                    {t(breadcrumb.headline)}
                 </Link>
             </li>
 
@@ -61,8 +61,8 @@ export default function Breadcrumbs() {
                 <ol role="list" className="flex items-center space-x-2">
                     {breadcrumbs.map((breadcrumb, index) =>
                         index === breadcrumbs.length - 1
-                            ? <LinkBreadcrumb key={slug(breadcrumb.titleKey)} breadcrumb={breadcrumb}/>
-                            : <TextBreadcrumb key={slug(breadcrumb.titleKey)} breadcrumb={breadcrumb}/>
+                            ? <LinkBreadcrumb key={slug(breadcrumb.headline)} breadcrumb={breadcrumb}/>
+                            : <TextBreadcrumb key={slug(breadcrumb.headline)} breadcrumb={breadcrumb}/>
                     )}
                 </ol>
             </nav>

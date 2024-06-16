@@ -1,18 +1,17 @@
 import {
+    useState,
     createContext,
-    Dispatch,
+    useContext,
     Fragment,
     PropsWithChildren,
-    ReactNode,
+    Dispatch,
     SetStateAction,
-    useContext,
-    useState
+    ReactNode
 } from 'react';
 import {Transition} from '@headlessui/react';
 import noop from '@/Utils/noop';
 import clsx from 'clsx';
 import {Link} from 'react-router-dom';
-import {HeadlessButton} from '@/Components/Button';
 
 type DropDownContextType = {
     open: boolean;
@@ -117,26 +116,11 @@ const DropdownLink = ({to, active = false, className = '', children}: { to: stri
     );
 };
 
-const DropdownButton = ({onClick, className = '', children}: { onClick: () => void; className?: string; children: ReactNode; }) => {
-    return (
-        <HeadlessButton
-            onClick={onClick}
-            className={clsx(
-                'block w-full text-left px-4 py-2 text-sm leading-5 rounded-lg focus:outline-none transition duration-150 ease-in-out text-gray-700 dark:text-gray-400 hover:bg-gray-400/25 dark:hover:bg-gray-700 focus:bg-gray-500/25 dark:focus:bg-gray-600 dark:focus:text-gray-300',
-                className
-            )}
-        >
-            {children}
-        </HeadlessButton>
-    )
-};
-
 const Spacer = () => <div className="pt-2 mb-2 border-b dark:border-gray-600"/>;
 
 Dropdown.Trigger = Trigger;
 Dropdown.Content = Content;
 Dropdown.Link = DropdownLink;
-Dropdown.Button = DropdownButton;
 Dropdown.Spacer = Spacer;
 
 export default Dropdown;

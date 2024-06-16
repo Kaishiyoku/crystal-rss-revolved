@@ -5,37 +5,20 @@ import MatchWithHandle from '@/V2/types/MatchWithHandle';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import Dropdown from '@/Components/Dropdown';
 import DropdownArrowIcon from '@/Icons/DropdownArrowIcon';
-import useAuth from '@/V2/Hooks/useAuth';
 import User from '@/types/generated/Models/User';
-import request from '@/V2/request';
 
 const AuthenticatedLayout = () => {
-    const {user, setUser} = useAuth();
-    const userData = useLoaderData() as User;
+    const user = useLoaderData() as User;
     const {t} = useLaravelReactI18n();
     const location = useLocation();
     const match = useMatches().find((match) => match.pathname === location.pathname) as MatchWithHandle;
 
     useEffect(() => {
-        setUser(userData);
-    }, []);
-
-    useEffect(() => {
         document.querySelector('title')!.textContent = t(match?.handle.title);
     }, [location]);
 
-    const handleLogout = async () => {
-        await request.delete('/api/logout');
-
-        window.location.href = '/';
-    };
-
-    if (!user) {
-        return null;
-    }
-
     return (
-        <div className="min-h-screen text-gray-800 dark:text-gray-300 bg-gray-50 dark:bg-gray-900">
+        <div className="min-h-screen text-gray-800 dark:text-gray-300 bg-gray-100 dark:bg-gray-900">
             <header className="flex justify-between items-center max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-xl space-x-2">
                 <Breadcrumbs/>
 
@@ -54,13 +37,9 @@ const AuthenticatedLayout = () => {
                     </Dropdown.Trigger>
 
                     <Dropdown.Content>
-                        <Dropdown.Link to="/app/categories">
+                        <Dropdown.Link to="/v2/categories">
                             {t('Categories')}
                         </Dropdown.Link>
-
-                        <Dropdown.Button onClick={handleLogout}>
-                            {t('Logout')}
-                        </Dropdown.Button>
                     </Dropdown.Content>
                 </Dropdown>
             </header>

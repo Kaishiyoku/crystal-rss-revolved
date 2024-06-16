@@ -15,7 +15,7 @@ type CategoriesCreateValidationErrors = ValidationErrors & { name?: string; } | 
 export default function CategoriesCreate() {
     const {t} = useLaravelReactI18n();
     const errors = useActionData() as CategoriesCreateValidationErrors;
-    const {show, handleClose} = usePageModal(errors, '/app/categories');
+    const {show, handleClose} = usePageModal(errors, '/v2/categories');
 
     return (
         <Pane appear show={show} onClose={handleClose}>
@@ -24,7 +24,7 @@ export default function CategoriesCreate() {
             </PaneHeader>
 
             <PaneBody>
-                <Form method="post" action="/app/categories/create" className="space-y-4">
+                <Form method="post" action="/v2/categories/create" className="space-y-4">
                     <div>
                         <InputLabel htmlFor="name" value={t('validation.attributes.name')} required/>
                         <TextInput

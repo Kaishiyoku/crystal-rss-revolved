@@ -1,6 +1,7 @@
 type Breadcrumb = {
     pathname: string;
-    titleKey: string;
+    title: string;
+    headline: string;
 };
 
 export default Breadcrumb;

@@ -12,12 +12,11 @@ import categoryLoader from '@/V2/Core/Router/Loaders/categoryLoader';
 import layoutLoader from '@/V2/Core/Router/Loaders/layoutLoader';
 import updateCategoryAction from '@/V2/Core/Router/Actions/updateCategoryAction';
 import ErrorPage from '@/V2/Core/ErrorPage';
-import AuthProvider from '@/V2/Core/AuthProvider';
 
 const router = createBrowserRouter([
     {
-        path: '/app',
-        element: <AuthProvider><AuthenticatedLayout/></AuthProvider>,
+        path: '/v2',
+        element: <AuthenticatedLayout/>,
         errorElement: <ErrorPage/>,
         loader: layoutLoader,
         handle: {titleKey: 'Home'} as RouteHandle,

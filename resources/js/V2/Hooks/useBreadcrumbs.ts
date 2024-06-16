@@ -10,6 +10,6 @@ export default function useBreadcrumbs() {
         .map((match) => {
             const handle = match.handle as RouteHandle;
 
-            return {pathname: match.pathname, titleKey: handle.titleKey} as Breadcrumb;
+            return {pathname: match.pathname, title: handle.title, headline: handle.headline} as Breadcrumb;
         }) as Breadcrumb[];
 }
