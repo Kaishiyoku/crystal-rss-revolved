@@ -9,7 +9,7 @@ import {Form} from 'react-router-dom';
 import EditCategoryValidationErrors from '@/V2/types/EditCategoryValidationErrors';
 import Category from '@/types/generated/Models/Category';
 
-export default function CategoryForm({action, category = null, errors}: { action: string; category?: Category | null; errors: CreateCategoryValidationErrors | EditCategoryValidationErrors; }) {
+export default function CategoryForm({action, category = null, errors}: { action: string; category: Category | null; errors: CreateCategoryValidationErrors | EditCategoryValidationErrors; }) {
     const {t} = useLaravelReactI18n();
 
     return (
