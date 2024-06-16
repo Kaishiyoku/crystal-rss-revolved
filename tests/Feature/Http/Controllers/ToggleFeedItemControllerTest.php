@@ -1,6 +1,6 @@
 <?php
 
-namespace Http\Controllers\Api;
+namespace Tests\Feature\Http\Controllers;
 
 use App\Models\Feed;
 use App\Models\FeedItem;
@@ -21,7 +21,7 @@ class ToggleFeedItemControllerTest extends TestCase
         $feed = Feed::factory()->recycle($user)->create();
         $feedItem = FeedItem::factory()->recycle($feed)->state(['read_at' => null])->create();
 
-        $this->json('put', route('api.toggle-feed-item', $feedItem))
+        $this->put(route('toggle-feed-item', $feedItem))
             ->assertOk()
             ->assertJsonPath('read_at', now()->micro(0)->toJSON());
     }
@@ -35,7 +35,7 @@ class ToggleFeedItemControllerTest extends TestCase
         $feed = Feed::factory()->recycle($user)->create();
         $feedItem = FeedItem::factory()->recycle($feed)->state(['read_at' => now()])->create();
 
-        $this->json('put', route('api.toggle-feed-item', $feedItem))
+        $this->put(route('toggle-feed-item', $feedItem))
             ->assertOk()
             ->assertJsonPath('read_at', null);
     }
@@ -47,7 +47,7 @@ class ToggleFeedItemControllerTest extends TestCase
         $feed = Feed::factory()->create();
         $feedItem = FeedItem::factory()->recycle($feed)->create();
 
-        $this->json('put', route('api.toggle-feed-item', $feedItem))
+        $this->put(route('toggle-feed-item', $feedItem))
             ->assertForbidden();
     }
 }
