@@ -55,9 +55,9 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Category $category): JsonResponse
+    public function edit(Category $category): Response
     {
-        return response()->json([
+        return Inertia::render('Categories/Edit', [
             'category' => $category,
             'canDelete' => Auth::user()->can('delete', $category),
         ]);
@@ -66,13 +66,13 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCategoryRequest $request, Category $category): JsonResponse
+    public function update(UpdateCategoryRequest $request, Category $category): RedirectResponse
     {
         $validated = $request->validated();
 
         $category->update($validated);
 
-        return response()->json();
+        return redirect()->route('categories.index');
     }
 
     /**

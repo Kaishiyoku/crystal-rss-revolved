@@ -22,7 +22,7 @@ const Modal = (
         document.body.style.overflowY = show ? 'hidden' : '';
     }, [show]);
 
-    const handleClose = () => {
+    const close = () => {
         if (closeable) {
             onClose();
         }
@@ -42,7 +42,7 @@ const Modal = (
                 as="div"
                 id="modal"
                 className="fixed inset-0 flex max-h-full px-4 py-6 sm:px-0 items-center z-50 transform transition-all backdrop-blur"
-                onClose={handleClose}
+                onClose={close}
             >
                 <Transition.Child
                     as={Fragment}

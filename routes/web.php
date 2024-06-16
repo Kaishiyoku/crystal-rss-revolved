@@ -44,10 +44,6 @@ Route::any('/react/categories/create', function () {
     return view('app_react');
 });
 
-Route::any('/react/categories/{category}/edit', function () {
-    return view('app_react');
-});
-
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
