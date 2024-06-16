@@ -58,10 +58,6 @@ const AuthenticatedLayout = () => {
                             {t('Categories')}
                         </Dropdown.Link>
 
-                        <Dropdown.Link to="/app/feeds">
-                            {t('Feeds')}
-                        </Dropdown.Link>
-
                         <Dropdown.Button onClick={handleLogout}>
                             {t('Logout')}
                         </Dropdown.Button>

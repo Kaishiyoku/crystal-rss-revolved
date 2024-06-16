@@ -174,7 +174,6 @@ class TypeProperty implements Arrayable
     {
         return match ($codeTypeName) {
             'bool' => ReturnType::Boolean,
-            'int' => ReturnType::Number,
             default => throw new InvalidArgumentException("code return type \"{$codeTypeName}\"not matched"),
         };
     }

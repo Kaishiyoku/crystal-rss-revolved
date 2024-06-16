@@ -13,7 +13,6 @@ type User = {
     is_admin: boolean /** cast attribute */;
     created_at: string | null;
     updated_at: string | null;
-    months_after_pruning_feed_items: number /** model attribute */;
     categories: Category[];
     feeds: Feed[];
     feedItems: FeedItem[];
