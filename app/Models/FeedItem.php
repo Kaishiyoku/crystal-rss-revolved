@@ -11,8 +11,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Str;
 
 /**
- * App\Models\FeedItem
- *
  * @property int $id
  * @property int $feed_id
  * @property string $checksum
@@ -27,6 +25,7 @@ use Illuminate\Support\Str;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Feed $feed
+ * @property-read bool $has_image
  *
  * @method static \Database\Factories\FeedItemFactory factory($count = null, $state = [])
  * @method static Builder|FeedItem newModelQuery()

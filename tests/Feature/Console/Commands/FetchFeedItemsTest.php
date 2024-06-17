@@ -136,7 +136,7 @@ class FetchFeedItemsTest extends TestCase
         $this->artisan(FetchFeedItems::class)
             ->assertExitCode(Command::SUCCESS);
 
-        static::assertSame('L6Q0,C?v00.l00m-%hrX00Kh+cN@', $verifiedUserFeed->feedItems->first()->blur_hash);
+        static::assertSame('LD9jKd%QISj]%6bcs+j@ITWUxvoL', $verifiedUserFeed->feedItems->first()->blur_hash);
     }
 
     /**

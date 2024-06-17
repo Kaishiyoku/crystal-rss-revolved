@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * App\Models\Feed
- *
  * @property int $id
  * @property int $user_id
  * @property int $category_id
@@ -19,8 +17,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $name
  * @property string $language
  * @property bool $is_purgeable
- * @property string|null $last_checked_at
- * @property string|null $last_failed_at
+ * @property \Illuminate\Support\Carbon|null $last_checked_at
+ * @property \Illuminate\Support\Carbon|null $last_failed_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Category $category
@@ -73,6 +71,8 @@ class Feed extends Model
      */
     protected $casts = [
         'is_purgeable' => 'bool',
+        'last_checked_at' => 'datetime',
+        'last_failed_at' => 'datetime',
     ];
 
     public function user(): BelongsTo

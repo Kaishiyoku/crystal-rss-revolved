@@ -76,19 +76,17 @@
         },
         {
             "returnTypes": [
-                "string",
-                "null"
+                "string"
             ],
-            "comment": null,
+            "comment": "cast attribute",
             "model": "Feed",
             "name": "last_checked_at"
         },
         {
             "returnTypes": [
-                "string",
-                "null"
+                "string"
             ],
-            "comment": null,
+            "comment": "cast attribute",
             "model": "Feed",
             "name": "last_failed_at"
         },
