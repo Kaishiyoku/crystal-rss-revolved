@@ -14,5 +14,4 @@ Schedule::command(FetchFeedItems::class)->everyThirtyMinutes();
 Schedule::command(CheckFeedFavicons::class)->dailyAt('02:00');
 
 Schedule::command('model:prune')->daily();
-Schedule::command('telescope:prune', ['--hours' => 72])->daily();
 Schedule::command('horizon:snapshot')->everyFiveMinutes();

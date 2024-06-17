@@ -79,13 +79,6 @@ export default function Authenticated({auth, header, children}: BasePageProps & 
                                                     >
                                                         {t('Manage users')}
                                                     </Dropdown.Link>
-
-                                                    <Dropdown.Link
-                                                        href={route('telescope')}
-                                                        as="a"
-                                                    >
-                                                        {t('Telescope')}
-                                                    </Dropdown.Link>
                                                 </>
                                             )}
                                             <Dropdown.Link href={route('logout')} method="post" as="button">
@@ -166,10 +159,6 @@ export default function Authenticated({auth, header, children}: BasePageProps & 
                                                     active={route().current('admin.users.*')}
                                                 >
                                                     {t('Manage users')}
-                                                </ResponsiveNavLink>
-
-                                                <ResponsiveNavLink href={route('telescope')} as="a">
-                                                    {t('Telescope')}
                                                 </ResponsiveNavLink>
                                             </>
                                         )}
