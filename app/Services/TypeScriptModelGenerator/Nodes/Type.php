@@ -16,7 +16,6 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
-use ReflectionAttribute;
 use ReflectionClass;
 use ReflectionEnum;
 use ReflectionEnumBackedCase;
@@ -188,15 +187,6 @@ class Type implements Arrayable
         if (in_array($reflectionMethod->getReturnType(), [HasMany::class, HasManyThrough::class])) {
             $relationshipName .= '[]';
         }
-
-        // @codeCoverageIgnoreStart
-        if (collect($reflectionMethod->getAttributes())
-            ->filter(fn (ReflectionAttribute $reflectionAttribute) => $reflectionAttribute->getName() === OptionalRelationship::class)
-            ->isNotEmpty()
-        ) {
-            $relationshipName .= ' | '.ReturnType::Null->value;
-        }
-        // @codeCoverageIgnoreEnd
 
         return [Str::snake($reflectionMethod->getName()) => $relationshipName];
     }

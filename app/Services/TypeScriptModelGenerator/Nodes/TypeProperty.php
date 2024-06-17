@@ -2,7 +2,6 @@
 
 namespace App\Services\TypeScriptModelGenerator\Nodes;
 
-use App\Models\Feed;
 use App\Services\TypeScriptModelGenerator\Enums\ReturnType;
 use Carbon\Carbon;
 use Illuminate\Contracts\Support\Arrayable;
