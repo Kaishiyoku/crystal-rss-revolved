@@ -1,19 +1,19 @@
 import {forwardRef, InputHTMLAttributes, useEffect, useImperativeHandle, useRef} from 'react';
 import clsx from 'clsx';
 
-type TextInputProps = InputHTMLAttributes<HTMLInputElement> & { isFocused?: boolean; };
-
-export default forwardRef<HTMLInputElement, TextInputProps>(function TextInput(
-    {type = 'text', className = '', isFocused = false, ...props}: TextInputProps,
+export default forwardRef(function TextInput(
+    {type = 'text', className = '', isFocused = false, ...props}: InputHTMLAttributes<HTMLInputElement> & { isFocused?: boolean; },
     ref
 ) {
-    const inputRef = useRef<HTMLInputElement>(null);
+    const localRef = useRef<HTMLInputElement>(null);
 
-    useImperativeHandle(ref, () => inputRef.current as HTMLInputElement);
+    useImperativeHandle(ref, () => ({
+        focus: () => localRef.current?.focus(),
+    }));
 
     useEffect(() => {
         if (isFocused) {
-            inputRef.current?.focus();
+            localRef.current?.focus();
         }
     }, []);
 
@@ -26,7 +26,7 @@ export default forwardRef<HTMLInputElement, TextInputProps>(function TextInput(
                 className,
                 {'opacity-50': props.disabled}
             )}
-            ref={inputRef}
+            ref={localRef}
         />
     );
 });

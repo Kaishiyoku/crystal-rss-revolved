@@ -1,27 +1,30 @@
 import './bootstrap';
 import '../css/app.css';
+
 import {createRoot} from 'react-dom/client';
-import NProgress from 'nprogress';
+import {createInertiaApp} from '@inertiajs/react';
+import {resolvePageComponent} from 'laravel-vite-plugin/inertia-helpers';
 import {LaravelReactI18nProvider} from 'laravel-react-i18n';
 import getBrowserLocale from '@/Utils/getBrowserLocale';
 import AppWithLoadedTranslations from '@/Components/AppWithLoadedTranslations';
-import AppWithToasts from '@/AppWithToasts';
 
-NProgress.configure({
-    showSpinner: false,
+window.appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
+
+void createInertiaApp({
+    title: (title: string): string => `${title} - ${window.appName}`,
+    resolve: (name: string) => resolvePageComponent(`./Pages/${name}.tsx`, import.meta.glob('./Pages/**/*.tsx')),
+    setup({el, App, props}) {
+        createRoot(el).render(
+            <LaravelReactI18nProvider
+                locale={getBrowserLocale()}
+                fallbackLocale="en"
+                files={import.meta.glob('/lang/*.json', {eager: true})}
+            >
+                <AppWithLoadedTranslations app={App} {...props}/>
+            </LaravelReactI18nProvider>
+        );
+    },
+    progress: {
+        color: '#7c3aed',
+    },
 });
-
-const App = () => {
-    return (
-        <LaravelReactI18nProvider
-            locale={getBrowserLocale()}
-            fallbackLocale="en"
-            files={import.meta.glob('/lang/*.json', {eager: true})}
-        >
-            <AppWithLoadedTranslations app={AppWithToasts}/>
-        </LaravelReactI18nProvider>
-    );
-};
-
-createRoot(document.getElementById('app')!)
-    .render(<App/>);

@@ -18,7 +18,6 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Kaishiyoku\HeraRssCrawler\HeraRssCrawler;
 use Kaishiyoku\HeraRssCrawler\Models\Rss\FeedItem as RssFeedItem;
-use Laravel\Telescope\Telescope;
 use Psr\Log\LoggerInterface;
 
 class FetchFeed implements ShouldQueue
@@ -68,7 +67,6 @@ class FetchFeed implements ShouldQueue
             }
         } catch (ClientException|Exception $exception) {
             $this->logger->error($exception, [$this->feed->feed_url]);
-            Telescope::catch($exception, ['feed-updater', $this->feed->feed_url]);
 
             $this->feed->last_failed_at = now();
             $this->feed->save();

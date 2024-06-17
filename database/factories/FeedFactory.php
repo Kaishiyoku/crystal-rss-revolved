@@ -26,7 +26,7 @@ class FeedFactory extends Factory
             'favicon_url' => fake()->optional()->url(),
             'name' => fake()->text(),
             'language' => fake()->languageCode(),
-            'last_checked_at' => fake()->dateTime(),
+            'last_checked_at' => fake()->optional()->dateTime(),
             'last_failed_at' => fake()->optional()->dateTime(),
         ];
     }

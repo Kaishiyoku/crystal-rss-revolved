@@ -6,17 +6,6 @@ body {
     margin-bottom: 0 !important;
 }
 
-#nprogress .bar {
-    background: #7c3aed !important;
-}
-#progress .peg {
-    box-shadow: 0 0 10px #7c3aed, 0 0 5px #7c3aed;
-}
-#nprogress .spinner-icon {
-    border-top-color: #7c3aed;
-    border-left-color: #7c3aed;
-}
-
 @layer base {
     /**
     * Miscellaneous
@@ -91,9 +80,6 @@ body {
     }
     .link-light {
         @apply font-semibold text-violet-200 hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-white/50 transition;
-    }
-    .link-danger {
-        @apply font-semibold text-pink-600 hover:text-pink-900 dark:text-pink-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-pink-500 transition;
     }
 
     /**

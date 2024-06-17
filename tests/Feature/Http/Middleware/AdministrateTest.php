@@ -8,7 +8,6 @@ use Database\Factories\UserFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 use Tests\TestCase;
 
 class AdministrateTest extends TestCase
@@ -28,16 +27,11 @@ class AdministrateTest extends TestCase
 
         $visited = false;
         $middleware = new Administrate();
+        $middleware->handle(Request::create('/users')->setUserResolver(fn () => $user ?? null), function () use (&$visited) {
+            $visited = true;
 
-        try {
-            $middleware->handle(Request::create('/telescope')->setUserResolver(fn () => $user ?? null), function () use (&$visited) {
-                $visited = true;
-
-                return Response::make();
-            });
-        } catch (HttpException) {
-            //
-        }
+            return Response::make();
+        });
 
         static::assertSame($expectVisited, $visited);
     }

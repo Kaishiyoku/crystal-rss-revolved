@@ -4,7 +4,6 @@ export default function Checkbox(
     {
         name,
         checked,
-        defaultChecked,
         value,
         disabled = false,
         onChange = noop,
@@ -12,7 +11,6 @@ export default function Checkbox(
     }: {
         name: string;
         checked?: boolean;
-        defaultChecked?: boolean;
         value: string | number | boolean;
         disabled?: boolean;
         onChange?: (event: React.FormEvent<HTMLInputElement>) => void;
@@ -24,7 +22,6 @@ export default function Checkbox(
             type="checkbox"
             name={name}
             checked={checked}
-            defaultChecked={defaultChecked}
             value={value.toString()}
             disabled={disabled}
             onChange={onChange}

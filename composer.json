@@ -18,7 +18,6 @@
         "laravel/framework": "^11.0",
         "laravel/horizon": "^5.23",
         "laravel/sanctum": "^4.0",
-        "laravel/telescope": "^5.0",
         "laravel/tinker": "^2.9",
         "neitanod/forceutf8": "^2.0",
         "predis/predis": "^2.2",

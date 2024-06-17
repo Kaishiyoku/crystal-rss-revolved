@@ -15,6 +15,9 @@ use InvalidArgumentException;
 use ReflectionClass;
 use ReflectionException;
 
+/**
+ * @codeCoverageIgnore
+ */
 class InheritedType
 {
     private Filesystem $files;

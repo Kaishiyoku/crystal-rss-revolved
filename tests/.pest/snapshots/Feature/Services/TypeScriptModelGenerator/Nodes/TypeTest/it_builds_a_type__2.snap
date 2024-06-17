@@ -76,7 +76,8 @@
         },
         {
             "returnTypes": [
-                "string"
+                "string",
+                "null"
             ],
             "comment": "cast attribute",
             "model": "Feed",
@@ -84,7 +85,8 @@
         },
         {
             "returnTypes": [
-                "string"
+                "string",
+                "null"
             ],
             "comment": "cast attribute",
             "model": "Feed",
@@ -112,7 +114,7 @@
     "relationshipProperties": {
         "user": "User",
         "category": "Category",
-        "feedItems": "FeedItem[]"
+        "feed_items": "FeedItem[]"
     },
     "model": "Feed"
 }

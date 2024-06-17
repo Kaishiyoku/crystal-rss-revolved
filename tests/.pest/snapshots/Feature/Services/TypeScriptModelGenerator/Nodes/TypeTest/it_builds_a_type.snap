@@ -13,13 +13,13 @@ type Feed = {
     name: string;
     language: string;
     is_purgeable: boolean /** cast attribute */;
-    last_checked_at: string /** cast attribute */;
-    last_failed_at: string /** cast attribute */;
+    last_checked_at: string | null /** cast attribute */;
+    last_failed_at: string | null /** cast attribute */;
     created_at: string | null;
     updated_at: string | null;
     user: User;
     category: Category;
-    feedItems: FeedItem[];
-}
+    feed_items: FeedItem[];
+};
 
 export default Feed;

@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
+/**
+ * @codeCoverageIgnore
+ */
 class InheritedTypePartial
 {
     private Filesystem $files;

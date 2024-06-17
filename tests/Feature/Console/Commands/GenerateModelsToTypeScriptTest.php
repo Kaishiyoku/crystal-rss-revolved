@@ -1,11 +1,11 @@
 <?php
 
-use App\Console\Commands\GenerateModelsToTypeScript;
+use App\Console\Commands\GenerateTypeScriptModels;
 
 use function Pest\Laravel\artisan;
 
 it('generates TypeScript types', function () {
-    artisan(GenerateModelsToTypeScript::class)
+    artisan(GenerateTypeScriptModels::class)
         ->assertSuccessful();
 
     // check if code has been generated
@@ -18,6 +18,5 @@ it('generates TypeScript types', function () {
         'ShortFeed.ts',
         'ShortFeedWithFeedItemsCount.ts',
         'User.ts',
-        'UserWithFeedsCountAndUnreadFeedItemsCount.ts',
     ]);
 });

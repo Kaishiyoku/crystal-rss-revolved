@@ -12,11 +12,11 @@ type FeedItem = {
     blur_hash: string | null;
     description: string | null;
     posted_at: string /** cast attribute */;
-    read_at: string /** cast attribute */;
+    read_at: string | null /** cast attribute */;
     created_at: string | null;
     updated_at: string | null;
     has_image: boolean /** model attribute */;
     feed: Feed;
-}
+};
 
 export default FeedItem;

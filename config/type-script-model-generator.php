@@ -6,6 +6,10 @@ return [
     'model_directory' => env('TYPE_SCRIPT_GENERATOR_MODEL_DIR', './app/Models'),
     'import_directory' => env('TYPE_SCRIPT_GENERATOR_IMPORT_DIR', '@/types/generated/Models'),
 
+    'ignored_models' => [
+        // App\Models\Model::class,
+    ],
+
     // model types
     'model_partials' => [
         [
@@ -36,20 +40,6 @@ return [
             'additional_fields' => [
                 [
                     'name' => 'feed_items_count',
-                    'types' => ['number'],
-                ],
-            ],
-        ],
-        [
-            'name' => 'UserWithFeedsCountAndUnreadFeedItemsCount',
-            'model' => \App\Models\User::class,
-            'additional_fields' => [
-                [
-                    'name' => 'feeds_count',
-                    'types' => ['number'],
-                ],
-                [
-                    'name' => 'unread_feed_items_count',
                     'types' => ['number'],
                 ],
             ],

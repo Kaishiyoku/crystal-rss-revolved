@@ -42,21 +42,31 @@ class TypeScriptModelGenerator
      */
     public function generateModel(string $fullyQualifiedModelName): void
     {
-        $this->generateModelType($fullyQualifiedModelName);
+        $otherFullyQualifiedModelNames = $this->getFullyQualifiedModelNames()
+            ->filter(fn (string $name) => $name !== $fullyQualifiedModelName);
+
+        $this->generateModelType($fullyQualifiedModelName, $otherFullyQualifiedModelNames);
         $this->generateModelPartialTypes($fullyQualifiedModelName);
         $this->generateModelInheritedTypes($fullyQualifiedModelName);
     }
 
-    private function generateModelType(string $fullyQualifiedModelName): void
+    /**
+     * @param  Collection<string>  $otherFullyQualifiedModelNames
+     *
+     * @throws ReflectionException
+     */
+    private function generateModelType(string $fullyQualifiedModelName, Collection $otherFullyQualifiedModelNames): void
     {
         $model = new $fullyQualifiedModelName();
         $modelName = (new ReflectionClass($model))->getShortName();
 
-        $type = new Type($model);
+        $type = new Type($model, $otherFullyQualifiedModelNames);
 
+        // @codeCoverageIgnoreStart
         if (! file_exists($this->outputDirectory)) {
             $this->files->makeDirectory($this->outputDirectory, 0755, true);
         }
+        // @codeCoverageIgnoreEnd
 
         $this->files->put(
             path: "{$this->outputDirectory}/{$modelName}.ts",
@@ -64,6 +74,7 @@ class TypeScriptModelGenerator
         );
     }
 
+    // @codeCoverageIgnoreStart
     private function generateModelPartialTypes(string $fullyQualifiedModelName): void
     {
         collect((array) config('type-script-model-generator.model_partials'))
@@ -76,7 +87,9 @@ class TypeScriptModelGenerator
                 );
             });
     }
+    // @codeCoverageIgnoreEnd
 
+    // @codeCoverageIgnoreStart
     private function generateModelInheritedTypes(string $fullyQualifiedModelName): void
     {
         collect((array) config('type-script-model-generator.inherited_types'))
@@ -89,7 +102,9 @@ class TypeScriptModelGenerator
                 );
             });
     }
+    // @codeCoverageIgnoreEnd
 
+    // @codeCoverageIgnoreStart
     private function generateInheritedTypePartialTypes(): void
     {
         collect((array) config('type-script-model-generator.inherited_type_partials'))
@@ -101,6 +116,7 @@ class TypeScriptModelGenerator
                 );
             });
     }
+    // @codeCoverageIgnoreEnd
 
     /**
      * @return Collection<string>
@@ -108,6 +124,7 @@ class TypeScriptModelGenerator
     private function getFullyQualifiedModelNames(): Collection
     {
         return collect(array_diff((array) scandir($this->modelDirectory), ['..', '.']))
+            ->filter(fn (string $name) => Str::endsWith($name, '.php'))
             ->map(fn (string $fileName) => Str::of($fileName)
                 ->replaceEnd('.php', '')
                 ->prepend(Str::of($this->modelDirectory)
@@ -118,6 +135,7 @@ class TypeScriptModelGenerator
                     ->join('\\')
                 )
                 ->toString()
-            );
+            )
+            ->filter(fn (string $fullyQualifiedModelName) => ! in_array($fullyQualifiedModelName, config('type-script-model-generator.ignored_models')));
     }
 }

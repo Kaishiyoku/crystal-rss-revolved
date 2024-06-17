@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="{{ __('welcome.headline', ['name' => config('app.name', 'Laravel')]) }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
         @include('partials.favicon')
 
@@ -14,10 +14,12 @@
         <link href="https://fonts.bunny.net/css?family=nunito-sans:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i&display=swap" rel="stylesheet" />
 
         <!-- Scripts -->
+        @routes
         @viteReactRefresh
-        @vite(['resources/js/app.tsx'])
+        @vite(['resources/js/app.tsx', "resources/js/Pages/{$page['component']}.tsx"])
+        @inertiaHead
     </head>
     <body class="font-sans antialiased">
-        <div id="app"></div>
+        @inertia
     </body>
 </html>
