@@ -14,6 +14,9 @@ use InvalidArgumentException;
 use ReflectionClass;
 use ReflectionException;
 
+/**
+ * @codeCoverageIgnore
+ */
 class ModelPartial
 {
     private Filesystem $files;

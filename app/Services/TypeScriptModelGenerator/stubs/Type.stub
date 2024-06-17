@@ -1,9 +1,14 @@
 /* this file has been automatically generated */
 {{ imports }}
 
+{{ castEnums }}
+
+{{ morphToEnums }}
+
 type {{ name }} = {
     {{ properties }}
     {{ relationshipProperties }}
-}
+    {{ morphToRelationshipProperties }}
+};
 
 export default {{ name }};

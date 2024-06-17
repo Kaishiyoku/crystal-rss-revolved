@@ -6,6 +6,10 @@ return [
     'model_directory' => env('TYPE_SCRIPT_GENERATOR_MODEL_DIR', './app/Models'),
     'import_directory' => env('TYPE_SCRIPT_GENERATOR_IMPORT_DIR', '@/types/generated/Models'),
 
+    'ignored_models' => [
+        // App\Models\Model::class,
+    ],
+
     // model types
     'model_partials' => [
         [

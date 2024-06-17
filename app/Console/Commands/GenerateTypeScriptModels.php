@@ -4,33 +4,32 @@ namespace App\Console\Commands;
 
 use App\Services\TypeScriptModelGenerator\TypeScriptModelGenerator;
 use Illuminate\Console\Command;
-use Symfony\Component\Console\Command\Command as SymfonyCommand;
 
-class GenerateModelsToTypeScript extends Command
+class GenerateTypeScriptModels extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'app:generate-models-to-ts';
+    protected $signature = 'app:generate-type-script-models';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Generates TypeScript types for every Laravel model';
+    protected $description = 'Generate TypeScript types for Laravel models';
 
     /**
      * Execute the console command.
+     *
+     * @phpstan-ignore-next-line
      */
-    public function handle(): int
+    public function handle()
     {
         (new TypeScriptModelGenerator())->generateAll();
 
         $this->line('TypeScript types generated.');
-
-        return SymfonyCommand::SUCCESS;
     }
 }

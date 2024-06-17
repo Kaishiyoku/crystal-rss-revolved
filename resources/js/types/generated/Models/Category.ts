@@ -8,6 +8,6 @@ type Category = {
     name: string;
     user: User;
     feeds: Feed[];
-}
+};
 
 export default Category;

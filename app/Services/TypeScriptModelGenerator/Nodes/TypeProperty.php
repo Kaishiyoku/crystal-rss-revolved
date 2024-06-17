@@ -2,7 +2,9 @@
 
 namespace App\Services\TypeScriptModelGenerator\Nodes;
 
+use App\Models\Feed;
 use App\Services\TypeScriptModelGenerator\Enums\ReturnType;
+use Carbon\Carbon;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Filesystem\Filesystem;
@@ -12,16 +14,20 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
 use ReflectionClass;
+use ReflectionEnum;
 use ReflectionException;
 use ReflectionFunction;
 use ReflectionMethod;
 use ReflectionNamedType;
 use ReflectionProperty;
 
+/**
+ * @codeCoverageIgnore
+ */
 class TypeProperty implements Arrayable
 {
     /**
-     * @var Collection<ReturnType>
+     * @var Collection<ReturnType|ReflectionEnum>
      */
     private Collection $returnTypes;
 
@@ -37,16 +43,22 @@ class TypeProperty implements Arrayable
 
         $returnTypes = $this->getDatabaseSchemaReturnTypes();
         $modelAttributeReturnTypes = $this->getModelAttributeReturnTypes();
-        $castReturnTypes = $this->getCastReturnTypes();
+        $castReturnType = $this->getCastReturnType();
 
         if ($modelAttributeReturnTypes) {
             $returnTypes = $modelAttributeReturnTypes;
             $this->comment .= 'model attribute';
         }
 
-        if ($castReturnTypes) {
-            $returnTypes = $castReturnTypes;
+        $isNullable = $returnTypes?->filter(fn (ReturnType $returnType) => $returnType === ReturnType::Null)->isNotEmpty();
+
+        if ($castReturnType) {
+            $returnTypes = collect([$castReturnType]);
             $this->comment .= 'cast attribute';
+
+            if ($isNullable) {
+                $returnTypes->add(ReturnType::Null);
+            }
         }
 
         if (! $returnTypes) {
@@ -76,11 +88,15 @@ class TypeProperty implements Arrayable
         return $self;
     }
 
-    public function toString(): string
+    public function toString(?string $customReturnType = null): string
     {
+        $returnTypesStr = $customReturnType ?? $this->returnTypes
+            ->map(fn (ReturnType|ReflectionEnum $returnType) => $returnType instanceof ReturnType ? $returnType->value : $returnType->getShortName())
+            ->join(' | ');
+
         return Str::of($this->files->get(__DIR__.'/../stubs/TypeProperty.stub'))
             ->replace('{{ name }}', $this->name)
-            ->replace('{{ returnTypes }}', $this->returnTypes->map(fn (ReturnType $returnType) => $returnType->value)->join(' | '))
+            ->replace('{{ returnTypes }}', $returnTypesStr)
             ->replace('{{ comment }}', $this->comment ? " /** {$this->comment} */" : '')
             ->replaceLast("\n", '');
     }
@@ -93,6 +109,14 @@ class TypeProperty implements Arrayable
             'model' => (new ReflectionClass($this->model))->getShortName(),
             'name' => $this->name,
         ];
+    }
+
+    /**
+     * @return Collection<ReturnType|ReflectionEnum>
+     */
+    public function getReturnTypes(): Collection
+    {
+        return $this->returnTypes;
     }
 
     /**
@@ -121,10 +145,7 @@ class TypeProperty implements Arrayable
         }
     }
 
-    /**
-     * @return Collection<ReturnType>|null
-     */
-    private function getCastReturnTypes(): ?Collection
+    private function getCastReturnType(): ReturnType|ReflectionEnum|null
     {
         $castType = collect($this->model->getCasts())
             ->filter(fn (string $castType, string $fieldName) => $fieldName === $this->name)
@@ -134,12 +155,16 @@ class TypeProperty implements Arrayable
             return null;
         }
 
-        return collect([match ($castType) {
+        if (enum_exists($castType) && (new ReflectionEnum($castType))->getBackingType()) {
+            return new ReflectionEnum($castType);
+        }
+
+        return match ($castType) {
             'int' => ReturnType::Number,
             'bool' => ReturnType::Boolean,
-            'datetime' => ReturnType::String,
+            'datetime', 'date', 'hashed' => ReturnType::String,
             default => throw new InvalidArgumentException("cast return type \"{$castType}\"not matched"),
-        }]);
+        };
     }
 
     /**
@@ -158,8 +183,9 @@ class TypeProperty implements Arrayable
         $databaseTypeName = Arr::get($databaseColumnSchema, 'type_name');
 
         $returnTypes = collect([match ($databaseTypeName) {
-            'bigint', 'tinyint' => ReturnType::Number,
-            'varchar', 'timestamp', 'datetime' => ReturnType::String,
+            'integer', 'int', 'double', 'bigint', 'smallint', 'tinyint' => ReturnType::Number,
+            'varchar', 'timestamp', 'datetime', 'date', 'time', 'text' => ReturnType::String,
+            'enum' => ReturnType::Enum,
             default => throw new InvalidArgumentException("database schema return type \"{$databaseTypeName}\"not matched"),
         }]);
 
@@ -174,6 +200,8 @@ class TypeProperty implements Arrayable
     {
         return match ($codeTypeName) {
             'bool' => ReturnType::Boolean,
+            'int', 'float' => ReturnType::Number,
+            'string', Carbon::class => ReturnType::String,
             default => throw new InvalidArgumentException("code return type \"{$codeTypeName}\"not matched"),
         };
     }
