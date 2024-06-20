@@ -4,7 +4,7 @@ import {useLaravelReactI18n} from 'laravel-react-i18n';
 import InputError from '@/Components/Form/InputError';
 import InputLabel from '@/Components/Form/InputLabel';
 import TextInput from '@/Components/Form/TextInput';
-import {PrimaryButton} from '@/Components/Button';
+import {Button} from '@/Components/Button';
 import React from 'react';
 import Card from '@/Components/Card';
 import User from '@/types/generated/Models/User';
@@ -90,9 +90,10 @@ export default function UpdateProfileInformation({mustVerifyEmail, status}: { mu
                         )}
 
                         <div className="flex items-center gap-4">
-                            <PrimaryButton type="submit" disabled={processing}>{t('Save')}</PrimaryButton>
+                            <Button type="submit" disabled={processing}>{t('Save')}</Button>
 
                             <Transition
+                                as="div"
                                 show={recentlySuccessful}
                                 enterFrom="opacity-0"
                                 leaveTo="opacity-0"

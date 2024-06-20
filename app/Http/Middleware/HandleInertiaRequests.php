@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
@@ -42,6 +43,14 @@ class HandleInertiaRequests extends Middleware
                 ]);
             },
             'monthsAfterPruningFeedItems' => fn () => $request->user() ? config('app.months_after_pruning_feed_items') : null,
+            'selectedFeedId' => $request->user() ? $request->integer('feed_id') : null,
+            'unreadFeeds' => $request->user()
+                ? fn () => $request->user()->feeds()
+                    ->select(['id', 'name', 'favicon_url'])
+                    ->whereHas('feedItems', fn (Builder $query) => $query->unread()) /** @phpstan-ignore-line */
+                    ->withCount(['feedItems' => fn (Builder $query) => $query->unread()]) /** @phpstan-ignore-line */
+                    ->get()
+                : null,
         ]);
     }
 

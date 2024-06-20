@@ -4,7 +4,7 @@ import InputError from '@/Components/Form/InputError';
 import InputLabel from '@/Components/Form/InputLabel';
 import TextInput from '@/Components/Form/TextInput';
 import {Head, Link, useForm} from '@inertiajs/react';
-import {PrimaryButton} from '@/Components/Button';
+import {Button} from '@/Components/Button';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 
 export default function Register() {
@@ -116,9 +116,9 @@ export default function Register() {
                         {t('Already registered?')}
                     </Link>
 
-                    <PrimaryButton type="submit" className="ml-4" disabled={processing}>
+                    <Button type="submit" className="ml-4" disabled={processing}>
                         {t('Register')}
-                    </PrimaryButton>
+                    </Button>
                 </div>
             </form>
         </GuestLayout>

@@ -1,5 +1,6 @@
 import Breadcrumb from '@/types/Breadcrumb';
 import User from '@/types/generated/Models/User';
+import ShortFeedWithFeedItemsCount from '@/types/generated/Models/ShortFeedWithFeedItemsCount';
 
 export type BasePageProps = {
     errors: object;
@@ -11,6 +12,8 @@ export type BasePageProps = {
 export type PageProps<T extends Record<string, unknown> = Record<string, unknown>> = T & BasePageProps & {
     breadcrumbs?: Breadcrumb[];
     monthsAfterPruningFeedItems: number;
+    selectedFeedId: number | null;
+    unreadFeeds: ShortFeedWithFeedItemsCount[];
 };
 
 export type WelcomeProps = PageProps & {

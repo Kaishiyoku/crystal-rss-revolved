@@ -2,7 +2,7 @@ import GuestLayout from '@/Layouts/GuestLayout';
 import InputError from '@/Components/Form/InputError';
 import TextInput from '@/Components/Form/TextInput';
 import {Head, useForm} from '@inertiajs/react';
-import {PrimaryButton} from '@/Components/Button';
+import {Button} from '@/Components/Button';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import React from 'react';
 
@@ -47,9 +47,9 @@ export default function ForgotPassword({status}: { status: string; }) {
                 <InputError message={errors.email} className="mt-2"/>
 
                 <div className="flex items-center justify-end mt-4">
-                    <PrimaryButton type="submit" disabled={processing}>
+                    <Button type="submit" disabled={processing}>
                         {t('Email Password Reset Link')}
-                    </PrimaryButton>
+                    </Button>
                 </div>
             </form>
         </GuestLayout>

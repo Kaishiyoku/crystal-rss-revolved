@@ -54,6 +54,7 @@ return [
             'fields' => [
                 'id',
                 'name',
+                'favicon_url',
                 'feed_items_count',
             ],
         ],

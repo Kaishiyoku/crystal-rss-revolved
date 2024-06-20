@@ -4,7 +4,7 @@ import InputError from '@/Components/Form/InputError';
 import InputLabel from '@/Components/Form/InputLabel';
 import TextInput from '@/Components/Form/TextInput';
 import {Head, useForm} from '@inertiajs/react';
-import {PrimaryButton} from '@/Components/Button';
+import {Button} from '@/Components/Button';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 
 export default function ResetPassword({token, email}: { token: string; email: string; }) {
@@ -89,9 +89,9 @@ export default function ResetPassword({token, email}: { token: string; email: st
                 </div>
 
                 <div className="flex items-center justify-end mt-4">
-                    <PrimaryButton type="submit" className="ml-4" disabled={processing}>
+                    <Button type="submit" className="ml-4" disabled={processing}>
                         {t('Reset Password')}
-                    </PrimaryButton>
+                    </Button>
                 </div>
             </form>
         </GuestLayout>

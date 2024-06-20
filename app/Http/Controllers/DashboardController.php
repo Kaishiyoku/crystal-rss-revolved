@@ -19,11 +19,6 @@ class DashboardController extends Controller
         $feedId = $request->exists('feed_id') ? $request->integer('feed_id') : null;
 
         $totalNumberOfFeedItems = Auth::user()->feedItems()->unread()->count();
-        $unreadFeeds = Auth::user()->feeds()
-            ->select(['id', 'name'])
-            ->whereHas('feedItems', fn (Builder $query) => $query->unread()) /** @phpstan-ignore-line */
-            ->withCount(['feedItems' => fn (Builder $query) => $query->unread()]) /** @phpstan-ignore-line */
-            ->get();
 
         $feedItems = Auth::user()->feedItems()
             ->unread()
@@ -38,9 +33,7 @@ class DashboardController extends Controller
         }
 
         return Inertia::render('Dashboard', [
-            'selectedFeed' => $feedId ? $unreadFeeds->firstWhere('id', $feedId) : null,
             'totalNumberOfFeedItems' => $totalNumberOfFeedItems,
-            'unreadFeeds' => $unreadFeeds,
             'feedItems' => $feedItems,
             'currentCursor' => $request->query('cursor'),
         ]);

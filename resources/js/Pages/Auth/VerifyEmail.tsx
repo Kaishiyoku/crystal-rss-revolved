@@ -1,6 +1,6 @@
 import GuestLayout from '@/Layouts/GuestLayout';
 import {Head, Link, useForm} from '@inertiajs/react';
-import {PrimaryButton} from '@/Components/Button';
+import {Button} from '@/Components/Button';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import React from 'react';
 
@@ -30,7 +30,7 @@ export default function VerifyEmail({status}: { status: string; }) {
 
             <form onSubmit={submit}>
                 <div className="mt-4 flex items-center justify-between">
-                    <PrimaryButton type="submit" disabled={processing}>{t('Resend Verification Email')}</PrimaryButton>
+                    <Button type="submit" disabled={processing}>{t('Resend Verification Email')}</Button>
 
                     <Link
                         href={route('logout')}

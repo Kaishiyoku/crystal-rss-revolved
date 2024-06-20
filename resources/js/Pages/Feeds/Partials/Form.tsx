@@ -6,7 +6,7 @@ import Select from '@/Components/Form/Select';
 import React, {useState} from 'react';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import Card from '@/Components/Card';
-import {PrimaryButton, TertiaryButton} from '@/Components/Button';
+import {Button} from '@/Components/Button';
 import Checkbox from '@/Components/Form/Checkbox';
 import {PageProps} from '@/types';
 import {SelectNumberOption} from '@/types/SelectOption';
@@ -82,13 +82,14 @@ export default function Form({method, action, feed, categories}: { method: 'post
                     isFocused
                 />
 
-                <TertiaryButton
+                <Button
                     className="rounded-l-none border border-gray-300 dark:border-gray-700"
                     onClick={() => discoverFeedUrls(searchUrl)}
                     disabled={isDiscoverFeedProcessing || searchUrl.length < 5}
+                    plain
                 >
                     {t('Search')}
-                </TertiaryButton>
+                </Button>
             </div>
 
             {discoveredFeedUrls.length > 0 && (
@@ -218,9 +219,9 @@ export default function Form({method, action, feed, categories}: { method: 'post
                 </div>
 
                 <div className="flex items-center gap-4">
-                    <PrimaryButton type="submit" disabled={processing || isDiscoverFeedProcessing}>
+                    <Button type="submit" disabled={processing || isDiscoverFeedProcessing}>
                         {t('Save')}
-                    </PrimaryButton>
+                    </Button>
                 </div>
             </form>
         </>

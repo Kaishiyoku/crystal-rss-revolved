@@ -3,7 +3,7 @@ import InputLabel from '@/Components/Form/InputLabel';
 import TextInput from '@/Components/Form/TextInput';
 import InputError from '@/Components/Form/InputError';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
-import {PrimaryButton} from '@/Components/Button';
+import {Button} from '@/Components/Button';
 import React from 'react';
 import Category from '@/types/generated/Models/Category';
 
@@ -37,9 +37,9 @@ export default function Form({method, action, category}: { method: 'post' | 'put
             </div>
 
             <div className="flex items-center gap-4">
-                <PrimaryButton type="submit" disabled={processing}>
+                <Button type="submit" disabled={processing}>
                     {t('Save')}
-                </PrimaryButton>
+                </Button>
             </div>
         </form>
     );

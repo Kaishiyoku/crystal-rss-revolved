@@ -3,14 +3,13 @@ import PhotoSolidIcon from '@/Icons/PhotoSolidIcon';
 import {useContext, useState} from 'react';
 import clsx from 'clsx';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
-import {SecondaryButton} from '@/Components/Button';
+import {Button} from '@/Components/Button';
 import TotalNumberOfFeedItemsContext from '@/Contexts/TotalNumberOfFeedItemsContext';
-import EyeOutlineIcon from '@/Icons/EyeOutlineIcon';
-import EyeSlashOutlineIcon from '@/Icons/EyeSlashOutlineIcon';
 import formatDateTime from '@/Utils/formatDateTime';
 import CalendarDaysSolidIcon from '@/Icons/CalendarDaysSolidIcon';
 import {RouteParams} from 'ziggy-js';
 import FeedItem from '@/types/generated/Models/FeedItem';
+import {EyeIcon, EyeSlashIcon} from '@heroicons/react/20/solid';
 
 export default function FeedItemCard({hueRotationIndex, feedItem}: { hueRotationIndex: number; feedItem: FeedItem; }) {
     const {t} = useLaravelReactI18n();
@@ -98,14 +97,19 @@ export default function FeedItemCard({hueRotationIndex, feedItem}: { hueRotation
                 </div>
 
                 <div className="pt-2">
-                    <SecondaryButton
+                    <Button
                         onClick={toggle}
                         disabled={processing}
-                        icon={internalFeedItem.read_at ? EyeSlashOutlineIcon : EyeOutlineIcon}
                         className="w-full"
+                        plain
                     >
+                        {internalFeedItem.read_at
+                            ? <EyeSlashIcon/>
+                            : <EyeIcon/>
+                        }
+
                         {internalFeedItem.read_at ? t('Read') : t('Unread')}
-                    </SecondaryButton>
+                    </Button>
                 </div>
             </Card.Body>
         </Card>

@@ -10,7 +10,7 @@ export default function Welcome(props: WelcomeProps) {
         <>
             <Head title={t('Welcome')}/>
 
-            <div className="relative sm:flex sm:justify-center sm:items-center sm:pt-12 pb-4 sm:pb-12 min-h-screen bg-gradient-to-br from-violet-500 to-purple-500">
+            <div className="relative sm:flex sm:justify-center sm:items-center sm:pt-12 pb-4 sm:pb-12 min-h-screen bg-gradient-to-br from-blue-500 to-cyan-500">
                 <div className="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
                     {props.auth.user
                         ? (
@@ -37,7 +37,7 @@ export default function Welcome(props: WelcomeProps) {
                             <ApplicationLogo className="h-full p-5"/>
                         </div>
 
-                        <div className="text-6xl md:text-8xl text-center py-8 text-transparent bg-clip-text bg-gradient-to-r from-violet-200 to-purple-200">
+                        <div className="text-6xl md:text-8xl text-center py-8 text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-cyan-300">
                             {window.appName}
                         </div>
 

@@ -6,12 +6,13 @@
         "lint": "eslint --ext .ts,.tsx resources/js"
     },
     "devDependencies": {
-        "@headlessui/react": "^1.7.14",
+        "@headlessui/react": "^2.0.4",
+        "@heroicons/react": "^2.1.4",
         "@inertiajs/react": "^1.0.3",
         "@tailwindcss/forms": "^0.5.3",
         "@tailwindcss/typography": "^0.5.10",
         "@types/js-cookie": "^3.0.6",
-        "@types/node": "^20.9.0",
+        "@types/node": "^20.14.5",
         "@types/nprogress": "^0.2.3",
         "@types/ramda": "^0.30.0",
         "@types/react": "^18.2.37",
@@ -31,6 +32,7 @@
         "eslint-plugin-n": "^16.0.0",
         "eslint-plugin-promise": "^6.1.1",
         "eslint-plugin-react": "^7.32.2",
+        "framer-motion": "^11.2.11",
         "js-cookie": "^3.0.5",
         "ky": "^1.1.3",
         "laravel-react-i18n": "^2.0.3",

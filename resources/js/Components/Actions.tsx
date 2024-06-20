@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import {Children, cloneElement, Fragment, ReactNode, useState} from 'react';
 import {Transition} from '@headlessui/react';
-import {HeadlessButton, TertiaryButton} from '@/Components/Button.jsx';
+import {Button} from '@/Components/Button.jsx';
 import {is} from 'ramda';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import XMarkOutlineIcon from '@/Icons/XMarkOutlineIcon';
@@ -23,14 +23,15 @@ const MobileActions = ({children}: { children: ReactNode; }) => {
     return (
         <div className="sm:hidden">
             <div className="pb-8">
-                <TertiaryButton
+                <Button
                     onClick={() => setShow(true)}
                     className="w-full"
+                    plain
                 >
                     <span>{t('Actions')}</span>
 
                     <EllipsisVerticalOutlineIcon className="w-5 h-5"/>
-                </TertiaryButton>
+                </Button>
             </div>
 
             <Transition show={show} as="div" leave="duration-200">

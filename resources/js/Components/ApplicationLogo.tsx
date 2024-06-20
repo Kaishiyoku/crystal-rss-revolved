@@ -1,6 +1,6 @@
-import {OtherProps} from '@/types';
+import {SVGProps} from 'react';
 
-export default function ApplicationLogo(props: OtherProps) {
+export default function ApplicationLogo(props: SVGProps<SVGSVGElement>) {
     return (
         <svg
             {...props}
@@ -17,10 +17,10 @@ export default function ApplicationLogo(props: OtherProps) {
             </defs>
             <g>
                 <g>
-                    <use xlinkHref="#bD2p376SP" opacity="1" fill="#6927ff" fillOpacity="1"></use>
+                    <use xlinkHref="#bD2p376SP" opacity="1" fill="#1d4ed8" fillOpacity="1"></use>
                 </g>
                 <g>
-                    <use xlinkHref="#bxp9uY7QC" opacity="1" fill="#914cd9" fillOpacity="1"></use>
+                    <use xlinkHref="#bxp9uY7QC" opacity="1" fill="#3b82f6" fillOpacity="1"></use>
                 </g>
             </g>
         </svg>

@@ -4,7 +4,7 @@ import InputLabel from '@/Components/Form/InputLabel';
 import {Modal} from '@/Components/Modal/Modal';
 import TextInput from '@/Components/Form/TextInput';
 import {useForm} from '@inertiajs/react';
-import {DangerButton, SecondaryButton} from '@/Components/Button';
+import {Button} from '@/Components/Button';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import Card from '@/Components/Card';
 
@@ -85,7 +85,7 @@ export default function DeleteUserForm() {
                     </div>
 
                     <div className="mt-6 flex justify-end">
-                        <SecondaryButton onClick={closeModal}>{t('Cancel')}</SecondaryButton>
+                        <Button onClick={closeModal} plain>{t('Cancel')}</Button>
 
                         <DangerButton type="submit" className="ml-3" confirm={false} disabled={processing}>
                             {t('Delete Account')}
