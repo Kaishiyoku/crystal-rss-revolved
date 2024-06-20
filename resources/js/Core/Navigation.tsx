@@ -34,7 +34,7 @@ export default function Navigation({user, selectedFeedId, unreadFeeds, children}
         <SidebarLayout
             navbar={
                 <Navbar>
-                    <NavbarSpacer />
+                    <NavbarSpacer/>
                     <NavbarSection>
                         <Dropdown>
                             <DropdownButton as={NavbarItem}>
@@ -42,7 +42,7 @@ export default function Navigation({user, selectedFeedId, unreadFeeds, children}
                             </DropdownButton>
                             <DropdownMenu className="min-w-64" anchor="bottom end">
                                 <DropdownItem href={route('profile.edit')}>
-                                    <UserIcon />
+                                    <UserIcon/>
                                     <DropdownLabel>{t('Profile')}</DropdownLabel>
                                 </DropdownItem>
 

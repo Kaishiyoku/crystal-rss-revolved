@@ -1,14 +1,13 @@
-import {Head, Link} from '@inertiajs/react';
+import {Head} from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import Header from '@/Components/Page/Header';
-import Actions from '@/Components/Actions';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
-import LinkStack from '@/Components/LinkStack';
 import EmptyState from '@/Components/EmptyState';
 import TagOutlineIcon from '@/Icons/TagOutlineIcon';
 import {PageProps} from '@/types';
 import {RouteParams} from 'ziggy-js';
 import CategoryWithFeedsCount from '@/types/generated/Models/CategoryWithFeedsCount';
+import {Button} from '@/Components/Button';
+import {LinkStack, LinkStackItem} from '@/Components/LinkStack';
 
 export default function Index({categories, ...props}: PageProps & { categories: CategoryWithFeedsCount[]; }) {
     const {t, tChoice} = useLaravelReactI18n();
@@ -17,36 +16,31 @@ export default function Index({categories, ...props}: PageProps & { categories: 
         <AuthenticatedLayout
             auth={props.auth}
             errors={props.errors}
-            header={<Header>{t('Categories')}</Header>}
-        >
-            <Head title={t('Categories')}/>
-
-            <Actions>
-                <Link
+            header={t('Categories')}
+            actions={(
+                <Button
                     href={route('categories.create')}
-                    className="link-secondary"
+                    outline
                 >
                     {t('Add category')}
-                </Link>
-            </Actions>
+                </Button>
+            )}
+        >
+            <Head title={t('Categories')}/>
 
             {categories.length > 0
                 ? (
                     <LinkStack>
                         {categories.map((category) => (
-                            <LinkStack.Item
+                            <LinkStackItem
                                 key={category.id}
-                                href={route('categories.edit', category as unknown as RouteParams<'categories.edit'>)}
-                                className="block"
+                                title={category.name}
+                                url={route('categories.edit', category as unknown as RouteParams<'categories.edit'>)}
                             >
-                                <div className="font-semibold">
-                                    {category.name}
-                                </div>
-
-                                <div className="text-sm text-muted">
+                                <div className="text-muted">
                                     {tChoice('category.feeds_count', category.feeds_count)}
                                 </div>
-                            </LinkStack.Item>
+                            </LinkStackItem>
                         ))}
                     </LinkStack>
                 )

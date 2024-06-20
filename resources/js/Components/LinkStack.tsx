@@ -1,33 +1,21 @@
-import clsx from 'clsx';
 import {ReactNode} from 'react';
-import Card from '@/Components/Card';
+import {Link} from '@inertiajs/react';
 
-const LinkStack = ({children}: { children: ReactNode; }) => {
+export function LinkStack({children}: { children: ReactNode; }) {
     return (
-        <Card>
+        <div>
             {children}
-        </Card>
+        </div>
     );
-};
+}
 
-const Item = (
-    {
-        href,
-        children,
-        className = '',
-    }: {
-        href: string;
-        children: ReactNode;
-        className?: string;
-    }
-) => {
+export function LinkStackItem({url, title, children}: { url: string; title: string; children?: ReactNode; }) {
     return (
-        <a href={href} className={clsx('px-4 py-3 hover:bg-gray-50 hover:dark:bg-gray-700 transition ease-in-out first:rounded-t-lg last:rounded-b-lg', className)}>
-            {children}
-        </a>
+        <Link href={url} className="block px-2 py-2.5 hover:bg-gray-50 dark:hover:bg-gray-800/50 first:rounded-t-md last:rounded-b-md transition">
+            <div className="font-semibold">{title}</div>
+            {children && (
+                <div className="text-muted">{children}</div>
+            )}
+        </Link>
     );
-};
-
-LinkStack.Item = Item;
-
-export default LinkStack;
+}
