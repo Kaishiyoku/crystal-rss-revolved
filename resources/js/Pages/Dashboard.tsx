@@ -1,5 +1,5 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import {Head, router} from '@inertiajs/react';
+import {Head, router, usePage} from '@inertiajs/react';
 import Header from '@/Components/Page/Header';
 import {useState} from 'react';
 import FeedItemCard from '@/Components/FeedItemCard';
@@ -13,6 +13,7 @@ import CursorPagination from '@/types/CursorPagination';
 import FeedItem from '@/types/generated/Models/FeedItem';
 import ShortFeedWithFeedItemsCount from '@/types/generated/Models/ShortFeedWithFeedItemsCount';
 import MarkAllAsReadButton from '@/Components/MarkAllAsReadButton';
+import {head} from 'ramda';
 
 type DashboardPageProps = PageProps & {
     unreadFeeds: ShortFeedWithFeedItemsCount[];
@@ -24,6 +25,8 @@ export default function Dashboard(props: DashboardPageProps) {
     const {t, tChoice} = useLaravelReactI18n();
     const [allFeedItems, setAllFeedItems] = useState(props.feedItems.data);
     const [totalNumberOfFeedItems, setTotalNumberOfFeedItems] = useState(props.totalNumberOfFeedItems);
+
+    const {selectedFeedId, unreadFeeds} = usePage<PageProps>().props;
 
     const loadMore = () => {
         if (!props.feedItems.next_page_url) {
@@ -44,18 +47,21 @@ export default function Dashboard(props: DashboardPageProps) {
                 auth={props.auth}
                 errors={props.errors}
                 header={
-                    <Header subTitle={tChoice('dashboard.unread_articles', totalNumberOfFeedItems)}>
+                    <>
                         {t('Dashboard')}
-                    </Header>
+
+                        <small className="text-muted pl-2">{tChoice('dashboard.unread_articles', totalNumberOfFeedItems)}</small>
+                    </>
                 }
+                actions={(
+                    <>
+                        {totalNumberOfFeedItems > 0 && (
+                            <MarkAllAsReadButton/>
+                        )}
+                    </>
+                )}
             >
                 <Head title="Dashboard"/>
-
-                <div className="flex flex-col sm:flex-row sm:space-x-2 space-y-2 sm:space-y-0 pb-8">
-                    {totalNumberOfFeedItems > 0 && (
-                        <MarkAllAsReadButton/>
-                    )}
-                </div>
 
                 {allFeedItems.length > 0
                     ? (
