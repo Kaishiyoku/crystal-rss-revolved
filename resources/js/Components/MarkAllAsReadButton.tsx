@@ -20,7 +20,7 @@ export default function MarkAllAsReadButton() {
         <>
             <Button
                 onClick={() => setIsConfirmAlertOpen(true)}
-                plain
+                outline
             >
                 <EyeIcon/>
                 {t('Mark all as read')}

@@ -14,13 +14,17 @@ export default function Authenticated({auth, header, breadcrumbs, actions, child
 
     return (
         <Navigation user={auth.user} selectedFeedId={selectedFeedId} unreadFeeds={unreadFeeds}>
-            {breadcrumbs && (
-                <Breadcrumbs breadcrumbs={breadcrumbs}/>
-            )}
-
-            {header && !breadcrumbs && (
+            {(header || breadcrumbs) && (
                 <div className="flex w-full flex-wrap items-end justify-between gap-4 border-b border-zinc-950/10 mb-8 pb-6 dark:border-white/10">
-                    <Heading>{header}</Heading>
+                    {header && !breadcrumbs && (
+                        <Heading>
+                            {header}
+                        </Heading>
+                    )}
+
+                    {breadcrumbs && (
+                        <Breadcrumbs breadcrumbs={breadcrumbs}/>
+                    )}
 
                     {actions && (
                         <div className="flex gap-4">

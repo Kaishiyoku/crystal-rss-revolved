@@ -24,10 +24,7 @@ export default function Breadcrumbs({breadcrumbs}: { breadcrumbs?: Breadcrumb[];
         const breadcrumbElement = breadcrumb.url
             ? (
                 <li key={slug(breadcrumb.title)}>
-                    <Link
-                        href={breadcrumb.url}
-                        className="font-semibold text-violet-400 hover:text-violet-300 leading-tight transition"
-                    >
+                    <Link href={breadcrumb.url} className="font-semibold link-blue">
                         {breadcrumb.title}
                     </Link>
                 </li>
@@ -60,7 +57,7 @@ export default function Breadcrumbs({breadcrumbs}: { breadcrumbs?: Breadcrumb[];
     };
 
     return (
-        <div className="overflow-y-hidden overflow-x-auto scrollbar-x-sm whitespace-nowrap" ref={breadcrumbsRef}>
+        <div className="overflow-y-hidden overflow-x-auto scrollbar-x-sm whitespace-nowrap text-2xl/8 sm:text-xl/8" ref={breadcrumbsRef}>
             <nav className="flex" aria-label="Breadcrumb">
                 <ol role="list" className="flex items-center space-x-2">
                     {breadcrumbs.map(breadcrumbMapper).flat()}
