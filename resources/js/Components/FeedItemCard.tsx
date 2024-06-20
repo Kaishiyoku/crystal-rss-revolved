@@ -1,4 +1,3 @@
-import Card from '@/Components/Card';
 import PhotoSolidIcon from '@/Icons/PhotoSolidIcon';
 import {useContext, useState} from 'react';
 import clsx from 'clsx';
@@ -9,7 +8,8 @@ import formatDateTime from '@/Utils/formatDateTime';
 import CalendarDaysSolidIcon from '@/Icons/CalendarDaysSolidIcon';
 import {RouteParams} from 'ziggy-js';
 import FeedItem from '@/types/generated/Models/FeedItem';
-import {EyeIcon, EyeSlashIcon} from '@heroicons/react/20/solid';
+import {CalendarDaysIcon, EyeIcon, EyeSlashIcon} from '@heroicons/react/20/solid';
+import {ImagePlaceholder, ImageWithBlurHash} from '@/Components/Image';
 
 export default function FeedItemCard({hueRotationIndex, feedItem}: { hueRotationIndex: number; feedItem: FeedItem; }) {
     const {t} = useLaravelReactI18n();
@@ -35,83 +35,80 @@ export default function FeedItemCard({hueRotationIndex, feedItem}: { hueRotation
     };
 
     return (
-        <Card
+        <div
             key={internalFeedItem.id}
-            className={clsx('flex flex-col transition ease-out duration-300', {'opacity-50': internalFeedItem.read_at})}
+            className={clsx('@container p-4 bg-gray-50 dark:bg-gray-800 rounded-lg transition ease-out duration-300', {'opacity-50': internalFeedItem.read_at})}
         >
-            {internalFeedItem.has_image && internalFeedItem.image_url
-                ? (
-                    <Card.Image
-                        src={internalFeedItem.image_url}
-                        alt={internalFeedItem.title}
-                        blurHash={internalFeedItem.blur_hash}
-                    />
-                )
-                : (
-                    <Card.ImagePlaceholder
-                        className={clsx({
-                            'hue-rotate-0': hueRotationIndex === 0,
-                            'hue-rotate-30': hueRotationIndex === 1,
-                            'hue-rotate-60': hueRotationIndex === 2,
-                            'hue-rotate-15': hueRotationIndex === 3,
-                            'hue-rotate-180': hueRotationIndex === 4,
-                            'hue-rotate-90': hueRotationIndex === 5,
-                        })}
-                    />
-                )
-            }
+            <div className="flex flex-col @md:flex-row">
+                <div className="flex flex-col shrink-0 mb-4 @md:mb-0 @md:mr-4">
+                    <div className="pb-4">
+                        {internalFeedItem.has_image && internalFeedItem.image_url
+                            ? (
+                                <ImageWithBlurHash
+                                    src={internalFeedItem.image_url}
+                                    alt={internalFeedItem.title}
+                                    blurHash={internalFeedItem.blur_hash}
+                                    className="w-full @md:w-44 aspect-[3/2] rounded-lg"
+                                />
+                            )
+                            : (
+                                <ImagePlaceholder colorIndex={hueRotationIndex} className="w-full @md:w-44 aspect-[3/2] rounded-lg"/>
+                            )
+                        }
+                    </div>
 
-            <Card.Body className="grow flex flex-col">
-                <div className="grow">
-                    <Card.HeaderLink href={internalFeedItem.url}>
-                        {internalFeedItem.title}
-                    </Card.HeaderLink>
-
-                    <div className="text-sm text-muted pt-2 pb-4">
-                        <div className="flex items-center pb-1">
-                            <CalendarDaysSolidIcon className="w-5 h-5 mr-2"/>
-                            {formatDateTime(internalFeedItem.posted_at)}
+                    <div className="pb-2 text-sm text-muted">
+                        <div className="flex space-x-2 pb-0.5">
+                            <CalendarDaysIcon className="size-4"/>
+                            <div>{formatDateTime(internalFeedItem.posted_at)}</div>
                         </div>
 
-                        <div className="flex items-center">
+                        <div className="flex space-x-2 text-sm text-muted">
                             {internalFeedItem.feed.favicon_url
                                 ? (
                                     <img
                                         loading="lazy"
                                         src={internalFeedItem.feed.favicon_url}
                                         alt={internalFeedItem.feed.name}
-                                        className="w-5 h-5 rounded mr-2"
+                                        className="size-4 rounded"
                                     />
                                 )
-                                : <PhotoSolidIcon className="w-5 h-5 mr-2"/>}
+                                : <PhotoSolidIcon className="size-5"/>}
 
                             <div>
                                 {internalFeedItem.feed.name}
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div className="text-muted overflow-hidden line-clamp-6 xl:line-clamp-3 break-all">
-                        {internalFeedItem.description}
+                <div className="flex flex-col">
+                    <a href={internalFeedItem.url} className="inline-block mb-2 text-lg text-blue-700 dark:text-blue-400 hover:underline">
+                        {internalFeedItem.title}
+                    </a>
+
+                    <div className="grow">
+                        <div className="text-muted overflow-hidden line-clamp-6 xl:line-clamp-3 break-all">
+                            {internalFeedItem.description}
+                        </div>
+                    </div>
+
+                    <div className="pt-4">
+                        <Button
+                            onClick={toggle}
+                            disabled={processing}
+                            plain
+                        >
+                            {internalFeedItem.read_at
+                                ? <EyeSlashIcon/>
+                                : <EyeIcon/>
+                            }
+
+                            {internalFeedItem.read_at ? t('Read') : t('Unread')}
+                        </Button>
                     </div>
                 </div>
-
-                <div className="pt-2">
-                    <Button
-                        onClick={toggle}
-                        disabled={processing}
-                        className="w-full"
-                        plain
-                    >
-                        {internalFeedItem.read_at
-                            ? <EyeSlashIcon/>
-                            : <EyeIcon/>
-                        }
-
-                        {internalFeedItem.read_at ? t('Read') : t('Unread')}
-                    </Button>
-                </div>
-            </Card.Body>
-        </Card>
+            </div>
+        </div>
     );
 }
