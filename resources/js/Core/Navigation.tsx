@@ -20,7 +20,7 @@ import {
 } from '@/Components/Sidebar';
 import {SidebarLayout} from '@/Components/SidebarLayout';
 import {ArrowRightStartOnRectangleIcon, ChevronDownIcon, ChevronUpIcon, UserIcon} from '@heroicons/react/16/solid';
-import {HomeIcon} from '@heroicons/react/20/solid';
+import {HomeIcon, RssIcon} from '@heroicons/react/20/solid';
 import {ReactNode} from 'react';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import ApplicationLogo from '@/Components/ApplicationLogo';
@@ -108,8 +108,8 @@ export default function Navigation({user, selectedFeedId, unreadFeeds, children}
                                             current={selectedFeedId === unreadFeed.id}
                                         >
                                             {unreadFeed.favicon_url
-                                                ? <img src={unreadFeed.favicon_url} alt="" className="size-5"/>
-                                                : null
+                                                ? <img src={unreadFeed.favicon_url} alt="" loading="lazy" className="size-5"/>
+                                                : <RssIcon/>
                                             }
 
                                             <SidebarLabel>
