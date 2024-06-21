@@ -2,7 +2,6 @@ import {Head, Link} from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import Form from '@/Pages/Feeds/Partials/Form';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
-import Breadcrumbs from '@/Components/Breadcrumbs/Breadcrumbs';
 import EmptyState from '@/Components/EmptyState';
 import ExclamationCircleOutlineIcon from '@/Icons/ExclamationCircleOutlineIcon';
 import PlusOutlineIcon from '@/Icons/PlusOutlineIcon';
@@ -17,7 +16,7 @@ export default function Create({feed, categories, ...props}: PageProps & { feed:
         <AuthenticatedLayout
             auth={props.auth}
             errors={props.errors}
-            header={<Breadcrumbs breadcrumbs={props.breadcrumbs}/>}
+            breadcrumbs={props.breadcrumbs}
         >
             <Head title={t('Add feed')}/>
 

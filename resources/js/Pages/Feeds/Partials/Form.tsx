@@ -86,7 +86,6 @@ export default function Form({method, action, feed, categories}: { method: 'post
                     className="rounded-l-none border border-gray-300 dark:border-gray-700"
                     onClick={() => discoverFeedUrls(searchUrl)}
                     disabled={isDiscoverFeedProcessing || searchUrl.length < 5}
-                    plain
                 >
                     {t('Search')}
                 </Button>

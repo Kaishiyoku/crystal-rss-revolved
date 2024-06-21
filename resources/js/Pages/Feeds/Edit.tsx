@@ -3,18 +3,24 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import Form from '@/Pages/Feeds/Partials/Form';
 import Actions from '@/Components/Actions';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
-import {DangerButton} from '@/Components/Button';
 import Breadcrumbs from '@/Components/Breadcrumbs/Breadcrumbs';
 import {PageProps} from '@/types';
 import {RouteParams} from 'ziggy-js';
 import {SelectNumberOption} from '@/types/SelectOption';
 import Feed from '@/types/generated/Models/Feed';
+import {Button} from '@/Components/Button';
+import ConfirmAlert from '@/Components/ConfirmAlert';
+import {useState} from 'react';
 
 export default function Edit({feed, categories, canDelete, ...props}: PageProps & { feed: Feed; categories: SelectNumberOption[]; canDelete: boolean; }) {
     const {t} = useLaravelReactI18n();
     const {delete: destroy, processing} = useForm();
 
+    const [isConfirmDeleteAlertOpen, setIsConfirmDeleteAlertOpen] = useState(false);
+
     const handleDelete = () => {
+        setIsConfirmDeleteAlertOpen(false);
+
         destroy(route('feeds.destroy', feed as unknown as RouteParams<'feeds.destroy'>));
     };
 
@@ -22,23 +28,30 @@ export default function Edit({feed, categories, canDelete, ...props}: PageProps 
         <AuthenticatedLayout
             auth={props.auth}
             errors={props.errors}
-            header={<Breadcrumbs breadcrumbs={props.breadcrumbs}/>}
+            breadcrumbs={props.breadcrumbs}
+            actions={(
+                <>
+                    {canDelete && (
+                        <Button
+                            disabled={processing}
+                            onClick={() => setIsConfirmDeleteAlertOpen(true)}
+                            outline
+                        >
+                            {t('Delete')}
+                        </Button>
+                    )}
+
+                    <ConfirmAlert
+                        open={isConfirmDeleteAlertOpen}
+                        title={t('Do you really want to delete this feed?')}
+                        confirmTitle={t('Delete feed')}
+                        onClose={() => setIsConfirmDeleteAlertOpen(false)}
+                        onConfirm={handleDelete}
+                    />
+                </>
+            )}
         >
             <Head title={t('Edit feed')}/>
-
-            <Actions>
-                {canDelete && (
-                    <DangerButton
-                        disabled={processing}
-                        confirmTitle={t('Do you really want to delete this feed?')}
-                        confirmSubmitTitle={t('Delete feed')}
-                        confirmCancelTitle={t('Cancel')}
-                        onClick={handleDelete}
-                    >
-                        {t('Delete')}
-                    </DangerButton>
-                )}
-            </Actions>
 
             <Form
                 method="put"
