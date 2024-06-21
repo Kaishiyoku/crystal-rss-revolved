@@ -5,7 +5,6 @@ import {useLaravelReactI18n} from 'laravel-react-i18n';
 import {Button} from '@/Components/Button';
 import TotalNumberOfFeedItemsContext from '@/Contexts/TotalNumberOfFeedItemsContext';
 import formatDateTime from '@/Utils/formatDateTime';
-import CalendarDaysSolidIcon from '@/Icons/CalendarDaysSolidIcon';
 import {RouteParams} from 'ziggy-js';
 import FeedItem from '@/types/generated/Models/FeedItem';
 import {CalendarDaysIcon, EyeIcon, EyeSlashIcon} from '@heroicons/react/20/solid';
@@ -37,7 +36,7 @@ export default function FeedItemCard({hueRotationIndex, feedItem}: { hueRotation
     return (
         <div
             key={internalFeedItem.id}
-            className={clsx('@container p-4 bg-gray-50 dark:bg-gray-800 rounded-lg transition ease-out duration-300', {'opacity-50': internalFeedItem.read_at})}
+            className={clsx('@container p-4 bg-gray-100 dark:bg-gray-800 rounded-lg transition ease-out duration-300', {'opacity-50': internalFeedItem.read_at})}
         >
             <div className="flex flex-col @md:flex-row">
                 <div className="flex flex-col shrink-0 mb-4 @md:mb-0 @md:mr-4">
