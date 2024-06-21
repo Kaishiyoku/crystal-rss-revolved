@@ -3,7 +3,6 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import formatDateTime from '@/Utils/formatDateTime';
 import EmptyState from '@/Components/EmptyState';
-import NewspaperSolidIcon from '@/Icons/NewspaperSolidIcon';
 import {PageProps} from '@/types';
 import {RouteParams} from 'ziggy-js';
 import FeedWithFeedItemsCount from '@/types/generated/Models/FeedWithFeedItemsCount';
@@ -77,7 +76,7 @@ export default function Index({feeds, ...props}: PageProps & { feeds: FeedWithFe
                 )
                 : (
                     <EmptyState
-                        icon={NewspaperSolidIcon}
+                        icon={RssIcon}
                         message={t('No feeds.')}
                         description={t('Get started by creating a new feed.')}
                     />

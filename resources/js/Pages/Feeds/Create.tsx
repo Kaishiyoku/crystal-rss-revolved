@@ -3,11 +3,12 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import Form from '@/Pages/Feeds/Partials/Form';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import EmptyState from '@/Components/EmptyState';
-import ExclamationCircleOutlineIcon from '@/Icons/ExclamationCircleOutlineIcon';
 import PlusOutlineIcon from '@/Icons/PlusOutlineIcon';
 import {PageProps} from '@/types';
 import {SelectNumberOption} from '@/types/SelectOption';
 import Feed from '@/types/generated/Models/Feed';
+import {PlusIcon, TagIcon} from '@heroicons/react/24/outline';
+import {Button} from '@/Components/Button';
 
 export default function Create({feed, categories, ...props}: PageProps & { feed: Feed; categories: SelectNumberOption[]; }) {
     const {t} = useLaravelReactI18n();
@@ -31,17 +32,18 @@ export default function Create({feed, categories, ...props}: PageProps & { feed:
                 )
                 : (
                     <EmptyState
-                        icon={ExclamationCircleOutlineIcon}
+                        icon={TagIcon}
                         message={t('Please create a category first.')}
                         description={t('There have to be at least one category before you can create a feed.')}
                     >
-                        <Link
+                        <Button
                             href={route('categories.create')}
-                            className="link-secondary mt-6"
+                            className="mt-2"
+                            plain
                         >
-                            <PlusOutlineIcon className="w-4 h-4 mr-2"/>
-                            <div>{t('New category')}</div>
-                        </Link>
+                            <PlusIcon/>
+                            {t('New category')}
+                        </Button>
                     </EmptyState>
                 )}
         </AuthenticatedLayout>

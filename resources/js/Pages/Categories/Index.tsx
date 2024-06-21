@@ -2,12 +2,12 @@ import {Head} from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import EmptyState from '@/Components/EmptyState';
-import TagOutlineIcon from '@/Icons/TagOutlineIcon';
 import {PageProps} from '@/types';
 import {RouteParams} from 'ziggy-js';
 import CategoryWithFeedsCount from '@/types/generated/Models/CategoryWithFeedsCount';
 import {Button} from '@/Components/Button';
 import {LinkStack, LinkStackItem} from '@/Components/LinkStack';
+import {TagIcon} from '@heroicons/react/24/outline';
 
 export default function Index({categories, ...props}: PageProps & { categories: CategoryWithFeedsCount[]; }) {
     const {t, tChoice} = useLaravelReactI18n();
@@ -46,7 +46,7 @@ export default function Index({categories, ...props}: PageProps & { categories: 
                 )
                 : (
                     <EmptyState
-                        icon={TagOutlineIcon}
+                        icon={TagIcon}
                         message={t('No categories.')}
                         description={t('Get started by creating a new category.')}
                     />

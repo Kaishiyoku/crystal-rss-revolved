@@ -1,19 +1,17 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import {Head, router, usePage} from '@inertiajs/react';
-import Header from '@/Components/Page/Header';
+import {Head, router} from '@inertiajs/react';
 import {useState} from 'react';
 import FeedItemCard from '@/Components/FeedItemCard';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import TotalNumberOfFeedItemsContext from '@/Contexts/TotalNumberOfFeedItemsContext';
 import {Button} from '@/Components/Button';
-import NewspaperSolidIcon from '@/Icons/NewspaperSolidIcon';
 import EmptyState from '@/Components/EmptyState';
 import {PageProps} from '@/types';
 import CursorPagination from '@/types/CursorPagination';
 import FeedItem from '@/types/generated/Models/FeedItem';
 import ShortFeedWithFeedItemsCount from '@/types/generated/Models/ShortFeedWithFeedItemsCount';
 import MarkAllAsReadButton from '@/Components/MarkAllAsReadButton';
-import {head} from 'ramda';
+import {NewspaperIcon} from '@heroicons/react/24/solid';
 
 type DashboardPageProps = PageProps & {
     unreadFeeds: ShortFeedWithFeedItemsCount[];
@@ -25,8 +23,6 @@ export default function Dashboard(props: DashboardPageProps) {
     const {t, tChoice} = useLaravelReactI18n();
     const [allFeedItems, setAllFeedItems] = useState(props.feedItems.data);
     const [totalNumberOfFeedItems, setTotalNumberOfFeedItems] = useState(props.totalNumberOfFeedItems);
-
-    const {selectedFeedId, unreadFeeds} = usePage<PageProps>().props;
 
     const loadMore = () => {
         if (!props.feedItems.next_page_url) {
@@ -77,7 +73,7 @@ export default function Dashboard(props: DashboardPageProps) {
                     )
                     : (
                         <EmptyState
-                            icon={NewspaperSolidIcon}
+                            icon={NewspaperIcon}
                             message={t('No unread articles.')}
                             description={t('Come back later.')}
                         />
