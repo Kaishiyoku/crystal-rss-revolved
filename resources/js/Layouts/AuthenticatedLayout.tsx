@@ -4,7 +4,7 @@ import Navigation from '@/Core/Navigation';
 import {usePage} from '@inertiajs/react';
 import {Heading} from '@/Components/Heading';
 import Breadcrumb from '@/types/Breadcrumb';
-import Breadcrumbs from '@/Components/Breadcrumbs/Breadcrumbs';
+import Breadcrumbs from '@/Core/Breadcrumbs';
 
 type AuthenticatedLayoutProps = BasePageProps & { header: ReactNode; breadcrumbs?: Breadcrumb[] | undefined; actions?: ReactNode; children: ReactNode; }
     | (BasePageProps & { header?: ReactNode; breadcrumbs: Breadcrumb[] | undefined; actions?: ReactNode; children: ReactNode; });
