@@ -1,5 +1,4 @@
 import {useForm, usePage} from '@inertiajs/react';
-import Select from '@/Components/Form/Select';
 import React, {useState} from 'react';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import Card from '@/Components/Card';
