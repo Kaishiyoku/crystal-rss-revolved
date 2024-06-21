@@ -1,9 +1,8 @@
-import {Head, Link} from '@inertiajs/react';
+import {Head} from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import Form from '@/Pages/Feeds/Partials/Form';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import EmptyState from '@/Components/EmptyState';
-import PlusOutlineIcon from '@/Icons/PlusOutlineIcon';
 import {PageProps} from '@/types';
 import {SelectNumberOption} from '@/types/SelectOption';
 import Feed from '@/types/generated/Models/Feed';

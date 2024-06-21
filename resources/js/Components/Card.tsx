@@ -1,5 +1,4 @@
 import clsx from 'clsx';
-import PhotoSolidIcon from '@/Icons/PhotoSolidIcon';
 import React, {ReactNode} from 'react';
 import {OtherProps} from '@/types';
 import {BlurhashCanvas} from 'react-blurhash';
@@ -29,14 +28,6 @@ const Image = ({src, alt, blurHash = null}: {src: string; alt: string; blurHash:
                 ? <BlurhashCanvas hash={blurHash} className="absolute w-full h-full"/>
                 : <div className="absolute size-full blur-xl" style={{backgroundImage: `url(${src})`}}/>
             }
-        </div>
-    );
-};
-
-const ImagePlaceholder = ({className = ''}: { className?: string; }) => {
-    return (
-        <div className={clsx('flex justify-center h-72 md:h-56 bg-gradient-to-br from-cyan-300 to-blue-400 dark:from-cyan-900 dark:to-blue-700 saturate-[.20] rounded-t-lg', className)}>
-            <PhotoSolidIcon className="h-full text-white mix-blend-soft-light"/>
         </div>
     );
 };
@@ -80,7 +71,6 @@ const Body = ({children, className = '', ...props}: { children: ReactNode; class
 };
 
 Card.Image = Image;
-Card.ImagePlaceholder = ImagePlaceholder;
 Card.Header = Header;
 Card.HeaderLink = HeaderLink;
 Card.Body = Body;

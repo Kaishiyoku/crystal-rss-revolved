@@ -1,4 +1,3 @@
-import PhotoSolidIcon from '@/Icons/PhotoSolidIcon';
 import {useContext, useState} from 'react';
 import clsx from 'clsx';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
@@ -7,7 +6,7 @@ import TotalNumberOfFeedItemsContext from '@/Contexts/TotalNumberOfFeedItemsCont
 import formatDateTime from '@/Utils/formatDateTime';
 import {RouteParams} from 'ziggy-js';
 import FeedItem from '@/types/generated/Models/FeedItem';
-import {CalendarDaysIcon, EyeIcon, EyeSlashIcon} from '@heroicons/react/20/solid';
+import {CalendarDaysIcon, EyeIcon, EyeSlashIcon, RssIcon} from '@heroicons/react/20/solid';
 import {ImagePlaceholder, ImageWithBlurHash} from '@/Components/Image';
 
 export default function FeedItemCard({hueRotationIndex, feedItem}: { hueRotationIndex: number; feedItem: FeedItem; }) {
@@ -72,7 +71,7 @@ export default function FeedItemCard({hueRotationIndex, feedItem}: { hueRotation
                                         className="size-4 rounded"
                                     />
                                 )
-                                : <PhotoSolidIcon className="size-5"/>}
+                                : <RssIcon className="size-5"/>}
 
                             <div>
                                 {internalFeedItem.feed.name}
