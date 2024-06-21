@@ -37,8 +37,7 @@ class FetchFeed implements ShouldQueue
     public function __construct(
         #[WithoutRelations]
         public Feed $feed
-    ) {
-    }
+    ) {}
 
     /**
      * Execute the job.
