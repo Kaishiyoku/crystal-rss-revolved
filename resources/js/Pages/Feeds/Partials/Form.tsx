@@ -11,6 +11,7 @@ import {ErrorMessage, Field, FieldGroup, Label} from '@/Components/Fieldset';
 import {Checkbox, CheckboxField} from '@/Components/Form/Checkbox';
 import InputListbox from '@/Components/Form/InputListbox';
 import toNumber from '@/Utils/toNumber';
+import {LinkStack, LinkStackItem} from '@/Components/LinkStack';
 
 export default function Form({method, action, feed, categories}: { method: 'post' | 'put'; action: string; feed: Feed; categories: SelectNumberOption[]; }) {
     const {t, tChoice} = useLaravelReactI18n();
@@ -78,6 +79,7 @@ export default function Form({method, action, feed, categories}: { method: 'post
                     placeholder={t('Search URL...')}
                     value={searchUrl}
                     onChange={(e) => setSearchUrl(e.target.value)}
+                    disabled={isDiscoverFeedProcessing}
                     autoFocus
                 />
 
@@ -90,18 +92,16 @@ export default function Form({method, action, feed, categories}: { method: 'post
             </div>
 
             {discoveredFeedUrls.length > 0 && (
-                <div className="mt-4 divide-y dark:divide-gray-700">
+                <LinkStack className="mb-8">
                     {discoveredFeedUrls.map((discoveredFeedUrl) => (
-                        <button
+                        <LinkStackItem
                             key={discoveredFeedUrl}
-                            type="button"
-                            className="block w-full text-left px-4 py-2 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600 first:rounded-t last:rounded-b transition"
+                            title={discoveredFeedUrl}
                             onClick={selectDiscoveredFeedUrl(discoveredFeedUrl)}
-                        >
-                            {discoveredFeedUrl}
-                        </button>
+                            disabled={isDiscoverFeedProcessing}
+                        />
                     ))}
-                </div>
+                </LinkStack>
             )}
 
             <form onSubmit={submit}>
