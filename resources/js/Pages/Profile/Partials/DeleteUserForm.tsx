@@ -1,17 +1,16 @@
-import React, {useRef, useState} from 'react';
-import InputError from '@/Components/Form/InputError';
-import InputLabel from '@/Components/Form/InputLabel';
-import {Modal} from '@/Components/Modal/Modal';
-import TextInput from '@/Components/Form/TextInput';
+import {FormEventHandler, useRef, useState} from 'react';
 import {useForm} from '@inertiajs/react';
-import {Button} from '@/Components/Button';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
-import Card from '@/Components/Card';
+import {Button} from '@/Components/Button';
+import {Input} from '@/Components/Form/Input';
+import {ErrorMessage, Field, Label} from '@/Components/Fieldset';
+import {Dialog, DialogActions, DialogBody, DialogDescription, DialogTitle} from '@/Components/Dialog';
 
-export default function DeleteUserForm() {
+export default function DeleteUserForm({className = ''}: { className?: string; }) {
     const {t} = useLaravelReactI18n();
+
     const [confirmingUserDeletion, setConfirmingUserDeletion] = useState(false);
-    const passwordInput = useRef<HTMLInputElement>();
+    const passwordInput = useRef<HTMLInputElement>(null);
 
     const {
         data,
@@ -20,14 +19,16 @@ export default function DeleteUserForm() {
         processing,
         reset,
         errors,
-    } = useForm({password: ''});
+    } = useForm({
+        password: '',
+    });
 
     const confirmUserDeletion = () => {
         setConfirmingUserDeletion(true);
     };
 
-    const deleteUser = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
+    const deleteUser: FormEventHandler = (e) => {
+        e.preventDefault();
 
         destroy(route('profile.destroy'), {
             preserveScroll: true,
@@ -44,55 +45,63 @@ export default function DeleteUserForm() {
     };
 
     return (
-        <Card>
-            <div className="max-w-xl sm:p-4">
-                <Card.Header
-                    title={t('Delete Account')}
-                    description={t('Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.')}
-                />
+        <section className={`space-y-6 ${className}`}>
+            <header>
+                <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">{t('Delete Account')}</h2>
 
-                <Card.Body>
-                    <DangerButton onClick={confirmUserDeletion} confirm={false}>{t('Delete Account')}</DangerButton>
-                </Card.Body>
-            </div>
+                <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                    {t('Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.')}
+                </p>
+            </header>
 
-            <Modal show={confirmingUserDeletion} onClose={closeModal}>
-                <form onSubmit={deleteUser} className="p-6">
-                    <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">
-                        {t('Are you sure you want to delete your account?')}
-                    </h2>
+            <Button onClick={confirmUserDeletion} color="pink">
+                {t('Delete Account')}
+            </Button>
 
-                    <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                        {t('Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.')}
-                    </p>
+            <Dialog open={confirmingUserDeletion} onClose={closeModal}>
+                <DialogTitle>
+                    {t('Are you sure you want to delete your account?')}
+                </DialogTitle>
 
-                    <div className="mt-6">
-                        <InputLabel htmlFor="password" value={t('Password')} className="sr-only"/>
+                <DialogDescription>
+                    {t('Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.')}
+                </DialogDescription>
 
-                        <TextInput
-                            id="password"
-                            type="password"
-                            name="password"
-                            ref={passwordInput}
-                            value={data.password}
-                            onChange={(e) => setData('password', e.target.value)}
-                            className="mt-1 block w-full"
-                            isFocused
-                            placeholder={t('Password')}
-                        />
+                <DialogBody>
+                    <form onSubmit={deleteUser}>
+                        <Field>
+                            <Label htmlFor="password" className="sr-only">
+                                {t('validation.attributes.password')}
+                            </Label>
+                            <Input
+                                id="password"
+                                type="password"
+                                name="password"
+                                ref={passwordInput}
+                                value={data.password}
+                                onChange={(e) => setData('password', e.target.value)}
+                                className="w-3/4"
+                                placeholder={t('validation.attributes.password')}
+                                invalid={!!errors.password}
+                                autoFocus
+                            />
+                            <ErrorMessage>
+                                {errors.password}
+                            </ErrorMessage>
+                        </Field>
 
-                        <InputError message={errors.password} className="mt-2"/>
-                    </div>
+                        <DialogActions>
+                            <Button onClick={closeModal} plain>
+                                {t('Cancel')}
+                            </Button>
 
-                    <div className="mt-6 flex justify-end">
-                        <Button onClick={closeModal} plain>{t('Cancel')}</Button>
-
-                        <DangerButton type="submit" className="ml-3" confirm={false} disabled={processing}>
-                            {t('Delete Account')}
-                        </DangerButton>
-                    </div>
-                </form>
-            </Modal>
-        </Card>
+                            <Button type="submit" disabled={processing} color="pink">
+                                {t('Delete Account')}
+                            </Button>
+                        </DialogActions>
+                    </form>
+                </DialogBody>
+            </Dialog>
+        </section>
     );
 }
