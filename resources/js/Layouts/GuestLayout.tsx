@@ -1,6 +1,5 @@
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import {Link} from '@inertiajs/react';
-import Card from '@/Components/Card';
 import {ReactNode} from 'react';
 
 export default function Guest({children}: {children: ReactNode; }) {
@@ -12,11 +11,9 @@ export default function Guest({children}: {children: ReactNode; }) {
                 </Link>
             </div>
 
-            <Card className="w-full sm:max-w-md">
-                <Card.Body>
-                    {children}
-                </Card.Body>
-            </Card>
+            <main className="w-full sm:max-w-md p-4 shadow dark:shadow-black/25 bg-white dark:bg-gray-800 rounded-lg">
+                {children}
+            </main>
         </div>
     );
 }

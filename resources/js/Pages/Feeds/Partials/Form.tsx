@@ -1,7 +1,6 @@
 import {useForm, usePage} from '@inertiajs/react';
 import React, {useState} from 'react';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
-import Card from '@/Components/Card';
 import {Button} from '@/Components/Button';
 import {PageProps} from '@/types';
 import {SelectNumberOption} from '@/types/SelectOption';
@@ -91,7 +90,7 @@ export default function Form({method, action, feed, categories}: { method: 'post
             </div>
 
             {discoveredFeedUrls.length > 0 && (
-                <Card className="mt-4 divide-y dark:divide-gray-700">
+                <div className="mt-4 divide-y dark:divide-gray-700">
                     {discoveredFeedUrls.map((discoveredFeedUrl) => (
                         <button
                             key={discoveredFeedUrl}
@@ -102,7 +101,7 @@ export default function Form({method, action, feed, categories}: { method: 'post
                             {discoveredFeedUrl}
                         </button>
                     ))}
-                </Card>
+                </div>
             )}
 
             <form onSubmit={submit}>
