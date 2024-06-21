@@ -1,9 +1,7 @@
 import {Head, useForm} from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import Form from '@/Pages/Feeds/Partials/Form';
-import Actions from '@/Components/Actions';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
-import Breadcrumbs from '@/Components/Breadcrumbs/Breadcrumbs';
 import {PageProps} from '@/types';
 import {RouteParams} from 'ziggy-js';
 import {SelectNumberOption} from '@/types/SelectOption';

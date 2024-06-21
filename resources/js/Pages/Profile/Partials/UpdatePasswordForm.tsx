@@ -48,7 +48,7 @@ export default function UpdatePasswordForm({className = ''}: { className?: strin
                 </p>
             </header>
 
-            <form onSubmit={updatePassword} className="mt-6 space-y-6">
+            <form onSubmit={updatePassword}>
                 <FieldGroup>
                     <Field>
                         <Label htmlFor="current_password">

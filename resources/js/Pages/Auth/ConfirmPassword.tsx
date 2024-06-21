@@ -1,11 +1,10 @@
 import React, {useEffect} from 'react';
 import GuestLayout from '@/Layouts/GuestLayout';
-import InputError from '@/Components/Form/InputError';
-import InputLabel from '@/Components/Form/InputLabel';
-import TextInput from '@/Components/Form/TextInput';
 import {Head, useForm} from '@inertiajs/react';
 import {Button} from '@/Components/Button';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
+import {ErrorMessage, Field, FieldGroup, Label} from '@/Components/Fieldset';
+import {Input} from '@/Components/Form/Input';
 
 export default function ConfirmPassword() {
     const {t} = useLaravelReactI18n();
@@ -39,27 +38,30 @@ export default function ConfirmPassword() {
             </div>
 
             <form onSubmit={submit}>
-                <div className="mt-4">
-                    <InputLabel htmlFor="password" value={t('Password')}/>
+                <FieldGroup>
+                    <Field>
+                        <Label htmlFor="password">
+                            {t('Password')}
+                        </Label>
+                        <Input
+                            id="password"
+                            type="password"
+                            name="password"
+                            value={data.password}
+                            className="mt-1 block w-full"
+                            onChange={handleOnChange}
+                            autoFocus
+                        />
 
-                    <TextInput
-                        id="password"
-                        type="password"
-                        name="password"
-                        value={data.password}
-                        className="mt-1 block w-full"
-                        isFocused={true}
-                        onChange={handleOnChange}
-                    />
+                        <ErrorMessage>
+                            {errors.password}
+                        </ErrorMessage>
+                    </Field>
 
-                    <InputError message={errors.password} className="mt-2"/>
-                </div>
-
-                <div className="flex items-center justify-end mt-4">
                     <Button type="submit" className="ml-4" disabled={processing}>
                         {t('Confirm')}
                     </Button>
-                </div>
+                </FieldGroup>
             </form>
         </GuestLayout>
     );

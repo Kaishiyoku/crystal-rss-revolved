@@ -99,7 +99,7 @@ function DialogCloseButton({onClick}: { onClick: () => void; }) {
         // Sizing
         'px-[calc(theme(spacing[2.5])-1px)] py-[calc(theme(spacing[2])-1px)] sm:px-[calc(theme(spacing.3)-1px)] sm:py-[calc(theme(spacing[2.5])-1px)] sm:text-sm/6',
         // Focus
-        'focus:outline-none focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500',
+        'focus:outline-none focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-blue-500',
         // Disabled
         'disabled:opacity-50',
         // Dark mode

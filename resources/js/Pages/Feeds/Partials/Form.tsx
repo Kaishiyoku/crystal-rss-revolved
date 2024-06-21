@@ -1,17 +1,18 @@
 import {useForm, usePage} from '@inertiajs/react';
-import InputLabel from '@/Components/Form/InputLabel';
-import TextInput from '@/Components/Form/TextInput';
-import InputError from '@/Components/Form/InputError';
 import Select from '@/Components/Form/Select';
 import React, {useState} from 'react';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import Card from '@/Components/Card';
 import {Button} from '@/Components/Button';
-import Checkbox from '@/Components/Form/Checkbox';
 import {PageProps} from '@/types';
 import {SelectNumberOption} from '@/types/SelectOption';
 import DiscoveredFeed from '@/types/DiscoveredFeed';
 import Feed from '@/types/generated/Models/Feed';
+import {Input} from '@/Components/Form/Input';
+import {ErrorMessage, Field, FieldGroup, Label} from '@/Components/Fieldset';
+import {Checkbox, CheckboxField} from '@/Components/Form/Checkbox';
+import InputListbox from '@/Components/Form/InputListbox';
+import toNumber from '@/Utils/toNumber';
 
 export default function Form({method, action, feed, categories}: { method: 'post' | 'put'; action: string; feed: Feed; categories: SelectNumberOption[]; }) {
     const {t, tChoice} = useLaravelReactI18n();
@@ -72,18 +73,17 @@ export default function Form({method, action, feed, categories}: { method: 'post
 
     return (
         <>
-            <div className="flex">
-                <TextInput
+            <div className="flex space-x-2 pb-8">
+                <Input
                     id="search_url"
-                    className="grow w-full rounded-r-none border-r-0"
+                    className="grow w-full"
                     placeholder={t('Search URL...')}
                     value={searchUrl}
                     onChange={(e) => setSearchUrl(e.target.value)}
-                    isFocused
+                    autoFocus
                 />
 
                 <Button
-                    className="rounded-l-none border border-gray-300 dark:border-gray-700"
                     onClick={() => discoverFeedUrls(searchUrl)}
                     disabled={isDiscoverFeedProcessing || searchUrl.length < 5}
                 >
@@ -106,122 +106,120 @@ export default function Form({method, action, feed, categories}: { method: 'post
                 </Card>
             )}
 
-            <form onSubmit={submit} className="mt-6 space-y-6">
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <div>
-                        <InputLabel htmlFor="name" value={t('validation.attributes.name')} required/>
+            <form onSubmit={submit}>
+                <FieldGroup>
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <Field disabled={isDiscoverFeedProcessing}>
+                            <Label htmlFor="name" required>
+                                {t('validation.attributes.name')}
+                            </Label>
+                            <Input
+                                id="name"
+                                className="mt-1 block w-full"
+                                value={data.name}
+                                onChange={(e) => setData('name', e.target.value)}
+                                required
+                            />
+                            <ErrorMessage>
+                                {errors.name}
+                            </ErrorMessage>
+                        </Field>
 
-                        <TextInput
-                            id="name"
-                            className="mt-1 block w-full"
-                            value={data.name}
-                            onChange={(e) => setData('name', e.target.value)}
-                            disabled={isDiscoverFeedProcessing}
-                            required
-                        />
+                        <Field disabled={isDiscoverFeedProcessing}>
+                            <Label htmlFor="category_id" required>
+                                {t('validation.attributes.category_id')}
+                            </Label>
+                            <InputListbox
+                                name="category_id"
+                                defaultValue={data.category_id}
+                                options={categories}
+                                onChange={(value) => setData('category_id', toNumber(value))}
+                                disabled={isDiscoverFeedProcessing}
+                            />
+                            <ErrorMessage>
+                                {errors.category_id}
+                            </ErrorMessage>
+                        </Field>
 
-                        <InputError className="mt-2" message={errors.name}/>
+                        <Field disabled={isDiscoverFeedProcessing}>
+                            <Label htmlFor="language" required>
+                                {t('validation.attributes.language')}
+                            </Label>
+                            <Input
+                                id="language"
+                                className="mt-1 block w-full"
+                                value={data.language}
+                                onChange={(e) => setData('language', e.target.value)}
+                                required
+                            />
+                            <ErrorMessage>
+                                {errors.language}
+                            </ErrorMessage>
+                        </Field>
                     </div>
 
-                    <div>
-                        <InputLabel htmlFor="category_id" value={t('validation.attributes.category_id')} required/>
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <Field disabled={isDiscoverFeedProcessing}>
+                            <Label htmlFor="feed_url" required>
+                                {t('validation.attributes.feed_url')}
+                            </Label>
+                            <Input
+                                id="feed_url"
+                                className="mt-1 block w-full"
+                                value={data.feed_url}
+                                onChange={(e) => setData('feed_url', e.target.value)}
+                                required
+                            />
+                            <ErrorMessage>
+                                {errors.feed_url}
+                            </ErrorMessage>
+                        </Field>
 
-                        <Select
-                            id="category_id"
-                            className="mt-1 block w-full"
-                            value={data.category_id}
-                            options={categories}
-                            onChange={(event: React.FormEvent<HTMLSelectElement>) => setData('category_id', parseInt(event.currentTarget.value, 10))}
-                            disabled={isDiscoverFeedProcessing}
-                            required
-                        />
+                        <Field disabled={isDiscoverFeedProcessing}>
+                            <Label htmlFor="site_url" required>
+                                {t('validation.attributes.site_url')}
+                            </Label>
+                            <Input
+                                id="site_url"
+                                className="mt-1 block w-full"
+                                value={data.site_url}
+                                onChange={(e) => setData('site_url', e.target.value)}
+                                required
+                            />
+                            <ErrorMessage>
+                                {errors.site_url}
+                            </ErrorMessage>
+                        </Field>
 
-                        <InputError className="mt-2" message={errors.category_id}/>
+                        <Field disabled={isDiscoverFeedProcessing}>
+                            <Label htmlFor="favicon_url">
+                                {t('validation.attributes.favicon_url')}
+                            </Label>
+                            <Input
+                                id="favicon_url"
+                                className="mt-1 block w-full"
+                                value={data.favicon_url}
+                                onChange={(e) => setData('favicon_url', e.target.value)}
+                            />
+                            <ErrorMessage>
+                                {errors.favicon_url}
+                            </ErrorMessage>
+                        </Field>
                     </div>
 
-                    <div>
-                        <InputLabel htmlFor="language" value={t('validation.attributes.language')} required/>
-
-                        <TextInput
-                            id="language"
-                            className="mt-1 block w-full"
-                            value={data.language}
-                            onChange={(e) => setData('language', e.target.value)}
-                            disabled={isDiscoverFeedProcessing}
-                            required
-                        />
-
-                        <InputError className="mt-2" message={errors.name}/>
-                    </div>
-                </div>
-
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <div>
-                        <InputLabel htmlFor="feed_url" value={t('validation.attributes.feed_url')} required/>
-
-                        <TextInput
-                            id="feed_url"
-                            className="mt-1 block w-full"
-                            value={data.feed_url}
-                            onChange={(e) => setData('feed_url', e.target.value)}
-                            disabled={isDiscoverFeedProcessing}
-                            required
-                        />
-
-                        <InputError className="mt-2" message={errors.feed_url}/>
-                    </div>
-
-                    <div>
-                        <InputLabel htmlFor="site_url" value={t('validation.attributes.site_url')} required/>
-
-                        <TextInput
-                            id="site_url"
-                            className="mt-1 block w-full"
-                            value={data.site_url}
-                            onChange={(e) => setData('site_url', e.target.value)}
-                            disabled={isDiscoverFeedProcessing}
-                            required
-                        />
-
-                        <InputError className="mt-2" message={errors.site_url}/>
-                    </div>
-
-                    <div>
-                        <InputLabel htmlFor="favicon_url" value={t('validation.attributes.favicon_url')}/>
-
-                        <TextInput
-                            id="favicon_url"
-                            className="mt-1 block w-full"
-                            value={data.favicon_url}
-                            onChange={(e) => setData('favicon_url', e.target.value)}
-                            disabled={isDiscoverFeedProcessing}
-                        />
-
-                        <InputError className="mt-2" message={errors.site_url}/>
-                    </div>
-                </div>
-
-                <div>
-                    <label className="flex items-center w-fit">
+                    <CheckboxField disabled={isDiscoverFeedProcessing}>
                         <Checkbox
                             name="is_purgeable"
                             checked={data.is_purgeable}
-                            value={data.is_purgeable}
-                            disabled={isDiscoverFeedProcessing}
-                            onChange={(e) => setData('is_purgeable', e.currentTarget.checked)}
+                            onChange={(checked) => setData('is_purgeable', checked)}
                         />
+                        <Label>{tChoice('feed.purge', monthsAfterPruningFeedItems)}</Label>
+                    </CheckboxField>
 
-                        <span className="ml-2 text-sm text-gray-600 dark:text-gray-400">
-                            {tChoice('feed.purge', monthsAfterPruningFeedItems)}
-                        </span>
-                    </label>
-                </div>
-
-                <div className="flex items-center gap-4">
                     <Button type="submit" disabled={processing || isDiscoverFeedProcessing}>
                         {t('Save')}
                     </Button>
-                </div>
+                </FieldGroup>
             </form>
         </>
     );

@@ -1,10 +1,10 @@
 import GuestLayout from '@/Layouts/GuestLayout';
-import InputError from '@/Components/Form/InputError';
-import TextInput from '@/Components/Form/TextInput';
 import {Head, useForm} from '@inertiajs/react';
 import {Button} from '@/Components/Button';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import React from 'react';
+import {Input} from '@/Components/Form/Input';
+import {ErrorMessage, Field, FieldGroup} from '@/Components/Fieldset';
 
 export default function ForgotPassword({status}: { status: string; }) {
     const {t} = useLaravelReactI18n();
@@ -34,23 +34,26 @@ export default function ForgotPassword({status}: { status: string; }) {
             {status && <div className="mb-4 font-medium text-sm text-green-600 dark:text-green-400">{status}</div>}
 
             <form onSubmit={submit}>
-                <TextInput
-                    id="email"
-                    type="email"
-                    name="email"
-                    value={data.email}
-                    className="mt-1 block w-full"
-                    isFocused={true}
-                    onChange={onHandleChange}
-                />
+                <FieldGroup>
+                    <Field>
+                        <Input
+                            id="email"
+                            type="email"
+                            name="email"
+                            value={data.email}
+                            className="mt-1 block w-full"
+                            onChange={onHandleChange}
+                            autoFocus
+                        />
+                        <ErrorMessage>
+                            {errors.email}
+                        </ErrorMessage>
+                    </Field>
 
-                <InputError message={errors.email} className="mt-2"/>
-
-                <div className="flex items-center justify-end mt-4">
                     <Button type="submit" disabled={processing}>
                         {t('Email Password Reset Link')}
                     </Button>
-                </div>
+                </FieldGroup>
             </form>
         </GuestLayout>
     );

@@ -1,11 +1,10 @@
 import {useForm} from '@inertiajs/react';
-import InputLabel from '@/Components/Form/InputLabel';
-import TextInput from '@/Components/Form/TextInput';
-import InputError from '@/Components/Form/InputError';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import {Button} from '@/Components/Button';
 import React from 'react';
 import Category from '@/types/generated/Models/Category';
+import {ErrorMessage, Field, FieldGroup, Label} from '@/Components/Fieldset';
+import {Input} from '@/Components/Form/Input';
 
 export default function Form({method, action, category}: { method: 'post' | 'put'; action: string; category: Category; }) {
     const {t} = useLaravelReactI18n();
@@ -20,27 +19,29 @@ export default function Form({method, action, category}: { method: 'post' | 'put
     };
 
     return (
-        <form onSubmit={submit} className="mt-6 space-y-6">
-            <div>
-                <InputLabel htmlFor="name" value={t('validation.attributes.name')} required/>
+        <form onSubmit={submit}>
+            <FieldGroup>
+                <Field>
+                    <Label htmlFor="name" required>
+                        {t('validation.attributes.name')}
+                    </Label>
+                    <Input
+                        id="name"
+                        className="mt-1 block w-full max-w-xl"
+                        value={data.name}
+                        onChange={(e) => setData('name', e.target.value)}
+                        autoFocus
+                        required
+                    />
+                    <ErrorMessage>
+                        {errors.name}
+                    </ErrorMessage>
+                </Field>
 
-                <TextInput
-                    id="name"
-                    className="mt-1 block w-full max-w-xl"
-                    value={data.name}
-                    onChange={(e) => setData('name', e.target.value)}
-                    required
-                    isFocused
-                />
-
-                <InputError className="mt-2" message={errors.name}/>
-            </div>
-
-            <div className="flex items-center gap-4">
                 <Button type="submit" disabled={processing}>
                     {t('Save')}
                 </Button>
-            </div>
+            </FieldGroup>
         </form>
     );
 }
