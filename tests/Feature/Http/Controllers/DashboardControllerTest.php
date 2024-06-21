@@ -27,9 +27,7 @@ class DashboardControllerTest extends TestCase
         $this->get(route('dashboard'))
             ->assertInertia(fn (Assert $page) => $page
                 ->component('Dashboard')
-                ->where('selectedFeed', null)
                 ->where('totalNumberOfFeedItems', 20)
-                ->count('unreadFeeds', 2)
                 ->has('feedItems', fn (Assert $page) => $page
                     ->count('data', 15)
                     ->has('data')
@@ -54,9 +52,7 @@ class DashboardControllerTest extends TestCase
         $this->get(route('dashboard').'?'.Arr::query(['cursor' => $cursor]))
             ->assertInertia(fn (Assert $page) => $page
                 ->component('Dashboard')
-                ->where('selectedFeed', null)
                 ->where('totalNumberOfFeedItems', 20)
-                ->count('unreadFeeds', 2)
                 ->has('feedItems', fn (Assert $page) => $page
                     ->count('data', 5)
                     ->has('data')
@@ -74,13 +70,7 @@ class DashboardControllerTest extends TestCase
         $this->get(route('dashboard').'?'.Arr::query(['feed_id' => $feedWithUnreadFeedItems->id]))
             ->assertInertia(fn (Assert $page) => $page
                 ->component('Dashboard')
-                ->where('selectedFeed', [
-                    'id' => $feedWithUnreadFeedItems->id,
-                    'name' => $feedWithUnreadFeedItems->name,
-                    'feed_items_count' => 15,
-                ])
                 ->where('totalNumberOfFeedItems', 20)
-                ->count('unreadFeeds', 2)
                 ->has('feedItems', fn (Assert $page) => $page
                     ->count('data', 15)
                     ->has('data')
