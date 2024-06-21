@@ -38,7 +38,7 @@ export default function Index({feeds, ...props}: PageProps & { feeds: FeedWithFe
                                             loading="lazy"
                                             src={feed.favicon_url}
                                             alt={feed.name}
-                                            className="size-5 rounded"
+                                            className="size-5 rounded-full"
                                         />
                                     )
                                     : <RssIcon className="size-5"/>}

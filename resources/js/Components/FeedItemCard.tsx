@@ -68,7 +68,7 @@ export default function FeedItemCard({hueRotationIndex, feedItem}: { hueRotation
                                         loading="lazy"
                                         src={internalFeedItem.feed.favicon_url}
                                         alt={internalFeedItem.feed.name}
-                                        className="size-4 rounded"
+                                        className="size-4 rounded-full"
                                     />
                                 )
                                 : <RssIcon className="size-5"/>}

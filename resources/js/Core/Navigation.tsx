@@ -108,7 +108,7 @@ export default function Navigation({user, selectedFeedId, unreadFeeds, children}
                                             current={selectedFeedId === unreadFeed.id}
                                         >
                                             {unreadFeed.favicon_url
-                                                ? <img src={unreadFeed.favicon_url} alt="" loading="lazy" className="size-5"/>
+                                                ? <img src={unreadFeed.favicon_url} alt="" loading="lazy" className="size-5 rounded-full"/>
                                                 : <RssIcon/>
                                             }
 
