@@ -1,8 +1,8 @@
 <?php
 
-use App\Models\FeedItem;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Intervention\Image\Exceptions\DecoderException;
 
@@ -18,17 +18,21 @@ return new class extends Migration
         });
 
         // generate blur hashes for existing feed items
-        FeedItem::unread()->whereNotNull('image_url')->each(function (FeedItem $feedItem) {
-            try {
-                $feedItem->fill([
-                    'blur_hash' => generateBlurHashByUrl($feedItem->image_url),
-                ]);
-
-                $feedItem->save();
-            } catch (DecoderException) {
-                // nothing to do here
-            }
-        });
+        DB::table('feed_items')
+            ->whereNull('read_at')
+            ->whereNotNull('image_url')
+            ->orderBy('id')
+            ->each(function ($feedItem) {
+                try {
+                    DB::table('feed_items')
+                        ->where('id', $feedItem->id)
+                        ->update([
+                            'blur_hash' => generateBlurHashByUrl($feedItem->image_url),
+                        ]);
+                } catch (DecoderException) {
+                    // nothing to do here
+                }
+            });
     }
 
     /**

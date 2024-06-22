@@ -12,6 +12,7 @@ use Intervention\Image\Colors\Rgb\Colorspace as RgbColorspace;
 use Intervention\Image\Drivers\Gd\Driver as GdDriver;
 use Intervention\Image\ImageManager;
 use kornrunner\Blurhash\Blurhash;
+use Illuminate\Support\Facades\Log;
 
 if (! function_exists('getContentTypeForUrl')) {
     function getContentTypeForUrl(string $url): ?string
@@ -53,6 +54,8 @@ if (! function_exists('generateBlurHashByUrl')) {
 
             return Blurhash::encode($pixels, 4, 3);
         } catch (Exception) {
+            Log::warning("Couldn't generate blur hash for image {$imageUrl}");
+
             return null;
         }
     }
