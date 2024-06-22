@@ -2,13 +2,14 @@ import {Head} from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import formatDateTime from '@/Utils/formatDateTime';
-import EmptyState from '@/Components/EmptyState';
+import {EmptyState} from '@/Components/EmptyState';
 import {PageProps} from '@/types';
 import {RouteParams} from 'ziggy-js';
 import FeedWithFeedItemsCount from '@/types/generated/Models/FeedWithFeedItemsCount';
 import {Button} from '@/Components/Button';
 import {LinkStack, LinkStackItem} from '@/Components/LinkStack';
 import {RssIcon} from '@heroicons/react/20/solid';
+import {PlusIcon} from '@heroicons/react/16/solid';
 
 export default function Index({feeds, ...props}: PageProps & { feeds: FeedWithFeedItemsCount[]; }) {
     const {t, tChoice} = useLaravelReactI18n();
@@ -19,9 +20,13 @@ export default function Index({feeds, ...props}: PageProps & { feeds: FeedWithFe
             errors={props.errors}
             header={('Feeds')}
             actions={(
-                <Button href={route('feeds.create')}>
-                    {t('Add feed')}
-                </Button>
+                <>
+                    {feeds.length > 0 && (
+                        <Button href={route('feeds.create')} outline>
+                            {t('Add feed')}
+                        </Button>
+                    )}
+                </>
             )}
         >
             <Head title={t('Feeds')}/>
@@ -79,7 +84,13 @@ export default function Index({feeds, ...props}: PageProps & { feeds: FeedWithFe
                         icon={RssIcon}
                         message={t('No feeds.')}
                         description={t('Get started by creating a new feed.')}
-                    />
+                    >
+                        <Button href={route('feeds.create')} outline>
+                            <PlusIcon/>
+
+                            {t('Add feed')}
+                        </Button>
+                    </EmptyState>
                 )}
         </AuthenticatedLayout>
     );

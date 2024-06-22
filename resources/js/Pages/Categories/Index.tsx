@@ -1,13 +1,14 @@
 import {Head} from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
-import EmptyState from '@/Components/EmptyState';
+import {EmptyState} from '@/Components/EmptyState';
 import {PageProps} from '@/types';
 import {RouteParams} from 'ziggy-js';
 import CategoryWithFeedsCount from '@/types/generated/Models/CategoryWithFeedsCount';
 import {Button} from '@/Components/Button';
 import {LinkStack, LinkStackItem} from '@/Components/LinkStack';
-import {TagIcon} from '@heroicons/react/24/outline';
+import {FolderIcon} from '@heroicons/react/24/outline';
+import {PlusIcon} from '@heroicons/react/16/solid';
 
 export default function Index({categories, ...props}: PageProps & { categories: CategoryWithFeedsCount[]; }) {
     const {t, tChoice} = useLaravelReactI18n();
@@ -18,12 +19,16 @@ export default function Index({categories, ...props}: PageProps & { categories: 
             errors={props.errors}
             header={t('Categories')}
             actions={(
-                <Button
-                    href={route('categories.create')}
-                    outline
-                >
-                    {t('Add category')}
-                </Button>
+                <>
+                    {categories.length > 0 && (
+                        <Button
+                            href={route('categories.create')}
+                            outline
+                        >
+                            {t('Add category')}
+                        </Button>
+                    )}
+                </>
             )}
         >
             <Head title={t('Categories')}/>
@@ -46,10 +51,16 @@ export default function Index({categories, ...props}: PageProps & { categories: 
                 )
                 : (
                     <EmptyState
-                        icon={TagIcon}
+                        icon={FolderIcon}
                         message={t('No categories.')}
                         description={t('Get started by creating a new category.')}
-                    />
+                    >
+                        <Button href={route('categories.create')} outline>
+                            <PlusIcon/>
+
+                            {t('New category')}
+                        </Button>
+                    </EmptyState>
                 )}
         </AuthenticatedLayout>
     );

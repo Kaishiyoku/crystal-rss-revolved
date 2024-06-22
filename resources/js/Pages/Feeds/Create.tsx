@@ -2,11 +2,11 @@ import {Head} from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import Form from '@/Pages/Feeds/Partials/Form';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
-import EmptyState from '@/Components/EmptyState';
+import {EmptyState} from '@/Components/EmptyState';
 import {PageProps} from '@/types';
 import {SelectNumberOption} from '@/types/SelectOption';
 import Feed from '@/types/generated/Models/Feed';
-import {PlusIcon, TagIcon} from '@heroicons/react/24/outline';
+import {PlusIcon, FolderIcon} from '@heroicons/react/24/outline';
 import {Button} from '@/Components/Button';
 
 export default function Create({feed, categories, ...props}: PageProps & { feed: Feed; categories: SelectNumberOption[]; }) {
@@ -31,17 +31,17 @@ export default function Create({feed, categories, ...props}: PageProps & { feed:
                 )
                 : (
                     <EmptyState
-                        icon={TagIcon}
+                        icon={FolderIcon}
                         message={t('Please create a category first.')}
                         description={t('There have to be at least one category before you can create a feed.')}
                     >
                         <Button
                             href={route('categories.create')}
                             className="mt-2"
-                            plain
+                            outline
                         >
                             <PlusIcon/>
-                            {t('New category')}
+                            {t('Add category')}
                         </Button>
                     </EmptyState>
                 )}

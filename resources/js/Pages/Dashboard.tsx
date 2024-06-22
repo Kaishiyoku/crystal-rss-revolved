@@ -5,13 +5,13 @@ import FeedItemCard from '@/Components/FeedItemCard';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import TotalNumberOfFeedItemsContext from '@/Contexts/TotalNumberOfFeedItemsContext';
 import {Button} from '@/Components/Button';
-import EmptyState from '@/Components/EmptyState';
+import {EmptyState} from '@/Components/EmptyState';
 import {PageProps} from '@/types';
 import CursorPagination from '@/types/CursorPagination';
 import FeedItem from '@/types/generated/Models/FeedItem';
 import ShortFeedWithFeedItemsCount from '@/types/generated/Models/ShortFeedWithFeedItemsCount';
 import MarkAllAsReadButton from '@/Components/MarkAllAsReadButton';
-import {NewspaperIcon} from '@heroicons/react/24/solid';
+import {NewspaperIcon} from '@heroicons/react/24/outline';
 
 type DashboardPageProps = PageProps & {
     unreadFeeds: ShortFeedWithFeedItemsCount[];
