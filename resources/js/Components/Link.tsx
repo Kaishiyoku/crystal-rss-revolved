@@ -10,7 +10,7 @@ import * as Headless from '@headlessui/react';
 import React from 'react';
 import {InertiaLinkProps, Link as InertiaLink} from '@inertiajs/react';
 
-export const Link = React.forwardRef(function Link({external, ...props}: { external: boolean; } & InertiaLinkProps & React.ComponentPropsWithoutRef<'a'>, ref: React.ForwardedRef<HTMLAnchorElement>) {
+export const Link = React.forwardRef(function Link({external = false, ...props}: { external: boolean; } & InertiaLinkProps & React.ComponentPropsWithoutRef<'a'>, ref: React.ForwardedRef<HTMLAnchorElement>) {
     return (
         <Headless.DataInteractive>
             {external
