@@ -82,6 +82,16 @@ export default function Navigation({user, selectedFeedId, unreadFeeds, children}
                                         <DropdownItem href={route('admin.users.index')}>
                                             {t('Manage users')}
                                         </DropdownItem>
+
+                                        <DropdownDivider/>
+
+                                        <DropdownItem href={route('horizon.index')} external>
+                                            {t('Laravel Horizon')}
+                                        </DropdownItem>
+
+                                        <DropdownItem href={route('pulse')} external>
+                                            {t('Laravel Pulse')}
+                                        </DropdownItem>
                                     </>
                                 )}
                             </DropdownMenu>

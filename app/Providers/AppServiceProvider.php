@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\User;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
@@ -41,6 +43,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         //
+
+        Gate::define('viewPulse', function (User $user) {
+            return $user->is_admin;
+        });
 
         $this->bootRoute();
     }
