@@ -44,7 +44,7 @@ export default function FeedItemCard({hueRotationIndex, feedItem}: { hueRotation
                             ? (
                                 <ImageWithBlurHash
                                     src={internalFeedItem.image_url}
-                                    alt={internalFeedItem.title}
+                                    alt=""
                                     blurHash={internalFeedItem.blur_hash}
                                     className="w-full @md:w-44 aspect-[3/2] rounded-lg"
                                 />
@@ -81,12 +81,12 @@ export default function FeedItemCard({hueRotationIndex, feedItem}: { hueRotation
                 </div>
 
                 <div className="flex flex-col">
-                    <a href={internalFeedItem.url} className="inline-block mb-2 text-lg link-blue">
+                    <a href={internalFeedItem.url} className="inline-block mb-2 text-lg link-blue hyphens-auto" lang={internalFeedItem.feed.language}>
                         {internalFeedItem.title}
                     </a>
 
                     <div className="grow">
-                        <div className="text-muted overflow-hidden line-clamp-6 xl:line-clamp-3 break-all">
+                        <div className="text-muted overflow-hidden line-clamp-6 xl:line-clamp-3 hyphens-auto" lang={internalFeedItem.feed.language}>
                             {internalFeedItem.description}
                         </div>
                     </div>
