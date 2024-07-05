@@ -26,6 +26,7 @@ import {useLaravelReactI18n} from 'laravel-react-i18n';
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import User from '@/types/generated/Models/User';
 import ShortFeedWithFeedItemsCount from '@/types/generated/Models/ShortFeedWithFeedItemsCount';
+import substr from '@/Utils/substr';
 
 export default function Navigation({user, selectedFeedId, unreadFeeds, children}: { user: User; selectedFeedId: number | null; unreadFeeds: ShortFeedWithFeedItemsCount[]; children: ReactNode; }) {
     const {t} = useLaravelReactI18n();
@@ -38,7 +39,7 @@ export default function Navigation({user, selectedFeedId, unreadFeeds, children}
                     <NavbarSection>
                         <Dropdown>
                             <DropdownButton as={NavbarItem}>
-                                <Avatar initials={user.name.substring(0, 2)} className="size-10 bg-blue-400 dark:bg-blue-900" square alt=""/>
+                                <Avatar initials={substr(user.name, 0, 2)} className="size-10 bg-blue-400 dark:bg-blue-900" square alt=""/>
                             </DropdownButton>
                             <DropdownMenu className="min-w-64" anchor="bottom end">
                                 <DropdownItem href={route('profile.edit')}>
@@ -135,7 +136,7 @@ export default function Navigation({user, selectedFeedId, unreadFeeds, children}
                         <Dropdown>
                             <DropdownButton as={SidebarItem}>
                                 <span className="flex min-w-0 items-center gap-3">
-                                    <Avatar initials={user.name.substring(0, 2)} className="size-10 bg-blue-400 dark:bg-blue-900" square alt=""/>
+                                    <Avatar initials={substr(user.name, 0, 2)} className="size-10 bg-blue-400 dark:bg-blue-900" square alt=""/>
                                     <span className="min-w-0">
                                         <span className="block truncate text-sm/5 font-medium text-zinc-950 dark:text-white">{user.name}</span>
                                         <span className="block truncate text-xs/5 font-normal text-zinc-500 dark:text-zinc-400">

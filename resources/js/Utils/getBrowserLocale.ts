@@ -1,3 +1,5 @@
-const getBrowserLocale = (): string => navigator.language.substring(0, 2);
+import substr from '@/Utils/substr';
+
+const getBrowserLocale = (): string => substr(navigator.language, 0, 2);
 
 export default getBrowserLocale;
