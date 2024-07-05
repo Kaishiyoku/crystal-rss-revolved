@@ -27,7 +27,7 @@ export function SidebarBody({className, ...props}: React.ComponentPropsWithoutRe
             {...props}
             className={clsx(
                 className,
-                'flex flex-1 flex-col overflow-y-auto p-4 [&>[data-slot=section]+[data-slot=section]]:mt-8 mb-10'
+                'flex flex-1 flex-col overflow-y-auto p-4 [&>[data-slot=section]+[data-slot=section]]:mt-8 max-lg:mb-10'
             )}
         />
     );
