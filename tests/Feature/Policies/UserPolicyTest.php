@@ -17,7 +17,7 @@ class UserPolicyTest extends TestCase
     {
         parent::__construct($name);
 
-        $this->userPolicy = new UserPolicy();
+        $this->userPolicy = new UserPolicy;
     }
 
     /**

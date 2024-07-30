@@ -19,7 +19,7 @@ class CategoryPolicyTest extends TestCase
     {
         parent::__construct($name);
 
-        $this->categoryPolicy = new CategoryPolicy();
+        $this->categoryPolicy = new CategoryPolicy;
     }
 
     /**

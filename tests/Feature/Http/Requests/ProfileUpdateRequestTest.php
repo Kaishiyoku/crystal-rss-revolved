@@ -29,7 +29,7 @@ class ProfileUpdateRequestTest extends TestCase
 
     public function test_authorize(): void
     {
-        static::assertTrue((new ProfileUpdateRequest())->authorize());
+        static::assertTrue((new ProfileUpdateRequest)->authorize());
     }
 
     /**

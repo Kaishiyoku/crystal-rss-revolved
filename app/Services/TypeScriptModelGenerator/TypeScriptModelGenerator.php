@@ -26,7 +26,7 @@ class TypeScriptModelGenerator
         $this->outputDirectory = config('type-script-model-generator.output_directory');
         $this->modelDirectory = config('type-script-model-generator.model_directory');
 
-        $this->files = new Filesystem();
+        $this->files = new Filesystem;
     }
 
     public function generateAll(): void
@@ -57,7 +57,7 @@ class TypeScriptModelGenerator
      */
     private function generateModelType(string $fullyQualifiedModelName, Collection $otherFullyQualifiedModelNames): void
     {
-        $model = new $fullyQualifiedModelName();
+        $model = new $fullyQualifiedModelName;
         $modelName = (new ReflectionClass($model))->getShortName();
 
         $type = new Type($model, $otherFullyQualifiedModelNames);

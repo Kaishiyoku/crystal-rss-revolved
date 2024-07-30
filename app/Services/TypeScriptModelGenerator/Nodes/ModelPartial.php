@@ -29,7 +29,7 @@ class ModelPartial
         /*** @var Collection<string> */
         private readonly Collection $fields,
     ) {
-        $this->files = new Filesystem();
+        $this->files = new Filesystem;
     }
 
     /**

@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(HeraRssCrawler::class, function (Application $app) {
-            $heraRssCrawler = new HeraRssCrawler();
+            $heraRssCrawler = new HeraRssCrawler;
             $heraRssCrawler->setLogger(Log::channel('feed_updater'));
             $heraRssCrawler->setRetryCount(config('app.rss_crawler_retry_count'));
 

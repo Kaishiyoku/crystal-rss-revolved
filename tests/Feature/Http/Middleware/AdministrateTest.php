@@ -26,7 +26,7 @@ class AdministrateTest extends TestCase
         }
 
         $visited = false;
-        $middleware = new Administrate();
+        $middleware = new Administrate;
         $middleware->handle(Request::create('/users')->setUserResolver(fn () => $user ?? null), function () use (&$visited) {
             $visited = true;
 

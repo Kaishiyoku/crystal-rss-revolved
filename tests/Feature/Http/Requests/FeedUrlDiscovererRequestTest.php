@@ -11,7 +11,7 @@ class FeedUrlDiscovererRequestTest extends TestCase
 {
     public function test_authorize(): void
     {
-        static::assertTrue((new FeedUrlDiscovererRequest())->authorize());
+        static::assertTrue((new FeedUrlDiscovererRequest)->authorize());
     }
 
     /**

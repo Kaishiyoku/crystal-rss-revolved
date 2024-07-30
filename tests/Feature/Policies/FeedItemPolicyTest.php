@@ -19,7 +19,7 @@ class FeedItemPolicyTest extends TestCase
     {
         parent::__construct($name);
 
-        $this->feedItemPolicy = new FeedItemPolicy();
+        $this->feedItemPolicy = new FeedItemPolicy;
     }
 
     /**

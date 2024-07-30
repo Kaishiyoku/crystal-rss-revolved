@@ -29,7 +29,7 @@ class DashboardRequestTest extends TestCase
 
     public function test_authorize(): void
     {
-        static::assertTrue((new DashboardRequest())->authorize());
+        static::assertTrue((new DashboardRequest)->authorize());
     }
 
     /**

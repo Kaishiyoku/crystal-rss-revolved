@@ -18,7 +18,7 @@ class FeedControllerTest extends TestCase
 
     public function test_middleware_is_registered(): void
     {
-        $middleware = collect((new FeedController())->getMiddleware())
+        $middleware = collect((new FeedController)->getMiddleware())
             ->map(fn (array $arr) => Arr::get($arr, 'middleware'))
             ->toArray();
 

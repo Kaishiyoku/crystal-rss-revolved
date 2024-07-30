@@ -30,7 +30,7 @@ class InheritedType
         /*** @var Collection<TypeProperty> */
         private readonly Collection $additionalFields,
     ) {
-        $this->files = new Filesystem();
+        $this->files = new Filesystem;
     }
 
     /**

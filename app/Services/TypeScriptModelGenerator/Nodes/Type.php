@@ -54,7 +54,7 @@ class Type implements Arrayable
         private readonly Model $model,
         private readonly Collection $otherFullyQualifiedModelNames
     ) {
-        $this->files = new Filesystem();
+        $this->files = new Filesystem;
 
         $this->name = (new ReflectionClass($this->model))->getShortName();
 

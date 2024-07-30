@@ -38,7 +38,7 @@ class TypeProperty implements Arrayable
         private readonly Model $model,
         public readonly string $name,
     ) {
-        $this->files = new Filesystem();
+        $this->files = new Filesystem;
 
         $returnTypes = $this->getDatabaseSchemaReturnTypes();
         $modelAttributeReturnTypes = $this->getModelAttributeReturnTypes();

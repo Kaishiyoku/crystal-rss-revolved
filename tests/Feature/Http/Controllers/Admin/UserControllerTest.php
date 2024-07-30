@@ -18,7 +18,7 @@ class UserControllerTest extends TestCase
 
     public function test_middleware_is_registered(): void
     {
-        $middleware = collect((new UserController())->getMiddleware())
+        $middleware = collect((new UserController)->getMiddleware())
             ->map(fn (array $arr) => Arr::get($arr, 'middleware'))
             ->toArray();
 

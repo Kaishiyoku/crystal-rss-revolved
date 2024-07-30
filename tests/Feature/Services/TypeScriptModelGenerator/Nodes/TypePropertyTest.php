@@ -57,10 +57,10 @@ it('builds a type property', function () {
         }
     };
 
-    expect((new TypeProperty(new FeedItem(), 'checksum'))->toString())->toBe('checksum: string;')
-        ->and((new TypeProperty(new FeedItem(), 'posted_at'))->toString())->toBe('posted_at: string /** cast attribute */;')
-        ->and((new TypeProperty(new FeedItem(), 'has_image'))->toString())->toBe('has_image: boolean /** model attribute */;')
-        ->and((new TypeProperty(new FeedItem(), 'non_existent_field'))->toString())->toBe('non_existent_field: unknown /** no return types found */;')
+    expect((new TypeProperty(new FeedItem, 'checksum'))->toString())->toBe('checksum: string;')
+        ->and((new TypeProperty(new FeedItem, 'posted_at'))->toString())->toBe('posted_at: string /** cast attribute */;')
+        ->and((new TypeProperty(new FeedItem, 'has_image'))->toString())->toBe('has_image: boolean /** model attribute */;')
+        ->and((new TypeProperty(new FeedItem, 'non_existent_field'))->toString())->toBe('non_existent_field: unknown /** no return types found */;')
         ->and((new TypeProperty($sampleModel, 'is_read'))->toString())->toBe('is_read: unknown /** no return types found */;');
 });
 

@@ -31,7 +31,7 @@ if (! function_exists('generateBlurHashByUrl')) {
     function generateBlurHashByUrl(string $imageUrl): ?string
     {
         try {
-            $imageManager = new ImageManager(new GdDriver());
+            $imageManager = new ImageManager(new GdDriver);
             $image = $imageManager->read(Http::get($imageUrl)->body());
             $image->scaleDown(100);
 
@@ -41,7 +41,7 @@ if (! function_exists('generateBlurHashByUrl')) {
                 $row = [];
 
                 for ($x = 0; $x < $image->width(); $x++) {
-                    $colors = $image->pickColor($x, $y)->convertTo(new RgbColorspace());
+                    $colors = $image->pickColor($x, $y)->convertTo(new RgbColorspace);
 
                     $row[] = [
                         $colors->channel(Red::class)->value(),

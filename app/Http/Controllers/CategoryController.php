@@ -34,7 +34,7 @@ class CategoryController extends Controller
     public function create(): Response
     {
         return Inertia::render('Categories/Create', [
-            'category' => new Category(),
+            'category' => new Category,
         ]);
     }
 

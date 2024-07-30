@@ -141,11 +141,11 @@ class FeedItemTest extends TestCase
 
         static::assertEquals(
             $readPrunableFeedItemIds->merge($unreadPrunableFeedItemIds)->values()->sort(),
-            (new FeedItem())->prunable()->pluck('id')
+            (new FeedItem)->prunable()->pluck('id')
         );
         static::assertNotContains(
             $readNotPrunableFeedItemIds->merge($unreadNotPrunableFeedItemIds)->values()->sort(),
-            (new FeedItem())->prunable()->pluck('id')
+            (new FeedItem)->prunable()->pluck('id')
         );
 
         $this->artisan('model:prune')

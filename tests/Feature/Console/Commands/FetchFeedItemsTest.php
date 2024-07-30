@@ -48,7 +48,7 @@ class FetchFeedItemsTest extends TestCase
             ->create();
 
         $heraRssCrawlerMock = $this->partialMock(HeraRssCrawler::class);
-        $heraRssCrawlerMock->shouldReceive('parseFeed')->once()->andThrow(new RuntimeException());
+        $heraRssCrawlerMock->shouldReceive('parseFeed')->once()->andThrow(new RuntimeException);
 
         $this->artisan(FetchFeedItems::class)
             ->assertExitCode(Command::SUCCESS);
@@ -146,7 +146,7 @@ class FetchFeedItemsTest extends TestCase
      */
     private static function getDummyRssFeed(int $numberOfFeedItems): RssFeed
     {
-        $rssFeed = new RssFeed();
+        $rssFeed = new RssFeed;
 
         $rssFeed->setCategories(collect());
         $rssFeed->setAuthors(collect());
@@ -168,7 +168,7 @@ class FetchFeedItemsTest extends TestCase
 
     private static function getDummyRssFeedItem(int $id, ?Carbon $date = null, ?string $imageUrl = null): RssFeedItem
     {
-        $rssFeedItem = new RssFeedItem();
+        $rssFeedItem = new RssFeedItem;
         $rssFeedItem->setCategories(collect());
         $rssFeedItem->setAuthors(collect());
 

@@ -31,8 +31,8 @@ class FeedRequestTest extends TestCase
 
     public function test_authorize(): void
     {
-        static::assertTrue((new StoreFeedRequest())->authorize());
-        static::assertTrue((new UpdateFeedRequest())->authorize());
+        static::assertTrue((new StoreFeedRequest)->authorize());
+        static::assertTrue((new UpdateFeedRequest)->authorize());
     }
 
     /**
