@@ -15,7 +15,7 @@ type LinkStackItemProps = { image?: ReactNode; url: string; title: string; onCli
 
 export function LinkStackItem({image, url, title, onClick, children, disabled = false}: LinkStackItemProps) {
     const classes = clsx(
-        'block w-full text-left px-2 py-2.5 first:rounded-t-md last:rounded-b-md transition',
+        'block w-full text-left px-2 py-2.5 first:rounded-t-md last:rounded-b-md transition duration-75 ease-out',
         {
             'opacity-50': disabled,
             'hover:bg-gray-50 dark:hover:bg-gray-800/50': !disabled,
