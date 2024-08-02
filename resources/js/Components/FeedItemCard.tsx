@@ -51,8 +51,7 @@ export default function FeedItemCard({hueRotationIndex, feedItem}: { hueRotation
                             )
                             : (
                                 <ImagePlaceholder colorIndex={hueRotationIndex} className="w-full @md:w-44 aspect-[3/2] rounded-lg"/>
-                            )
-                        }
+                            )}
                     </div>
 
                     <div className="pb-2 text-sm text-muted">
@@ -99,8 +98,7 @@ export default function FeedItemCard({hueRotationIndex, feedItem}: { hueRotation
                         >
                             {internalFeedItem.read_at
                                 ? <EyeSlashIcon/>
-                                : <EyeIcon/>
-                            }
+                                : <EyeIcon/>}
 
                             {internalFeedItem.read_at ? t('Read') : t('Unread')}
                         </Button>

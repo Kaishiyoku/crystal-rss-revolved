@@ -13,7 +13,7 @@ import {
     TableHeader,
     TableMobileContainer,
     TableMobileText,
-    TableRow
+    TableRow,
 } from '@/Components/Table';
 
 export default function Index({users, ...props}: PageProps & { users: UserWithStats[]; }) {

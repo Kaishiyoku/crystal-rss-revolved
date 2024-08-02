@@ -30,8 +30,7 @@ export default function Breadcrumbs({breadcrumbs}: { breadcrumbs?: Breadcrumb[];
                 </li>
             )
             : (
-                <li key={slug(breadcrumb.title)}
-                    className="font-semibold text-gray-800 dark:text-gray-300 leading-tight">
+                <li key={slug(breadcrumb.title)} className="font-semibold text-gray-800 dark:text-gray-300 leading-tight">
                     {breadcrumb.title}
                 </li>
             );

@@ -20,7 +20,7 @@ type InputListboxType = {
     errorMessage?: string;
     disabled?: boolean;
     autoFocus?: boolean;
-}
+};
 
 export default function InputListbox({name, defaultValue, placeholder, options, onChange, errorMessage, disabled = false, autoFocus = false}: InputListboxType) {
     const [selected, setSelected] = useState<number | string | null>(defaultValue ?? null);

@@ -5,7 +5,7 @@ import {
     DropdownDivider,
     DropdownItem,
     DropdownLabel,
-    DropdownMenu
+    DropdownMenu,
 } from '@/Components/Dropdown';
 import {Navbar, NavbarItem, NavbarSection, NavbarSpacer} from '@/Components/Navbar';
 import {
@@ -16,7 +16,7 @@ import {
     SidebarHeader,
     SidebarItem,
     SidebarLabel,
-    SidebarSection
+    SidebarSection,
 } from '@/Components/Sidebar';
 import {SidebarLayout} from '@/Components/SidebarLayout';
 import {ArrowRightStartOnRectangleIcon, ChevronDownIcon, ChevronUpIcon, UserIcon} from '@heroicons/react/16/solid';
@@ -50,7 +50,7 @@ export default function Navigation({user, selectedFeedId, unreadFeeds, children}
                                 <DropdownDivider/>
 
                                 <DropdownItem href={route('logout')} method="post" as="button">
-                                    <ArrowRightStartOnRectangleIcon />
+                                    <ArrowRightStartOnRectangleIcon/>
                                     <DropdownLabel>{t('Log Out')}</DropdownLabel>
                                 </DropdownItem>
                             </DropdownMenu>
@@ -120,8 +120,7 @@ export default function Navigation({user, selectedFeedId, unreadFeeds, children}
                                         >
                                             {unreadFeed.favicon_url
                                                 ? <img src={unreadFeed.favicon_url} alt="" loading="lazy" className="size-5 rounded-full"/>
-                                                : <RssIcon/>
-                                            }
+                                                : <RssIcon/>}
 
                                             <SidebarLabel>
                                                 {unreadFeed.name}
@@ -144,18 +143,18 @@ export default function Navigation({user, selectedFeedId, unreadFeeds, children}
                                         </span>
                                     </span>
                                 </span>
-                                <ChevronUpIcon />
+                                <ChevronUpIcon/>
                             </DropdownButton>
                             <DropdownMenu className="min-w-64" anchor="top start">
                                 <DropdownItem href={route('profile.edit')}>
-                                    <UserIcon />
+                                    <UserIcon/>
                                     <DropdownLabel>{t('Profile')}</DropdownLabel>
                                 </DropdownItem>
 
                                 <DropdownDivider/>
 
                                 <DropdownItem href={route('logout')} method="post" as="button">
-                                    <ArrowRightStartOnRectangleIcon />
+                                    <ArrowRightStartOnRectangleIcon/>
                                     <DropdownLabel>{t('Log Out')}</DropdownLabel>
                                 </DropdownItem>
                             </DropdownMenu>

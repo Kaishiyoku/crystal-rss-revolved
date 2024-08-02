@@ -18,7 +18,7 @@ export default function Index({feeds, ...props}: PageProps & { feeds: FeedWithFe
         <AuthenticatedLayout
             auth={props.auth}
             errors={props.errors}
-            header={('Feeds')}
+            header={t('Feeds')}
             actions={(
                 <>
                     {feeds.length > 0 && (
@@ -65,8 +65,7 @@ export default function Index({feeds, ...props}: PageProps & { feeds: FeedWithFe
                                     <div className="text-muted">
                                         {feed.is_purgeable
                                             ? tChoice('feed.purge', props.monthsAfterPruningFeedItems)
-                                            : t('feed.no_purge')
-                                        }
+                                            : t('feed.no_purge')}
                                     </div>
 
                                     {feed.last_failed_at && (

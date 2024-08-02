@@ -34,8 +34,7 @@ export function LinkStackItem({image, url, title, onClick, children, disabled = 
                     )
                     : (
                         <div className="font-semibold">{title}</div>
-                    )
-                }
+                    )}
 
                 {children && (
                     <div className="text-muted">{children}</div>
@@ -53,8 +52,7 @@ export function LinkStackItem({image, url, title, onClick, children, disabled = 
                     )
                     : (
                         <div className="font-semibold">{title}</div>
-                    )
-                }
+                    )}
 
                 {children && (
                     <div className="text-muted">{children}</div>

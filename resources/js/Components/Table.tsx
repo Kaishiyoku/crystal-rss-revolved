@@ -28,7 +28,7 @@ export function TableHead({className, ...props}: React.ComponentPropsWithoutRef<
 }
 
 export function TableBody(props: React.ComponentPropsWithoutRef<'tbody'>) {
-    return <tbody {...props} />;
+    return <tbody {...props}/>;
 }
 
 const TableRowContext = createContext<{ href?: string; target?: string; title?: string; }>({

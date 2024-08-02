@@ -15,8 +15,7 @@ export const Link = React.forwardRef(function Link({external = false, ...props}:
         <Headless.DataInteractive>
             {external
                 ? <a {...props} ref={ref}/>
-                : <InertiaLink {...props} ref={ref}/>
-            }
+                : <InertiaLink {...props} ref={ref}/>}
         </Headless.DataInteractive>
     );
 });

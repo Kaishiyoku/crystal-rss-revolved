@@ -12,15 +12,15 @@ export default function ApplicationLogo(props: SVGProps<SVGSVGElement>) {
             height="342"
         >
             <defs>
-                <path d="M290 400L190 200L290 50L290 400Z" id="bD2p376SP"></path>
-                <path d="M400 199.73L300 199.73L300 49.73L400 199.73Z" id="bxp9uY7QC"></path>
+                <path d="M290 400L190 200L290 50L290 400Z" id="bD2p376SP"/>
+                <path d="M400 199.73L300 199.73L300 49.73L400 199.73Z" id="bxp9uY7QC"/>
             </defs>
             <g>
                 <g>
-                    <use xlinkHref="#bD2p376SP" opacity="1" fill="#1d4ed8" fillOpacity="1"></use>
+                    <use xlinkHref="#bD2p376SP" opacity="1" fill="#1d4ed8" fillOpacity="1"/>
                 </g>
                 <g>
-                    <use xlinkHref="#bxp9uY7QC" opacity="1" fill="#3b82f6" fillOpacity="1"></use>
+                    <use xlinkHref="#bxp9uY7QC" opacity="1" fill="#3b82f6" fillOpacity="1"/>
                 </g>
             </g>
         </svg>

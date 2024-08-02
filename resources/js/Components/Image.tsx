@@ -16,8 +16,7 @@ export function ImageWithBlurHash({blurHash, src, className, ...props}: { blurHa
 
             {blurHash
                 ? <BlurhashCanvas hash={blurHash} className="absolute w-full h-full"/>
-                : <div className="absolute size-full blur-xl" style={{backgroundImage: `url(${src})`}}/>
-            }
+                : <div className="absolute size-full blur-xl" style={{backgroundImage: `url(${src})`}}/>}
         </div>
     );
 }
