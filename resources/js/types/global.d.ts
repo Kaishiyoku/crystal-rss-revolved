@@ -1,4 +1,4 @@
-import type ziggyRoute from 'ziggy-js';
+import {route as routeFn} from 'ziggy-js';
 import {Config as ZiggyConfig} from 'ziggy-js';
 import {KyInstance} from 'ky';
 
@@ -9,6 +9,6 @@ declare global {
         appName: string;
     }
 
-    const route: typeof ziggyRoute;
+    const route: typeof routeFn;
     const Ziggy: ZiggyConfig;
 }
