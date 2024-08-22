@@ -3,6 +3,8 @@
 namespace App\Console\Commands;
 
 use App\Models\Feed;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\ServerException;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 use Kaishiyoku\HeraRssCrawler\HeraRssCrawler;
@@ -46,20 +48,24 @@ class CheckFeedFavicons extends Command
     public function handle(): void
     {
         Feed::all()->each(function (Feed $feed) {
-            $feed->fill([
-                'favicon_url' => $this->heraRssCrawler->discoverFavicon($feed->site_url),
-            ]);
+            try {
+                $feed->fill([
+                    'favicon_url' => $this->heraRssCrawler->discoverFavicon($feed->site_url),
+                ]);
 
-            // only save if the favicon has been changed
-            if ($feed->isClean()) {
-                $this->logger->info("No favicon update needed for feed #{$feed->id}: {$feed->name}");
+                // only save if the favicon has been changed
+                if ($feed->isClean()) {
+                    $this->logger->info("No favicon update needed for feed #{$feed->id}: {$feed->name}");
 
-                return;
+                    return;
+                }
+
+                $feed->save();
+
+                $this->logger->info("Updated favicon for feed #{$feed->id}: {$feed->name}");
+            } catch (ClientException|ServerException $exception) {
+                $this->logger->warning("Couldn't check favicon for feed #{$feed->id}: {$feed->name}; error message: {$exception->getMessage()}");
             }
-
-            $feed->save();
-
-            $this->logger->info("Updated favicon for feed #{$feed->id}: {$feed->name}");
         });
     }
 }
