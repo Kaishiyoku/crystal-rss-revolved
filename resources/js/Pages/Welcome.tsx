@@ -1,77 +1,132 @@
-import {Head, Link} from '@inertiajs/react';
+import {Head} from '@inertiajs/react';
+import {PageProps} from '@/types';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import ApplicationLogo from '@/Components/ApplicationLogo';
-import {WelcomeProps} from '@/types';
+import {Link} from '@/Components/Link';
 
-export default function Welcome(props: WelcomeProps) {
+export default function Welcome({auth, canLogin, canRegister}: PageProps<{ canLogin: boolean; canRegister: boolean; }>) {
     const {t} = useLaravelReactI18n();
 
     return (
         <>
             <Head title={t('Welcome')}/>
 
-            <div className="relative sm:flex sm:justify-center sm:items-center sm:pt-12 pb-4 sm:pb-12 min-h-screen bg-gradient-to-br from-blue-500 to-cyan-500">
-                <div className="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
-                    {props.auth.user
-                        ? (
-                            <Link href={route('dashboard')} className="link-light">
-                                {t('Dashboard')}
-                            </Link>
-                        )
-                        : (
-                            <>
-                                <Link href={route('login')} className="link-light">
-                                    {t('Log in')}
-                                </Link>
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                version="1.1"
+                viewBox="0 0 640 1200"
+                className="sm:hidden top-0 absolute z-10 w-full opacity-75 dark:opacity-50"
+            >
+                <defs>
+                    <filter
+                        id="bbblurry-filter"
+                        x="-100%"
+                        y="-100%"
+                        width="400%"
+                        height="400%"
+                        filterUnits="objectBoundingBox"
+                        primitiveUnits="userSpaceOnUse"
+                        colorInterpolationFilters="sRGB"
+                    >
+                        <feGaussianBlur
+                            stdDeviation="100"
+                            x="0%"
+                            y="0%"
+                            width="100%"
+                            height="100%"
+                            in="SourceGraphic"
+                            edgeMode="none"
+                            result="blur"
+                        />
+                    </filter>
+                </defs>
+                <g filter="url(#bbblurry-filter)">
+                    <ellipse className="fill-blue-600" rx="200" ry="200" cx="180" cy="650"/>
+                    <ellipse className="fill-violet-600" rx="200" ry="200" cx="175" cy="150"/>
+                    <ellipse className="fill-teal-600" rx="200" ry="200" cx="350" cy="400"/>
+                </g>
+            </svg>
 
-                                <Link href={route('register')} className="link-light ml-4">
-                                    {t('Register')}
-                                </Link>
-                            </>
-                        )}
-                </div>
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                version="1.1"
+                viewBox="0 0 800 450"
+                className="hidden sm:block top-0 z-10 absolute size-full opacity-80 dark:opacity-50"
+            >
+                <defs>
+                    <filter
+                        id="bbblurry-filter"
+                        x="-100%"
+                        y="-100%"
+                        width="400%"
+                        height="400%"
+                        filterUnits="objectBoundingBox"
+                        primitiveUnits="userSpaceOnUse"
+                        colorInterpolationFilters="sRGB"
+                    >
+                        <feGaussianBlur
+                            stdDeviation="65"
+                            x="0%"
+                            y="0%"
+                            width="100%"
+                            height="100%"
+                            in="SourceGraphic"
+                            edgeMode="none"
+                            result="blur"
+                        />
+                    </filter>
+                </defs>
+                <g filter="url(#bbblurry-filter)">
+                    <ellipse className="fill-blue-600" rx="112" ry="113" cx="120" cy="175"/>
+                    <ellipse className="fill-violet-600" rx="112" ry="113" cx="280" cy="115"/>
+                    <ellipse className="fill-teal-600" rx="112" ry="113" cx="725" cy="75"/>
+                </g>
+            </svg>
 
-                <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                    <div className="flex flex-col justify-center items-center pt-8 sm:pt-0">
-                        <div className="flex justify-center items-center bg-white/25 p-2 rounded-full w-52 h-52">
-                            <ApplicationLogo className="h-full p-5"/>
+            <div className="text-black/50 dark:text-white/50">
+                <div className="relative min-h-screen flex flex-col items-center selection:bg-blue-500 selection:text-white">
+                    <div className="relative w-full max-w-2xl p-6 lg:max-w-7xl">
+                        <header className="flex justify-end">
+                            <nav className="flex space-x-4 z-20">
+                                {auth.user
+                                    ? (
+                                        <Link href={route('dashboard')} color="zinc">
+                                            {t('Dashboard')}
+                                        </Link>
+                                    )
+                                    : (
+                                        <>
+                                            {canLogin && (
+                                                <Link href={route('login')} color="zinc">
+                                                    {t('Log in')}
+                                                </Link>
+                                            )}
+
+                                            {canRegister && (
+                                                <Link href={route('register')} color="zinc">
+                                                    {t('Register')}
+                                                </Link>
+                                            )}
+                                        </>
+                                    )}
+                            </nav>
+                        </header>
+                    </div>
+
+                    <div className="relative flex flex-col items-center w-full max-w-2xl px-6 py-20 lg:max-w-7xl">
+                        <div className="absolute w-full h-full welcome-pattern top-0"/>
+                        <div className="absolute w-full h-full welcome-pattern-gradient dark:welcome-pattern-gradient-dark top-0"/>
+
+                        <div className="z-20 pb-12">
+                            <ApplicationLogo className="size-32"/>
                         </div>
 
-                        <div className="text-6xl md:text-8xl text-center py-8 text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-cyan-300">
+                        <div className="z-20 text-center text-8xl font-light bg-gradient-to-r from-blue-500 via-violet-500 to-teal-500 dark:from-blue-600 dark:via-violet-600 dark:to-teal-600 bg-clip-text">
                             {window.appName}
-                        </div>
-
-                        <div className="prose prose-2xl prose-invert max-w-xl">
-                            <p>
-                                {t(':name is a minimalist newsfeed reader.', {name: window.appName})}
-                            </p>
-
-                            <p>
-                                {t('The features are limited by intention to be able to concentrate on what matters: reading the news.')}
-                            </p>
-
-                            <p>
-                                {t('Any RSS feed can be added and article summaries are then being fetched and displayed on the dashboard automatically.')}
-                            </p>
-
-                            <div className="flex space-x-4">
-                                {props.contactEmail && (
-                                    <a href={`mailto:${props.contactEmail}`}>
-                                        {t('Contact')}
-                                    </a>
-                                )}
-
-                                {props.githubUrl && (
-                                    <a href={props.githubUrl}>
-                                        {t('GitHub')}
-                                    </a>
-                                )}
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </>
-    )
-    ;
+    );
 }

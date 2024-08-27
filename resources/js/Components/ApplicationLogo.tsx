@@ -1,27 +1,18 @@
-import {SVGProps} from 'react';
+import {SVGAttributes} from 'react';
 
-export default function ApplicationLogo(props: SVGProps<SVGSVGElement>) {
+export default function ApplicationLogo(props: SVGAttributes<SVGElement>) {
     return (
-        <svg
-            {...props}
-            xmlns="http://www.w3.org/2000/svg"
-            xmlnsXlink="http://www.w3.org/1999/xlink"
-            preserveAspectRatio="xMidYMid meet"
-            viewBox="188.5 48.22992700729927 214.5 354.77007299270076"
-            width="205.04"
-            height="342"
-        >
+        <svg {...props} id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
             <defs>
-                <path d="M290 400L190 200L290 50L290 400Z" id="bD2p376SP"/>
-                <path d="M400 199.73L300 199.73L300 49.73L400 199.73Z" id="bxp9uY7QC"/>
+                <linearGradient id="linear-gradient" x1="73.22" y1="73.22" x2="426.78" y2="426.78" gradientUnits="userSpaceOnUse">
+                    <stop offset="0" stopColor="#2563eb"/>
+                    <stop offset="1" stopColor="#0d9488"/>
+                </linearGradient>
             </defs>
-            <g>
-                <g>
-                    <use xlinkHref="#bD2p376SP" opacity="1" fill="#1d4ed8" fillOpacity="1"/>
-                </g>
-                <g>
-                    <use xlinkHref="#bxp9uY7QC" opacity="1" fill="#3b82f6" fillOpacity="1"/>
-                </g>
+            <circle fill="url(#linear-gradient)" cx="250" cy="250" r="250"/>
+            <g transform="translate(-45, 20)">
+                <path d="M290 400L190 200L290 50L290 400Z" opacity="1" fill="white" fillOpacity="1"/>
+                <path d="M400 199.73L300 199.73L300 49.73L400 199.73Z" opacity="1" fill="white" fillOpacity="1" transform="translate(5, 0)"/>
             </g>
         </svg>
     );
