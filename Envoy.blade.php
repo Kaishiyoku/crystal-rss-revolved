@@ -17,6 +17,7 @@
     $healthUrl = $_ENV['DEPLOY_HEALTH_CHECK'] ?? null;
     $branch = $_ENV['DEPLOY_BRANCH'] ?: 'master';
     $supervisorCommandName = $_ENV['DEPLOY_SUPERVISOR_COMMAND_NAME'];
+    $phpVersion = $_ENV['DEPLOY_PHP_VERSION'];
 
     if (!$supervisorCommandName) {
         throw new Exception('No supervisor command name specified');
@@ -182,7 +183,7 @@
 
 @task('restart_php_fpm')
     echo "Restarting php-fpm..."
-    sudo service php8.2-fpm restart
+    sudo service php{{ $phpVersion }}-fpm restart
 @endtask
 
 @task('health_check')
