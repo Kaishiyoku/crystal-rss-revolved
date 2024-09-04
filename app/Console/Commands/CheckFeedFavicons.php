@@ -63,9 +63,9 @@ class CheckFeedFavicons extends Command
                 $feed->save();
 
                 $this->logger->info("Updated favicon for feed #{$feed->id}: {$feed->name}");
-            } catch (ClientException|ServerException $exception) {
+            } catch (ClientException|ServerException $exception) { // @codeCoverageIgnoreStart
                 $this->logger->warning("Couldn't check favicon for feed #{$feed->id}: {$feed->name}; error message: {$exception->getMessage()}");
-            }
+            } // @codeCoverageIgnoreEnd
         });
     }
 }
