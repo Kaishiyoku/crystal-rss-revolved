@@ -5,7 +5,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 11.23.4.
+ * Generated for Laravel 11.23.5.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -4302,7 +4302,7 @@ namespace Illuminate\Support\Facades {
      * 
      *
      * @method static array run(\Closure|array $tasks)
-     * @method static void background(\Closure|array $tasks)
+     * @method static \Illuminate\Foundation\Defer\DeferredCallback defer(\Closure|array $tasks)
      * @see \Illuminate\Concurrency\ConcurrencyManager
      */        class Concurrency {
                     /**
