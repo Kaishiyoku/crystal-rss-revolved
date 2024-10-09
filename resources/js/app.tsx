@@ -18,7 +18,7 @@ void createInertiaApp({
             <LaravelReactI18nProvider
                 locale={getBrowserLocale()}
                 fallbackLocale="en"
-                files={import.meta.glob('/lang/*.json', {eager: true})}
+                files={import.meta.glob('/lang/*.json')}
             >
                 <AppWithLoadedTranslations app={App} {...props}/>
             </LaravelReactI18nProvider>
