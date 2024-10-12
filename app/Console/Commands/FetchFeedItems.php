@@ -69,13 +69,6 @@ class FetchFeedItems extends Command
 
     private function fetchFeedsForUser(User $user): void
     {
-        $user->feeds->each(function (Feed $feed) {
-            $this->fetchFeed($feed);
-        });
-    }
-
-    private function fetchFeed(Feed $feed): void
-    {
-        FetchFeed::dispatch($feed);
+        $user->feeds->each(fn (Feed $feed) => FetchFeed::dispatch($feed));
     }
 }
