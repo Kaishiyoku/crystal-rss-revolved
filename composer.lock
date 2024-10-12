@@ -1456,16 +1456,16 @@
         },
         {
             "name": "kaishiyoku/hera-rss-crawler",
-            "version": "6.0.1",
+            "version": "6.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Kaishiyoku/hera-rss-crawler.git",
-                "reference": "a71fdec9636e5c35f84fa7ddfd368b1b76df04f5"
+                "reference": "4baecf30b41f4b0efdf66beae6d61203e9a04240"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Kaishiyoku/hera-rss-crawler/zipball/a71fdec9636e5c35f84fa7ddfd368b1b76df04f5",
-                "reference": "a71fdec9636e5c35f84fa7ddfd368b1b76df04f5",
+                "url": "https://api.github.com/repos/Kaishiyoku/hera-rss-crawler/zipball/4baecf30b41f4b0efdf66beae6d61203e9a04240",
+                "reference": "4baecf30b41f4b0efdf66beae6d61203e9a04240",
                 "shasum": ""
             },
             "require": {
@@ -1522,7 +1522,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Kaishiyoku/hera-rss-crawler/issues",
-                "source": "https://github.com/Kaishiyoku/hera-rss-crawler/tree/6.0.1"
+                "source": "https://github.com/Kaishiyoku/hera-rss-crawler/tree/6.0.2"
             },
             "funding": [
                 {
@@ -1530,7 +1530,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-03-30T19:30:02+00:00"
+            "time": "2024-10-12T11:57:26+00:00"
         },
         {
             "name": "kornrunner/blurhash",
@@ -1783,22 +1783,22 @@
         },
         {
             "name": "laminas/laminas-xml",
-            "version": "1.6.0",
+            "version": "1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-xml.git",
-                "reference": "c35aab57d1d0a970b53965046d535b88c3dc8bea"
+                "reference": "3a7850dec668a89807accfa4826a2ff11497fe74"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-xml/zipball/c35aab57d1d0a970b53965046d535b88c3dc8bea",
-                "reference": "c35aab57d1d0a970b53965046d535b88c3dc8bea",
+                "url": "https://api.github.com/repos/laminas/laminas-xml/zipball/3a7850dec668a89807accfa4826a2ff11497fe74",
+                "reference": "3a7850dec668a89807accfa4826a2ff11497fe74",
                 "shasum": ""
             },
             "require": {
                 "ext-dom": "*",
                 "ext-simplexml": "*",
-                "php": "~8.1.0 || ~8.2.0 || ~8.3.0"
+                "php": "~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0"
             },
             "conflict": {
                 "zendframework/zendxml": "*"
@@ -1806,8 +1806,8 @@
             "require-dev": {
                 "ext-iconv": "*",
                 "laminas/laminas-coding-standard": "~1.0.0",
-                "phpunit/phpunit": "^9.5.8",
-                "squizlabs/php_codesniffer": "3.6.1 as 2.9999999.9999999"
+                "phpunit/phpunit": "^10.5.35 || ^11.4",
+                "squizlabs/php_codesniffer": "3.10.3 as 2.9999999.9999999"
             },
             "type": "library",
             "autoload": {
@@ -1839,7 +1839,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2023-11-23T10:03:52+00:00"
+            "time": "2024-10-11T08:45:59+00:00"
         },
         {
             "name": "laravel/framework",
@@ -2844,16 +2844,16 @@
         },
         {
             "name": "livewire/livewire",
-            "version": "v3.5.9",
+            "version": "v3.5.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/livewire/livewire.git",
-                "reference": "d04a229058afa76116d0e39209943a8ea3a7f888"
+                "reference": "774092003edb2670615ef09f3a9fbdd335d6d0d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/livewire/livewire/zipball/d04a229058afa76116d0e39209943a8ea3a7f888",
-                "reference": "d04a229058afa76116d0e39209943a8ea3a7f888",
+                "url": "https://api.github.com/repos/livewire/livewire/zipball/774092003edb2670615ef09f3a9fbdd335d6d0d7",
+                "reference": "774092003edb2670615ef09f3a9fbdd335d6d0d7",
                 "shasum": ""
             },
             "require": {
@@ -2908,7 +2908,7 @@
             "description": "A front-end framework for Laravel.",
             "support": {
                 "issues": "https://github.com/livewire/livewire/issues",
-                "source": "https://github.com/livewire/livewire/tree/v3.5.9"
+                "source": "https://github.com/livewire/livewire/tree/v3.5.10"
             },
             "funding": [
                 {
@@ -2916,7 +2916,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-10-01T12:40:06+00:00"
+            "time": "2024-10-10T20:03:38+00:00"
         },
         {
             "name": "masterminds/html5",
@@ -7788,16 +7788,16 @@
         },
         {
             "name": "doctrine/dbal",
-            "version": "3.9.1",
+            "version": "3.9.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "d7dc08f98cba352b2bab5d32c5e58f7e745c11a7"
+                "reference": "61446f07fcb522414d6cfd8b1c3e5f9e18c579ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/d7dc08f98cba352b2bab5d32c5e58f7e745c11a7",
-                "reference": "d7dc08f98cba352b2bab5d32c5e58f7e745c11a7",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/61446f07fcb522414d6cfd8b1c3e5f9e18c579ba",
+                "reference": "61446f07fcb522414d6cfd8b1c3e5f9e18c579ba",
                 "shasum": ""
             },
             "require": {
@@ -7813,7 +7813,7 @@
                 "doctrine/coding-standard": "12.0.0",
                 "fig/log-test": "^1",
                 "jetbrains/phpstorm-stubs": "2023.1",
-                "phpstan/phpstan": "1.12.0",
+                "phpstan/phpstan": "1.12.6",
                 "phpstan/phpstan-strict-rules": "^1.6",
                 "phpunit/phpunit": "9.6.20",
                 "psalm/plugin-phpunit": "0.18.4",
@@ -7881,7 +7881,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/dbal/issues",
-                "source": "https://github.com/doctrine/dbal/tree/3.9.1"
+                "source": "https://github.com/doctrine/dbal/tree/3.9.3"
             },
             "funding": [
                 {
@@ -7897,7 +7897,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-09-01T13:49:23+00:00"
+            "time": "2024-10-10T17:56:43+00:00"
         },
         {
             "name": "doctrine/deprecations",
