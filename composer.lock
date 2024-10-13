@@ -1456,16 +1456,16 @@
         },
         {
             "name": "kaishiyoku/hera-rss-crawler",
-            "version": "6.2.0",
+            "version": "6.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Kaishiyoku/hera-rss-crawler.git",
-                "reference": "9146d80c31adf714e591fe61c84f8d5f6f73339e"
+                "reference": "a79c6adef22ab8bc78885d33012c0e3ee3b6c8a6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Kaishiyoku/hera-rss-crawler/zipball/9146d80c31adf714e591fe61c84f8d5f6f73339e",
-                "reference": "9146d80c31adf714e591fe61c84f8d5f6f73339e",
+                "url": "https://api.github.com/repos/Kaishiyoku/hera-rss-crawler/zipball/a79c6adef22ab8bc78885d33012c0e3ee3b6c8a6",
+                "reference": "a79c6adef22ab8bc78885d33012c0e3ee3b6c8a6",
                 "shasum": ""
             },
             "require": {
@@ -1522,7 +1522,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Kaishiyoku/hera-rss-crawler/issues",
-                "source": "https://github.com/Kaishiyoku/hera-rss-crawler/tree/6.2.0"
+                "source": "https://github.com/Kaishiyoku/hera-rss-crawler/tree/6.2.1"
             },
             "funding": [
                 {
@@ -1530,7 +1530,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-10-13T09:06:42+00:00"
+            "time": "2024-10-13T10:18:46+00:00"
         },
         {
             "name": "kornrunner/blurhash",
