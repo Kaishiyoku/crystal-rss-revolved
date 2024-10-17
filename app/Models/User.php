@@ -74,6 +74,15 @@ class User extends Authenticatable implements MustVerifyEmail
         'remember_token',
     ];
 
+    public array $interfaces = [
+        'tokens' => [
+            'type' => 'unknown',
+        ],
+        'notifications' => [
+            'type' => 'unknown',
+        ],
+    ];
+
     /**
      * The attributes that should be cast.
      *

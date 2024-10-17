@@ -1,5 +1,4 @@
-/* this file has been automatically generated */
-import FeedWithFeedItemsCount from '@/types/generated/Models/FeedWithFeedItemsCount';
+import FeedWithFeedItemsCount from '@/types/models/FeedWithFeedItemsCount';
 
 type ShortFeedWithFeedItemsCount = Pick<FeedWithFeedItemsCount, 'id' | 'name' | 'favicon_url' | 'feed_items_count'>;
 

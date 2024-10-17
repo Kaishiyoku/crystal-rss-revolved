@@ -28,8 +28,9 @@
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.10",
         "barryvdh/laravel-ide-helper": "^3.0",
-        "doctrine/dbal": "^3.8",
+        "doctrine/dbal": "^3.9",
         "fakerphp/faker": "^1.23",
+        "fumeapp/modeltyper": "^2.8",
         "larastan/larastan": "^2.8",
         "laravel-lang/common": "^3.1",
         "laravel/breeze": "^2.0",
@@ -79,7 +80,8 @@
         ],
         "analyze": "./vendor/bin/phpstan analyse --memory-limit=256M",
         "pint": "./vendor/bin/pint",
-        "deploy": "./vendor/bin/envoy run deploy --ansi"
+        "deploy": "./vendor/bin/envoy run deploy --ansi",
+        "generate-typescript": "php artisan model:typer --no-hidden --use-enums  > resources/js/types/generated/models.d.ts && php -r \"file_put_contents(__DIR__ . '/resources/js/types/generated/models.d.ts', '/* eslint no-use-before-define: [\\'off\\'] */' . PHP_EOL . PHP_EOL . file_get_contents(__DIR__ . '/resources/js/types/generated/models.d.ts'));\" && npx eslint resources/js/types/generated/models.d.ts  --fix"
     },
     "extra": {
         "laravel": {

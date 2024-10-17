@@ -1,5 +1,4 @@
-/* this file has been automatically generated */
-import Feed from '@/types/generated/Models/Feed';
+import {Feed} from '@/types/generated/models';
 
 type FeedWithFeedItemsCount = Feed & {
     feed_items_count: number;

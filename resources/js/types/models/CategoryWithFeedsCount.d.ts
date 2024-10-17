@@ -1,5 +1,4 @@
-/* this file has been automatically generated */
-import Category from '@/types/generated/Models/Category';
+import {Category} from '@/types/generated/models';
 
 type CategoryWithFeedsCount = Category & {
     feeds_count: number;

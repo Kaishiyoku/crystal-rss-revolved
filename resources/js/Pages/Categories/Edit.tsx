@@ -4,10 +4,10 @@ import Form from '@/Pages/Categories/Partials/Form';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import {PageProps} from '@/types';
 import {RouteParams} from 'ziggy-js';
-import Category from '@/types/generated/Models/Category';
 import {Button} from '@/Components/Button';
 import {useState} from 'react';
 import ConfirmAlert from '@/Components/ConfirmAlert';
+import {Category} from '@/types/generated/models';
 
 export default function Edit({category, canDelete, ...props}: PageProps & { category: Category; canDelete: boolean; }) {
     const {t} = useLaravelReactI18n();

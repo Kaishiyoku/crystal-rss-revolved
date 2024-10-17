@@ -4,7 +4,7 @@ import {useLaravelReactI18n} from 'laravel-react-i18n';
 import {useState} from 'react';
 import {useForm} from '@inertiajs/react';
 import {RouteParams} from 'ziggy-js';
-import UserWithStats from '@/types/generated/Models/UserWithStats';
+import UserWithStats from '@/types/models/UserWithStats';
 
 export default function DeleteUserButton({user}: { user: UserWithStats; }) {
     const {t} = useLaravelReactI18n();

@@ -3,7 +3,6 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import {PageProps} from '@/types';
 import formatDateTime from '@/Utils/formatDateTime';
-import UserWithStats from '@/types/generated/Models/UserWithStats';
 import DeleteUserButton from '@/Pages/Admin/Users/Partials/DeleteUserButton';
 import {
     Table,
@@ -15,6 +14,7 @@ import {
     TableMobileText,
     TableRow,
 } from '@/Components/Table';
+import UserWithStats from '@/types/models/UserWithStats';
 
 export default function Index({users, ...props}: PageProps & { users: UserWithStats[]; }) {
     const {t} = useLaravelReactI18n();

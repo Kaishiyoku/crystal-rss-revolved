@@ -5,9 +5,9 @@ import {Button} from '@/Components/Button';
 import TotalNumberOfFeedItemsContext from '@/Contexts/TotalNumberOfFeedItemsContext';
 import formatDateTime from '@/Utils/formatDateTime';
 import {RouteParams} from 'ziggy-js';
-import FeedItem from '@/types/generated/Models/FeedItem';
 import {CalendarDaysIcon, EyeIcon, EyeSlashIcon, RssIcon} from '@heroicons/react/20/solid';
 import {ImagePlaceholder, ImageWithBlurHash} from '@/Components/Image';
+import {FeedItem} from '@/types/generated/models';
 
 export default function FeedItemCard({hueRotationIndex, feedItem}: { hueRotationIndex: number; feedItem: FeedItem; }) {
     const {t} = useLaravelReactI18n();

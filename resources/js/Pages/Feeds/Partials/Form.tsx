@@ -5,13 +5,13 @@ import {Button} from '@/Components/Button';
 import {PageProps} from '@/types';
 import {SelectNumberOption} from '@/types/SelectOption';
 import DiscoveredFeed from '@/types/DiscoveredFeed';
-import Feed from '@/types/generated/Models/Feed';
 import {Input} from '@/Components/Form/Input';
 import {ErrorMessage, Field, FieldGroup, Label} from '@/Components/Fieldset';
 import {Checkbox, CheckboxField} from '@/Components/Form/Checkbox';
 import InputListbox from '@/Components/Form/InputListbox';
 import toNumber from '@/Utils/toNumber';
 import {LinkStack, LinkStackItem} from '@/Components/LinkStack';
+import {Feed} from '@/types/generated/models';
 
 export default function Form({method, action, feed, categories}: { method: 'post' | 'put'; action: string; feed: Feed; categories: SelectNumberOption[]; }) {
     const {t, tChoice} = useLaravelReactI18n();

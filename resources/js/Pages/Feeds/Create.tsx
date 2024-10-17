@@ -5,9 +5,9 @@ import {useLaravelReactI18n} from 'laravel-react-i18n';
 import {EmptyState} from '@/Components/EmptyState';
 import {PageProps} from '@/types';
 import {SelectNumberOption} from '@/types/SelectOption';
-import Feed from '@/types/generated/Models/Feed';
 import {PlusIcon, FolderIcon} from '@heroicons/react/24/outline';
 import {Button} from '@/Components/Button';
+import {Feed} from '@/types/generated/models';
 
 export default function Create({feed, categories, ...props}: PageProps & { feed: Feed; categories: SelectNumberOption[]; }) {
     const {t} = useLaravelReactI18n();

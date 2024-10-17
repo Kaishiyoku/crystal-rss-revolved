@@ -3,10 +3,10 @@ import {Transition} from '@headlessui/react';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import {Button} from '@/Components/Button';
 import React from 'react';
-import User from '@/types/generated/Models/User';
 import {Description, Heading} from '@/Components/Heading';
 import {ErrorMessage, Field, FieldGroup, Label} from '@/Components/Fieldset';
 import {Input} from '@/Components/Form/Input';
+import {User} from '@/types/generated/models';
 
 export default function UpdateProfileInformation({mustVerifyEmail, status, className}: { mustVerifyEmail: boolean; status: string; className?: string; }) {
     const {t} = useLaravelReactI18n();

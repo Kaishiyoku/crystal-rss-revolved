@@ -2,9 +2,9 @@ import {useForm} from '@inertiajs/react';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import {Button} from '@/Components/Button';
 import React from 'react';
-import Category from '@/types/generated/Models/Category';
 import {ErrorMessage, Field, FieldGroup, Label} from '@/Components/Fieldset';
 import {Input} from '@/Components/Form/Input';
+import {Category} from '@/types/generated/models';
 
 export default function Form({method, action, category}: { method: 'post' | 'put'; action: string; category: Category; }) {
     const {t} = useLaravelReactI18n();

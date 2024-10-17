@@ -5,11 +5,11 @@ import formatDateTime from '@/Utils/formatDateTime';
 import {EmptyState} from '@/Components/EmptyState';
 import {PageProps} from '@/types';
 import {RouteParams} from 'ziggy-js';
-import FeedWithFeedItemsCount from '@/types/generated/Models/FeedWithFeedItemsCount';
 import {Button} from '@/Components/Button';
 import {LinkStack, LinkStackItem} from '@/Components/LinkStack';
 import {RssIcon} from '@heroicons/react/20/solid';
 import {PlusIcon} from '@heroicons/react/16/solid';
+import FeedWithFeedItemsCount from '@/types/models/FeedWithFeedItemsCount';
 
 export default function Index({feeds, ...props}: PageProps & { feeds: FeedWithFeedItemsCount[]; }) {
     const {t, tChoice} = useLaravelReactI18n();

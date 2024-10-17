@@ -24,9 +24,9 @@ import {HomeIcon, RssIcon} from '@heroicons/react/20/solid';
 import {ReactNode} from 'react';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import ApplicationLogo from '@/Components/ApplicationLogo';
-import User from '@/types/generated/Models/User';
-import ShortFeedWithFeedItemsCount from '@/types/generated/Models/ShortFeedWithFeedItemsCount';
 import substr from '@/Utils/substr';
+import {User} from '@/types/generated/models';
+import ShortFeedWithFeedItemsCount from '@/types/models/ShortFeedWithFeedItemsCount';
 
 export default function Navigation({user, selectedFeedId, unreadFeeds, children}: { user: User; selectedFeedId: number | null; unreadFeeds: ShortFeedWithFeedItemsCount[]; children: ReactNode; }) {
     const {t} = useLaravelReactI18n();
