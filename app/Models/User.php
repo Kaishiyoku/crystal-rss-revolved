@@ -74,6 +74,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'remember_token',
     ];
 
+    /**
+     * @var array<array<string, string>>
+     */
     public array $interfaces = [
         'tokens' => [
             'type' => 'unknown',
