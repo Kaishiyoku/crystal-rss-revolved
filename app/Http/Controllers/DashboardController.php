@@ -22,7 +22,7 @@ class DashboardController extends Controller
 
         $feedItems = Auth::user()->feedItems()
             ->unread()
-            ->when($feedId, fn (Builder $query) => $query->where('feed_id', $feedId)) /** @phpstan-ignore-line */
+            ->when($feedId, fn (Builder $query) => $query->where('feed_id', $feedId))
             ->with('feed')
             ->cursorPaginate()
             ->withQueryString();
