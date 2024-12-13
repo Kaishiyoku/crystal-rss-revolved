@@ -1,21 +1,17 @@
 <?php
 
-namespace Http\Controllers;
-
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 
-class FeedUrlDiscovererControllerTest extends TestCase
-{
-    use RefreshDatabase;
+use function Pest\Laravel\actingAs;
+use function Pest\Laravel\post;
 
-    public function test_returns_discovered_feed_urls(): void
-    {
-        $this->actingAs(User::factory()->create());
+uses(RefreshDatabase::class);
 
-        $this->post(route('discover-feed-urls'), ['feed_url' => 'https://tailwindcss.com'])
-            ->assertJsonIsArray()
-            ->assertJsonCount(2);
-    }
-}
+test('returns discovered feed urls', function () {
+    actingAs(User::factory()->create());
+
+    post(route('discover-feed-urls'), ['feed_url' => 'https://tailwindcss.com'])
+        ->assertJsonIsArray()
+        ->assertJsonCount(2);
+});

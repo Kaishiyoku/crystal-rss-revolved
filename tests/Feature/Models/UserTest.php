@@ -1,45 +1,30 @@
 <?php
 
-namespace Tests\Feature\Models;
-
 use App\Models\Category;
 use App\Models\Feed;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 
-class UserTest extends TestCase
-{
-    use RefreshDatabase;
+uses(RefreshDatabase::class);
 
-    public function test_verified_scope(): void
-    {
-        $verifiedUserIds = User::factory(5)->create()->pluck('id');
-        User::factory(5)->unverified()->create()->pluck('id');
+test('verified scope', function () {
+    $verifiedUserIds = User::factory(5)->create()->pluck('id');
+    User::factory(5)->unverified()->create()->pluck('id');
 
-        static::assertEquals($verifiedUserIds, User::verified()->pluck('id'));
-    }
+    expect(User::verified()->pluck('id'))->toEqual($verifiedUserIds);
+});
 
-    public function test_user_has_categories(): void
-    {
-        $user = User::factory()->create();
-        $categories = Category::factory(2)->for($user)->create();
+test('user has categories', function () {
+    $user = User::factory()->create();
+    $categories = Category::factory(2)->for($user)->create();
 
-        static::assertEquals(
-            $categories->sortBy('name')->pluck('id'),
-            $user->categories()->pluck('id')
-        );
-    }
+    expect($user->categories()->pluck('id'))->toEqual($categories->sortBy('name')->pluck('id'));
+});
 
-    public function test_user_has_feeds(): void
-    {
-        $user = User::factory()->create();
-        $category = Category::factory()->for($user)->create();
-        $feeds = Feed::factory(5)->for($user)->for($category)->create();
+test('user has feeds', function () {
+    $user = User::factory()->create();
+    $category = Category::factory()->for($user)->create();
+    $feeds = Feed::factory(5)->for($user)->for($category)->create();
 
-        static::assertEquals(
-            $feeds->sortBy('name')->pluck('id'),
-            $user->feeds()->pluck('id')
-        );
-    }
-}
+    expect($user->feeds()->pluck('id'))->toEqual($feeds->sortBy('name')->pluck('id'));
+});

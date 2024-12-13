@@ -1,42 +1,38 @@
 <?php
 
-namespace Tests\Feature\Http\Controllers;
-
 use App\Models\Feed;
 use App\Models\FeedItem;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 
-class MarkAllUnreadFeedItemsAsReadControllerTest extends TestCase
-{
-    use RefreshDatabase;
+use function Pest\Laravel\actingAs;
+use function Pest\Laravel\freezeTime;
+use function Pest\Laravel\put;
 
-    public function test_marks_all_unread_feed_items_as_read_for_specific_user(): void
-    {
-        $this->freezeTime();
+uses(RefreshDatabase::class);
 
-        $this->actingAs($user = User::factory()->create());
+test('marks all unread feed items as read for specific user', function () {
+    freezeTime();
 
-        Feed::factory(5)
-            ->recycle($user)
-            ->has(FeedItem::factory(10)->state(['read_at' => null]))
-            ->has(FeedItem::factory(20)->state(['read_at' => now()]))
-            ->create();
+    actingAs($user = User::factory()->create());
 
-        static::assertSame(50, $user->feedItems()->unread()->count());
-        static::assertSame(100, $user->feedItems()->whereNotNull('read_at')->count());
+    Feed::factory(5)
+        ->recycle($user)
+        ->has(FeedItem::factory(10)->state(['read_at' => null]))
+        ->has(FeedItem::factory(20)->state(['read_at' => now()]))
+        ->create();
 
-        $this->put(route('mark-all-as-read'))
-            ->assertOk();
+    expect($user->feedItems()->unread()->count())->toBe(50)
+        ->and($user->feedItems()->whereNotNull('read_at')->count())->toBe(100);
 
-        static::assertSame(0, $user->feedItems()->unread()->count());
-        static::assertSame(150, $user->feedItems()->whereNotNull('read_at')->count());
-    }
+    put(route('mark-all-as-read'))
+        ->assertOk();
 
-    public function test_cannot_access_as_guest(): void
-    {
-        $this->put(route('mark-all-as-read'))
-            ->assertRedirect('/login');
-    }
-}
+    expect($user->feedItems()->unread()->count())->toBe(0)
+        ->and($user->feedItems()->whereNotNull('read_at')->count())->toBe(150);
+});
+
+test('cannot access as guest', function () {
+    put(route('mark-all-as-read'))
+        ->assertRedirect('/login');
+});

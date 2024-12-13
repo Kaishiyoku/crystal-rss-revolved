@@ -1,7 +1,5 @@
 <?php
 
-namespace Http\Controllers\Admin;
-
 use App\Http\Controllers\Admin\UserController;
 use App\Models\Category;
 use App\Models\Feed;
@@ -10,80 +8,74 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Arr;
 use Inertia\Testing\AssertableInertia as Assert;
-use Tests\TestCase;
 
-class UserControllerTest extends TestCase
-{
-    use RefreshDatabase;
+use function Pest\Laravel\actingAs;
+use function Pest\Laravel\delete;
+use function Pest\Laravel\get;
 
-    public function test_middleware_is_registered(): void
-    {
-        $middleware = collect((new UserController)->getMiddleware())
-            ->map(fn (array $arr) => Arr::get($arr, 'middleware'))
-            ->toArray();
+uses(RefreshDatabase::class);
 
-        $expectedMiddleware = [
-            'can:viewAny,App\Models\User',
-            'can:view,user',
-            'can:create,App\Models\User',
-            'can:update,user',
-            'can:delete,user',
-        ];
+test('middleware is registered', function () {
+    $middleware = collect((new UserController)->getMiddleware())
+        ->map(fn (array $arr) => Arr::get($arr, 'middleware'))
+        ->toArray();
 
-        static::assertCount(5, $middleware);
-        static::assertSame($expectedMiddleware, $middleware);
-    }
+    $expectedMiddleware = [
+        'can:viewAny,App\Models\User',
+        'can:view,user',
+        'can:create,App\Models\User',
+        'can:update,user',
+        'can:delete,user',
+    ];
 
-    public function test_index(): void
-    {
-        $this->actingAs(User::factory()->admin()->create());
+    expect($middleware)->toHaveCount(5)
+        ->and($middleware)->toBe($expectedMiddleware);
+});
 
-        User::factory()->count(5)->create();
+test('index', function () {
+    actingAs(User::factory()->admin()->create());
 
-        $this->get(route('admin.users.index'))
-            ->assertInertia(fn (Assert $page) => $page
-                ->component('Admin/Users/Index')
-                ->count('users', 6)
-            );
-    }
+    User::factory()->count(5)->create();
 
-    public function test_cannot_access_index_as_guest(): void
-    {
-        $this->get(route('admin.users.index'))
-            ->assertRedirect('/login');
-    }
+    get(route('admin.users.index'))
+        ->assertInertia(fn (Assert $page) => $page
+            ->component('Admin/Users/Index')
+            ->count('users', 6)
+        );
+});
 
-    public function test_cannot_access_index_as_normal_user(): void
-    {
-        $this->get(route('admin.users.index'))
-            ->assertRedirect('/login');
-    }
+test('cannot access index as guest', function () {
+    get(route('admin.users.index'))
+        ->assertRedirect('/login');
+});
 
-    public function test_delete(): void
-    {
-        $this->actingAs(User::factory()->admin()->create());
+test('cannot access index as normal user', function () {
+    get(route('admin.users.index'))
+        ->assertRedirect('/login');
+});
 
-        $user = User::factory()
-            ->hasFeedItems(10)
-            ->create();
+test('delete', function () {
+    actingAs(User::factory()->admin()->create());
 
-        $this->delete(route('admin.users.destroy', $user))
-            ->assertRedirect(route('admin.users.index'));
+    $user = User::factory()
+        ->hasFeedItems(10)
+        ->create();
 
-        static::assertCount(1, User::get());
-        static::assertCount(0, Category::get());
-        static::assertCount(0, Feed::get());
-        static::assertCount(0, FeedItem::get());
-        static::assertNull(User::find($user->id));
-    }
+    delete(route('admin.users.destroy', $user))
+        ->assertRedirect(route('admin.users.index'));
 
-    public function test_cannot_delete_own_user(): void
-    {
-        $this->actingAs($user = User::factory()->admin()->create());
+    expect(User::get())->toHaveCount(1)
+        ->and(Category::get())->toHaveCount(0)
+        ->and(Feed::get())->toHaveCount(0)
+        ->and(FeedItem::get())->toHaveCount(0)
+        ->and(User::find($user->id))->toBeNull();
+});
 
-        $this->delete(route('admin.users.destroy', $user))
-            ->assertForbidden();
+test('cannot delete own user', function () {
+    actingAs($user = User::factory()->admin()->create());
 
-        static::assertSame(1, User::count());
-    }
-}
+    delete(route('admin.users.destroy', $user))
+        ->assertForbidden();
+
+    expect(User::count())->toBe(1);
+});

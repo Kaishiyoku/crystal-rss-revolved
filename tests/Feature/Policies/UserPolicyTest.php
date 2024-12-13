@@ -1,128 +1,109 @@
 <?php
 
-namespace Policies;
-
 use App\Models\User;
 use App\Policies\UserPolicy;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 
-class UserPolicyTest extends TestCase
-{
-    use RefreshDatabase;
+use function Pest\Laravel\actingAs;
 
-    private UserPolicy $userPolicy;
+uses(RefreshDatabase::class);
 
-    public function __construct(string $name)
-    {
-        parent::__construct($name);
+beforeEach(function () {
+    test()->userPolicy = new UserPolicy;
+});
 
-        $this->userPolicy = new UserPolicy;
-    }
+/**
+ * An admin user should always be able to viewAny (e.g. the index page).
+ */
+test('view any as admin', function () {
+    actingAs($user = User::factory()->admin()->create());
 
-    /**
-     * An admin user should always be able to viewAny (e.g. the index page).
-     */
-    public function test_view_any_as_admin(): void
-    {
-        $this->actingAs($user = User::factory()->admin()->create());
+    expect($this->userPolicy->viewAny($user))->toBeTrue();
+});
 
-        static::assertTrue($this->userPolicy->viewAny($user));
-    }
+/**
+ * A normal user should not be able to viewAny (e.g. the index page).
+ */
+test('view any as normal user', function () {
+    actingAs($user = User::factory()->create());
 
-    /**
-     * A normal user should not be able to viewAny (e.g. the index page).
-     */
-    public function test_view_any_as_normal_user(): void
-    {
-        $this->actingAs($user = User::factory()->create());
+    expect($this->userPolicy->viewAny($user))->toBeFalse();
+});
 
-        static::assertFalse($this->userPolicy->viewAny($user));
-    }
+/**
+ * An admin user should never be able to view a specific user because there's no user details page.
+ */
+test('view', function () {
+    actingAs($ownUser = User::factory()->admin()->create());
+    $user = User::factory()->create();
 
-    /**
-     * An admin user should never be able to view a specific user because there's no user details page.
-     */
-    public function test_view(): void
-    {
-        $this->actingAs($ownUser = User::factory()->admin()->create());
-        $user = User::factory()->create();
+    expect($this->userPolicy->view($ownUser, $user))->toBeFalse();
+});
 
-        static::assertFalse($this->userPolicy->view($ownUser, $user));
-    }
+/**
+ * An admin user should never be able to create a user because there's no user creation page.
+ */
+test('create', function () {
+    actingAs($user = User::factory()->admin()->create());
 
-    /**
-     * An admin user should never be able to create a user because there's no user creation page.
-     */
-    public function test_create(): void
-    {
-        $this->actingAs($user = User::factory()->admin()->create());
+    expect($this->userPolicy->create($user))->toBeFalse();
+});
 
-        static::assertFalse($this->userPolicy->create($user));
-    }
+/**
+ * An admin user should never be able to update a user because there's no user update page.
+ */
+test('update', function () {
+    actingAs($ownUser = User::factory()->admin()->create());
+    $user = User::factory()->create();
 
-    /**
-     * An admin user should never be able to update a user because there's no user update page.
-     */
-    public function test_update(): void
-    {
-        $this->actingAs($ownUser = User::factory()->admin()->create());
-        $user = User::factory()->create();
+    expect($this->userPolicy->update($ownUser, $user))->toBeFalse();
+});
 
-        static::assertFalse($this->userPolicy->update($ownUser, $user));
-    }
+/**
+ * An admin user should be able to delete another user.
+ */
+test('delete', function () {
+    actingAs($ownUser = User::factory()->admin()->create());
+    $user = User::factory()->create();
 
-    /**
-     * An admin user should be able to delete another user.
-     */
-    public function test_delete(): void
-    {
-        $this->actingAs($ownUser = User::factory()->admin()->create());
-        $user = User::factory()->create();
+    expect($this->userPolicy->delete($ownUser, $user))->toBeTrue();
+});
 
-        static::assertTrue($this->userPolicy->delete($ownUser, $user));
-    }
+/**
+ * An admin user should not be able to delete his own user.
+ */
+test('cannot delete own user', function () {
+    actingAs($user = User::factory()->create());
 
-    /**
-     * An admin user should not be able to delete his own user.
-     */
-    public function test_cannot_delete_own_user(): void
-    {
-        $this->actingAs($user = User::factory()->create());
+    expect($this->userPolicy->delete($user, $user))->toBeFalse();
+});
 
-        static::assertFalse($this->userPolicy->delete($user, $user));
-    }
+/**
+ * A normal user should not be able to delete another user.
+ */
+test('cannot delete as normal user', function () {
+    actingAs($ownUser = User::factory()->create());
+    $user = User::factory()->create();
 
-    /**
-     * A normal user should not be able to delete another user.
-     */
-    public function test_cannot_delete_as_normal_user(): void
-    {
-        $this->actingAs($ownUser = User::factory()->create());
-        $user = User::factory()->create();
+    expect($this->userPolicy->delete($ownUser, $user))->toBeFalse();
+});
 
-        static::assertFalse($this->userPolicy->delete($ownUser, $user));
-    }
+/**
+ * An admin user should never be able to restore a specific user because users aren't soft deletable.
+ */
+test('restore', function () {
+    actingAs($ownUser = User::factory()->admin()->create());
+    $user = User::factory()->create();
 
-    /**
-     * An admin user should never be able to restore a specific user because users aren't soft deletable.
-     */
-    public function test_restore(): void
-    {
-        $this->actingAs($ownUser = User::factory()->admin()->create());
-        $user = User::factory()->create();
+    expect($this->userPolicy->restore($ownUser, $user))->toBeFalse();
+});
 
-        static::assertFalse($this->userPolicy->restore($ownUser, $user));
-    }
+/**
+ * An admin user should never be able to force delete a specific user because users aren't soft deletable.
+ */
+test('force delete', function () {
+    actingAs($ownUser = User::factory()->admin()->create());
+    $user = User::factory()->create();
 
-    /**
-     * An admin user should never be able to force delete a specific user because users aren't soft deletable.
-     */
-    public function test_force_delete(): void
-    {
-        $this->actingAs($ownUser = User::factory()->admin()->create());
-        $user = User::factory()->create();
-
-        static::assertFalse($this->userPolicy->forceDelete($ownUser, $user));
-    }
-}
+    expect($this->userPolicy->forceDelete($ownUser, $user))->toBeFalse();
+});

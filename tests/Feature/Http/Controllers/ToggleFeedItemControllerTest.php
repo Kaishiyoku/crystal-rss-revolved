@@ -1,53 +1,48 @@
 <?php
 
-namespace Tests\Feature\Http\Controllers;
-
 use App\Models\Feed;
 use App\Models\FeedItem;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 
-class ToggleFeedItemControllerTest extends TestCase
-{
-    use RefreshDatabase;
+use function Pest\Laravel\actingAs;
+use function Pest\Laravel\freezeTime;
+use function Pest\Laravel\put;
 
-    public function test_marks_feed_item_as_read(): void
-    {
-        $this->freezeTime();
+uses(RefreshDatabase::class);
 
-        $this->actingAs($user = User::factory()->create());
+test('marks feed item as read', function () {
+    freezeTime();
 
-        $feed = Feed::factory()->recycle($user)->create();
-        $feedItem = FeedItem::factory()->recycle($feed)->state(['read_at' => null])->create();
+    actingAs($user = User::factory()->create());
 
-        $this->put(route('toggle-feed-item', $feedItem))
-            ->assertOk()
-            ->assertJsonPath('read_at', now()->micro(0)->toJSON());
-    }
+    $feed = Feed::factory()->recycle($user)->create();
+    $feedItem = FeedItem::factory()->recycle($feed)->state(['read_at' => null])->create();
 
-    public function test_marks_feed_item_as_unread(): void
-    {
-        $this->freezeTime();
+    put(route('toggle-feed-item', $feedItem))
+        ->assertOk()
+        ->assertJsonPath('read_at', now()->micro(0)->toJSON());
+});
 
-        $this->actingAs($user = User::factory()->create());
+test('marks feed item as unread', function () {
+    freezeTime();
 
-        $feed = Feed::factory()->recycle($user)->create();
-        $feedItem = FeedItem::factory()->recycle($feed)->state(['read_at' => now()])->create();
+    actingAs($user = User::factory()->create());
 
-        $this->put(route('toggle-feed-item', $feedItem))
-            ->assertOk()
-            ->assertJsonPath('read_at', null);
-    }
+    $feed = Feed::factory()->recycle($user)->create();
+    $feedItem = FeedItem::factory()->recycle($feed)->state(['read_at' => now()])->create();
 
-    public function test_cannot_toggle_feed_item_of_another_user(): void
-    {
-        $this->actingAs(User::factory()->create());
+    put(route('toggle-feed-item', $feedItem))
+        ->assertOk()
+        ->assertJsonPath('read_at', null);
+});
 
-        $feed = Feed::factory()->create();
-        $feedItem = FeedItem::factory()->recycle($feed)->create();
+test('cannot toggle feed item of another user', function () {
+    actingAs(User::factory()->create());
 
-        $this->put(route('toggle-feed-item', $feedItem))
-            ->assertForbidden();
-    }
-}
+    $feed = Feed::factory()->create();
+    $feedItem = FeedItem::factory()->recycle($feed)->create();
+
+    put(route('toggle-feed-item', $feedItem))
+        ->assertForbidden();
+});

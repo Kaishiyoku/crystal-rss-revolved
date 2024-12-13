@@ -11,10 +11,9 @@
 |
 */
 
-uses(
-    Tests\TestCase::class,
-    //     Illuminate\Foundation\Testing\RefreshDatabase::class,
-)->in('Feature');
+use Tests\TestCase;
+
+uses(TestCase::class)->in('Feature');
 
 /*
 |--------------------------------------------------------------------------
@@ -45,4 +44,34 @@ expect()->extend('toBeOne', function () {
 function something()
 {
     // ..
+}
+
+function fakeFeedId(): int
+{
+    return 1;
+}
+
+function fakeFeedIdOfAnotherUser(): int
+{
+    return 2;
+}
+
+function fakeCategoryId(): int
+{
+    return 1;
+}
+
+function fakeCategoryIdOfAnotherUser(): int
+{
+    return 2;
+}
+
+function fakeUserEmail(): string
+{
+    return 'test@test.dev';
+}
+
+function fakeUserEmailOfAnotherUser(): string
+{
+    return 'test2@test.dev';
 }

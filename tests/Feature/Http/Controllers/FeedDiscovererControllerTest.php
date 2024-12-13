@@ -1,63 +1,55 @@
 <?php
 
-namespace Http\Controllers;
-
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 
-class FeedDiscovererControllerTest extends TestCase
-{
-    use RefreshDatabase;
+use function Pest\Laravel\actingAs;
+use function Pest\Laravel\post;
 
-    public function test_success(): void
-    {
-        $this->actingAs(User::factory()->create());
+uses(RefreshDatabase::class);
 
-        $this->post(route('discover-feed'), ['feed_url' => 'https://tailwindcss.com/feeds/feed.xml'])
-            ->assertJsonIsObject()
-            ->assertJsonStructure([
-                'feed_url',
-                'site_url',
-                'favicon_url',
-                'name',
-                'language',
-            ]);
-    }
+test('success', function () {
+    actingAs(User::factory()->create());
 
-    public function test_no_feed_found(): void
-    {
-        $this->actingAs(User::factory()->create());
+    post(route('discover-feed'), ['feed_url' => 'https://tailwindcss.com/feeds/feed.xml'])
+        ->assertJsonIsObject()
+        ->assertJsonStructure([
+            'feed_url',
+            'site_url',
+            'favicon_url',
+            'name',
+            'language',
+        ]);
+});
 
-        $response = $this->post(route('discover-feed'), ['feed_url' => 'https://blurha.sh/']);
+test('no feed found', function () {
+    actingAs(User::factory()->create());
 
-        $response->assertNotFound();
-        static::assertSame('No feeds found.', $response->exception->getMessage());
-    }
+    $response = post(route('discover-feed'), ['feed_url' => 'https://blurha.sh/']);
 
-    public function test_cannot_access_as_guest(): void
-    {
-        $this->post(route('discover-feed'))
-            ->assertRedirect('/login');
-    }
+    $response->assertNotFound();
+    expect($response->exception->getMessage())->toBe('No feeds found.');
+});
 
-    public function test_connect_exception(): void
-    {
-        $this->actingAs(User::factory()->create());
+test('cannot access as guest', function () {
+    post(route('discover-feed'))
+        ->assertRedirect('/login');
+});
 
-        $response = $this->post(route('discover-feed'), ['feed_url' => 'https://test.dev']);
+test('connect exception', function () {
+    actingAs(User::factory()->create());
 
-        $response->assertUnprocessable();
-        static::assertSame('The given URL is invalid.', $response->exception->getMessage());
-    }
+    $response = post(route('discover-feed'), ['feed_url' => 'https://test.dev']);
 
-    public function test_client_exception(): void
-    {
-        $this->actingAs(User::factory()->create());
+    $response->assertUnprocessable();
+    expect($response->exception->getMessage())->toBe('The given URL is invalid.');
+});
 
-        $response = $this->post(route('discover-feed'), ['feed_url' => 'https://tailwindcss.com/random-page']);
+test('client exception', function () {
+    actingAs(User::factory()->create());
 
-        $response->assertUnprocessable();
-        static::assertSame('The given URL could not be resolved.', $response->exception->getMessage());
-    }
-}
+    $response = post(route('discover-feed'), ['feed_url' => 'https://tailwindcss.com/random-page']);
+
+    $response->assertUnprocessable();
+    expect($response->exception->getMessage())->toBe('The given URL could not be resolved.');
+});
