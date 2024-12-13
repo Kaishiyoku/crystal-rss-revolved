@@ -11,8 +11,6 @@ use Illuminate\Support\Collection;
 use Kaishiyoku\HeraRssCrawler\HeraRssCrawler;
 use Kaishiyoku\HeraRssCrawler\Models\Rss\Feed as RssFeed;
 use Kaishiyoku\HeraRssCrawler\Models\Rss\FeedItem as RssFeedItem;
-use ReflectionException;
-use RuntimeException;
 use Tests\TestCase;
 
 uses(TestCase::class);
