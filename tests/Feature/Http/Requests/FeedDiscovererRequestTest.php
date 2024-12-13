@@ -3,8 +3,6 @@
 use App\Http\Requests\FeedDiscovererRequest;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
-use Tests\TestCase;
-
 
 test('authorize', function () {
     static::assertTrue((new FeedDiscovererRequest)->authorize());

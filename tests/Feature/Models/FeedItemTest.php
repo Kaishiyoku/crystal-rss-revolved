@@ -6,7 +6,6 @@ use Illuminate\Console\Command;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Config;
-use Tests\TestCase;
 
 uses(RefreshDatabase::class);
 uses(WithFaker::class);

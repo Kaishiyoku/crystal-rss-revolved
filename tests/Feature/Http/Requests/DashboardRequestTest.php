@@ -5,7 +5,6 @@ use App\Models\Feed;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Validation\ValidationException;
-use Tests\TestCase;
 
 uses(RefreshDatabase::class);
 beforeEach(function () {

@@ -5,7 +5,6 @@ use App\Models\Feed;
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Kaishiyoku\HeraRssCrawler\HeraRssCrawler;
-use Tests\TestCase;
 
 uses(RefreshDatabase::class);
 

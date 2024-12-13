@@ -7,7 +7,6 @@ use Illuminate\Console\Command;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Validation\ValidationException;
-use Tests\TestCase;
 
 uses(RefreshDatabase::class);
 

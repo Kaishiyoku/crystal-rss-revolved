@@ -6,7 +6,6 @@ use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification;
-use Tests\TestCase;
 
 uses(RefreshDatabase::class);
 

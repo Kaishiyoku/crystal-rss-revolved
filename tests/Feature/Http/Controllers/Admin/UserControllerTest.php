@@ -8,7 +8,6 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Arr;
 use Inertia\Testing\AssertableInertia as Assert;
-use Tests\TestCase;
 
 uses(RefreshDatabase::class);
 

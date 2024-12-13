@@ -5,7 +5,6 @@ use App\Models\FeedItem;
 use App\Models\User;
 use App\Policies\FeedItemPolicy;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 
 uses(RefreshDatabase::class);
 

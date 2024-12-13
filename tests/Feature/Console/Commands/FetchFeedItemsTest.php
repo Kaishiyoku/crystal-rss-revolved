@@ -11,7 +11,6 @@ use Illuminate\Support\Collection;
 use Kaishiyoku\HeraRssCrawler\HeraRssCrawler;
 use Kaishiyoku\HeraRssCrawler\Models\Rss\Feed as RssFeed;
 use Kaishiyoku\HeraRssCrawler\Models\Rss\FeedItem as RssFeedItem;
-use Tests\TestCase;
 
 uses(RefreshDatabase::class);
 
