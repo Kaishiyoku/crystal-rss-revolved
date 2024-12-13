@@ -7,7 +7,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
-uses(TestCase::class);
 uses(RefreshDatabase::class);
 
 test('login screen can be rendered', function () {

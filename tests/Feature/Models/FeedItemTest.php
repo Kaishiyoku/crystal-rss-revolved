@@ -8,7 +8,6 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Config;
 use Tests\TestCase;
 
-uses(TestCase::class);
 uses(RefreshDatabase::class);
 uses(WithFaker::class);
 

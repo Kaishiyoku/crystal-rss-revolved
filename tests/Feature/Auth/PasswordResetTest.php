@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
-uses(TestCase::class);
 uses(RefreshDatabase::class);
 
 test('reset password link screen can be rendered', function () {

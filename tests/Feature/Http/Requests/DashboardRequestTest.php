@@ -7,7 +7,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Validation\ValidationException;
 use Tests\TestCase;
 
-uses(TestCase::class);
 uses(RefreshDatabase::class);
 beforeEach(function () {
     $this->actingAs($user = User::factory()->create());

@@ -5,7 +5,6 @@ use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Tests\TestCase;
 
-uses(TestCase::class);
 
 test('authorize', function () {
     static::assertTrue((new FeedUrlDiscovererRequest)->authorize());

@@ -7,7 +7,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Kaishiyoku\HeraRssCrawler\HeraRssCrawler;
 use Tests\TestCase;
 
-uses(TestCase::class);
 uses(RefreshDatabase::class);
 
 test('update feed favicon urls', function () {

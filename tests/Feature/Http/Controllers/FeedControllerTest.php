@@ -10,7 +10,6 @@ use Illuminate\Support\Arr;
 use Inertia\Testing\AssertableInertia as Assert;
 use Tests\TestCase;
 
-uses(TestCase::class);
 uses(RefreshDatabase::class);
 
 test('middleware is registered', function () {

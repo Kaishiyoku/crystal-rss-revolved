@@ -13,7 +13,6 @@ use Kaishiyoku\HeraRssCrawler\Models\Rss\Feed as RssFeed;
 use Kaishiyoku\HeraRssCrawler\Models\Rss\FeedItem as RssFeedItem;
 use Tests\TestCase;
 
-uses(TestCase::class);
 uses(RefreshDatabase::class);
 
 test('fetch feed items only for verified users', function () {
