@@ -1,7 +1,5 @@
 <?php
 
-namespace Tests\Feature\Console\Commands;
-
 use App\Console\Commands\FetchFeedItems;
 use App\Models\Feed;
 use App\Models\FeedItem;
@@ -17,187 +15,181 @@ use ReflectionException;
 use RuntimeException;
 use Tests\TestCase;
 
-class FetchFeedItemsTest extends TestCase
-{
-    use RefreshDatabase;
+uses(TestCase::class);
+uses(RefreshDatabase::class);
 
-    public function __construct(string $name, private int $dummyRssFeedItemId = 1)
-    {
-        parent::__construct($name);
-    }
+test('fetch feed items only for verified users', function () {
+    $expectedNumberOfFeedItems = 2;
 
-    public function test_fetch_feed_items_only_for_verified_users(): void
-    {
-        $expectedNumberOfFeedItems = 2;
+    $unverifiedUser = User::factory()->unverified()->create();
+    $unverifiedUserFeed = Feed::factory()->state(['feed_url' => 'https://feed.laravel-news.com/'])->recycle($unverifiedUser)->create();
 
-        $unverifiedUser = User::factory()->unverified()->create();
-        $unverifiedUserFeed = Feed::factory()->state(['feed_url' => 'https://feed.laravel-news.com/'])->recycle($unverifiedUser)->create();
+    $verifiedUser = User::factory()->create();
+    $verifiedUserFeed = Feed::factory()->state(['feed_url' => 'https://feed.laravel-news.com/'])->recycle($verifiedUser)->create();
 
-        $verifiedUser = User::factory()->create();
-        $verifiedUserFeed = Feed::factory()->state(['feed_url' => 'https://feed.laravel-news.com/'])->recycle($verifiedUser)->create();
+    $heraRssCrawlerMock = $this->partialMock(HeraRssCrawler::class);
+    $heraRssCrawlerMock->shouldReceive('parseFeed')->once()->andReturn(getDummyRssFeed($expectedNumberOfFeedItems));
 
-        $heraRssCrawlerMock = $this->partialMock(HeraRssCrawler::class);
-        $heraRssCrawlerMock->shouldReceive('parseFeed')->once()->andReturn($this->getDummyRssFeed($expectedNumberOfFeedItems));
+    $this->artisan(FetchFeedItems::class)
+        ->assertExitCode(Command::SUCCESS);
 
-        $this->artisan(FetchFeedItems::class)
-            ->assertExitCode(Command::SUCCESS);
+    static::assertSame(0, $unverifiedUserFeed->feedItems()->count());
+    static::assertSame($expectedNumberOfFeedItems, $verifiedUserFeed->feedItems()->count());
+});
 
-        static::assertSame(0, $unverifiedUserFeed->feedItems()->count());
-        static::assertSame($expectedNumberOfFeedItems, $verifiedUserFeed->feedItems()->count());
-    }
+test('invalid rss feed', function () {
+    $user = User::factory()
+        ->has(Feed::factory()->state(['feed_url' => 'https://laravel-news.com']))
+        ->create();
 
-    public function test_invalid_rss_feed(): void
-    {
-        $user = User::factory()
-            ->has(Feed::factory()->state(['feed_url' => 'https://laravel-news.com']))
-            ->create();
+    $heraRssCrawlerMock = $this->partialMock(HeraRssCrawler::class);
+    $heraRssCrawlerMock->shouldReceive('parseFeed')->once()->andThrow(new RuntimeException);
 
-        $heraRssCrawlerMock = $this->partialMock(HeraRssCrawler::class);
-        $heraRssCrawlerMock->shouldReceive('parseFeed')->once()->andThrow(new RuntimeException);
+    $this->artisan(FetchFeedItems::class)
+        ->assertExitCode(Command::SUCCESS);
 
-        $this->artisan(FetchFeedItems::class)
-            ->assertExitCode(Command::SUCCESS);
+    static::assertSame(0, $user->feedItems()->count());
+    static::assertNotNull($user->feeds()->first()->last_failed_at);
+    static::assertNotNull($user->feeds()->first()->last_checked_at);
+});
 
-        static::assertSame(0, $user->feedItems()->count());
-        static::assertNotNull($user->feeds()->first()->last_failed_at);
-        static::assertNotNull($user->feeds()->first()->last_checked_at);
-    }
+test('does not save duplicate feed items', function () {
+    $expectedNumberOfFeedItems = 2;
 
-    public function test_does_not_save_duplicate_feed_items(): void
-    {
-        $expectedNumberOfFeedItems = 2;
+    $user = User::factory()->create();
+    $feed = Feed::factory()->state(['feed_url' => 'https://feed.laravel-news.com/'])->recycle($user)->create();
 
-        $user = User::factory()->create();
-        $feed = Feed::factory()->state(['feed_url' => 'https://feed.laravel-news.com/'])->recycle($user)->create();
+    $heraRssCrawlerMock = $this->partialMock(HeraRssCrawler::class);
+    $heraRssCrawlerMock->shouldReceive('parseFeed')->twice()->andReturn(getDummyRssFeed($expectedNumberOfFeedItems));
 
-        $heraRssCrawlerMock = $this->partialMock(HeraRssCrawler::class);
-        $heraRssCrawlerMock->shouldReceive('parseFeed')->twice()->andReturn($this->getDummyRssFeed($expectedNumberOfFeedItems));
+    $this->artisan(FetchFeedItems::class)
+        ->assertExitCode(Command::SUCCESS);
 
-        $this->artisan(FetchFeedItems::class)
-            ->assertExitCode(Command::SUCCESS);
+    $numberOfFeedItems = $feed->feedItems()->count();
 
-        $numberOfFeedItems = $feed->feedItems()->count();
+    static::assertSame($expectedNumberOfFeedItems, $numberOfFeedItems);
 
-        static::assertSame($expectedNumberOfFeedItems, $numberOfFeedItems);
+    $this->artisan(FetchFeedItems::class)
+        ->assertExitCode(Command::SUCCESS);
 
-        $this->artisan(FetchFeedItems::class)
-            ->assertExitCode(Command::SUCCESS);
+    static::assertSame($numberOfFeedItems, $feed->feedItems()->count());
+});
 
-        static::assertSame($numberOfFeedItems, $feed->feedItems()->count());
-    }
+test('does not store older feed items', function () {
+    $this->freezeTime();
 
-    public function test_does_not_store_older_feed_items(): void
-    {
-        $this->freezeTime();
+    $expectedNumberOfFeedItems = 2;
 
-        $expectedNumberOfFeedItems = 2;
+    $user = User::factory()->create();
+    $feed = Feed::factory()->state(['feed_url' => 'https://feed.laravel-news.com/'])->recycle($user)->create();
 
-        $user = User::factory()->create();
-        $feed = Feed::factory()->state(['feed_url' => 'https://feed.laravel-news.com/'])->recycle($user)->create();
-
-        $dummyRssFeed = $this->getDummyRssFeed($expectedNumberOfFeedItems);
-        $dummyRssFeed->setFeedItems($dummyRssFeed->getFeedItems()
-            ->merge([
-                $this->getDummyRssFeedItem(
-                    now()
-                        ->subMonths(config('app.fetch_articles_not_older_than_months'))
-                        ->subDay()
-                ),
-            ]));
-
-        $heraRssCrawlerMock = $this->partialMock(HeraRssCrawler::class);
-        $heraRssCrawlerMock->shouldReceive('parseFeed')->once()->andReturn($dummyRssFeed);
-
-        $this->artisan(FetchFeedItems::class)
-            ->assertExitCode(Command::SUCCESS);
-
-        $numberOfFeedItems = $feed->feedItems()->count();
-
-        static::assertSame($expectedNumberOfFeedItems, $numberOfFeedItems);
-
-        $feed->feedItems
-            ->each(function (FeedItem $feedItem) {
-                static::assertTrue($feedItem->posted_at->gte(today()->subMonths(config('app.fetch_articles_not_older_than_months'))));
-            });
-    }
-
-    public function test_generates_blur_hash_for_image(): void
-    {
-        $verifiedUser = User::factory()->create();
-        $verifiedUserFeed = Feed::factory()->state(['feed_url' => 'https://feed.laravel-news.com/'])->recycle($verifiedUser)->create();
-
-        static::assertSame(0, $verifiedUserFeed->feedItems()->count());
-
-        $dummyRssFeed = $this->getDummyRssFeed(1);
-        $dummyRssFeed->setFeedItems(collect([
-            $this->getDummyRssFeedItem(
-                null,
-                'https://placehold.co/600x400/EEE/31343C/png'
+    $dummyRssFeed = getDummyRssFeed($expectedNumberOfFeedItems);
+    $dummyRssFeed->setFeedItems($dummyRssFeed->getFeedItems()
+        ->merge([
+            getDummyRssFeedItem(
+                now()
+                    ->subMonths(config('app.fetch_articles_not_older_than_months'))
+                    ->subDay()
             ),
         ]));
 
-        $heraRssCrawlerMock = $this->partialMock(HeraRssCrawler::class);
-        $heraRssCrawlerMock->shouldReceive('parseFeed')->once()->andReturn($dummyRssFeed);
+    $heraRssCrawlerMock = $this->partialMock(HeraRssCrawler::class);
+    $heraRssCrawlerMock->shouldReceive('parseFeed')->once()->andReturn($dummyRssFeed);
 
-        $this->artisan(FetchFeedItems::class)
-            ->assertExitCode(Command::SUCCESS);
+    $this->artisan(FetchFeedItems::class)
+        ->assertExitCode(Command::SUCCESS);
 
-        static::assertSame('L9R3TW%M-;%M-;j[j[fQ~qj[D%ay', $verifiedUserFeed->feedItems->first()->blur_hash);
-    }
+    $numberOfFeedItems = $feed->feedItems()->count();
 
-    /**
+    static::assertSame($expectedNumberOfFeedItems, $numberOfFeedItems);
+
+    $feed->feedItems
+        ->each(function (FeedItem $feedItem) {
+            static::assertTrue($feedItem->posted_at->gte(today()->subMonths(config('app.fetch_articles_not_older_than_months'))));
+        });
+});
+
+test('generates blur hash for image', function () {
+    $verifiedUser = User::factory()->create();
+    $verifiedUserFeed = Feed::factory()->state(['feed_url' => 'https://feed.laravel-news.com/'])->recycle($verifiedUser)->create();
+
+    static::assertSame(0, $verifiedUserFeed->feedItems()->count());
+
+    $dummyRssFeed = getDummyRssFeed(1);
+    $dummyRssFeed->setFeedItems(collect([
+        getDummyRssFeedItem(
+            null,
+            'https://placehold.co/600x400/EEE/31343C/png'
+        ),
+    ]));
+
+    $heraRssCrawlerMock = $this->partialMock(HeraRssCrawler::class);
+    $heraRssCrawlerMock->shouldReceive('parseFeed')->once()->andReturn($dummyRssFeed);
+
+    $this->artisan(FetchFeedItems::class)
+        ->assertExitCode(Command::SUCCESS);
+
+    static::assertSame('L9R3TW%M-;%M-;j[j[fQ~qj[D%ay', $verifiedUserFeed->feedItems->first()->blur_hash);
+});
+
+// Helpers
+function __construct(string $name, private int $dummyRssFeedItemId = 1)
+{
+    parent::__construct($name);
+}
+
+/**
      * @param  Collection<RssFeedItem>  $rssFeedItems
      *
      * @throws ReflectionException
      */
-    private function getDummyRssFeed(int $numberOfFeedItems): RssFeed
-    {
-        $rssFeed = new RssFeed;
+function getDummyRssFeed(int $numberOfFeedItems): RssFeed
+{
+    $rssFeed = new RssFeed;
 
-        $rssFeed->setCategories(collect());
-        $rssFeed->setAuthors(collect());
-        $rssFeed->setTitle('Dummy feed');
-        $rssFeed->setCopyright(null);
-        $rssFeed->setCreatedAt(now());
-        $rssFeed->setUpdatedAt(now());
-        $rssFeed->setDescription('Dummy feed description');
-        $rssFeed->setFeedUrl('https://test.dev');
-        $rssFeed->setId('dummy-feed');
-        $rssFeed->setLanguage('en');
-        $rssFeed->setUrl(null);
-        $rssFeed->setFeedItems(collect(range(1, $numberOfFeedItems))->map(fn () => $this->getDummyRssFeedItem()));
-        $rssFeed->setChecksum(HeraRssCrawler::generateChecksumForFeed($rssFeed));
+    $rssFeed->setCategories(collect());
+    $rssFeed->setAuthors(collect());
+    $rssFeed->setTitle('Dummy feed');
+    $rssFeed->setCopyright(null);
+    $rssFeed->setCreatedAt(now());
+    $rssFeed->setUpdatedAt(now());
+    $rssFeed->setDescription('Dummy feed description');
+    $rssFeed->setFeedUrl('https://test.dev');
+    $rssFeed->setId('dummy-feed');
+    $rssFeed->setLanguage('en');
+    $rssFeed->setUrl(null);
+    $rssFeed->setFeedItems(collect(range(1, $numberOfFeedItems))->map(fn () => test()->getDummyRssFeedItem()));
+    $rssFeed->setChecksum(HeraRssCrawler::generateChecksumForFeed($rssFeed));
 
-        return $rssFeed;
-    }
+    return $rssFeed;
+}
 
-    private function getDummyRssFeedItem(?Carbon $date = null, ?string $imageUrl = null): RssFeedItem
-    {
-        $this->dummyRssFeedItemId++;
+function getDummyRssFeedItem(?Carbon $date = null, ?string $imageUrl = null): RssFeedItem
+{
+    test()->dummyRssFeedItemId++;
 
-        $rssFeedItem = new RssFeedItem;
-        $rssFeedItem->setCategories(collect());
-        $rssFeedItem->setAuthors(collect());
+    $rssFeedItem = new RssFeedItem;
+    $rssFeedItem->setCategories(collect());
+    $rssFeedItem->setAuthors(collect());
 
-        $rssFeedItem->setTitle("Dummy article #{$this->dummyRssFeedItemId}");
-        $rssFeedItem->setCommentCount(0);
-        $rssFeedItem->setCommentFeedLink('https://test.dev');
-        $rssFeedItem->setCommentLink('https://test.dev');
-        $rssFeedItem->setContent('Dummy content');
-        $rssFeedItem->setCreatedAt($date ?? now());
-        $rssFeedItem->setUpdatedAt($date ?? now());
-        $rssFeedItem->setDescription('Dummy description');
-        $rssFeedItem->setEnclosureUrl("https://test.dev/{$this->dummyRssFeedItemId}");
-        $rssFeedItem->setImageUrls($imageUrl ? collect([$imageUrl]) : collect());
-        $rssFeedItem->setEncoding('utf-8');
-        $rssFeedItem->setId("article-{$this->dummyRssFeedItemId}");
-        $rssFeedItem->setLinks(collect());
-        $rssFeedItem->setPermalink("https://test.dev/permalink/{$this->dummyRssFeedItemId}");
-        $rssFeedItem->setType('Dummy article');
-        $rssFeedItem->setXml(null);
+    $rssFeedItem->setTitle("Dummy article #{test()->dummyRssFeedItemId}");
+    $rssFeedItem->setCommentCount(0);
+    $rssFeedItem->setCommentFeedLink('https://test.dev');
+    $rssFeedItem->setCommentLink('https://test.dev');
+    $rssFeedItem->setContent('Dummy content');
+    $rssFeedItem->setCreatedAt($date ?? now());
+    $rssFeedItem->setUpdatedAt($date ?? now());
+    $rssFeedItem->setDescription('Dummy description');
+    $rssFeedItem->setEnclosureUrl("https://test.dev/{test()->dummyRssFeedItemId}");
+    $rssFeedItem->setImageUrls($imageUrl ? collect([$imageUrl]) : collect());
+    $rssFeedItem->setEncoding('utf-8');
+    $rssFeedItem->setId("article-{test()->dummyRssFeedItemId}");
+    $rssFeedItem->setLinks(collect());
+    $rssFeedItem->setPermalink("https://test.dev/permalink/{test()->dummyRssFeedItemId}");
+    $rssFeedItem->setType('Dummy article');
+    $rssFeedItem->setXml(null);
 
-        $rssFeedItem->generateChecksum();
+    $rssFeedItem->generateChecksum();
 
-        return $rssFeedItem;
-    }
+    return $rssFeedItem;
 }

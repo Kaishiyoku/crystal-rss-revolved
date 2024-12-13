@@ -1,7 +1,5 @@
 <?php
 
-namespace Tests\Feature\Auth;
-
 use App\Models\User;
 use App\Providers\AppServiceProvider;
 use Illuminate\Auth\Events\Lockout;
@@ -9,78 +7,70 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
-class AuthenticationTest extends TestCase
-{
-    use RefreshDatabase;
+uses(TestCase::class);
+uses(RefreshDatabase::class);
 
-    public function test_login_screen_can_be_rendered(): void
-    {
-        $response = $this->get('/login');
+test('login screen can be rendered', function () {
+    $response = $this->get('/login');
 
-        $response->assertStatus(200);
-    }
+    $response->assertStatus(200);
+});
 
-    public function test_users_can_authenticate_using_the_login_screen(): void
-    {
-        $user = User::factory()->create();
+test('users can authenticate using the login screen', function () {
+    $user = User::factory()->create();
 
+    $response = $this->post('/login', [
+        'email' => $user->email,
+        'password' => 'password',
+    ]);
+
+    $this->assertAuthenticated();
+    $response->assertRedirect(route('dashboard'));
+});
+
+test('users can not authenticate with invalid password', function () {
+    $user = User::factory()->create();
+
+    $this->post('/login', [
+        'email' => $user->email,
+        'password' => 'wrong-password',
+    ]);
+
+    $this->assertGuest();
+});
+
+test('users can logout', function () {
+    $this->actingAs(User::factory()->create());
+
+    $this->post('/logout');
+
+    $this->assertGuest();
+});
+
+test('user exceeds rate limiting', function () {
+    Event::fake();
+
+    $user = User::factory()->create();
+
+    collect(range(0, 5))->each(function (int $index) use ($user) {
         $response = $this->post('/login', [
-            'email' => $user->email,
-            'password' => 'password',
-        ]);
-
-        $this->assertAuthenticated();
-        $response->assertRedirect(route('dashboard'));
-    }
-
-    public function test_users_can_not_authenticate_with_invalid_password(): void
-    {
-        $user = User::factory()->create();
-
-        $this->post('/login', [
             'email' => $user->email,
             'password' => 'wrong-password',
         ]);
 
-        $this->assertGuest();
-    }
+        if ($index === 5) {
+            Event::assertDispatched(Lockout::class);
+            $response->assertSessionHasErrors(['email']);
+        }
+    });
 
-    public function test_users_can_logout(): void
-    {
-        $this->actingAs(User::factory()->create());
+    $this->assertGuest();
+});
 
-        $this->post('/logout');
+test('redirect if authenticated', function () {
+    $this->actingAs(User::factory()->create());
 
-        $this->assertGuest();
-    }
+    $response = $this->get('/register');
 
-    public function test_user_exceeds_rate_limiting(): void
-    {
-        Event::fake();
-
-        $user = User::factory()->create();
-
-        collect(range(0, 5))->each(function (int $index) use ($user) {
-            $response = $this->post('/login', [
-                'email' => $user->email,
-                'password' => 'wrong-password',
-            ]);
-
-            if ($index === 5) {
-                Event::assertDispatched(Lockout::class);
-                $response->assertSessionHasErrors(['email']);
-            }
-        });
-
-        $this->assertGuest();
-    }
-
-    public function test_redirect_if_authenticated(): void
-    {
-        $this->actingAs(User::factory()->create());
-
-        $response = $this->get('/register');
-
-        $response->assertRedirect(AppServiceProvider::HOME);
-    }
-}
+    $response->assertRedirect(AppServiceProvider::HOME);
+});

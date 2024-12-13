@@ -1,63 +1,54 @@
 <?php
 
-namespace Http\Controllers;
-
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class FeedDiscovererControllerTest extends TestCase
-{
-    use RefreshDatabase;
+uses(TestCase::class);
+uses(RefreshDatabase::class);
 
-    public function test_success(): void
-    {
-        $this->actingAs(User::factory()->create());
+test('success', function () {
+    $this->actingAs(User::factory()->create());
 
-        $this->post(route('discover-feed'), ['feed_url' => 'https://tailwindcss.com/feeds/feed.xml'])
-            ->assertJsonIsObject()
-            ->assertJsonStructure([
-                'feed_url',
-                'site_url',
-                'favicon_url',
-                'name',
-                'language',
-            ]);
-    }
+    $this->post(route('discover-feed'), ['feed_url' => 'https://tailwindcss.com/feeds/feed.xml'])
+        ->assertJsonIsObject()
+        ->assertJsonStructure([
+            'feed_url',
+            'site_url',
+            'favicon_url',
+            'name',
+            'language',
+        ]);
+});
 
-    public function test_no_feed_found(): void
-    {
-        $this->actingAs(User::factory()->create());
+test('no feed found', function () {
+    $this->actingAs(User::factory()->create());
 
-        $response = $this->post(route('discover-feed'), ['feed_url' => 'https://blurha.sh/']);
+    $response = $this->post(route('discover-feed'), ['feed_url' => 'https://blurha.sh/']);
 
-        $response->assertNotFound();
-        static::assertSame('No feeds found.', $response->exception->getMessage());
-    }
+    $response->assertNotFound();
+    static::assertSame('No feeds found.', $response->exception->getMessage());
+});
 
-    public function test_cannot_access_as_guest(): void
-    {
-        $this->post(route('discover-feed'))
-            ->assertRedirect('/login');
-    }
+test('cannot access as guest', function () {
+    $this->post(route('discover-feed'))
+        ->assertRedirect('/login');
+});
 
-    public function test_connect_exception(): void
-    {
-        $this->actingAs(User::factory()->create());
+test('connect exception', function () {
+    $this->actingAs(User::factory()->create());
 
-        $response = $this->post(route('discover-feed'), ['feed_url' => 'https://test.dev']);
+    $response = $this->post(route('discover-feed'), ['feed_url' => 'https://test.dev']);
 
-        $response->assertUnprocessable();
-        static::assertSame('The given URL is invalid.', $response->exception->getMessage());
-    }
+    $response->assertUnprocessable();
+    static::assertSame('The given URL is invalid.', $response->exception->getMessage());
+});
 
-    public function test_client_exception(): void
-    {
-        $this->actingAs(User::factory()->create());
+test('client exception', function () {
+    $this->actingAs(User::factory()->create());
 
-        $response = $this->post(route('discover-feed'), ['feed_url' => 'https://tailwindcss.com/random-page']);
+    $response = $this->post(route('discover-feed'), ['feed_url' => 'https://tailwindcss.com/random-page']);
 
-        $response->assertUnprocessable();
-        static::assertSame('The given URL could not be resolved.', $response->exception->getMessage());
-    }
-}
+    $response->assertUnprocessable();
+    static::assertSame('The given URL could not be resolved.', $response->exception->getMessage());
+});
