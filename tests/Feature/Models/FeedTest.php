@@ -12,22 +12,19 @@ test('feed belongs to user', function () {
     $user = User::factory()->create();
     $feed = Feed::factory()->for($user)->create();
 
-    static::assertSame($user->id, $feed->user->id);
+    expect($feed->user->id)->toBe($user->id);
 });
 
 test('feed belongs to category', function () {
     $category = Category::factory()->create();
     $feed = Feed::factory()->for($category)->create();
 
-    static::assertSame($category->id, $feed->category->id);
+    expect($feed->category->id)->toBe($category->id);
 });
 
 test('feed has feed items', function () {
     $feed = Feed::factory()->create();
     $feedItems = FeedItem::factory(5)->for($feed)->create();
 
-    static::assertEquals(
-        $feedItems->sortByDesc('posted_at')->pluck('id'),
-        $feed->feedItems()->pluck('id'),
-    );
+    expect($feed->feedItems()->pluck('id'))->toEqual($feedItems->sortByDesc('posted_at')->pluck('id'));
 });

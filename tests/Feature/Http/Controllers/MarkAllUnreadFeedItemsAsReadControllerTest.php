@@ -5,12 +5,16 @@ use App\Models\FeedItem;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
+use function Pest\Laravel\actingAs;
+use function Pest\Laravel\freezeTime;
+use function Pest\Laravel\put;
+
 uses(RefreshDatabase::class);
 
 test('marks all unread feed items as read for specific user', function () {
-    $this->freezeTime();
+    freezeTime();
 
-    $this->actingAs($user = User::factory()->create());
+    actingAs($user = User::factory()->create());
 
     Feed::factory(5)
         ->recycle($user)
@@ -18,17 +22,17 @@ test('marks all unread feed items as read for specific user', function () {
         ->has(FeedItem::factory(20)->state(['read_at' => now()]))
         ->create();
 
-    static::assertSame(50, $user->feedItems()->unread()->count());
-    static::assertSame(100, $user->feedItems()->whereNotNull('read_at')->count());
+    expect($user->feedItems()->unread()->count())->toBe(50)
+        ->and($user->feedItems()->whereNotNull('read_at')->count())->toBe(100);
 
-    $this->put(route('mark-all-as-read'))
+    put(route('mark-all-as-read'))
         ->assertOk();
 
-    static::assertSame(0, $user->feedItems()->unread()->count());
-    static::assertSame(150, $user->feedItems()->whereNotNull('read_at')->count());
+    expect($user->feedItems()->unread()->count())->toBe(0)
+        ->and($user->feedItems()->whereNotNull('read_at')->count())->toBe(150);
 });
 
 test('cannot access as guest', function () {
-    $this->put(route('mark-all-as-read'))
+    put(route('mark-all-as-read'))
         ->assertRedirect('/login');
 });

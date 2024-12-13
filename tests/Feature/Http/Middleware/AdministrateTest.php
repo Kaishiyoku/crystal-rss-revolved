@@ -7,13 +7,15 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 
+use function Pest\Laravel\actingAs;
+
 uses(RefreshDatabase::class);
 
 test('middleware', function (?UserFactory $userFactory, bool $expectVisited) {
     $user = $userFactory?->create();
 
     if ($userFactory) {
-        $this->actingAs($user);
+        actingAs($user);
     }
 
     $visited = false;
@@ -24,7 +26,7 @@ test('middleware', function (?UserFactory $userFactory, bool $expectVisited) {
         return Response::make();
     });
 
-    static::assertSame($expectVisited, $visited);
+    expect($visited)->toBe($expectVisited);
 })->with('middleware');
 
 // Datasets

@@ -6,6 +6,9 @@ use Illuminate\Console\Command;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Kaishiyoku\HeraRssCrawler\HeraRssCrawler;
 
+use function Pest\Laravel\artisan;
+use function Pest\Laravel\partialMock;
+
 uses(RefreshDatabase::class);
 
 test('update feed favicon urls', function () {
@@ -25,21 +28,20 @@ test('update feed favicon urls', function () {
         'favicon_url' => $validFaviconUrl,
     ]);
 
-    $heraRssCrawlerMock = $this->partialMock(HeraRssCrawler::class);
+    $heraRssCrawlerMock = partialMock(HeraRssCrawler::class);
     $heraRssCrawlerMock->shouldReceive('discoverFavicon')->times(3)->andReturn($validFaviconUrl);
 
-    $this->artisan(CheckFeedFavicons::class)
+    artisan(CheckFeedFavicons::class)
         ->assertExitCode(Command::SUCCESS);
 
     $feedWithoutFavicon->refresh();
     $feedWithChangingFavicon->refresh();
     $feedWithoutChangingFavicon->refresh();
 
-    static::assertNotNull($feedWithoutFavicon->favicon_url);
-    static::assertNotNull($feedWithChangingFavicon->favicon_url);
-    static::assertNotNull($feedWithoutChangingFavicon->favicon_url);
-
-    static::assertNotSame($invalidFaviconUrl, $feedWithChangingFavicon->favicon_url);
-    static::assertSame($validFaviconUrl, $feedWithChangingFavicon->favicon_url);
-    static::assertSame($feedWithoutChangingFavicon->created_at->timestamp, $feedWithoutChangingFavicon->updated_at->timestamp);
+    expect($feedWithoutFavicon->favicon_url)->not->toBeNull()
+        ->and($feedWithChangingFavicon->favicon_url)->not->toBeNull()
+        ->and($feedWithoutChangingFavicon->favicon_url)->not->toBeNull()
+        ->and($feedWithChangingFavicon->favicon_url)->not->toBe($invalidFaviconUrl)
+        ->and($feedWithChangingFavicon->favicon_url)->toBe($validFaviconUrl)
+        ->and($feedWithoutChangingFavicon->updated_at->timestamp)->toBe($feedWithoutChangingFavicon->created_at->timestamp);
 });

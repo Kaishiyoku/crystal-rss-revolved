@@ -6,15 +6,22 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
+use function Pest\Laravel\actingAs;
+
+// Helpers
+$makeData = fn (mixed $name = null, mixed $email = null): array => [
+    'name' => $name ?? 'Test',
+    'email' => $email ?? 'test@test.de',
+];
+
 uses(RefreshDatabase::class);
 beforeEach(function () {
-    $this->actingAs($this->user = User::factory()->state(['email' => static::USER_EMAIL])->create());
-    User::factory()->state(['email' => static::USER_EMAIL_OF_ANOTHER_USER])->create();
+    actingAs($this->user = User::factory()->state(['email' => fakeUserEmail()])->create());
+    User::factory()->state(['email' => fakeUserEmailOfAnotherUser()])->create();
 });
 
-
 test('authorize', function () {
-    static::assertTrue((new ProfileUpdateRequest)->authorize());
+    expect((new ProfileUpdateRequest)->authorize())->toBeTrue();
 });
 
 test('validate', function (array $data, bool $shouldSucceed, ?string $expectedExceptionMessage = null) {
@@ -22,59 +29,48 @@ test('validate', function (array $data, bool $shouldSucceed, ?string $expectedEx
     $request->setUserResolver(fn () => $this->user);
 
     if (! $shouldSucceed) {
-        static::expectException(ValidationException::class);
-        static::expectExceptionMessage($expectedExceptionMessage);
-    }
+        expect(fn () => $request->validate($request->rules()))
+            ->toThrow(ValidationException::class, $expectedExceptionMessage);
+    } else {
+        $validated = $request->validate($request->rules());
 
-    $validated = $request->validate($request->rules());
-
-    if ($shouldSucceed) {
-        static::assertSame($data, $validated);
+        expect($validated)->toBe($data);
     }
 })->with('validation');
 
 // Datasets
 dataset('validation', [
     'succeeds' => [
-        static::makeData(),
+        $makeData(),
         true,
     ],
     'invalid name' => [
-        static::makeData(name: 123),
+        $makeData(name: 123),
         false,
         'The Name field must be a string.',
     ],
     'overly long name' => [
-        static::makeData(name: Str::random(256)),
+        $makeData(name: Str::random(256)),
         false,
         'The Name field must not be greater than 255 characters.',
     ],
     'invalid email' => [
-        static::makeData(email: 'test'),
+        $makeData(email: 'test'),
         false,
         'The email field must be a valid email address.',
     ],
     'overly long email' => [
-        static::makeData(email: Str::random(248).'@test.de'),
+        $makeData(email: Str::random(248).'@test.de'),
         false,
         'The email field must not be greater than 255 characters.',
     ],
     'email of own user' => [
-        static::makeData(email: static::USER_EMAIL),
+        $makeData(email: fakeUserEmail()),
         true,
     ],
     'email of another user' => [
-        static::makeData(email: static::USER_EMAIL_OF_ANOTHER_USER),
+        $makeData(email: fakeUserEmailOfAnotherUser()),
         false,
         'The email has already been taken.',
     ],
 ]);
-
-// Helpers
-function makeData(mixed $name = null, mixed $email = null): array
-{
-    return [
-        'name' => $name ?? 'Test',
-        'email' => $email ?? 'test@test.de',
-    ];
-}

@@ -15,7 +15,7 @@
         "intervention/image": "^3.3",
         "kaishiyoku/hera-rss-crawler": "^6.0",
         "kornrunner/blurhash": "^1.2",
-        "laravel/framework": "^11.0",
+        "laravel/framework": "11.32.0",
         "laravel/horizon": "^5.23",
         "laravel/pulse": "^1.2",
         "laravel/sanctum": "^4.0",
@@ -38,7 +38,7 @@
         "laravel/pint": "^1.13",
         "laravel/sail": "^1.26",
         "mockery/mockery": "^1.6",
-        "nunomaduro/collision": "^7.0",
+        "nunomaduro/collision": "^8.0",
         "pestphp/pest": "^2.23",
         "pestphp/pest-plugin-laravel": "^2.2",
         "spatie/laravel-ignition": "^2.4"

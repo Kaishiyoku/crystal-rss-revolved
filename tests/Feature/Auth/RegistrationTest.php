@@ -3,16 +3,18 @@
 use App\Providers\AppServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
+use function Pest\Laravel\get;
+use function Pest\Laravel\post;
+
 uses(RefreshDatabase::class);
 
 test('registration screen can be rendered', function () {
-    $response = $this->get('/register');
-
-    $response->assertStatus(200);
+    get('/register')
+        ->assertOk();
 });
 
 test('new users can register', function () {
-    $response = $this->post('/register', [
+    $response = post('/register', [
         'name' => 'Test User',
         'email' => 'test@example.com',
         'password' => 'password',

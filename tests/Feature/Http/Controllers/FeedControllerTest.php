@@ -9,6 +9,12 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Arr;
 use Inertia\Testing\AssertableInertia as Assert;
 
+use function Pest\Laravel\actingAs;
+use function Pest\Laravel\delete;
+use function Pest\Laravel\get;
+use function Pest\Laravel\post;
+use function Pest\Laravel\put;
+
 uses(RefreshDatabase::class);
 
 test('middleware is registered', function () {
@@ -24,16 +30,16 @@ test('middleware is registered', function () {
         'can:delete,feed',
     ];
 
-    static::assertCount(5, $middleware);
-    static::assertSame($expectedMiddleware, $middleware);
+    expect($middleware)->toHaveCount(5)
+        ->and($middleware)->toBe($expectedMiddleware);
 });
 
 test('index', function () {
-    $this->actingAs($user = User::factory()->create());
+    actingAs($user = User::factory()->create());
 
     Feed::factory()->for($user)->create();
 
-    $this->get(route('feeds.index'))
+    get(route('feeds.index'))
         ->assertInertia(fn (Assert $page) => $page
             ->component('Feeds/Index')
             ->count('feeds', 1)
@@ -42,22 +48,21 @@ test('index', function () {
 });
 
 test('cannot access index as guest', function () {
-    $response = $this->get(route('feeds.index'));
-
-    $response->assertRedirect('/login');
+    get(route('feeds.index'))
+        ->assertRedirect('/login');
 });
 
 test('create', function () {
-    $this->actingAs(User::factory()->create());
+    actingAs(User::factory()->create());
 
-    $this->get(route('feeds.create'))
+    get(route('feeds.create'))
         ->assertInertia(fn (Assert $page) => $page
             ->has('feed')
         );
 });
 
 test('store', function () {
-    $this->actingAs($user = User::factory()->create());
+    actingAs($user = User::factory()->create());
 
     $category = Category::factory()->for($user)->create();
     $feedUrl = 'https://tailwindcss.com/feeds/feed.xml';
@@ -67,7 +72,7 @@ test('store', function () {
     $language = 'en';
     $isPurgeable = true;
 
-    $response = $this->post(route('feeds.store'), [
+    post(route('feeds.store'), [
         'category_id' => $category->id,
         'feed_url' => $feedUrl,
         'site_url' => $siteUrl,
@@ -75,37 +80,37 @@ test('store', function () {
         'name' => $name,
         'language' => $language,
         'is_purgeable' => $isPurgeable,
-    ]);
+    ])
+        ->assertRedirect(route('feeds.index'));
 
-    $response->assertRedirect(route('feeds.index'));
-    static::assertSame(1, $user->feeds()->count());
-    static::assertSame($user->id, $user->feeds()->first()->user_id);
-    static::assertSame($category->id, $user->feeds()->first()->category_id);
-    static::assertSame($feedUrl, $user->feeds()->first()->feed_url);
-    static::assertSame($siteUrl, $user->feeds()->first()->site_url);
-    static::assertSame($faviconUrl, $user->feeds()->first()->favicon_url);
-    static::assertSame($name, $user->feeds()->first()->name);
-    static::assertSame($language, $user->feeds()->first()->language);
-    static::assertSame($isPurgeable, $user->feeds()->first()->is_purgeable);
+    expect($user->feeds()->count())->toBe(1)
+        ->and($user->feeds()->first()->user_id)->toBe($user->id)
+        ->and($user->feeds()->first()->category_id)->toBe($category->id)
+        ->and($user->feeds()->first()->feed_url)->toBe($feedUrl)
+        ->and($user->feeds()->first()->site_url)->toBe($siteUrl)
+        ->and($user->feeds()->first()->favicon_url)->toBe($faviconUrl)
+        ->and($user->feeds()->first()->name)->toBe($name)
+        ->and($user->feeds()->first()->language)->toBe($language)
+        ->and($user->feeds()->first()->is_purgeable)->toBe($isPurgeable);
 });
 
 test('store validation fails due to missing data', function () {
-    $this->actingAs($user = User::factory()->create());
+    actingAs($user = User::factory()->create());
 
-    $this->get(route('feeds.create'));
-    $response = $this->post(route('feeds.store'), ['name' => ' ']);
+    get(route('feeds.create'));
+    $response = post(route('feeds.store'), ['name' => ' ']);
 
     $response->assertRedirect(route('feeds.create'));
     $response->assertSessionHasErrors(['name' => 'The Name field is required.']);
-    static::assertSame(0, $user->feeds()->count());
+    expect($user->feeds()->count())->toBe(0);
 });
 
 test('edit', function () {
-    $this->actingAs($user = User::factory()->create());
+    actingAs($user = User::factory()->create());
 
     $feed = Feed::factory()->for($user)->create();
 
-    $this->get(route('feeds.edit', $feed))
+    get(route('feeds.edit', $feed))
         ->assertInertia(fn (Assert $page) => $page
             ->has('feed')
             ->where('canDelete', true)
@@ -113,16 +118,16 @@ test('edit', function () {
 });
 
 test('cannot edit feed of another user', function () {
-    $this->actingAs(User::factory()->create());
+    actingAs(User::factory()->create());
 
     $feed = Feed::factory()->create();
 
-    $this->get(route('feeds.edit', $feed))
+    get(route('feeds.edit', $feed))
         ->assertForbidden();
 });
 
 test('update', function () {
-    $this->actingAs($user = User::factory()->create());
+    actingAs($user = User::factory()->create());
 
     $feed = Feed::factory()->for($user)->create();
 
@@ -134,7 +139,7 @@ test('update', function () {
     $language = 'de';
     $isPurgeable = false;
 
-    $response = $this->put(route('feeds.update', $feed), [
+    $response = put(route('feeds.update', $feed), [
         'category_id' => $category->id,
         'feed_url' => $feedUrl,
         'site_url' => $siteUrl,
@@ -145,45 +150,45 @@ test('update', function () {
     ]);
 
     $response->assertRedirect(route('feeds.index'));
-    static::assertSame($user->id, $user->feeds()->first()->user_id);
-    static::assertSame($category->id, $user->feeds()->first()->category_id);
-    static::assertSame($feedUrl, $user->feeds()->first()->feed_url);
-    static::assertSame($siteUrl, $user->feeds()->first()->site_url);
-    static::assertSame($faviconUrl, $user->feeds()->first()->favicon_url);
-    static::assertSame($name, $user->feeds()->first()->name);
-    static::assertSame($language, $user->feeds()->first()->language);
-    static::assertSame($isPurgeable, $user->feeds()->first()->is_purgeable);
+    expect($user->feeds()->first()->user_id)->toBe($user->id)
+        ->and($user->feeds()->first()->category_id)->toBe($category->id)
+        ->and($user->feeds()->first()->feed_url)->toBe($feedUrl)
+        ->and($user->feeds()->first()->site_url)->toBe($siteUrl)
+        ->and($user->feeds()->first()->favicon_url)->toBe($faviconUrl)
+        ->and($user->feeds()->first()->name)->toBe($name)
+        ->and($user->feeds()->first()->language)->toBe($language)
+        ->and($user->feeds()->first()->is_purgeable)->toBe($isPurgeable);
 });
 
 test('cannot update feed of another user', function () {
-    $this->actingAs(User::factory()->create());
+    actingAs(User::factory()->create());
 
     $feed = Feed::factory()->create();
 
-    $this->put(route('feeds.update', $feed), ['name' => 'Test (updated)'])
+    put(route('feeds.update', $feed), ['name' => 'Test (updated)'])
         ->assertForbidden();
 });
 
 test('delete', function () {
-    $this->actingAs($user = User::factory()->create());
+    actingAs($user = User::factory()->create());
 
     $feed = Feed::factory()->for($user)->hasFeedItems(10)->create();
 
-    $response = $this->delete(route('feeds.destroy', $feed));
+    $response = delete(route('feeds.destroy', $feed));
 
     $response->assertRedirect(route('feeds.index'));
-    static::assertSame(0, $user->feeds()->count());
-    static::assertSame(0, $user->feedItems()->count());
+    expect($user->feeds()->count())->toBe(0)
+        ->and($user->feedItems()->count())->toBe(0);
 });
 
 test('cannot delete feed of another user', function () {
-    $this->actingAs(User::factory()->create());
+    actingAs(User::factory()->create());
 
     $feed = Feed::factory()->hasFeedItems(10)->create();
 
-    $this->delete(route('feeds.destroy', $feed))
+    delete(route('feeds.destroy', $feed))
         ->assertForbidden();
 
-    static::assertSame(1, Feed::count());
-    static::assertSame(10, FeedItem::count());
+    expect(Feed::count())->toBe(1)
+        ->and(FeedItem::count())->toBe(10);
 });

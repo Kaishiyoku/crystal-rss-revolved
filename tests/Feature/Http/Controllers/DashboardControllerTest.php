@@ -8,17 +8,20 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Testing\AssertableInertia as Assert;
 
+use function Pest\Laravel\actingAs;
+use function Pest\Laravel\get;
+
 uses(RefreshDatabase::class);
 
 test('index', function () {
-    $this->actingAs($user = User::factory()->create());
+    actingAs($user = User::factory()->create());
 
     $feedWithUnreadFeedItems = Feed::factory()->for($user)->has(FeedItem::factory()->unread()->count(15))->create();
     Feed::factory()->for($user)->has(FeedItem::factory()->unread()->count(5))->create();
     $feedWithoutUnreadFeedItems = Feed::factory()->for($user)->has(FeedItem::factory()->read()->count(3))->create();
 
     // visit dashboard without any query parameters
-    $this->get(route('dashboard'))
+    get(route('dashboard'))
         ->assertInertia(fn (Assert $page) => $page
             ->component('Dashboard')
             ->where('totalNumberOfFeedItems', 20)
@@ -43,7 +46,7 @@ test('index', function () {
 
     $cursor = Arr::get($feedItems->toArray(), 'next_cursor');
 
-    $this->get(route('dashboard').'?'.Arr::query(['cursor' => $cursor]))
+    get(route('dashboard').'?'.Arr::query(['cursor' => $cursor]))
         ->assertInertia(fn (Assert $page) => $page
             ->component('Dashboard')
             ->where('totalNumberOfFeedItems', 20)
@@ -61,7 +64,7 @@ test('index', function () {
         );
 
     // visit dashboard with selected feed
-    $this->get(route('dashboard').'?'.Arr::query(['feed_id' => $feedWithUnreadFeedItems->id]))
+    get(route('dashboard').'?'.Arr::query(['feed_id' => $feedWithUnreadFeedItems->id]))
         ->assertInertia(fn (Assert $page) => $page
             ->component('Dashboard')
             ->where('totalNumberOfFeedItems', 20)
@@ -79,12 +82,11 @@ test('index', function () {
         );
 
     // visit dashboard with selected feed which has no unread feed items
-    $this->get(route('dashboard').'?'.Arr::query(['feed_id' => $feedWithoutUnreadFeedItems->id]))
+    get(route('dashboard').'?'.Arr::query(['feed_id' => $feedWithoutUnreadFeedItems->id]))
         ->assertRedirect(route('dashboard'));
 });
 
 test('cannot access as guest', function () {
-    $response = $this->get(route('dashboard'));
-
-    $response->assertRedirect('/login');
+    get(route('dashboard'))
+        ->assertRedirect('/login');
 });

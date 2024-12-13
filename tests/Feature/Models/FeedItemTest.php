@@ -7,6 +7,9 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Config;
 
+use function Pest\Laravel\artisan;
+use function Pest\Laravel\freezeTime;
+
 uses(RefreshDatabase::class);
 uses(WithFaker::class);
 
@@ -14,14 +17,14 @@ test('feed item belongs to feed', function () {
     $feed = Feed::factory()->create();
     $feedItem = FeedItem::factory()->for($feed)->create();
 
-    static::assertSame($feed->id, $feedItem->feed->id);
+    expect($feedItem->feed->id)->toBe($feed->id);
 });
 
 test('unread scope', function () {
     $unreadFeedItemIds = FeedItem::factory(5)->state(['read_at' => null])->create()->pluck('id');
     FeedItem::factory(5)->state(['read_at' => now()])->create()->pluck('id');
 
-    static::assertEquals($unreadFeedItemIds, FeedItem::unread()->pluck('id'));
+    expect(FeedItem::unread()->pluck('id'))->toEqual($unreadFeedItemIds);
 });
 
 test('of feed scope', function () {
@@ -31,25 +34,16 @@ test('of feed scope', function () {
     $feedB = Feed::factory()->create();
     $feedItemIdsOfFeedB = FeedItem::factory(5)->for($feedB)->create()->pluck('id');
 
-    static::assertEquals(
-        $feedItemIdsOfFeedA->sort()->values(),
-        FeedItem::ofFeed($feedA->id)->pluck('id')->sort()->values()
-    );
-    static::assertEquals(
-        $feedItemIdsOfFeedB->sort()->values(),
-        FeedItem::ofFeed($feedB->id)->pluck('id')->sort()->values()
-    );
-    static::assertEqualsCanonicalizing(
-        $feedItemIdsOfFeedA->merge($feedItemIdsOfFeedB)->sort()->values(),
-        FeedItem::ofFeed(null)->pluck('id')->sort()->values()
-    );
+    expect(FeedItem::ofFeed($feedA->id)->pluck('id')->sort()->values())->toEqual($feedItemIdsOfFeedA->sort()->values())
+        ->and(FeedItem::ofFeed($feedB->id)->pluck('id')->sort()->values())->toEqual($feedItemIdsOfFeedB->sort()->values())
+        ->and(FeedItem::ofFeed(null)->pluck('id')->sort()->values())->toEqual($feedItemIdsOfFeedA->merge($feedItemIdsOfFeedB)->sort()->values());
 });
 
 test('has image attribute', function () {
     $feedItemWithImage = FeedItem::factory()
         ->state([
-            'image_url' => $this->faker()->imageUrl(),
-            'image_mimetype' => $this->faker()->randomElement(['image/png', 'image/jpeg']),
+            'image_url' => fake()->imageUrl(),
+            'image_mimetype' => fake()->randomElement(['image/png', 'image/jpeg']),
         ])
         ->create();
 
@@ -62,19 +56,19 @@ test('has image attribute', function () {
 
     $feedItemWithInvalidImageMimetype = FeedItem::factory()
         ->state([
-            'image_url' => $this->faker()->imageUrl(),
+            'image_url' => fake()->imageUrl(),
             'image_mimetype' => 'text/plain',
         ])
         ->create();
 
     $feedItems = FeedItem::factory(20)->create();
 
-    static::assertTrue($feedItemWithImage->has_image);
-    static::assertFalse($feedItemWithoutImage->has_image);
-    static::assertFalse($feedItemWithInvalidImageMimetype->has_image);
+    expect($feedItemWithImage->has_image)->toBeTrue()
+        ->and($feedItemWithoutImage->has_image)->toBeFalse()
+        ->and($feedItemWithInvalidImageMimetype->has_image)->toBeFalse();
 
     $feedItems->each(function (FeedItem $feedItem) {
-        static::assertSame((bool) $feedItem->image_url, $feedItem->has_image);
+        expect($feedItem->has_image)->toBe((bool) $feedItem->image_url);
     });
 });
 
@@ -84,11 +78,11 @@ test('per page', function () {
 
     Config::set('app.feed_items_per_page', $expectedPerPage);
 
-    static::assertSame($expectedPerPage, $feedItem->getPerPage());
+    expect($feedItem->getPerPage())->toBe($expectedPerPage);
 });
 
 test('prunable', function () {
-    $this->freezeTime();
+    freezeTime();
 
     $readPrunableFeedItemIds = FeedItem::factory(10)
         ->state(
@@ -129,20 +123,12 @@ test('prunable', function () {
 
     Config::set('app.months_after_pruning_feed_items', 5);
 
-    static::assertEquals(
-        $readPrunableFeedItemIds->merge($unreadPrunableFeedItemIds)->values()->sort(),
-        (new FeedItem)->prunable()->pluck('id')
-    );
-    static::assertNotContains(
-        $readNotPrunableFeedItemIds->merge($unreadNotPrunableFeedItemIds)->values()->sort(),
-        (new FeedItem)->prunable()->pluck('id')
-    );
+    expect((new FeedItem)->prunable()->pluck('id'))->toEqual($readPrunableFeedItemIds->merge($unreadPrunableFeedItemIds)->values()->sort())
+        ->and((new FeedItem)->prunable()->pluck('id'))->not->toContain($readNotPrunableFeedItemIds->merge($unreadNotPrunableFeedItemIds)->values()->sort());
 
-    $this->artisan('model:prune')
+    artisan('model:prune')
         ->assertExitCode(Command::SUCCESS);
 
-    static::assertEquals(
-        $readNotPrunableFeedItemIds->merge($unreadNotPrunableFeedItemIds)->values()->sort(),
-        FeedItem::orderBy('id')->pluck('id')
-    );
+    expect(FeedItem::orderBy('id')->pluck('id'))
+        ->toEqual($readNotPrunableFeedItemIds->merge($unreadNotPrunableFeedItemIds)->values()->sort());
 });

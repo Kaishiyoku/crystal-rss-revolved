@@ -11,7 +11,7 @@ test('category belongs to user', function () {
     $user = User::factory()->create();
     $category = Category::factory()->for($user)->create();
 
-    static::assertSame($user->id, $category->user->id);
+    expect($category->user->id)->toBe($user->id);
 });
 
 test('category has feeds', function () {
@@ -19,8 +19,5 @@ test('category has feeds', function () {
     $category = Category::factory()->for($user)->create();
     $feeds = Feed::factory(5)->for($user)->for($category)->create();
 
-    static::assertEquals(
-        $feeds->sortBy('name')->pluck('id'),
-        $category->feeds()->pluck('id'),
-    );
+    expect($category->feeds()->pluck('id'))->toEqual($feeds->sortBy('name')->pluck('id'));
 });

@@ -6,18 +6,21 @@ use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
 
+use function Pest\Laravel\actingAs;
+use function Pest\Laravel\get;
+use function Pest\Laravel\post;
+
 uses(RefreshDatabase::class);
 
 test('login screen can be rendered', function () {
-    $response = $this->get('/login');
-
-    $response->assertStatus(200);
+    get('/login')
+        ->assertOk();
 });
 
 test('users can authenticate using the login screen', function () {
     $user = User::factory()->create();
 
-    $response = $this->post('/login', [
+    $response = post('/login', [
         'email' => $user->email,
         'password' => 'password',
     ]);
@@ -29,7 +32,7 @@ test('users can authenticate using the login screen', function () {
 test('users can not authenticate with invalid password', function () {
     $user = User::factory()->create();
 
-    $this->post('/login', [
+    post('/login', [
         'email' => $user->email,
         'password' => 'wrong-password',
     ]);
@@ -38,9 +41,9 @@ test('users can not authenticate with invalid password', function () {
 });
 
 test('users can logout', function () {
-    $this->actingAs(User::factory()->create());
+    actingAs(User::factory()->create());
 
-    $this->post('/logout');
+    post('/logout');
 
     $this->assertGuest();
 });
@@ -51,7 +54,7 @@ test('user exceeds rate limiting', function () {
     $user = User::factory()->create();
 
     collect(range(0, 5))->each(function (int $index) use ($user) {
-        $response = $this->post('/login', [
+        $response = post('/login', [
             'email' => $user->email,
             'password' => 'wrong-password',
         ]);
@@ -66,9 +69,9 @@ test('user exceeds rate limiting', function () {
 });
 
 test('redirect if authenticated', function () {
-    $this->actingAs(User::factory()->create());
+    actingAs(User::factory()->create());
 
-    $response = $this->get('/register');
+    $response = get('/register');
 
     $response->assertRedirect(AppServiceProvider::HOME);
 });

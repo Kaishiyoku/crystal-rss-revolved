@@ -7,6 +7,12 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Arr;
 use Inertia\Testing\AssertableInertia as Assert;
 
+use function Pest\Laravel\actingAs;
+use function Pest\Laravel\delete;
+use function Pest\Laravel\get;
+use function Pest\Laravel\post;
+use function Pest\Laravel\put;
+
 uses(RefreshDatabase::class);
 
 test('middleware is registered', function () {
@@ -22,16 +28,16 @@ test('middleware is registered', function () {
         'can:delete,category',
     ];
 
-    static::assertCount(5, $middleware);
-    static::assertSame($expectedMiddleware, $middleware);
+    expect($middleware)->toHaveCount(5)
+        ->and($middleware)->toBe($expectedMiddleware);
 });
 
 test('index', function () {
-    $this->actingAs($user = User::factory()->create());
+    actingAs($user = User::factory()->create());
 
     Category::factory()->for($user)->create();
 
-    $this->get(route('categories.index'))
+    get(route('categories.index'))
         ->assertInertia(fn (Assert $page) => $page
             ->component('Categories/Index')
             ->count('categories', 1)
@@ -40,66 +46,65 @@ test('index', function () {
 });
 
 test('cannot access index as guest', function () {
-    $response = $this->get(route('categories.index'));
-
-    $response->assertRedirect('/login');
+    get(route('categories.index'))
+        ->assertRedirect('/login');
 });
 
 test('create', function () {
-    $this->actingAs(User::factory()->create());
+    actingAs(User::factory()->create());
 
-    $this->get(route('categories.create'))
+    get(route('categories.create'))
         ->assertInertia(fn (Assert $page) => $page
             ->has('category')
         );
 });
 
 test('store', function () {
-    $this->actingAs($user = User::factory()->create());
+    actingAs($user = User::factory()->create());
 
     $expectedName = 'Test';
 
     // here we test if the unique rule is only applied to a specific user's categories
     Category::factory()->state(['name' => $expectedName]);
 
-    $response = $this->post(route('categories.store'), ['name' => $expectedName]);
+    $response = post(route('categories.store'), ['name' => $expectedName]);
 
     $response->assertRedirect(route('categories.index'));
-    static::assertSame(1, $user->categories()->count());
-    static::assertSame($user->id, $user->categories()->first()->user_id);
-    static::assertSame($expectedName, $user->categories()->first()->name);
+    expect($user->categories()->count())->toBe(1)
+        ->and($user->categories()->first()->user_id)->toBe($user->id)
+        ->and($user->categories()->first()->name)->toBe($expectedName);
 });
 
 test('store validation fails due to duplicate name', function () {
-    $this->actingAs($user = User::factory()->has(Category::factory()->state(['name' => 'Test']))->create());
+    actingAs($user = User::factory()->has(Category::factory()->state(['name' => 'Test']))->create());
 
     $expectedName = 'Test';
 
-    $this->get(route('categories.create'));
-    $response = $this->post(route('categories.store'), ['name' => $expectedName]);
+    get(route('categories.create'));
+    $response = post(route('categories.store'), ['name' => $expectedName]);
 
     $response->assertRedirect(route('categories.create'));
     $response->assertSessionHasErrors(['name' => 'The Name has already been taken.']);
-    static::assertSame(1, $user->categories()->count());
+    expect($user->categories()->count())->toBe(1);
 });
 
 test('store validation fails due to missing data', function () {
-    $this->actingAs($user = User::factory()->create());
+    actingAs($user = User::factory()->create());
 
-    $this->get(route('categories.create'));
-    $response = $this->post(route('categories.store'), ['name' => ' ']);
+    get(route('categories.create'));
+    $response = post(route('categories.store'), ['name' => ' ']);
 
     $response->assertRedirect(route('categories.create'));
     $response->assertSessionHasErrors(['name' => 'The Name field is required.']);
-    static::assertSame(0, $user->categories()->count());
+    expect($user->categories()->count())->toBe(0);
 });
 
 test('edit', function () {
-    $this->actingAs($user = User::factory()->create());
+    actingAs($user = User::factory()->create());
 
     $category = Category::factory()->for($user)->create();
 
-    $this->get(route('categories.edit', $category))
+    get(route('categories.edit', $category))
         ->assertInertia(fn (Assert $page) => $page
             ->has('category')
             ->where('canDelete', true)
@@ -107,16 +112,16 @@ test('edit', function () {
 });
 
 test('cannot edit category of another user', function () {
-    $this->actingAs(User::factory()->create());
+    actingAs(User::factory()->create());
 
     $category = Category::factory()->create();
 
-    $this->get(route('categories.edit', $category))
+    get(route('categories.edit', $category))
         ->assertForbidden();
 });
 
 test('update', function () {
-    $this->actingAs($user = User::factory()->create());
+    actingAs($user = User::factory()->create());
 
     $category = Category::factory()->for($user)->create();
 
@@ -125,54 +130,54 @@ test('update', function () {
     // here we test if the unique rule is only applied to a specific user's categories
     Category::factory()->state(['name' => $expectedName]);
 
-    $response = $this->put(route('categories.update', $category), ['name' => $expectedName]);
+    $response = put(route('categories.update', $category), ['name' => $expectedName]);
 
     $response->assertRedirect(route('categories.index'));
-    static::assertSame($user->id, $user->categories()->first()->user_id);
-    static::assertSame($expectedName, $user->categories()->first()->name);
+    expect($user->categories()->first()->user_id)->toBe($user->id)
+        ->and($user->categories()->first()->name)->toBe($expectedName);
 });
 
 test('cannot update category of another user', function () {
-    $this->actingAs(User::factory()->create());
+    actingAs(User::factory()->create());
 
     $category = Category::factory()->create();
 
-    $this->put(route('categories.update', $category), ['name' => 'Test (updated)'])
+    put(route('categories.update', $category), ['name' => 'Test (updated)'])
         ->assertForbidden();
 });
 
 test('cannot update category due to duplicate name', function () {
-    $this->actingAs($user = User::factory()->create());
+    actingAs($user = User::factory()->create());
 
     Category::factory()->state(['name' => 'Test 1'])->for($user)->create();
     $category = Category::factory()->state(['name' => 'Test 2'])->for($user)->create();
 
-    $this->get(route('categories.edit', $category));
+    get(route('categories.edit', $category));
 
-    $response = $this->put(route('categories.update', $category), ['name' => 'Test 1']);
+    $response = put(route('categories.update', $category), ['name' => 'Test 1']);
 
     $response->assertRedirect(route('categories.edit', $category));
     $response->assertSessionHasErrors(['name' => 'The Name has already been taken.']);
 });
 
 test('delete', function () {
-    $this->actingAs($user = User::factory()->create());
+    actingAs($user = User::factory()->create());
 
     $category = Category::factory()->for($user)->create();
 
-    $response = $this->delete(route('categories.destroy', $category));
+    $response = delete(route('categories.destroy', $category));
 
     $response->assertRedirect(route('categories.index'));
-    static::assertSame(0, $user->categories()->count());
+    expect($user->categories()->count())->toBe(0);
 });
 
 test('cannot delete category of another user', function () {
-    $this->actingAs(User::factory()->create());
+    actingAs(User::factory()->create());
 
     $category = Category::factory()->create();
 
-    $this->delete(route('categories.destroy', $category))
+    delete(route('categories.destroy', $category))
         ->assertForbidden();
 
-    static::assertSame(1, Category::count());
+    expect(Category::count())->toBe(1);
 });

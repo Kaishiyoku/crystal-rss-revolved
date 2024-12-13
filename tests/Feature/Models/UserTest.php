@@ -11,17 +11,14 @@ test('verified scope', function () {
     $verifiedUserIds = User::factory(5)->create()->pluck('id');
     User::factory(5)->unverified()->create()->pluck('id');
 
-    static::assertEquals($verifiedUserIds, User::verified()->pluck('id'));
+    expect(User::verified()->pluck('id'))->toEqual($verifiedUserIds);
 });
 
 test('user has categories', function () {
     $user = User::factory()->create();
     $categories = Category::factory(2)->for($user)->create();
 
-    static::assertEquals(
-        $categories->sortBy('name')->pluck('id'),
-        $user->categories()->pluck('id')
-    );
+    expect($user->categories()->pluck('id'))->toEqual($categories->sortBy('name')->pluck('id'));
 });
 
 test('user has feeds', function () {
@@ -29,8 +26,5 @@ test('user has feeds', function () {
     $category = Category::factory()->for($user)->create();
     $feeds = Feed::factory(5)->for($user)->for($category)->create();
 
-    static::assertEquals(
-        $feeds->sortBy('name')->pluck('id'),
-        $user->feeds()->pluck('id')
-    );
+    expect($user->feeds()->pluck('id'))->toEqual($feeds->sortBy('name')->pluck('id'));
 });
