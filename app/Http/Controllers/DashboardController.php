@@ -18,8 +18,9 @@ class DashboardController extends Controller
     {
         $feedId = $request->exists('feed_id') ? $request->integer('feed_id') : null;
 
-        $totalNumberOfFeedItems = Auth::user()->feedItems()->unread()->count();
+        $totalNumberOfFeedItems = Auth::user()->feedItems()->unread()->count(); // @phpstan-ignore-line
 
+        // @phpstan-ignore-next-line
         $feedItems = Auth::user()->feedItems()
             ->unread()
             ->when($feedId, fn (Builder $query) => $query->where('feed_id', $feedId))

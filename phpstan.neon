@@ -10,9 +10,10 @@ parameters:
     level: 6
 
     ignoreErrors:
+        -
+            identifier: missingType.generics
         - '#^Method [a-zA-Z0-9\\_]+\:\:rules\(\) return type has no value type specified in iterable type array\.$#'
 #
 #    excludePaths:
 #        - ./*/*/FileToBeExcluded.php
 #
-    checkGenericClassInNonGenericObjectType: false

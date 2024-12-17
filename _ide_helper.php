@@ -11862,8 +11862,8 @@ namespace Illuminate\Support\Facades {
          * 
          * You should only list the reverse proxies that you manage directly.
          *
-         * @param array $proxies A list of trusted proxies, the string 'REMOTE_ADDR' will be replaced with $_SERVER['REMOTE_ADDR']
-         * @param int $trustedHeaderSet A bit field of Request::HEADER_*, to set which headers to trust from your proxies
+         * @param array $proxies A list of trusted proxies, the string 'REMOTE_ADDR' will be replaced with $_SERVER['REMOTE_ADDR'] and 'PRIVATE_SUBNETS' by IpUtils::PRIVATE_SUBNETS
+         * @param \Symfony\Component\HttpFoundation\int-mask-of<Request::HEADER_*> $trustedHeaderSet A bit field to set which headers to trust from your proxies
          * @static 
          */        public static function setTrustedProxies($proxies, $trustedHeaderSet)
         {            //Method inherited from \Symfony\Component\HttpFoundation\Request         
@@ -14486,6 +14486,16 @@ namespace Illuminate\Support\Facades {
          */        public static function inertia($uri, $component, $props = [])
         {
                         return \Illuminate\Routing\Router::inertia($uri, $component, $props);
+        }
+                    /**
+         * 
+         *
+         * @see \LaravelLang\Routes\ServiceProvider::registerGroup()
+         * @param \Closure $callback
+         * @static 
+         */        public static function localizedGroup($callback)
+        {
+                        return \Illuminate\Routing\Router::localizedGroup($callback);
         }
             }
             /**
@@ -20040,6 +20050,16 @@ namespace Spatie\LaravelIgnition\Facades {
                     /**
          * 
          *
+         * @param \Spatie\FlareClient\class-string $exceptionClass
+         * @static 
+         */        public static function overrideGrouping($exceptionClass, $type = 'exception_message_and_class')
+        {
+                        /** @var \Spatie\FlareClient\Flare $instance */
+                        return $instance->overrideGrouping($exceptionClass, $type);
+        }
+                    /**
+         * 
+         *
          * @static 
          */        public static function version()
         {
@@ -20418,6 +20438,16 @@ namespace Illuminate\Routing {
          */        public static function inertia($uri, $component, $props = [])
         {
                         return \Illuminate\Routing\Router::inertia($uri, $component, $props);
+        }
+                    /**
+         * 
+         *
+         * @see \LaravelLang\Routes\ServiceProvider::registerGroup()
+         * @param \Closure $callback
+         * @static 
+         */        public static function localizedGroup($callback)
+        {
+                        return \Illuminate\Routing\Router::localizedGroup($callback);
         }
             }
             /**

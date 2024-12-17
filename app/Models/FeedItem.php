@@ -11,6 +11,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Str;
 
 /**
+ * 
+ *
  * @property int $id
  * @property int $feed_id
  * @property string $checksum
@@ -26,7 +28,6 @@ use Illuminate\Support\Str;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Feed $feed
  * @property-read bool $has_image
- *
  * @method static \Database\Factories\FeedItemFactory factory($count = null, $state = [])
  * @method static Builder<static>|FeedItem newModelQuery()
  * @method static Builder<static>|FeedItem newQuery()
@@ -46,7 +47,6 @@ use Illuminate\Support\Str;
  * @method static Builder<static>|FeedItem whereTitle($value)
  * @method static Builder<static>|FeedItem whereUpdatedAt($value)
  * @method static Builder<static>|FeedItem whereUrl($value)
- *
  * @mixin \Eloquent
  */
 class FeedItem extends Model
@@ -56,7 +56,7 @@ class FeedItem extends Model
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<int, string>
+     * @var list<string>
      */
     protected $fillable = [
         'checksum',
@@ -73,7 +73,7 @@ class FeedItem extends Model
     /**
      * The accessors to append to the model's array form.
      *
-     * @var array<int, string>
+     * @var list<string>
      */
     protected $appends = [
         'has_image',

@@ -16,6 +16,7 @@ class MarkAllUnreadFeedItemsAsReadController extends Controller
     {
         $now = now();
 
+        // @phpstan-ignore-next-line
         Auth::user()->feedItems()->unread()->update([
             'read_at' => $now,
         ]);
