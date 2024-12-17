@@ -10,6 +10,11 @@ jobs:
   laravel-tests:
 
     runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        php-versions: [8.2, 8.3]
+
+    name: Tests (PHP ${{ matrix.php-versions }})
 
     services:
       mysql:
@@ -33,7 +38,7 @@ jobs:
     - name: Setup PHP with Xdebug
       uses: shivammathur/setup-php@v2
       with:
-        php-version: 8.2
+        php-version: ${{ matrix.php-versions }}
         coverage: xdebug
 
     - name: Copy .env
