@@ -1,5 +1,4 @@
-import {route as routeFn} from 'ziggy-js';
-import {Config as ZiggyConfig} from 'ziggy-js';
+import {route as routeFn, Config as ZiggyConfig} from 'ziggy-js';
 import {KyInstance} from 'ky';
 
 declare global {
