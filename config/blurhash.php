@@ -2,8 +2,8 @@
 
 return [
 
-    'width' => env('BLURHASH_WIDTH', 4),
+    'width' => (int) env('BLURHASH_WIDTH', 4),
 
-    'height' => env('BLURHASH_HEIGHT', 3),
+    'height' => (int) env('BLURHASH_HEIGHT', 3),
 
 ];

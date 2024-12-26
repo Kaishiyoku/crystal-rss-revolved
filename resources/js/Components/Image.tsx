@@ -5,9 +5,6 @@ import clsx from 'clsx';
 import {decode} from 'blurhash';
 
 export function ImageWithBlurHash({blurHash, src, className, ...props}: { blurHash: string | null; } & Omit<ComponentPropsWithoutRef<'img'>, 'loading'>) {
-    const blurHashWidth = import.meta.env.VITE_BLURHASH_WIDTH;
-    const blurHashHeight = import.meta.env.VITE_BLURHASH_HEIGHT;
-
     return (
         <div className={twMerge('relative flex items-center overflow-hidden', className)}>
             <img
@@ -19,7 +16,7 @@ export function ImageWithBlurHash({blurHash, src, className, ...props}: { blurHa
             />
 
             {blurHash
-                ? <BlurhashCanvas hash={blurHash} width={blurHashWidth} height={blurHashHeight} className="!absolute !w-full !h-full"/>
+                ? <BlurhashCanvas hash={blurHash} className="!absolute !w-full !h-full"/>
                 : <div className="absolute size-full blur-xl" style={{backgroundImage: `url(${src})`}}/>}
         </div>
     );
@@ -46,8 +43,11 @@ export function ImagePlaceholder({colorIndex = 0, className}: { colorIndex?: num
     );
 }
 
-function BlurhashCanvas({hash, width, height, punch = 1, ...props}: { hash: string; width: number; height: number; punch?: number; } & CanvasHTMLAttributes<HTMLCanvasElement>) {
+function BlurhashCanvas({hash, punch = 1, ...props}: { hash: string; punch?: number; } & CanvasHTMLAttributes<HTMLCanvasElement>) {
     const canvasElement = useRef<HTMLCanvasElement>(null);
+
+    const width = Number(import.meta.env.VITE_BLURHASH_WIDTH);
+    const height = Number(import.meta.env.VITE_BLURHASH_HEIGHT);
 
     const draw = () => {
         if (!canvasElement.current) {
