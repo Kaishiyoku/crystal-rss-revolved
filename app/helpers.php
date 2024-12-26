@@ -52,7 +52,11 @@ if (! function_exists('generateBlurHashByUrl')) {
                 $pixels[] = $row;
             }
 
-            return Blurhash::encode($pixels, 4, 3);
+            return Blurhash::encode(
+                image: $pixels,
+                components_x: config('blurhash.width'),
+                components_y: config('blurhash.height'),
+            );
         } catch (Exception) {
             Log::warning("Couldn't generate blur hash for image {$imageUrl}");
 

@@ -5,6 +5,9 @@ import clsx from 'clsx';
 import {decode} from 'blurhash';
 
 export function ImageWithBlurHash({blurHash, src, className, ...props}: { blurHash: string | null; } & Omit<ComponentPropsWithoutRef<'img'>, 'loading'>) {
+    const blurHashWidth = import.meta.env.VITE_BLURHASH_WIDTH;
+    const blurHashHeight = import.meta.env.VITE_BLURHASH_HEIGHT;
+
     return (
         <div className={twMerge('relative flex items-center overflow-hidden', className)}>
             <img
@@ -16,7 +19,7 @@ export function ImageWithBlurHash({blurHash, src, className, ...props}: { blurHa
             />
 
             {blurHash
-                ? <BlurhashCanvas hash={blurHash} width={4} height={3} className="!absolute !w-full !h-full"/>
+                ? <BlurhashCanvas hash={blurHash} width={blurHashWidth} height={blurHashHeight} className="!absolute !w-full !h-full"/>
                 : <div className="absolute size-full blur-xl" style={{backgroundImage: `url(${src})`}}/>}
         </div>
     );
