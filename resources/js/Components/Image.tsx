@@ -2,7 +2,7 @@ import React, {CanvasHTMLAttributes, ComponentPropsWithoutRef, useEffect, useRef
 import {twMerge} from 'tailwind-merge';
 import {PhotoIcon} from '@heroicons/react/24/solid';
 import clsx from 'clsx';
-import {decode} from 'blurhash';
+import {isBlurhashValid, decode} from 'blurhash';
 
 export function ImageWithBlurHash({blurHash, src, className, ...props}: { blurHash: string | null; } & Omit<ComponentPropsWithoutRef<'img'>, 'loading'>) {
     return (
@@ -15,7 +15,7 @@ export function ImageWithBlurHash({blurHash, src, className, ...props}: { blurHa
                 alt=""
             />
 
-            {blurHash
+            {blurHash && isBlurhashValid(blurHash)
                 ? <BlurhashCanvas hash={blurHash} className="!absolute !w-full !h-full"/>
                 : <div className="absolute size-full blur-xl" style={{backgroundImage: `url(${src})`}}/>}
         </div>
