@@ -1,8 +1,8 @@
-import {BlurhashCanvas} from 'react-blurhash';
-import React, {ComponentPropsWithoutRef} from 'react';
+import React, {CanvasHTMLAttributes, ComponentPropsWithoutRef, useEffect, useRef} from 'react';
 import {twMerge} from 'tailwind-merge';
 import {PhotoIcon} from '@heroicons/react/24/solid';
 import clsx from 'clsx';
+import {decode} from 'blurhash';
 
 export function ImageWithBlurHash({blurHash, src, className, ...props}: { blurHash: string | null; } & Omit<ComponentPropsWithoutRef<'img'>, 'loading'>) {
     return (
@@ -12,10 +12,11 @@ export function ImageWithBlurHash({blurHash, src, className, ...props}: { blurHa
                 loading="lazy"
                 src={src}
                 className="z-10 object-contain w-full"
+                alt=""
             />
 
             {blurHash
-                ? <BlurhashCanvas hash={blurHash} className="absolute w-full h-full"/>
+                ? <BlurhashCanvas hash={blurHash} width={4} height={3} className="!absolute !w-full !h-full"/>
                 : <div className="absolute size-full blur-xl" style={{backgroundImage: `url(${src})`}}/>}
         </div>
     );
@@ -39,5 +40,40 @@ export function ImagePlaceholder({colorIndex = 0, className}: { colorIndex?: num
         <div className={classes}>
             <PhotoIcon className="h-full text-white mix-blend-soft-light"/>
         </div>
+    );
+}
+
+function BlurhashCanvas({hash, width, height, punch = 1, ...props}: { hash: string; width: number; height: number; punch?: number; } & CanvasHTMLAttributes<HTMLCanvasElement>) {
+    const canvasElement = useRef<HTMLCanvasElement>(null);
+
+    const draw = () => {
+        if (!canvasElement.current) {
+            return;
+        }
+
+        const pixels = decode(hash, width, height, punch);
+
+        const ctx = canvasElement.current.getContext('2d');
+
+        if (!ctx) {
+            return;
+        }
+
+        const imageData = ctx.createImageData(width, height);
+        imageData.data.set(pixels);
+        ctx.putImageData(imageData, 0, 0);
+    };
+
+    useEffect(() => {
+        draw();
+    }, [hash]);
+
+    return (
+        <canvas
+            ref={canvasElement}
+            width={width}
+            height={height}
+            {...props}
+        />
     );
 }
