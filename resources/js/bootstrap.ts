@@ -2,6 +2,10 @@ import ky from 'ky';
 import NProgress from 'nprogress';
 import Cookies from 'js-cookie';
 
+NProgress.configure({
+    showSpinner: false,
+});
+
 window.ky = ky.extend({
     headers: {
         Accept: 'application/json',
