@@ -115,7 +115,7 @@ export default function Navigation({user, selectedFeedId, unreadFeeds, children}
                                         <SidebarItem
                                             key={unreadFeed.id}
                                             href={`${route('dashboard')}?feed_id=${unreadFeed.id}`}
-                                            title={unreadFeed.name}
+                                            title={`${unreadFeed.name} (${unreadFeed.feed_items_count})`}
                                             current={selectedFeedId === unreadFeed.id}
                                         >
                                             {unreadFeed.favicon_url
@@ -123,7 +123,13 @@ export default function Navigation({user, selectedFeedId, unreadFeeds, children}
                                                 : <RssIcon/>}
 
                                             <SidebarLabel>
-                                                {unreadFeed.name}
+                                                <span>
+                                                    {unreadFeed.name}
+                                                </span>
+
+                                                <span className="ml-2 text-xs text-muted">
+                                                    {unreadFeed.feed_items_count}
+                                                </span>
                                             </SidebarLabel>
                                         </SidebarItem>
                                     ))}
