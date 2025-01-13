@@ -79,7 +79,7 @@ export default function FeedItemCard({hueRotationIndex, feedItem}: { hueRotation
                     </div>
                 </div>
 
-                <div className="flex flex-col min-w-0">
+                <div className="flex flex-col min-w-0 w-full">
                     <a href={internalFeedItem.url} className="inline-block mb-2 text-lg link-blue hyphens-auto break-words" lang={internalFeedItem.feed.language}>
                         {internalFeedItem.title}
                     </a>
