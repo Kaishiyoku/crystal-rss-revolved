@@ -12,7 +12,7 @@ export default function Login({status, canResetPassword}: { status: string; canR
     const {data, setData, post, processing, errors, reset} = useForm({
         email: '',
         password: '',
-        remember: false,
+        remember: false as boolean,
     });
 
     useEffect(() => {
