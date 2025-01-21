@@ -8,6 +8,7 @@ import {RouteParams} from 'ziggy-js';
 import {CalendarDaysIcon, EyeIcon, EyeSlashIcon, RssIcon} from '@heroicons/react/20/solid';
 import {ImagePlaceholder, ImageWithBlurHash} from '@/Components/Image';
 import {FeedItem} from '@/types/generated/models';
+import {Link} from '@/Components/Link';
 
 export default function FeedItemCard({hueRotationIndex, feedItem}: { hueRotationIndex: number; feedItem: FeedItem; }) {
     const {t} = useLaravelReactI18n();
@@ -80,9 +81,15 @@ export default function FeedItemCard({hueRotationIndex, feedItem}: { hueRotation
                 </div>
 
                 <div className="flex flex-col min-w-0 w-full">
-                    <a href={internalFeedItem.url} className="inline-block mb-2 text-lg link-blue hyphens-auto break-words" lang={internalFeedItem.feed.language}>
+                    <Link
+                        href={internalFeedItem.url}
+                        color="blue"
+                        className="inline-block mb-2 text-lg link-blue hyphens-auto break-words"
+                        hover
+                        external
+                    >
                         {internalFeedItem.title}
-                    </a>
+                    </Link>
 
                     {internalFeedItem.description && (
                         <div className="grow">
