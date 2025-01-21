@@ -92,7 +92,7 @@ export default function FeedItemCard({hueRotationIndex, feedItem}: { hueRotation
                         </div>
                     )}
 
-                    <div className="pt-4">
+                    <div className="flex flex-col items-end pt-4">
                         <Button
                             onClick={toggle}
                             disabled={processing}
