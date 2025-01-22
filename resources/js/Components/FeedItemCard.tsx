@@ -38,7 +38,7 @@ export default function FeedItemCard({hueRotationIndex, feedItem}: { hueRotation
             key={internalFeedItem.id}
             className={clsx('@container p-4 ring-1 ring-zinc-950/10 dark:ring-zinc-50/10 rounded-lg shadow-md dark:shadow-black/25 transition ease-out duration-300', {'opacity-50': internalFeedItem.read_at})}
         >
-            <div className="flex flex-col @md:flex-row">
+            <div className="flex flex-col @md:flex-row h-full">
                 <div className="flex flex-col grow-0 mb-4 @md:mb-0 @md:mr-4">
                     <div className="pb-4">
                         {internalFeedItem.has_image && internalFeedItem.image_url
@@ -80,7 +80,7 @@ export default function FeedItemCard({hueRotationIndex, feedItem}: { hueRotation
                     </div>
                 </div>
 
-                <div className="flex flex-col min-w-0 w-full">
+                <div className="grow flex flex-col min-w-0 w-full">
                     <Link
                         href={internalFeedItem.url}
                         color="blue"
@@ -99,7 +99,7 @@ export default function FeedItemCard({hueRotationIndex, feedItem}: { hueRotation
                         </div>
                     )}
 
-                    <div className="flex flex-col items-end pt-4">
+                    <div className="flex flex-col items-start lg:items-end pt-4">
                         <Button
                             onClick={toggle}
                             disabled={processing}
