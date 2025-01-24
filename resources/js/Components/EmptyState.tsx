@@ -4,7 +4,7 @@ export function EmptyState({icon: Icon, message, description, children}: { icon:
     return (
         <div className="flex flex-col items-center">
             <div className="flex flex-col items-center max-w-sm">
-                <Icon className="size-14 text-gray-400"/>
+                <Icon className="size-14 text-zinc-400"/>
 
                 <h3 className="mt-2 font-semibold text-lg text-center">{message}</h3>
 

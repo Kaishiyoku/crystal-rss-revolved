@@ -78,13 +78,13 @@ export default function UpdateProfileInformation({mustVerifyEmail, status, class
 
                     {mustVerifyEmail && user.email_verified_at === null && (
                         <div>
-                            <p className="text-sm mt-2 text-gray-800 dark:text-gray-200">
+                            <p className="text-sm mt-2 text-zinc-800 dark:text-zinc-200">
                                 {t('Your email address is unverified.')}
                                 <Link
                                     href={route('verification.send')}
                                     method="post"
                                     as="button"
-                                    className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-offset-gray-800"
+                                    className="underline text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 rounded-md focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-offset-zinc-800"
                                 >
                                     {t('Click here to re-send the verification email.')}
                                 </Link>
@@ -110,7 +110,7 @@ export default function UpdateProfileInformation({mustVerifyEmail, status, class
                             leave="transition ease-in-out"
                             leaveTo="opacity-0"
                         >
-                            <p className="text-sm text-gray-600 dark:text-gray-400">{t('Saved.')}</p>
+                            <p className="text-sm text-zinc-600 dark:text-zinc-400">{t('Saved.')}</p>
                         </Transition>
                     </div>
                 </FieldGroup>

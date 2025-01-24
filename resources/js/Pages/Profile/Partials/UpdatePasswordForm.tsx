@@ -41,9 +41,9 @@ export default function UpdatePasswordForm({className = ''}: { className?: strin
     return (
         <section className={className}>
             <header>
-                <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">{t('Update Password')}</h2>
+                <h2 className="text-lg font-medium text-zinc-900 dark:text-zinc-100">{t('Update Password')}</h2>
 
-                <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
                     {t('Ensure your account is using a long, random password to stay secure.')}
                 </p>
             </header>
@@ -115,7 +115,7 @@ export default function UpdatePasswordForm({className = ''}: { className?: strin
                             leave="transition ease-in-out"
                             leaveTo="opacity-0"
                         >
-                            <p className="text-sm text-gray-600 dark:text-gray-400">{t('Saved.')}</p>
+                            <p className="text-sm text-zinc-600 dark:text-zinc-400">{t('Saved.')}</p>
                         </Transition>
                     </div>
                 </FieldGroup>
