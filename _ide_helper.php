@@ -4741,9 +4741,9 @@ namespace Illuminate\Support\Facades {
          *
          * @template TCacheValue
          * @param string $key
-         * @param \Illuminate\Cache\array{  0: \DateTimeInterface|\DateInterval|int, 1: \DateTimeInterface|\DateInterval|int }  $ttl
+         * @param array{ 0: \DateTimeInterface|\DateInterval|int, 1: \DateTimeInterface|\DateInterval|int } $ttl
          * @param (callable(): TCacheValue) $callback
-         * @param \Illuminate\Cache\array{  seconds?: int, owner?: string }|null  $lock
+         * @param array{ seconds?: int, owner?: string }|null $lock
          * @return TCacheValue 
          * @static 
          */
@@ -14214,7 +14214,7 @@ namespace Illuminate\Support\Facades {
          * 
          *
          * @internal 
-         * @param \Symfony\Component\HttpFoundation\callable():  SessionInterface $factory
+         * @param callable():  SessionInterface $factory
          * @static 
          */
         public static function setSessionFactory($factory)
@@ -21874,7 +21874,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Set the prefetching strategy.
          *
-         * @param \Illuminate\Foundation\'waterfall'|\Illuminate\Foundation\'aggressive'|null $strategy
+         * @param 'waterfall'|'aggressive'|null $strategy
          * @param array $config
          * @return \Illuminate\Foundation\Vite 
          * @static 
@@ -22353,7 +22353,7 @@ namespace Barryvdh\Debugbar\Facades {
         /**
          * Returns an array of all data collectors
          *
-         * @return \DebugBar\array[DataCollectorInterface] 
+         * @return array[DataCollectorInterface] 
          * @static 
          */
         public static function getCollectors()
@@ -23037,7 +23037,7 @@ namespace Laravel\Pulse\Facades {
          * Resolve the users' details using the given closure.
          *
          * @deprecated 
-         * @param \Laravel\Pulse\callable(\Illuminate\Support\Collection<int, mixed>):  ?iterable<int|string, array{name: string, email?: ?string, avatar?: ?string, extra?: ?string}>  $callback
+         * @param callable(\Illuminate\Support\Collection<int, mixed>):  ?iterable<int|string, array{name: string, email?: ?string, avatar?: ?string, extra?: ?string}>  $callback
          * @static 
          */
         public static function users($callback)
@@ -23049,7 +23049,7 @@ namespace Laravel\Pulse\Facades {
         /**
          * Resolve the user's details using the given closure.
          *
-         * @param \Laravel\Pulse\callable(\Illuminate\Contracts\Auth\Authenticatable):  array{name: string, email?: ?string, avatar?: ?string, extra?: ?string}  $callback
+         * @param callable(\Illuminate\Contracts\Auth\Authenticatable):  array{name: string, email?: ?string, avatar?: ?string, extra?: ?string}  $callback
          * @static 
          */
         public static function user($callback)
@@ -23061,7 +23061,7 @@ namespace Laravel\Pulse\Facades {
         /**
          * Get the authenticated user ID resolver.
          *
-         * @return \Laravel\Pulse\callable(): (int|string|null)
+         * @return callable(): (int|string|null)
          * @static 
          */
         public static function authenticatedUserIdResolver()
@@ -25394,7 +25394,7 @@ namespace  {
          * Chunk the results of the query.
          *
          * @param int $count
-         * @param \Illuminate\Database\Eloquent\callable(\Illuminate\Support\Collection<int, TValue>, int):  mixed  $callback
+         * @param callable(\Illuminate\Support\Collection<int, TValue>, int):  mixed  $callback
          * @return bool 
          * @static 
          */
@@ -25408,7 +25408,7 @@ namespace  {
          * Run a map over each item while chunking.
          *
          * @template TReturn
-         * @param \Illuminate\Database\Eloquent\callable(TValue):  TReturn  $callback
+         * @param callable(TValue):  TReturn  $callback
          * @param int $count
          * @return \Illuminate\Support\Collection<int, TReturn> 
          * @static 
@@ -25422,7 +25422,7 @@ namespace  {
         /**
          * Execute a callback over each item while chunking.
          *
-         * @param \Illuminate\Database\Eloquent\callable(TValue, int):  mixed  $callback
+         * @param callable(TValue, int):  mixed  $callback
          * @param int $count
          * @return bool 
          * @throws \RuntimeException
@@ -25438,7 +25438,7 @@ namespace  {
          * Chunk the results of a query by comparing IDs.
          *
          * @param int $count
-         * @param \Illuminate\Database\Eloquent\callable(\Illuminate\Support\Collection<int, TValue>, int):  mixed  $callback
+         * @param callable(\Illuminate\Support\Collection<int, TValue>, int):  mixed  $callback
          * @param string|null $column
          * @param string|null $alias
          * @return bool 
@@ -25454,7 +25454,7 @@ namespace  {
          * Chunk the results of a query by comparing IDs in descending order.
          *
          * @param int $count
-         * @param \Illuminate\Database\Eloquent\callable(\Illuminate\Support\Collection<int, TValue>, int):  mixed  $callback
+         * @param callable(\Illuminate\Support\Collection<int, TValue>, int):  mixed  $callback
          * @param string|null $column
          * @param string|null $alias
          * @return bool 
@@ -25470,7 +25470,7 @@ namespace  {
          * Chunk the results of a query by comparing IDs in a given order.
          *
          * @param int $count
-         * @param \Illuminate\Database\Eloquent\callable(\Illuminate\Support\Collection<int, TValue>, int):  mixed  $callback
+         * @param callable(\Illuminate\Support\Collection<int, TValue>, int):  mixed  $callback
          * @param string|null $column
          * @param string|null $alias
          * @param bool $descending
@@ -25487,7 +25487,7 @@ namespace  {
         /**
          * Execute a callback over each item while chunking by ID.
          *
-         * @param \Illuminate\Database\Eloquent\callable(TValue, int):  mixed  $callback
+         * @param callable(TValue, int):  mixed  $callback
          * @param int $count
          * @param string|null $column
          * @param string|null $alias
@@ -25577,7 +25577,7 @@ namespace  {
         /**
          * Pass the query to a given callback.
          *
-         * @param \Illuminate\Database\Eloquent\callable($this):  mixed  $callback
+         * @param callable($this):  mixed  $callback
          * @return \Illuminate\Database\Eloquent\Builder<static> 
          * @static 
          */
