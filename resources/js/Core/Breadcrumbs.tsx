@@ -30,7 +30,7 @@ export default function Breadcrumbs({breadcrumbs}: { breadcrumbs?: Breadcrumb[];
                 </li>
             )
             : (
-                <li key={slug(breadcrumb.title)} className="font-semibold text-gray-800 dark:text-gray-300 leading-tight">
+                <li key={slug(breadcrumb.title)} className="font-semibold text-zinc-800 dark:text-zinc-300 leading-tight">
                     {breadcrumb.title}
                 </li>
             );
@@ -41,9 +41,9 @@ export default function Breadcrumbs({breadcrumbs}: { breadcrumbs?: Breadcrumb[];
 
         return [
             breadcrumbElement,
-            <li key={`${slug(breadcrumb.title)}-separator`} className="text-gray-300 dark:text-gray-500">
+            <li key={`${slug(breadcrumb.title)}-separator`} className="text-zinc-300 dark:text-zinc-500">
                 <svg
-                    className="h-5 w-5 flex-shrink-0 stroke-current"
+                    className="h-5 w-5 shrink-0 stroke-current"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 20 20"

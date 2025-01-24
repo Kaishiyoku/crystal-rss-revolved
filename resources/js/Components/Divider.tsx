@@ -21,7 +21,7 @@ export function DividerContainer({soft = false, className, ...props}: { soft?: b
             {...props}
             className={clsx(
                 className,
-                'divide-y [&>*]:py-8',
+                'divide-y *:py-8',
                 soft && 'divide-zinc-950/5 dark:divide-white/5',
                 !soft && 'divide-zinc-950/10 dark:divide-white/10'
             )}

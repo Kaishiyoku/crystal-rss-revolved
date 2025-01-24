@@ -33,7 +33,7 @@ export default function ConfirmPassword() {
         <GuestLayout>
             <Head title={t('Confirm Password')}/>
 
-            <div className="mb-4 text-sm text-gray-600 dark:text-gray-400">
+            <div className="mb-4 text-sm text-zinc-600 dark:text-zinc-400">
                 {t('This is a secure area of the application. Please confirm your password before continuing.')}
             </div>
 

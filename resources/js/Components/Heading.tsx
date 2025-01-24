@@ -27,7 +27,7 @@ export function Subheading({className, level = 2, ...props}: HeadingProps) {
 
 export function Description({children}: { children: ReactNode; }) {
     return (
-        <p className="mt-1 text-gray-600 dark:text-gray-400">
+        <p className="mt-1 text-zinc-600 dark:text-zinc-400">
             {children}
         </p>
     );

@@ -47,11 +47,11 @@ export default function FeedItemCard({hueRotationIndex, feedItem}: { hueRotation
                                     src={internalFeedItem.image_url}
                                     alt=""
                                     blurHash={internalFeedItem.blur_hash}
-                                    className="w-full @md:w-44 aspect-[3/2] rounded-lg"
+                                    className="w-full @md:w-44 aspect-3/2 rounded-lg"
                                 />
                             )
                             : (
-                                <ImagePlaceholder colorIndex={hueRotationIndex} className="w-full @md:w-44 aspect-[3/2] rounded-lg"/>
+                                <ImagePlaceholder colorIndex={hueRotationIndex} className="w-full @md:w-44 aspect-3/2 rounded-lg"/>
                             )}
                     </div>
 
