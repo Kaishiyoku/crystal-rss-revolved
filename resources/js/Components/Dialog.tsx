@@ -29,7 +29,7 @@ export function Dialog({open, onClose, afterLeave, size = 'lg', className, child
                     leaveTo="opacity-0"
                     afterLeave={afterLeave}
                 >
-                    <div className="fixed inset-0 z-50 flex w-screen justify-center overflow-y-auto bg-zinc-950/25 px-2 py-2 focus:outline-0 sm:px-6 sm:py-8 lg:px-8 lg:py-16 dark:bg-zinc-950/50 backdrop-blur"/>
+                    <div className="fixed inset-0 z-50 flex w-screen justify-center overflow-y-auto bg-zinc-950/25 px-2 py-2 focus:outline-0 sm:px-6 sm:py-8 lg:px-8 lg:py-16 dark:bg-zinc-950/50 backdrop-blur-sm"/>
                 </Headless.TransitionChild>
 
                 <div className="fixed inset-0 z-50 w-screen overflow-y-auto pt-6 sm:pt-0">
@@ -46,7 +46,7 @@ export function Dialog({open, onClose, afterLeave, size = 'lg', className, child
                                 className={clsx(
                                     className,
                                     sizes[size],
-                                    'row-start-2 w-full min-w-0 rounded-t-3xl bg-white p-[--gutter] shadow-lg ring-1 ring-zinc-950/10 [--gutter:theme(spacing.8)] sm:mb-auto sm:rounded-2xl dark:bg-zinc-900 dark:ring-white/10 forced-colors:outline'
+                                    'row-start-2 w-full min-w-0 rounded-t-3xl bg-white p-(--gutter) shadow-lg ring-1 ring-zinc-950/10 [--gutter:--spacing(8)] sm:mb-auto sm:rounded-2xl dark:bg-zinc-900 dark:ring-white/10 forced-colors:outline'
                                 )}
                             >
                                 <DialogCloseButton onClick={() => onClose(false)}/>
@@ -97,9 +97,9 @@ function DialogCloseButton({onClick}: { onClick: () => void; }) {
         // Base
         'sm:hidden inline-flex items-center justify-center gap-x-2 rounded-lg border text-base/6 font-semibold border-transparent text-zinc-950 active:bg-zinc-950/5 hover:bg-zinc-950/5',
         // Sizing
-        'px-[calc(theme(spacing[2.5])-1px)] py-[calc(theme(spacing[2])-1px)] sm:px-[calc(theme(spacing.3)-1px)] sm:py-[calc(theme(spacing[2.5])-1px)] sm:text-sm/6',
+        'px-[calc(--spacing(2.5)-1px)] py-[calc(--spacing(2)-1px)] sm:px-[calc(--spacing(3)-1px)] sm:py-[calc(--spacing(2.5)-1px)] sm:text-sm/6',
         // Focus
-        'focus:outline-none focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-blue-500',
+        'focus:outline-hidden focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-blue-500',
         // Disabled
         'disabled:opacity-50',
         // Dark mode

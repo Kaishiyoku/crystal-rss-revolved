@@ -36,7 +36,7 @@ export default function Welcome({auth, canLogin, canRegister}: PageProps<{ canLo
                             height="100%"
                             in="SourceGraphic"
                             edgeMode="none"
-                            result="blur"
+                            result="blur-sm"
                         />
                     </filter>
                 </defs>
@@ -72,7 +72,7 @@ export default function Welcome({auth, canLogin, canRegister}: PageProps<{ canLo
                             height="100%"
                             in="SourceGraphic"
                             edgeMode="none"
-                            result="blur"
+                            result="blur-sm"
                         />
                     </filter>
                 </defs>
@@ -121,7 +121,7 @@ export default function Welcome({auth, canLogin, canRegister}: PageProps<{ canLo
                             <ApplicationLogo className="size-32"/>
                         </div>
 
-                        <div className="z-20 text-center text-8xl font-light bg-gradient-to-r from-blue-500 via-violet-500 to-teal-500 dark:from-blue-600 dark:via-violet-600 dark:to-teal-600 bg-clip-text">
+                        <div className="z-20 text-center text-8xl font-light bg-linear-to-r from-blue-500 via-violet-500 to-teal-500 dark:from-blue-600 dark:via-violet-600 dark:to-teal-600 bg-clip-text">
                             {window.appName}
                         </div>
                     </div>

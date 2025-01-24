@@ -16,7 +16,7 @@ export function ImageWithBlurHash({blurHash, src, className, ...props}: { blurHa
             />
 
             {blurHash && isBlurhashValid(blurHash)
-                ? <BlurhashCanvas hash={blurHash} className="!absolute !w-full !h-full"/>
+                ? <BlurhashCanvas hash={blurHash} className="absolute! w-full! h-full!"/>
                 : <div className="absolute size-full blur-xl" style={{backgroundImage: `url(${src})`}}/>}
         </div>
     );
@@ -24,7 +24,7 @@ export function ImageWithBlurHash({blurHash, src, className, ...props}: { blurHa
 
 export function ImagePlaceholder({colorIndex = 0, className}: { colorIndex?: number; className?: string; }) {
     const classes = twMerge(
-        'flex justify-center bg-gradient-to-br from-cyan-300 to-blue-400 dark:from-cyan-900 dark:to-blue-700 saturate-[.20]',
+        'flex justify-center bg-linear-to-br from-cyan-300 to-blue-400 dark:from-cyan-900 dark:to-blue-700 saturate-[.20]',
         clsx({
             'hue-rotate-0': colorIndex === 0,
             'hue-rotate-30': colorIndex === 1,

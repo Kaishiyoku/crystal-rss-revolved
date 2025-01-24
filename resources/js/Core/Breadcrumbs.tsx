@@ -43,7 +43,7 @@ export default function Breadcrumbs({breadcrumbs}: { breadcrumbs?: Breadcrumb[];
             breadcrumbElement,
             <li key={`${slug(breadcrumb.title)}-separator`} className="text-gray-300 dark:text-gray-500">
                 <svg
-                    className="h-5 w-5 flex-shrink-0 stroke-current"
+                    className="h-5 w-5 shrink-0 stroke-current"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 20 20"
