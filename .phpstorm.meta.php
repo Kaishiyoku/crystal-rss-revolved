@@ -3312,7 +3312,7 @@ namespace PHPSTORM_META {
 'http-statuses.508','http-statuses.509','http-statuses.510','http-statuses.511','http-statuses.520',
 'http-statuses.521','http-statuses.522','http-statuses.523','http-statuses.524','http-statuses.525',
 'http-statuses.526','http-statuses.527','http-statuses.598','http-statuses.599','http-statuses.unknownError',
-'en.0','php_de.0','php_en.0',);
+'en.0',);
         registerArgumentsSet('env', 
 'APP_NAME','APP_ENV','APP_KEY','APP_DEBUG','APP_TIMEZONE',
 'APP_URL','APP_LOCALE','APP_FALLBACK_LOCALE','APP_FAKER_LOCALE','APP_MAINTENANCE_DRIVER',
