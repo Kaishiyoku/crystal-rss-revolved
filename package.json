@@ -58,8 +58,7 @@
         }
     },
     "optionalDependencies": {
-        "@tailwindcss/oxide-linux-x64-gnu": "^4.0.1",
-        "lightningcss-linux-x64-gnu": "^1.29.1"
+        "@tailwindcss/oxide-linux-arm64-gnu": "^4.0.1"
     },
     "dependencies": {
         "globals": "^15.9.0"
