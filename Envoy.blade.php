@@ -131,7 +131,7 @@
 @task('deployment_npm')
     echo "Installing npm dependencies..."
     cd {{ $release }}
-    npm install --no-audit --no-fund --no-optional
+    npm install --no-audit --no-fund
     echo "Running npm..."
     npm run {{ $env === 'production' ? 'build' : 'dev' }} --silent
 @endtask
