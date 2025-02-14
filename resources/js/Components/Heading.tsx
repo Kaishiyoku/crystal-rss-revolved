@@ -6,10 +6,16 @@ type HeadingProps = { level?: 1 | 2 | 3 | 4 | 5 | 6; } & React.ComponentPropsWit
 export function Heading({className, level = 1, ...props}: HeadingProps) {
     const Element: `h${typeof level}` = `h${level}`;
 
+    const classes = {
+        'text-2xl/8 sm:text-xl/8': level === 1,
+        'text-lg/8': level === 2,
+        'text-md/7': level >= 3,
+    };
+
     return (
         <Element
             {...props}
-            className={clsx(className, 'text-2xl/8 font-semibold text-zinc-950 sm:text-xl/8 dark:text-white')}
+            className={clsx(className, classes, 'font-semibold text-zinc-950 dark:text-white')}
         />
     );
 }

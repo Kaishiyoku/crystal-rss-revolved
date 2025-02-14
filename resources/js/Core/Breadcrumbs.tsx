@@ -24,7 +24,7 @@ export default function Breadcrumbs({breadcrumbs}: { breadcrumbs?: Breadcrumb[];
         const breadcrumbElement = breadcrumb.url
             ? (
                 <li key={slug(breadcrumb.title)}>
-                    <Link href={breadcrumb.url} className="font-semibold link-blue">
+                    <Link href={breadcrumb.url} className="font-semibold" color="blue">
                         {breadcrumb.title}
                     </Link>
                 </li>

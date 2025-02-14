@@ -5,10 +5,10 @@ import {Button} from '@/Components/Button';
 import TotalNumberOfFeedItemsContext from '@/Contexts/TotalNumberOfFeedItemsContext';
 import formatDateTime from '@/Utils/formatDateTime';
 import {RouteParams} from 'ziggy-js';
-import {CalendarDaysIcon, EyeIcon, EyeSlashIcon, RssIcon} from '@heroicons/react/20/solid';
+import {ArrowTopRightOnSquareIcon, CalendarDaysIcon, EyeIcon, EyeSlashIcon, RssIcon} from '@heroicons/react/20/solid';
 import {ImagePlaceholder, ImageWithBlurHash} from '@/Components/Image';
 import {FeedItem} from '@/types/generated/models';
-import {Link} from '@/Components/Link';
+import {Heading} from '@/Components/Heading';
 
 export default function FeedItemCard({hueRotationIndex, feedItem}: { hueRotationIndex: number; feedItem: FeedItem; }) {
     const {t} = useLaravelReactI18n();
@@ -81,15 +81,11 @@ export default function FeedItemCard({hueRotationIndex, feedItem}: { hueRotation
                 </div>
 
                 <div className="grow flex flex-col min-w-0 w-full">
-                    <Link
-                        href={internalFeedItem.url}
-                        color="blue"
-                        className="inline-block mb-2 text-lg link-blue hyphens-auto break-words"
-                        hover
-                        external
+                    <Heading
+                        level={2}
                     >
                         {internalFeedItem.title}
-                    </Link>
+                    </Heading>
 
                     {internalFeedItem.description && (
                         <div className="grow">
@@ -99,7 +95,7 @@ export default function FeedItemCard({hueRotationIndex, feedItem}: { hueRotation
                         </div>
                     )}
 
-                    <div className="grow flex flex-col justify-end items-start lg:items-end pt-4">
+                    <div className="grow flex items-end lg:justify-end space-x-2 pt-4">
                         <Button
                             onClick={toggle}
                             disabled={processing}
@@ -110,6 +106,16 @@ export default function FeedItemCard({hueRotationIndex, feedItem}: { hueRotation
                                 : <EyeIcon/>}
 
                             {internalFeedItem.read_at ? t('Read') : t('Unread')}
+                        </Button>
+
+                        <Button
+                            href={feedItem.url}
+                            plain
+                            external
+                        >
+                            <ArrowTopRightOnSquareIcon/>
+
+                            {t('Read article')}
                         </Button>
                     </div>
                 </div>

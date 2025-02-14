@@ -96,10 +96,6 @@
   @apply font-semibold text-blue-200 hover:text-white focus:outline focus:outline-2 focus:rounded-xs focus:outline-white/50 transition;
 }
 
-@utility link-blue {
-  @apply text-blue-700 dark:text-blue-400 hover:underline;
-}
-
 @utility button-welcome {
   /**
      * Buttons
