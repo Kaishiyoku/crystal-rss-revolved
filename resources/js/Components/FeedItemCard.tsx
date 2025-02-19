@@ -99,6 +99,7 @@ export default function FeedItemCard({hueRotationIndex, feedItem}: { hueRotation
                         <Button
                             onClick={toggle}
                             disabled={processing}
+                            className="w-full"
                             plain
                         >
                             {internalFeedItem.read_at
@@ -110,6 +111,7 @@ export default function FeedItemCard({hueRotationIndex, feedItem}: { hueRotation
 
                         <Button
                             href={feedItem.url}
+                            className="w-full"
                             plain
                             external
                         >
