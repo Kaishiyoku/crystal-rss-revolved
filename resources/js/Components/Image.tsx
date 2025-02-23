@@ -1,8 +1,7 @@
 import React, {CanvasHTMLAttributes, ComponentPropsWithoutRef, useEffect, useRef} from 'react';
 import {twMerge} from 'tailwind-merge';
 import {PhotoIcon} from '@heroicons/react/24/solid';
-import clsx from 'clsx';
-import {isBlurhashValid, decode} from 'blurhash';
+import {decode, isBlurhashValid} from 'blurhash';
 
 export function ImageWithBlurHash({blurHash, src, className, ...props}: { blurHash: string | null; } & Omit<ComponentPropsWithoutRef<'img'>, 'loading'>) {
     return (
@@ -22,17 +21,9 @@ export function ImageWithBlurHash({blurHash, src, className, ...props}: { blurHa
     );
 }
 
-export function ImagePlaceholder({colorIndex = 0, className}: { colorIndex?: number; className?: string; }) {
+export function ImagePlaceholder({className}: { className?: string; }) {
     const classes = twMerge(
-        'flex justify-center bg-linear-to-br from-cyan-300 to-blue-400 dark:from-cyan-900 dark:to-blue-700 saturate-[.20]',
-        clsx({
-            'hue-rotate-0': colorIndex === 0,
-            'hue-rotate-30': colorIndex === 1,
-            'hue-rotate-60': colorIndex === 2,
-            'hue-rotate-15': colorIndex === 3,
-            'hue-rotate-180': colorIndex === 4,
-            'hue-rotate-90': colorIndex === 5,
-        }),
+        'flex justify-center bg-linear-to-br from-zinc-200 to-zinc-300 dark:from-zinc-700 dark:to-zinc-800',
         className
     );
 

@@ -10,7 +10,7 @@ import {ImagePlaceholder, ImageWithBlurHash} from '@/Components/Image';
 import {FeedItem} from '@/types/generated/models';
 import {Heading} from '@/Components/Heading';
 
-export default function FeedItemCard({hueRotationIndex, feedItem}: { hueRotationIndex: number; feedItem: FeedItem; }) {
+export default function FeedItemCard({feedItem}: { feedItem: FeedItem; }) {
     const {t} = useLaravelReactI18n();
     const {totalNumberOfFeedItems, setTotalNumberOfFeedItems} = useContext(TotalNumberOfFeedItemsContext);
     const [internalFeedItem, setInternalFeedItem] = useState(feedItem);
@@ -51,7 +51,7 @@ export default function FeedItemCard({hueRotationIndex, feedItem}: { hueRotation
                                 />
                             )
                             : (
-                                <ImagePlaceholder colorIndex={hueRotationIndex} className="w-full @md:w-44 aspect-3/2 rounded-lg"/>
+                                <ImagePlaceholder className="w-full @md:w-44 aspect-3/2 rounded-lg"/>
                             )}
                     </div>
 

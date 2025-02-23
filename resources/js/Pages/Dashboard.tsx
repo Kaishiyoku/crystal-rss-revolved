@@ -62,10 +62,9 @@ export default function Dashboard(props: DashboardPageProps) {
                 {allFeedItems.length > 0
                     ? (
                         <div className="grid sm:grid-cols-2 gap-6">
-                            {allFeedItems.map((feedItem, index) => (
+                            {allFeedItems.map((feedItem) => (
                                 <FeedItemCard
                                     key={feedItem.id}
-                                    hueRotationIndex={index % 6}
                                     feedItem={feedItem}
                                 />
                             ))}
