@@ -80,7 +80,7 @@ export default function FeedItemCard({hueRotationIndex, feedItem}: { hueRotation
                     </div>
                 </div>
 
-                <div className="grow flex flex-col min-w-0 w-full">
+                <div className="grow flex flex-col min-w-0">
                     <Heading
                         level={2}
                     >
