@@ -41,6 +41,7 @@ test('index', function () {
     // visit dashboard with cursor query parameter
     $feedItems = Auth::user()->feedItems()
         ->unread()
+        ->orderByDesc('posted_at')
         ->cursorPaginate()
         ->withQueryString();
 
