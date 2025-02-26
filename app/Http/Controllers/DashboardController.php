@@ -25,6 +25,7 @@ class DashboardController extends Controller
             ->unread()
             ->when($feedId, fn (Builder $query) => $query->where('feed_id', $feedId))
             ->with('feed')
+            ->orderByDesc('posted_at')
             ->cursorPaginate()
             ->withQueryString();
 
