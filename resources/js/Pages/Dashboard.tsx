@@ -1,6 +1,6 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import {Head, router} from '@inertiajs/react';
-import {useMemo, useState} from 'react';
+import {useState} from 'react';
 import FeedItemCard from '@/Components/FeedItemCard';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import {Button} from '@/Components/Button';
@@ -12,7 +12,7 @@ import {NewspaperIcon} from '@heroicons/react/24/outline';
 import ShortFeedWithFeedItemsCount from '@/types/models/ShortFeedWithFeedItemsCount';
 import {FeedItem} from '@/types/generated/models';
 import {useAtomValue} from 'jotai';
-import {unreadFeedsAtom} from '@/Stores/unreadFeedsAtom';
+import {totalNumberOfFeedItemsAtom} from '@/Stores/unreadFeedsAtom';
 
 type DashboardPageProps = PageProps & {
     unreadFeeds: ShortFeedWithFeedItemsCount[];
@@ -24,12 +24,7 @@ export default function Dashboard(props: DashboardPageProps) {
     const {t, tChoice} = useLaravelReactI18n();
     const [allFeedItems, setAllFeedItems] = useState(props.feedItems.data);
 
-    const unreadFeedsAtomValue = useAtomValue(unreadFeedsAtom);
-
-    const totalNumberOfFeedItems = useMemo(
-        () => unreadFeedsAtomValue.reduce((accum, unreadFeed) => accum + unreadFeed.feed_items_count, 0),
-        [unreadFeedsAtomValue]
-    );
+    const totalNumberOfFeedItemsAtomValue = useAtomValue(totalNumberOfFeedItemsAtom);
 
     const loadMore = () => {
         if (!props.feedItems.next_page_url) {
@@ -52,12 +47,12 @@ export default function Dashboard(props: DashboardPageProps) {
                 <>
                     {t('Dashboard')}
 
-                    <small className="text-muted pl-2">{tChoice('dashboard.unread_articles', totalNumberOfFeedItems)}</small>
+                    <small className="text-muted pl-2">{tChoice('dashboard.unread_articles', totalNumberOfFeedItemsAtomValue)}</small>
                 </>
             }
             actions={(
                 <>
-                    {totalNumberOfFeedItems > 0 && (
+                    {totalNumberOfFeedItemsAtomValue > 0 && (
                         <MarkAllAsReadButton/>
                     )}
                 </>
