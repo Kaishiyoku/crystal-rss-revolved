@@ -28,6 +28,7 @@ import substr from '@/Utils/substr';
 import {User} from '@/types/generated/models';
 import {useAtomValue} from 'jotai';
 import {unreadFeedsAtom} from '@/Stores/unreadFeedsAtom';
+import {router} from '@inertiajs/react';
 
 export default function Navigation({user, selectedFeedId, children}: { user: User; selectedFeedId: number | null; children: ReactNode; }) {
     const {t} = useLaravelReactI18n();
@@ -52,7 +53,7 @@ export default function Navigation({user, selectedFeedId, children}: { user: Use
 
                                 <DropdownDivider/>
 
-                                <DropdownItem href={route('logout')} method="post" as="button">
+                                <DropdownItem onClick={() => router.visit(route('logout'), {method: 'post'})}>
                                     <ArrowRightStartOnRectangleIcon/>
                                     <DropdownLabel>{t('Log Out')}</DropdownLabel>
                                 </DropdownItem>
@@ -162,7 +163,7 @@ export default function Navigation({user, selectedFeedId, children}: { user: Use
 
                                 <DropdownDivider/>
 
-                                <DropdownItem href={route('logout')} method="post" as="button">
+                                <DropdownItem onClick={() => router.visit(route('logout'), {method: 'post'})}>
                                     <ArrowRightStartOnRectangleIcon/>
                                     <DropdownLabel>{t('Log Out')}</DropdownLabel>
                                 </DropdownItem>
