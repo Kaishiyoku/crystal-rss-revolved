@@ -2,16 +2,16 @@ import * as Headless from '@headlessui/react';
 import clsx from 'clsx';
 import type React from 'react';
 
-export function Fieldset({className, ...props}: { className?: string; } & Omit<Headless.FieldsetProps, 'className'>) {
+export function Fieldset({className, ...props}: { className?: string; } & Omit<Headless.FieldsetProps, 'as' | 'className'>) {
     return (
         <Headless.Fieldset
             {...props}
-            className={clsx(className, '[&>*+[data-slot=control]]:mt-6 *:data-[slot=text]:mt-1')}
+            className={clsx(className, '*:data-[slot=text]:mt-1 [&>*+[data-slot=control]]:mt-6')}
         />
     );
 }
 
-export function Legend({className, ...props}: { className?: string; } & Omit<Headless.LegendProps, 'className'>) {
+export function Legend({className, ...props}: { className?: string; } & Omit<Headless.LegendProps, 'as' | 'className'>) {
     return (
         <Headless.Legend
             data-slot="legend"
@@ -28,7 +28,7 @@ export function FieldGroup({className, ...props}: React.ComponentPropsWithoutRef
     return <div data-slot="control" {...props} className={clsx(className, 'space-y-8')}/>;
 }
 
-export function Field({className, ...props}: { className?: string; } & Omit<Headless.FieldProps, 'className'>) {
+export function Field({className, ...props}: { className?: string; } & Omit<Headless.FieldProps, 'as' | 'className'>) {
     return (
         <Headless.Field
             {...props}
@@ -45,14 +45,14 @@ export function Field({className, ...props}: { className?: string; } & Omit<Head
     );
 }
 
-export function Label({required = false, className, ...props}: { required?: boolean; className?: string; } & Omit<Headless.LabelProps, 'className'>) {
+export function Label({required = false, className, ...props}: { required?: boolean; className?: string; } & Omit<Headless.LabelProps, 'as' | 'className'>) {
     return (
         <Headless.Label
             data-slot="label"
             {...props}
             className={clsx(
                 className,
-                'select-none text-base/6 text-zinc-950 data-disabled:opacity-50 sm:text-sm/6 dark:text-white',
+                'text-base/6 text-zinc-950 select-none data-disabled:opacity-50 sm:text-sm/6 dark:text-white',
                 {
                     "after:text-pink-600 after:ml-0.5 after:content-['*']": required,
                 }
@@ -61,24 +61,17 @@ export function Label({required = false, className, ...props}: { required?: bool
     );
 }
 
-export function Description({className, ...props}: { className?: string; } & Omit<Headless.DescriptionProps, 'className'>) {
+export function Description({className, ...props}: { className?: string; } & Omit<Headless.DescriptionProps, 'as' | 'className'>) {
     return (
         <Headless.Description
             data-slot="description"
             {...props}
-            className={clsx(
-                className,
-                'text-base/6 text-zinc-500 data-disabled:opacity-50 sm:text-sm/6 dark:text-zinc-400'
-            )}
+            className={clsx(className, 'text-base/6 text-zinc-500 data-disabled:opacity-50 sm:text-sm/6 dark:text-zinc-400')}
         />
     );
 }
 
-export function ErrorMessage({className, ...props}: { className?: string; } & Omit<Headless.DescriptionProps, 'className'>) {
-    if (!props.children) {
-        return null;
-    }
-
+export function ErrorMessage({className, ...props}: { className?: string; } & Omit<Headless.DescriptionProps, 'as' | 'className'>) {
     return (
         <Headless.Description
             data-slot="error"

@@ -1,12 +1,12 @@
 import * as Headless from '@headlessui/react';
 import clsx from 'clsx';
 import {LayoutGroup, motion} from 'framer-motion';
-import React, {Fragment, useId} from 'react';
+import React, {forwardRef, useId} from 'react';
 import {Link} from '@/Components/Link';
 import {TouchTarget} from '@/Components/Button';
 
 export function Sidebar({className, ...props}: React.ComponentPropsWithoutRef<'nav'>) {
-    return <nav {...props} className={clsx(className, 'flex h-full flex-col')}/>;
+    return <nav {...props} className={clsx(className, 'flex h-full min-h-0 flex-col')}/>;
 }
 
 export function SidebarHeader({className, ...props}: React.ComponentPropsWithoutRef<'div'>) {
@@ -27,7 +27,7 @@ export function SidebarBody({className, ...props}: React.ComponentPropsWithoutRe
             {...props}
             className={clsx(
                 className,
-                'flex flex-1 flex-col overflow-y-auto p-4 [&>[data-slot=section]+[data-slot=section]]:mt-8 max-lg:mb-10'
+                'flex flex-1 flex-col overflow-y-auto p-4 [&>[data-slot=section]+[data-slot=section]]:mt-8'
             )}
         />
     );
@@ -69,15 +69,15 @@ export function SidebarHeading({className, ...props}: React.ComponentPropsWithou
     );
 }
 
-export const SidebarItem = React.forwardRef(function SidebarItem(
+export const SidebarItem = forwardRef(function SidebarItem(
     {
         current,
         className,
         children,
         ...props
     }: { current?: boolean; className?: string; children: React.ReactNode; } & (
-        | Omit<Headless.ButtonProps, 'className'>
-        | Omit<React.ComponentPropsWithoutRef<typeof Link>, 'type' | 'className'>
+        | Omit<Headless.ButtonProps, 'as' | 'className'>
+        | Omit<Headless.ButtonProps<typeof Link>, 'as' | 'className'>
         ),
     ref: React.ForwardedRef<HTMLAnchorElement | HTMLButtonElement>
 ) {
@@ -113,10 +113,14 @@ export const SidebarItem = React.forwardRef(function SidebarItem(
             )}
             {'href' in props
                 ? (
-                    <Headless.CloseButton as={Fragment} ref={ref}>
-                        <Link className={classes} {...props} data-current={current ? 'true' : undefined}>
-                            <TouchTarget>{children}</TouchTarget>
-                        </Link>
+                    <Headless.CloseButton
+                        as={Link}
+                        {...props}
+                        className={classes}
+                        data-current={current ? 'true' : undefined}
+                        ref={ref}
+                    >
+                        <TouchTarget>{children}</TouchTarget>
                     </Headless.CloseButton>
                 )
                 : (

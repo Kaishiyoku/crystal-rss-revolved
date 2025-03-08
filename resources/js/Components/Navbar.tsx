@@ -1,7 +1,7 @@
 import * as Headless from '@headlessui/react';
 import clsx from 'clsx';
 import {LayoutGroup, motion} from 'framer-motion';
-import React, {useId} from 'react';
+import React, {forwardRef, useId} from 'react';
 import {Link} from '@/Components/Link';
 import {TouchTarget} from '@/Components/Button';
 
@@ -27,14 +27,14 @@ export function NavbarSpacer({className, ...props}: React.ComponentPropsWithoutR
     return <div aria-hidden="true" {...props} className={clsx(className, '-ml-4 flex-1')}/>;
 }
 
-export const NavbarItem = React.forwardRef(function NavbarItem(
+export const NavbarItem = forwardRef(function NavbarItem(
     {
         current,
         className,
         children,
         ...props
     }: { current?: boolean; className?: string; children: React.ReactNode; } & (
-        | Omit<Headless.ButtonProps, 'className'>
+        | Omit<Headless.ButtonProps, 'as' | 'className'>
         | Omit<React.ComponentPropsWithoutRef<typeof Link>, 'className'>
         ),
     ref: React.ForwardedRef<HTMLAnchorElement | HTMLButtonElement>
@@ -47,7 +47,7 @@ export const NavbarItem = React.forwardRef(function NavbarItem(
         // Trailing icon (down chevron or similar)
         '*:not-nth-2:last:data-[slot=icon]:ml-auto *:not-nth-2:last:data-[slot=icon]:size-5 sm:*:not-nth-2:last:data-[slot=icon]:size-4',
         // Avatar
-        '*:data-[slot=avatar]:-m-0.5 *:data-[slot=avatar]:size-7 *:data-[slot=avatar]:[--avatar-radius:var(--radius)] *:data-[slot=avatar]:[--ring-opacity:10%] sm:*:data-[slot=avatar]:size-6',
+        '*:data-[slot=avatar]:-m-0.5 *:data-[slot=avatar]:size-7 *:data-[slot=avatar]:[--avatar-radius:var(--radius-md)] *:data-[slot=avatar]:[--ring-opacity:10%] sm:*:data-[slot=avatar]:size-6',
         // Hover
         'data-hover:bg-zinc-950/5 data-hover:*:data-[slot=icon]:fill-zinc-950',
         // Active
@@ -91,6 +91,6 @@ export const NavbarItem = React.forwardRef(function NavbarItem(
     );
 });
 
-export function NavbarLabel({className, ...props}: React.ComponentPropsWithoutRef<'span'>) {
+export function NavbarLabel({ className, ...props }: React.ComponentPropsWithoutRef<'span'>) {
     return <span {...props} className={clsx(className, 'truncate')}/>;
 }

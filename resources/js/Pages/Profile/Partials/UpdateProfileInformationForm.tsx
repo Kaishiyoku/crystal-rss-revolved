@@ -26,7 +26,7 @@ export default function UpdateProfileInformation({mustVerifyEmail, status, class
 
     return (
         <section className={className}>
-            <header>
+            <header className="pb-6">
                 <Heading level={2}>
                     {t('Profile Information')}
                 </Heading>

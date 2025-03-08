@@ -20,39 +20,25 @@ function CloseMenuIcon() {
 
 function MobileSidebar({open, close, children}: React.PropsWithChildren<{ open: boolean; close: () => void; }>) {
     return (
-        <Headless.Transition show={open}>
-            <Headless.Dialog onClose={close} className="lg:hidden">
-                <Headless.TransitionChild
-                    enter="ease-out duration-300"
-                    enterFrom="opacity-0"
-                    enterTo="opacity-100"
-                    leave="ease-in duration-200"
-                    leaveFrom="opacity-100"
-                    leaveTo="opacity-0"
-                >
-                    <div className="fixed inset-0 bg-black/30"/>
-                </Headless.TransitionChild>
-                <Headless.TransitionChild
-                    enter="ease-in-out duration-300"
-                    enterFrom="-translate-x-full"
-                    enterTo="translate-x-0"
-                    leave="ease-in-out duration-300"
-                    leaveFrom="translate-x-0"
-                    leaveTo="-translate-x-full"
-                >
-                    <Headless.DialogPanel className="fixed inset-y-0 w-full max-w-80 p-2 transition">
-                        <div className="flex h-full flex-col rounded-lg bg-white shadow-xs ring-1 ring-zinc-950/5 dark:bg-zinc-900 dark:ring-white/10">
-                            <div className="-mb-3 px-4 pt-3">
-                                <Headless.CloseButton as={NavbarItem} aria-label="Close navigation">
-                                    <CloseMenuIcon/>
-                                </Headless.CloseButton>
-                            </div>
-                            {children}
-                        </div>
-                    </Headless.DialogPanel>
-                </Headless.TransitionChild>
-            </Headless.Dialog>
-        </Headless.Transition>
+        <Headless.Dialog open={open} onClose={close} className="lg:hidden">
+            <Headless.DialogBackdrop
+                transition
+                className="fixed inset-0 bg-black/30 transition data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"
+            />
+            <Headless.DialogPanel
+                transition
+                className="fixed inset-y-0 w-full max-w-80 p-2 transition duration-300 ease-in-out data-closed:-translate-x-full"
+            >
+                <div className="flex h-full flex-col rounded-lg bg-white ring-1 shadow-xs ring-zinc-950/5 dark:bg-zinc-900 dark:ring-white/10">
+                    <div className="-mb-3 px-4 pt-3">
+                        <Headless.CloseButton as={NavbarItem} aria-label="Close navigation">
+                            <CloseMenuIcon/>
+                        </Headless.CloseButton>
+                    </div>
+                    {children}
+                </div>
+            </Headless.DialogPanel>
+        </Headless.Dialog>
     );
 }
 
@@ -80,8 +66,8 @@ export function SidebarLayout({navbar, sidebar, children}: React.PropsWithChildr
             </header>
 
             {/* Content */}
-            <main className="flex flex-1 flex-col pb-2 lg:min-w-0 lg:pl-64 lg:pr-2 lg:pt-2">
-                <div className="grow p-6 lg:rounded-lg lg:bg-white lg:p-10 lg:shadow-xs lg:ring-1 lg:ring-zinc-950/5 dark:lg:bg-zinc-900 dark:lg:ring-white/10">
+            <main className="flex flex-1 flex-col pb-2 lg:min-w-0 lg:pt-2 lg:pr-2 lg:pl-64">
+                <div className="grow p-6 lg:rounded-lg lg:bg-white lg:p-10 lg:ring-1 lg:shadow-xs lg:ring-zinc-950/5 dark:lg:bg-zinc-900 dark:lg:ring-white/10">
                     <div className="mx-auto max-w-6xl">{children}</div>
                 </div>
             </main>

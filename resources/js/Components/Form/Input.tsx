@@ -1,6 +1,6 @@
 import * as Headless from '@headlessui/react';
-import {clsx} from 'clsx';
-import {forwardRef} from 'react';
+import clsx from 'clsx';
+import React, {forwardRef} from 'react';
 
 export function InputGroup({children}: React.ComponentPropsWithoutRef<'span'>) {
     return (
@@ -29,7 +29,7 @@ export const Input = forwardRef(function Input(
     }: {
         className?: string;
         type?: 'email' | 'number' | 'password' | 'search' | 'tel' | 'text' | 'url' | DateType;
-    } & Omit<Headless.InputProps, 'className'>,
+    } & Omit<Headless.InputProps, 'as' | 'className'>,
     ref: React.ForwardedRef<HTMLInputElement>
 ) {
     return (
@@ -44,7 +44,7 @@ export const Input = forwardRef(function Input(
                 // Background color is moved to control and shadow is removed in dark mode so hide `before` pseudo
                 'dark:before:hidden',
                 // Focus ring
-                'after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:ring-inset after:ring-transparent sm:focus-within:after:ring-2 sm:focus-within:after:ring-blue-500',
+                'after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:ring-transparent after:ring-inset sm:focus-within:after:ring-2 sm:focus-within:after:ring-blue-500',
                 // Disabled state
                 'has-data-disabled:opacity-50 has-data-disabled:before:bg-zinc-950/5 has-data-disabled:before:shadow-none',
                 // Invalid state
@@ -84,7 +84,9 @@ export const Input = forwardRef(function Input(
                     // Invalid state
                     'data-invalid:border-red-500 data-invalid:data-hover:border-red-500 dark:data-invalid:border-red-500 dark:data-invalid:data-hover:border-red-500',
                     // Disabled state
-                    'data-disabled:border-zinc-950/20 dark:data-hover:data-disabled:border-white/15 dark:data-disabled:border-white/15 dark:data-disabled:bg-white/[2.5%]',
+                    'data-disabled:border-zinc-950/20 dark:data-disabled:border-white/15 dark:data-disabled:bg-white/[2.5%] dark:data-hover:data-disabled:border-white/15',
+                    // System icons
+                    'dark:[color-scheme:dark]',
                 ])}
             />
         </span>
