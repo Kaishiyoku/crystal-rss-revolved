@@ -1,34 +1,32 @@
-import {useContext, useState} from 'react';
+import {useState} from 'react';
 import clsx from 'clsx';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import {Button} from '@/Components/Button';
-import TotalNumberOfFeedItemsContext from '@/Contexts/TotalNumberOfFeedItemsContext';
 import formatDateTime from '@/Utils/formatDateTime';
 import {RouteParams} from 'ziggy-js';
 import {ArrowTopRightOnSquareIcon, CalendarDaysIcon, EyeIcon, EyeSlashIcon, RssIcon} from '@heroicons/react/20/solid';
 import {ImagePlaceholder, ImageWithBlurHash} from '@/Components/Image';
 import {FeedItem} from '@/types/generated/models';
 import {Heading} from '@/Components/Heading';
+import {useSetAtom} from 'jotai';
+import {unreadFeedsAtom, updateUnreadFeedByFeedItem} from '@/Stores/unreadFeedsAtom';
 
 export default function FeedItemCard({feedItem}: { feedItem: FeedItem; }) {
     const {t} = useLaravelReactI18n();
-    const {totalNumberOfFeedItems, setTotalNumberOfFeedItems} = useContext(TotalNumberOfFeedItemsContext);
     const [internalFeedItem, setInternalFeedItem] = useState(feedItem);
     const [processing, setProcessing] = useState(false);
+
+    const setUnreadFeedsAtomValue = useSetAtom(unreadFeedsAtom);
 
     const toggle = () => {
         setProcessing(true);
 
         void window.ky.put(route('toggle-feed-item', internalFeedItem as unknown as RouteParams<'toggle-feed-item'>))
             .json<FeedItem>()
-            .then((data) => {
-                if (data.read_at) {
-                    setTotalNumberOfFeedItems(totalNumberOfFeedItems - 1);
-                } else {
-                    setTotalNumberOfFeedItems(totalNumberOfFeedItems + 1);
-                }
+            .then((updatedFeedItem) => {
+                setUnreadFeedsAtomValue(updateUnreadFeedByFeedItem(updatedFeedItem));
 
-                setInternalFeedItem(data);
+                setInternalFeedItem(updatedFeedItem);
             })
             .finally(() => setProcessing(false));
     };

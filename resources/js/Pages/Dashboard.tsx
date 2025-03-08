@@ -1,9 +1,8 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import {Head, router} from '@inertiajs/react';
-import {useState} from 'react';
+import {useMemo, useState} from 'react';
 import FeedItemCard from '@/Components/FeedItemCard';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
-import TotalNumberOfFeedItemsContext from '@/Contexts/TotalNumberOfFeedItemsContext';
 import {Button} from '@/Components/Button';
 import {EmptyState} from '@/Components/EmptyState';
 import {PageProps} from '@/types';
@@ -12,6 +11,8 @@ import MarkAllAsReadButton from '@/Components/MarkAllAsReadButton';
 import {NewspaperIcon} from '@heroicons/react/24/outline';
 import ShortFeedWithFeedItemsCount from '@/types/models/ShortFeedWithFeedItemsCount';
 import {FeedItem} from '@/types/generated/models';
+import {useAtomValue} from 'jotai';
+import {unreadFeedsAtom} from '@/Stores/unreadFeedsAtom';
 
 type DashboardPageProps = PageProps & {
     unreadFeeds: ShortFeedWithFeedItemsCount[];
@@ -22,7 +23,13 @@ type DashboardPageProps = PageProps & {
 export default function Dashboard(props: DashboardPageProps) {
     const {t, tChoice} = useLaravelReactI18n();
     const [allFeedItems, setAllFeedItems] = useState(props.feedItems.data);
-    const [totalNumberOfFeedItems, setTotalNumberOfFeedItems] = useState(props.totalNumberOfFeedItems);
+
+    const unreadFeedsAtomValue = useAtomValue(unreadFeedsAtom);
+
+    const totalNumberOfFeedItems = useMemo(
+        () => unreadFeedsAtomValue.reduce((accum, unreadFeed) => accum + unreadFeed.feed_items_count, 0),
+        [unreadFeedsAtomValue]
+    );
 
     const loadMore = () => {
         if (!props.feedItems.next_page_url) {
@@ -38,57 +45,55 @@ export default function Dashboard(props: DashboardPageProps) {
     };
 
     return (
-        <TotalNumberOfFeedItemsContext.Provider value={{totalNumberOfFeedItems, setTotalNumberOfFeedItems}}>
-            <AuthenticatedLayout
-                auth={props.auth}
-                errors={props.errors}
-                header={
-                    <>
-                        {t('Dashboard')}
+        <AuthenticatedLayout
+            auth={props.auth}
+            errors={props.errors}
+            header={
+                <>
+                    {t('Dashboard')}
 
-                        <small className="text-muted pl-2">{tChoice('dashboard.unread_articles', totalNumberOfFeedItems)}</small>
-                    </>
-                }
-                actions={(
-                    <>
-                        {totalNumberOfFeedItems > 0 && (
-                            <MarkAllAsReadButton/>
-                        )}
-                    </>
+                    <small className="text-muted pl-2">{tChoice('dashboard.unread_articles', totalNumberOfFeedItems)}</small>
+                </>
+            }
+            actions={(
+                <>
+                    {totalNumberOfFeedItems > 0 && (
+                        <MarkAllAsReadButton/>
+                    )}
+                </>
+            )}
+        >
+            <Head title="Dashboard"/>
+
+            {allFeedItems.length > 0
+                ? (
+                    <div className="grid sm:grid-cols-2 gap-6">
+                        {allFeedItems.map((feedItem) => (
+                            <FeedItemCard
+                                key={feedItem.id}
+                                feedItem={feedItem}
+                            />
+                        ))}
+                    </div>
+                )
+                : (
+                    <EmptyState
+                        icon={NewspaperIcon}
+                        message={t('No unread articles.')}
+                        description={t('Come back later.')}
+                    />
                 )}
-            >
-                <Head title="Dashboard"/>
 
-                {allFeedItems.length > 0
-                    ? (
-                        <div className="grid sm:grid-cols-2 gap-6">
-                            {allFeedItems.map((feedItem) => (
-                                <FeedItemCard
-                                    key={feedItem.id}
-                                    feedItem={feedItem}
-                                />
-                            ))}
-                        </div>
-                    )
-                    : (
-                        <EmptyState
-                            icon={NewspaperIcon}
-                            message={t('No unread articles.')}
-                            description={t('Come back later.')}
-                        />
-                    )}
-
-                <div className="pt-5">
-                    {props.feedItems.next_page_url && (
-                        <Button
-                            onClick={loadMore}
-                            plain
-                        >
-                            {t('Load more')}
-                        </Button>
-                    )}
-                </div>
-            </AuthenticatedLayout>
-        </TotalNumberOfFeedItemsContext.Provider>
+            <div className="pt-5">
+                {props.feedItems.next_page_url && (
+                    <Button
+                        onClick={loadMore}
+                        plain
+                    >
+                        {t('Load more')}
+                    </Button>
+                )}
+            </div>
+        </AuthenticatedLayout>
     );
 }

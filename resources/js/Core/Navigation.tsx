@@ -26,10 +26,13 @@ import {useLaravelReactI18n} from 'laravel-react-i18n';
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import substr from '@/Utils/substr';
 import {User} from '@/types/generated/models';
-import ShortFeedWithFeedItemsCount from '@/types/models/ShortFeedWithFeedItemsCount';
+import {useAtomValue} from 'jotai';
+import {unreadFeedsAtom} from '@/Stores/unreadFeedsAtom';
 
-export default function Navigation({user, selectedFeedId, unreadFeeds, children}: { user: User; selectedFeedId: number | null; unreadFeeds: ShortFeedWithFeedItemsCount[]; children: ReactNode; }) {
+export default function Navigation({user, selectedFeedId, children}: { user: User; selectedFeedId: number | null; children: ReactNode; }) {
     const {t} = useLaravelReactI18n();
+
+    const unreadFeedsAtomValue = useAtomValue(unreadFeedsAtom);
 
     return (
         <SidebarLayout
@@ -107,11 +110,11 @@ export default function Navigation({user, selectedFeedId, unreadFeeds, children}
                                 </SidebarLabel>
                             </SidebarItem>
 
-                            {unreadFeeds.length > 0 && (
+                            {unreadFeedsAtomValue.length > 0 && (
                                 <>
                                     <SidebarDivider/>
 
-                                    {unreadFeeds.map((unreadFeed) => (
+                                    {unreadFeedsAtomValue.map((unreadFeed) => (
                                         <SidebarItem
                                             key={unreadFeed.id}
                                             href={`${route('dashboard')}?feed_id=${unreadFeed.id}`}

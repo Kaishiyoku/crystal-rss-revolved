@@ -7,6 +7,10 @@ import {resolvePageComponent} from 'laravel-vite-plugin/inertia-helpers';
 import {LaravelReactI18nProvider} from 'laravel-react-i18n';
 import getBrowserLocale from '@/Utils/getBrowserLocale';
 import AppWithLoadedTranslations from '@/Components/AppWithLoadedTranslations';
+import {Provider} from 'jotai';
+import {unreadFeedsAtom} from '@/Stores/unreadFeedsAtom';
+import {PageProps} from '@/types';
+import AtomsHydrator from '@/Core/AtomsHydrator';
 
 window.appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
 
@@ -15,13 +19,17 @@ void createInertiaApp({
     resolve: (name: string) => resolvePageComponent(`./Pages/${name}.tsx`, import.meta.glob('./Pages/**/*.tsx')),
     setup({el, App, props}) {
         createRoot(el).render(
-            <LaravelReactI18nProvider
-                locale={getBrowserLocale()}
-                fallbackLocale="en"
-                files={import.meta.glob('/lang/*.json')}
-            >
-                <AppWithLoadedTranslations app={App} {...props}/>
-            </LaravelReactI18nProvider>
+            <Provider>
+                <AtomsHydrator atomValues={[[unreadFeedsAtom, (props.initialPage.props as PageProps).unreadFeeds]]}>
+                    <LaravelReactI18nProvider
+                        locale={getBrowserLocale()}
+                        fallbackLocale="en"
+                        files={import.meta.glob('/lang/*.json')}
+                    >
+                        <AppWithLoadedTranslations app={App} {...props}/>
+                    </LaravelReactI18nProvider>
+                </AtomsHydrator>
+            </Provider>
         );
     },
     progress: {
