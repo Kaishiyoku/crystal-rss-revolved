@@ -15,7 +15,7 @@ import {twMerge} from 'tailwind-merge';
 export const Link = React.forwardRef(function Link({external = false, hover = false, color = 'zinc', className, ...props}: { external?: boolean; hover?: boolean; color?: 'zinc' | 'blue'; } & InertiaLinkProps & React.ComponentPropsWithoutRef<'a'>, ref: React.ForwardedRef<HTMLAnchorElement>) {
     const colorClasses = clsx({
         'text-blue-600 dark:text-blue-400': color === 'blue',
-        'hover:underline': hover,
+        'underline decoration-transparent hover:decoration-blue-600 dark:hover:decoration-blue-400': hover,
     });
 
     return (

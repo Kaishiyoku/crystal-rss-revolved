@@ -1,7 +1,7 @@
-import {Link} from '@inertiajs/react';
 import slug from 'slug';
 import {useEffect, useRef} from 'react';
 import Breadcrumb from '@/types/Breadcrumb';
+import {Link} from '@/Components/Link';
 
 export default function Breadcrumbs({breadcrumbs}: { breadcrumbs?: Breadcrumb[]; }) {
     if (!breadcrumbs) {
@@ -24,7 +24,7 @@ export default function Breadcrumbs({breadcrumbs}: { breadcrumbs?: Breadcrumb[];
         const breadcrumbElement = breadcrumb.url
             ? (
                 <li key={slug(breadcrumb.title)}>
-                    <Link href={breadcrumb.url} className="font-semibold" color="blue">
+                    <Link href={breadcrumb.url} className="font-semibold" color="blue" hover>
                         {breadcrumb.title}
                     </Link>
                 </li>
