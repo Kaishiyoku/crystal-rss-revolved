@@ -8,6 +8,11 @@ declare global {
         appName: string;
     }
 
+    // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
+    interface SymbolConstructor {
+        readonly observable: symbol;
+    }
+
     const route: typeof routeFn;
     const Ziggy: ZiggyConfig;
 }
