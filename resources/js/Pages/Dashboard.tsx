@@ -32,7 +32,7 @@ export default function Dashboard(props: DashboardPageProps) {
         }
 
         router.get(props.feedItems.next_page_url, undefined, {
-            only: ['feedItems'],
+            only: ['feedItems', 'unreadFeeds'],
             preserveState: true,
             preserveScroll: true,
             onSuccess: (page) => setAllFeedItems([...allFeedItems, ...(page.props as DashboardPageProps).feedItems.data]),

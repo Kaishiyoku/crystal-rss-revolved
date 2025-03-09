@@ -5,7 +5,7 @@ import {useSetAtom} from 'jotai/index';
 import {unreadFeedsAtom} from '@/Stores/unreadFeedsAtom';
 
 // @ts-expect-error the app type doesn't matter here because we directly use this component in our Inertia setup function
-export default function AppWithLoadedTranslations({app: App, ...props}) {
+export default function HydratedApp({app: App, ...props}) {
     const {loading} = useLaravelReactI18n();
 
     const setUnreadFeedsAtom = useSetAtom(unreadFeedsAtom);

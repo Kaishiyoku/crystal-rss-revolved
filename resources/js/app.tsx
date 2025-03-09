@@ -6,7 +6,7 @@ import {createInertiaApp} from '@inertiajs/react';
 import {resolvePageComponent} from 'laravel-vite-plugin/inertia-helpers';
 import {LaravelReactI18nProvider} from 'laravel-react-i18n';
 import getBrowserLocale from '@/Utils/getBrowserLocale';
-import AppWithLoadedTranslations from '@/Components/AppWithLoadedTranslations';
+import HydratedApp from '@/Components/HydratedApp';
 import {Provider} from 'jotai';
 import {unreadFeedsAtom} from '@/Stores/unreadFeedsAtom';
 import {PageProps} from '@/types';
@@ -26,7 +26,7 @@ void createInertiaApp({
                         fallbackLocale="en"
                         files={import.meta.glob('/lang/*.json')}
                     >
-                        <AppWithLoadedTranslations app={App} {...props}/>
+                        <HydratedApp app={App} {...props}/>
                     </LaravelReactI18nProvider>
                 </AtomsHydrator>
             </Provider>
