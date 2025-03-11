@@ -11,8 +11,8 @@ import MarkAllAsReadButton from '@/Components/MarkAllAsReadButton';
 import {NewspaperIcon} from '@heroicons/react/24/outline';
 import ShortFeedWithFeedItemsCount from '@/types/models/ShortFeedWithFeedItemsCount';
 import {FeedItem} from '@/types/generated/models';
-import {useAtomValue} from 'jotai';
-import {totalNumberOfFeedItemsAtom} from '@/Stores/unreadFeedsAtom';
+import {useAtomValue, useSetAtom} from 'jotai';
+import {mergeWithEmptyUnreadFeeds, totalNumberOfFeedItemsAtom, unreadFeedsAtom} from '@/Stores/unreadFeedsAtom';
 
 type DashboardPageProps = PageProps & {
     unreadFeeds: ShortFeedWithFeedItemsCount[];
@@ -25,6 +25,8 @@ export default function Dashboard(props: DashboardPageProps) {
     const [allFeedItems, setAllFeedItems] = useState(props.feedItems.data);
 
     const totalNumberOfFeedItemsAtomValue = useAtomValue(totalNumberOfFeedItemsAtom);
+    const unreadFeedsAtomValue = useAtomValue(unreadFeedsAtom);
+    const setUnreadFeedsAtomValue = useSetAtom(unreadFeedsAtom);
 
     const loadMore = () => {
         if (!props.feedItems.next_page_url) {
@@ -35,7 +37,11 @@ export default function Dashboard(props: DashboardPageProps) {
             only: ['feedItems', 'unreadFeeds'],
             preserveState: true,
             preserveScroll: true,
-            onSuccess: (page) => setAllFeedItems([...allFeedItems, ...(page.props as DashboardPageProps).feedItems.data]),
+            onSuccess: (page) => {
+                setUnreadFeedsAtomValue(mergeWithEmptyUnreadFeeds((page.props as PageProps).unreadFeeds, unreadFeedsAtomValue));
+
+                setAllFeedItems([...allFeedItems, ...(page.props as DashboardPageProps).feedItems.data]);
+            },
         });
     };
 

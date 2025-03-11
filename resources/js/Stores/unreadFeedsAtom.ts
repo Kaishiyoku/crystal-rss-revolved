@@ -1,6 +1,7 @@
 import {atom} from 'jotai';
 import ShortFeedWithFeedItemsCount from '@/types/models/ShortFeedWithFeedItemsCount';
 import {FeedItem} from '@/types/generated/models';
+import {pluck} from 'ramda';
 
 export const unreadFeedsAtom = atom<ShortFeedWithFeedItemsCount[]>([]);
 
@@ -16,4 +17,16 @@ export const updateUnreadFeedByFeedItem = (feedItem: FeedItem) =>
             ? {...unreadFeed, feed_items_count: unreadFeed.feed_items_count + (feedItem.read_at ? -1 : 1)}
             : unreadFeed
         );
+    };
+
+export const mergeWithEmptyUnreadFeeds = (newUnreadFeeds: ShortFeedWithFeedItemsCount[], prevUnreadFeeds: ShortFeedWithFeedItemsCount[]) =>
+    () => {
+        const newUnreadFeedIds = pluck('id', newUnreadFeeds);
+
+        return [
+            ...newUnreadFeeds,
+            ...prevUnreadFeeds.filter((prevUnreadFeed) =>
+                prevUnreadFeed.feed_items_count === 0 && !newUnreadFeedIds.includes(prevUnreadFeed.id)
+            ),
+        ];
     };
