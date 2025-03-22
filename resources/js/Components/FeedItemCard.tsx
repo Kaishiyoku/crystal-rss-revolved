@@ -34,7 +34,7 @@ export default function FeedItemCard({feedItem}: { feedItem: FeedItem; }) {
     return (
         <div
             key={internalFeedItem.id}
-            className={clsx('@container p-4 ring-1 ring-zinc-950/10 dark:ring-zinc-50/10 hover:ring-blue-500/50 rounded-lg transition ease-out duration-300', {'opacity-50': internalFeedItem.read_at})}
+            className={clsx('@container p-4 ring-1 ring-zinc-950/10 dark:ring-zinc-50/10 hover:ring-blue-600/50 dark:hover:ring-blue-500/50 rounded-lg transition ease-out duration-300', {'opacity-50': internalFeedItem.read_at})}
         >
             <div className="flex flex-col @md:flex-row h-full">
                 <div className="flex flex-col grow-0 mb-4 @md:mb-0 @md:mr-4">
