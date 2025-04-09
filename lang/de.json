@@ -112,5 +112,7 @@
     "Delete user": "Benutzer löschen",
     "Do you really want to delete the user “:name”?": "Wollen Sie den Benutzer „:name” wirklich löschen?",
     "Manage users": "Benutzer verwalten",
-    "Read article": "Artikel lesen"
+    "Read article": "Artikel lesen",
+    "Loading articles…": "Artikel werden geladen…",
+    "Loading…": "Lädt…"
 }

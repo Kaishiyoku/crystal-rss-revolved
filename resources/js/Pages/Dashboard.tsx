@@ -1,5 +1,5 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import {Head, router} from '@inertiajs/react';
+import {Head, router, WhenVisible} from '@inertiajs/react';
 import {useState} from 'react';
 import FeedItemCard from '@/Components/FeedItemCard';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
@@ -13,6 +13,7 @@ import ShortFeedWithFeedItemsCount from '@/types/models/ShortFeedWithFeedItemsCo
 import {FeedItem} from '@/types/generated/models';
 import {useAtomValue, useSetAtom} from 'jotai';
 import {mergeWithEmptyUnreadFeeds, totalNumberOfFeedItemsAtom, unreadFeedsAtom} from '@/Stores/unreadFeedsAtom';
+import LoadingIcon from '@/Components/Icons/LoadingIcon';
 
 type DashboardPageProps = PageProps & {
     unreadFeeds: ShortFeedWithFeedItemsCount[];
@@ -23,6 +24,9 @@ type DashboardPageProps = PageProps & {
 export default function Dashboard(props: DashboardPageProps) {
     const {t, tChoice} = useLaravelReactI18n();
     const [allFeedItems, setAllFeedItems] = useState(props.feedItems.data);
+    const [isFetchingMore, setIsFetchingMore] = useState(false);
+    const [isFetchingMoreManually, setIsFetchingMoreManually] = useState(false);
+    const [timesLoadedMore, setTimesLoadedMore] = useState(0);
 
     const totalNumberOfFeedItemsAtomValue = useAtomValue(totalNumberOfFeedItemsAtom);
     const unreadFeedsAtomValue = useAtomValue(unreadFeedsAtom);
@@ -33,6 +37,8 @@ export default function Dashboard(props: DashboardPageProps) {
             return;
         }
 
+        setIsFetchingMoreManually(true);
+
         router.get(props.feedItems.next_page_url, undefined, {
             only: ['feedItems', 'unreadFeeds'],
             preserveState: true,
@@ -41,8 +47,31 @@ export default function Dashboard(props: DashboardPageProps) {
                 setUnreadFeedsAtomValue(mergeWithEmptyUnreadFeeds((page.props as PageProps).unreadFeeds, unreadFeedsAtomValue));
 
                 setAllFeedItems([...allFeedItems, ...(page.props as DashboardPageProps).feedItems.data]);
+
+                setTimesLoadedMore((prev) => prev + 1);
+            },
+            onFinish: () => {
+                setIsFetchingMoreManually(false);
             },
         });
+    };
+
+    const onBeforeMoreLoading = () => {
+        setIsFetchingMore(true);
+    };
+
+    const onMoreLoaded = (e: unknown) => {
+        const {feedItems, unreadFeeds} = (e as { props: DashboardPageProps; }).props;
+
+        setUnreadFeedsAtomValue(mergeWithEmptyUnreadFeeds(unreadFeeds, unreadFeedsAtomValue));
+
+        setAllFeedItems([...allFeedItems, ...feedItems.data]);
+
+        setTimesLoadedMore((prev) => prev + 1);
+    };
+
+    const onMoreFinishedLoading = () => {
+        setIsFetchingMore(false);
     };
 
     return (
@@ -85,16 +114,44 @@ export default function Dashboard(props: DashboardPageProps) {
                     />
                 )}
 
-            <div className="pt-5">
-                {props.feedItems.next_page_url && (
-                    <Button
-                        onClick={loadMore}
-                        plain
-                    >
-                        {t('Load more')}
-                    </Button>
+            <WhenVisible
+                always={timesLoadedMore < 5 && props.feedItems.next_cursor !== null}
+                fallback={(
+                    <div className="flex max-sm:justify-center pt-6">
+                        <LoadingIcon/>
+                    </div>
                 )}
-            </div>
+                params={{
+                    data: {feed_id: props.selectedFeedId, cursor: props.feedItems.next_cursor},
+                    only: ['feedItems', 'unreadFeeds'],
+                    onBefore: onBeforeMoreLoading,
+                    onSuccess: onMoreLoaded,
+                    onFinish: onMoreFinishedLoading,
+                }}
+            >
+                <div>
+                    {isFetchingMore && (
+                        <div className="flex max-sm:justify-center pt-6">
+                            <LoadingIcon/>
+                        </div>
+                    )}
+                </div>
+            </WhenVisible>
+
+            {timesLoadedMore >= 5 && (
+                <div className="pt-6">
+                    {props.feedItems.next_page_url && (
+                        <Button
+                            disabled={isFetchingMoreManually}
+                            className="max-sm:w-full"
+                            onClick={loadMore}
+                            plain
+                        >
+                            <span>{t('Load more')}</span>
+                        </Button>
+                    )}
+                </div>
+            )}
         </AuthenticatedLayout>
     );
 }
