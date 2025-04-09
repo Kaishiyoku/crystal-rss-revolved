@@ -122,7 +122,7 @@ export default function Dashboard(props: DashboardPageProps) {
                     </div>
                 )}
                 params={{
-                    data: {feed_id: props.selectedFeedId, cursor: props.feedItems.next_cursor},
+                    data: props.selectedFeedId ? {feed_id: props.selectedFeedId, cursor: props.feedItems.next_cursor} : {cursor: props.feedItems.next_cursor},
                     only: ['feedItems', 'unreadFeeds'],
                     onBefore: onBeforeMoreLoading,
                     onSuccess: onMoreLoaded,
