@@ -1,6 +1,6 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import {Head, router, WhenVisible} from '@inertiajs/react';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import FeedItemCard from '@/Components/FeedItemCard';
 import {useLaravelReactI18n} from 'laravel-react-i18n';
 import {Button} from '@/Components/Button';
@@ -114,29 +114,31 @@ export default function Dashboard(props: DashboardPageProps) {
                     />
                 )}
 
-            <WhenVisible
-                always={timesLoadedMore < 5 && props.feedItems.next_cursor !== null}
-                fallback={(
-                    <div className="flex max-sm:justify-center pt-6">
-                        <LoadingIcon/>
-                    </div>
-                )}
-                params={{
-                    data: props.selectedFeedId ? {feed_id: props.selectedFeedId, cursor: props.feedItems.next_cursor} : {cursor: props.feedItems.next_cursor},
-                    only: ['feedItems', 'unreadFeeds'],
-                    onBefore: onBeforeMoreLoading,
-                    onSuccess: onMoreLoaded,
-                    onFinish: onMoreFinishedLoading,
-                }}
-            >
-                <div>
-                    {isFetchingMore && (
+            {props.feedItems.next_cursor !== null && (
+                <WhenVisible
+                    always={timesLoadedMore < 5}
+                    fallback={(
                         <div className="flex max-sm:justify-center pt-6">
                             <LoadingIcon/>
                         </div>
                     )}
-                </div>
-            </WhenVisible>
+                    params={{
+                        data: props.selectedFeedId ? {feed_id: props.selectedFeedId, cursor: props.feedItems.next_cursor} : {cursor: props.feedItems.next_cursor},
+                        only: ['feedItems', 'unreadFeeds'],
+                        onBefore: onBeforeMoreLoading,
+                        onSuccess: onMoreLoaded,
+                        onFinish: onMoreFinishedLoading,
+                    }}
+                >
+                    <div>
+                        {isFetchingMore && (
+                            <div className="flex max-sm:justify-center pt-6">
+                                <LoadingIcon/>
+                            </div>
+                        )}
+                    </div>
+                </WhenVisible>
+            )}
 
             {timesLoadedMore >= 5 && (
                 <div className="pt-6">
