@@ -7,11 +7,11 @@ import {Description, Heading} from '@/Components/Heading';
 import {ErrorMessage, Field, FieldGroup, Label} from '@/Components/Fieldset';
 import {Input} from '@/Components/Form/Input';
 import {User} from '@/types/generated/models';
+import {PageProps} from '@/types';
 
 export default function UpdateProfileInformation({mustVerifyEmail, status, className}: { mustVerifyEmail: boolean; status: string; className?: string; }) {
     const {t} = useLaravelReactI18n();
-    // @ts-expect-error we know that the page props include the authenticated user
-    const user = usePage().props.auth.user as User;
+    const user = usePage<PageProps>().props.auth.user;
 
     const {data, setData, patch, errors, processing, recentlySuccessful} = useForm({
         name: user.name,
