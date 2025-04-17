@@ -15,7 +15,7 @@ import {Feed} from '@/types/generated/models';
 
 export default function Form({method, action, feed, categories}: { method: 'post' | 'put'; action: string; feed: Feed; categories: SelectNumberOption[]; }) {
     const {t, tChoice} = useLaravelReactI18n();
-    const {monthsAfterPruningFeedItems} = usePage().props as PageProps;
+    const {monthsAfterPruningFeedItems} = usePage().props;
     const [isDiscoverFeedProcessing, setIsDiscoverFeedProcessing] = useState(false);
     const [searchUrl, setSearchUrl] = useState('');
     const [discoveredFeedUrls, setDiscoveredFeedUrls] = useState<string[]>([]);
