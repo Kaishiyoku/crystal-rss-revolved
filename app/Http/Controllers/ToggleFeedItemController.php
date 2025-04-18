@@ -14,7 +14,7 @@ class ToggleFeedItemController extends Controller
      */
     public function __invoke(FeedItem $feedItem)
     {
-        Gate::authorize('update', $feedItem);
+        $this->authorize('update', $feedItem);
 
         $feedItem->update([
             'read_at' => $feedItem->read_at ? null : now(),

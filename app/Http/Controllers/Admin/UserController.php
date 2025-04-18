@@ -15,11 +15,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:viewAny,App\Models\User')->only('index');
-        $this->middleware('can:view,user')->only('show');
-        $this->middleware('can:create,App\Models\User')->only('create', 'store');
-        $this->middleware('can:update,user')->only('edit', 'update');
-        $this->middleware('can:delete,user')->only('destroy');
+        $this->authorizeResource(User::class);
     }
 
     /**
