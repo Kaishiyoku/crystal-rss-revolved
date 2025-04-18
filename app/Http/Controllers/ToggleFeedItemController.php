@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Gate;
 use App\Models\FeedItem;
+use Illuminate\Support\Facades\Gate;
 
 class ToggleFeedItemController extends Controller
 {
