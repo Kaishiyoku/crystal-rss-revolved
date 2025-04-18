@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
@@ -10,15 +12,17 @@ use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
 
-class CategoryController extends Controller
+class CategoryController extends Controller implements HasMiddleware
 {
-    public function __construct()
+    public static function middleware(): array
     {
-        $this->middleware('can:viewAny,App\Models\Category')->only('index');
-        $this->middleware('can:view,category')->only('show');
-        $this->middleware('can:create,App\Models\Category')->only('create', 'store');
-        $this->middleware('can:update,category')->only('edit', 'update');
-        $this->middleware('can:delete,category')->only('destroy');
+        return [
+            new Middleware('can:viewAny,App\Models\Category', only: ['index']),
+            new Middleware('can:view,category', only: ['show']),
+            new Middleware('can:create,App\Models\Category', only: ['create', 'store']),
+            new Middleware('can:update,category', only: ['edit', 'update']),
+            new Middleware('can:delete,category', only: ['destroy']),
+        ];
     }
 
     /**

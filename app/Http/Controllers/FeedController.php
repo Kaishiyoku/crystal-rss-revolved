@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use App\Http\Requests\StoreFeedRequest;
 use App\Http\Requests\UpdateFeedRequest;
 use App\Models\Feed;
@@ -11,15 +13,17 @@ use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
 
-class FeedController extends Controller
+class FeedController extends Controller implements HasMiddleware
 {
-    public function __construct()
+    public static function middleware(): array
     {
-        $this->middleware('can:viewAny,App\Models\Feed')->only('index');
-        $this->middleware('can:view,feed')->only('show');
-        $this->middleware('can:create,App\Models\Feed')->only('create', 'store');
-        $this->middleware('can:update,feed')->only('edit', 'update');
-        $this->middleware('can:delete,feed')->only('destroy');
+        return [
+            new Middleware('can:viewAny,App\Models\Feed', only: ['index']),
+            new Middleware('can:view,feed', only: ['show']),
+            new Middleware('can:create,App\Models\Feed', only: ['create', 'store']),
+            new Middleware('can:update,feed', only: ['edit', 'update']),
+            new Middleware('can:delete,feed', only: ['destroy']),
+        ];
     }
 
     /**

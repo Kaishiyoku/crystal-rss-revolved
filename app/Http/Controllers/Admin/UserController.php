@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
@@ -9,15 +11,17 @@ use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Inertia\Response;
 
-class UserController extends Controller
+class UserController extends Controller implements HasMiddleware
 {
-    public function __construct()
+    public static function middleware(): array
     {
-        $this->middleware('can:viewAny,App\Models\User')->only('index');
-        $this->middleware('can:view,user')->only('show');
-        $this->middleware('can:create,App\Models\User')->only('create', 'store');
-        $this->middleware('can:update,user')->only('edit', 'update');
-        $this->middleware('can:delete,user')->only('destroy');
+        return [
+            new Middleware('can:viewAny,App\Models\User', only: ['index']),
+            new Middleware('can:view,user', only: ['show']),
+            new Middleware('can:create,App\Models\User', only: ['create', 'store']),
+            new Middleware('can:update,user', only: ['edit', 'update']),
+            new Middleware('can:delete,user', only: ['destroy']),
+        ];
     }
 
     /**
