@@ -6,7 +6,6 @@ import React from 'react';
 import {Description, Heading} from '@/Components/Heading';
 import {ErrorMessage, Field, FieldGroup, Label} from '@/Components/Fieldset';
 import {Input} from '@/Components/Form/Input';
-import {User} from '@/types/generated/models';
 import {PageProps} from '@/types';
 
 export default function UpdateProfileInformation({mustVerifyEmail, status, className}: { mustVerifyEmail: boolean; status: string; className?: string; }) {
