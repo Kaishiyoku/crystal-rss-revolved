@@ -1,40 +1,40 @@
-import ky from 'ky';
-import NProgress from 'nprogress';
-import Cookies from 'js-cookie';
+import ky from "ky";
+import NProgress from "nprogress";
+import Cookies from "js-cookie";
 
 NProgress.configure({
-    showSpinner: false,
+	showSpinner: false,
 });
 
 window.ky = ky.extend({
-    headers: {
-        Accept: 'application/json',
-    },
-    hooks: {
-        beforeRequest: [
-            (request) => {
-                NProgress.start();
+	headers: {
+		Accept: "application/json",
+	},
+	hooks: {
+		beforeRequest: [
+			(request) => {
+				NProgress.start();
 
-                if (window.location.host === new URL(request.url).host) {
-                    request.headers.set('X-XSRF-TOKEN', Cookies.get('XSRF-TOKEN') ?? '');
-                }
-            },
-        ],
-        afterResponse: [
-            (request, options, response) => {
-                NProgress.done();
+				if (window.location.host === new URL(request.url).host) {
+					request.headers.set("X-XSRF-TOKEN", Cookies.get("XSRF-TOKEN") ?? "");
+				}
+			},
+		],
+		afterResponse: [
+			(request, options, response) => {
+				NProgress.done();
 
-                return response;
-            },
-        ],
-        beforeError: [
-            (error) => {
-                NProgress.done();
+				return response;
+			},
+		],
+		beforeError: [
+			(error) => {
+				NProgress.done();
 
-                return error;
-            },
-        ],
-    },
+				return error;
+			},
+		],
+	},
 });
 
 /**

@@ -1,7 +1,7 @@
-import {Category} from '@/types/generated/models';
+import { Category } from "@/types/generated/models";
 
 type CategoryWithFeedsCount = Category & {
-    feeds_count: number;
+	feeds_count: number;
 };
 
 export default CategoryWithFeedsCount;
