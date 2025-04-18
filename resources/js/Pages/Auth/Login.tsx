@@ -1,12 +1,12 @@
 import type React from 'react';
-import {useEffect} from 'react';
-import {Checkbox, CheckboxField} from '@/Components/Form/Checkbox';
+import { useEffect } from 'react';
+import { Checkbox, CheckboxField } from '@/Components/Form/Checkbox';
 import GuestLayout from '@/Layouts/GuestLayout';
-import {Head, Link, useForm} from '@inertiajs/react';
-import {Button} from '@/Components/Button';
-import {useLaravelReactI18n} from 'laravel-react-i18n';
-import {ErrorMessage, Field, FieldGroup, Label} from '@/Components/Fieldset';
-import {Input} from '@/Components/Form/Input';
+import { Head, Link, useForm } from '@inertiajs/react';
+import { Button } from '@/Components/Button';
+import { useLaravelReactI18n } from 'laravel-react-i18n';
+import { ErrorMessage, Field, FieldGroup, Label } from '@/Components/Fieldset';
+import { Input } from '@/Components/Form/Input';
 
 export default function Login({
 	status,
@@ -66,7 +66,7 @@ export default function Login({
 							value={data.password}
 							className="mt-1 block w-full"
 							autoComplete="current-password"
-                            onChange={(event) => setData('password', event.target.value)}
+							onChange={(event) => setData('password', event.target.value)}
 						/>
 						<ErrorMessage>{errors.password}</ErrorMessage>
 					</Field>

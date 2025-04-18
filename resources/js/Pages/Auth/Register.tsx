@@ -1,11 +1,11 @@
 import type React from 'react';
-import {useEffect} from 'react';
+import { useEffect } from 'react';
 import GuestLayout from '@/Layouts/GuestLayout';
-import {Head, Link, useForm} from '@inertiajs/react';
-import {Button} from '@/Components/Button';
-import {useLaravelReactI18n} from 'laravel-react-i18n';
-import {ErrorMessage, Field, FieldGroup, Label} from '@/Components/Fieldset';
-import {Input} from '@/Components/Form/Input';
+import { Head, Link, useForm } from '@inertiajs/react';
+import { Button } from '@/Components/Button';
+import { useLaravelReactI18n } from 'laravel-react-i18n';
+import { ErrorMessage, Field, FieldGroup, Label } from '@/Components/Fieldset';
+import { Input } from '@/Components/Form/Input';
 
 export default function Register() {
 	const { t } = useLaravelReactI18n();
@@ -43,7 +43,7 @@ export default function Register() {
 							value={data.name}
 							className="mt-1 block w-full"
 							autoComplete="name"
-                            onChange={(event) => setData('name', event.target.value)}
+							onChange={(event) => setData('name', event.target.value)}
 							autoFocus
 							required
 						/>
@@ -59,7 +59,7 @@ export default function Register() {
 							value={data.email}
 							className="mt-1 block w-full"
 							autoComplete="username"
-                            onChange={(event) => setData('email', event.target.value)}
+							onChange={(event) => setData('email', event.target.value)}
 							required
 						/>
 						<ErrorMessage>{errors.email}</ErrorMessage>
@@ -74,7 +74,7 @@ export default function Register() {
 							value={data.password}
 							className="mt-1 block w-full"
 							autoComplete="new-password"
-                            onChange={(event) => setData('password', event.target.value)}
+							onChange={(event) => setData('password', event.target.value)}
 							required
 						/>
 						<ErrorMessage>{errors.password}</ErrorMessage>
@@ -91,7 +91,9 @@ export default function Register() {
 							value={data.password_confirmation}
 							className="mt-1 block w-full"
 							autoComplete="new-password"
-							onChange={(event) => setData('password_confirmation', event.target.value)}
+							onChange={(event) =>
+								setData('password_confirmation', event.target.value)
+							}
 							required
 						/>
 						<ErrorMessage>{errors.password_confirmation}</ErrorMessage>
