@@ -22,7 +22,7 @@
         "laravel/tinker": "^2.10.1",
         "neitanod/forceutf8": "^2.0",
         "predis/predis": "^2.2",
-        "robertboes/inertia-breadcrumbs": "^0.7.0-beta",
+        "robertboes/inertia-breadcrumbs": "^0.8.0",
         "tightenco/ziggy": "^2.0"
     },
     "require-dev": {
