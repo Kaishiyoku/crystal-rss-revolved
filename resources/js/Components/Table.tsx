@@ -1,5 +1,6 @@
 import clsx from "clsx";
-import React, { ReactNode, createContext, useContext, useState } from "react";
+import type React from "react";
+import { type ReactNode, createContext, useContext, useState } from "react"
 import { Link } from "@/Components/Link";
 
 const TableContext = createContext<{

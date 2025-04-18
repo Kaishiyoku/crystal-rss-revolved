@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import type React from "react";
+import { useEffect } from "react";
 import { Checkbox, CheckboxField } from "@/Components/Form/Checkbox";
 import GuestLayout from "@/Layouts/GuestLayout";
 import { Head, Link, useForm } from "@inertiajs/react";
@@ -18,6 +19,7 @@ export default function Login({
 		remember: false as boolean,
 	});
 
+    // biome-ignore lint/correctness/useExhaustiveDependencies(reset): we only want to run this once
 	useEffect(() => {
 		return () => {
 			reset("password");

@@ -3,7 +3,7 @@ import clsx from "clsx";
 import { useLaravelReactI18n } from "laravel-react-i18n";
 import { Button } from "@/Components/Button";
 import formatDateTime from "@/Utils/formatDateTime";
-import { RouteParams } from "ziggy-js";
+import type { RouteParams } from "ziggy-js";
 import {
 	ArrowTopRightOnSquareIcon,
 	CalendarDaysIcon,
@@ -12,7 +12,7 @@ import {
 	RssIcon,
 } from "@heroicons/react/20/solid";
 import { ImagePlaceholder, ImageWithBlurHash } from "@/Components/Image";
-import { FeedItem } from "@/types/generated/models";
+import type { FeedItem } from "@/types/generated/models";
 import { Heading } from "@/Components/Heading";
 import { useSetAtom } from "jotai";
 import {

@@ -1,5 +1,5 @@
 import { useLaravelReactI18n } from "laravel-react-i18n";
-import { PropsWithoutRef, SVGProps } from "react";
+import type { PropsWithoutRef, SVGProps } from "react";
 import { twMerge } from "tailwind-merge";
 
 export default function LoadingIcon({
@@ -11,6 +11,7 @@ export default function LoadingIcon({
 	return (
 		<svg
 			{...props}
+            aria-hidden="true"
 			className={twMerge("size-5 animate-spin text-white", className)}
 			xmlns="http://www.w3.org/2000/svg"
 			fill="none"

@@ -2,13 +2,13 @@ import { Head, useForm } from "@inertiajs/react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import Form from "@/Pages/Feeds/Partials/Form";
 import { useLaravelReactI18n } from "laravel-react-i18n";
-import { PageProps } from "@/types";
-import { RouteParams } from "ziggy-js";
-import { SelectNumberOption } from "@/types/SelectOption";
+import type { PageProps } from "@/types";
+import type { RouteParams } from "ziggy-js";
+import type { SelectNumberOption } from "@/types/SelectOption";
 import { Button } from "@/Components/Button";
 import ConfirmAlert from "@/Components/ConfirmAlert";
 import { useState } from "react";
-import { Feed } from "@/types/generated/models";
+import type { Feed } from "@/types/generated/models";
 
 export default function Edit({
 	feed,

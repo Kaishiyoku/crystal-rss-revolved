@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 type HeadingProps = {
 	level?: 1 | 2 | 3 | 4 | 5 | 6;

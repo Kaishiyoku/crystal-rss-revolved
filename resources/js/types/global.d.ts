@@ -1,5 +1,5 @@
-import { route as routeFn } from "ziggy-js";
-import { KyInstance } from "ky";
+import type { route as routeFn } from "ziggy-js";
+import type { KyInstance } from "ky";
 
 declare global {
 	// eslint-disable-next-line @typescript-eslint/consistent-type-definitions

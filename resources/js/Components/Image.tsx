@@ -1,6 +1,6 @@
 import React, {
-	CanvasHTMLAttributes,
-	ComponentPropsWithoutRef,
+	type CanvasHTMLAttributes,
+	type ComponentPropsWithoutRef,
 	useEffect,
 	useRef,
 } from "react";
@@ -85,6 +85,8 @@ function BlurhashCanvas({
 		ctx.putImageData(imageData, 0, 0);
 	};
 
+    // biome-ignore lint/correctness/useExhaustiveDependencies(hash): we need to run this effect when the hash changes
+    // biome-ignore lint/correctness/useExhaustiveDependencies(draw): we only need to run this effect when the hash changes
 	useEffect(() => {
 		draw();
 	}, [hash]);

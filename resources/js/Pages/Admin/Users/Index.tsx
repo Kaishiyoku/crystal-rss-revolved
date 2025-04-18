@@ -1,7 +1,7 @@
 import { Head } from "@inertiajs/react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { useLaravelReactI18n } from "laravel-react-i18n";
-import { PageProps } from "@/types";
+import type { PageProps } from "@/types";
 import formatDateTime from "@/Utils/formatDateTime";
 import DeleteUserButton from "@/Pages/Admin/Users/Partials/DeleteUserButton";
 import {
@@ -14,7 +14,7 @@ import {
 	TableMobileText,
 	TableRow,
 } from "@/Components/Table";
-import UserWithStats from "@/types/models/UserWithStats";
+import type UserWithStats from "@/types/models/UserWithStats";
 
 export default function Index({
 	users,

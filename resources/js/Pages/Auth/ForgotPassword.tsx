@@ -2,7 +2,7 @@ import GuestLayout from "@/Layouts/GuestLayout";
 import { Head, useForm } from "@inertiajs/react";
 import { Button } from "@/Components/Button";
 import { useLaravelReactI18n } from "laravel-react-i18n";
-import React from "react";
+import type React from "react";
 import { Input } from "@/Components/Form/Input";
 import { ErrorMessage, Field, FieldGroup } from "@/Components/Fieldset";
 

@@ -1,17 +1,18 @@
 import { useForm, usePage } from "@inertiajs/react";
-import React, { useState } from "react";
+import type React from "react";
+import { useState } from "react";
 import { useLaravelReactI18n } from "laravel-react-i18n";
 import { Button } from "@/Components/Button";
-import { PageProps } from "@/types";
-import { SelectNumberOption } from "@/types/SelectOption";
-import DiscoveredFeed from "@/types/DiscoveredFeed";
+import type { PageProps } from "@/types";
+import type { SelectNumberOption } from "@/types/SelectOption";
+import type DiscoveredFeed from "@/types/DiscoveredFeed";
 import { Input } from "@/Components/Form/Input";
 import { ErrorMessage, Field, FieldGroup, Label } from "@/Components/Fieldset";
 import { Checkbox, CheckboxField } from "@/Components/Form/Checkbox";
 import InputListbox from "@/Components/Form/InputListbox";
 import toNumber from "@/Utils/toNumber";
 import { LinkStack, LinkStackItem } from "@/Components/LinkStack";
-import { Feed } from "@/types/generated/models";
+import type { Feed } from "@/types/generated/models";
 
 export default function Form({
 	method,

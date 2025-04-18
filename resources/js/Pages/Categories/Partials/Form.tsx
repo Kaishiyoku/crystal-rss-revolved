@@ -1,10 +1,10 @@
 import { useForm } from "@inertiajs/react";
 import { useLaravelReactI18n } from "laravel-react-i18n";
 import { Button } from "@/Components/Button";
-import React from "react";
+import type React from "react";
 import { ErrorMessage, Field, FieldGroup, Label } from "@/Components/Fieldset";
 import { Input } from "@/Components/Form/Input";
-import { Category } from "@/types/generated/models";
+import type { Category } from "@/types/generated/models";
 
 export default function Form({
 	method,

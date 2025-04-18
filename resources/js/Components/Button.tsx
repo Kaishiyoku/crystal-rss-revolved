@@ -1,6 +1,7 @@
 import * as Headless from "@headlessui/react";
 import clsx from "clsx";
-import React, { forwardRef } from "react";
+import type React from "react";
+import { forwardRef } from "react";
 import { Link } from "@/Components/Link";
 
 const styles = {

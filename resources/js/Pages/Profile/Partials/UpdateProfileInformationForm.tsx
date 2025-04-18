@@ -2,11 +2,11 @@ import { Link, useForm, usePage } from "@inertiajs/react";
 import { Transition } from "@headlessui/react";
 import { useLaravelReactI18n } from "laravel-react-i18n";
 import { Button } from "@/Components/Button";
-import React from "react";
+import type React from "react";
 import { Description, Heading } from "@/Components/Heading";
 import { ErrorMessage, Field, FieldGroup, Label } from "@/Components/Fieldset";
 import { Input } from "@/Components/Form/Input";
-import { PageProps } from "@/types";
+import type { PageProps } from "@/types";
 
 export default function UpdateProfileInformation({
 	mustVerifyEmail,

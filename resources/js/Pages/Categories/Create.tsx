@@ -2,8 +2,8 @@ import { Head } from "@inertiajs/react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import Form from "@/Pages/Categories/Partials/Form";
 import { useLaravelReactI18n } from "laravel-react-i18n";
-import { PageProps } from "@/types";
-import { Category } from "@/types/generated/models";
+import type { PageProps } from "@/types";
+import type { Category } from "@/types/generated/models";
 
 export default function Create({
 	category,

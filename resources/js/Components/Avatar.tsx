@@ -1,6 +1,7 @@
 import * as Headless from "@headlessui/react";
 import clsx from "clsx";
-import React, { forwardRef } from "react";
+import type React from "react";
+import { forwardRef } from "react";
 import { Link } from "@/Components/Link";
 import { TouchTarget } from "@/Components/Button";
 
@@ -36,23 +37,26 @@ export function Avatar({
 			)}
 		>
 			{initials && (
-				<svg
-					className="size-full fill-current p-[5%] text-[48px] font-medium uppercase select-none"
-					viewBox="0 0 100 100"
-					aria-hidden={alt ? undefined : "true"}
-				>
-					{alt && <title>{alt}</title>}
-					<text
-						x="50%"
-						y="50%"
-						alignmentBaseline="middle"
-						dominantBaseline="middle"
-						textAnchor="middle"
-						dy=".125em"
-					>
-						{initials}
-					</text>
-				</svg>
+                <>
+                    {/* biome-ignore lint/a11y/noSvgWithoutTitle: we don't necessarily need a title here */}
+                    <svg
+                        className="size-full fill-current p-[5%] text-[48px] font-medium uppercase select-none"
+                        viewBox="0 0 100 100"
+                        aria-hidden={alt ? undefined : "true"}
+                    >
+                        {alt && <title>{alt}</title>}
+                        <text
+                            x="50%"
+                            y="50%"
+                            alignmentBaseline="middle"
+                            dominantBaseline="middle"
+                            textAnchor="middle"
+                            dy=".125em"
+                        >
+                            {initials}
+                        </text>
+                    </svg>
+                </>
 			)}
 			{src && <img className="size-full" src={src} alt={alt} />}
 		</span>

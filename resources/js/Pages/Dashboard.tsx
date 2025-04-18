@@ -5,12 +5,12 @@ import FeedItemCard from "@/Components/FeedItemCard";
 import { useLaravelReactI18n } from "laravel-react-i18n";
 import { Button } from "@/Components/Button";
 import { EmptyState } from "@/Components/EmptyState";
-import { PageProps } from "@/types";
-import CursorPagination from "@/types/CursorPagination";
+import type { PageProps } from "@/types";
+import type CursorPagination from "@/types/CursorPagination";
 import MarkAllAsReadButton from "@/Components/MarkAllAsReadButton";
 import { NewspaperIcon } from "@heroicons/react/24/outline";
-import ShortFeedWithFeedItemsCount from "@/types/models/ShortFeedWithFeedItemsCount";
-import { FeedItem } from "@/types/generated/models";
+import type ShortFeedWithFeedItemsCount from "@/types/models/ShortFeedWithFeedItemsCount";
+import type { FeedItem } from "@/types/generated/models";
 import { useAtomValue, useSetAtom } from "jotai";
 import {
 	mergeWithEmptyUnreadFeeds,
@@ -107,9 +107,7 @@ export default function Dashboard(props: DashboardPageProps) {
 					</small>
 				</>
 			}
-			actions={
-				<>{totalNumberOfFeedItemsAtomValue > 0 && <MarkAllAsReadButton />}</>
-			}
+			actions={totalNumberOfFeedItemsAtomValue > 0 && <MarkAllAsReadButton />}
 		>
 			<Head title="Dashboard" />
 

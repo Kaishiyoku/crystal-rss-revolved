@@ -1,6 +1,6 @@
 import slug from "slug";
 import { useEffect, useRef } from "react";
-import Breadcrumb from "@/types/Breadcrumb";
+import type Breadcrumb from "@/types/Breadcrumb";
 import { Link } from "@/Components/Link";
 
 export default function Breadcrumbs({
@@ -79,8 +79,8 @@ export default function Breadcrumbs({
 			ref={breadcrumbsRef}
 		>
 			<nav className="flex" aria-label="Breadcrumb">
-				<ol role="list" className="flex items-center space-x-2">
-					{breadcrumbs.map(breadcrumbMapper).flat()}
+				<ol className="flex items-center space-x-2">
+					{breadcrumbs.flatMap(breadcrumbMapper)}
 				</ol>
 			</nav>
 		</div>

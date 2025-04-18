@@ -1,9 +1,10 @@
-import { SVGAttributes } from "react";
+import type { SVGAttributes } from "react";
 
 export default function ApplicationLogo(props: SVGAttributes<SVGElement>) {
 	return (
 		<svg
 			{...props}
+            aria-hidden="true"
 			id="Layer_1"
 			data-name="Layer 1"
 			xmlns="http://www.w3.org/2000/svg"

@@ -1,6 +1,6 @@
-import Breadcrumb from "@/types/Breadcrumb";
-import { User } from "@/types/generated/models";
-import ShortFeedWithFeedItemsCount from "@/types/models/ShortFeedWithFeedItemsCount";
+import type Breadcrumb from "@/types/Breadcrumb";
+import type { User } from "@/types/generated/models";
+import type ShortFeedWithFeedItemsCount from "@/types/models/ShortFeedWithFeedItemsCount";
 
 export type BasePageProps = {
 	errors: object;

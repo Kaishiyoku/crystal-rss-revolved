@@ -1,4 +1,4 @@
-import { FormEventHandler, useRef, useState } from "react";
+import { type FormEventHandler, useRef, useState } from "react";
 import { useForm } from "@inertiajs/react";
 import { useLaravelReactI18n } from "laravel-react-i18n";
 import { Button } from "@/Components/Button";

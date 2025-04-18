@@ -3,13 +3,13 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { useLaravelReactI18n } from "laravel-react-i18n";
 import formatDateTime from "@/Utils/formatDateTime";
 import { EmptyState } from "@/Components/EmptyState";
-import { PageProps } from "@/types";
-import { RouteParams } from "ziggy-js";
+import type { PageProps } from "@/types";
+import type { RouteParams } from "ziggy-js";
 import { Button } from "@/Components/Button";
 import { LinkStack, LinkStackItem } from "@/Components/LinkStack";
 import { RssIcon } from "@heroicons/react/20/solid";
 import { PlusIcon } from "@heroicons/react/16/solid";
-import FeedWithFeedItemsCount from "@/types/models/FeedWithFeedItemsCount";
+import type FeedWithFeedItemsCount from "@/types/models/FeedWithFeedItemsCount";
 
 export default function Index({
 	feeds,
@@ -22,15 +22,13 @@ export default function Index({
 			auth={props.auth}
 			errors={props.errors}
 			header={t("Feeds")}
-			actions={
-				<>
-					{feeds.length > 0 && (
-						<Button href={route("feeds.create")} outline>
-							{t("Add feed")}
-						</Button>
-					)}
-				</>
-			}
+			actions={(
+                feeds.length > 0 && (
+                    <Button href={route("feeds.create")} outline>
+                        {t("Add feed")}
+                    </Button>
+                )
+            )}
 		>
 			<Head title={t("Feeds")} />
 

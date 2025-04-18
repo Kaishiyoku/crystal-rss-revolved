@@ -1,6 +1,6 @@
 import { atom } from "jotai";
-import ShortFeedWithFeedItemsCount from "@/types/models/ShortFeedWithFeedItemsCount";
-import { FeedItem } from "@/types/generated/models";
+import type ShortFeedWithFeedItemsCount from "@/types/models/ShortFeedWithFeedItemsCount";
+import type { FeedItem } from "@/types/generated/models";
 import { pluck, prop, sortBy } from "ramda";
 
 export const unreadFeedsAtom = atom<ShortFeedWithFeedItemsCount[]>([]);

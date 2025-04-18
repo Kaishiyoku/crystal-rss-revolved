@@ -1,5 +1,5 @@
 import { Head } from "@inertiajs/react";
-import { PageProps } from "@/types";
+import type { PageProps } from "@/types";
 import { useLaravelReactI18n } from "laravel-react-i18n";
 import ApplicationLogo from "@/Components/ApplicationLogo";
 import { Link } from "@/Components/Link";
@@ -16,6 +16,7 @@ export default function Welcome({
 			<Head title={t("Welcome")} />
 
 			<svg
+                aria-hidden="true"
 				xmlns="http://www.w3.org/2000/svg"
 				version="1.1"
 				viewBox="0 0 640 1200"
@@ -70,6 +71,7 @@ export default function Welcome({
 			</svg>
 
 			<svg
+                aria-hidden="true"
 				xmlns="http://www.w3.org/2000/svg"
 				version="1.1"
 				viewBox="0 0 800 450"

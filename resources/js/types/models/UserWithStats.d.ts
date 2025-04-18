@@ -1,4 +1,4 @@
-import { User } from "@/types/generated/models";
+import type { User } from "@/types/generated/models";
 
 type UserWithStats = User & {
 	feeds_count: number;

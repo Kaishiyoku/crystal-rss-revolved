@@ -1,4 +1,4 @@
-import FeedWithFeedItemsCount from "@/types/models/FeedWithFeedItemsCount";
+import type FeedWithFeedItemsCount from "@/types/models/FeedWithFeedItemsCount";
 
 type ShortFeedWithFeedItemsCount = Pick<
 	FeedWithFeedItemsCount,

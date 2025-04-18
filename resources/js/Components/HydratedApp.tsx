@@ -1,6 +1,6 @@
 import { useLaravelReactI18n } from "laravel-react-i18n";
 import { router } from "@inertiajs/react";
-import { PageProps } from "@/types";
+import type { PageProps } from "@/types";
 import { useSetAtom } from "jotai/index";
 import { unreadFeedsAtom } from "@/Stores/unreadFeedsAtom";
 

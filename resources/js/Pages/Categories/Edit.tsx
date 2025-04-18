@@ -2,12 +2,12 @@ import { Head, useForm } from "@inertiajs/react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import Form from "@/Pages/Categories/Partials/Form";
 import { useLaravelReactI18n } from "laravel-react-i18n";
-import { PageProps } from "@/types";
-import { RouteParams } from "ziggy-js";
+import type { PageProps } from "@/types";
+import type { RouteParams } from "ziggy-js";
 import { Button } from "@/Components/Button";
 import { useState } from "react";
 import ConfirmAlert from "@/Components/ConfirmAlert";
-import { Category } from "@/types/generated/models";
+import type { Category } from "@/types/generated/models";
 
 export default function Edit({
 	category,
@@ -36,29 +36,27 @@ export default function Edit({
 			auth={props.auth}
 			errors={props.errors}
 			breadcrumbs={props.breadcrumbs}
-			actions={
-				<>
-					{canDelete && (
-						<>
-							<Button
-								disabled={processing}
-								onClick={() => setIsConfirmDeleteAlertOpen(true)}
-								outline
-							>
-								{t("Delete")}
-							</Button>
+			actions={(
+                canDelete && (
+                    <>
+                        <Button
+                            disabled={processing}
+                            onClick={() => setIsConfirmDeleteAlertOpen(true)}
+                            outline
+                        >
+                            {t("Delete")}
+                        </Button>
 
-							<ConfirmAlert
-								open={isConfirmDeleteAlertOpen}
-								title={t("Do you really want to delete this category?")}
-								confirmTitle={t("Delete category")}
-								onClose={() => setIsConfirmDeleteAlertOpen(false)}
-								onConfirm={handleDelete}
-							/>
-						</>
-					)}
-				</>
-			}
+                        <ConfirmAlert
+                            open={isConfirmDeleteAlertOpen}
+                            title={t("Do you really want to delete this category?")}
+                            confirmTitle={t("Delete category")}
+                            onClose={() => setIsConfirmDeleteAlertOpen(false)}
+                            onConfirm={handleDelete}
+                        />
+                    </>
+                )
+            )}
 		>
 			<Head title={t("Edit category")} />
 

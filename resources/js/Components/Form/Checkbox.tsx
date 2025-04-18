@@ -133,6 +133,7 @@ export function Checkbox({
 		>
 			<span className={clsx([base, colors[color]])}>
 				<svg
+                    aria-hidden="true"
 					className="size-4 stroke-(--checkbox-check) opacity-0 group-data-checked:opacity-100 sm:h-3.5 sm:w-3.5"
 					viewBox="0 0 14 14"
 					fill="none"

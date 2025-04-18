@@ -1,4 +1,4 @@
-import { FormEventHandler, useRef } from "react";
+import { type FormEventHandler, useRef } from "react";
 import { useForm } from "@inertiajs/react";
 import { Transition } from "@headlessui/react";
 import { useLaravelReactI18n } from "laravel-react-i18n";

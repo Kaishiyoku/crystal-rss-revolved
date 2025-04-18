@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import type React from "react";
+import { useEffect } from "react";
 import GuestLayout from "@/Layouts/GuestLayout";
 import { Head, useForm } from "@inertiajs/react";
 import { Button } from "@/Components/Button";
@@ -12,6 +13,7 @@ export default function ConfirmPassword() {
 		password: "",
 	});
 
+    // biome-ignore lint/correctness/useExhaustiveDependencies(reset): we only want to run this once
 	useEffect(() => {
 		return () => {
 			reset("password");

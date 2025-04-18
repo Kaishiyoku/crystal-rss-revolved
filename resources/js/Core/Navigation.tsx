@@ -31,11 +31,11 @@ import {
 	UserIcon,
 } from "@heroicons/react/16/solid";
 import { HomeIcon, RssIcon } from "@heroicons/react/20/solid";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import { useLaravelReactI18n } from "laravel-react-i18n";
 import ApplicationLogo from "@/Components/ApplicationLogo";
 import substr from "@/Utils/substr";
-import { User } from "@/types/generated/models";
+import type { User } from "@/types/generated/models";
 import { useAtomValue } from "jotai";
 import { unreadFeedsAtom } from "@/Stores/unreadFeedsAtom";
 import { router } from "@inertiajs/react";

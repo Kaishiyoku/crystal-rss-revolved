@@ -9,7 +9,7 @@ import getBrowserLocale from "@/Utils/getBrowserLocale";
 import HydratedApp from "@/Components/HydratedApp";
 import { Provider } from "jotai";
 import { unreadFeedsAtom } from "@/Stores/unreadFeedsAtom";
-import { PageProps } from "@/types";
+import type { PageProps } from "@/types";
 import AtomsHydrator from "@/Core/AtomsHydrator";
 
 window.appName =

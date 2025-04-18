@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { SelectOption } from "@/types/SelectOption";
+import type { SelectOption } from "@/types/SelectOption";
 import {
 	Listbox,
 	ListboxDescription,

@@ -1,4 +1,4 @@
-import { Feed } from "@/types/generated/models";
+import type { Feed } from "@/types/generated/models";
 
 type FeedWithFeedItemsCount = Feed & {
 	feed_items_count: number;

@@ -1,6 +1,7 @@
 import * as Headless from "@headlessui/react";
-import { InertiaLinkProps, Link as InertiaLink } from "@inertiajs/react";
-import React, { forwardRef } from "react";
+import { type InertiaLinkProps, Link as InertiaLink } from "@inertiajs/react";
+import type React from "react";
+import { forwardRef } from "react";
 import { twMerge } from "tailwind-merge";
 import { clsx } from "clsx";
 

@@ -3,11 +3,11 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import Form from "@/Pages/Feeds/Partials/Form";
 import { useLaravelReactI18n } from "laravel-react-i18n";
 import { EmptyState } from "@/Components/EmptyState";
-import { PageProps } from "@/types";
-import { SelectNumberOption } from "@/types/SelectOption";
+import type { PageProps } from "@/types";
+import type { SelectNumberOption } from "@/types/SelectOption";
 import { PlusIcon, FolderIcon } from "@heroicons/react/24/outline";
 import { Button } from "@/Components/Button";
-import { Feed } from "@/types/generated/models";
+import type { Feed } from "@/types/generated/models";
 
 export default function Create({
 	feed,
