@@ -12,17 +12,15 @@ use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
 
-class CategoryController extends Controller implements HasMiddleware
+class CategoryController extends Controller
 {
-    public static function middleware(): array
+    public function __construct()
     {
-        return [
-            new Middleware('can:viewAny,App\Models\Category', only: ['index']),
-            new Middleware('can:view,category', only: ['show']),
-            new Middleware('can:create,App\Models\Category', only: ['create', 'store']),
-            new Middleware('can:update,category', only: ['edit', 'update']),
-            new Middleware('can:delete,category', only: ['destroy']),
-        ];
+        $this->middleware('can:viewAny,App\Models\Category')->only('index');
+        $this->middleware('can:view,category')->only('show');
+        $this->middleware('can:create,App\Models\Category')->only('create', 'store');
+        $this->middleware('can:update,category')->only('edit', 'update');
+        $this->middleware('can:delete,category')->only('destroy');
     }
 
     /**

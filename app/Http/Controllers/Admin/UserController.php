@@ -11,17 +11,15 @@ use Illuminate\Routing\Controllers\Middleware;
 use Inertia\Inertia;
 use Inertia\Response;
 
-class UserController extends Controller implements HasMiddleware
+class UserController extends Controller
 {
-    public static function middleware(): array
+    public function __construct()
     {
-        return [
-            new Middleware('can:viewAny,App\Models\User', only: ['index']),
-            new Middleware('can:view,user', only: ['show']),
-            new Middleware('can:create,App\Models\User', only: ['create', 'store']),
-            new Middleware('can:update,user', only: ['edit', 'update']),
-            new Middleware('can:delete,user', only: ['destroy']),
-        ];
+        $this->middleware('can:viewAny,App\Models\User')->only('index');
+        $this->middleware('can:view,user')->only('show');
+        $this->middleware('can:create,App\Models\User')->only('create', 'store');
+        $this->middleware('can:update,user')->only('edit', 'update');
+        $this->middleware('can:delete,user')->only('destroy');
     }
 
     /**
