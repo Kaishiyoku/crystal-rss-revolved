@@ -88,14 +88,17 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     /**
-     * The attributes that should be cast.
+     * Get the attributes that should be cast.
      *
-     * @var array<string, string>
+     * @return array<string, string>
      */
-    protected $casts = [
-        'is_admin' => 'bool',
-        'email_verified_at' => 'datetime',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'is_admin' => 'bool',
+            'email_verified_at' => 'datetime',
+        ];
+    }
 
     #[Scope]
     protected function verified(Builder $query): void
