@@ -1,8 +1,8 @@
-import { Head } from "@inertiajs/react";
-import type { PageProps } from "@/types";
-import { useLaravelReactI18n } from "laravel-react-i18n";
-import ApplicationLogo from "@/Components/ApplicationLogo";
-import { Link } from "@/Components/Link";
+import { Head } from '@inertiajs/react';
+import type { PageProps } from '@/types';
+import { useLaravelReactI18n } from 'laravel-react-i18n';
+import ApplicationLogo from '@/Components/ApplicationLogo';
+import { Link } from '@/Components/Link';
 
 export default function Welcome({
 	auth,
@@ -13,10 +13,10 @@ export default function Welcome({
 
 	return (
 		<>
-			<Head title={t("Welcome")} />
+			<Head title={t('Welcome')} />
 
 			<svg
-                aria-hidden="true"
+				aria-hidden="true"
 				xmlns="http://www.w3.org/2000/svg"
 				version="1.1"
 				viewBox="0 0 640 1200"
@@ -71,7 +71,7 @@ export default function Welcome({
 			</svg>
 
 			<svg
-                aria-hidden="true"
+				aria-hidden="true"
 				xmlns="http://www.w3.org/2000/svg"
 				version="1.1"
 				viewBox="0 0 800 450"
@@ -131,20 +131,20 @@ export default function Welcome({
 						<header className="flex justify-end">
 							<nav className="flex space-x-4 z-20">
 								{auth.user ? (
-									<Link href={route("dashboard")} color="zinc">
-										{t("Dashboard")}
+									<Link href={route('dashboard')} color="zinc">
+										{t('Dashboard')}
 									</Link>
 								) : (
 									<>
 										{canLogin && (
-											<Link href={route("login")} color="zinc">
-												{t("Log in")}
+											<Link href={route('login')} color="zinc">
+												{t('Log in')}
 											</Link>
 										)}
 
 										{canRegister && (
-											<Link href={route("register")} color="zinc">
-												{t("Register")}
+											<Link href={route('register')} color="zinc">
+												{t('Register')}
 											</Link>
 										)}
 									</>

@@ -1,19 +1,19 @@
-import { type FormEventHandler, useRef, useState } from "react";
-import { useForm } from "@inertiajs/react";
-import { useLaravelReactI18n } from "laravel-react-i18n";
-import { Button } from "@/Components/Button";
-import { Input } from "@/Components/Form/Input";
-import { ErrorMessage, Field, Label } from "@/Components/Fieldset";
+import { type FormEventHandler, useRef, useState } from 'react';
+import { useForm } from '@inertiajs/react';
+import { useLaravelReactI18n } from 'laravel-react-i18n';
+import { Button } from '@/Components/Button';
+import { Input } from '@/Components/Form/Input';
+import { ErrorMessage, Field, Label } from '@/Components/Fieldset';
 import {
 	Dialog,
 	DialogActions,
 	DialogBody,
 	DialogDescription,
 	DialogTitle,
-} from "@/Components/Dialog";
+} from '@/Components/Dialog';
 
 export default function DeleteUserForm({
-	className = "",
+	className = '',
 }: { className?: string }) {
 	const { t } = useLaravelReactI18n();
 
@@ -28,7 +28,7 @@ export default function DeleteUserForm({
 		reset,
 		errors,
 	} = useForm({
-		password: "",
+		password: '',
 	});
 
 	const confirmUserDeletion = () => {
@@ -38,7 +38,7 @@ export default function DeleteUserForm({
 	const deleteUser: FormEventHandler = (e) => {
 		e.preventDefault();
 
-		destroy(route("profile.destroy"), {
+		destroy(route('profile.destroy'), {
 			preserveScroll: true,
 			onSuccess: () => closeModal(),
 			onError: () => passwordInput.current?.focus(),
@@ -56,28 +56,28 @@ export default function DeleteUserForm({
 		<section className={`space-y-6 ${className}`}>
 			<header>
 				<h2 className="text-lg font-medium text-zinc-900 dark:text-zinc-100">
-					{t("Delete Account")}
+					{t('Delete Account')}
 				</h2>
 
 				<p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
 					{t(
-						"Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.",
+						'Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.',
 					)}
 				</p>
 			</header>
 
 			<Button onClick={confirmUserDeletion} color="pink">
-				{t("Delete Account")}
+				{t('Delete Account')}
 			</Button>
 
 			<Dialog open={confirmingUserDeletion} onClose={closeModal}>
 				<DialogTitle>
-					{t("Are you sure you want to delete your account?")}
+					{t('Are you sure you want to delete your account?')}
 				</DialogTitle>
 
 				<DialogDescription>
 					{t(
-						"Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.",
+						'Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.',
 					)}
 				</DialogDescription>
 
@@ -85,7 +85,7 @@ export default function DeleteUserForm({
 					<form onSubmit={deleteUser}>
 						<Field>
 							<Label htmlFor="password" className="sr-only">
-								{t("validation.attributes.password")}
+								{t('validation.attributes.password')}
 							</Label>
 							<Input
 								id="password"
@@ -93,9 +93,9 @@ export default function DeleteUserForm({
 								name="password"
 								ref={passwordInput}
 								value={data.password}
-								onChange={(e) => setData("password", e.target.value)}
+								onChange={(e) => setData('password', e.target.value)}
 								className="w-3/4"
-								placeholder={t("validation.attributes.password")}
+								placeholder={t('validation.attributes.password')}
 								invalid={!!errors.password}
 								autoFocus
 							/>
@@ -104,11 +104,11 @@ export default function DeleteUserForm({
 
 						<DialogActions>
 							<Button onClick={closeModal} plain>
-								{t("Cancel")}
+								{t('Cancel')}
 							</Button>
 
 							<Button type="submit" disabled={processing} color="pink">
-								{t("Delete Account")}
+								{t('Delete Account')}
 							</Button>
 						</DialogActions>
 					</form>

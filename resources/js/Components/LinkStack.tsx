@@ -1,11 +1,11 @@
-import type { ComponentPropsWithoutRef, ReactNode } from "react";
-import { Link } from "@inertiajs/react";
-import { clsx } from "clsx";
+import type { ComponentPropsWithoutRef, ReactNode } from 'react';
+import { Link } from '@inertiajs/react';
+import { clsx } from 'clsx';
 
 export function LinkStack({
 	children,
 	...props
-}: { children: ReactNode } & ComponentPropsWithoutRef<"div">) {
+}: { children: ReactNode } & ComponentPropsWithoutRef<'div'>) {
 	return <div {...props}>{children}</div>;
 }
 
@@ -36,10 +36,10 @@ export function LinkStackItem({
 	disabled = false,
 }: LinkStackItemProps) {
 	const classes = clsx(
-		"block w-full text-left px-2 py-2.5 first:rounded-t-md last:rounded-b-md transition duration-75 ease-out",
+		'block w-full text-left px-2 py-2.5 first:rounded-t-md last:rounded-b-md transition duration-75 ease-out',
 		{
-			"opacity-50": disabled,
-			"hover:bg-zinc-50 dark:hover:bg-zinc-800/50": !disabled,
+			'opacity-50': disabled,
+			'hover:bg-zinc-50 dark:hover:bg-zinc-800/50': !disabled,
 		},
 	);
 

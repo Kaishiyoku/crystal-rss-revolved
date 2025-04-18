@@ -1,10 +1,10 @@
-import type { ReactNode } from "react";
-import type { BasePageProps, PageProps } from "@/types";
-import Navigation from "@/Core/Navigation";
-import { usePage } from "@inertiajs/react";
-import { Heading } from "@/Components/Heading";
-import type Breadcrumb from "@/types/Breadcrumb";
-import Breadcrumbs from "@/Core/Breadcrumbs";
+import type { ReactNode } from 'react';
+import type { BasePageProps, PageProps } from '@/types';
+import Navigation from '@/Core/Navigation';
+import { usePage } from '@inertiajs/react';
+import { Heading } from '@/Components/Heading';
+import type Breadcrumb from '@/types/Breadcrumb';
+import Breadcrumbs from '@/Core/Breadcrumbs';
 
 type AuthenticatedLayoutProps =
 	| (BasePageProps & {

@@ -1,6 +1,6 @@
-import { Alert, AlertActions, AlertTitle } from "@/Components/Alert";
-import { Button } from "@/Components/Button";
-import { useLaravelReactI18n } from "laravel-react-i18n";
+import { Alert, AlertActions, AlertTitle } from '@/Components/Alert';
+import { Button } from '@/Components/Button';
+import { useLaravelReactI18n } from 'laravel-react-i18n';
 
 export default function ConfirmAlert({
 	open,
@@ -29,7 +29,7 @@ export default function ConfirmAlert({
 
 			<AlertActions>
 				<Button onClick={() => onClose(false)} plain>
-					{t("Cancel")}
+					{t('Cancel')}
 				</Button>
 
 				<Button onClick={handleConfirmClick}>{confirmTitle}</Button>

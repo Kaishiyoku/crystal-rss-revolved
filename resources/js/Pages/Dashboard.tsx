@@ -1,23 +1,23 @@
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, router, WhenVisible } from "@inertiajs/react";
-import { useState } from "react";
-import FeedItemCard from "@/Components/FeedItemCard";
-import { useLaravelReactI18n } from "laravel-react-i18n";
-import { Button } from "@/Components/Button";
-import { EmptyState } from "@/Components/EmptyState";
-import type { PageProps } from "@/types";
-import type CursorPagination from "@/types/CursorPagination";
-import MarkAllAsReadButton from "@/Components/MarkAllAsReadButton";
-import { NewspaperIcon } from "@heroicons/react/24/outline";
-import type ShortFeedWithFeedItemsCount from "@/types/models/ShortFeedWithFeedItemsCount";
-import type { FeedItem } from "@/types/generated/models";
-import { useAtomValue, useSetAtom } from "jotai";
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import { Head, router, WhenVisible } from '@inertiajs/react';
+import { useState } from 'react';
+import FeedItemCard from '@/Components/FeedItemCard';
+import { useLaravelReactI18n } from 'laravel-react-i18n';
+import { Button } from '@/Components/Button';
+import { EmptyState } from '@/Components/EmptyState';
+import type { PageProps } from '@/types';
+import type CursorPagination from '@/types/CursorPagination';
+import MarkAllAsReadButton from '@/Components/MarkAllAsReadButton';
+import { NewspaperIcon } from '@heroicons/react/24/outline';
+import type ShortFeedWithFeedItemsCount from '@/types/models/ShortFeedWithFeedItemsCount';
+import type { FeedItem } from '@/types/generated/models';
+import { useAtomValue, useSetAtom } from 'jotai';
 import {
 	mergeWithEmptyUnreadFeeds,
 	totalNumberOfFeedItemsAtom,
 	unreadFeedsAtom,
-} from "@/Stores/unreadFeedsAtom";
-import LoadingIcon from "@/Components/Icons/LoadingIcon";
+} from '@/Stores/unreadFeedsAtom';
+import LoadingIcon from '@/Components/Icons/LoadingIcon';
 
 type DashboardPageProps = PageProps & {
 	unreadFeeds: ShortFeedWithFeedItemsCount[];
@@ -46,7 +46,7 @@ export default function Dashboard(props: DashboardPageProps) {
 		setIsFetchingMoreManually(true);
 
 		router.get(props.feedItems.next_page_url, undefined, {
-			only: ["feedItems", "unreadFeeds"],
+			only: ['feedItems', 'unreadFeeds'],
 			preserveState: true,
 			preserveScroll: true,
 			onSuccess: (page) => {
@@ -97,11 +97,11 @@ export default function Dashboard(props: DashboardPageProps) {
 			errors={props.errors}
 			header={
 				<>
-					{t("Dashboard")}
+					{t('Dashboard')}
 
 					<small className="text-muted pl-2">
 						{tChoice(
-							"dashboard.unread_articles",
+							'dashboard.unread_articles',
 							totalNumberOfFeedItemsAtomValue,
 						)}
 					</small>
@@ -120,8 +120,8 @@ export default function Dashboard(props: DashboardPageProps) {
 			) : (
 				<EmptyState
 					icon={NewspaperIcon}
-					message={t("No unread articles.")}
-					description={t("Come back later.")}
+					message={t('No unread articles.')}
+					description={t('Come back later.')}
 				/>
 			)}
 
@@ -140,7 +140,7 @@ export default function Dashboard(props: DashboardPageProps) {
 									cursor: props.feedItems.next_cursor,
 								}
 							: { cursor: props.feedItems.next_cursor },
-						only: ["feedItems", "unreadFeeds"],
+						only: ['feedItems', 'unreadFeeds'],
 						onBefore: onBeforeMoreLoading,
 						onSuccess: onMoreLoaded,
 						onFinish: onMoreFinishedLoading,
@@ -165,7 +165,7 @@ export default function Dashboard(props: DashboardPageProps) {
 							onClick={loadMore}
 							plain
 						>
-							<span>{t("Load more")}</span>
+							<span>{t('Load more')}</span>
 						</Button>
 					)}
 				</div>

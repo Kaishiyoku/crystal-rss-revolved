@@ -1,4 +1,4 @@
-import { Avatar } from "@/Components/Avatar";
+import { Avatar } from '@/Components/Avatar';
 import {
 	Dropdown,
 	DropdownButton,
@@ -6,13 +6,13 @@ import {
 	DropdownItem,
 	DropdownLabel,
 	DropdownMenu,
-} from "@/Components/Dropdown";
+} from '@/Components/Dropdown';
 import {
 	Navbar,
 	NavbarItem,
 	NavbarSection,
 	NavbarSpacer,
-} from "@/Components/Navbar";
+} from '@/Components/Navbar';
 import {
 	Sidebar,
 	SidebarBody,
@@ -22,23 +22,23 @@ import {
 	SidebarItem,
 	SidebarLabel,
 	SidebarSection,
-} from "@/Components/Sidebar";
-import { SidebarLayout } from "@/Components/SidebarLayout";
+} from '@/Components/Sidebar';
+import { SidebarLayout } from '@/Components/SidebarLayout';
 import {
 	ArrowRightStartOnRectangleIcon,
 	ChevronDownIcon,
 	ChevronUpIcon,
 	UserIcon,
-} from "@heroicons/react/16/solid";
-import { HomeIcon, RssIcon } from "@heroicons/react/20/solid";
-import type { ReactNode } from "react";
-import { useLaravelReactI18n } from "laravel-react-i18n";
-import ApplicationLogo from "@/Components/ApplicationLogo";
-import substr from "@/Utils/substr";
-import type { User } from "@/types/generated/models";
-import { useAtomValue } from "jotai";
-import { unreadFeedsAtom } from "@/Stores/unreadFeedsAtom";
-import { router } from "@inertiajs/react";
+} from '@heroicons/react/16/solid';
+import { HomeIcon, RssIcon } from '@heroicons/react/20/solid';
+import type { ReactNode } from 'react';
+import { useLaravelReactI18n } from 'laravel-react-i18n';
+import ApplicationLogo from '@/Components/ApplicationLogo';
+import substr from '@/Utils/substr';
+import type { User } from '@/types/generated/models';
+import { useAtomValue } from 'jotai';
+import { unreadFeedsAtom } from '@/Stores/unreadFeedsAtom';
+import { router } from '@inertiajs/react';
 
 export default function Navigation({
 	user,
@@ -65,20 +65,20 @@ export default function Navigation({
 								/>
 							</DropdownButton>
 							<DropdownMenu className="min-w-64" anchor="bottom end">
-								<DropdownItem href={route("profile.edit")}>
+								<DropdownItem href={route('profile.edit')}>
 									<UserIcon />
-									<DropdownLabel>{t("Profile")}</DropdownLabel>
+									<DropdownLabel>{t('Profile')}</DropdownLabel>
 								</DropdownItem>
 
 								<DropdownDivider />
 
 								<DropdownItem
 									onClick={() =>
-										router.visit(route("logout"), { method: "post" })
+										router.visit(route('logout'), { method: 'post' })
 									}
 								>
 									<ArrowRightStartOnRectangleIcon />
-									<DropdownLabel>{t("Log Out")}</DropdownLabel>
+									<DropdownLabel>{t('Log Out')}</DropdownLabel>
 								</DropdownItem>
 							</DropdownMenu>
 						</Dropdown>
@@ -98,30 +98,30 @@ export default function Navigation({
 								className="min-w-80 lg:min-w-64"
 								anchor="bottom start"
 							>
-								<DropdownItem href={route("categories.index")}>
-									{t("Categories")}
+								<DropdownItem href={route('categories.index')}>
+									{t('Categories')}
 								</DropdownItem>
 
-								<DropdownItem href={route("feeds.index")}>
-									{t("Feeds")}
+								<DropdownItem href={route('feeds.index')}>
+									{t('Feeds')}
 								</DropdownItem>
 
 								{user.is_admin && (
 									<>
 										<DropdownDivider />
 
-										<DropdownItem href={route("admin.users.index")}>
-											{t("Manage users")}
+										<DropdownItem href={route('admin.users.index')}>
+											{t('Manage users')}
 										</DropdownItem>
 
 										<DropdownDivider />
 
-										<DropdownItem href={route("horizon.index")} external>
-											{t("Laravel Horizon")}
+										<DropdownItem href={route('horizon.index')} external>
+											{t('Laravel Horizon')}
 										</DropdownItem>
 
-										<DropdownItem href={route("pulse")} external>
-											{t("Laravel Pulse")}
+										<DropdownItem href={route('pulse')} external>
+											{t('Laravel Pulse')}
 										</DropdownItem>
 									</>
 								)}
@@ -131,11 +131,11 @@ export default function Navigation({
 					<SidebarBody>
 						<SidebarSection>
 							<SidebarItem
-								href={route("dashboard")}
-								current={!selectedFeedId && route().current("dashboard")}
+								href={route('dashboard')}
+								current={!selectedFeedId && route().current('dashboard')}
 							>
 								<HomeIcon />
-								<SidebarLabel>{t("Dashboard")}</SidebarLabel>
+								<SidebarLabel>{t('Dashboard')}</SidebarLabel>
 							</SidebarItem>
 
 							{unreadFeedsAtomValue.length > 0 && (
@@ -145,7 +145,7 @@ export default function Navigation({
 									{unreadFeedsAtomValue.map((unreadFeed) => (
 										<SidebarItem
 											key={unreadFeed.id}
-											href={`${route("dashboard")}?feed_id=${unreadFeed.id}`}
+											href={`${route('dashboard')}?feed_id=${unreadFeed.id}`}
 											title={`${unreadFeed.name} (${unreadFeed.feed_items_count})`}
 											current={selectedFeedId === unreadFeed.id}
 										>
@@ -195,20 +195,20 @@ export default function Navigation({
 								<ChevronUpIcon />
 							</DropdownButton>
 							<DropdownMenu className="min-w-64" anchor="top start">
-								<DropdownItem href={route("profile.edit")}>
+								<DropdownItem href={route('profile.edit')}>
 									<UserIcon />
-									<DropdownLabel>{t("Profile")}</DropdownLabel>
+									<DropdownLabel>{t('Profile')}</DropdownLabel>
 								</DropdownItem>
 
 								<DropdownDivider />
 
 								<DropdownItem
 									onClick={() =>
-										router.visit(route("logout"), { method: "post" })
+										router.visit(route('logout'), { method: 'post' })
 									}
 								>
 									<ArrowRightStartOnRectangleIcon />
-									<DropdownLabel>{t("Log Out")}</DropdownLabel>
+									<DropdownLabel>{t('Log Out')}</DropdownLabel>
 								</DropdownItem>
 							</DropdownMenu>
 						</Dropdown>

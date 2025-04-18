@@ -1,28 +1,28 @@
-import * as Headless from "@headlessui/react";
-import { type InertiaLinkProps, Link as InertiaLink } from "@inertiajs/react";
-import type React from "react";
-import { forwardRef } from "react";
-import { twMerge } from "tailwind-merge";
-import { clsx } from "clsx";
+import * as Headless from '@headlessui/react';
+import { type InertiaLinkProps, Link as InertiaLink } from '@inertiajs/react';
+import type React from 'react';
+import { forwardRef } from 'react';
+import { twMerge } from 'tailwind-merge';
+import { clsx } from 'clsx';
 
 export const Link = forwardRef(function Link(
 	{
 		external = false,
 		hover = false,
-		color = "zinc",
+		color = 'zinc',
 		className,
 		...props
 	}: {
 		external?: boolean;
 		hover?: boolean;
-		color?: "zinc" | "blue";
+		color?: 'zinc' | 'blue';
 	} & InertiaLinkProps &
-		React.ComponentPropsWithoutRef<"a">,
+		React.ComponentPropsWithoutRef<'a'>,
 	ref: React.ForwardedRef<HTMLAnchorElement>,
 ) {
 	const colorClasses = clsx({
-		"text-blue-600 dark:text-blue-400": color === "blue",
-		"underline decoration-transparent hover:decoration-blue-600 dark:hover:decoration-blue-400":
+		'text-blue-600 dark:text-blue-400': color === 'blue',
+		'underline decoration-transparent hover:decoration-blue-600 dark:hover:decoration-blue-400':
 			hover,
 	});
 

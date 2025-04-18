@@ -1,14 +1,14 @@
-import GuestLayout from "@/Layouts/GuestLayout";
-import { Head, useForm } from "@inertiajs/react";
-import { Button } from "@/Components/Button";
-import { useLaravelReactI18n } from "laravel-react-i18n";
-import type React from "react";
-import { Input } from "@/Components/Form/Input";
-import { ErrorMessage, Field, FieldGroup } from "@/Components/Fieldset";
+import GuestLayout from '@/Layouts/GuestLayout';
+import { Head, useForm } from '@inertiajs/react';
+import { Button } from '@/Components/Button';
+import { useLaravelReactI18n } from 'laravel-react-i18n';
+import type React from 'react';
+import { Input } from '@/Components/Form/Input';
+import { ErrorMessage, Field, FieldGroup } from '@/Components/Fieldset';
 
 export default function ForgotPassword({ status }: { status: string }) {
 	const { t } = useLaravelReactI18n();
-	const { data, setData, post, processing, errors } = useForm({ email: "" });
+	const { data, setData, post, processing, errors } = useForm({ email: '' });
 
 	const onHandleChange = (event: React.FormEvent<HTMLInputElement>) => {
 		const target = event.target as HTMLInputElement;
@@ -20,16 +20,16 @@ export default function ForgotPassword({ status }: { status: string }) {
 	const submit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
-		post(route("password.email"));
+		post(route('password.email'));
 	};
 
 	return (
 		<GuestLayout>
-			<Head title={t("Forgot Password")} />
+			<Head title={t('Forgot Password')} />
 
 			<div className="mb-4 text-sm text-zinc-600 dark:text-zinc-400">
 				{t(
-					"Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.",
+					'Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.',
 				)}
 			</div>
 
@@ -55,7 +55,7 @@ export default function ForgotPassword({ status }: { status: string }) {
 					</Field>
 
 					<Button type="submit" disabled={processing}>
-						{t("Email Password Reset Link")}
+						{t('Email Password Reset Link')}
 					</Button>
 				</FieldGroup>
 			</form>

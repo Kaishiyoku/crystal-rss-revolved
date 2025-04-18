@@ -1,8 +1,8 @@
-import GuestLayout from "@/Layouts/GuestLayout";
-import { Head, Link, useForm } from "@inertiajs/react";
-import { Button } from "@/Components/Button";
-import { useLaravelReactI18n } from "laravel-react-i18n";
-import type React from "react";
+import GuestLayout from '@/Layouts/GuestLayout';
+import { Head, Link, useForm } from '@inertiajs/react';
+import { Button } from '@/Components/Button';
+import { useLaravelReactI18n } from 'laravel-react-i18n';
+import type React from 'react';
 
 export default function VerifyEmail({ status }: { status: string }) {
 	const { t } = useLaravelReactI18n();
@@ -11,7 +11,7 @@ export default function VerifyEmail({ status }: { status: string }) {
 	const submit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
-		post(route("verification.send"));
+		post(route('verification.send'));
 	};
 
 	return (
@@ -24,10 +24,10 @@ export default function VerifyEmail({ status }: { status: string }) {
 				)}
 			</div>
 
-			{status === "verification-link-sent" && (
+			{status === 'verification-link-sent' && (
 				<div className="mb-4 font-medium text-sm text-green-600 dark:text-green-400">
 					{t(
-						"A new verification link has been sent to the email address you provided during registration.",
+						'A new verification link has been sent to the email address you provided during registration.',
 					)}
 				</div>
 			)}
@@ -35,16 +35,16 @@ export default function VerifyEmail({ status }: { status: string }) {
 			<form onSubmit={submit}>
 				<div className="mt-4 flex items-center justify-between">
 					<Button type="submit" disabled={processing}>
-						{t("Resend Verification Email")}
+						{t('Resend Verification Email')}
 					</Button>
 
 					<Link
-						href={route("logout")}
+						href={route('logout')}
 						method="post"
 						as="button"
 						className="underline text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 rounded-md focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 dark:focus:ring-offset-zinc-800"
 					>
-						{t("Log Out")}
+						{t('Log Out')}
 					</Link>
 				</div>
 			</form>

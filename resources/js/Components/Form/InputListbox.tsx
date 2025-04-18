@@ -1,11 +1,11 @@
-import { useState } from "react";
-import type { SelectOption } from "@/types/SelectOption";
+import { useState } from 'react';
+import type { SelectOption } from '@/types/SelectOption';
 import {
 	Listbox,
 	ListboxDescription,
 	ListboxLabel,
 	ListboxOption,
-} from "@/Components/Listbox";
+} from '@/Components/Listbox';
 
 type InputListboxType =
 	| {

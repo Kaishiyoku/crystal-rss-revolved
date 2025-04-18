@@ -1,11 +1,11 @@
-import type React from "react";
-import { useEffect } from "react";
-import GuestLayout from "@/Layouts/GuestLayout";
-import { Head, useForm } from "@inertiajs/react";
-import { Button } from "@/Components/Button";
-import { useLaravelReactI18n } from "laravel-react-i18n";
-import { ErrorMessage, Field, FieldGroup, Label } from "@/Components/Fieldset";
-import { Input } from "@/Components/Form/Input";
+import type React from 'react';
+import { useEffect } from 'react';
+import GuestLayout from '@/Layouts/GuestLayout';
+import { Head, useForm } from '@inertiajs/react';
+import { Button } from '@/Components/Button';
+import { useLaravelReactI18n } from 'laravel-react-i18n';
+import { ErrorMessage, Field, FieldGroup, Label } from '@/Components/Fieldset';
+import { Input } from '@/Components/Form/Input';
 
 export default function ResetPassword({
 	token,
@@ -15,14 +15,14 @@ export default function ResetPassword({
 	const { data, setData, post, processing, errors, reset } = useForm({
 		token,
 		email,
-		password: "",
-		password_confirmation: "",
+		password: '',
+		password_confirmation: '',
 	});
 
-    // biome-ignore lint/correctness/useExhaustiveDependencies(reset): we only want to run this once
+	// biome-ignore lint/correctness/useExhaustiveDependencies(reset): we only want to run this once
 	useEffect(() => {
 		return () => {
-			reset("password", "password_confirmation");
+			reset('password', 'password_confirmation');
 		};
 	}, []);
 
@@ -36,17 +36,17 @@ export default function ResetPassword({
 	const submit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
-		post(route("password.store"));
+		post(route('password.store'));
 	};
 
 	return (
 		<GuestLayout>
-			<Head title={t("Reset Password")} />
+			<Head title={t('Reset Password')} />
 
 			<form onSubmit={submit}>
 				<FieldGroup>
 					<Field>
-						<Label htmlFor="email">{t("Email")}</Label>
+						<Label htmlFor="email">{t('Email')}</Label>
 						<Input
 							id="email"
 							type="email"
@@ -60,7 +60,7 @@ export default function ResetPassword({
 					</Field>
 
 					<Field>
-						<Label htmlFor="password">{t("Password")}</Label>
+						<Label htmlFor="password">{t('Password')}</Label>
 						<Input
 							id="password"
 							type="password"
@@ -76,7 +76,7 @@ export default function ResetPassword({
 
 					<Field>
 						<Label htmlFor="password_confirmation">
-							{t("Confirm Password")}
+							{t('Confirm Password')}
 						</Label>
 						<Input
 							type="password"
@@ -91,7 +91,7 @@ export default function ResetPassword({
 
 					<div className="flex items-center justify-end mt-4">
 						<Button type="submit" className="ml-4" disabled={processing}>
-							{t("Reset Password")}
+							{t('Reset Password')}
 						</Button>
 					</div>
 				</FieldGroup>

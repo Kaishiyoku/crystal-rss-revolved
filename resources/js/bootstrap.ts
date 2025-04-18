@@ -1,6 +1,6 @@
-import ky from "ky";
-import NProgress from "nprogress";
-import Cookies from "js-cookie";
+import ky from 'ky';
+import NProgress from 'nprogress';
+import Cookies from 'js-cookie';
 
 NProgress.configure({
 	showSpinner: false,
@@ -8,7 +8,7 @@ NProgress.configure({
 
 window.ky = ky.extend({
 	headers: {
-		Accept: "application/json",
+		Accept: 'application/json',
 	},
 	hooks: {
 		beforeRequest: [
@@ -16,7 +16,7 @@ window.ky = ky.extend({
 				NProgress.start();
 
 				if (window.location.host === new URL(request.url).host) {
-					request.headers.set("X-XSRF-TOKEN", Cookies.get("XSRF-TOKEN") ?? "");
+					request.headers.set('X-XSRF-TOKEN', Cookies.get('XSRF-TOKEN') ?? '');
 				}
 			},
 		],

@@ -1,10 +1,10 @@
-import ConfirmAlert from "@/Components/ConfirmAlert";
-import { Button } from "@/Components/Button";
-import { useLaravelReactI18n } from "laravel-react-i18n";
-import { useState } from "react";
-import { useForm } from "@inertiajs/react";
-import type { RouteParams } from "ziggy-js";
-import type UserWithStats from "@/types/models/UserWithStats";
+import ConfirmAlert from '@/Components/ConfirmAlert';
+import { Button } from '@/Components/Button';
+import { useLaravelReactI18n } from 'laravel-react-i18n';
+import { useState } from 'react';
+import { useForm } from '@inertiajs/react';
+import type { RouteParams } from 'ziggy-js';
+import type UserWithStats from '@/types/models/UserWithStats';
 
 export default function DeleteUserButton({ user }: { user: UserWithStats }) {
 	const { t } = useLaravelReactI18n();
@@ -16,8 +16,8 @@ export default function DeleteUserButton({ user }: { user: UserWithStats }) {
 	const handleDelete = (user: UserWithStats) => () => {
 		destroy(
 			route(
-				"admin.users.destroy",
-				user as unknown as RouteParams<"admin.users.destroy">,
+				'admin.users.destroy',
+				user as unknown as RouteParams<'admin.users.destroy'>,
 			),
 		);
 	};
@@ -28,15 +28,15 @@ export default function DeleteUserButton({ user }: { user: UserWithStats }) {
 				onClick={() => setIsConfirmAlertOpen(true)}
 				disabled={deleteProcessing}
 			>
-				{t("Delete")}
+				{t('Delete')}
 			</Button>
 
 			<ConfirmAlert
 				open={isConfirmAlertOpen}
-				title={t("Do you really want to delete the user “:name”?", {
+				title={t('Do you really want to delete the user “:name”?', {
 					name: user.name,
 				})}
-				confirmTitle={t("Delete user")}
+				confirmTitle={t('Delete user')}
 				onClose={() => setIsConfirmAlertOpen(false)}
 				onConfirm={handleDelete(user)}
 			/>

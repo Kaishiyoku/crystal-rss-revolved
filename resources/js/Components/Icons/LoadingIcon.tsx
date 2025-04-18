@@ -1,22 +1,22 @@
-import { useLaravelReactI18n } from "laravel-react-i18n";
-import type { PropsWithoutRef, SVGProps } from "react";
-import { twMerge } from "tailwind-merge";
+import { useLaravelReactI18n } from 'laravel-react-i18n';
+import type { PropsWithoutRef, SVGProps } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 export default function LoadingIcon({
 	className,
 	...props
-}: Omit<PropsWithoutRef<SVGProps<SVGSVGElement>>, "aria-label">) {
+}: Omit<PropsWithoutRef<SVGProps<SVGSVGElement>>, 'aria-label'>) {
 	const { t } = useLaravelReactI18n();
 
 	return (
 		<svg
 			{...props}
-            aria-hidden="true"
-			className={twMerge("size-5 animate-spin text-white", className)}
+			aria-hidden="true"
+			className={twMerge('size-5 animate-spin text-white', className)}
 			xmlns="http://www.w3.org/2000/svg"
 			fill="none"
 			viewBox="0 0 24 24"
-			aria-label={t("Loading…")}
+			aria-label={t('Loading…')}
 			data-slot="icon"
 		>
 			<circle

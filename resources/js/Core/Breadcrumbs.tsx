@@ -1,7 +1,7 @@
-import slug from "slug";
-import { useEffect, useRef } from "react";
-import type Breadcrumb from "@/types/Breadcrumb";
-import { Link } from "@/Components/Link";
+import slug from 'slug';
+import { useEffect, useRef } from 'react';
+import type Breadcrumb from '@/types/Breadcrumb';
+import { Link } from '@/Components/Link';
 
 export default function Breadcrumbs({
 	breadcrumbs,
@@ -17,7 +17,7 @@ export default function Breadcrumbs({
 			breadcrumbsRef.current?.scrollTo({
 				top: 0,
 				left: breadcrumbsRef.current.getBoundingClientRect().right,
-				behavior: "smooth",
+				behavior: 'smooth',
 			});
 		}, 250);
 	}, []);

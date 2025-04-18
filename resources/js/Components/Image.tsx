@@ -3,10 +3,10 @@ import React, {
 	type ComponentPropsWithoutRef,
 	useEffect,
 	useRef,
-} from "react";
-import { twMerge } from "tailwind-merge";
-import { PhotoIcon } from "@heroicons/react/24/solid";
-import { decode, isBlurhashValid } from "blurhash";
+} from 'react';
+import { twMerge } from 'tailwind-merge';
+import { PhotoIcon } from '@heroicons/react/24/solid';
+import { decode, isBlurhashValid } from 'blurhash';
 
 export function ImageWithBlurHash({
 	blurHash,
@@ -14,13 +14,13 @@ export function ImageWithBlurHash({
 	className,
 	...props
 }: { blurHash: string | null } & Omit<
-	ComponentPropsWithoutRef<"img">,
-	"loading"
+	ComponentPropsWithoutRef<'img'>,
+	'loading'
 >) {
 	return (
 		<div
 			className={twMerge(
-				"relative flex items-center overflow-hidden",
+				'relative flex items-center overflow-hidden',
 				className,
 			)}
 		>
@@ -46,7 +46,7 @@ export function ImageWithBlurHash({
 
 export function ImagePlaceholder({ className }: { className?: string }) {
 	const classes = twMerge(
-		"flex justify-center bg-linear-to-br from-zinc-200 to-zinc-300 dark:from-zinc-700 dark:to-zinc-800",
+		'flex justify-center bg-linear-to-br from-zinc-200 to-zinc-300 dark:from-zinc-700 dark:to-zinc-800',
 		className,
 	);
 
@@ -74,7 +74,7 @@ function BlurhashCanvas({
 
 		const pixels = decode(hash, width, height, punch);
 
-		const ctx = canvasElement.current.getContext("2d");
+		const ctx = canvasElement.current.getContext('2d');
 
 		if (!ctx) {
 			return;
@@ -85,8 +85,8 @@ function BlurhashCanvas({
 		ctx.putImageData(imageData, 0, 0);
 	};
 
-    // biome-ignore lint/correctness/useExhaustiveDependencies(hash): we need to run this effect when the hash changes
-    // biome-ignore lint/correctness/useExhaustiveDependencies(draw): we only need to run this effect when the hash changes
+	// biome-ignore lint/correctness/useExhaustiveDependencies(hash): we need to run this effect when the hash changes
+	// biome-ignore lint/correctness/useExhaustiveDependencies(draw): we only need to run this effect when the hash changes
 	useEffect(() => {
 		draw();
 	}, [hash]);

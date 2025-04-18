@@ -1,24 +1,24 @@
-import { useState } from "react";
-import clsx from "clsx";
-import { useLaravelReactI18n } from "laravel-react-i18n";
-import { Button } from "@/Components/Button";
-import formatDateTime from "@/Utils/formatDateTime";
-import type { RouteParams } from "ziggy-js";
+import { useState } from 'react';
+import clsx from 'clsx';
+import { useLaravelReactI18n } from 'laravel-react-i18n';
+import { Button } from '@/Components/Button';
+import formatDateTime from '@/Utils/formatDateTime';
+import type { RouteParams } from 'ziggy-js';
 import {
 	ArrowTopRightOnSquareIcon,
 	CalendarDaysIcon,
 	EyeIcon,
 	EyeSlashIcon,
 	RssIcon,
-} from "@heroicons/react/20/solid";
-import { ImagePlaceholder, ImageWithBlurHash } from "@/Components/Image";
-import type { FeedItem } from "@/types/generated/models";
-import { Heading } from "@/Components/Heading";
-import { useSetAtom } from "jotai";
+} from '@heroicons/react/20/solid';
+import { ImagePlaceholder, ImageWithBlurHash } from '@/Components/Image';
+import type { FeedItem } from '@/types/generated/models';
+import { Heading } from '@/Components/Heading';
+import { useSetAtom } from 'jotai';
 import {
 	unreadFeedsAtom,
 	updateUnreadFeedByFeedItem,
-} from "@/Stores/unreadFeedsAtom";
+} from '@/Stores/unreadFeedsAtom';
 
 export default function FeedItemCard({ feedItem }: { feedItem: FeedItem }) {
 	const { t } = useLaravelReactI18n();
@@ -33,8 +33,8 @@ export default function FeedItemCard({ feedItem }: { feedItem: FeedItem }) {
 		void window.ky
 			.put(
 				route(
-					"toggle-feed-item",
-					internalFeedItem as unknown as RouteParams<"toggle-feed-item">,
+					'toggle-feed-item',
+					internalFeedItem as unknown as RouteParams<'toggle-feed-item'>,
 				),
 			)
 			.json<FeedItem>()
@@ -50,8 +50,8 @@ export default function FeedItemCard({ feedItem }: { feedItem: FeedItem }) {
 		<div
 			key={internalFeedItem.id}
 			className={clsx(
-				"@container p-4 ring-1 ring-zinc-950/10 dark:ring-zinc-50/10 hover:ring-blue-600/50 dark:hover:ring-blue-500/50 rounded-lg transition ease-out duration-300",
-				{ "opacity-50": internalFeedItem.read_at },
+				'@container p-4 ring-1 ring-zinc-950/10 dark:ring-zinc-50/10 hover:ring-blue-600/50 dark:hover:ring-blue-500/50 rounded-lg transition ease-out duration-300',
+				{ 'opacity-50': internalFeedItem.read_at },
 			)}
 		>
 			<div className="flex flex-col @md:flex-row h-full">
@@ -115,7 +115,7 @@ export default function FeedItemCard({ feedItem }: { feedItem: FeedItem }) {
 						>
 							{internalFeedItem.read_at ? <EyeSlashIcon /> : <EyeIcon />}
 
-							{internalFeedItem.read_at ? t("Read") : t("Unread")}
+							{internalFeedItem.read_at ? t('Read') : t('Unread')}
 						</Button>
 
 						<Button
@@ -126,7 +126,7 @@ export default function FeedItemCard({ feedItem }: { feedItem: FeedItem }) {
 						>
 							<ArrowTopRightOnSquareIcon />
 
-							{t("Read article")}
+							{t('Read article')}
 						</Button>
 					</div>
 				</div>

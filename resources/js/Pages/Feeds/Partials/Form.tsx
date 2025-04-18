@@ -1,18 +1,18 @@
-import { useForm, usePage } from "@inertiajs/react";
-import type React from "react";
-import { useState } from "react";
-import { useLaravelReactI18n } from "laravel-react-i18n";
-import { Button } from "@/Components/Button";
-import type { PageProps } from "@/types";
-import type { SelectNumberOption } from "@/types/SelectOption";
-import type DiscoveredFeed from "@/types/DiscoveredFeed";
-import { Input } from "@/Components/Form/Input";
-import { ErrorMessage, Field, FieldGroup, Label } from "@/Components/Fieldset";
-import { Checkbox, CheckboxField } from "@/Components/Form/Checkbox";
-import InputListbox from "@/Components/Form/InputListbox";
-import toNumber from "@/Utils/toNumber";
-import { LinkStack, LinkStackItem } from "@/Components/LinkStack";
-import type { Feed } from "@/types/generated/models";
+import { useForm, usePage } from '@inertiajs/react';
+import type React from 'react';
+import { useState } from 'react';
+import { useLaravelReactI18n } from 'laravel-react-i18n';
+import { Button } from '@/Components/Button';
+import type { PageProps } from '@/types';
+import type { SelectNumberOption } from '@/types/SelectOption';
+import type DiscoveredFeed from '@/types/DiscoveredFeed';
+import { Input } from '@/Components/Form/Input';
+import { ErrorMessage, Field, FieldGroup, Label } from '@/Components/Fieldset';
+import { Checkbox, CheckboxField } from '@/Components/Form/Checkbox';
+import InputListbox from '@/Components/Form/InputListbox';
+import toNumber from '@/Utils/toNumber';
+import { LinkStack, LinkStackItem } from '@/Components/LinkStack';
+import type { Feed } from '@/types/generated/models';
 
 export default function Form({
 	method,
@@ -20,7 +20,7 @@ export default function Form({
 	feed,
 	categories,
 }: {
-	method: "post" | "put";
+	method: 'post' | 'put';
 	action: string;
 	feed: Feed;
 	categories: SelectNumberOption[];
@@ -29,16 +29,16 @@ export default function Form({
 	const { monthsAfterPruningFeedItems } = usePage<PageProps>().props;
 	const [isDiscoverFeedProcessing, setIsDiscoverFeedProcessing] =
 		useState(false);
-	const [searchUrl, setSearchUrl] = useState("");
+	const [searchUrl, setSearchUrl] = useState('');
 	const [discoveredFeedUrls, setDiscoveredFeedUrls] = useState<string[]>([]);
 
 	const { data, setData, post, put, errors, processing } = useForm({
 		category_id: feed.category_id ?? categories[0].value,
-		feed_url: feed.feed_url ?? "",
-		site_url: feed.site_url ?? "",
-		favicon_url: feed.favicon_url ?? "",
-		name: feed.name ?? "",
-		language: feed.language ?? "",
+		feed_url: feed.feed_url ?? '',
+		site_url: feed.site_url ?? '',
+		favicon_url: feed.favicon_url ?? '',
+		name: feed.name ?? '',
+		language: feed.language ?? '',
 		is_purgeable: feed.is_purgeable ?? true,
 	});
 
@@ -47,7 +47,7 @@ export default function Form({
 		setIsDiscoverFeedProcessing(true);
 
 		window.ky
-			.post(route("discover-feed-urls"), { json: { feed_url: searchUrl } })
+			.post(route('discover-feed-urls'), { json: { feed_url: searchUrl } })
 			.json<string[]>()
 			.then((data) => {
 				setDiscoveredFeedUrls(data);
@@ -62,12 +62,12 @@ export default function Form({
 		setIsDiscoverFeedProcessing(true);
 
 		window.ky
-			.post(route("discover-feed"), { json: { feed_url: feedUrl } })
+			.post(route('discover-feed'), { json: { feed_url: feedUrl } })
 			.json<DiscoveredFeed>()
 			.then((responseData) => {
 				setData({ ...data, ...responseData });
 
-				setSearchUrl("");
+				setSearchUrl('');
 				setDiscoveredFeedUrls([]);
 			})
 			.catch((error) => {
@@ -79,7 +79,7 @@ export default function Form({
 	const submit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
-		const request = method === "post" ? post : put;
+		const request = method === 'post' ? post : put;
 
 		request(action);
 	};
@@ -90,7 +90,7 @@ export default function Form({
 				<Input
 					id="search_url"
 					className="grow w-full"
-					placeholder={t("Search URL...")}
+					placeholder={t('Search URL...')}
 					value={searchUrl}
 					onChange={(e) => setSearchUrl(e.target.value)}
 					disabled={isDiscoverFeedProcessing}
@@ -101,7 +101,7 @@ export default function Form({
 					onClick={() => discoverFeedUrls(searchUrl)}
 					disabled={isDiscoverFeedProcessing || searchUrl.length < 5}
 				>
-					{t("Search")}
+					{t('Search')}
 				</Button>
 			</div>
 
@@ -123,13 +123,13 @@ export default function Form({
 					<div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
 						<Field disabled={isDiscoverFeedProcessing}>
 							<Label htmlFor="name" required>
-								{t("validation.attributes.name")}
+								{t('validation.attributes.name')}
 							</Label>
 							<Input
 								id="name"
 								className="mt-1 block w-full"
 								value={data.name}
-								onChange={(e) => setData("name", e.target.value)}
+								onChange={(e) => setData('name', e.target.value)}
 								required
 							/>
 							<ErrorMessage>{errors.name}</ErrorMessage>
@@ -137,13 +137,13 @@ export default function Form({
 
 						<Field disabled={isDiscoverFeedProcessing}>
 							<Label htmlFor="category_id" required>
-								{t("validation.attributes.category_id")}
+								{t('validation.attributes.category_id')}
 							</Label>
 							<InputListbox
 								name="category_id"
 								defaultValue={data.category_id}
 								options={categories}
-								onChange={(value) => setData("category_id", toNumber(value))}
+								onChange={(value) => setData('category_id', toNumber(value))}
 								disabled={isDiscoverFeedProcessing}
 							/>
 							<ErrorMessage>{errors.category_id}</ErrorMessage>
@@ -151,13 +151,13 @@ export default function Form({
 
 						<Field disabled={isDiscoverFeedProcessing}>
 							<Label htmlFor="language" required>
-								{t("validation.attributes.language")}
+								{t('validation.attributes.language')}
 							</Label>
 							<Input
 								id="language"
 								className="mt-1 block w-full"
 								value={data.language}
-								onChange={(e) => setData("language", e.target.value)}
+								onChange={(e) => setData('language', e.target.value)}
 								required
 							/>
 							<ErrorMessage>{errors.language}</ErrorMessage>
@@ -167,13 +167,13 @@ export default function Form({
 					<div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
 						<Field disabled={isDiscoverFeedProcessing}>
 							<Label htmlFor="feed_url" required>
-								{t("validation.attributes.feed_url")}
+								{t('validation.attributes.feed_url')}
 							</Label>
 							<Input
 								id="feed_url"
 								className="mt-1 block w-full"
 								value={data.feed_url}
-								onChange={(e) => setData("feed_url", e.target.value)}
+								onChange={(e) => setData('feed_url', e.target.value)}
 								required
 							/>
 							<ErrorMessage>{errors.feed_url}</ErrorMessage>
@@ -181,13 +181,13 @@ export default function Form({
 
 						<Field disabled={isDiscoverFeedProcessing}>
 							<Label htmlFor="site_url" required>
-								{t("validation.attributes.site_url")}
+								{t('validation.attributes.site_url')}
 							</Label>
 							<Input
 								id="site_url"
 								className="mt-1 block w-full"
 								value={data.site_url}
-								onChange={(e) => setData("site_url", e.target.value)}
+								onChange={(e) => setData('site_url', e.target.value)}
 								required
 							/>
 							<ErrorMessage>{errors.site_url}</ErrorMessage>
@@ -195,13 +195,13 @@ export default function Form({
 
 						<Field disabled={isDiscoverFeedProcessing}>
 							<Label htmlFor="favicon_url">
-								{t("validation.attributes.favicon_url")}
+								{t('validation.attributes.favicon_url')}
 							</Label>
 							<Input
 								id="favicon_url"
 								className="mt-1 block w-full"
 								value={data.favicon_url}
-								onChange={(e) => setData("favicon_url", e.target.value)}
+								onChange={(e) => setData('favicon_url', e.target.value)}
 							/>
 							<ErrorMessage>{errors.favicon_url}</ErrorMessage>
 						</Field>
@@ -211,16 +211,16 @@ export default function Form({
 						<Checkbox
 							name="is_purgeable"
 							checked={data.is_purgeable}
-							onChange={(checked) => setData("is_purgeable", checked)}
+							onChange={(checked) => setData('is_purgeable', checked)}
 						/>
-						<Label>{tChoice("feed.purge", monthsAfterPruningFeedItems)}</Label>
+						<Label>{tChoice('feed.purge', monthsAfterPruningFeedItems)}</Label>
 					</CheckboxField>
 
 					<Button
 						type="submit"
 						disabled={processing || isDiscoverFeedProcessing}
 					>
-						{t("Save")}
+						{t('Save')}
 					</Button>
 				</FieldGroup>
 			</form>

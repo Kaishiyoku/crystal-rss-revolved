@@ -1,7 +1,7 @@
-import * as Headless from "@headlessui/react";
-import type React from "react";
-import { useState } from "react";
-import { NavbarItem } from "@/Components/Navbar";
+import * as Headless from '@headlessui/react';
+import type React from 'react';
+import { useState } from 'react';
+import { NavbarItem } from '@/Components/Navbar';
 
 function OpenMenuIcon() {
 	return (

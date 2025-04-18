@@ -1,9 +1,9 @@
-import { Head } from "@inertiajs/react";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { useLaravelReactI18n } from "laravel-react-i18n";
-import type { PageProps } from "@/types";
-import formatDateTime from "@/Utils/formatDateTime";
-import DeleteUserButton from "@/Pages/Admin/Users/Partials/DeleteUserButton";
+import { Head } from '@inertiajs/react';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import { useLaravelReactI18n } from 'laravel-react-i18n';
+import type { PageProps } from '@/types';
+import formatDateTime from '@/Utils/formatDateTime';
+import DeleteUserButton from '@/Pages/Admin/Users/Partials/DeleteUserButton';
 import {
 	Table,
 	TableBody,
@@ -13,8 +13,8 @@ import {
 	TableMobileContainer,
 	TableMobileText,
 	TableRow,
-} from "@/Components/Table";
-import type UserWithStats from "@/types/models/UserWithStats";
+} from '@/Components/Table';
+import type UserWithStats from '@/types/models/UserWithStats';
 
 export default function Index({
 	users,
@@ -26,28 +26,28 @@ export default function Index({
 		<AuthenticatedLayout
 			auth={props.auth}
 			errors={props.errors}
-			header={t("Manage users")}
+			header={t('Manage users')}
 		>
-			<Head title={t("Manage users")} />
+			<Head title={t('Manage users')} />
 
 			<Table>
 				<TableHead className="hidden md:table-header-group">
 					<TableRow>
-						<TableHeader>{t("validation.attributes.name")}</TableHeader>
+						<TableHeader>{t('validation.attributes.name')}</TableHeader>
 						<TableHeader className="hidden md:table-cell">
-							{t("validation.attributes.email_verified_at")}
+							{t('validation.attributes.email_verified_at')}
 						</TableHeader>
 						<TableHeader className="hidden md:table-cell">
-							{t("validation.attributes.is_admin")}
+							{t('validation.attributes.is_admin')}
 						</TableHeader>
 						<TableHeader className="hidden md:table-cell">
-							{t("Number of feeds")}
+							{t('Number of feeds')}
 						</TableHeader>
 						<TableHeader className="hidden md:table-cell">
-							{t("Number of unread feed items")}
+							{t('Number of unread feed items')}
 						</TableHeader>
 						<TableHeader className="hidden md:table-cell">
-							<span className="sr-only">{t("Actions")}</span>
+							<span className="sr-only">{t('Actions')}</span>
 						</TableHeader>
 					</TableRow>
 				</TableHead>
@@ -67,22 +67,22 @@ export default function Index({
 
 								<TableMobileContainer>
 									<TableMobileText
-										label={t("validation.attributes.email_verified_at")}
+										label={t('validation.attributes.email_verified_at')}
 									>
 										{user.email_verified_at
 											? formatDateTime(user.email_verified_at)
-											: "/"}
+											: '/'}
 									</TableMobileText>
 
-									<TableMobileText label={t("validation.attributes.is_admin")}>
-										{user.is_admin ? t("Yes") : t("No")}
+									<TableMobileText label={t('validation.attributes.is_admin')}>
+										{user.is_admin ? t('Yes') : t('No')}
 									</TableMobileText>
 
-									<TableMobileText label={t("Number of feeds")}>
+									<TableMobileText label={t('Number of feeds')}>
 										{user.feeds_count}
 									</TableMobileText>
 
-									<TableMobileText label={t("Number of unread feed items")}>
+									<TableMobileText label={t('Number of unread feed items')}>
 										{user.unread_feed_items_count}
 									</TableMobileText>
 								</TableMobileContainer>
@@ -96,10 +96,10 @@ export default function Index({
 							<TableCell className="hidden md:table-cell">
 								{user.email_verified_at
 									? formatDateTime(user.email_verified_at)
-									: "/"}
+									: '/'}
 							</TableCell>
 							<TableCell className="hidden md:table-cell">
-								{user.is_admin ? t("Yes") : t("No")}
+								{user.is_admin ? t('Yes') : t('No')}
 							</TableCell>
 							<TableCell className="hidden md:table-cell">
 								{user.feeds_count}

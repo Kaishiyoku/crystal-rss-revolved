@@ -1,14 +1,14 @@
-import { Head, useForm } from "@inertiajs/react";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import Form from "@/Pages/Feeds/Partials/Form";
-import { useLaravelReactI18n } from "laravel-react-i18n";
-import type { PageProps } from "@/types";
-import type { RouteParams } from "ziggy-js";
-import type { SelectNumberOption } from "@/types/SelectOption";
-import { Button } from "@/Components/Button";
-import ConfirmAlert from "@/Components/ConfirmAlert";
-import { useState } from "react";
-import type { Feed } from "@/types/generated/models";
+import { Head, useForm } from '@inertiajs/react';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import Form from '@/Pages/Feeds/Partials/Form';
+import { useLaravelReactI18n } from 'laravel-react-i18n';
+import type { PageProps } from '@/types';
+import type { RouteParams } from 'ziggy-js';
+import type { SelectNumberOption } from '@/types/SelectOption';
+import { Button } from '@/Components/Button';
+import ConfirmAlert from '@/Components/ConfirmAlert';
+import { useState } from 'react';
+import type { Feed } from '@/types/generated/models';
 
 export default function Edit({
 	feed,
@@ -30,7 +30,7 @@ export default function Edit({
 		setIsConfirmDeleteAlertOpen(false);
 
 		destroy(
-			route("feeds.destroy", feed as unknown as RouteParams<"feeds.destroy">),
+			route('feeds.destroy', feed as unknown as RouteParams<'feeds.destroy'>),
 		);
 	};
 
@@ -47,27 +47,27 @@ export default function Edit({
 							onClick={() => setIsConfirmDeleteAlertOpen(true)}
 							outline
 						>
-							{t("Delete")}
+							{t('Delete')}
 						</Button>
 					)}
 
 					<ConfirmAlert
 						open={isConfirmDeleteAlertOpen}
-						title={t("Do you really want to delete this feed?")}
-						confirmTitle={t("Delete feed")}
+						title={t('Do you really want to delete this feed?')}
+						confirmTitle={t('Delete feed')}
 						onClose={() => setIsConfirmDeleteAlertOpen(false)}
 						onConfirm={handleDelete}
 					/>
 				</>
 			}
 		>
-			<Head title={t("Edit feed")} />
+			<Head title={t('Edit feed')} />
 
 			<Form
 				method="put"
 				action={route(
-					"feeds.update",
-					feed as unknown as RouteParams<"feeds.update">,
+					'feeds.update',
+					feed as unknown as RouteParams<'feeds.update'>,
 				)}
 				feed={feed}
 				categories={categories}

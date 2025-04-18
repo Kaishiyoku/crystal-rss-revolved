@@ -1,8 +1,8 @@
-import { useLaravelReactI18n } from "laravel-react-i18n";
-import { router } from "@inertiajs/react";
-import type { PageProps } from "@/types";
-import { useSetAtom } from "jotai/index";
-import { unreadFeedsAtom } from "@/Stores/unreadFeedsAtom";
+import { useLaravelReactI18n } from 'laravel-react-i18n';
+import { router } from '@inertiajs/react';
+import type { PageProps } from '@/types';
+import { useSetAtom } from 'jotai/index';
+import { unreadFeedsAtom } from '@/Stores/unreadFeedsAtom';
 
 // @ts-expect-error the app type doesn't matter here because we directly use this component in our Inertia setup function
 export default function HydratedApp({ app: App, ...props }) {
@@ -15,7 +15,7 @@ export default function HydratedApp({ app: App, ...props }) {
 		return null;
 	}
 
-	router.on("success", (event) => {
+	router.on('success', (event) => {
 		setUnreadFeedsAtom((event.detail.page.props as PageProps).unreadFeeds);
 	});
 

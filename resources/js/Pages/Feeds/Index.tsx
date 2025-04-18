@@ -1,15 +1,15 @@
-import { Head } from "@inertiajs/react";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { useLaravelReactI18n } from "laravel-react-i18n";
-import formatDateTime from "@/Utils/formatDateTime";
-import { EmptyState } from "@/Components/EmptyState";
-import type { PageProps } from "@/types";
-import type { RouteParams } from "ziggy-js";
-import { Button } from "@/Components/Button";
-import { LinkStack, LinkStackItem } from "@/Components/LinkStack";
-import { RssIcon } from "@heroicons/react/20/solid";
-import { PlusIcon } from "@heroicons/react/16/solid";
-import type FeedWithFeedItemsCount from "@/types/models/FeedWithFeedItemsCount";
+import { Head } from '@inertiajs/react';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import { useLaravelReactI18n } from 'laravel-react-i18n';
+import formatDateTime from '@/Utils/formatDateTime';
+import { EmptyState } from '@/Components/EmptyState';
+import type { PageProps } from '@/types';
+import type { RouteParams } from 'ziggy-js';
+import { Button } from '@/Components/Button';
+import { LinkStack, LinkStackItem } from '@/Components/LinkStack';
+import { RssIcon } from '@heroicons/react/20/solid';
+import { PlusIcon } from '@heroicons/react/16/solid';
+import type FeedWithFeedItemsCount from '@/types/models/FeedWithFeedItemsCount';
 
 export default function Index({
 	feeds,
@@ -21,16 +21,16 @@ export default function Index({
 		<AuthenticatedLayout
 			auth={props.auth}
 			errors={props.errors}
-			header={t("Feeds")}
-			actions={(
-                feeds.length > 0 && (
-                    <Button href={route("feeds.create")} outline>
-                        {t("Add feed")}
-                    </Button>
-                )
-            )}
+			header={t('Feeds')}
+			actions={
+				feeds.length > 0 && (
+					<Button href={route('feeds.create')} outline>
+						{t('Add feed')}
+					</Button>
+				)
+			}
 		>
-			<Head title={t("Feeds")} />
+			<Head title={t('Feeds')} />
 
 			{feeds.length > 0 ? (
 				<LinkStack>
@@ -51,8 +51,8 @@ export default function Index({
 							}
 							title={feed.name}
 							url={route(
-								"feeds.edit",
-								feed as unknown as RouteParams<"feeds.edit">,
+								'feeds.edit',
+								feed as unknown as RouteParams<'feeds.edit'>,
 							)}
 						>
 							<div className="text-sm text-muted">
@@ -61,18 +61,18 @@ export default function Index({
 								</div>
 
 								<div className="text-muted">
-									{tChoice("feed.feed_items_count", feed.feed_items_count)}
+									{tChoice('feed.feed_items_count', feed.feed_items_count)}
 								</div>
 
 								<div className="text-muted">
 									{feed.is_purgeable
-										? tChoice("feed.purge", props.monthsAfterPruningFeedItems)
-										: t("feed.no_purge")}
+										? tChoice('feed.purge', props.monthsAfterPruningFeedItems)
+										: t('feed.no_purge')}
 								</div>
 
 								{feed.last_failed_at && (
 									<div className="text-pink-500">
-										{t("feed.last_failed_at", {
+										{t('feed.last_failed_at', {
 											date: formatDateTime(feed.last_failed_at),
 										})}
 									</div>
@@ -84,13 +84,13 @@ export default function Index({
 			) : (
 				<EmptyState
 					icon={RssIcon}
-					message={t("No feeds.")}
-					description={t("Get started by creating a new feed.")}
+					message={t('No feeds.')}
+					description={t('Get started by creating a new feed.')}
 				>
-					<Button href={route("feeds.create")} outline>
+					<Button href={route('feeds.create')} outline>
 						<PlusIcon />
 
-						{t("Add feed")}
+						{t('Add feed')}
 					</Button>
 				</EmptyState>
 			)}

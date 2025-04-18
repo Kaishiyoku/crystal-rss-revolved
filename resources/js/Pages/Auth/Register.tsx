@@ -1,25 +1,25 @@
-import type React from "react";
-import { useEffect } from "react";
-import GuestLayout from "@/Layouts/GuestLayout";
-import { Head, Link, useForm } from "@inertiajs/react";
-import { Button } from "@/Components/Button";
-import { useLaravelReactI18n } from "laravel-react-i18n";
-import { ErrorMessage, Field, FieldGroup, Label } from "@/Components/Fieldset";
-import { Input } from "@/Components/Form/Input";
+import type React from 'react';
+import { useEffect } from 'react';
+import GuestLayout from '@/Layouts/GuestLayout';
+import { Head, Link, useForm } from '@inertiajs/react';
+import { Button } from '@/Components/Button';
+import { useLaravelReactI18n } from 'laravel-react-i18n';
+import { ErrorMessage, Field, FieldGroup, Label } from '@/Components/Fieldset';
+import { Input } from '@/Components/Form/Input';
 
 export default function Register() {
 	const { t } = useLaravelReactI18n();
 	const { data, setData, post, processing, errors, reset } = useForm({
-		name: "",
-		email: "",
-		password: "",
-		password_confirmation: "",
+		name: '',
+		email: '',
+		password: '',
+		password_confirmation: '',
 	});
 
-    // biome-ignore lint/correctness/useExhaustiveDependencies(reset): we only want to run this once
+	// biome-ignore lint/correctness/useExhaustiveDependencies(reset): we only want to run this once
 	useEffect(() => {
 		return () => {
-			reset("password", "password_confirmation");
+			reset('password', 'password_confirmation');
 		};
 	}, []);
 
@@ -29,24 +29,24 @@ export default function Register() {
 		// @ts-expect-error we know which fields can occur here
 		setData(
 			target.name,
-			target.type === "checkbox" ? target.checked : target.value,
+			target.type === 'checkbox' ? target.checked : target.value,
 		);
 	};
 
 	const submit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
-		post(route("register"));
+		post(route('register'));
 	};
 
 	return (
 		<GuestLayout>
-			<Head title={t("Register")} />
+			<Head title={t('Register')} />
 
 			<form onSubmit={submit}>
 				<FieldGroup>
 					<Field>
-						<Label htmlFor="name">{t("Name")}</Label>
+						<Label htmlFor="name">{t('Name')}</Label>
 						<Input
 							id="name"
 							name="name"
@@ -61,7 +61,7 @@ export default function Register() {
 					</Field>
 
 					<Field>
-						<Label htmlFor="email">{t("Email")}</Label>
+						<Label htmlFor="email">{t('Email')}</Label>
 						<Input
 							id="email"
 							type="email"
@@ -76,7 +76,7 @@ export default function Register() {
 					</Field>
 
 					<Field>
-						<Label htmlFor="password">{t("Password")}</Label>
+						<Label htmlFor="password">{t('Password')}</Label>
 						<Input
 							id="password"
 							type="password"
@@ -92,7 +92,7 @@ export default function Register() {
 
 					<Field>
 						<Label htmlFor="password_confirmation">
-							{t("Confirm Password")}
+							{t('Confirm Password')}
 						</Label>
 						<Input
 							id="password_confirmation"
@@ -109,14 +109,14 @@ export default function Register() {
 
 					<div className="flex items-center justify-end mt-4">
 						<Link
-							href={route("login")}
+							href={route('login')}
 							className="underline text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 rounded-md focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 dark:focus:ring-offset-zinc-800"
 						>
-							{t("Already registered?")}
+							{t('Already registered?')}
 						</Link>
 
 						<Button type="submit" className="ml-4" disabled={processing}>
-							{t("Register")}
+							{t('Register')}
 						</Button>
 					</div>
 				</FieldGroup>

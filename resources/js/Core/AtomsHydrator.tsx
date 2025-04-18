@@ -1,6 +1,6 @@
-import type { WritableAtom } from "jotai/index";
-import type { ReactNode } from "react";
-import { useHydrateAtoms } from "jotai/utils";
+import type { WritableAtom } from 'jotai/index';
+import type { ReactNode } from 'react';
+import { useHydrateAtoms } from 'jotai/utils';
 
 export default function AtomsHydrator({
 	atomValues,

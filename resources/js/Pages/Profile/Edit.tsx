@@ -1,11 +1,11 @@
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import DeleteUserForm from "./Partials/DeleteUserForm";
-import UpdatePasswordForm from "./Partials/UpdatePasswordForm";
-import UpdateProfileInformationForm from "./Partials/UpdateProfileInformationForm";
-import { Head } from "@inertiajs/react";
-import type { BasePageProps } from "@/types";
-import { useLaravelReactI18n } from "laravel-react-i18n";
-import { DividerContainer } from "@/Components/Divider";
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import DeleteUserForm from './Partials/DeleteUserForm';
+import UpdatePasswordForm from './Partials/UpdatePasswordForm';
+import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm';
+import { Head } from '@inertiajs/react';
+import type { BasePageProps } from '@/types';
+import { useLaravelReactI18n } from 'laravel-react-i18n';
+import { DividerContainer } from '@/Components/Divider';
 
 export default function Edit({
 	auth,
@@ -16,7 +16,7 @@ export default function Edit({
 	const { t } = useLaravelReactI18n();
 
 	return (
-		<AuthenticatedLayout auth={auth} header={t("Profile")} errors={errors}>
+		<AuthenticatedLayout auth={auth} header={t('Profile')} errors={errors}>
 			<Head title="Profile" />
 
 			<DividerContainer>

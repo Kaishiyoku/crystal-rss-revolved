@@ -1,8 +1,8 @@
-import type FeedWithFeedItemsCount from "@/types/models/FeedWithFeedItemsCount";
+import type FeedWithFeedItemsCount from '@/types/models/FeedWithFeedItemsCount';
 
 type ShortFeedWithFeedItemsCount = Pick<
 	FeedWithFeedItemsCount,
-	"id" | "name" | "favicon_url" | "feed_items_count"
+	'id' | 'name' | 'favicon_url' | 'feed_items_count'
 >;
 
 export default ShortFeedWithFeedItemsCount;
