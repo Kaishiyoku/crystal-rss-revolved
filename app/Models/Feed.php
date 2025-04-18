@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * 
- *
  * @property int $id
  * @property int $user_id
  * @property int $category_id
@@ -27,6 +25,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\FeedItem> $feedItems
  * @property-read int|null $feed_items_count
  * @property-read \App\Models\User $user
+ *
  * @method static \Database\Factories\FeedFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Feed newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Feed newQuery()
@@ -44,6 +43,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Feed whereSiteUrl($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Feed whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Feed whereUserId($value)
+ *
  * @mixin \Eloquent
  */
 class Feed extends Model
@@ -65,15 +65,18 @@ class Feed extends Model
     ];
 
     /**
-     * The attributes that should be cast.
+     * Get the attributes that should be cast.
      *
-     * @var array<string, string>
+     * @return array<string, string>
      */
-    protected $casts = [
-        'is_purgeable' => 'bool',
-        'last_checked_at' => 'datetime',
-        'last_failed_at' => 'datetime',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'is_purgeable' => 'bool',
+            'last_checked_at' => 'datetime',
+            'last_failed_at' => 'datetime',
+        ];
+    }
 
     public function user(): BelongsTo
     {
