@@ -1,4 +1,4 @@
-name: ESLint
+name: Biome
 on:
   push:
     branches: [ "master" ]
@@ -11,5 +11,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Install modules
       run: npm ci
-    - name: Run ESLint
+    - name: Run Biome lint
       run: npm run lint
+    - name: Run Biome format
+      run: npm run format
