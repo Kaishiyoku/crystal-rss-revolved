@@ -14,7 +14,11 @@ class CategoryController extends Controller
 {
     public function __construct()
     {
-        $this->authorizeResource(Category::class);
+        $this->middleware('can:viewAny,App\Models\Category')->only('index');
+        $this->middleware('can:view,category')->only('show');
+        $this->middleware('can:create,App\Models\Category')->only('create', 'store');
+        $this->middleware('can:update,category')->only('edit', 'update');
+        $this->middleware('can:delete,category')->only('destroy');
     }
 
     /**

@@ -15,7 +15,11 @@ class FeedController extends Controller
 {
     public function __construct()
     {
-        $this->authorizeResource(Feed::class);
+        $this->middleware('can:viewAny,App\Models\Feed')->only('index');
+        $this->middleware('can:view,feed')->only('show');
+        $this->middleware('can:create,App\Models\Feed')->only('create', 'store');
+        $this->middleware('can:update,feed')->only('edit', 'update');
+        $this->middleware('can:delete,feed')->only('destroy');
     }
 
     /**

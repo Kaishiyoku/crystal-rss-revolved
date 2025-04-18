@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Gate;
 use App\Models\FeedItem;
 
 class ToggleFeedItemController extends Controller
@@ -13,7 +14,7 @@ class ToggleFeedItemController extends Controller
      */
     public function __invoke(FeedItem $feedItem)
     {
-        $this->authorize('update', $feedItem);
+        Gate::authorize('update', $feedItem);
 
         $feedItem->update([
             'read_at' => $feedItem->read_at ? null : now(),
