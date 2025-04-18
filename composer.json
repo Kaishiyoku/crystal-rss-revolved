@@ -41,7 +41,8 @@
         "nunomaduro/collision": "^8.0",
         "pestphp/pest": "^3.0",
         "pestphp/pest-plugin-laravel": "^3.0",
-        "spatie/laravel-ignition": "^2.4"
+        "spatie/laravel-ignition": "^2.4",
+        "laravel/pail": "^1.2.2"
     },
     "autoload": {
         "psr-4": {
@@ -80,7 +81,11 @@
         "analyze": "./vendor/bin/phpstan analyse --memory-limit=256M",
         "pint": "./vendor/bin/pint",
         "deploy": "./vendor/bin/envoy run deploy --ansi",
-        "generate-typescript": "php artisan model:typer --no-hidden --use-enums  > resources/js/types/generated/models.d.ts && php -r \"file_put_contents(__DIR__ . '/resources/js/types/generated/models.d.ts', '/* eslint no-use-before-define: [\\'off\\'] */' . PHP_EOL . PHP_EOL . file_get_contents(__DIR__ . '/resources/js/types/generated/models.d.ts'));\" && npx eslint resources/js/types/generated/models.d.ts  --fix"
+        "generate-typescript": "php artisan model:typer --no-hidden --use-enums  > resources/js/types/generated/models.d.ts && php -r \"file_put_contents(__DIR__ . '/resources/js/types/generated/models.d.ts', '/* eslint no-use-before-define: [\\'off\\'] */' . PHP_EOL . PHP_EOL . file_get_contents(__DIR__ . '/resources/js/types/generated/models.d.ts'));\" && npx eslint resources/js/types/generated/models.d.ts  --fix",
+        "dev": [
+            "Composer\\Config::disableProcessTimeout",
+            "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"php artisan pail --timeout=0\" \"npm run dev\" --names=server,queue,logs,vite"
+        ]
     },
     "extra": {
         "laravel": {
