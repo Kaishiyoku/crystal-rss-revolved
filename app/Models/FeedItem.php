@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -127,7 +128,8 @@ class FeedItem extends Model
     /**
      * Scope a query to only include unread feed items.
      */
-    public function scopeUnread(Builder $query): void
+    #[Scope]
+    protected function unread(Builder $query): void
     {
         $query->whereNull('read_at');
     }
@@ -135,7 +137,8 @@ class FeedItem extends Model
     /**
      * Scope a query to only include feed items of a given feed if the feed ID is not null.
      */
-    public function scopeOfFeed(Builder $query, ?int $feedId): void
+    #[Scope]
+    protected function ofFeed(Builder $query, ?int $feedId): void
     {
         $query->when($feedId, fn ($query) => $query->where('feed_id', $feedId));
     }
