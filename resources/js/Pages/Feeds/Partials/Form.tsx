@@ -5,7 +5,7 @@ import { useLaravelReactI18n } from 'laravel-react-i18n';
 import { Button } from '@/Components/Button';
 import type { PageProps } from '@/types';
 import type { SelectNumberOption } from '@/types/SelectOption';
-import  DiscoveredFeed from '@/types/DiscoveredFeed';
+import DiscoveredFeed from '@/types/DiscoveredFeed';
 import { Input } from '@/Components/Form/Input';
 import { ErrorMessage, Field, FieldGroup, Label } from '@/Components/Fieldset';
 import { Checkbox, CheckboxField } from '@/Components/Form/Checkbox';
@@ -13,7 +13,7 @@ import InputListbox from '@/Components/Form/InputListbox';
 import toNumber from '@/Utils/toNumber';
 import { LinkStack, LinkStackItem } from '@/Components/LinkStack';
 import type { Feed } from '@/types/generated/models';
-import {Subheading} from '@/Components/Heading';
+import { Subheading } from '@/Components/Heading';
 import discoveredFeed from '@/types/DiscoveredFeed';
 
 export default function Form({
@@ -33,8 +33,8 @@ export default function Form({
 		useState(false);
 	const [searchUrl, setSearchUrl] = useState('');
 	const [discoveredFeedUrls, setDiscoveredFeedUrls] = useState<string[]>([]);
-    const [selectedFeedUrl, setSelectedFeedUrl] = useState<string | null>(null);
-    const [showManualInputFields, setShowManualInputFields] = useState(false);
+	const [selectedFeedUrl, setSelectedFeedUrl] = useState<string | null>(null);
+	const [showManualInputFields, setShowManualInputFields] = useState(false);
 
 	const { data, setData, post, put, errors, processing, isDirty } = useForm({
 		category_id: feed.category_id ?? categories[0].value,
@@ -73,10 +73,10 @@ export default function Form({
 
 				setSearchUrl('');
 				setDiscoveredFeedUrls([]);
-                setSelectedFeedUrl(responseData.feed_url);
+				setSelectedFeedUrl(responseData.feed_url);
 			})
 			.catch((error) => {
-                setSelectedFeedUrl(null);
+				setSelectedFeedUrl(null);
 
 				console.error(error);
 			})
@@ -91,14 +91,14 @@ export default function Form({
 		request(action);
 	};
 
-    const handleAddFeedManually = () => {
-        setDiscoveredFeedUrls([]);
-        setShowManualInputFields(true);
-    };
+	const handleAddFeedManually = () => {
+		setDiscoveredFeedUrls([]);
+		setShowManualInputFields(true);
+	};
 
-    const handleAddFeedViaDiscovery = () => {
-        setShowManualInputFields(false);
-    };
+	const handleAddFeedViaDiscovery = () => {
+		setShowManualInputFields(false);
+	};
 
 	return (
 		<>
@@ -115,50 +115,50 @@ export default function Form({
 
 				<Button
 					onClick={() => discoverFeedUrls(searchUrl)}
-					disabled={isDiscoverFeedProcessing || showManualInputFields || searchUrl.length < 5}
+					disabled={
+						isDiscoverFeedProcessing ||
+						showManualInputFields ||
+						searchUrl.length < 5
+					}
 				>
 					{t('Search')}
 				</Button>
 			</div>
 
 			{discoveredFeedUrls.length > 0 && (
-                <div className="space-y-2">
-                    <Subheading>
-                        {t('Found feeds')}
-                    </Subheading>
+				<div className="space-y-2">
+					<Subheading>{t('Found feeds')}</Subheading>
 
-                    <LinkStack className="mb-8">
-                        {discoveredFeedUrls.map((discoveredFeedUrl) => (
-                            <LinkStackItem
-                                key={discoveredFeedUrl}
-                                title={discoveredFeedUrl}
-                                onClick={selectDiscoveredFeedUrl(discoveredFeedUrl)}
-                                disabled={isDiscoverFeedProcessing}
-                            />
-                        ))}
-                    </LinkStack>
-                </div>
+					<LinkStack className="mb-8">
+						{discoveredFeedUrls.map((discoveredFeedUrl) => (
+							<LinkStackItem
+								key={discoveredFeedUrl}
+								title={discoveredFeedUrl}
+								onClick={selectDiscoveredFeedUrl(discoveredFeedUrl)}
+								disabled={isDiscoverFeedProcessing}
+							/>
+						))}
+					</LinkStack>
+				</div>
 			)}
 
-            {!selectedFeedUrl && (
-                <div className="flex items-center space-x-2 my-4">
-                    <div className="border dark:border-zinc-700 grow" />
+			{!selectedFeedUrl && (
+				<div className="flex items-center space-x-2 my-4">
+					<div className="border dark:border-zinc-700 grow" />
 
-                    {showManualInputFields
-                        ? (
-                            <Button onClick={handleAddFeedViaDiscovery} plain>
-                                {t("Search URL...")}
-                            </Button>
-                        )
-                        : (
-                            <Button onClick={handleAddFeedManually} plain>
-                                {t("Add feed manually")}
-                            </Button>
-                        )}
+					{showManualInputFields ? (
+						<Button onClick={handleAddFeedViaDiscovery} plain>
+							{t('Search URL...')}
+						</Button>
+					) : (
+						<Button onClick={handleAddFeedManually} plain>
+							{t('Add feed manually')}
+						</Button>
+					)}
 
-                    <div className="border dark:border-zinc-700 grow" />
-                </div>
-            )}
+					<div className="border dark:border-zinc-700 grow" />
+				</div>
+			)}
 
 			<form onSubmit={submit}>
 				<FieldGroup hidden={!showManualInputFields && !isDirty}>
