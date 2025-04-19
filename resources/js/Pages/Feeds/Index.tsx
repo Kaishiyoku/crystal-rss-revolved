@@ -13,7 +13,7 @@ import type FeedWithFeedItemsCount from '@/types/models/FeedWithFeedItemsCount';
 import { Description, Label } from '@/Components/Fieldset';
 import { Switch, SwitchField } from '@/Components/Form/Switch';
 import { useMemo, useState } from 'react';
-import {FunnelIcon} from '@heroicons/react/24/outline';
+import { FunnelIcon } from '@heroicons/react/24/outline';
 
 export default function Index({
 	feeds,
@@ -60,70 +60,73 @@ export default function Index({
 						/>
 					</SwitchField>
 
-                    {showFailedFeedsOnly && filteredFeeds.length === 0 && (
-                        <EmptyState
-                            icon={FunnelIcon}
-                            message={t('No failed feeds.')}
-                            description={t('There are no feeds that failed fetching lately.')}
-                        >
-                            <Button onClick={() => setShowFailedFeedsOnly(false)} outline>
-                                <FunnelIcon />
+					{showFailedFeedsOnly && filteredFeeds.length === 0 && (
+						<EmptyState
+							icon={FunnelIcon}
+							message={t('No failed feeds.')}
+							description={t('There are no feeds that failed fetching lately.')}
+						>
+							<Button onClick={() => setShowFailedFeedsOnly(false)} outline>
+								<FunnelIcon />
 
-                                {t('Show all feeds')}
-                            </Button>
-                        </EmptyState>
-                    )}
+								{t('Show all feeds')}
+							</Button>
+						</EmptyState>
+					)}
 
-                    {filteredFeeds.length > 0 && (
-                        <LinkStack>
-                            {filteredFeeds.map((feed) => (
-                                <LinkStackItem
-                                    key={feed.id}
-                                    image={
-                                        feed.favicon_url ? (
-                                            <img
-                                                loading="lazy"
-                                                src={feed.favicon_url}
-                                                alt={feed.name}
-                                                className="size-5 rounded-full"
-                                            />
-                                        ) : (
-                                            <RssIcon className="size-5" />
-                                        )
-                                    }
-                                    title={feed.name}
-                                    url={route(
-                                        'feeds.edit',
-                                        feed as unknown as RouteParams<'feeds.edit'>,
-                                    )}
-                                >
-                                    <div className="text-sm text-muted">
-                                        <div className="flex space-x-2">
-                                            <div>{feed.category.name}</div>
-                                        </div>
+					{filteredFeeds.length > 0 && (
+						<LinkStack>
+							{filteredFeeds.map((feed) => (
+								<LinkStackItem
+									key={feed.id}
+									image={
+										feed.favicon_url ? (
+											<img
+												loading="lazy"
+												src={feed.favicon_url}
+												alt={feed.name}
+												className="size-5 rounded-full"
+											/>
+										) : (
+											<RssIcon className="size-5" />
+										)
+									}
+									title={feed.name}
+									url={route(
+										'feeds.edit',
+										feed as unknown as RouteParams<'feeds.edit'>,
+									)}
+								>
+									<div className="text-sm text-muted">
+										<div className="flex space-x-2">
+											<div>{feed.category.name}</div>
+										</div>
 
-                                        <div className="text-muted">
-                                            {tChoice('feed.feed_items_count', feed.feed_items_count)}
-                                        </div>
+										<div className="text-muted">
+											{tChoice('feed.feed_items_count', feed.feed_items_count)}
+										</div>
 
-                                        <div className="text-muted">
-                                            {feed.is_purgeable
-                                                ? tChoice('feed.purge', props.monthsAfterPruningFeedItems)
-                                                : t('feed.no_purge')}
-                                        </div>
+										<div className="text-muted">
+											{feed.is_purgeable
+												? tChoice(
+														'feed.purge',
+														props.monthsAfterPruningFeedItems,
+													)
+												: t('feed.no_purge')}
+										</div>
 
-                                        {feed.last_failed_at && (
-                                            <div className="text-pink-500">
-                                                {t('feed.last_failed_at', {
-                                                    date: formatDateTime(feed.last_failed_at),
-                                                })}
-                                            </div>
-                                        )}
-                                    </div>
-                                </LinkStackItem>
-                            ))}
-                        </LinkStack>
-                    )}
+										{feed.last_failed_at && (
+											<div className="text-pink-500">
+												{t('feed.last_failed_at', {
+													date: formatDateTime(feed.last_failed_at),
+												})}
+											</div>
+										)}
+									</div>
+								</LinkStackItem>
+							))}
+						</LinkStack>
+					)}
 				</div>
 			) : (
 				<EmptyState
