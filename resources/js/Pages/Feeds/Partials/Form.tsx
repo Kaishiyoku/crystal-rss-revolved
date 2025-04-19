@@ -5,7 +5,7 @@ import { useLaravelReactI18n } from 'laravel-react-i18n';
 import { Button } from '@/Components/Button';
 import type { PageProps } from '@/types';
 import type { SelectNumberOption } from '@/types/SelectOption';
-import type DiscoveredFeed from '@/types/DiscoveredFeed';
+import  DiscoveredFeed from '@/types/DiscoveredFeed';
 import { Input } from '@/Components/Form/Input';
 import { ErrorMessage, Field, FieldGroup, Label } from '@/Components/Fieldset';
 import { Checkbox, CheckboxField } from '@/Components/Form/Checkbox';
@@ -13,6 +13,8 @@ import InputListbox from '@/Components/Form/InputListbox';
 import toNumber from '@/Utils/toNumber';
 import { LinkStack, LinkStackItem } from '@/Components/LinkStack';
 import type { Feed } from '@/types/generated/models';
+import {Subheading} from '@/Components/Heading';
+import discoveredFeed from '@/types/DiscoveredFeed';
 
 export default function Form({
 	method,
@@ -31,8 +33,10 @@ export default function Form({
 		useState(false);
 	const [searchUrl, setSearchUrl] = useState('');
 	const [discoveredFeedUrls, setDiscoveredFeedUrls] = useState<string[]>([]);
+    const [selectedFeedUrl, setSelectedFeedUrl] = useState<string | null>(null);
+    const [showManualInputFields, setShowManualInputFields] = useState(false);
 
-	const { data, setData, post, put, errors, processing } = useForm({
+	const { data, setData, post, put, errors, processing, isDirty } = useForm({
 		category_id: feed.category_id ?? categories[0].value,
 		feed_url: feed.feed_url ?? '',
 		site_url: feed.site_url ?? '',
@@ -69,8 +73,11 @@ export default function Form({
 
 				setSearchUrl('');
 				setDiscoveredFeedUrls([]);
+                setSelectedFeedUrl(responseData.feed_url);
 			})
 			.catch((error) => {
+                setSelectedFeedUrl(null);
+
 				console.error(error);
 			})
 			.finally(() => setIsDiscoverFeedProcessing(false));
@@ -84,6 +91,15 @@ export default function Form({
 		request(action);
 	};
 
+    const handleAddFeedManually = () => {
+        setDiscoveredFeedUrls([]);
+        setShowManualInputFields(true);
+    };
+
+    const handleAddFeedViaDiscovery = () => {
+        setShowManualInputFields(false);
+    };
+
 	return (
 		<>
 			<div className="flex space-x-2 pb-8">
@@ -93,33 +109,59 @@ export default function Form({
 					placeholder={t('Search URL...')}
 					value={searchUrl}
 					onChange={(e) => setSearchUrl(e.target.value)}
-					disabled={isDiscoverFeedProcessing}
+					disabled={isDiscoverFeedProcessing || showManualInputFields}
 					autoFocus
 				/>
 
 				<Button
 					onClick={() => discoverFeedUrls(searchUrl)}
-					disabled={isDiscoverFeedProcessing || searchUrl.length < 5}
+					disabled={isDiscoverFeedProcessing || showManualInputFields || searchUrl.length < 5}
 				>
 					{t('Search')}
 				</Button>
 			</div>
 
 			{discoveredFeedUrls.length > 0 && (
-				<LinkStack className="mb-8">
-					{discoveredFeedUrls.map((discoveredFeedUrl) => (
-						<LinkStackItem
-							key={discoveredFeedUrl}
-							title={discoveredFeedUrl}
-							onClick={selectDiscoveredFeedUrl(discoveredFeedUrl)}
-							disabled={isDiscoverFeedProcessing}
-						/>
-					))}
-				</LinkStack>
+                <div className="space-y-2">
+                    <Subheading>
+                        {t('Found feeds')}
+                    </Subheading>
+
+                    <LinkStack className="mb-8">
+                        {discoveredFeedUrls.map((discoveredFeedUrl) => (
+                            <LinkStackItem
+                                key={discoveredFeedUrl}
+                                title={discoveredFeedUrl}
+                                onClick={selectDiscoveredFeedUrl(discoveredFeedUrl)}
+                                disabled={isDiscoverFeedProcessing}
+                            />
+                        ))}
+                    </LinkStack>
+                </div>
 			)}
 
+            {!selectedFeedUrl && (
+                <div className="flex items-center space-x-2 my-4">
+                    <div className="border dark:border-zinc-700 grow" />
+
+                    {showManualInputFields
+                        ? (
+                            <Button onClick={handleAddFeedViaDiscovery} plain>
+                                {t("Search URL...")}
+                            </Button>
+                        )
+                        : (
+                            <Button onClick={handleAddFeedManually} plain>
+                                {t("Add feed manually")}
+                            </Button>
+                        )}
+
+                    <div className="border dark:border-zinc-700 grow" />
+                </div>
+            )}
+
 			<form onSubmit={submit}>
-				<FieldGroup>
+				<FieldGroup hidden={!showManualInputFields && !isDirty}>
 					<div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
 						<Field disabled={isDiscoverFeedProcessing}>
 							<Label htmlFor="name" required>
