@@ -5,7 +5,7 @@ import { useLaravelReactI18n } from 'laravel-react-i18n';
 import { Button } from '@/Components/Button';
 import type { PageProps } from '@/types';
 import type { SelectNumberOption } from '@/types/SelectOption';
-import DiscoveredFeed from '@/types/DiscoveredFeed';
+import type DiscoveredFeed from '@/types/DiscoveredFeed';
 import { Input } from '@/Components/Form/Input';
 import { ErrorMessage, Field, FieldGroup, Label } from '@/Components/Fieldset';
 import { Checkbox, CheckboxField } from '@/Components/Form/Checkbox';
