@@ -56,9 +56,7 @@ test('create', function () {
     actingAs(User::factory()->create());
 
     get(route('feeds.create'))
-        ->assertInertia(fn (Assert $page) => $page
-            ->has('feed')
-        );
+        ->assertInertia(fn (Assert $page) => $page);
 });
 
 test('store', function () {

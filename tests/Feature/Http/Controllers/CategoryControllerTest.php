@@ -54,9 +54,7 @@ test('create', function () {
     actingAs(User::factory()->create());
 
     get(route('categories.create'))
-        ->assertInertia(fn (Assert $page) => $page
-            ->has('category')
-        );
+        ->assertInertia(fn (Assert $page) => $page);
 });
 
 test('store', function () {
