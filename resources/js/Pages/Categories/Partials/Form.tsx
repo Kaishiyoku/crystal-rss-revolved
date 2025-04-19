@@ -10,10 +10,10 @@ export default function Form({
 	method,
 	action,
 	category,
-}: { method: 'post' | 'put'; action: string; category: Category }) {
+}: { method: 'post' | 'put'; action: string; category?: Category }) {
 	const { t } = useLaravelReactI18n();
 	const { data, setData, post, put, errors, processing } = useForm({
-		name: category.name ?? '',
+		name: category?.name ?? '',
 	});
 
 	const submit = (event: React.FormEvent<HTMLFormElement>) => {

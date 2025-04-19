@@ -5,10 +5,7 @@ import { useLaravelReactI18n } from 'laravel-react-i18n';
 import type { PageProps } from '@/types';
 import type { Category } from '@/types/generated/models';
 
-export default function Create({
-	category,
-	...props
-}: PageProps & { category: Category }) {
+export default function Create(props: PageProps) {
 	const { t } = useLaravelReactI18n();
 
 	return (
@@ -22,7 +19,6 @@ export default function Create({
 			<Form
 				method="post"
 				action={route('categories.store')}
-				category={category}
 			/>
 		</AuthenticatedLayout>
 	);
