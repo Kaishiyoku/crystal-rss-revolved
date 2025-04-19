@@ -36,7 +36,6 @@ class FeedController extends Controller
     {
         return Inertia::render('Feeds/Create', [
             'categories' => Auth::user()->categories()->pluck('name', 'id')->map(fn (string $name, int $id) => ['value' => $id, 'name' => $name])->values(),
-            'feed' => new Feed,
         ]);
     }
 

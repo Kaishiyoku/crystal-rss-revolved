@@ -24,7 +24,7 @@ export default function Form({
 }: {
 	method: 'post' | 'put';
 	action: string;
-	feed: Feed;
+	feed?: Feed;
 	categories: SelectNumberOption[];
 }) {
 	const { t, tChoice } = useLaravelReactI18n();
@@ -34,16 +34,16 @@ export default function Form({
 	const [searchUrl, setSearchUrl] = useState('');
 	const [discoveredFeedUrls, setDiscoveredFeedUrls] = useState<string[]>([]);
 	const [selectedFeedUrl, setSelectedFeedUrl] = useState<string | null>(null);
-	const [showManualInputFields, setShowManualInputFields] = useState(false);
+	const [showManualInputFields, setShowManualInputFields] = useState(!!feed);
 
 	const { data, setData, post, put, errors, processing, isDirty } = useForm({
-		category_id: feed.category_id ?? categories[0].value,
-		feed_url: feed.feed_url ?? '',
-		site_url: feed.site_url ?? '',
-		favicon_url: feed.favicon_url ?? '',
-		name: feed.name ?? '',
-		language: feed.language ?? '',
-		is_purgeable: feed.is_purgeable ?? true,
+		category_id: feed?.category_id ?? categories[0].value,
+		feed_url: feed?.feed_url ?? '',
+		site_url: feed?.site_url ?? '',
+		favicon_url: feed?.favicon_url ?? '',
+		name: feed?.name ?? '',
+		language: feed?.language ?? '',
+		is_purgeable: feed?.is_purgeable ?? true,
 	});
 
 	const discoverFeedUrls = (searchUrl: string) => {

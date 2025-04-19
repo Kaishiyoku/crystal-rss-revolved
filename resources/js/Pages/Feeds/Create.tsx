@@ -10,10 +10,9 @@ import { Button } from '@/Components/Button';
 import type { Feed } from '@/types/generated/models';
 
 export default function Create({
-	feed,
 	categories,
 	...props
-}: PageProps & { feed: Feed; categories: SelectNumberOption[] }) {
+}: PageProps & { categories: SelectNumberOption[] }) {
 	const { t } = useLaravelReactI18n();
 
 	return (
@@ -28,7 +27,6 @@ export default function Create({
 				<Form
 					method="post"
 					action={route('feeds.store')}
-					feed={feed}
 					categories={categories}
 				/>
 			) : (
