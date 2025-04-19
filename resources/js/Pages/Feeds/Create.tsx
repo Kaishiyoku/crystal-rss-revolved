@@ -5,9 +5,8 @@ import { useLaravelReactI18n } from 'laravel-react-i18n';
 import { EmptyState } from '@/Components/EmptyState';
 import type { PageProps } from '@/types';
 import type { SelectNumberOption } from '@/types/SelectOption';
-import { PlusIcon, FolderIcon } from '@heroicons/react/24/outline';
+import { FolderIcon, PlusIcon } from '@heroicons/react/24/outline';
 import { Button } from '@/Components/Button';
-import type { Feed } from '@/types/generated/models';
 
 export default function Create({
 	categories,
