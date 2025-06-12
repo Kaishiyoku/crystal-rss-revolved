@@ -96,3 +96,26 @@ test('force delete', function () {
 
     expect($this->feedItemPolicy->forceDelete($user, $feedItem))->toBeFalse();
 });
+
+/**
+ * A user should be able to generate a PDF of their own feed item.
+ */
+test('pdf of own feed item', function () {
+    actingAs($user = User::factory()->create());
+    $feed = Feed::factory()->for($user)->create();
+    $feedItem = FeedItem::factory()->for($feed)->create();
+
+    expect($this->feedItemPolicy->pdf($user, $feedItem))->toBeTrue();
+});
+
+/**
+ * A user should not be able to generate a PDF of a feed item owned by another user.
+ */
+test('pdf of feed item of another user', function () {
+    actingAs($user = User::factory()->create());
+    $anotherUser = User::factory()->create();
+    $feed = Feed::factory()->for($anotherUser)->create();
+    $feedItem = FeedItem::factory()->for($feed)->create();
+
+    expect($this->feedItemPolicy->pdf($user, $feedItem))->toBeFalse();
+});
