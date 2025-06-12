@@ -10,6 +10,7 @@
     "require": {
         "php": "^8.2",
         "diglactic/laravel-breadcrumbs": "^10.0",
+        "fivefilters/readability.php": "^3.3",
         "guzzlehttp/guzzle": "^7.8",
         "inertiajs/inertia-laravel": "^2.0",
         "intervention/image": "^3.3",
@@ -23,6 +24,7 @@
         "neitanod/forceutf8": "^2.0",
         "predis/predis": "^2.2",
         "robertboes/inertia-breadcrumbs": "^0.8.0",
+        "spatie/laravel-pdf": "^1.5",
         "tightenco/ziggy": "^2.0"
     },
     "require-dev": {

@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FeedController;
 use App\Http\Controllers\FeedDiscovererController;
+use App\Http\Controllers\FeedItemPdfController;
 use App\Http\Controllers\FeedUrlDiscovererController;
 use App\Http\Controllers\MarkAllUnreadFeedItemsAsReadController;
 use App\Http\Controllers\ProfileController;
@@ -48,6 +49,8 @@ Route::middleware('auth')->group(function () {
         Route::put('/feeds/mark-all-as-read', MarkAllUnreadFeedItemsAsReadController::class)->name('mark-all-as-read');
         Route::resource('feeds', FeedController::class)->except('show');
         Route::put('/feeds/{feedItem}/toggle', ToggleFeedItemController::class)->name('toggle-feed-item');
+
+        Route::get('/feeds/{feedItem}/pdf', FeedItemPdfController::class)->name('feed-item-pdf');
 
         Route::middleware('administrate')->prefix('admin')->as('admin.')->group(function () {
             Route::resource('users', AdminUserController::class)->only(['index', 'destroy']);

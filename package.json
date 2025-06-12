@@ -55,5 +55,8 @@
     },
     "optionalDependencies": {
         "@tailwindcss/oxide-linux-arm64-gnu": "^4.0.1"
+    },
+    "dependencies": {
+        "puppeteer": "^24.10.1"
     }
 }

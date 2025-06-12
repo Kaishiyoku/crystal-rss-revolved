@@ -112,7 +112,7 @@
     "Delete user": "Benutzer löschen",
     "Do you really want to delete the user “:name”?": "Wollen Sie den Benutzer „:name” wirklich löschen?",
     "Manage users": "Benutzer verwalten",
-    "Read article": "Artikel lesen",
+    "Show article": "Zum Artikel",
     "Loading articles…": "Artikel werden geladen…",
     "Loading…": "Lädt…",
     "Add feed manually": "Feed manuell hinzufügen",
@@ -121,5 +121,6 @@
     "Only show feeds that failed fetching lately.": "Zeige nur Feeds an, die in letzter Zeit fehlgeschlagen sind.",
     "No failed feeds.": "Keine fehlgeschlagenen Feeds.",
     "There are no feeds that failed fetching lately.": "Es wurden keine Feeds gefunden, die in letzter Zeit fehlgeschlagen sind.",
-    "Show all feeds": "Alle Feeds anzeigen"
+    "Show all feeds": "Alle Feeds anzeigen",
+    "Generate PDF": "PDF generieren"
 }

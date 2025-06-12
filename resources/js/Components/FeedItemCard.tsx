@@ -1,24 +1,24 @@
-import { useState } from 'react';
+import {useState} from 'react';
 import clsx from 'clsx';
-import { useLaravelReactI18n } from 'laravel-react-i18n';
-import { Button } from '@/Components/Button';
+import {useLaravelReactI18n} from 'laravel-react-i18n';
+import {Button} from '@/Components/Button';
 import formatDateTime from '@/Utils/formatDateTime';
-import type { RouteParams } from 'ziggy-js';
+import type {RouteParams} from 'ziggy-js';
 import {
-	ArrowTopRightOnSquareIcon,
-	CalendarDaysIcon,
-	EyeIcon,
-	EyeSlashIcon,
-	RssIcon,
+    ArrowTopRightOnSquareIcon,
+    CalendarDaysIcon,
+    EllipsisVerticalIcon,
+    EyeIcon,
+    EyeSlashIcon,
+    RssIcon,
 } from '@heroicons/react/20/solid';
-import { ImagePlaceholder, ImageWithBlurHash } from '@/Components/Image';
-import type { FeedItem } from '@/types/generated/models';
-import { Heading } from '@/Components/Heading';
-import { useSetAtom } from 'jotai';
-import {
-	unreadFeedsAtom,
-	updateUnreadFeedByFeedItem,
-} from '@/Stores/unreadFeedsAtom';
+import {ImagePlaceholder, ImageWithBlurHash} from '@/Components/Image';
+import type {FeedItem} from '@/types/generated/models';
+import {Heading} from '@/Components/Heading';
+import {useSetAtom} from 'jotai';
+import {unreadFeedsAtom, updateUnreadFeedByFeedItem,} from '@/Stores/unreadFeedsAtom';
+import {Dropdown, DropdownButton, DropdownItem, DropdownLabel, DropdownMenu} from '@/Components/Dropdown';
+import {DocumentIcon} from '@heroicons/react/24/outline';
 
 export default function FeedItemCard({ feedItem }: { feedItem: FeedItem }) {
 	const { t } = useLaravelReactI18n();
@@ -93,7 +93,26 @@ export default function FeedItemCard({ feedItem }: { feedItem: FeedItem }) {
 				</div>
 
 				<div className="grow flex flex-col min-w-0">
-					<Heading level={2}>{internalFeedItem.title}</Heading>
+                    <div className="flex space-x-4 justify-between items-start">
+                        <Heading level={2}>{internalFeedItem.title}</Heading>
+
+                        <Dropdown>
+                            <DropdownButton plain>
+                                <EllipsisVerticalIcon/>
+                            </DropdownButton>
+                            <DropdownMenu className="min-w-64" anchor="bottom end">
+                                <DropdownItem
+                                    href={route('feed-item-pdf', feedItem as unknown as RouteParams<'feed-item-pdf'>,)}
+                                    target="_blank"
+                                    external
+                                >
+                                    <DocumentIcon />
+
+                                    <DropdownLabel>{t('Generate PDF')}</DropdownLabel>
+                                </DropdownItem>
+                            </DropdownMenu>
+                        </Dropdown>
+                    </div>
 
 					{internalFeedItem.description && (
 						<div className="grow">
@@ -126,8 +145,8 @@ export default function FeedItemCard({ feedItem }: { feedItem: FeedItem }) {
 						>
 							<ArrowTopRightOnSquareIcon />
 
-							{t('Read article')}
-						</Button>
+                            {t('Show article')}
+                        </Button>
 					</div>
 				</div>
 			</div>

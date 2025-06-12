@@ -62,4 +62,9 @@ class FeedItemPolicy
     {
         return false;
     }
+
+    public function pdf(User $user, FeedItem $feedItem): bool
+    {
+        return $user->id === $feedItem->feed->user_id;
+    }
 }
