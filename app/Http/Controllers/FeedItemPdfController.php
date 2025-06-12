@@ -22,7 +22,7 @@ class FeedItemPdfController extends Controller
     {
         $this->authorize('pdf', $feedItem);
 
-        $readability = new Readability((new Configuration())
+        $readability = new Readability((new Configuration)
             ->setFixRelativeURLs(true)
             ->setOriginalURL($feedItem->url)
         );
