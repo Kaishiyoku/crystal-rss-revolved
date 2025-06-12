@@ -221,5 +221,6 @@ return [
         'feed_id' => 'Feed',
         'email_verified_at' => 'E-Mail verifiziert am',
         'is_admin' => 'Administrator',
+        'is_pdf_export_enabled' => 'PDF Exports aktivieren',
     ],
 ];

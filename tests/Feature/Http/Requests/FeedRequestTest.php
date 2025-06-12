@@ -19,6 +19,7 @@ $makeData = fn (
     mixed $name = null,
     mixed $language = null,
     mixed $isPurgeable = null,
+    mixed $isPdfExportEnabled = null,
 ): array => [
     'category_id' => $categoryId ?? 1,
     'feed_url' => $feedUrl ?? 'https://tailwindcss.com/feeds/feed.xml',
@@ -27,6 +28,7 @@ $makeData = fn (
     'name' => $name ?? 'Tailwind CSS Blog',
     'language' => $language ?? 'en',
     'is_purgeable' => $isPurgeable ?? true,
+    'is_pdf_export_enabled' => $isPdfExportEnabled ?? true,
 ];
 
 uses(RefreshDatabase::class);
@@ -177,5 +179,15 @@ dataset('validation', [
         $makeData(isPurgeable: '#000000'),
         false,
         'The Purgeable field must be true or false.',
+    ],
+    'missing is_pdf_export_enabled' => [
+        $makeData(isPdfExportEnabled: ''),
+        false,
+        'The Enable PDF exports field is required.',
+    ],
+    'invalid is_pdf_export_enabled' => [
+        $makeData(isPdfExportEnabled: '#000000'),
+        false,
+        'The Enable PDF exports field must be true or false.',
     ],
 ]);

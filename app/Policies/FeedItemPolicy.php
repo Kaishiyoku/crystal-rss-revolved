@@ -65,6 +65,6 @@ class FeedItemPolicy
 
     public function pdf(User $user, FeedItem $feedItem): bool
     {
-        return $user->id === $feedItem->feed->user_id;
+        return $user->id === $feedItem->feed->user_id && $feedItem->feed->is_pdf_export_enabled;
     }
 }

@@ -31,6 +31,7 @@ class StoreFeedRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'language' => ['required', 'string', 'max:255'],
             'is_purgeable' => ['required', 'bool'],
+            'is_pdf_export_enabled' => ['required', 'bool'],
         ];
     }
 }

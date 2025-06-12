@@ -105,25 +105,27 @@ export default function FeedItemCard({ feedItem }: { feedItem: FeedItem }) {
 					<div className="flex space-x-4 justify-between items-start">
 						<Heading level={2}>{internalFeedItem.title}</Heading>
 
-						<Dropdown>
-							<DropdownButton plain>
-								<EllipsisVerticalIcon />
-							</DropdownButton>
-							<DropdownMenu className="min-w-64" anchor="bottom end">
-								<DropdownItem
-									href={route(
-										'feed-item-pdf',
-										feedItem as unknown as RouteParams<'feed-item-pdf'>,
-									)}
-									target="_blank"
-									external
-								>
-									<DocumentIcon />
+						{feedItem.feed.is_pdf_export_enabled && (
+							<Dropdown>
+								<DropdownButton plain>
+									<EllipsisVerticalIcon />
+								</DropdownButton>
+								<DropdownMenu className="min-w-64" anchor="bottom end">
+									<DropdownItem
+										href={route(
+											'feed-item-pdf',
+											feedItem as unknown as RouteParams<'feed-item-pdf'>,
+										)}
+										target="_blank"
+										external
+									>
+										<DocumentIcon />
 
-									<DropdownLabel>{t('Generate PDF')}</DropdownLabel>
-								</DropdownItem>
-							</DropdownMenu>
-						</Dropdown>
+										<DropdownLabel>{t('Generate PDF')}</DropdownLabel>
+									</DropdownItem>
+								</DropdownMenu>
+							</Dropdown>
+						)}
 					</div>
 
 					{internalFeedItem.description && (

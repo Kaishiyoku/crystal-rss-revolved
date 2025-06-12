@@ -78,3 +78,13 @@ it('cannot be accessed as guest', function () {
     get(route('feed-item-pdf', $feedItem))
         ->assertRedirect('/login');
 });
+
+it('cannot be accessed when PDF export is disabled', function () {
+    actingAs($user = User::factory()->create());
+
+    $feed = Feed::factory()->for($user)->state(['is_pdf_export_enabled' => false])->create();
+    $feedItem = FeedItem::factory()->for($feed)->create();
+
+    get(route('feed-item-pdf', $feedItem))
+        ->assertForbidden();
+});

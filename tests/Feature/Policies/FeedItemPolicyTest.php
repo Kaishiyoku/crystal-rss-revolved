@@ -119,3 +119,11 @@ test('pdf of feed item of another user', function () {
 
     expect($this->feedItemPolicy->pdf($user, $feedItem))->toBeFalse();
 });
+
+test('pdf of feed item when pdf export is disabled for the feed', function () {
+    actingAs($user = User::factory()->create());
+    $feed = Feed::factory()->for($user)->state(['is_pdf_export_enabled' => false])->create();
+    $feedItem = FeedItem::factory()->for($feed)->create();
+
+    expect($this->feedItemPolicy->pdf($user, $feedItem))->toBeFalse();
+});

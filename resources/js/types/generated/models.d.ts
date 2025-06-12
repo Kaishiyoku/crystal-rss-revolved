@@ -19,6 +19,7 @@ export interface Feed {
 	name: string;
 	language: string;
 	is_purgeable: boolean;
+	is_pdf_export_enabled: boolean;
 	last_checked_at: string | null;
 	last_failed_at: string | null;
 	created_at: string | null;

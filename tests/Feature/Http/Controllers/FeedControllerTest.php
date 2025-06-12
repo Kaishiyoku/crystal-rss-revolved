@@ -69,6 +69,7 @@ test('store', function () {
     $name = 'Tailwind CSS Blog';
     $language = 'en';
     $isPurgeable = true;
+    $isPdfExportEnabled = true;
 
     post(route('feeds.store'), [
         'category_id' => $category->id,
@@ -78,6 +79,7 @@ test('store', function () {
         'name' => $name,
         'language' => $language,
         'is_purgeable' => $isPurgeable,
+        'is_pdf_export_enabled' => $isPdfExportEnabled,
     ])
         ->assertRedirect(route('feeds.index'));
 
@@ -89,7 +91,8 @@ test('store', function () {
         ->and($user->feeds()->first()->favicon_url)->toBe($faviconUrl)
         ->and($user->feeds()->first()->name)->toBe($name)
         ->and($user->feeds()->first()->language)->toBe($language)
-        ->and($user->feeds()->first()->is_purgeable)->toBe($isPurgeable);
+        ->and($user->feeds()->first()->is_purgeable)->toBe($isPurgeable)
+        ->and($user->feeds()->first()->is_pdf_export_enabled)->toBe($isPdfExportEnabled);
 });
 
 test('store validation fails due to missing data', function () {
@@ -136,6 +139,7 @@ test('update', function () {
     $name = 'Tailwind CSS Blog (Updated)';
     $language = 'de';
     $isPurgeable = false;
+    $isPdfExportEnabled = false;
 
     $response = put(route('feeds.update', $feed), [
         'category_id' => $category->id,
@@ -145,6 +149,7 @@ test('update', function () {
         'name' => $name,
         'language' => $language,
         'is_purgeable' => $isPurgeable,
+        'is_pdf_export_enabled' => $isPdfExportEnabled,
     ]);
 
     $response->assertRedirect(route('feeds.index'));
@@ -155,7 +160,8 @@ test('update', function () {
         ->and($user->feeds()->first()->favicon_url)->toBe($faviconUrl)
         ->and($user->feeds()->first()->name)->toBe($name)
         ->and($user->feeds()->first()->language)->toBe($language)
-        ->and($user->feeds()->first()->is_purgeable)->toBe($isPurgeable);
+        ->and($user->feeds()->first()->is_purgeable)->toBe($isPurgeable)
+        ->and($user->feeds()->first()->is_pdf_export_enabled)->toBe($isPdfExportEnabled);
 });
 
 test('cannot update feed of another user', function () {

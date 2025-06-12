@@ -122,6 +122,7 @@ return [
         'feed_id' => 'Feed',
         'email_verified_at' => 'Email verified at',
         'is_admin' => 'Is admin',
+        'is_pdf_export_enabled' => 'Enable PDF exports',
     ],
 
 ];

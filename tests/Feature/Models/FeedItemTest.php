@@ -3,6 +3,8 @@
 use App\Models\Feed;
 use App\Models\FeedItem;
 use Illuminate\Console\Command;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\MassPrunable;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Config;
@@ -12,6 +14,38 @@ use function Pest\Laravel\freezeTime;
 
 uses(RefreshDatabase::class);
 uses(WithFaker::class);
+
+it('has traits', function () {
+    expect((new ReflectionClass(FeedItem::class))->getTraitNames())->toBe([
+        HasFactory::class,
+        MassPrunable::class,
+    ]);
+});
+
+it('has fillable attributes', function () {
+    expect((new ReflectionProperty(FeedItem::factory()->create(), 'fillable'))->getDefaultValue())
+        ->toBe([
+            'checksum',
+            'url',
+            'title',
+            'image_url',
+            'image_mimetype',
+            'blur_hash',
+            'description',
+            'posted_at',
+            'read_at',
+        ]);
+});
+
+it('casts attributes', function () {
+    $feedItem = FeedItem::factory()->create();
+
+    expect((new ReflectionMethod($feedItem, 'casts'))->invoke($feedItem))
+        ->toBe([
+            'posted_at' => 'datetime',
+            'read_at' => 'datetime',
+        ]);
+});
 
 test('feed item belongs to feed', function () {
     $feed = Feed::factory()->create();

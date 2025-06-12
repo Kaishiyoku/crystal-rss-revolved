@@ -44,6 +44,7 @@ export default function Form({
 		name: feed?.name ?? '',
 		language: feed?.language ?? '',
 		is_purgeable: feed?.is_purgeable ?? true,
+		is_pdf_export_enabled: feed?.is_pdf_export_enabled ?? true,
 	});
 
 	const discoverFeedUrls = (searchUrl: string) => {
@@ -249,14 +250,29 @@ export default function Form({
 						</Field>
 					</div>
 
-					<CheckboxField disabled={isDiscoverFeedProcessing}>
-						<Checkbox
-							name="is_purgeable"
-							checked={data.is_purgeable}
-							onChange={(checked) => setData('is_purgeable', checked)}
-						/>
-						<Label>{tChoice('feed.purge', monthsAfterPruningFeedItems)}</Label>
-					</CheckboxField>
+					<div className="space-y-2">
+						<CheckboxField disabled={isDiscoverFeedProcessing}>
+							<Checkbox
+								name="is_purgeable"
+								checked={data.is_purgeable}
+								onChange={(checked) => setData('is_purgeable', checked)}
+							/>
+							<Label>
+								{tChoice('feed.purge', monthsAfterPruningFeedItems)}
+							</Label>
+						</CheckboxField>
+
+						<CheckboxField disabled={isDiscoverFeedProcessing}>
+							<Checkbox
+								name="is_pdf_export_enabled"
+								checked={data.is_pdf_export_enabled}
+								onChange={(checked) =>
+									setData('is_pdf_export_enabled', checked)
+								}
+							/>
+							<Label>{t('validation.attributes.is_pdf_export_enabled')}</Label>
+						</CheckboxField>
+					</div>
 
 					<Button
 						type="submit"

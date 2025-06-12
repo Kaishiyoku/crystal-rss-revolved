@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $name
  * @property string $language
  * @property bool $is_purgeable
+ * @property bool $is_pdf_export_enabled
  * @property \Illuminate\Support\Carbon|null $last_checked_at
  * @property \Illuminate\Support\Carbon|null $last_failed_at
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -35,6 +36,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Feed whereFaviconUrl($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Feed whereFeedUrl($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Feed whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Feed whereIsPdfExportEnabled($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Feed whereIsPurgeable($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Feed whereLanguage($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Feed whereLastCheckedAt($value)
@@ -62,6 +64,7 @@ class Feed extends Model
         'name',
         'language',
         'is_purgeable',
+        'is_pdf_export_enabled',
     ];
 
     /**
@@ -73,6 +76,7 @@ class Feed extends Model
     {
         return [
             'is_purgeable' => 'bool',
+            'is_pdf_export_enabled' => 'bool',
             'last_checked_at' => 'datetime',
             'last_failed_at' => 'datetime',
         ];
