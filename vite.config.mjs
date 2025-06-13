@@ -6,7 +6,10 @@ import i18n from 'laravel-react-i18n/vite';
 export default defineConfig({
     plugins: [
         laravel({
-            input: 'resources/js/app.tsx',
+            input: [
+                'resources/js/app.tsx',
+                'resources/css/app.css',
+            ],
             refresh: true,
         }),
         react(),
