@@ -9,6 +9,7 @@ use fivefilters\Readability\Readability;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
+use Spatie\Browsershot\Browsershot;
 use Spatie\LaravelPdf\Enums\Format;
 use Spatie\LaravelPdf\Enums\Unit;
 use Spatie\LaravelPdf\Facades\Pdf;
@@ -37,6 +38,10 @@ class FeedItemPdfController extends Controller
                 'author' => $readability->getAuthor(),
                 'content' => $readability->getContent(),
             ])
+                ->withBrowsershot(function (Browsershot $browsershot) {
+                    $browsershot->delay(300);
+                    $browsershot->dismissDialogs();
+                })
                 ->format(Format::A4)
                 ->margins(25, 20, 25, 20, Unit::Millimeter)
                 ->toResponse($request);
