@@ -121,5 +121,8 @@
     "Only show feeds that failed fetching lately.": "Zeige nur Feeds an, die in letzter Zeit fehlgeschlagen sind.",
     "No failed feeds.": "Keine fehlgeschlagenen Feeds.",
     "There are no feeds that failed fetching lately.": "Es wurden keine Feeds gefunden, die in letzter Zeit fehlgeschlagen sind.",
-    "Show all feeds": "Alle Feeds anzeigen"
+    "Show all feeds": "Alle Feeds anzeigen",
+    "Sign in to your account": "Melden Sie sich an",
+    "Don’t have an account?": "Sie haben kein Konto?",
+    "Sign up": "Registrieren"
 }

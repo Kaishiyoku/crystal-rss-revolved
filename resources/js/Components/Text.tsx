@@ -39,7 +39,7 @@ export function Strong({
 	return (
 		<strong
 			{...props}
-			className={clsx(className, 'font-medium text-zinc-950 dark:text-white')}
+			className={clsx(className, 'font-bold text-zinc-950 dark:text-white')}
 		/>
 	);
 }
