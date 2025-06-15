@@ -126,7 +126,7 @@ export default function FeedItemCard({ feedItem }: { feedItem: FeedItem }) {
 						>
 							<ArrowTopRightOnSquareIcon />
 
-							{t('Read article')}
+							{t('Show article')}
 						</Button>
 					</div>
 				</div>
