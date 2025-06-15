@@ -131,19 +131,19 @@ export default function Welcome({
 						<header className="flex justify-end">
 							<nav className="flex space-x-4 z-20">
 								{auth.user ? (
-									<Link href={route('dashboard')} color="zinc">
+									<Link href={route('dashboard')} color="zinc" hover>
 										{t('Dashboard')}
 									</Link>
 								) : (
 									<>
 										{canLogin && (
-											<Link href={route('login')} color="zinc">
+											<Link href={route('login')} color="zinc" hover>
 												{t('Log in')}
 											</Link>
 										)}
 
 										{canRegister && (
-											<Link href={route('register')} color="zinc">
+											<Link href={route('register')} color="zinc" hover>
 												{t('Register')}
 											</Link>
 										)}
