@@ -12,7 +12,11 @@ export default function UpdateProfileInformation({
 	mustVerifyEmail,
 	status,
 	className,
-}: { mustVerifyEmail: boolean; status: string; className?: string }) {
+}: {
+	mustVerifyEmail: boolean;
+	status: string;
+	className?: string;
+}) {
 	const { t } = useLaravelReactI18n();
 	const user = usePage<PageProps>().props.auth.user;
 

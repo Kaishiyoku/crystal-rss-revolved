@@ -44,7 +44,11 @@ export default function Navigation({
 	user,
 	selectedFeedId,
 	children,
-}: { user: User; selectedFeedId: number | null; children: ReactNode }) {
+}: {
+	user: User;
+	selectedFeedId: number | null;
+	children: ReactNode;
+}) {
 	const { t } = useLaravelReactI18n();
 
 	const unreadFeedsAtomValue = useAtomValue(unreadFeedsAtom);

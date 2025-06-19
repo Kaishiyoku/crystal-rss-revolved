@@ -10,7 +10,10 @@ import { Input } from '@/Components/Form/Input';
 export default function ResetPassword({
 	token,
 	email,
-}: { token: string; email: string }) {
+}: {
+	token: string;
+	email: string;
+}) {
 	const { t } = useLaravelReactI18n();
 	const { data, setData, post, processing, errors, reset } = useForm({
 		token,

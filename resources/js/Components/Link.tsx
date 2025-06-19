@@ -21,11 +21,13 @@ export const Link = forwardRef(function Link(
 	ref: React.ForwardedRef<HTMLAnchorElement>,
 ) {
 	const colorClasses = clsx({
-        'text-zinc-600 dark:text-zinc-400': color === 'zinc',
+		'text-zinc-600 dark:text-zinc-400': color === 'zinc',
 		'text-blue-600 dark:text-blue-400': color === 'blue',
 		'underline decoration-transparent': hover,
-        'hover:decoration-zinc-600 dark:hover:decoration-zinc-400': hover && color === 'zinc',
-        'hover:decoration-blue-600 dark:hover:decoration-blue-400': hover && color === 'blue',
+		'hover:decoration-zinc-600 dark:hover:decoration-zinc-400':
+			hover && color === 'zinc',
+		'hover:decoration-blue-600 dark:hover:decoration-blue-400':
+			hover && color === 'blue',
 	});
 
 	return (

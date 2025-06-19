@@ -193,7 +193,10 @@ export function TableMobileContainer({ children }: { children: ReactNode }) {
 export function TableMobileText({
 	label,
 	children,
-}: { label: string; children: ReactNode }) {
+}: {
+	label: string;
+	children: ReactNode;
+}) {
 	return (
 		<div>
 			<dt className="text-sm text-muted">{label}</dt>

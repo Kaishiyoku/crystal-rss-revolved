@@ -8,7 +8,9 @@ import { ErrorMessage, Field, FieldGroup, Label } from '@/Components/Fieldset';
 
 export default function UpdatePasswordForm({
 	className = '',
-}: { className?: string }) {
+}: {
+	className?: string;
+}) {
 	const { t } = useLaravelReactI18n();
 
 	const passwordInput = useRef<HTMLInputElement>(null);

@@ -14,7 +14,9 @@ import {
 
 export default function DeleteUserForm({
 	className = '',
-}: { className?: string }) {
+}: {
+	className?: string;
+}) {
 	const { t } = useLaravelReactI18n();
 
 	const [confirmingUserDeletion, setConfirmingUserDeletion] = useState(false);
