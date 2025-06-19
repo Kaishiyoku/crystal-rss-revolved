@@ -14,7 +14,6 @@ import toNumber from '@/Utils/toNumber';
 import { LinkStack, LinkStackItem } from '@/Components/LinkStack';
 import type { Feed } from '@/types/generated/models';
 import { Subheading } from '@/Components/Heading';
-import discoveredFeed from '@/types/DiscoveredFeed';
 
 export default function Form({
 	method,

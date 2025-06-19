@@ -5,11 +5,9 @@ import { Link } from '@/Components/Link';
 
 export default function Breadcrumbs({
 	breadcrumbs,
-}: { breadcrumbs?: Breadcrumb[] }) {
-	if (!breadcrumbs) {
-		return null;
-	}
-
+}: {
+	breadcrumbs?: Breadcrumb[];
+}) {
 	const breadcrumbsRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
@@ -21,6 +19,10 @@ export default function Breadcrumbs({
 			});
 		}, 250);
 	}, []);
+
+	if (!breadcrumbs) {
+		return null;
+	}
 
 	const breadcrumbMapper = (
 		breadcrumb: Breadcrumb,

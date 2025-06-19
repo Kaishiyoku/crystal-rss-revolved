@@ -21,7 +21,7 @@ window.ky = ky.extend({
 			},
 		],
 		afterResponse: [
-			(request, options, response) => {
+			(_request, _options, response) => {
 				NProgress.done();
 
 				return response;
