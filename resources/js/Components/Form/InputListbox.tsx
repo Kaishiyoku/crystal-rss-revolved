@@ -49,26 +49,24 @@ export default function InputListbox({
 	};
 
 	return (
-		<>
-			<Listbox
-				name={name}
-				value={selected}
-				placeholder={placeholder}
-				invalid={!!errorMessage}
-				onChange={handleChange}
-				disabled={disabled}
-				autoFocus={autoFocus}
-			>
-				{options.map(({ value, name, description }) => (
-					<ListboxOption key={value} value={value}>
-						<ListboxLabel>{name}</ListboxLabel>
+		<Listbox
+			name={name}
+			value={selected}
+			placeholder={placeholder}
+			invalid={!!errorMessage}
+			onChange={handleChange}
+			disabled={disabled}
+			autoFocus={autoFocus}
+		>
+			{options.map(({ value, name, description }) => (
+				<ListboxOption key={value} value={value}>
+					<ListboxLabel>{name}</ListboxLabel>
 
-						{description && (
-							<ListboxDescription>{description}</ListboxDescription>
-						)}
-					</ListboxOption>
-				))}
-			</Listbox>
-		</>
+					{description && (
+						<ListboxDescription>{description}</ListboxDescription>
+					)}
+				</ListboxOption>
+			))}
+		</Listbox>
 	);
 }

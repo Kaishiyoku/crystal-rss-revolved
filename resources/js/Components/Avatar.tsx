@@ -4,6 +4,7 @@ import type React from 'react';
 import { forwardRef } from 'react';
 import { Link } from '@/Components/Link';
 import { TouchTarget } from '@/Components/Button';
+import type { ButtonProps } from '@headlessui/react';
 
 type AvatarProps = {
 	src?: string | null;
@@ -95,7 +96,7 @@ export const AvatarButton = forwardRef(function AvatarButton(
 			</TouchTarget>
 		</Link>
 	) : (
-		<Headless.Button {...props} className={classes} ref={ref}>
+		<Headless.Button {...(props as ButtonProps)} className={classes} ref={ref}>
 			<TouchTarget>
 				<Avatar src={src} square={square} initials={initials} alt={alt} />
 			</TouchTarget>

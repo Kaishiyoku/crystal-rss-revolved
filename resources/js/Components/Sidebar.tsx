@@ -5,6 +5,7 @@ import type React from 'react';
 import { forwardRef, useId } from 'react';
 import { Link } from '@/Components/Link';
 import { TouchTarget } from '@/Components/Button';
+import type { ButtonProps } from '@headlessui/react';
 
 export function Sidebar({
 	className,
@@ -177,7 +178,7 @@ export const SidebarItem = forwardRef(function SidebarItem(
 				</Headless.CloseButton>
 			) : (
 				<Headless.Button
-					{...props}
+					{...(props as ButtonProps)}
 					className={clsx('cursor-default', classes)}
 					data-current={current ? 'true' : undefined}
 					ref={ref}
