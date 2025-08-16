@@ -37,6 +37,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @method static Builder<static>|User newModelQuery()
  * @method static Builder<static>|User newQuery()
  * @method static Builder<static>|User query()
+ * @method static Builder<static>|User verified()
  * @method static Builder<static>|User whereCreatedAt($value)
  * @method static Builder<static>|User whereEmail($value)
  * @method static Builder<static>|User whereEmailVerifiedAt($value)
