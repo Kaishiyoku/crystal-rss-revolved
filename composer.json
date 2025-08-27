@@ -13,7 +13,7 @@
         "guzzlehttp/guzzle": "^7.8",
         "inertiajs/inertia-laravel": "^2.0",
         "intervention/image": "^3.3",
-        "kaishiyoku/hera-rss-crawler": "^6.0",
+        "kaishiyoku/hera-rss-crawler": "^7.0",
         "kornrunner/blurhash": "^1.2",
         "laravel/framework": "^12.9",
         "laravel/horizon": "^5.30",
