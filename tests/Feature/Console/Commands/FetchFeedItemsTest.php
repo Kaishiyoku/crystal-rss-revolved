@@ -186,3 +186,18 @@ test('generates blur hash for image', function () use ($getDummyRssFeed, $getDum
 
     expect($verifiedUserFeed->feedItems->first()->blur_hash)->toBe('L9R3TW%M-;%M-;j[j[fQ~qj[D%ay');
 });
+
+test('feed is null', function () {
+    $verifiedUser = User::factory()->create();
+    $verifiedUserFeed = Feed::factory()->state(['feed_url' => 'https://feed.laravel-news.com/'])->recycle($verifiedUser)->create();
+
+    expect($verifiedUserFeed->feedItems()->count())->toBe(0);
+
+    $heraRssCrawlerMock = partialMock(HeraRssCrawler::class);
+    $heraRssCrawlerMock->shouldReceive('parseFeed')->once()->andReturn(null);
+
+    artisan(FetchFeedItems::class)
+        ->assertExitCode(Command::SUCCESS);
+
+    expect($verifiedUserFeed->feedItems()->count())->toBe(0);
+});

@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Exceptions\FeedNotFoundException;
 use App\Models\Feed;
 use App\Models\FeedItem;
 use Exception;
@@ -54,6 +55,10 @@ class FetchFeed implements ShouldQueue
         try {
             $rssFeed = $heraRssCrawler->parseFeed($this->feed->feed_url);
 
+            if (! $rssFeed) {
+                throw new FeedNotFoundException($this->feed->feed_url);
+            }
+
             $rssFeed->getFeedItems()
                 ->filter(fn (RssFeedItem $rssFeedItem) => $rssFeedItem->getCreatedAt()?->gte($minFeedDate))
                 ->each(function (RssFeedItem $rssFeedItem) {
@@ -64,7 +69,7 @@ class FetchFeed implements ShouldQueue
             if ($this->feed->isDirty()) {
                 $this->feed->save();
             }
-        } catch (ClientException|Exception $exception) {
+        } catch (ClientException|FeedNotFoundException|Exception $exception) {
             $this->logger->error($exception, [$this->feed->feed_url]);
 
             $this->feed->last_failed_at = now();
