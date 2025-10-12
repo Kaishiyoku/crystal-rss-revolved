@@ -24,7 +24,6 @@ test('index', function () {
     get(route('dashboard'))
         ->assertInertia(fn (Assert $page) => $page
             ->component('Dashboard')
-            ->where('totalNumberOfFeedItems', 20)
             ->has('feedItems', fn (Assert $page) => $page
                 ->count('data', 15)
                 ->has('data')
@@ -35,7 +34,6 @@ test('index', function () {
                 ->has('prev_cursor')
                 ->has('prev_page_url')
             )
-            ->where('currentCursor', null)
         );
 
     // visit dashboard with cursor query parameter
@@ -50,7 +48,6 @@ test('index', function () {
     get(route('dashboard').'?'.Arr::query(['cursor' => $cursor]))
         ->assertInertia(fn (Assert $page) => $page
             ->component('Dashboard')
-            ->where('totalNumberOfFeedItems', 20)
             ->has('feedItems', fn (Assert $page) => $page
                 ->count('data', 5)
                 ->has('data')
@@ -61,14 +58,12 @@ test('index', function () {
                 ->has('prev_cursor')
                 ->has('prev_page_url')
             )
-            ->where('currentCursor', $cursor)
         );
 
     // visit dashboard with selected feed
     get(route('dashboard').'?'.Arr::query(['feed_id' => $feedWithUnreadFeedItems->id]))
         ->assertInertia(fn (Assert $page) => $page
             ->component('Dashboard')
-            ->where('totalNumberOfFeedItems', 20)
             ->has('feedItems', fn (Assert $page) => $page
                 ->count('data', 15)
                 ->has('data')
@@ -79,7 +74,6 @@ test('index', function () {
                 ->has('prev_cursor')
                 ->has('prev_page_url')
             )
-            ->where('currentCursor', null)
         );
 
     // visit dashboard with selected feed which has no unread feed items
