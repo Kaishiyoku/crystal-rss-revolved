@@ -16,7 +16,7 @@
         "kaishiyoku/hera-rss-crawler": "^7.0",
         "kornrunner/blurhash": "^1.2",
         "laravel/framework": "^12.9",
-        "laravel/horizon": "^5.30",
+        "laravel/horizon": "^5.41",
         "laravel/pulse": "^1.2",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.10.1",
