@@ -21,7 +21,7 @@ export default function Edit({
 	canDelete: boolean;
 }) {
 	const { t } = useLaravelReactI18n();
-	const { delete: destroy, processing } = useForm();
+	const { delete: destroy, processing } = useForm({});
 
 	const [isConfirmDeleteAlertOpen, setIsConfirmDeleteAlertOpen] =
 		useState(false);

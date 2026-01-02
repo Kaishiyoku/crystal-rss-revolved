@@ -11,7 +11,7 @@ export default function DeleteUserButton({ user }: { user: UserWithStats }) {
 
 	const [isConfirmAlertOpen, setIsConfirmAlertOpen] = useState(false);
 
-	const { delete: destroy, processing: deleteProcessing } = useForm();
+	const { delete: destroy, processing: deleteProcessing } = useForm({});
 
 	const handleDelete = (user: UserWithStats) => () => {
 		destroy(

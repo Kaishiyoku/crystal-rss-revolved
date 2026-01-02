@@ -15,7 +15,7 @@ export default function Edit({
 	...props
 }: PageProps & { category: Category; canDelete: boolean }) {
 	const { t } = useLaravelReactI18n();
-	const { delete: destroy, processing } = useForm();
+	const { delete: destroy, processing } = useForm({});
 
 	const handleDelete = () => {
 		setIsConfirmDeleteAlertOpen(false);
