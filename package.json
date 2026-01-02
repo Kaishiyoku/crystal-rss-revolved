@@ -27,7 +27,7 @@
         "clsx": "^2.0.0",
         "concurrently": "^9.0.1",
         "date-fns": "^4.1.0",
-        "framer-motion": "12.23.12",
+        "framer-motion": "^12.23.12",
         "jotai": "^2.12.1",
         "js-cookie": "^3.0.5",
         "ky": "^1.7.1",
