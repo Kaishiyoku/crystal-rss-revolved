@@ -16,7 +16,8 @@
         },
         "typeRoots": [
             "resources/js/types/global.d.ts"
-        ]
+        ],
+        "skipLibCheck": true
     },
     "include": ["resources/js/**/*.ts", "resources/js/**/*.tsx", "resources/js/**/*.d.ts"]
 }
