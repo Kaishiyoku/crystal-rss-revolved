@@ -1,7 +1,6 @@
 import { Head } from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { useLaravelReactI18n } from 'laravel-react-i18n';
-import formatDateTime from '@/Utils/formatDateTime';
 import { EmptyState } from '@/Components/EmptyState';
 import type { PageProps } from '@/types';
 import type { RouteParams } from 'ziggy-js';
@@ -14,12 +13,14 @@ import { Description, Label } from '@/Components/Fieldset';
 import { Switch, SwitchField } from '@/Components/Form/Switch';
 import { useMemo, useState } from 'react';
 import { FunnelIcon } from '@heroicons/react/24/outline';
+import { useDateFormatter } from '@/Hooks/useDateFormatter';
 
 export default function Index({
 	feeds,
 	...props
 }: PageProps & { feeds: FeedWithFeedItemsCount[] }) {
 	const { t, tChoice } = useLaravelReactI18n();
+	const { formatDateTime } = useDateFormatter();
 
 	const [showFailedFeedsOnly, setShowFailedFeedsOnly] = useState(false);
 

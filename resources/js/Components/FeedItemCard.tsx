@@ -2,7 +2,6 @@ import { useState } from 'react';
 import clsx from 'clsx';
 import { useLaravelReactI18n } from 'laravel-react-i18n';
 import { Button } from '@/Components/Button';
-import formatDateTime from '@/Utils/formatDateTime';
 import type { RouteParams } from 'ziggy-js';
 import {
 	ArrowTopRightOnSquareIcon,
@@ -19,9 +18,12 @@ import {
 	unreadFeedsAtom,
 	updateUnreadFeedByFeedItem,
 } from '@/Stores/unreadFeedsAtom';
+import { useDateFormatter } from '@/Hooks/useDateFormatter';
 
 export default function FeedItemCard({ feedItem }: { feedItem: FeedItem }) {
 	const { t } = useLaravelReactI18n();
+	const { formatDateTime } = useDateFormatter();
+
 	const [internalFeedItem, setInternalFeedItem] = useState(feedItem);
 	const [processing, setProcessing] = useState(false);
 

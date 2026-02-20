@@ -2,7 +2,6 @@ import { Head } from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { useLaravelReactI18n } from 'laravel-react-i18n';
 import type { PageProps } from '@/types';
-import formatDateTime from '@/Utils/formatDateTime';
 import DeleteUserButton from '@/Pages/Admin/Users/Partials/DeleteUserButton';
 import {
 	Table,
@@ -15,12 +14,14 @@ import {
 	TableRow,
 } from '@/Components/Table';
 import type UserWithStats from '@/types/models/UserWithStats';
+import { useDateFormatter } from '@/Hooks/useDateFormatter';
 
 export default function Index({
 	users,
 	...props
 }: PageProps & { users: UserWithStats[] }) {
 	const { t } = useLaravelReactI18n();
+	const { formatDateTime } = useDateFormatter();
 
 	return (
 		<AuthenticatedLayout
