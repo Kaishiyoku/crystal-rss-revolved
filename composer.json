@@ -21,12 +21,12 @@
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.10.1",
         "neitanod/forceutf8": "^2.0",
-        "predis/predis": "^2.2",
+        "predis/predis": "^3.4",
         "robertboes/inertia-breadcrumbs": "^0.8.0",
         "tightenco/ziggy": "^2.0"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.15",
+        "barryvdh/laravel-debugbar": "^4.0",
         "barryvdh/laravel-ide-helper": "^3.5",
         "doctrine/dbal": "^4.0",
         "fakerphp/faker": "^1.23",
