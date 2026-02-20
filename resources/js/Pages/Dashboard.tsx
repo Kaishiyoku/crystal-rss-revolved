@@ -60,6 +60,7 @@ export default function Dashboard({ feedItems, ...props }: DashboardPageProps) {
 					</div>
 				)}
 				className="grid sm:grid-cols-2 gap-6"
+				preserveUrl
 			>
 				{feedItems.data.map((feedItem) => (
 					<FeedItemCard key={feedItem.id} feedItem={feedItem} />

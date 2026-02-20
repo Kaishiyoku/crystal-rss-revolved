@@ -152,7 +152,7 @@ export default function Navigation({
 											href={`${route('dashboard')}?feed_id=${unreadFeed.id}`}
 											title={`${unreadFeed.name} (${unreadFeed.feed_items_count})`}
 											current={selectedFeedId === unreadFeed.id}
-                                            prefetch
+											prefetch
 										>
 											{unreadFeed.favicon_url ? (
 												<img
