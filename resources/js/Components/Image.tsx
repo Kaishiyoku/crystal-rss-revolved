@@ -46,7 +46,7 @@ export function ImageWithBlurHash({
 
 export function ImagePlaceholder({ className }: { className?: string }) {
 	const classes = twMerge(
-		'flex justify-center bg-linear-to-br from-zinc-200 to-zinc-300 dark:from-zinc-700 dark:to-zinc-800',
+		'flex justify-center bg-zinc-300 dark:bg-zinc-700',
 		className,
 	);
 
