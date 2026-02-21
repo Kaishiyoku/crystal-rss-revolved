@@ -2,7 +2,7 @@ import { Head } from '@inertiajs/react';
 import type { PageProps } from '@/types';
 import { useLaravelReactI18n } from 'laravel-react-i18n';
 import ApplicationLogo from '@/Components/ApplicationLogo';
-import { Link } from '@/Components/Link';
+import { Button } from '@/Components/Button';
 
 export default function Welcome({
 	auth,
@@ -131,21 +131,21 @@ export default function Welcome({
 						<header className="flex justify-end">
 							<nav className="flex space-x-4 z-20">
 								{auth.user ? (
-									<Link href={route('dashboard')} color="zinc" hover>
+									<Button href={route('dashboard')} plain>
 										{t('Dashboard')}
-									</Link>
+									</Button>
 								) : (
 									<>
 										{canLogin && (
-											<Link href={route('login')} color="zinc" hover>
+											<Button href={route('login')} plain>
 												{t('Log in')}
-											</Link>
+											</Button>
 										)}
 
 										{canRegister && (
-											<Link href={route('register')} color="zinc" hover>
+											<Button href={route('register')} plain>
 												{t('Register')}
-											</Link>
+											</Button>
 										)}
 									</>
 								)}
