@@ -57,7 +57,7 @@ export default function FeedItemCard({ feedItem }: { feedItem: FeedItem }) {
 		<div
 			key={internalFeedItem.id}
 			className={clsx(
-				'@container p-4 ring-1 ring-zinc-950/10 dark:ring-zinc-50/10 hover:ring-blue-600/50 dark:hover:ring-blue-500/50 rounded-lg transition ease-out duration-300',
+				'@container p-4 ring-1 ring-zinc-950/10 dark:ring-zinc-50/10 hover:ring-zinc-400 dark:hover:ring-zinc-600 rounded-lg transition ease-out duration-300',
 				{ 'opacity-50': internalFeedItem.read_at },
 			)}
 		>
