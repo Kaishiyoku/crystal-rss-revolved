@@ -7,8 +7,9 @@ use App\Http\Controllers\FeedController;
 use App\Http\Controllers\FeedDiscovererController;
 use App\Http\Controllers\FeedUrlDiscovererController;
 use App\Http\Controllers\MarkAllUnreadFeedItemsAsReadController;
+use App\Http\Controllers\MarkFeedItemAsReadController;
+use App\Http\Controllers\MarkFeedItemAsUnreadController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ToggleFeedItemController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -47,7 +48,8 @@ Route::middleware('auth')->group(function () {
 
         Route::put('/feeds/mark-all-as-read', MarkAllUnreadFeedItemsAsReadController::class)->name('mark-all-as-read');
         Route::resource('feeds', FeedController::class)->except('show');
-        Route::put('/feeds/{feedItem}/toggle', ToggleFeedItemController::class)->name('toggle-feed-item');
+        Route::put('/feeds/{feedItem}/mark-as-read', MarkFeedItemAsReadController::class)->name('mark-feed-item-as-read');
+        Route::put('/feeds/{feedItem}/mark-as-unread', MarkFeedItemAsUnreadController::class)->name('mark-feed-item-as-unread');
 
         Route::middleware('administrate')->prefix('admin')->as('admin.')->group(function () {
             Route::resource('users', AdminUserController::class)->only(['index', 'destroy']);

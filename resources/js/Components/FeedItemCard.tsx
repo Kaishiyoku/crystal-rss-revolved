@@ -32,13 +32,18 @@ export default function FeedItemCard({ feedItem }: { feedItem: FeedItem }) {
 	const toggle = () => {
 		setProcessing(true);
 
+		const url = internalFeedItem.read_at
+			? route(
+					'mark-feed-item-as-unread',
+					internalFeedItem as unknown as RouteParams<'mark-feed-item-as-unread'>,
+				)
+			: route(
+					'mark-feed-item-as-read',
+					internalFeedItem as unknown as RouteParams<'mark-feed-item-as-read'>,
+				);
+
 		void window.ky
-			.put(
-				route(
-					'toggle-feed-item',
-					internalFeedItem as unknown as RouteParams<'toggle-feed-item'>,
-				),
-			)
+			.put(url)
 			.json<FeedItem>()
 			.then((updatedFeedItem) => {
 				setUnreadFeedsAtomValue(updateUnreadFeedByFeedItem(updatedFeedItem));

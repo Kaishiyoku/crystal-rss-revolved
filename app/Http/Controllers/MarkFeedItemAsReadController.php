@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\FeedItem;
 
-class ToggleFeedItemController extends Controller
+class MarkFeedItemAsReadController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -16,7 +16,7 @@ class ToggleFeedItemController extends Controller
         $this->authorize('update', $feedItem);
 
         $feedItem->update([
-            'read_at' => $feedItem->read_at ? null : now(),
+            'read_at' => now(),
         ]);
 
         return response()->json($feedItem);
