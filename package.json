@@ -30,7 +30,6 @@
         "framer-motion": "^12.23.12",
         "jotai": "^2.12.1",
         "js-cookie": "^3.0.5",
-        "ky": "^1.7.1",
         "laravel-react-i18n": "^2.0.3",
         "laravel-vite-plugin": "^2.0.0",
         "neostandard": "^0.12.0",
