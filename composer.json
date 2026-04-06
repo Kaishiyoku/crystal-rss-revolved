@@ -11,7 +11,7 @@
         "php": "^8.2",
         "diglactic/laravel-breadcrumbs": "^10.0",
         "guzzlehttp/guzzle": "^7.8",
-        "inertiajs/inertia-laravel": "^2.0",
+        "inertiajs/inertia-laravel": "3.0",
         "intervention/image": "^3.3",
         "kaishiyoku/hera-rss-crawler": "^7.0",
         "kornrunner/blurhash": "^1.2",
@@ -22,7 +22,7 @@
         "laravel/tinker": "^2.10.1",
         "neitanod/forceutf8": "^2.0",
         "predis/predis": "^3.4",
-        "robertboes/inertia-breadcrumbs": "^0.8.0",
+        "robertboes/inertia-breadcrumbs": "^1.0.0",
         "tightenco/ziggy": "^2.0"
     },
     "require-dev": {
