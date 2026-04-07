@@ -4,6 +4,7 @@ import { useLaravelReactI18n } from 'laravel-react-i18n';
 import { useState } from 'react';
 import ConfirmAlert from '@/Components/ConfirmAlert';
 import { router } from '@inertiajs/react';
+import ky from '@/Utils/ky';
 
 export default function MarkAllAsReadButton() {
 	const { t } = useLaravelReactI18n();
@@ -11,7 +12,7 @@ export default function MarkAllAsReadButton() {
 	const [isConfirmAlertOpen, setIsConfirmAlertOpen] = useState(false);
 
 	const markAllAsRead = async () => {
-		await window.ky.put(route('mark-all-as-read'));
+		await ky.put(route('mark-all-as-read'));
 
 		router.get(route('dashboard'));
 	};

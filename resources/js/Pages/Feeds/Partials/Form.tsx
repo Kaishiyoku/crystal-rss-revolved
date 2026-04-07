@@ -14,6 +14,7 @@ import toNumber from '@/Utils/toNumber';
 import { LinkStack, LinkStackItem } from '@/Components/LinkStack';
 import type { Feed } from '@/types/generated/models';
 import { Subheading } from '@/Components/Heading';
+import ky from '@/Utils/ky';
 
 export default function Form({
 	method,
@@ -49,7 +50,7 @@ export default function Form({
 		setDiscoveredFeedUrls([]);
 		setIsDiscoverFeedProcessing(true);
 
-		window.ky
+		ky
 			.post(route('discover-feed-urls'), { json: { feed_url: searchUrl } })
 			.json<string[]>()
 			.then((data) => {
@@ -64,7 +65,7 @@ export default function Form({
 	const selectDiscoveredFeedUrl = (feedUrl: string) => () => {
 		setIsDiscoverFeedProcessing(true);
 
-		window.ky
+		ky
 			.post(route('discover-feed'), { json: { feed_url: feedUrl } })
 			.json<DiscoveredFeed>()
 			.then((responseData) => {

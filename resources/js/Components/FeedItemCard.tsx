@@ -19,6 +19,7 @@ import {
 	updateUnreadFeedByFeedItem,
 } from '@/Stores/unreadFeedsAtom';
 import { useDateFormatter } from '@/Hooks/useDateFormatter';
+import ky from '@/Utils/ky';
 
 export default function FeedItemCard({ feedItem }: { feedItem: FeedItem }) {
 	const { t } = useLaravelReactI18n();
@@ -42,7 +43,7 @@ export default function FeedItemCard({ feedItem }: { feedItem: FeedItem }) {
 					internalFeedItem as unknown as RouteParams<'mark-feed-item-as-read'>,
 				);
 
-		void window.ky
+		void ky
 			.put(url)
 			.json<FeedItem>()
 			.then((updatedFeedItem) => {
