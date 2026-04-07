@@ -50,8 +50,7 @@ export default function Form({
 		setDiscoveredFeedUrls([]);
 		setIsDiscoverFeedProcessing(true);
 
-		ky
-			.post(route('discover-feed-urls'), { json: { feed_url: searchUrl } })
+		ky.post(route('discover-feed-urls'), { json: { feed_url: searchUrl } })
 			.json<string[]>()
 			.then((data) => {
 				setDiscoveredFeedUrls(data);
@@ -65,8 +64,7 @@ export default function Form({
 	const selectDiscoveredFeedUrl = (feedUrl: string) => () => {
 		setIsDiscoverFeedProcessing(true);
 
-		ky
-			.post(route('discover-feed'), { json: { feed_url: feedUrl } })
+		ky.post(route('discover-feed'), { json: { feed_url: feedUrl } })
 			.json<DiscoveredFeed>()
 			.then((responseData) => {
 				setData({ ...data, ...responseData });

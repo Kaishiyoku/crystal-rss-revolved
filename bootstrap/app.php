@@ -1,9 +1,13 @@
 <?php
 
+use App\Http\Middleware\Administrate;
+use App\Http\Middleware\HandleInertiaRequests;
+use App\Http\Middleware\HandleLocale;
 use App\Providers\AppServiceProvider;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withProviders()
@@ -18,18 +22,18 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->redirectGuestsTo(fn () => route('login'));
         $middleware->redirectUsersTo(AppServiceProvider::HOME);
 
-        $middleware->append(\App\Http\Middleware\HandleLocale::class);
+        $middleware->append(HandleLocale::class);
 
         $middleware->web([
-            \App\Http\Middleware\HandleInertiaRequests::class,
-            \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
+            HandleInertiaRequests::class,
+            AddLinkHeadersForPreloadedAssets::class,
         ]);
 
         $middleware->statefulApi();
         $middleware->throttleApi();
 
         $middleware->alias([
-            'administrate' => \App\Http\Middleware\Administrate::class,
+            'administrate' => Administrate::class,
         ]);
     })
     ->withCommands([

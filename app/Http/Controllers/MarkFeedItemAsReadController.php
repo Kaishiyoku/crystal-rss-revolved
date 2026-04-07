@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\FeedItem;
+use Illuminate\Http\JsonResponse;
 
 class MarkFeedItemAsReadController extends Controller
 {
     /**
      * Handle the incoming request.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function __invoke(FeedItem $feedItem)
     {

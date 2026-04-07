@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\FeedDiscovererRequest;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ConnectException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Arr;
 use Kaishiyoku\HeraRssCrawler\HeraRssCrawler;
 
@@ -13,7 +14,7 @@ class FeedDiscovererController extends Controller
     /**
      * Handle the incoming request.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      *
      * @throws \Exception
      */

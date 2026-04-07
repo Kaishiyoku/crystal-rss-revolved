@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\FeedUrlDiscovererRequest;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Arr;
 use Kaishiyoku\HeraRssCrawler\HeraRssCrawler;
 
@@ -11,7 +12,7 @@ class FeedUrlDiscovererController extends Controller
     /**
      * Handle the incoming request.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      *
      * @throws \Exception
      */

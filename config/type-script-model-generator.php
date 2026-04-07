@@ -1,5 +1,9 @@
 <?php
 
+use App\Models\Category;
+use App\Models\Feed;
+use App\Models\User;
+
 return [
 
     'output_directory' => env('TYPE_SCRIPT_GENERATOR_OUTPUT_DIR', './resources/js/types/generated/Models'),
@@ -14,7 +18,7 @@ return [
     'model_partials' => [
         [
             'name' => 'ShortFeed',
-            'model' => \App\Models\Feed::class,
+            'model' => Feed::class,
             'fields' => [
                 'id',
                 'name',
@@ -26,7 +30,7 @@ return [
     'inherited_types' => [
         [
             'name' => 'CategoryWithFeedsCount',
-            'model' => \App\Models\Category::class,
+            'model' => Category::class,
             'additional_fields' => [
                 [
                     'name' => 'feeds_count',
@@ -36,7 +40,7 @@ return [
         ],
         [
             'name' => 'FeedWithFeedItemsCount',
-            'model' => \App\Models\Feed::class,
+            'model' => Feed::class,
             'additional_fields' => [
                 [
                     'name' => 'feed_items_count',
@@ -46,7 +50,7 @@ return [
         ],
         [
             'name' => 'UserWithStats',
-            'model' => \App\Models\User::class,
+            'model' => User::class,
             'additional_fields' => [
                 [
                     'name' => 'feeds_count',

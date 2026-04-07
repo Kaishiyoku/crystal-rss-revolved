@@ -123,7 +123,9 @@ export default function FeedItemCard({ feedItem }: { feedItem: FeedItem }) {
 						>
 							{internalFeedItem.read_at ? <EyeSlashIcon /> : <EyeIcon />}
 
-							{internalFeedItem.read_at ? t('Mark as unread') : t('Mark as read')}
+							{internalFeedItem.read_at
+								? t('Mark as unread')
+								: t('Mark as read')}
 						</Button>
 
 						<Button
