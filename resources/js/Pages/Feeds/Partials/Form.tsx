@@ -1,9 +1,11 @@
-import { progress, useForm, useHttp, usePage } from '@inertiajs/react';
-import { type ChangeEvent, useState } from 'react';
+import { useForm, usePage } from '@inertiajs/react';
+import type React from 'react';
+import { useState } from 'react';
 import { useLaravelReactI18n } from 'laravel-react-i18n';
 import { Button } from '@/Components/Button';
 import type { PageProps } from '@/types';
 import type { SelectNumberOption } from '@/types/SelectOption';
+import type DiscoveredFeed from '@/types/DiscoveredFeed';
 import { Input } from '@/Components/Form/Input';
 import { ErrorMessage, Field, FieldGroup, Label } from '@/Components/Fieldset';
 import { Checkbox, CheckboxField } from '@/Components/Form/Checkbox';
@@ -12,8 +14,6 @@ import toNumber from '@/Utils/toNumber';
 import { LinkStack, LinkStackItem } from '@/Components/LinkStack';
 import type { Feed } from '@/types/generated/models';
 import { Subheading } from '@/Components/Heading';
-import type DiscoveredFeed from '@/types/DiscoveredFeed';
-import useFetch from '@/Hooks/useFetch';
 
 export default function Form({
 	method,
@@ -27,17 +27,13 @@ export default function Form({
 	categories: SelectNumberOption[];
 }) {
 	const { t, tChoice } = useLaravelReactI18n();
-
 	const { monthsAfterPruningFeedItems } = usePage<PageProps>().props;
 	const [isDiscoverFeedProcessing, setIsDiscoverFeedProcessing] =
 		useState(false);
+	const [searchUrl, setSearchUrl] = useState('');
 	const [discoveredFeedUrls, setDiscoveredFeedUrls] = useState<string[]>([]);
 	const [selectedFeedUrl, setSelectedFeedUrl] = useState<string | null>(null);
 	const [showManualInputFields, setShowManualInputFields] = useState(!!feed);
-
-	const { fetch } = useFetch();
-
-	const discoverFeedUrlsHttp = useHttp({ feed_url: '' });
 
 	const { data, setData, post, put, errors, processing, isDirty } = useForm({
 		category_id: feed?.category_id ?? categories[0].value,
@@ -49,54 +45,41 @@ export default function Form({
 		is_purgeable: feed?.is_purgeable ?? true,
 	});
 
-	const onSearchUrlChange = (event: ChangeEvent<HTMLInputElement>) => {
-		discoverFeedUrlsHttp.setData({ feed_url: event.target.value });
-	};
-
-	const discoverFeedUrls = () => {
+	const discoverFeedUrls = (searchUrl: string) => {
 		setDiscoveredFeedUrls([]);
 		setIsDiscoverFeedProcessing(true);
 
-		discoverFeedUrlsHttp.post(route('discover-feed-urls'), {
-			onStart: () => {
-				progress.start();
-			},
-			onSuccess: (response) => {
-				setDiscoveredFeedUrls(response as string[]);
-			},
-			onError: (errors) => {
-				console.error(errors);
-			},
-			onFinish: () => {
-				setIsDiscoverFeedProcessing(false);
-
-				progress.finish();
-			},
-		});
+		window.ky
+			.post(route('discover-feed-urls'), { json: { feed_url: searchUrl } })
+			.json<string[]>()
+			.then((data) => {
+				setDiscoveredFeedUrls(data);
+			})
+			.catch((error) => {
+				console.error(error);
+			})
+			.finally(() => setIsDiscoverFeedProcessing(false));
 	};
 
-	const selectDiscoveredFeedUrl = (feedUrl: string) => async () => {
+	const selectDiscoveredFeedUrl = (feedUrl: string) => () => {
 		setIsDiscoverFeedProcessing(true);
 
-		try {
-			const responseData = await fetch<DiscoveredFeed>(
-				route('discover-feed'),
-				'POST',
-				{ feed_url: feedUrl },
-			);
+		window.ky
+			.post(route('discover-feed'), { json: { feed_url: feedUrl } })
+			.json<DiscoveredFeed>()
+			.then((responseData) => {
+				setData({ ...data, ...responseData });
 
-			setData({ ...data, ...responseData });
+				setSearchUrl('');
+				setDiscoveredFeedUrls([]);
+				setSelectedFeedUrl(responseData.feed_url);
+			})
+			.catch((error) => {
+				setSelectedFeedUrl(null);
 
-			discoverFeedUrlsHttp.setData({ feed_url: '' });
-			setDiscoveredFeedUrls([]);
-			setSelectedFeedUrl(data.feed_url);
-		} catch (error) {
-			setSelectedFeedUrl(null);
-
-			console.error(error);
-		}
-
-		setIsDiscoverFeedProcessing(false);
+				console.error(error);
+			})
+			.finally(() => setIsDiscoverFeedProcessing(false));
 	};
 
 	const submit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -123,18 +106,18 @@ export default function Form({
 					id="search_url"
 					className="grow w-full"
 					placeholder={t('Search URL...')}
-					value={discoverFeedUrlsHttp.data.feed_url}
-					onChange={onSearchUrlChange}
+					value={searchUrl}
+					onChange={(e) => setSearchUrl(e.target.value)}
 					disabled={isDiscoverFeedProcessing || showManualInputFields}
 					autoFocus
 				/>
 
 				<Button
-					onClick={discoverFeedUrls}
+					onClick={() => discoverFeedUrls(searchUrl)}
 					disabled={
 						isDiscoverFeedProcessing ||
 						showManualInputFields ||
-						discoverFeedUrlsHttp.data.feed_url.length < 5
+						searchUrl.length < 5
 					}
 				>
 					{t('Search')}
