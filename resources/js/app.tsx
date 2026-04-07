@@ -1,14 +1,14 @@
 import './bootstrap';
 import '../css/app.css';
 
-import {createRoot} from 'react-dom/client';
-import {createInertiaApp} from '@inertiajs/react';
-import {LaravelReactI18nProvider} from 'laravel-react-i18n';
+import { createRoot } from 'react-dom/client';
+import { createInertiaApp } from '@inertiajs/react';
+import { LaravelReactI18nProvider } from 'laravel-react-i18n';
 import getBrowserLocale from '@/Utils/getBrowserLocale';
 import HydratedApp from '@/Components/HydratedApp';
-import {Provider} from 'jotai';
-import {unreadFeedsAtom} from '@/Stores/unreadFeedsAtom';
-import type {PageProps} from '@/types';
+import { Provider } from 'jotai';
+import { unreadFeedsAtom } from '@/Stores/unreadFeedsAtom';
+import type { PageProps } from '@/types';
 import AtomsHydrator from '@/Core/AtomsHydrator';
 
 window.appName =
