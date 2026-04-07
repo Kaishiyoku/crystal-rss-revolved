@@ -70,10 +70,10 @@ export default function FeedItemCard({ feedItem }: { feedItem: FeedItem }) {
 								src={internalFeedItem.image_url}
 								alt=""
 								blurHash={internalFeedItem.blur_hash}
-								className="w-full @md:w-44 aspect-3/2 rounded-lg"
+								className="w-full @md:w-40 aspect-3/2 rounded-lg"
 							/>
 						) : (
-							<ImagePlaceholder className="w-full @md:w-44 aspect-3/2 rounded-lg" />
+							<ImagePlaceholder className="w-full @md:w-40 aspect-3/2 rounded-lg" />
 						)}
 					</div>
 
@@ -114,7 +114,7 @@ export default function FeedItemCard({ feedItem }: { feedItem: FeedItem }) {
 						</div>
 					)}
 
-					<div className="grow flex items-end lg:justify-end space-x-2 pt-4">
+					<div className="grow @md:flex items-end lg:justify-end space-x-2 pt-4">
 						<Button
 							onClick={toggle}
 							disabled={processing}
@@ -123,7 +123,7 @@ export default function FeedItemCard({ feedItem }: { feedItem: FeedItem }) {
 						>
 							{internalFeedItem.read_at ? <EyeSlashIcon /> : <EyeIcon />}
 
-							{internalFeedItem.read_at ? t('Read') : t('Unread')}
+							{internalFeedItem.read_at ? t('Mark as unread') : t('Mark as read')}
 						</Button>
 
 						<Button
