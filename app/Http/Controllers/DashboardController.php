@@ -19,9 +19,8 @@ class DashboardController extends Controller
         $feedId = $request->exists('feed_id') ? $request->integer('feed_id') : null;
 
         $feedItems = Inertia::scroll(
-            // @phpstan-ignore-next-line
             fn () => Auth::user()->feedItems()
-                ->unread()
+                ->unread() // @phpstan-ignore method.notFound
                 ->when($feedId, fn (Builder $query) => $query->where('feed_id', $feedId))
                 ->with('feed')
                 ->orderByDesc('posted_at')
