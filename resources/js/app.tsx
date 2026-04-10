@@ -17,9 +17,9 @@ window.appName =
 void createInertiaApp({
 	title: (title: string): string => `${title} - ${window.appName}`,
 	setup({ el, App, props }) {
-        if (!el) {
-            return;
-        }
+		if (!el) {
+			return;
+		}
 
 		createRoot(el).render(
 			<Provider>

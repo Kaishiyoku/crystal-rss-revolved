@@ -1,5 +1,5 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, InfiniteScroll } from '@inertiajs/react';
+import { Head, InfiniteScroll, router } from '@inertiajs/react';
 import FeedItemCard from '@/Components/FeedItemCard';
 import { useLaravelReactI18n } from 'laravel-react-i18n';
 import { EmptyState } from '@/Components/EmptyState';
@@ -11,6 +11,7 @@ import type { FeedItem } from '@/types/generated/models';
 import { useAtomValue } from 'jotai';
 import { totalNumberOfFeedItemsAtom } from '@/Stores/unreadFeedsAtom';
 import LoadingIcon from '@/Components/Icons/LoadingIcon';
+import { useEffect } from 'react';
 
 type DashboardPageProps = PageProps & {
 	feedItems: CursorPagination<FeedItem>;
@@ -22,6 +23,11 @@ export default function Dashboard({ feedItems, ...props }: DashboardPageProps) {
 	const totalNumberOfFeedItemsAtomValue = useAtomValue(
 		totalNumberOfFeedItemsAtom,
 	);
+
+	// biome-ignore lint/correctness/useExhaustiveDependencies(feedItems): we want to run this when feedItems change
+	useEffect(() => {
+		router.reload({ only: ['unreadFeeds'] });
+	}, [feedItems]);
 
 	return (
 		<AuthenticatedLayout

@@ -3,6 +3,7 @@ import { router } from '@inertiajs/react';
 import type { PageProps } from '@/types';
 import { useSetAtom } from 'jotai/index';
 import { unreadFeedsAtom } from '@/Stores/unreadFeedsAtom';
+import { useEffect } from 'react';
 
 // @ts-expect-error the app type doesn't matter here because we directly use this component in our Inertia setup function
 export default function HydratedApp({ app: App, ...props }) {
@@ -10,14 +11,17 @@ export default function HydratedApp({ app: App, ...props }) {
 
 	const setUnreadFeedsAtom = useSetAtom(unreadFeedsAtom);
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies(setUnreadFeedsAtom): we only want to run this once
+	useEffect(() => {
+		router.on('success', (event) => {
+			setUnreadFeedsAtom((event.detail.page.props as PageProps).unreadFeeds);
+		});
+	}, []);
+
 	// wait until all translations are loaded
 	if (loading) {
 		return null;
 	}
-
-	router.on('success', (event) => {
-		setUnreadFeedsAtom((event.detail.page.props as PageProps).unreadFeeds);
-	});
 
 	return <App {...props} />;
 }
