@@ -6,12 +6,27 @@ use Illuminate\Console\Command;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Config;
-
 use function Pest\Laravel\artisan;
 use function Pest\Laravel\freezeTime;
 
 uses(RefreshDatabase::class);
 uses(WithFaker::class);
+
+it('has fillable attributes', function () {
+    $property = new ReflectionProperty(FeedItem::class, 'fillable');
+
+    expect($property->getValue(new FeedItem()))->toBe([
+        'checksum',
+        'url',
+        'title',
+        'image_url',
+        'image_mimetype',
+        'blur_hash',
+        'description',
+        'posted_at',
+        'read_at',
+    ]);
+});
 
 test('feed item belongs to feed', function () {
     $feed = Feed::factory()->create();

@@ -11,6 +11,7 @@
 .env.backup
 .env.production
 .phpunit.result.cache
+/.cursor/
 Homestead.json
 Homestead.yaml
 auth.json
@@ -21,3 +22,4 @@ yarn-error.log
 /.nova
 /.vscode
 Envoy*.php
+_ide_helper.php

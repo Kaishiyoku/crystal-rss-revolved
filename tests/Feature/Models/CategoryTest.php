@@ -7,6 +7,14 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
 
+it('has fillable attributes', function () {
+    $property = new ReflectionProperty(Category::class, 'fillable');
+
+    expect($property->getValue(new Category()))->toBe([
+        'name',
+    ]);
+});
+
 test('category belongs to user', function () {
     $user = User::factory()->create();
     $category = Category::factory()->for($user)->create();

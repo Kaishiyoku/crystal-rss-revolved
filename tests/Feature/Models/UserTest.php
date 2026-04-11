@@ -7,6 +7,25 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
 
+it('has fillable attributes', function () {
+    $property = new ReflectionProperty(User::class, 'fillable');
+
+    expect($property->getValue(new User()))->toBe([
+        'name',
+        'email',
+        'password',
+    ]);
+});
+
+it('has hidden attributes', function () {
+    $property = new ReflectionProperty(User::class, 'hidden');
+
+    expect($property->getValue(new User()))->toBe([
+        'password',
+        'remember_token',
+    ]);
+});
+
 test('verified scope', function () {
     $verifiedUserIds = User::factory(5)->create()->pluck('id');
     User::factory(5)->unverified()->create()->pluck('id');

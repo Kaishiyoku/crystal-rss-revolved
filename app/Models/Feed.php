@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -50,23 +51,10 @@ use Illuminate\Support\Carbon;
  *
  * @mixin \Eloquent
  */
+#[Fillable(['feed_url', 'site_url', 'favicon_url', 'name', 'language', 'is_purgeable'])]
 class Feed extends Model
 {
     use HasFactory;
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
-    protected $fillable = [
-        'feed_url',
-        'site_url',
-        'favicon_url',
-        'name',
-        'language',
-        'is_purgeable',
-    ];
 
     /**
      * Get the attributes that should be cast.

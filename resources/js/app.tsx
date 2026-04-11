@@ -11,8 +11,10 @@ import { unreadFeedsAtom } from '@/Stores/unreadFeedsAtom';
 import type { PageProps } from '@/types';
 import AtomsHydrator from '@/Core/AtomsHydrator';
 
-window.appName =
-	window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
+if (typeof window !== 'undefined') {
+    window.appName =
+        window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
+}
 
 void createInertiaApp({
 	title: (title: string): string => `${title} - ${window.appName}`,

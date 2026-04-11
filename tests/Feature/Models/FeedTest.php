@@ -8,6 +8,19 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
 
+it('has fillable attributes', function () {
+    $property = new ReflectionProperty(Feed::class, 'fillable');
+
+    expect($property->getValue(new Feed()))->toBe([
+        'feed_url',
+        'site_url',
+        'favicon_url',
+        'name',
+        'language',
+        'is_purgeable',
+    ]);
+});
+
 test('feed belongs to user', function () {
     $user = User::factory()->create();
     $feed = Feed::factory()->for($user)->create();

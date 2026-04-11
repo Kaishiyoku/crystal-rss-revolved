@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -51,26 +52,10 @@ use Illuminate\Support\Str;
  *
  * @mixin \Eloquent
  */
+#[Fillable(['checksum', 'url', 'title', 'image_url', 'image_mimetype', 'blur_hash', 'description', 'posted_at', 'read_at'])]
 class FeedItem extends Model
 {
     use HasFactory, MassPrunable;
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
-    protected $fillable = [
-        'checksum',
-        'url',
-        'title',
-        'image_url',
-        'image_mimetype',
-        'blur_hash',
-        'description',
-        'posted_at',
-        'read_at',
-    ];
 
     /**
      * The accessors to append to the model's array form.
