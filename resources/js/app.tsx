@@ -12,8 +12,8 @@ import type { PageProps } from '@/types';
 import AtomsHydrator from '@/Core/AtomsHydrator';
 
 if (typeof window !== 'undefined') {
-    window.appName =
-        window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
+	window.appName =
+		window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
 }
 
 void createInertiaApp({
