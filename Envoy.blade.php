@@ -72,7 +72,10 @@
 @endstory
 
 @story('rollback')
+    stop_queue
     deployment_rollback
+    restart_php_fpm
+    start_queue
     health_check
 @endstory
 
