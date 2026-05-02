@@ -11,7 +11,8 @@ import type { FeedItem } from '@/types/generated/models';
 import { useAtomValue } from 'jotai';
 import { totalNumberOfFeedItemsAtom } from '@/Stores/unreadFeedsAtom';
 import LoadingIcon from '@/Components/Icons/LoadingIcon';
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useHotkeys } from 'react-hotkeys-hook';
 
 type DashboardPageProps = PageProps & {
 	feedItems: CursorPagination<FeedItem>;
@@ -19,6 +20,49 @@ type DashboardPageProps = PageProps & {
 
 export default function Dashboard({ feedItems, ...props }: DashboardPageProps) {
 	const { t, tChoice } = useLaravelReactI18n();
+
+	const [focusedItemIndex, setFocusedItemIndex] = useState<number | null>(null);
+
+	const feedRefs = useRef<HTMLDivElement[]>([]);
+
+	const focusPrev = () => {
+		if (!feedRefs.current) {
+			return;
+		}
+
+		const prevIndex = focusedItemIndex === null ? 0 : focusedItemIndex - 1;
+
+		if (prevIndex < 0) {
+			return;
+		}
+
+		const prevRef = feedRefs.current[prevIndex];
+
+		prevRef.focus();
+
+		setFocusedItemIndex(prevIndex);
+	};
+
+	const focusNext = () => {
+		if (!feedRefs.current) {
+			return;
+		}
+
+		const nextIndex = focusedItemIndex === null ? 0 : focusedItemIndex + 1;
+
+		if (nextIndex > feedRefs.current.length - 1) {
+			return;
+		}
+
+		const nextRef = feedRefs.current[nextIndex];
+
+		nextRef.focus();
+
+		setFocusedItemIndex(nextIndex);
+	};
+
+	useHotkeys('k', focusPrev);
+	useHotkeys('j', focusNext);
 
 	const totalNumberOfFeedItemsAtomValue = useAtomValue(
 		totalNumberOfFeedItemsAtom,
@@ -68,8 +112,14 @@ export default function Dashboard({ feedItems, ...props }: DashboardPageProps) {
 				className="grid sm:grid-cols-2 gap-6"
 				preserveUrl
 			>
-				{feedItems.data.map((feedItem) => (
-					<FeedItemCard key={feedItem.id} feedItem={feedItem} />
+				{feedItems.data.map((feedItem, index) => (
+					<FeedItemCard
+						key={feedItem.id}
+						feedItem={feedItem}
+						ref={(el) => {
+							feedRefs.current[index] = el;
+						}}
+					/>
 				))}
 			</InfiniteScroll>
 		</AuthenticatedLayout>

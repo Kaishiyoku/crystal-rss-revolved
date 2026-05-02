@@ -1,4 +1,6 @@
-import { useState } from 'react';
+// biome-ignore-all lint/a11y/noNoninteractiveTabindex: we know what we're doing here
+
+import { type RefObject, useState } from 'react';
 import clsx from 'clsx';
 import { useLaravelReactI18n } from 'laravel-react-i18n';
 import { Button } from '@/Components/Button';
@@ -21,7 +23,13 @@ import {
 import { useDateFormatter } from '@/Hooks/useDateFormatter';
 import ky from '@/Utils/ky';
 
-export default function FeedItemCard({ feedItem }: { feedItem: FeedItem }) {
+export default function FeedItemCard({
+	feedItem,
+	ref,
+}: {
+	feedItem: FeedItem;
+	ref: RefObject<HTMLDivElement> | ((el: HTMLDivElement) => void);
+}) {
 	const { t } = useLaravelReactI18n();
 	const { formatDateTime } = useDateFormatter();
 
@@ -56,6 +64,8 @@ export default function FeedItemCard({ feedItem }: { feedItem: FeedItem }) {
 
 	return (
 		<div
+			ref={ref}
+			tabIndex={0}
 			key={internalFeedItem.id}
 			className={clsx(
 				'@container p-4 ring-1 ring-zinc-950/10 dark:ring-zinc-50/10 hover:ring-zinc-400 dark:hover:ring-zinc-600 rounded-lg transition ease-out duration-300',

@@ -9,8 +9,8 @@ const ky = baseKy.extend({
 	hooks: {
 		beforeRequest: [
 			(request) => {
-                progress.start();
-                progress.reveal();
+				progress.start();
+				progress.reveal();
 
 				if (window.location.host === new URL(request.url).host) {
 					request.headers.set('X-XSRF-TOKEN', Cookies.get('XSRF-TOKEN') ?? '');
