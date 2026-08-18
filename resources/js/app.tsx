@@ -10,7 +10,6 @@ import { Provider } from 'jotai';
 import { unreadFeedsAtom } from '@/Stores/unreadFeedsAtom';
 import type { PageProps } from '@/types';
 import AtomsHydrator from '@/Core/AtomsHydrator';
-import {resolvePageComponent} from 'laravel-vite-plugin/inertia-helpers';
 
 if (typeof window !== 'undefined') {
 	window.appName =

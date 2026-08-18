@@ -22,6 +22,7 @@ import {
 } from '@/Stores/unreadFeedsAtom';
 import { useDateFormatter } from '@/Hooks/useDateFormatter';
 import ky from '@/Utils/ky';
+import LoadingIcon from '@/Components/Icons/LoadingIcon';
 
 export default function FeedItemCard({
 	feedItem,
@@ -131,11 +132,15 @@ export default function FeedItemCard({
 							className="w-full lg:w-auto"
 							plain
 						>
-							{internalFeedItem.read_at ? <EyeSlashIcon /> : <EyeIcon />}
+							{processing ? (
+								<LoadingIcon />
+							) : internalFeedItem.read_at ? (
+								<EyeSlashIcon />
+							) : (
+								<EyeIcon />
+							)}
 
-							{internalFeedItem.read_at
-								? t('Mark as unread')
-								: t('Mark as read')}
+							{internalFeedItem.read_at ? t('Read') : t('Unread')}
 						</Button>
 
 						<Button
