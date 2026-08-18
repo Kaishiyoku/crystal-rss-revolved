@@ -10,7 +10,7 @@ uses(RefreshDatabase::class);
 it('has fillable attributes', function () {
     $property = new ReflectionProperty(User::class, 'fillable');
 
-    expect($property->getValue(new User()))->toBe([
+    expect($property->getValue(new User))->toBe([
         'name',
         'email',
         'password',
@@ -20,7 +20,7 @@ it('has fillable attributes', function () {
 it('has hidden attributes', function () {
     $property = new ReflectionProperty(User::class, 'hidden');
 
-    expect($property->getValue(new User()))->toBe([
+    expect($property->getValue(new User))->toBe([
         'password',
         'remember_token',
     ]);

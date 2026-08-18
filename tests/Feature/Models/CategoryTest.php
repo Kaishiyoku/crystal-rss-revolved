@@ -10,7 +10,7 @@ uses(RefreshDatabase::class);
 it('has fillable attributes', function () {
     $property = new ReflectionProperty(Category::class, 'fillable');
 
-    expect($property->getValue(new Category()))->toBe([
+    expect($property->getValue(new Category))->toBe([
         'name',
     ]);
 });

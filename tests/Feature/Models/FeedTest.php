@@ -11,7 +11,7 @@ uses(RefreshDatabase::class);
 it('has fillable attributes', function () {
     $property = new ReflectionProperty(Feed::class, 'fillable');
 
-    expect($property->getValue(new Feed()))->toBe([
+    expect($property->getValue(new Feed))->toBe([
         'feed_url',
         'site_url',
         'favicon_url',
