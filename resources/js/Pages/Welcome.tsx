@@ -20,6 +20,7 @@ export default function Welcome({
 				xmlns="http://www.w3.org/2000/svg"
 				version="1.1"
 				viewBox="0 0 640 1200"
+                preserveAspectRatio="none"
 				className="sm:hidden top-0 absolute z-10 w-full opacity-75 dark:opacity-50"
 			>
 				<defs>
@@ -75,6 +76,7 @@ export default function Welcome({
 				xmlns="http://www.w3.org/2000/svg"
 				version="1.1"
 				viewBox="0 0 800 450"
+                preserveAspectRatio="none"
 				className="hidden sm:block top-0 z-10 absolute size-full opacity-80 dark:opacity-50"
 			>
 				<defs>
