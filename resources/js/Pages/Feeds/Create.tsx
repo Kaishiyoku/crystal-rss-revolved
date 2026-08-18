@@ -1,7 +1,7 @@
 import { Head } from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import Form from '@/Pages/Feeds/Partials/Form';
-import { useLaravelReactI18n } from 'laravel-react-i18n';
+import { useLaravelReactI18n } from 'laravel-react-internationalization';
 import { EmptyState } from '@/Components/EmptyState';
 import type { PageProps } from '@/types';
 import type { SelectNumberOption } from '@/types/SelectOption';

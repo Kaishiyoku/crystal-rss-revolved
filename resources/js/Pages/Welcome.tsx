@@ -1,6 +1,6 @@
 import { Head } from '@inertiajs/react';
 import type { PageProps } from '@/types';
-import { useLaravelReactI18n } from 'laravel-react-i18n';
+import { useLaravelReactI18n } from 'laravel-react-internationalization';
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import { Button } from '@/Components/Button';
 

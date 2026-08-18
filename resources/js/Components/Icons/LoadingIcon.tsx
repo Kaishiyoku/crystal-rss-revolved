@@ -1,4 +1,4 @@
-import { useLaravelReactI18n } from 'laravel-react-i18n';
+import { useLaravelReactI18n } from 'laravel-react-internationalization';
 import type { PropsWithoutRef, SVGProps } from 'react';
 import { twMerge } from 'tailwind-merge';
 

@@ -1,6 +1,6 @@
 import { Link, useForm, usePage } from '@inertiajs/react';
 import { Transition } from '@headlessui/react';
-import { useLaravelReactI18n } from 'laravel-react-i18n';
+import { useLaravelReactI18n } from 'laravel-react-internationalization';
 import { Button } from '@/Components/Button';
 import type React from 'react';
 import { Description, Heading } from '@/Components/Heading';

@@ -3,13 +3,14 @@ import '../css/app.css';
 
 import { createRoot } from 'react-dom/client';
 import { createInertiaApp } from '@inertiajs/react';
-import { LaravelReactI18nProvider } from 'laravel-react-i18n';
+import { LaravelReactI18nProvider } from 'laravel-react-internationalization';
 import getBrowserLocale from '@/Utils/getBrowserLocale';
 import HydratedApp from '@/Components/HydratedApp';
 import { Provider } from 'jotai';
 import { unreadFeedsAtom } from '@/Stores/unreadFeedsAtom';
 import type { PageProps } from '@/types';
 import AtomsHydrator from '@/Core/AtomsHydrator';
+import {resolvePageComponent} from 'laravel-vite-plugin/inertia-helpers';
 
 if (typeof window !== 'undefined') {
 	window.appName =

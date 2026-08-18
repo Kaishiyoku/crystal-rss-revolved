@@ -4,7 +4,7 @@ import UpdatePasswordForm from './Partials/UpdatePasswordForm';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm';
 import { Head } from '@inertiajs/react';
 import type { BasePageProps } from '@/types';
-import { useLaravelReactI18n } from 'laravel-react-i18n';
+import { useLaravelReactI18n } from 'laravel-react-internationalization';
 import { DividerContainer } from '@/Components/Divider';
 
 export default function Edit({

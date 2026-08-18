@@ -2,7 +2,7 @@
 
 import { type RefObject, useState } from 'react';
 import clsx from 'clsx';
-import { useLaravelReactI18n } from 'laravel-react-i18n';
+import { useLaravelReactI18n } from 'laravel-react-internationalization';
 import { Button } from '@/Components/Button';
 import type { RouteParams } from 'ziggy-js';
 import {

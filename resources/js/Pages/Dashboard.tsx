@@ -1,7 +1,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, InfiniteScroll, router } from '@inertiajs/react';
 import FeedItemCard from '@/Components/FeedItemCard';
-import { useLaravelReactI18n } from 'laravel-react-i18n';
+import { useLaravelReactI18n } from 'laravel-react-internationalization';
 import { EmptyState } from '@/Components/EmptyState';
 import type { PageProps } from '@/types';
 import type CursorPagination from '@/types/CursorPagination';

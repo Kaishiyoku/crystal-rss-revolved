@@ -1,6 +1,6 @@
 import { EyeIcon } from '@heroicons/react/20/solid';
 import { Button } from '@/Components/Button';
-import { useLaravelReactI18n } from 'laravel-react-i18n';
+import { useLaravelReactI18n } from 'laravel-react-internationalization';
 import { useState } from 'react';
 import ConfirmAlert from '@/Components/ConfirmAlert';
 import { router } from '@inertiajs/react';

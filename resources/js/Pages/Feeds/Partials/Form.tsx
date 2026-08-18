@@ -1,7 +1,7 @@
 import { useForm, usePage } from '@inertiajs/react';
 import type React from 'react';
 import { useState } from 'react';
-import { useLaravelReactI18n } from 'laravel-react-i18n';
+import { useLaravelReactI18n } from 'laravel-react-internationalization';
 import { Button } from '@/Components/Button';
 import type { PageProps } from '@/types';
 import type { SelectNumberOption } from '@/types/SelectOption';

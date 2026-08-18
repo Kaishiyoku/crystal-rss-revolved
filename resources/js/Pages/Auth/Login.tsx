@@ -4,7 +4,7 @@ import { Checkbox, CheckboxField } from '@/Components/Form/Checkbox';
 import GuestLayout from '@/Layouts/GuestLayout';
 import { Head, useForm } from '@inertiajs/react';
 import { Button } from '@/Components/Button';
-import { useLaravelReactI18n } from 'laravel-react-i18n';
+import { useLaravelReactI18n } from 'laravel-react-internationalization';
 import { ErrorMessage, Field, Label } from '@/Components/Fieldset';
 import { Input } from '@/Components/Form/Input';
 import ApplicationLogo from '@/Components/ApplicationLogo';

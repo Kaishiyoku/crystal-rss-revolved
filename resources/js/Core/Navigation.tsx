@@ -32,7 +32,7 @@ import {
 } from '@heroicons/react/16/solid';
 import { HomeIcon, RssIcon } from '@heroicons/react/20/solid';
 import type { ReactNode } from 'react';
-import { useLaravelReactI18n } from 'laravel-react-i18n';
+import { useLaravelReactI18n } from 'laravel-react-internationalization';
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import substr from '@/Utils/substr';
 import type { User } from '@/types/generated/models';

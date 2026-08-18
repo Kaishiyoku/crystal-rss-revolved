@@ -1,4 +1,4 @@
-import { useLaravelReactI18n } from 'laravel-react-i18n';
+import { useLaravelReactI18n } from 'laravel-react-internationalization';
 import { router } from '@inertiajs/react';
 import type { PageProps } from '@/types';
 import { useSetAtom } from 'jotai/index';

@@ -1,6 +1,6 @@
 import { Alert, AlertActions, AlertTitle } from '@/Components/Alert';
 import { Button } from '@/Components/Button';
-import { useLaravelReactI18n } from 'laravel-react-i18n';
+import { useLaravelReactI18n } from 'laravel-react-internationalization';
 
 export default function ConfirmAlert({
 	open,

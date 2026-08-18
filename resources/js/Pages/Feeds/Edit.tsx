@@ -1,7 +1,7 @@
 import { Head, useForm } from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import Form from '@/Pages/Feeds/Partials/Form';
-import { useLaravelReactI18n } from 'laravel-react-i18n';
+import { useLaravelReactI18n } from 'laravel-react-internationalization';
 import type { PageProps } from '@/types';
 import type { RouteParams } from 'ziggy-js';
 import type { SelectNumberOption } from '@/types/SelectOption';

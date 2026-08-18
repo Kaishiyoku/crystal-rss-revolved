@@ -1,6 +1,6 @@
 import { type FormEventHandler, useRef, useState } from 'react';
 import { useForm } from '@inertiajs/react';
-import { useLaravelReactI18n } from 'laravel-react-i18n';
+import { useLaravelReactI18n } from 'laravel-react-internationalization';
 import { Button } from '@/Components/Button';
 import { Input } from '@/Components/Form/Input';
 import { ErrorMessage, Field, Label } from '@/Components/Fieldset';

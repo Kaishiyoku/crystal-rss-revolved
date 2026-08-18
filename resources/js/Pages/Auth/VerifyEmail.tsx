@@ -1,7 +1,7 @@
 import GuestLayout from '@/Layouts/GuestLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { Button } from '@/Components/Button';
-import { useLaravelReactI18n } from 'laravel-react-i18n';
+import { useLaravelReactI18n } from 'laravel-react-internationalization';
 import type React from 'react';
 
 export default function VerifyEmail({ status }: { status: string }) {
