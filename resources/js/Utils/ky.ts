@@ -8,27 +8,27 @@ const ky = baseKy.extend({
 	},
 	hooks: {
 		beforeRequest: [
-			(request) => {
+			(state) => {
 				progress.start();
 				progress.reveal();
 
-				if (window.location.host === new URL(request.url).host) {
-					request.headers.set('X-XSRF-TOKEN', Cookies.get('XSRF-TOKEN') ?? '');
+				if (window.location.host === new URL(state.request.url).host) {
+					state.request.headers.set('X-XSRF-TOKEN', Cookies.get('XSRF-TOKEN') ?? '');
 				}
 			},
 		],
 		afterResponse: [
-			(_request, _options, response) => {
+			(state) => {
 				progress.finish();
 
-				return response;
+				return state.response;
 			},
 		],
 		beforeError: [
-			(error) => {
+			(state) => {
 				progress.finish();
 
-				return error;
+				return state.error;
 			},
 		],
 	},
