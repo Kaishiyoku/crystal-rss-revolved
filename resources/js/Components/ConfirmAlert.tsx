@@ -32,7 +32,9 @@ export default function ConfirmAlert({
 					{t('Cancel')}
 				</Button>
 
-				<Button onClick={handleConfirmClick}>{confirmTitle}</Button>
+				<Button color="dark/white" onClick={handleConfirmClick}>
+					{confirmTitle}
+				</Button>
 			</AlertActions>
 		</Alert>
 	);

@@ -19,6 +19,7 @@ import {
 	SidebarDivider,
 	SidebarFooter,
 	SidebarHeader,
+	SidebarHeading,
 	SidebarItem,
 	SidebarLabel,
 	SidebarSection,
@@ -145,6 +146,8 @@ export default function Navigation({
 							{unreadFeedsAtomValue.length > 0 && (
 								<>
 									<SidebarDivider />
+
+									<SidebarHeading>{t('Feeds')}</SidebarHeading>
 
 									{unreadFeedsAtomValue.map((unreadFeed) => (
 										<SidebarItem

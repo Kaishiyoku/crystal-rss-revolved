@@ -32,7 +32,7 @@ export default function Authenticated({
 	return (
 		<Navigation user={auth.user} selectedFeedId={selectedFeedId}>
 			{(header || breadcrumbs) && (
-				<div className="flex w-full flex-wrap items-end justify-between gap-4 border-b border-zinc-950/10 mb-8 pb-6 dark:border-white/10">
+				<div className="flex w-full flex-wrap items-end justify-between gap-4 mb-8 pb-6 border-b border-zinc-950/5 dark:border-white/5">
 					{header && !breadcrumbs && <Heading>{header}</Heading>}
 
 					{breadcrumbs && <Breadcrumbs breadcrumbs={breadcrumbs} />}

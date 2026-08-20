@@ -81,10 +81,10 @@ export default function FeedItemCard({
 								src={internalFeedItem.image_url}
 								alt=""
 								blurHash={internalFeedItem.blur_hash}
-								className="w-full @md:w-40 aspect-3/2 rounded-lg"
+								className="w-full @md:w-40 aspect-16/9 rounded-lg"
 							/>
 						) : (
-							<ImagePlaceholder className="w-full @md:w-40 aspect-3/2 rounded-lg" />
+							<ImagePlaceholder className="w-full @md:w-40 aspect-16/9 rounded-lg" />
 						)}
 					</div>
 
@@ -125,7 +125,7 @@ export default function FeedItemCard({
 						</div>
 					)}
 
-					<div className="grow @md:flex items-end lg:justify-end space-x-2 pt-4">
+					<div className="grow @xs:flex items-end lg:justify-end space-x-2 pt-4">
 						<Button
 							onClick={toggle}
 							disabled={processing}
