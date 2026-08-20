@@ -10,6 +10,7 @@ use App\Http\Controllers\MarkAllUnreadFeedItemsAsReadController;
 use App\Http\Controllers\MarkFeedItemAsReadController;
 use App\Http\Controllers\MarkFeedItemAsUnreadController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -24,14 +25,7 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'contactEmail' => config('app.contact_email'),
-        'githubUrl' => config('app.github_url'),
-    ]);
-});
+Route::get('/', WelcomeController::class)->name('welcome');
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
