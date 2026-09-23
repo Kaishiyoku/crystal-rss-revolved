@@ -12,7 +12,6 @@ use App\Http\Controllers\MarkFeedItemAsUnreadController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
